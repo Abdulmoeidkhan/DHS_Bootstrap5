@@ -4,6 +4,7 @@
 <head>
     @include("layouts.head")
     @livewireStyles
+    <!-- just remove arrow (->) to make it PWA  @->laravelPWA -->
     <title>DHS</title>
 </head>
 
@@ -18,8 +19,9 @@
             @yield("content")
         </div>
     </div>
-    @endauth
+    @else
     @yield("content")
+    @endauth
     @include("layouts.foot")
     @livewireScripts
 </body>
