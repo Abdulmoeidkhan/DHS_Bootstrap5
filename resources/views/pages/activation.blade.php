@@ -17,11 +17,7 @@
                                 <img src="{{asset('images/icons/Badar-Logo-Black.png')}}" width="180" alt="">
                             </a>
                             <p class="text-center">Delegation Handling System</p>
-                            <form action="{{route('signUp.request')}}" method="POST">
-                                <div class="mb-3">
-                                    <label for="username" class="form-label">User Name</label>
-                                    <input type="text" class="form-control" aria-describedby="textHelp" id="username" name="username">
-                                </div>
+                            <form action="{{route('activation.request')}}" method="POST">
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email Address</label>
                                     <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
@@ -31,18 +27,18 @@
                                     <input type="password" class="form-control" id="password" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;">
                                 </div>
                                 <div class="mb-4">
-                                    <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;">
+                                    <label for="activationCode" class="form-label">Activation Code</label>
+                                    <input type="text" class="form-control" id="activationCode" name="activationCode" placeholder="Enter your Activation Code" />
                                 </div>
                                 @csrf
-                                <input type="submit" name="Sign Up" value="Sign Up" class="btn btn-badar w-100 py-8 fs-4 mb-4 rounded-2" />
+                                <input type="submit" name="Activation" value="Activate" value="Sign Up" class="btn btn-badar w-100 py-8 fs-4 mb-4 rounded-2" />
                                 <div class="d-flex align-items-center justify-content-center">
                                     <p class="fs-4 mb-0 fw-bold">Already have an Account?</p>
                                     <a class="text-badar fw-bold ms-2" href="{{route('signIn')}}">Sign In</a>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <p class="fs-4 mb-0 fw-bold">Activate Account?</p>
-                                    <a class="text-badar fw-bold ms-2" href="{{route('accountActivation')}}">Activate</a>
+                                    <p class="fs-4 mb-0 fw-bold">New to DHS?</p>
+                                    <a class="text-badar fw-bold ms-2" href="{{route('signUp')}}">Create an account</a>
                                 </div>
                             </form>
                         </div>
