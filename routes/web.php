@@ -6,6 +6,7 @@ use App\Http\Controllers\ActivationRequest;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\UserPanelController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,12 +36,11 @@ Route::get('/accountActivation', function () {
 //     return view('pages.userList');
 // })->name("userList");
 Route::group(['middleware' => 'auth'], function () {
-
     Route::get('/', [DashboardController::class, 'renderView'])->name("dashboard");
-
     Route::get('/userPanel', [UserPanelController::class,'renderView'])->name("userPanel");
-
-    Route::get('logout', [LogoutController::class, 'logout'])->name('logout.request');
+    Route::get('/logout', [LogoutController::class, 'logout'])->name('logout.request');
+    Route::get('/deleteUser/{id}', [UserProfileController::class, 'deleteId'])->name('deleteUser.request');
+    Route::get('/restoreUser/{id}', [UserProfileController::class, 'restoreId'])->name('restoreUser.request');
 });
 
 
