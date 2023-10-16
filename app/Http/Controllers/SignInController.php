@@ -25,7 +25,7 @@ class SignInController extends Controller
             if (Auth::attempt($credentials)) {
                 $req->session()->regenerate();
                 return redirect()->route('dashboard');
-                // User::with('roles')->where('email', $req->email)->first();
+                // return User::with('roles')->where('email', $req->email)->first();
             } else {
                 return ['status' => 0, "msg" => 'The provided credentials do not match our records.'];
             }

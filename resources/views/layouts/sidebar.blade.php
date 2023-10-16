@@ -18,6 +18,31 @@
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Home</span>
                 </li>
+                @if(session()->get('user')->roles[0]->name =="admin")
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('userPanel')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-user-plus"></i>
+                        </span>
+                        <span class="hide-menu">User Panel</span>
+                    </a>
+                </li>
+                @else
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="./index.html" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-layout-dashboard"></i>
+                        </span>
+                        <span class="hide-menu">Dashboard</span>
+                    </a>
+                </li>
+                @endif
+            </ul>
+            <!-- <ul id="sidebarnav">
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Home</span>
+                </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="./index.html" aria-expanded="false">
                         <span>
@@ -120,7 +145,7 @@
                     </a>
                 </li>
                 @endif
-            </ul>
+            </ul> -->
         </nav>
         <!-- End Sidebar navigation -->
     </div>

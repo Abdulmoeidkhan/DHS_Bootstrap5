@@ -3,7 +3,9 @@
 use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\SignInController;
 use App\Http\Controllers\ActivationRequest;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\UserPanelController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,9 +35,11 @@ Route::get('/accountActivation', function () {
 //     return view('pages.userList');
 // })->name("userList");
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', function () {
-        return view('pages.dashboard');
-    })->name("dashboard");
+
+    Route::get('/', [DashboardController::class, 'renderView'])->name("dashboard");
+
+    Route::get('/userPanel', [UserPanelController::class,'renderView'])->name("userPanel");
+
     Route::get('logout', [LogoutController::class, 'logout'])->name('logout.request');
 });
 

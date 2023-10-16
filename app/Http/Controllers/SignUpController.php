@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Laratrust\Models\Role;
 use Laratrust\Models\Team;
+use Laratrust\Models\Permission;
 
 class SignUpController extends Controller
 {
@@ -29,9 +30,11 @@ class SignUpController extends Controller
     }
     protected function basicRolesAndTeams($user)
     {
-        $team = Team::where('name', 'visitor')->first();
-        $admin = Role::where('name', 'read')->first();
-        $user->addRole($admin, $team);
+        $team = Team::where('name', 'user')->first();
+        $role = Role::where('name', 'user')->first();
+        $permission = Permission::where('name', 'read')->first();
+        $user->addRole($role, $team);
+        $user->givePermission($permission,$team);
     }
 
     public function signUp(Request $req)
@@ -52,7 +55,8 @@ class SignUpController extends Controller
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[1]) {
-                return  back()->with('error', "Email Address already Exist");
+                return  $exception->errorInfo[2];
+                // return  back()->with('error', "Email Address already Exist");
             } else {
                 return  back()->with('error', $exception->errorInfo[2]);
             }
