@@ -36,7 +36,7 @@ class SignUpController extends Controller
         $user->addRole($role, $team);
         $user->givePermission($permission,$team);
         // $user->addRole('admin', 'admin');
-        // $user->givePermissions(['read','create','update','delete'],'admin');
+        // $user->givePermissions(['read', 'create', 'update', 'delete'], 'admin');
     }
 
     public function signUp(Request $req)
@@ -58,7 +58,7 @@ class SignUpController extends Controller
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
                 // return  $exception->errorInfo[2];
-                return  back()->with('error', "Email Address already Exist error : $exception->errorInfo[2]");
+                return  back()->with('error', 'Email Address already Exist error : ' . $exception->errorInfo[2]);
             } else {
                 return  back()->with('error', $exception->errorInfo[2]);
             }
