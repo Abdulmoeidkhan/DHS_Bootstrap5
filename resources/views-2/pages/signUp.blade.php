@@ -65,7 +65,7 @@
                 <div class="w-px-400 mx-auto pt-5 pt-lg-0">
                     <h4 class="mb-2 fw-semibold">Adventure starts here 🚀</h4>
                     <p class="mb-4">Make your app management easy and fun!</p>
-                    <form id="formAuthentication" class="mb-3" action="{{route('signUp.request')}}" method="POST">
+                    <form id="formAuthentication" class="mb-3" action="{{route('request.signUp')}}" method="POST">
                         <div class="form-floating form-floating-outline mb-3">
                             <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" autofocus />
                             <label for="username">Username</label>

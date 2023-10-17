@@ -19,7 +19,6 @@ return new class extends Migration
             $table->date('end_date');
             $table->integer('days');
             $table->string('venue')->nullable();
-            $table->string('logo')->nullable();
             $table->string('banner')->nullable();
             $table->string('description')->nullable();
             $table->string('delegations')->nullable();
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('events');
     }
 };
