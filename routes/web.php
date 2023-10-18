@@ -8,7 +8,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileImageController;
 use App\Http\Controllers\UserFullProfileController;
 use App\Http\Controllers\UserPanelController;
-use App\Http\Controllers\UserProfileController;
+// use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,13 +39,16 @@ Route::get('/accountActivation', function () {
 // })->name("userList");
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [DashboardController::class, 'renderView'])->name("pages.dashboard");
-    Route::get('/userPanel', [UserPanelController::class, 'renderView'])->name("pages.userPanel");
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout.request');
     // Route::get('/deleteUser/{id}', [UserProfileController::class, 'deleteId'])->name('request.deleteUser');
     // Route::get('/restoreUser/{id}', [UserProfileController::class, 'restoreId'])->name('restoreUser.request');
-    Route::get('/userProfile/{id}', [UserFullProfileController::class, 'render'])->name('pages.userProfile');
     Route::post('/imageUpload', [ProfileImageController::class, 'uploadImage'])->name('request.imageUpload');
+    Route::get('/userProfile/myProfile', [UserFullProfileController::class, 'renderMyProfile'])->name('pages.myProfile');
+    Route::get('/userProfile/{id}', [UserFullProfileController::class, 'render'])->middleware('userTypeCheck')->name('pages.userProfile');
+    Route::get('/userPanel', [UserPanelController::class, 'renderView'])->middleware('userTypeCheck')->name("pages.userPanel");
 });
+// Route::group(['middleware' => ['auth','userTypeCheck']], function () {
+// });
 
 
 Route::post('signUpRequest', [SignUpController::class, 'signUp'])->name('request.signUp');

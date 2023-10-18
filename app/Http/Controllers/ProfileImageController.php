@@ -4,10 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Image;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileImageController extends Controller
 {
+    protected function hisOwnProfile($uid)
+    {
+        if ($uid == auth()->user()->uid) {
+            $user = User::with('roles', 'permissions')->where('id', Auth::user()->id)->first();
+            $user->images = Image::where('uid', Auth::user()->uid)->first();
+            session()->put('user', $user);
+            return true;
+        } else {
+            return false;
+        }
+    }
     public function uploadImage(Request $req)
     {
         // Validate the request.
@@ -25,13 +38,12 @@ class ProfileImageController extends Controller
         $image->base64_image = $base64;
         $image->uid = $req->id;
 
-
         if (Image::where('uid', $req->id)->first()) {
             Image::where('uid', $req->id)->update(['base64_image' => $base64]);
-            return redirect()->route('pages.userProfile', $req->id);
+            return $this->hisOwnProfile($req->id) ? redirect()->route('pages.myProfile') : redirect()->route('pages.userProfile', $req->id);
         } else {
             $image->save();
-            return redirect()->route('pages.userProfile', $req->id);
+            return $this->hisOwnProfile($req->id) ? redirect()->route('pages.myProfile') : redirect()->route('pages.userProfile', $req->id);
         }
 
         // return $filename;

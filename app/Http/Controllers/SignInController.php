@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,6 +25,9 @@ class SignInController extends Controller
         if ($this->isActivated($req)) {
             if (Auth::attempt($credentials)) {
                 $req->session()->regenerate();
+                $user = User::with('roles', 'permissions')->where('id', Auth::user()->id)->first();
+                $user->images = Image::where('uid', Auth::user()->uid)->first();
+                session()->put('user', $user);
                 return redirect()->route('pages.dashboard');
                 // return User::with('roles')->where('email', $req->email)->first();
             } else {

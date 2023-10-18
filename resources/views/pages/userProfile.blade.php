@@ -7,16 +7,16 @@
             <div class="card w-100">
                 <div class="card-body p-4">
                     <div class="mb-4">
-                        <h5 class="card-title fw-semibold">Profile</h5>
+                        <h5 class="card-title fw-semibold">Profile Picture</h5>
                     </div>
                     <!-- <img src="asset('assets/images/profile/user-1.jpg')" width="200px" height="200px" class="rounded mx-auto d-block" alt="User Profile Picture"> -->
-                    <img src="{{$user->images?->base64_image}}" width="200px" height="200px" class="rounded mx-auto d-block" alt="User Profile Picture">
+                    <img src="{{$user->images?$user->images->base64_image:($user->avatar?$user->avatar:asset('assets/images/profile/user-1.jpg'))}}" width="200px" height="200px" class="rounded mx-auto d-block" alt="User Profile Picture">
                     <br />
                     <form action="{{route('request.imageUpload')}}" method="post" enctype="multipart/form-data">
                         <div class="input-group">
-                            <input type="hidden" value="{{$user->uid}}" name="id"/>
+                            <input type="hidden" value="{{$user->uid}}" name="id" />
                             <input type="file" class="form-control" id="uploadFile" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="image" accept="image/png, image/jpeg" required>
-                            <button class="btn btn-outline-danger" type="submit" >Upload</button>
+                            <button class="btn btn-outline-danger" type="submit">Upload</button>
                         </div>
                         @csrf
                     </form>
@@ -26,111 +26,65 @@
         <div class="col-lg-8 d-flex align-items-stretch">
             <div class="card w-100">
                 <div class="card-body p-4">
-                    <h5 class="card-title fw-semibold mb-4">Recent Transactions</h5>
+                    <h5 class="card-title fw-semibold mb-4">Profile Information</h5>
                     <div class="table-responsive">
-                        <table class="table text-nowrap mb-0 align-middle">
-                            <thead class="text-dark fs-4">
-                                <tr>
-                                    <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Id</h6>
-                                    </th>
-                                    <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Assigned</h6>
-                                    </th>
-                                    <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Name</h6>
-                                    </th>
-                                    <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Priority</h6>
-                                    </th>
-                                    <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Budget</h6>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">1</h6>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-1">Sunil Joshi</h6>
-                                        <span class="fw-normal">Web Designer</span>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">Elite Admin</p>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <div class="d-flex align-items-center gap-2">
-                                            <span class="badge bg-primary rounded-3 fw-semibold">Low</span>
-                                        </div>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0 fs-4">$3.9</h6>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">2</h6>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-1">Andrew McDownland</h6>
-                                        <span class="fw-normal">Project Manager</span>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">Real Homes WP Theme</p>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <div class="d-flex align-items-center gap-2">
-                                            <span class="badge bg-secondary rounded-3 fw-semibold">Medium</span>
-                                        </div>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0 fs-4">$24.5k</h6>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">3</h6>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-1">Christopher Jamil</h6>
-                                        <span class="fw-normal">Project Manager</span>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">MedicalPro WP Theme</p>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <div class="d-flex align-items-center gap-2">
-                                            <span class="badge bg-danger rounded-3 fw-semibold">High</span>
-                                        </div>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0 fs-4">$12.8k</h6>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">4</h6>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-1">Nirav Joshi</h6>
-                                        <span class="fw-normal">Frontend Engineer</span>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">Hosting Press HTML</p>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <div class="d-flex align-items-center gap-2">
-                                            <span class="badge bg-success rounded-3 fw-semibold">Critical</span>
-                                        </div>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0 fs-4">$2.4k</h6>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <form name="userBasicInfo" id="userBasicInfo" method="POST" action="#" >
+                            @csrf
+                            <div class="mb-3">
+                                <label for="disabledInputEmail1" class="form-label">Registered Email Address</label>
+                                <input type="email" class="form-control" id="disabledInputEmail1" placeholder="Registered Email Address" aria-describedby="emailHelp" value="{{$user->email}}" disabled>
+                                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputUserName" class="form-label">Your User Name</label>
+                                <input type="text" class="form-control" id="inputUserName" placeholder="User Name" aria-describedby="userHelp" value="{{$user->name}}" minlength="3" maxlength="20" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputContactNumber" class="form-label">Your Contact Number</label>
+                                <input type="number" class="form-control" id="inputContactNumber" placeholder="Contact Number" aria-describedby="userHelp" value="{{$user->contact_number}}" minlength="3" maxlength="20" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userInputPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="userInputPassword" placeholder="Password">
+                            </div>
+                            <div class="mb-3">
+                                <label for="userInputPasswordConfirm" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="userInputPasswordConfirm" placeholder="Confirm Password">
+                            </div>
+                            <!-- <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="disabledTextInput" class="form-label">Disabled input</label>
+                                <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
+                            </div>
+                            <div class="mb-3">
+                                <label for="disabledSelect" class="form-label">Disabled select menu</label>
+                                <select id="disabledSelect" class="form-select">
+                                    <option>Disabled select</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled>
+                                    <label class="form-check-label" for="disabledFieldsetCheck">
+                                        Can't check this
+                                    </label>
+                                </div>
+                            </div>
+                            <fieldset disabled>
+                                <legend>Profile View Information Only</legend>
+                                <div class="mb-3">
+                                    <label for="disabledInputEmail1" class="form-label">Registered Email Address</label>
+                                    <input type="email" class="form-control" id="disabledInputEmail1" placeholder="Registered Email Address" aria-describedby="emailHelp" value="{{$user->email}}" disabled>
+                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                                </div>
+                            </fieldset> -->
+                            <input type="hidden" value="{{$user->uid}}"/>
+                            <input type="submit" class="btn btn-primary" value="Submit" />
+                        </form>
+                        <script async src="{{asset('assets/js/formValidations.js')}}"></script>
                     </div>
                 </div>
             </div>

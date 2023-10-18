@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+
 
 class DashboardController extends Controller
 {
@@ -15,7 +14,7 @@ class DashboardController extends Controller
         // $permission = Permission::where('name', 'read')->first();
         // // $user->attachPermission($permission);
         // $user->givePermission($permission);
-        session()->put('user', User::with('roles', 'permissions')->where('id', Auth::user()->id)->first());
+        // return session()->get('user');
         return view('pages.dashboard');
         // return User::with('roles', 'permissions')->where('id', Auth::user()->id)->first();
     }
