@@ -354,5 +354,7 @@
         </div>
     </div>
 </div>
+<script async src="{{asset('assets/libs/apexcharts/dist/apexcharts.min.js')}}"></script>
+<script async src="{{asset('assets/js/dashboard.js')}}"></script>
 @endsection
 @endauth

@@ -28,7 +28,7 @@
                 <div class="card-body p-4">
                     <h5 class="card-title fw-semibold mb-4">Profile Information</h5>
                     <div class="table-responsive">
-                        <form name="userBasicInfo" id="userBasicInfo" method="POST" action="#" >
+                        <form name="userBasicInfo" id="userBasicInfo" method="POST" >
                             @csrf
                             <div class="mb-3">
                                 <label for="disabledInputEmail1" class="form-label">Registered Email Address</label>
