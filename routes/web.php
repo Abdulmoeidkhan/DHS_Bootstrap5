@@ -6,6 +6,7 @@ use App\Http\Controllers\ActivationRequest;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileImageController;
+use App\Http\Controllers\UpdateProfileController;
 use App\Http\Controllers\UserFullProfileController;
 use App\Http\Controllers\UserPanelController;
 // use App\Http\Controllers\UserProfileController;
@@ -46,6 +47,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/userProfile/myProfile', [UserFullProfileController::class, 'renderMyProfile'])->name('pages.myProfile');
     Route::get('/userProfile/{id}', [UserFullProfileController::class, 'render'])->middleware('userTypeCheck')->name('pages.userProfile');
     Route::get('/userPanel', [UserPanelController::class, 'renderView'])->middleware('userTypeCheck')->name("pages.userPanel");
+    Route::post('/updateProfile', [UpdateProfileController::class, 'updateProflie'])->name('request.updateProfile');
+    Route::post('/updateProfilePassowrd', [UpdateProfileController::class, 'updatePassword'])->name('request.updatePassword');
 });
 // Route::group(['middleware' => ['auth','userTypeCheck']], function () {
 // });
