@@ -48,6 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/userProfile/{id}', [UserFullProfileController::class, 'render'])->middleware('userTypeCheck')->name('pages.userProfile');
     Route::get('/userPanel', [UserPanelController::class, 'renderView'])->middleware('userTypeCheck')->name("pages.userPanel");
     Route::post('/updateProfile', [UpdateProfileController::class, 'updateProflie'])->name('request.updateProfile');
+    Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->middleware('userTypeCheck')->name('request.updateAuthority');
     Route::post('/updateProfilePassowrd', [UpdateProfileController::class, 'updatePassword'])->name('request.updatePassword');
 });
 // Route::group(['middleware' => ['auth','userTypeCheck']], function () {

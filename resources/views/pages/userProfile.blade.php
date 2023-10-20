@@ -2,6 +2,7 @@
 @extends('layouts.layout')
 @section("content")
 <div class="container-fluid">
+    <div id="liveAlertPlaceholder"></div>
     <div class="row">
         <div class="col-lg-4 d-flex align-items-stretch">
             <div class="card w-100">
@@ -107,29 +108,22 @@
                                 @csrf
                                 <div class="mb-3">
                                     <label for="roleSelect" class="form-label">Roles</label>
-                                    <select id="roleSelect" class="form-select" <?php echo $user->uid === auth()->user()->uid ? 'disabled' : '' ?>>
+                                    <select id="roleSelect" name="roles" class="form-select" <?php echo $user->uid === auth()->user()->uid ? 'disabled' : '' ?>>
                                         @foreach($roles as $role)
                                         <option value="{{$role->name}}" <?php echo $user->roles[0]->name === $role->name ? 'selected' : '' ?>>{{$role->display_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                <div class="form-label">Permissions</div>
+                                    <div class="form-label">Permissions</div>
 
                                     @foreach($permissions as $permission)
                                     <div class="form-check">
-                                        <input 
-                                        class="form-check-input" 
-                                        type="checkbox" 
-                                        name="{{$permission->name}}" 
-                                        id="{{$permission->display_name}}" 
-                                        <?php echo $user->uid === auth()->user()->uid ? 'disabled' : '' ?>
-                                        <?php 
-                                        foreach($user->permissions as $userPermission){
-                                            echo $permission->name === $userPermission->name ? 'checked' : '' ;
+                                        <input class="form-check-input" type="checkbox" name="{{$permission->name}}" id="{{$permission->display_name}}" <?php echo $user->uid === auth()->user()->uid ? 'disabled' : '' ?> <?php
+                                        foreach ($user->permissions as $userPermission) {
+                                            echo $permission->name === $userPermission->name ? 'checked' : '';
                                         }
-                                        ?>
-                                        />
+                                        ?> />
                                         <label class="form-check-label" for="{{$permission->display_name}}">
                                             {{$permission->display_name}}
                                         </label>
@@ -137,6 +131,7 @@
                                     @endforeach
                                 </div>
                             </fieldset>
+                            
                             <input type="hidden" name="uid" value="{{$user->uid}}" />
                             <input type="submit" name="submit" class="btn btn-danger" value="Authorise" />
                         </form>
@@ -147,6 +142,7 @@
             </div>
         </div>
     </div>
+
 </div>
 @endsection
 @endauth
