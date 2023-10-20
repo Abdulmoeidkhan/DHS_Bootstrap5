@@ -15,7 +15,8 @@ function getValues(event) {
     axios
         .post("/updateProfile", reqObj)
         .then(function (response) {
-            appendAlert(response.data, "success");
+            // appendAlert(response.data, "success");
+            console.log(response)
         })
         .catch(function (error) {
             console.log(error);
@@ -71,21 +72,31 @@ function getAuthority(event) {
     //         [val["name"]]: val["value"] == "on" ? val["checked"] : val["value"],
     //     };
     // }
+    let permissionsArray = (elementsRecieved) => {
+        let permissionArray = []
+        for (valuesRecieved in elementsRecieved) {
+            let el = elementsRecieved[valuesRecieved];
+            el.type === 'checkbox' && el.checked && !permissionArray.includes(el.name) && permissionArray.push(el.name);
+        }
+        return permissionArray;
+    }
     let reqObj = {
         role: authorityUpdateForm.elements["roles"].value,
-        role: authorityUpdateForm.elements["roles"].value,
+        uid: authorityUpdateForm.elements["uid"].value,
+        permissions: permissionsArray(authorityUpdateForm.elements)
     };
-    console.log(authorityUpdateForm.elements["roles"].value);
+    // console.log(authorityUpdateForm.elements["uid"]);
     // console.log(authorityUpdateForm.elements['create'].name,authorityUpdateForm.elements['create'].checked);
-    // axios
-    //     .post("/updateAuthority", reqObj)
-    //     .then(function (response) {
-    //         console.log(response)
-    //         // appendAlert(response.data, "success");
-    //     })
-    //     .catch(function (error) {
-    //         console.log(error);
-    //     });
+    // console.log(reqObj);
+    axios
+        .post("/updateAuthority", reqObj)
+        .then(function (response) {
+            console.log(response)
+            // appendAlert(response.data, "success");
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }
 
 // Alert Trigger functionality

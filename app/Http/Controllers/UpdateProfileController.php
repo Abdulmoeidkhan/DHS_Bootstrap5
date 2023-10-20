@@ -33,32 +33,49 @@ class UpdateProfileController extends Controller
     public function updateProflie(Request $req)
     {
         User::where('uid', $req->uid)->update(['name' => $req->inputUserName, 'contact_number' => $req->inputContactNumber]);
-        $user = User::with('roles', 'permissions')->where('id', Auth::user()->id)->first();
-        $user->images = Image::where('uid', Auth::user()->uid)->first();
-        session()->forget('user');
-        session()->put('user', $user);
+        $user = User::with('roles', 'permissions')->where('uid', $req->uid)->first();
+        $user->images = Image::where('uid', $req->uid)->first();
+        if ($req->uid === Auth::user()->uid) {
+            session()->forget('user');
+            session()->put('user', $user);
+        }
         return "Profile has been updated";
+        // return $user;
     }
 
     public function updateAuthority(Request $req)
     {
-        $user = User::with('roles', 'permissions')->where('id', Auth::user()->id)->first();
-        $roleToBeAdd = Role::where('name', $req->roles)->first();
-        $teamToBeAdd = Team::where('name', $req->roles)->first();
+        $user = User::with('roles', 'permissions')->where('uid', $req->uid)->first();
+        $roleToBeAdd = Role::where('name', $req->role)->first();
+        $teamToBeAdd = Team::where('name', $req->role)->first();
+        $allPermissions = Permission::all();
         $rolesRemoved = $user->removeRole($user->roles[0], $user->roles[0]);
         $rolesAdded = $user->addRole($roleToBeAdd, $teamToBeAdd);
-        $permissions = Permission::all();
-        foreach($permissions as $permission){
-
+        $oldPermissions = $user->permissions;
+        foreach ($oldPermissions as $oldPermission) {
+            $user->removePermission($oldPermission, $user->roles[0]);
         }
+        $newPermissions = $req->permissions;
+        $permissionsToBeGrant = [];
+        foreach ($newPermissions as $newPermission) {
+            foreach ($allPermissions as $permission) {
+                $permission->name == $newPermission && array_push($permissionsToBeGrant, $permission);
+            }
+        }
+
+        $permissionsAdded = $user->givePermissions($permissionsToBeGrant, $teamToBeAdd);
         // $permissionsRemoved = $user->removePermissions($user->permissions);
         // $permissionsAdded = $user->givePermissions();
         // if ($rolesRemoved) {
         // }
+        // return [$roleToBeAdd,  $teamToBeAdd];
         // return [$roleToBeAdd, $roleToBeDelete, $teamToBeAdd, $teamToBeRemove];
-        // $user = User::with('roles', 'permissions')->where('id', Auth::user()->id)->first();
-        return [$req->all(), $user,$permissions];
+        // return [$req->all(), $updatedUser];
+        // return [$req->all()];
         // return [$rolesRemoved, $rolesAdded];
+        // return [$updatedUser];
+        $updatedUser = User::with('roles', 'permissions')->where('uid', $req->uid)->first();
+        return [$updatedUser];
 
         // $user->images = Image::where('uid', Auth::user()->uid)->first();
         // session()->forget('user');

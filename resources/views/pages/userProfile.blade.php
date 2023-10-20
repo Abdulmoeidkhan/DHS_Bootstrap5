@@ -119,12 +119,12 @@
 
                                     @foreach($permissions as $permission)
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="{{$permission->name}}" id="{{$permission->display_name}}" <?php echo $user->uid === auth()->user()->uid ? 'disabled' : '' ?> <?php
+                                        <input class="form-check-input text-capitalize" type="checkbox" name="{{$permission->name}}" id="{{$permission->name}}" <?php echo $user->uid === auth()->user()->uid ? 'disabled' : '' ?> <?php
                                         foreach ($user->permissions as $userPermission) {
                                             echo $permission->name === $userPermission->name ? 'checked' : '';
                                         }
                                         ?> />
-                                        <label class="form-check-label" for="{{$permission->display_name}}">
+                                        <label class="form-check-label" for="{{$permission->name}}">
                                             {{$permission->display_name}}
                                         </label>
                                     </div>
