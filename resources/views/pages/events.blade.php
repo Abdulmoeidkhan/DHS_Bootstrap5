@@ -25,122 +25,62 @@
         <div class="tab-content mt-5" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="current-event" tabindex="0">
                 <div class="row row-cols-1 row-cols-md-3 g-4">
-                    <div class="col">
+                    @foreach($futureEvents as $futureEvent)
+                    <div class="col" id="{{$futureEvent->uid}}">
                         <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
+                            <img src="{{ Storage::url($futureEvent->banner) }}" class="card-img-top" alt="{{$futureEvent->name}} Picture">
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <h5 class="card-title text-capitalize">{{$futureEvent->name}}</h5>
+                                <p class="card-text">{{$futureEvent->description ? $futureEvent->description : ""}}</p>
+                                <p class="card-text">Start Date : {{$futureEvent->start_date}}</p>
+                                <p class="card-text">End Date : {{$futureEvent->end_date}}</p>
+                                <p class="card-text">Number Of Days : {{$futureEvent->days}}</p>
+                                <p class="card-text">Venue : {{$futureEvent->venue}}</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+                    @if(sizeof($futureEvents) < 1)
+                    <p>No Upcoming Event Available !</p>
+                    @endif
                 </div>
             </div>
             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="past-event" tabindex="0">
                 <div class="row row-cols-1 row-cols-md-3 g-4">
-                    <div class="col">
+                    @foreach($pastEvents as $pastEvent)
+                    <div class="col" id="{{$pastEvent->uid}}">
                         <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
+                            <img src="{{ Storage::url($pastEvent->banner) }}" class="card-img-top" alt="{{$pastEvent->name}} Picture">
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <h5 class="card-title text-capitalize">{{$pastEvent->name}}</h5>
+                                <p class="card-text">{{$pastEvent->description ? $pastEvent->description : ""}}</p>
+                                <p class="card-text">Start Date : {{$pastEvent->start_date}}</p>
+                                <p class="card-text">End Date : {{$pastEvent->end_date}}</p>
+                                <p class="card-text">Number Of Days : {{$pastEvent->days}}</p>
+                                <p class="card-text">Venue : {{$pastEvent->venue}}</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
             <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="all-event" tabindex="0">
                 <div class="row row-cols-1 row-cols-md-3 g-4">
-                    <div class="col">
+                @foreach($allEvents as $allEvent)
+                    <div class="col" id="{{$allEvent->uid}}">
                         <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
+                            <img src="{{ Storage::url($allEvent->banner) }}" class="card-img-top" alt="{{$pastEvent->name}} Picture">
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <h5 class="card-title text-capitalize">{{$allEvent->name}}</h5>
+                                <p class="card-text">{{$allEvent->description ? $allEvent->description:""}}</p>
+                                <p class="card-text">Start Date : {{$allEvent->start_date}}</p>
+                                <p class="card-text">End Date : {{$allEvent->end_date}}</p>
+                                <p class="card-text">Number Of Days : {{$allEvent->days}}</p>
+                                <p class="card-text">Venue : {{$allEvent->venue}}</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

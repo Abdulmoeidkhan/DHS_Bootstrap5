@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use Illuminate\Support\Str;
 use App\Models\Image;
+use Illuminate\Support\Facades\Storage;
 
 class AddEventController extends Controller
 {
@@ -17,6 +18,8 @@ class AddEventController extends Controller
     }
     public function addEvent(Request $req)
     {
+        $file = $req->file('eventBanner');
+        $type = $file->extension();
         $event = new Event();
         $event->name = $req->eventName;
         $event->uid = (string) Str::uuid();
@@ -26,23 +29,25 @@ class AddEventController extends Controller
         $event->days = $req->days;
         $event->venue = $req->eventVenue;
         $event->description = $req->eventDescription;
+        $event->banner = Storage::putFileAs('public/' . $req->eventName, $file, $req->eventName . '.' . $type);
         try {
-            // $file = $req->file('eventBanner');
             $savedEvent = $event->save();
             if ($savedEvent) {
-                $file = $req->file('eventBanner');
-                $type = $file->extension();
-                $base64Image = base64_encode(file_get_contents($file->getRealPath()));
-                $base64 = 'data:image/' . $type . ';base64,' . $base64Image;
-                $image = new Image();
-                $image->base64_image = $base64;
-                $image->uid = $event->uid;
-                try {
-                    $image->save();
-                    return redirect()->back()->with('message', "Event Successfully Added");
-                } catch (\Illuminate\Database\QueryException $exception) {
-                    return  back()->with('error', $exception->errorInfo[2]);
-                }
+                return redirect()->back()->with('message', "Event Successfully Added");
+                // $file = $req->file('eventBanner');
+                // Storage::putFileAs('public/uploads', $file->getClientOriginalName(), $file);
+                // return redirect()->back()->with('message', "Event Successfully Added");
+                // $base64Image = base64_encode(file_get_contents($file->getRealPath()));
+                // $base64 = 'data:image/' . $type . ';base64,' . $base64Image;
+                // $image = new Image();
+                // $image->base64_image = $base64;
+                // $image->uid = $event->uid;
+                // try {
+                //     $image->save();
+                //     return redirect()->back()->with('message', "Event Successfully Added");
+                // } catch (\Illuminate\Database\QueryException $exception) {
+                //     return  back()->with('error', $exception->errorInfo[2]);
+                // }
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {

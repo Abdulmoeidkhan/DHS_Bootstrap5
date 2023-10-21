@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->uuid('uid')->unique();
-            $table->uuid('user_uid')->unique();
+            $table->uuid('user_uid');
             $table->string('name')->unique();
+            $table->string('banner')->unique();
             $table->date('start_date');
             $table->date('end_date');
             $table->integer('days');
