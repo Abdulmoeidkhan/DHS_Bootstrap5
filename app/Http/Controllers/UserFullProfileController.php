@@ -14,7 +14,6 @@ class UserFullProfileController extends Controller
 {
     public function render(Request $req, $id)
     {
-        $teams = Team::all();
         $roles = Role::all();
         $permissions = Permission::all();
         $user = User::with('roles', 'permissions')->where('uid', $id)->first();
@@ -24,7 +23,6 @@ class UserFullProfileController extends Controller
     }
     public function renderMyProfile(Request $req)
     {
-        $teams = Team::all();
         $roles = Role::all();
         $permissions = Permission::all();
         $user = session()->get('user');

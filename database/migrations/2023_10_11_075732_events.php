@@ -14,16 +14,18 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->uuid('uid')->unique();
-            $table->string('name');
+            $table->uuid('user_uid')->unique();
+            $table->string('name')->unique();
             $table->date('start_date');
             $table->date('end_date');
             $table->integer('days');
-            $table->string('venue')->nullable();
-            $table->string('banner')->nullable();
+            $table->string('venue');
             $table->string('description')->nullable();
             $table->string('delegations')->nullable();
             $table->integer('status')->default(1);
             $table->timestamps();
+            $table->foreign('user_uid')->references('uid')->on('users')
+            ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

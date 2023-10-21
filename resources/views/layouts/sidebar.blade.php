@@ -18,6 +18,14 @@
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Home</span>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.dashboard')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-layout-dashboard"></i>
+                        </span>
+                        <span class="hide-menu">Dashboard</span>
+                    </a>
+                </li>
                 @if(session()->get('user')->roles[0]->name =="admin")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.userPanel')}}" aria-expanded="false">
@@ -27,13 +35,14 @@
                         <span class="hide-menu">User Panel</span>
                     </a>
                 </li>
-                @else
+                @endif
+                @if(session()->get('user')->roles[0]->name =="admin")
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./index.html" aria-expanded="false">
+                    <a class="sidebar-link" href="{{route('pages.events')}}" aria-expanded="false">
                         <span>
-                            <i class="ti ti-layout-dashboard"></i>
+                            <i class="ti ti-user-plus"></i>
                         </span>
-                        <span class="hide-menu">Dashboard</span>
+                        <span class="hide-menu">Events</span>
                     </a>
                 </li>
                 @endif
