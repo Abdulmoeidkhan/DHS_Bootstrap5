@@ -11,6 +11,8 @@ use App\Http\Controllers\UpdateProfileController;
 use App\Http\Controllers\UserFullProfileController;
 use App\Http\Controllers\UserPanelController;
 use App\Http\Controllers\AddEventController;
+use App\Http\Controllers\EventInterestedController;
+use App\Http\Controllers\DelegationPageController;
 // use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +39,10 @@ Route::get('/accountActivation', function () {
     return view('pages.activation');
 })->name("accountActivation");
 
+Route::get('/404', function () {
+    return view('pages.404');
+})->name("404");
+
 // Route::get('/userList', function () {
 //     return view('pages.userList');
 // })->name("userList");
@@ -48,19 +54,24 @@ Route::group(['middleware' => 'auth'], function () {
     // Pages Routes
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout.request');
     Route::get('/', [DashboardController::class, 'renderView'])->name("pages.dashboard");
-    Route::get('/events', [EventController::class, 'render'])->middleware('userTypeCheck')->name('pages.events');
-    Route::get('/addEventPage', [AddEventController::class, 'render'])->middleware('userTypeCheck')->name('pages.addEvent');
+    Route::get('/events', [EventController::class, 'render'])->name('pages.events');
+    Route::get('/interested/{id}', [EventInterestedController::class, 'updateInterest'])->name('request.interested');
     Route::get('/userProfile/myProfile', [UserFullProfileController::class, 'renderMyProfile'])->name('pages.myProfile');
-    Route::get('/userPanel', [UserPanelController::class, 'renderView'])->middleware('userTypeCheck')->name("pages.userPanel");
-    Route::get('/userProfile/{id}', [UserFullProfileController::class, 'render'])->middleware('userTypeCheck')->name('pages.userProfile');
 
 
     // Request Routes
     Route::post('/imageUpload', [ProfileImageController::class, 'uploadImage'])->name('request.imageUpload');
     Route::post('/updateProfile', [UpdateProfileController::class, 'updateProflie'])->name('request.updateProfile');
-    Route::post('/addEventRequest', [AddEventController::class, 'addEvent'])->middleware('userTypeCheck')->name('request.addEventRequest');
     Route::post('/updateProfilePassowrd', [UpdateProfileController::class, 'updatePassword'])->name('request.updatePassword');
-    Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->middleware('userTypeCheck')->name('request.updateAuthority');
+
+    Route::group(['middleware' => 'userTypeCheck'], function () {
+        Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');
+        Route::get('/delegationPage', [DelegationPageController::class, 'render'])->name('pages.delegationPage');
+        Route::get('/userPanel', [UserPanelController::class, 'renderView'])->name("pages.userPanel");
+        Route::get('/userProfile/{id}', [UserFullProfileController::class, 'render'])->name('pages.userProfile');
+        Route::post('/addEventRequest', [AddEventController::class, 'addEvent'])->name('request.addEventRequest');
+        Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->name('request.updateAuthority');
+    });
 });
 // Route::group(['middleware' => ['auth','userTypeCheck']], function () {
 // });

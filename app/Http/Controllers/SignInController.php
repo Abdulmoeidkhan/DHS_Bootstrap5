@@ -31,7 +31,8 @@ class SignInController extends Controller
                 return redirect()->route('pages.dashboard');
                 // return User::with('roles')->where('email', $req->email)->first();
             } else {
-                return ['status' => 0, "msg" => 'The provided credentials do not match our records.'];
+                // return ['status' => 0, "msg" => 'The provided credentials do not match our records.'];
+                return redirect()->route('signIn')->with('error', "The provided credentials do not match our records.");
             }
         } else {
             return redirect()->route('accountActivation')->with('error', "User is not activated");

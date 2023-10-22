@@ -16,13 +16,14 @@ class EventController extends Controller
 {
     public function render(Request $req)
     {
-        // return date('Y-m-d') ;
-        // return strtotime(date('Y-m-d')) < strtotime('2023-02-05');
-        // return [...$futureEvent, ...$pastEvent];
         $pastEvents = Event::where('end_date', '<', date('Y-m-d'))->orderBy('start_date', 'desc')->get();
         $futureEvents = Event::where('end_date', '>', date('Y-m-d'))->orderBy('start_date', 'desc')->get();
+        foreach($futureEvents as $key=>$futureEvent){
+            $futureEvents[$key]->interested=session()->get('user')->interested != null ? in_array($futureEvent->uid,session()->get('user')->interested ):false;            
+        }
         $allEvents = [...$futureEvents, ...$pastEvents];
         // return Storage::url('public/myeven/myeven.jpg');
+        // return $futureEvents;
         return view('pages.events',['pastEvents'=>$pastEvents,'futureEvents'=>$futureEvents,'allEvents'=>$allEvents]);
     }
 }

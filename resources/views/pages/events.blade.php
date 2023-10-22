@@ -36,13 +36,19 @@
                                 <p class="card-text">End Date : {{$futureEvent->end_date}}</p>
                                 <p class="card-text">Number Of Days : {{$futureEvent->days}}</p>
                                 <p class="card-text">Venue : {{$futureEvent->venue}}</p>
+                                <p class="card-text d-flex justify-content-around">
+                                    @if($futureEvent->interested)
+                                    <a class="btn btn-outline-badar " id="interested-{{$futureEvent->uid}}" href="#">Not Interested</a>
+                                    @else
+                                    <a class="btn btn-outline-badar " id="interested-{{$futureEvent->uid}}" href="{{route('request.interested',$futureEvent->uid)}}">Interested</a>
+                                    @endif
+                                </p>
                             </div>
                         </div>
                     </div>
                     @endforeach
-                    @if(sizeof($futureEvents) < 1)
-                    <p>No Upcoming Event Available !</p>
-                    @endif
+                    @if(sizeof($futureEvents) < 1) <p>No Upcoming Event Available !</p>
+                        @endif
                 </div>
             </div>
             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="past-event" tabindex="0">
@@ -66,7 +72,7 @@
             </div>
             <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="all-event" tabindex="0">
                 <div class="row row-cols-1 row-cols-md-3 g-4">
-                @foreach($allEvents as $allEvent)
+                    @foreach($allEvents as $allEvent)
                     <div class="col" id="{{$allEvent->uid}}">
                         <div class="card">
                             <img src="{{ Storage::url($allEvent->banner) }}" class="card-img-top" alt="{{$pastEvent->name}} Picture">

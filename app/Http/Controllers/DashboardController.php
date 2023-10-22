@@ -15,6 +15,7 @@ class DashboardController extends Controller
         // // $user->attachPermission($permission);
         // $user->givePermission($permission);
         // return session()->get('user');
+
         return view('pages.dashboard');
         // return User::with('roles', 'permissions')->where('id', Auth::user()->id)->first();
     }

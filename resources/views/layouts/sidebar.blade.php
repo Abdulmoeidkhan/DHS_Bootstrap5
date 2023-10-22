@@ -26,6 +26,14 @@
                         <span class="hide-menu">Dashboard</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.events')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-calendar-event"></i>
+                        </span>
+                        <span class="hide-menu">Events</span>
+                    </a>
+                </li>
                 @if(session()->get('user')->roles[0]->name =="admin")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.userPanel')}}" aria-expanded="false">
@@ -38,11 +46,11 @@
                 @endif
                 @if(session()->get('user')->roles[0]->name =="admin")
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('pages.events')}}" aria-expanded="false">
+                    <a class="sidebar-link" href="{{route('pages.delegationPage')}}" aria-expanded="false">
                         <span>
-                            <i class="ti ti-calendar-event"></i>
+                            <i class="ti ti-mail"></i>
                         </span>
-                        <span class="hide-menu">Events</span>
+                        <span class="hide-menu">Delegation</span>
                     </a>
                 </li>
                 @endif

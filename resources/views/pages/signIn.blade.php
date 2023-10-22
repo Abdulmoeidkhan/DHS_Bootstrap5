@@ -1,11 +1,17 @@
 @extends('layouts.layout')
 @section("content")
-@if (session('error'))
-<script>
-  alert("{{session('error')}}");
-</script>
-@endif
 <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
+  @if(session('message'))
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <div>{{session('message')}}</div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  @elseif(session('error'))
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div>{{session('error')}}</div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  @endif
   <div class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
     <div class="d-flex align-items-center justify-content-center w-100">
       <div class="row justify-content-center w-100">

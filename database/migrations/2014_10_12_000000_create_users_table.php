@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->string('provider_id')->nullable();
             $table->string('avatar')->nullable();
-            $table->string('interested')->nullable();
+            $table->json('interested')->nullable();
             $table->integer('activation_code')->nullable();
             $table->bigInteger('contact_number')->nullable();
             $table->integer('activated')->default(0);
