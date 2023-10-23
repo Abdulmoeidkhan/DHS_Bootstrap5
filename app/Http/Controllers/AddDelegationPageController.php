@@ -8,11 +8,13 @@ use App\Models\Event;
 
 class AddDelegationPageController extends Controller
 {
-    public function render(){
-        $events=Event::all();
-        return view('pages.addDelegation',['events'=>$events]);
+    public function render()
+    {
+        $events = Event::where('end_date', '>', date('Y-m-d'))->orderBy('start_date', 'desc')->get();
+        return view('pages.addDelegation', ['events' => $events]);
     }
-    public function addDelegation(){
+    public function addDelegation()
+    {
         return "Working";
     }
 }
