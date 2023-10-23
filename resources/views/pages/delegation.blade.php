@@ -1,12 +1,19 @@
 @auth
 @extends('layouts.layout')
 @section("content")
-<!-- if (session('error')) -->
-<!-- <script>
-    alert("{{session('error')}");
-</script> -->
-<!-- endif -->
+@if (session('error'))
+<script>
+    alert("{{session('error')}}");
+</script>
+@endif
 <div class="container-fluid">
+    @if(session()->get('user')->roles[0]->name === "admin")
+    <div class="row">
+        <div class="d-flex justify-content-center">
+            <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-outline-success">Add Delegations</a>
+        </div>
+    </div>
+    @endif
     <div class="row">
         <div class="card w-100">
             <div class="card-body p-4">

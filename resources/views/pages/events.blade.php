@@ -75,7 +75,7 @@
                     @foreach($allEvents as $allEvent)
                     <div class="col" id="{{$allEvent->uid}}">
                         <div class="card">
-                            <img src="{{ Storage::url($allEvent->banner) }}" class="card-img-top" alt="{{$pastEvent->name}} Picture">
+                            <img src="{{ Storage::url($allEvent->banner) }}" class="card-img-top" alt="{{$allEvent->name}} Picture">
                             <div class="card-body">
                                 <h5 class="card-title text-capitalize">{{$allEvent->name}}</h5>
                                 <p class="card-text">{{$allEvent->description ? $allEvent->description:""}}</p>

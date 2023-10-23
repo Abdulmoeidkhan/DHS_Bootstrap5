@@ -13,6 +13,8 @@ use App\Http\Controllers\UserPanelController;
 use App\Http\Controllers\AddEventController;
 use App\Http\Controllers\EventInterestedController;
 use App\Http\Controllers\DelegationPageController;
+use App\Http\Controllers\AddDelegationPageController;
+use App\Http\Controllers\AddVipsController;
 // use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -66,9 +68,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'userTypeCheck'], function () {
         Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');
+        Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');
         Route::get('/delegationPage', [DelegationPageController::class, 'render'])->name('pages.delegationPage');
+        Route::get('/addDelegationPage', [AddDelegationPageController::class, 'render'])->name('pages.addDelegationPage');
         Route::get('/userPanel', [UserPanelController::class, 'renderView'])->name("pages.userPanel");
         Route::get('/userProfile/{id}', [UserFullProfileController::class, 'render'])->name('pages.userProfile');
+        Route::post('/addDelegationRequest', [AddEventController::class, 'addDelegationRequest'])->name('request.addDelegationRequest');
+        Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');
         Route::post('/addEventRequest', [AddEventController::class, 'addEvent'])->name('request.addEventRequest');
         Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->name('request.updateAuthority');
     });

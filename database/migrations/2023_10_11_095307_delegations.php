@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('exhibition');
             $table->integer('delegates');
             $table->timestamps();
+            $table->foreign('invited_by')->references('uid')->on('vips')
+            ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
