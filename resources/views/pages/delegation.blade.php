@@ -13,6 +13,7 @@
             <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-outline-success">Add Delegations</a>
         </div>
     </div>
+    <br/>
     @endif
     <div class="row">
         <div class="card w-100">

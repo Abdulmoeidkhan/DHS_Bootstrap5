@@ -24,19 +24,18 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <input type="submit" class="btn btn-primary" value="Submit" name="submit" />
+                            <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button  type="submit" class="btn btn-primary" data-bs-dismiss="modal" >Submit</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    @if($savedvip)
+    <!-- if($savedvip)
     <script>
-        let myModal = document.getElementById('VIPModal');
-        myModal.hide()
-        console.log("workings")
+        let myModal = document.getElementById('closeBtn');
+        myModal.click();
     </script>
-    @endif
+    endif -->
 </div>

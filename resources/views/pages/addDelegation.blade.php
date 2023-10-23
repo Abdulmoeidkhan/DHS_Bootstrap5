@@ -14,10 +14,11 @@
     </div>
     @endif
     @if(session()->get('user')->roles[0]->name === "admin")
-        <livewire:add-vips/>
+    <livewire:add-vips-component />
+    <br />
     @endif
     <div class="row">
-        <div class="col-lg-8 d-flex align-items-stretch">
+        <div class="col-lg-12 d-flex align-items-stretch">
             <div class="card w-100">
                 <div class="card-body p-4">
                     <h5 class="card-title fw-semibold mb-4">New Delegation</h5>
@@ -28,8 +29,7 @@
                                 @csrf
                                 <div class="mb-3">
                                     <label for="countryInput">Select Delegation Country</label>
-                                    <input class="form-control" name="country" id="countryInput" placeholder="Select Country" list="countriesList" required>
-                                    <datalist id="countriesList">
+                                    <select class="form-select" aria-label="Event Name" id="countryInput">
                                         <option value="Afghanistan"> Afghanistan </option>
                                         <option value="Albania"> Albania </option>
                                         <option value="Algeria"> Algeria </option>
@@ -222,23 +222,25 @@
                                         <option value="Yemen"> Yemen </option>
                                         <option value="Zambia"> Zambia </option>
                                         <option value="Zimbabwe"> Zimbabwe </option>
-                                    </datalist>
+                                    </select>
+                                    
                                 </div>
                                 <div class="mb-3">
                                     <label for="invitedBy" class="form-label">Invited By</label>
-                                    <input name="invitedBy" list="invitedByList"class="form-control" id="invitedBy" placeholder="Select Invited By" required>
-                                    <datalist id="invitedByList">
-
-                                        <option value="Afghanistan"> Afghanistan </option>
-                                    </datalist>
+                                    <input name="invitedBy" list="invitedByList" class="form-control" id="invitedBy" placeholder="Select Invited By" required>
+                                    <livewire:invited-by-component />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="startDate" class="form-label">Event Start Date</label>
-                                    <input name="startDate" type="date" class="form-control" id="startDate" placeholder="delegation Start Date" required>
+                                    <label for="address" class="form-label">Address</label>
+                                    <textarea name="address" class="form-control" id="address" placeholder="Address"></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="endDate" class="form-label">Event End Date</label>
-                                    <input name="endDate" type="date" class="form-control" id="endDate" placeholder="delegation End Date" required>
+                                    <label for="eventSelect" class="form-label">Event Name</label>
+                                    <select class="form-select" aria-label="Event Name" id="eventSelect">
+                                        @foreach($events as $event)
+                                        <option value="{{$event->name}}"> {{$event->name}} </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="days" class="form-label">Number Of Days</label>

@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 
 
-class AddVips extends Component
+class AddVipsComponent extends Component
 {
     public $name = '';
     public $designation = '';
@@ -29,11 +29,12 @@ class AddVips extends Component
         // return $this->redirect('/posts')
         //     ->with('status', 'Post successfully created.');
         $this->dispatch('datasaved')->self();
-        return $this->savedvip;
+        $this->dispatch('vipchanged')->to(InvitedByComponent::class);
+        $this->reset();
     }
     #[On('datasaved')]
     public function render()
     {
-        return view('livewire.add-vips');
+        return view('livewire.add-vips-component');
     }
 }
