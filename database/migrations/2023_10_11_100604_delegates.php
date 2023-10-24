@@ -14,16 +14,24 @@ return new class extends Migration
         Schema::create('delegates', function (Blueprint $table) {
             $table->id();
             $table->uuid('uid')->unique();
+            $table->uuid('user_uid')->unique();
             $table->string('country');
+            $table->string('rep_first_Name')->nullable();
+            $table->string('rep_last_Name')->nullable();
             $table->integer('self')->default(1);
             $table->string('rank');
             $table->string('first_Name');
             $table->string('last_Name');
-            $table->integer('delegation');
+            $table->integer('delegation')->nullable();
             $table->string('designation')->nullable();
             $table->string('organistaion')->nullable();
             $table->string('passport')->nullable();
+            $table->integer('status')->default(1);
             $table->timestamps();
+            $table->foreign('user_uid')->references('uid')->on('users')
+            ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('delegation')->references('id')->on('delegations')
+            ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

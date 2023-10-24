@@ -1,9 +1,10 @@
 <form wire:submit="save">
     <div class="modal-body">
         <div class="mb-3">
-            <label for="vipName" class="col-form-label">VIP's Name :</label>
-            <input type="text" class="form-control" wire:model="name">
+            <label for="userUid" class="col-form-label">Select User For Delegate :</label>
+            <input type="text" class="form-control" wire:model="userUid" id="country">
         </div>
+        <livewire:country-select-component selectmodel="country"/>
         <div class="mb-3">
             <label for="message-text" class="col-form-label">Designation:</label>
             <input type="text" class="form-control" wire:model="designation">
