@@ -1,8 +1,9 @@
 <div class="mb-3">
     <label for="invitedBy" class="form-label">Invited By</label>
-    <select class="form-select" aria-label="VIP's Name" id="invitedBy" required>
+    <select class="form-select" aria-label="VIP's Name" id="invitedBy" name="invitedBy" required>
+    <option value="" selected disabled hidden> Select Invited By </option>
         @foreach($vips as $key=>$vip)
-        <option value="{{$vip->name}}"> {{$vip->name}} </option>
+        <option value="{{$vip->uid}}"> {{$vip->name}} </option>
         @endforeach
     </select>
 </div>

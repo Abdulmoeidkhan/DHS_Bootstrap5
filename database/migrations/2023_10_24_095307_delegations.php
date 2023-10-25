@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('delegation_response')->default("Awaited");
             $table->string('address')->nullable();
             $table->string('exhibition');
-            $table->integer('delegates');
+            $table->string('delegationCode')->unique();
+            $table->uuid('delegates')->unique()->nullable();
             $table->timestamps();
             $table->foreign('invited_by')->references('uid')->on('vips')
             ->onUpdate('cascade')->onDelete('cascade');

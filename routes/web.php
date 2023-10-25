@@ -73,7 +73,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/addDelegationPage', [AddDelegationPageController::class, 'render'])->name('pages.addDelegationPage');
         Route::get('/userPanel', [UserPanelController::class, 'renderView'])->name("pages.userPanel");
         Route::get('/userProfile/{id}', [UserFullProfileController::class, 'render'])->name('pages.userProfile');
-        Route::post('/addDelegationRequest', [AddEventController::class, 'addDelegationRequest'])->name('request.addDelegationRequest');
+        Route::post('/addDelegationRequest', [AddDelegationPageController::class, 'addDelegation'])->name('request.addDelegationRequest');
         Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');
         Route::post('/addEventRequest', [AddEventController::class, 'addEvent'])->name('request.addEventRequest');
         Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->name('request.updateAuthority');
