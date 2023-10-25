@@ -15,6 +15,7 @@ use App\Http\Controllers\EventInterestedController;
 use App\Http\Controllers\DelegationPageController;
 use App\Http\Controllers\AddDelegationPageController;
 use App\Http\Controllers\AddVipsController;
+use App\Http\Controllers\ActivateProfileController;
 // use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -65,6 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/imageUpload', [ProfileImageController::class, 'uploadImage'])->name('request.imageUpload');
     Route::post('/updateProfile', [UpdateProfileController::class, 'updateProflie'])->name('request.updateProfile');
     Route::post('/updateProfilePassowrd', [UpdateProfileController::class, 'updatePassword'])->name('request.updatePassword');
+    Route::post('/activateProfile', [ActivateProfileController::class, 'activateProfile'])->name('request.activateProfile');
 
     Route::group(['middleware' => 'userTypeCheck'], function () {
         Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');

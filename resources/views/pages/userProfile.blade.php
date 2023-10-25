@@ -2,6 +2,17 @@
 @extends('layouts.layout')
 @section("content")
 <div class="container-fluid">
+    @if(session('message'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div>{{session('message')}}</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @elseif(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <div>{{session('error')}}</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
     <div id="liveAlertPlaceholder"></div>
     <div class="row">
         <div class="col-lg-4 d-flex align-items-stretch">
@@ -120,10 +131,10 @@
                                     @foreach($permissions as $permission)
                                     <div class="form-check">
                                         <input class="form-check-input text-capitalize" type="checkbox" name="{{$permission->name}}" id="{{$permission->name}}" <?php echo $user->uid === auth()->user()->uid ? 'disabled' : '' ?> <?php
-                                        foreach ($user->permissions as $userPermission) {
-                                            echo $permission->name === $userPermission->name ? 'checked' : '';
-                                        }
-                                        ?> />
+                                                                                                                                                                                                                                    foreach ($user->permissions as $userPermission) {
+                                                                                                                                                                                                                                        echo $permission->name === $userPermission->name ? 'checked' : '';
+                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                    ?> />
                                         <label class="form-check-label" for="{{$permission->name}}">
                                             {{$permission->display_name}}
                                         </label>
@@ -131,9 +142,31 @@
                                     @endforeach
                                 </div>
                             </fieldset>
-                            
+
                             <input type="hidden" name="uid" value="{{$user->uid}}" />
                             <input type="submit" name="submit" class="btn btn-danger" value="Authorise" />
+                        </form>
+                    </div>
+                    <br />
+                    <h5 class="card-title fw-semibold mb-4">Profile Information</h5>
+                    <div class="table-responsive">
+                        <form name="profileActivation" id="profileActivation" method="POST" action="{{route('request.activateProfile')}}">
+                            <fieldset>
+                                <legend>Profile Activation</legend>
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="prefixSelect" class="form-label">Prefix</label>
+                                    <select id="prefixSelect" name="prefixSelect" class="form-select">
+                                        <option value="DL" selected>DL</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="activationCode" class="form-label">Activation Code</label>
+                                    <input type="number" name="activationCode" class="form-control" id="activationCode" placeholder="Activation Number (Please do not put code (DL,LO) in this field )" required>
+                                </div>
+                                <input type="hidden" name="uid" value="{{$user->uid}}" />
+                                <input type="submit" name="submit" class="btn btn-success" value="Activate" />
+                            </fieldset>
                         </form>
                     </div>
                     <script async src="https://unpkg.com/axios/dist/axios.min.js"></script>
