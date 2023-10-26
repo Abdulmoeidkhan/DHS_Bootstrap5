@@ -58,8 +58,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout.request');
     Route::get('/', [DashboardController::class, 'renderView'])->name("pages.dashboard");
     Route::get('/events', [EventController::class, 'render'])->name('pages.events');
-    Route::get('/interested/{id}', [EventInterestedController::class, 'updateInterest'])->name('request.interested');
     Route::get('/userProfile/myProfile', [UserFullProfileController::class, 'renderMyProfile'])->name('pages.myProfile');
+    Route::get('/interested/{id}', [EventInterestedController::class, 'updateInterest'])->name('request.interested');
 
 
     // Request Routes
@@ -79,6 +79,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');
         Route::post('/addEventRequest', [AddEventController::class, 'addEvent'])->name('request.addEventRequest');
         Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->name('request.updateAuthority');
+        Route::get('/getDelegates', [DelegationPageController::class, 'delegationData'])->name('request.getDelegates');
     });
 });
 // Route::group(['middleware' => ['auth','userTypeCheck']], function () {
