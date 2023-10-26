@@ -87,6 +87,21 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <table id="table" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-export="true" data-url="data1.json" data-show-columns="true" data-show-columns-toggle-all="true" data-show-toggle="true" data-page-list="[10, 25, 50, 100, all]">
+            <thead>
+                <tr>
+                    <th colspan="2">Item Detail</th>
+                    <th data-field="id" rowspan="2" data-valign="middle">Item ID</th>
+                </tr>
+                <tr>
+                    <th data-field="name">Item Name</th>
+                    <th data-field="price">Item Price</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </div>
+@include("layouts.tableFoot")
 @endsection
 @endauth
