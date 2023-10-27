@@ -1,11 +1,11 @@
 @auth
 @extends('layouts.layout')
 @section("content")
-<!-- if (session('error')) -->
-<!-- <script>
+@if (session('error'))
+<script>
     alert("{{session('error')}}");
-</script> -->
-<!-- endif -->
+</script>
+@endif
 <div class="container-fluid">
     <div class="row">
         <div class="card w-100">

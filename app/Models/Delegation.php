@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Delegation extends Model
 {
     use HasFactory;
+
 }

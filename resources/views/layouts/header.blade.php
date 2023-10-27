@@ -37,6 +37,12 @@
                                 <p class="mb-0 fs-3">Profile Activation</p>
                             </a>
                             @endif
+                            @if(session()->get('user')->roles[0]->name =="delegate")
+                            <a href="{{route('pages.profileActivation')}}" class="d-flex align-items-center gap-2 dropdown-item">
+                                <i class="ti ti-list-check fs-6"></i>
+                                <p class="mb-0 fs-3">Delegate Profile</p>
+                            </a>
+                            @endif
                             <a href="{{route('logout.request')}}" class="btn btn-outline-badar mx-3 mt-2 d-block">Logout</a>
                         </div>
                     </div>

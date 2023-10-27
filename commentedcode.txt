@@ -1,0 +1,43 @@
+               Below code is written for custom Table data render using bootstrap table (Custom TR and TD)
+               Code Starts here
+               
+               <div class="table-responsive">
+                    <table id="table" data-flat="true" data-search="true" data-show-refresh="true" data-click-to-select="true" data-toggle="table" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
+                        <!-- data-url="route('request.getDelegates')"  -->
+                        <thead>
+                            <tr>
+                                <th data-field="id">Id</th>
+                                <th data-field="country">Country</th>
+                                <th data-field="delegation_response">Delegation Response</th>
+                                <th data-field="address">Address</th>
+                                <th data-field="exhibition">Exhibition</th>
+                                <th data-field="delegationCode">Delegation Code</th>
+                                <th data-field="first_Name">Delegates First Name</th>
+                                <th data-field="last_Name">Delegates Last Name</th>
+                                <th data-field="name">Invited By</th>
+                                <th data-field="uid" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($delegations as $key=>$delegation)
+                            <tr id="tr-id-{{$key}}" class="tr-class-{{$key}}" data-title="bootstrap table" data-object='{"key": "value"}'>
+                                <td id="td-id-{{$key}}" class="td-class-{{$key}}" data-title="bootstrap table">
+                                {{$delegation->id}}
+                                    <!-- <a href="https://github.com/wenzhixin/bootstrap-table" target="_blank">bootstrap-table</a> -->
+                                </td>
+                                <td>{{$delegation->country}}</td>
+                                <td>{{$delegation->delegation_response}}</td>
+                                <td>{{$delegation->address}}</td>
+                                <td>{{$delegation->exhibition}}</td>
+                                <td>{{$delegation->delegationCode}}</td>
+                                <td>{{$delegation->first_Name}}</td>
+                                <td>{{$delegation->last_Name}}</td>
+                                <td>{{$delegation->name}}</td>
+                                <td>{{$delegation->uid}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+               Code End here
+                Above code is written for custom Table data render using bootstrap table (Custom TR and TD)

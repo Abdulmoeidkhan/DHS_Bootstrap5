@@ -7,33 +7,12 @@
 </script>
 @endif
 <div class="container-fluid">
-    @if(session()->get('user')->roles[0]->name === "admin")
-    <div class="row">
-        <div class="d-flex justify-content-center">
-            <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-outline-success">Add Delegations</a>
-        </div>
-    </div>
-    <br />
-    @endif
     <div class="row">
         <div class="card w-100">
             <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">Delegations</h5>
                 <div class="table-responsive">
-                    <table 
-                    id="table" 
-                    data-flat="true" 
-                    data-search="true" 
-                    data-show-refresh="true" 
-                    data-click-to-select="true" 
-                    data-toggle="table" 
-                    data-url="{{route('request.getDelegates')}}" 
-                    data-pagination="true" 
-                    data-show-toggle="true" 
-                    data-show-export="true" 
-                    data-show-columns="true" 
-                    data-show-columns-toggle-all="true"
-                     data-page-list="[10, 25, 50, 100, all]">
+                    <table id="table" data-flat="true" data-search="true" data-show-refresh="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.getDelegates')}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
                         <thead>
                             <tr>
                                 <th data-field="id">Id</th>
