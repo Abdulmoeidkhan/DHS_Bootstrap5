@@ -38,8 +38,8 @@
                             </a>
                             @endif
                             @if(session()->get('user')->roles[0]->name =="delegate")
-                            <a href="{{route('pages.profileActivation')}}" class="d-flex align-items-center gap-2 dropdown-item">
-                                <i class="ti ti-list-check fs-6"></i>
+                            <a href="{{route('pages.delegateProfile')}}" class="d-flex align-items-center gap-2 dropdown-item">
+                                <i class="ti ti-user-check fs-6"></i>
                                 <p class="mb-0 fs-3">Delegate Profile</p>
                             </a>
                             @endif

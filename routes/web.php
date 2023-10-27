@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [DashboardController::class, 'renderView'])->name("pages.dashboard");
     Route::get('/events', [EventController::class, 'render'])->name('pages.events');
     Route::get('/userProfile/myProfile', [UserFullProfileController::class, 'renderMyProfile'])->name('pages.myProfile');
+    Route::get('/userProfile/delegateProfile', [UserFullProfileController::class, 'renderDelegateProfile'])->name('pages.delegateProfile');
     Route::get('/userProfile/profileActivation', [ActivateProfileController::class, 'renderProfileActivation'])->name('pages.profileActivation');
     Route::get('/interested/{id}', [EventInterestedController::class, 'updateInterest'])->name('request.interested');
 

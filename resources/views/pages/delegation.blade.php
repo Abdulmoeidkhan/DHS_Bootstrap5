@@ -48,17 +48,6 @@
                                 <th data-field="uid" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr id="tr-id-1" class="tr-class-1" data-title="bootstrap table" data-object='{"key": "value"}'>
-                                <td id="td-id-1" class="td-class-1" data-title="bootstrap table">
-                                    <a href="https://github.com/wenzhixin/bootstrap-table" target="_blank">bootstrap-table</a>
-                                </td>
-                                <td data-value="526">8827</td>
-                                <td data-text="122">3603</td>
-                                <td data-i18n="Description">An extended Bootstrap table with radio, checkbox, sort, pagination, and other added features. (supports twitter bootstrap v2 and v3)
-                                </td>
-                            </tr>
-                        </tbody>
                     </table>
                 </div>
             </div>

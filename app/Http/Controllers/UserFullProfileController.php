@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Delegate;
 use Illuminate\Http\Request;
 use App\Models\Image;
 use App\Models\User;
 use Laratrust\Models\Role;
-use Laratrust\Models\Team;
 use Laratrust\Models\Permission;
 
 class UserFullProfileController extends Controller
@@ -27,5 +27,9 @@ class UserFullProfileController extends Controller
         $permissions = Permission::all();
         $user = session()->get('user');
         return view('pages.userProfile', ['user' => $user,  'roles' => $roles, 'permissions' => $permissions]);
+    }
+    public function renderDelegateProfile(){
+        $delegate=Delegate::where('user_uid', auth()->user()->uid)->first();
+        return view('pages.delegateProfile',['delegate'=>$delegate]);
     }
 }
