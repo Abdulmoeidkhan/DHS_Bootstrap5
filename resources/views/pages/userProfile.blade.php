@@ -119,7 +119,7 @@
                                 @csrf
                                 <div class="mb-3">
                                     <label for="roleSelect" class="form-label">Roles</label>
-                                    <select id="roleSelect" name="roles" class="form-select" <?php echo $user->uid === auth()->user()->uid ? 'disabled' : '' ?>>
+                                    <select id="roleSelect" name="roles" class="form-select" <?php echo $user->uid === auth()->user()->uid ? 'disabled' : ($user->roles[0]->name == "delegate" ? 'disabled' : ''); ?>>
                                         @foreach($roles as $role)
                                         <option value="{{$role->name}}" <?php echo $user->roles[0]->name === $role->name ? 'selected' : '' ?>>{{$role->display_name}}</option>
                                         @endforeach
@@ -147,7 +147,7 @@
                             <input type="submit" name="submit" class="btn btn-danger" value="Authorise" />
                         </form>
                     </div>
-                    <br />
+                    <!-- <br />
                     <h5 class="card-title fw-semibold mb-4">Profile Information</h5>
                     <div class="table-responsive">
                         <form name="profileActivation" id="profileActivation" method="POST" action="{{route('request.activateProfile')}}">
@@ -168,7 +168,7 @@
                                 <input type="submit" name="submit" class="btn btn-success" value="Activate" />
                             </fieldset>
                         </form>
-                    </div>
+                    </div> -->
                     <script async src="https://unpkg.com/axios/dist/axios.min.js"></script>
                     <script async src="{{asset('assets/js/formValidations.js')}}"></script>
                 </div>

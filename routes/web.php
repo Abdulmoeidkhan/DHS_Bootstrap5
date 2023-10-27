@@ -60,6 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/events', [EventController::class, 'render'])->name('pages.events');
     Route::get('/interested/{id}', [EventInterestedController::class, 'updateInterest'])->name('request.interested');
     Route::get('/userProfile/myProfile', [UserFullProfileController::class, 'renderMyProfile'])->name('pages.myProfile');
+    Route::get('/userProfile/profileActivation', [ActivateProfileController::class, 'renderProfileActivation'])->name('pages.profileActivation');
 
 
     // Request Routes
