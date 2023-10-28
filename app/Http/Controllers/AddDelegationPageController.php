@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Delegate;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Delegation;
@@ -42,7 +43,28 @@ class AddDelegationPageController extends Controller
         try {
             $delegationSaved = $delegation->save();
             if ($delegationSaved) {
-                return back()->with('message','Delegation has been added Successfully');
+                return back()->with('message', 'Delegation has been added Successfully');
+            }
+        } catch (\Illuminate\Database\QueryException $exception) {
+            if ($exception->errorInfo[2]) {
+                return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+            } else {
+                return  back()->with('error', $exception->errorInfo[2]);
+            }
+        }
+    }
+    public function updateDelegation(Request $req)
+    {
+        $arrayToBeUpdate = [];
+        foreach ($req->all() as $key => $value) {
+            if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
+                $arrayToBeUpdate[$key] = $value;
+            }
+        }
+        try {
+            $updatedDelegate = Delegate::where('uid', $req->uid)->update($arrayToBeUpdate);
+            if ($updatedDelegate) {
+                return back()->with('message', 'Delegation has been updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {

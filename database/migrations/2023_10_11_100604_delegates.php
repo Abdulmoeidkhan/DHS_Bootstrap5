@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('delegates', function (Blueprint $table) {
             $table->id();
             $table->uuid('uid')->unique();
+            $table->uuid('rep_uid')->nullable();
             $table->uuid('user_uid')->unique();
             $table->string('country')->nullable();
             $table->string('rep_first_Name')->nullable();

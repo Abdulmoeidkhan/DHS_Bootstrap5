@@ -28,8 +28,18 @@ class UserFullProfileController extends Controller
         $user = session()->get('user');
         return view('pages.userProfile', ['user' => $user,  'roles' => $roles, 'permissions' => $permissions]);
     }
-    public function renderDelegateProfile(){
-        $delegate=Delegate::where('user_uid', auth()->user()->uid)->first();
-        return view('pages.delegateProfile',['delegate'=>$delegate]);
+    public function renderDelegateProfile()
+    {
+        $delegate = Delegate::where('user_uid', auth()->user()->uid)->first();
+        $delegateImage = Image::where('uid', $delegate->uid)->first();
+        $repImage = Image::where('uid', $delegate->rep_uid)->first();
+        return view('pages.delegateProfile', ['delegate' => $delegate, 'delegateImage' => $delegateImage, 'repImage' => $repImage]);
+    }
+    public function renderSpeceficDelegateProfile(Request $req, $id)
+    {
+        $delegate = Delegate::where('user_uid', $id)->first();
+        $delegateImage = Image::where('uid', $delegate->uid)->first();
+        $repImage = Image::where('uid', $delegate->rep_uid)->first();
+        return view('pages.delegateProfile', ['delegate' => $delegate, 'delegateImage' => $delegateImage, 'repImage' => $repImage]);
     }
 }
