@@ -12,11 +12,11 @@ use App\Http\Controllers\UserFullProfileController;
 use App\Http\Controllers\UserPanelController;
 use App\Http\Controllers\AddEventController;
 use App\Http\Controllers\EventInterestedController;
-use App\Http\Controllers\DelegationPageController;
+use App\Http\Controllers\DelegationsPageController;
 use App\Http\Controllers\AddDelegationPageController;
 use App\Http\Controllers\AddVipsController;
 use App\Http\Controllers\ActivateProfileController;
-// use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,7 +59,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [DashboardController::class, 'renderView'])->name("pages.dashboard");
     Route::get('/events', [EventController::class, 'render'])->name('pages.events');
     Route::get('/userProfile/myProfile', [UserFullProfileController::class, 'renderMyProfile'])->name('pages.myProfile');
-    Route::get('/userProfile/delegateProfile', [UserFullProfileController::class, 'renderDelegateProfile'])->name('pages.delegateProfile');
     Route::get('/userProfile/profileActivation', [ActivateProfileController::class, 'renderProfileActivation'])->name('pages.profileActivation');
     Route::get('/interested/{id}', [EventInterestedController::class, 'updateInterest'])->name('request.interested');
     Route::post('/updateDelegation', [AddDelegationPageController::class, 'updateDelegation'])->name('request.updateDelegation');
@@ -71,10 +70,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/updateProfilePassowrd', [UpdateProfileController::class, 'updatePassword'])->name('request.updatePassword');
     Route::post('/activateProfile', [ActivateProfileController::class, 'activateProfile'])->name('request.activateProfile');
 
+
+    Route::group(['middleware' => 'delegateTypeCheck'], function () {
+        Route::get('/getMembers', [MemberController::class, 'membersData'])->name('request.getMembers');
+        Route::get('/userProfile/delegateProfile', [UserFullProfileController::class, 'renderDelegateProfile'])->name('pages.delegateProfile');
+    });
+
+
     Route::group(['middleware' => 'userTypeCheck'], function () {
         Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');
         Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');
-        Route::get('/delegationPage', [DelegationPageController::class, 'render'])->name('pages.delegationPage');
+        Route::get('/delegationsPage', [DelegationsPageController::class, 'render'])->name('pages.delegationsPage');
         Route::get('/addDelegationPage', [AddDelegationPageController::class, 'render'])->name('pages.addDelegationPage');
         Route::get('/userPanel', [UserPanelController::class, 'renderView'])->name("pages.userPanel");
         Route::get('/userProfile/{id}', [UserFullProfileController::class, 'render'])->name('pages.userProfile');
@@ -83,7 +89,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');
         Route::post('/addEventRequest', [AddEventController::class, 'addEvent'])->name('request.addEventRequest');
         Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->name('request.updateAuthority');
-        Route::get('/getDelegates', [DelegationPageController::class, 'delegationData'])->name('request.getDelegates');
+        Route::get('/getDelegates', [DelegationsPageController::class, 'delegationData'])->name('request.getDelegates');
+        Route::get('/getMembers', [MemberController::class, 'membersData'])->name('request.getMembers');
     });
 });
 // Route::group(['middleware' => ['auth','userTypeCheck']], function () {

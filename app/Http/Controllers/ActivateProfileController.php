@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Laratrust\Models\Role;
 use Laratrust\Models\Team;
+use App\Models\Image;
 use Laratrust\Models\Permission;
 
 class ActivateProfileController extends Controller
@@ -25,7 +26,7 @@ class ActivateProfileController extends Controller
             $delegate->delegation = $delegationUid->uid;
             try {
                 $savedDelegate = $delegate->save();
-                $updatesDone = $savedDelegate ? Delegation::where('delegationCode', $recievedParams->activationCode . '')->update(['delegates' => $recievedParams->uid]) : false;
+                $updatesDone = $savedDelegate ? Delegation::where('delegationCode', $recievedParams->activationCode . '')->update(['delegates' => $recievedParams->uid, 'delegation_response' => 'accepted']) : false;
                 $rolesAndPermissionGiven = $updatesDone ? $this->delegationRolesAndTeams($recievedParams->uid) : false;
                 return $rolesAndPermissionGiven;
             } catch (\Illuminate\Database\QueryException $exception) {
@@ -52,6 +53,7 @@ class ActivateProfileController extends Controller
         $rolesAdded = $user->addRole($role, $team);
         $newdPermissions = $user->givePermissions(['read', 'create'], $team);
         $updatedUser = User::with('roles', 'permissions')->where('uid', $uid)->first();
+        $updatedUser->images=Image::where('uid', $uid)->first();
         session()->forget('user');
         session()->put('user', $updatedUser);
         return true;
@@ -66,7 +68,7 @@ class ActivateProfileController extends Controller
                 $delegateActivated = $this->activateDelegate($req);
                 // return $delegateActivated;
                 // $delegateRolesPermission = $this->delegationRolesAndTeams($req->uid);
-                return $delegateActivated ? back()->with('message', 'Delegation Updated Successfully') : back()->with('error','Delegation already assigned');
+                return $delegateActivated ? back()->with('message', 'Delegation Updated Successfully') : back()->with('error', 'Delegation already assigned');
                 break;
             case "blue":
                 echo "Your favorite color is blue!";

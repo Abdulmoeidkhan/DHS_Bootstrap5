@@ -76,7 +76,6 @@ class UpdateProfileController extends Controller
         // return [$updatedUser];
         $updatedUser = User::with('roles', 'permissions')->where('uid', $req->uid)->first();
         return [$updatedUser];
-
         // $user->images = Image::where('uid', Auth::user()->uid)->first();
         // session()->forget('user');
         // session()->put('user', $user);

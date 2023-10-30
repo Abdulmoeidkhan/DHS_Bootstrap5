@@ -70,7 +70,7 @@
                                 <div class="mb-3">
                                     <label for="country">Select Country</label>
                                     <select class="form-select" aria-label="Country Name" id="country" name="country" required>
-                                        <option value="" selected disabled hidden> Select Country </option>
+                                        <option value="" <?php echo $delegate->country ? '' : 'selected'; ?> disabled hidden> Select Country </option>
                                         <option value="Afghanistan"> Afghanistan </option>
                                         <option value="Albania"> Albania </option>
                                         <option value="Algeria"> Algeria </option>
@@ -309,8 +309,7 @@
             </div>
         </div>
     </div>
-
-
+    <?php echo $delegate->country ? '<script id="scriptElement">document.getElementById("country").value="' . $delegate->country . '";document.getElementById("scriptElement").remove()</script>' : ''; ?>
 </div>
 @endsection
 @endauth

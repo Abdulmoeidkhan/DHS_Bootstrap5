@@ -46,21 +46,31 @@
                 @endif
                 @if(session()->get('user')->roles[0]->name =="admin")
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('pages.delegationPage')}}" aria-expanded="false">
+                    <a class="sidebar-link" href="{{route('pages.delegationsPage')}}" aria-expanded="false">
                         <span>
                             <i class="ti ti-mail"></i>
                         </span>
-                        <span class="hide-menu">Delegation</span>
+                        <span class="hide-menu">Delegations</span>
                     </a>
                 </li>
                 @endif
                 @if(session()->get('user')->roles[0]->name =="delegate")
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('pages.delegationPage')}}" aria-expanded="false">
+                    <a class="sidebar-link" href="{{route('pages.delegationsPage')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-user-plus"></i>
+                        </span>
+                        <span class="hide-menu">Members</span>
+                    </a>
+                </li>
+                @endif
+                @if(session()->get('user')->roles[0]->name =="delegate")
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.delegationsPage')}}" aria-expanded="false">
                         <span>
                             <i class="ti ti-mail"></i>
                         </span>
-                        <span class="hide-menu">Members</span>
+                        <span class="hide-menu">Delegation</span>
                     </a>
                 </li>
                 @endif
