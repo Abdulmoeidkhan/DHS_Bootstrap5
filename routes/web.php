@@ -70,11 +70,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/updateProfilePassowrd', [UpdateProfileController::class, 'updatePassword'])->name('request.updatePassword');
     Route::post('/activateProfile', [ActivateProfileController::class, 'activateProfile'])->name('request.activateProfile');
 
-    
+
     Route::group(['middleware' => 'delegateTypeCheck'], function () {
         Route::get('/members', [MemberController::class, 'render'])->name('pages.members');
         Route::get('/getMembers', [MemberController::class, 'membersData'])->name('request.getMembers');
         Route::get('/addMember/{id}', [MemberController::class, 'addMemberPage'])->name('pages.addMember');
+        Route::get('/delegation', [DelegationsPageController::class, 'singleDelegation'])->name('pages.delegation');
         Route::post('/addMemberRequest/{id}', [MemberController::class, 'addMemberRequest'])->name('request.addMemberRequest');
         Route::get('/memberFullProfile/{id}', [MemberController::class, 'memberFullProfile'])->name('pages.memberFullProfile');
         Route::get('/userProfile/delegateProfile', [UserFullProfileController::class, 'renderDelegateProfile'])->name('pages.delegateProfile');
@@ -82,19 +83,19 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::group(['middleware' => 'userTypeCheck'], function () {
+        Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');
         Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');
         Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');
         Route::get('/userPanel', [UserPanelController::class, 'renderView'])->name("pages.userPanel");
         Route::get('/userProfile/{id}', [UserFullProfileController::class, 'render'])->name('pages.userProfile');
+        Route::post('/addEventRequest', [AddEventController::class, 'addEvent'])->name('request.addEventRequest');
         Route::get('/delegationsPage', [DelegationsPageController::class, 'render'])->name('pages.delegationsPage');
+        Route::get('/getDelegates', [DelegationsPageController::class, 'delegationData'])->name('request.getDelegates');
         Route::get('/addDelegationPage', [AddDelegationPageController::class, 'render'])->name('pages.addDelegationPage');
         Route::get('/getSpecificMembers', [MemberController::class, 'specificMembersData'])->name('pages.getSpecificMembers');
+        Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->name('request.updateAuthority');
         Route::get('/delegateProfile/{id}', [UserFullProfileController::class, 'renderSpeceficDelegateProfile'])->name('pages.renderSpeceficDelegateProfile');
         Route::post('/addDelegationRequest', [AddDelegationPageController::class, 'addDelegation'])->name('request.addDelegationRequest');
-        Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');
-        Route::post('/addEventRequest', [AddEventController::class, 'addEvent'])->name('request.addEventRequest');
-        Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->name('request.updateAuthority');
-        Route::get('/getDelegates', [DelegationsPageController::class, 'delegationData'])->name('request.getDelegates');
     });
 });
 // Route::group(['middleware' => ['auth','userTypeCheck']], function () {
