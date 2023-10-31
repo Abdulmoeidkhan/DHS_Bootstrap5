@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\LogoutController;
 use App\Models\User;
 use App\Models\Image;
 use Illuminate\Http\Request;

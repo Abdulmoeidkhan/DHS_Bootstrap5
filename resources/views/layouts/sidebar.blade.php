@@ -56,7 +56,7 @@
                 @endif
                 @if(session()->get('user')->roles[0]->name =="delegate")
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('pages.delegationsPage')}}" aria-expanded="false">
+                    <a class="sidebar-link" href="{{route('pages.members')}}" aria-expanded="false">
                         <span>
                             <i class="ti ti-user-plus"></i>
                         </span>

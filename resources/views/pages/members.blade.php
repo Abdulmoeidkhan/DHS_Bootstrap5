@@ -10,7 +10,7 @@
     @if(session()->get('user')->roles[0]->name === "delegate")
     <div class="row">
         <div class="d-flex justify-content-center">
-            <a type="button" href="{{route('pages.addMembersPage')}}" class="btn btn-outline-success">Add Members</a>
+            <a type="button" href="{{route('pages.addMember',session()->get('user')->uid)}}" class="btn btn-outline-success">Add Members</a>
         </div>
     </div>
     <br />
@@ -29,11 +29,11 @@
                                 <th data-field="member_designation">Designation</th>
                                 <th data-field="member_organistaion">Organistaion</th>
                                 <th data-field="member_passport">Passport</th>
-                                <th data-field="first_Name">Delegation First Name</th>
-                                <th data-field="last_Name">Delegation Last Name</th>
+                                <th data-field="first_Name">Delegate First Name</th>
+                                <th data-field="last_Name">Delegate Last Name</th>
                                 <!-- <th data-field="first_Name">Delegation Code</th> -->
                                 <th data-field="country">Country</th>
-                                <th data-field="delegates" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
+                                <th data-field="member_uid" data-formatter="operateProfileFormatter" data-events="operateProfile">Profile</th>
                             </tr>
                         </thead>
                     </table>
@@ -42,7 +42,7 @@
         </div>
     </div>
     <script>
-        window.operateEvents = {
+        window.operateProfile = {
             'click .like': function(e, value, row) {
                 alert('You click like action, row: ' + JSON.stringify(row))
             },
@@ -51,12 +51,12 @@
             }
         }
 
-        function operateFormatter(value, row, index) {
+        function operateProfileFormatter(value, row, index) {
             if (value) {
                 return [
                     '<div class="left">',
                     // '<a href="https://github.com/wenzhixin/' + value + '" target="_blank">' + value + '</a>',
-                    '<a class="btn btn-outline-success" href="delegateProfile/' + value + '">',
+                    '<a class="btn btn-outline-success" href="memberFullProfile/' + value + '">',
                     '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
                     '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>',
                     '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>',
