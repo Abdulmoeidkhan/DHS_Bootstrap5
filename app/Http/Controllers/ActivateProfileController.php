@@ -26,7 +26,7 @@ class ActivateProfileController extends Controller
             $delegate->delegation = $delegationUid->uid;
             try {
                 $savedDelegate = $delegate->save();
-                $updatesDone = $savedDelegate ? Delegation::where('delegationCode', $recievedParams->activationCode . '')->update(['delegates' => $recievedParams->uid, 'delegation_response' => 'accepted']) : false;
+                $updatesDone = $savedDelegate ? Delegation::where('delegationCode', $recievedParams->activationCode . '')->update(['delegates' => $recievedParams->uid, 'delegation_response' => 'Accepted']) : false;
                 $rolesAndPermissionGiven = $updatesDone ? $this->delegationRolesAndTeams($recievedParams->uid) : false;
                 return $rolesAndPermissionGiven;
             } catch (\Illuminate\Database\QueryException $exception) {

@@ -28,6 +28,8 @@ class ActivationRequest extends Controller
                     Auth::logout();
                     return back()->with('error', 'Activation Code is not correct');
                 }
+            } else {
+                return back()->with('error', 'Email/Password is not correct');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             return  back()->with('error', $exception->errorInfo[2]);

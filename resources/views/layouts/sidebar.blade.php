@@ -54,11 +54,21 @@
                     </a>
                 </li>
                 @endif
+                @if(session()->get('user')->roles[0]->name =="admin")
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="#" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-shield-half-filled"></i>
+                        </span>
+                        <span class="hide-menu">Liasons</span>
+                    </a>
+                </li>
+                @endif
                 @if(session()->get('user')->roles[0]->name =="delegate")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.members')}}" aria-expanded="false">
                         <span>
-                            <i class="ti ti-user-plus"></i>
+                            <i class="ti ti-users"></i>
                         </span>
                         <span class="hide-menu">Members</span>
                     </a>
@@ -71,6 +81,16 @@
                             <i class="ti ti-mail"></i>
                         </span>
                         <span class="hide-menu">Delegation</span>
+                    </a>
+                </li>
+                @endif
+                @if(session()->get('user')->roles[0]->name =="delegate")
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="#" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-shield-half-filled"></i>
+                        </span>
+                        <span class="hide-menu">Liason</span>
                     </a>
                 </li>
                 @endif

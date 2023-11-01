@@ -13,7 +13,7 @@ class SignInController extends Controller
     protected function isActivated($req)
     {
         $user = User::where('email', $req->email)->first();
-        return $user->activated;
+        return $user?$user->activated:false;
     }
     public function signIn(Request $req)
     {
