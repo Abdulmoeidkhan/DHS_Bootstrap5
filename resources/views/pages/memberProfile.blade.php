@@ -21,26 +21,11 @@
                     <div class="mb-4">
                         <h5 class="card-title fw-semibold">Member Picture</h5>
                     </div>
-                    <img src="{{$delegateImage?$delegateImage->base64_image:asset('assets/images/profile/user-1.jpg')}}" width="200px" height="200px" class="rounded mx-auto d-block" alt="Member Profile Picture">
+                    <img src="{{$member->image?$member->image->base64_image:asset('assets/images/profile/user-1.jpg')}}" width="200px" height="200px" class="rounded mx-auto d-block" alt="Member Profile Picture">
                     <br />
                     <form action="{{route('request.imageUpload')}}" method="post" enctype="multipart/form-data">
                         <div class="input-group">
-                            <input type="hidden" value="{{$delegate->uid}}" name="id" />
-                            <input type="file" class="form-control" id="uploadFile" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="image" accept="image/png, image/jpeg" required>
-                            <button class="btn btn-outline-danger" type="submit">Upload</button>
-                        </div>
-                        @csrf
-                    </form>
-                </div>
-                <div class="card-body p-4">
-                    <div class="mb-4">
-                        <h5 class="card-title fw-semibold">Representative Picture</h5>
-                    </div>
-                    <img src="{{$repImage?$repImage->base64_image:asset('assets/images/profile/user-1.jpg')}}" width="200px" height="200px" class="rounded mx-auto d-block" alt="User Profile Picture">
-                    <br />
-                    <form action="{{route('request.imageUpload')}}" method="post" enctype="multipart/form-data">
-                        <div class="input-group">
-                            <input type="hidden" value="{{$delegate->rep_uid}}" name="id" />
+                            <input type="hidden" value="{{$member->member_uid}}" name="id" />
                             <input type="file" class="form-control" id="uploadFile" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="image" accept="image/png, image/jpeg" required>
                             <button class="btn btn-outline-danger" type="submit">Upload</button>
                         </div>
@@ -55,51 +40,35 @@
                 <div class="card-body p-4">
                     <h5 class="card-title fw-semibold mb-4">Member Information</h5>
                     <div class="table-responsive">
-                        <form name="delegationInfo" id="delegationInfo" method="POST" action="{{route('request.updateDelegation')}}">
+                        <form name="memberInfo" id="memberInfo" method="POST" action="#">
                             <fieldset>
                                 <legend>Member Information</legend>
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="first_Name" class="form-label">Member First Name</label>
-                                    <input name="first_Name" type="text" class="form-control" id="first_Name" placeholder="First Name" value="{{$delegate->first_Name}}" required>
+                                    <label for="member_rank" class="form-label">Member First Name</label>
+                                    <input name="member_rank" type="text" class="form-control" id="member_rank" placeholder="Rank" value="{{$member->member_rank}}" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="last_Name" class="form-label">Member Last Name</label>
-                                    <input name="last_Name" type="text" class="form-control" id="last_Name" placeholder="Last Name" value="{{$delegate->last_Name}}" required>
+                                    <label for="member_first_Name" class="form-label">Member First Name</label>
+                                    <input name="member_first_Name" type="text" class="form-control" id="member_first_Name" placeholder="First Name" value="{{$member->member_first_Name}}" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="designation" class="form-label">Designation</label>
-                                    <input name="designation" type="text" class="form-control" id="designation" placeholder="Designation" value="{{$delegate->designation}}" required>
+                                    <label for="member_last_Name" class="form-label">Member Last Name</label>
+                                    <input name="member_last_Name" type="text" class="form-control" id="member_last_Name" placeholder="Last Name" value="{{$member->last_Name}}" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="organistaion" class="form-label">Organistaion</label>
-                                    <input name="organistaion" type="text" class="form-control" id="organistaion" placeholder="Organistaion" value="{{$delegate->organistaion}}" required>
+                                    <label for="member_designation" class="form-label">Designation</label>
+                                    <input name="member_designation" type="text" class="form-control" id="member_designation" placeholder="Designation" value="{{$member->member_designation}}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="member_organistaion" class="form-label">Organistaion</label>
+                                    <input name="member_organistaion" type="text" class="form-control" id="member_organistaion" placeholder="Organistaion" value="{{$member->member_organistaion}}" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="passport" class="form-label">Passport</label>
-                                    <input name="passport" type="text" class="form-control" id="passport" placeholder="Passport" value="{{$delegate->passport}}">
+                                    <input name="passport" type="text" class="form-control" id="passport" placeholder="Passport" value="{{$member->passport}}">
                                 </div>
-                                <div class="mb-3">
-                                    <input class="form-check-input" type="radio" name="self" id="self" value="1" <?php echo $delegate->self ? 'checked' : '' ?>>
-                                    <label class="form-check-label" for="self">
-                                        Self
-                                    </label>
-                                </div>
-                                <div class="mb-3">
-                                    <input class="form-check-input" type="radio" name="self" id="rep" value="0" <?php echo !$delegate->self ? 'checked' : '' ?>>
-                                    <label class="form-check-label" for="rep">
-                                        Representative
-                                    </label>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="rep_first_Name" class="form-label">Representative First Name</label>
-                                    <input name="rep_first_Name" type="text" class="form-control" id="rep_first_Name" placeholder="Representative First Name" value="{{$delegate->rep_first_Name}}">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="rep_last_Name" class="form-label">Representative Last Name</label>
-                                    <input name="rep_last_Name" type="text" class="form-control" id="rep_last_Name" placeholder="Representative Last Name" value="{{$delegate->rep_last_Name}}">
-                                </div>
-                                <input type="hidden" name="uid" value="{{$delegate->uid}}" />
+                                <input type="hidden" name="uid" value="{{$member->uid}}" />
                                 <input type="submit" name="submit" class="btn btn-primary" value="Update" />
                             </fieldset>
                         </form>
@@ -109,7 +78,7 @@
             </div>
         </div>
     </div>
-    <?php echo $delegate->country ? '<script id="scriptElement">document.getElementById("country").value="' . $delegate->country . '";document.getElementById("scriptElement").remove()</script>' : ''; ?>
+    <?php echo $member->country ? '<script id="scriptElement">document.getElementById("country").value="' . $member->country . '";document.getElementById("scriptElement").remove()</script>' : ''; ?>
 </div>
 @endsection
 @endauth

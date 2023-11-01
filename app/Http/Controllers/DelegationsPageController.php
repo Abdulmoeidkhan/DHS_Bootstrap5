@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Delegation;
+use App\Models\Vips;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -22,8 +23,9 @@ class DelegationsPageController extends Controller
     }
     public function singleDelegation()
     {
-        $delegation = Delegation::where('delegates',session()->get('user')->uid);
-        return $delegation;
-        // return view('pages.delegation');
+        $delegation = Delegation::where('delegates',session()->get('user')->uid)->first();
+        $delegation->vip=Vips::where('uid',$delegation->invited_by)->first();
+        // return $delegation;
+        return view('pages.delegation',['delegation'=>$delegation]);
     }
 }

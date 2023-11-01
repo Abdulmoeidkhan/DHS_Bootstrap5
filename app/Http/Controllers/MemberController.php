@@ -83,6 +83,7 @@ class MemberController extends Controller
     {
         $member = Member::where('member_uid', $id)->first();
         $member->image = Image::where('uid', $id)->first();
-        return $member;
+        // return $member;
+        return view('pages.memberProfile',['member'=>$member]);
     }
 }
