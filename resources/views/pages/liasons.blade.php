@@ -10,7 +10,7 @@
     @if(session()->get('user')->roles[0]->name === "admin")
     <div class="row">
         <div class="d-flex justify-content-center">
-            <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-outline-success">Add Liason</a>
+            <a type="button" href="{{route('pages.addLiason')}}" class="btn btn-outline-success">Add Liason</a>
         </div>
     </div>
     <br />
@@ -20,7 +20,7 @@
             <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">Liason</h5>
                 <div class="table-responsive">
-                    <table id="table" data-flat="true" data-search="true" data-show-refresh="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.getDelegates')}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
+                    <table id="table" data-flat="true" data-search="true" data-show-refresh="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.liasonsData')}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
                         <thead>
                             <tr>
                                 <th data-field="id">Id</th>
@@ -54,7 +54,6 @@
             if (value) {
                 return [
                     '<div class="left">',
-                    // '<a href="https://github.com/wenzhixin/' + value + '" target="_blank">' + value + '</a>',
                     '<a class="btn btn-outline-success" href="delegateProfile/' + value + '">',
                     '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
                     '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>',

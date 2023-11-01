@@ -16,6 +16,7 @@ use App\Http\Controllers\DelegationsPageController;
 use App\Http\Controllers\AddDelegationPageController;
 use App\Http\Controllers\AddVipsController;
 use App\Http\Controllers\ActivateProfileController;
+use App\Http\Controllers\LiasonsController;
 use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
 
@@ -55,9 +56,9 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::get('/restoreUser/{id}', [UserProfileController::class, 'restoreId'])->name('restoreUser.request');
 
     // Pages Routes
+    Route::get('/events', [EventController::class, 'render'])->name('pages.events');
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout.request');
     Route::get('/', [DashboardController::class, 'renderView'])->name("pages.dashboard");
-    Route::get('/events', [EventController::class, 'render'])->name('pages.events');
     Route::get('/userProfile/myProfile', [UserFullProfileController::class, 'renderMyProfile'])->name('pages.myProfile');
     Route::get('/userProfile/profileActivation', [ActivateProfileController::class, 'renderProfileActivation'])->name('pages.profileActivation');
     Route::get('/interested/{id}', [EventInterestedController::class, 'updateInterest'])->name('request.interested');
@@ -85,7 +86,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'userTypeCheck'], function () {
         Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');
         Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');
-        Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');
+        Route::get('/liasons', [LiasonsController::class, 'renderLiasons'])->name('pages.liasons');
+        Route::get('/liasonsData', [LiasonsController::class, 'liasonsData'])->name('request.liasonsData');
+        Route::get('/addLiason', [LiasonsController::class, 'addLiason'])->name('request.addLiason');
+        Route::get('/addLiasonPages', [LiasonsController::class, 'addLiasonPage'])->name('pages.addLiason');
         Route::get('/userPanel', [UserPanelController::class, 'renderView'])->name("pages.userPanel");
         Route::get('/userProfile/{id}', [UserFullProfileController::class, 'render'])->name('pages.userProfile');
         Route::post('/addEventRequest', [AddEventController::class, 'addEvent'])->name('request.addEventRequest');
