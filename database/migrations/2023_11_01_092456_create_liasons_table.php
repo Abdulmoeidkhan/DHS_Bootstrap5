@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('liason_designation');
             $table->string('liason_first_name');
             $table->string('liason_last_name');
-            $table->integer('liason_contact');
-            $table->integer('liason_identity');
+            $table->bigInteger('liason_contact');
+            $table->bigInteger('liason_identity');
             $table->uuid('liason_delegation')->unique()->nullable();
             $table->uuid('liason_officer')->unique()->nullable();
             $table->string('liasonCode')->unique();

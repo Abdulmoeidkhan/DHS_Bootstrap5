@@ -20,17 +20,29 @@
             <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">Liason</h5>
                 <div class="table-responsive">
-                    <table id="table" data-flat="true" data-search="true" data-show-refresh="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.liasonsData')}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
+                    <table 
+                    id="table" 
+                    data-flat="true" 
+                    data-search="true" 
+                    data-show-refresh="true" 
+                    data-click-to-select="true" 
+                    data-toggle="table" 
+                    data-url="{{route('request.specificLiasonsData',$delegationUid->delegation)}}"
+                    data-pagination="true"
+                    data-show-toggle="true"
+                    data-show-export="true"
+                    data-show-columns="true"
+                    data-show-columns-toggle-all="true"
+                    data-page-list="[10, 25, 50, 100, all]">
                         <thead>
                             <tr>
                                 <th data-field="id">Id</th>
                                 <th data-field="liason_rank">Rank</th>
                                 <th data-field="liason_designation">Designation</th>
-                                <th data-field="liason_designation">Designation</th>
                                 <th data-field="liason_contact">Contact</th>
                                 <th data-field="liason_identity">Identity</th>
                                 <th data-field="liason_first_name">Liason First Name</th>
-                                <th data-field="liason_last_name">Delegates Last Name</th>
+                                <th data-field="liason_last_name">Liason Last Name</th>
                                 <th data-field="liason_officer">Liason Officer</th>
                                 <th data-field="delegates" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
                             </tr>

@@ -77,6 +77,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/getMembers', [MemberController::class, 'membersData'])->name('request.getMembers');
         Route::get('/addMember/{id}', [MemberController::class, 'addMemberPage'])->name('pages.addMember');
         Route::get('/delegation', [DelegationsPageController::class, 'singleDelegation'])->name('pages.delegation');
+        Route::get('/specificLiasonsData/{id}', [LiasonsController::class, 'specificLiasonsData'])->name('request.specificLiasonsData');
+        Route::get('/specificLiason', [LiasonsController::class, 'renderSpecificLiason'])->name('pages.renderSpecificLiason');
         Route::post('/addMemberRequest/{id}', [MemberController::class, 'addMemberRequest'])->name('request.addMemberRequest');
         Route::get('/memberFullProfile/{id}', [MemberController::class, 'memberFullProfile'])->name('pages.memberFullProfile');
         Route::get('/userProfile/delegateProfile', [UserFullProfileController::class, 'renderDelegateProfile'])->name('pages.delegateProfile');
@@ -88,7 +90,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');
         Route::get('/liasons', [LiasonsController::class, 'renderLiasons'])->name('pages.liasons');
         Route::get('/liasonsData', [LiasonsController::class, 'liasonsData'])->name('request.liasonsData');
-        Route::get('/addLiason', [LiasonsController::class, 'addLiason'])->name('request.addLiason');
+        Route::post('/addLiason', [LiasonsController::class, 'addLiason'])->name('request.addLiason');
         Route::get('/addLiasonPages', [LiasonsController::class, 'addLiasonPage'])->name('pages.addLiason');
         Route::get('/userPanel', [UserPanelController::class, 'renderView'])->name("pages.userPanel");
         Route::get('/userProfile/{id}', [UserFullProfileController::class, 'render'])->name('pages.userProfile');

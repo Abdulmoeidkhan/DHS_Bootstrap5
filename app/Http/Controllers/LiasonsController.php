@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Delegate;
 use App\Models\Liason;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -31,6 +32,12 @@ class LiasonsController extends Controller
         return view('pages.liasons');
     }
 
+    public function renderSpecificLiason()
+    {
+        $delegationUid = Delegate::where('user_uid', session()->get('user')->uid)->first('delegation');
+        return view('pages.liason', ['delegationUid' => $delegationUid]);
+    }
+
     public function addLiasonPage()
     {
         return view('pages.addLiasons');
@@ -41,25 +48,37 @@ class LiasonsController extends Controller
         $delegations = DB::table('liasons')
             ->leftJoin('delegates', 'delegates.delegation', '=', 'liasons.liason_delegation')
             ->leftJoin('delegations', 'delegations.uid', '=', 'liasons.liason_delegation')
-            ->select('liasons.*', 'delegations.country', 'delegates.last_Name', 'vips.name')
+            ->select('liasons.*', 'delegations.country', 'delegates.last_Name')
             ->get();
         return $delegations;
     }
-    
+
+    public function specificLiasonsData($id)
+    {
+        $delegations = DB::table('liasons')
+            ->leftJoin('delegates', 'delegates.delegation', '=', 'liasons.liason_delegation')
+            ->leftJoin('delegations', 'delegations.uid', '=', 'liasons.liason_delegation')
+            ->where('liasons.liason_delegation', $id)
+            ->select('liasons.*', 'delegations.country', 'delegates.last_Name')
+            ->get();
+        return $delegations;
+    }
+
     public function addLiason(Request $req)
     {
-        $delegation = new Liason();
-        $delegation->uid = (string) Str::uuid();
-        $delegation->country = $req->country;
-        $delegation->invited_by = $req->invitedBy;
-        $delegation->address = $req->address;
-        $delegation->address = $req->address;
-        $delegation->exhibition = $req->eventSelect;
-        $delegation->delegationCode = $this->badge(8, "DL");
+        $liason = new Liason();
+        $liason->liason_uid  = (string) Str::uuid();
+        $liason->liason_rank = $req->liason_rank;
+        $liason->liason_designation = $req->liason_designation;
+        $liason->liason_first_name = $req->liason_first_name;
+        $liason->liason_last_name = $req->liason_last_name;
+        $liason->liason_contact = $req->liason_contact;
+        $liason->liason_identity = $req->liason_identity;
+        $liason->liasonCode  = $this->badge(8, "LO");
         try {
-            $delegationSaved = $delegation->save();
-            if ($delegationSaved) {
-                return back()->with('message', 'Delegation has been added Successfully');
+            $liasonSaved = $liason->save();
+            if ($liasonSaved) {
+                return back()->with('message', 'Liason has been added Successfully');
             }
         } catch (QueryException $exception) {
             if ($exception->errorInfo[2]) {
@@ -69,8 +88,4 @@ class LiasonsController extends Controller
             }
         }
     }
-
-
-
-
 }
