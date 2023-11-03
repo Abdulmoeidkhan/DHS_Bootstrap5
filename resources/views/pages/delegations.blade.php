@@ -32,7 +32,8 @@
                                 <th data-field="first_Name">Delegates First Name</th>
                                 <th data-field="last_Name">Delegates Last Name</th>
                                 <th data-field="name">Invited By</th>
-                                <th data-field="delegates" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
+                                <th data-field="delegates" data-formatter="operateFormatter">Profile</th>
+                                <th data-field="liasons" data-formatter="operateLiason">Attach Liason</th>
                             </tr>
                         </thead>
                     </table>
@@ -41,20 +42,10 @@
         </div>
     </div>
     <script>
-        window.operateEvents = {
-            'click .like': function(e, value, row) {
-                alert('You click like action, row: ' + JSON.stringify(row))
-            },
-            'click .remove': function(e, value, row) {
-                alert('You click remove action, row: ' + JSON.stringify(row))
-            }
-        }
-
         function operateFormatter(value, row, index) {
             if (value) {
                 return [
                     '<div class="left">',
-                    // '<a href="https://github.com/wenzhixin/' + value + '" target="_blank">' + value + '</a>',
                     '<a class="btn btn-outline-success" href="delegateProfile/' + value + '">',
                     '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
                     '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>',
@@ -64,13 +55,45 @@
                     '</svg>',
                     '</a>',
                     '</div>',
-                    '<div class="right">',
-                    '<a class="like" href="javascript:void(0)" title="Like">',
-                    '<i class="fa fa-heart"></i>',
-                    '</a>  ',
-                    '<a class="remove" href="javascript:void(0)" title="Remove">',
-                    '<i class="fa fa-trash"></i>',
+                ].join('')
+            }
+        }
+
+        function operateLiason(value, row, index) {
+            if (value) {
+                return [
+                    '<div class="left">',
+                    '<a class="btn btn-outline-success" href="delegateProfile/' + value + '">',
+                    '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
+                    '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
+                    '<path d="M6 21v-2a4 4 0 0 1 4 -4h2" />',
+                    '<path d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" />',
+                    '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />',
+                    '</svg>',
                     '</a>',
+                    '</div>'
+                ].join('')
+            } else {
+                return [
+                    '<div class="left">',
+                    '<button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#LiasonModal">',
+                    '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
+                    '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
+                    '<path d="M6 21v-2a4 4 0 0 1 4 -4h2" />',
+                    '<path d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" />',
+                    '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />',
+                    '</svg>',
+                    '</button>',
+                    '<div class="modal fade" id="LiasonModal" tabindex="-1" aria-labelledby="LiasonModal" aria-hidden="true">',
+                    '<div class="modal-dialog">',
+                    '<div class="modal-content">',
+                    '<div class="modal-header">',
+                    '<h5 class="modal-title" id="exampleModalLabel">Attach Liason</h5>',
+                    '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>',
+                    '</div>',
+                    '</div>',
+                    '</div>',
+                    '</div>',
                     '</div>'
                 ].join('')
             }
