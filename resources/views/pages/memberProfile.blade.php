@@ -2,17 +2,6 @@
 @extends('layouts.layout')
 @section("content")
 <div class="container-fluid">
-    @if(session('message'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <div>{{session('message')}}</div>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @elseif(session('error'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <div>{{session('error')}}</div>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
     <div id="liveAlertPlaceholder"></div>
     <div class="row">
         <div class="col-lg-4 d-flex align-items-stretch">
@@ -40,7 +29,7 @@
                 <div class="card-body p-4">
                     <h5 class="card-title fw-semibold mb-4">Member Information</h5>
                     <div class="table-responsive">
-                        <form name="memberInfo" id="memberInfo" method="POST" action="#">
+                        <form name="memberInfo" id="memberInfo" method="POST" action="{{route('pages.updateMemberRequest',$member->member_uid)}}">
                             <fieldset>
                                 <legend>Member Information</legend>
                                 @csrf
@@ -54,7 +43,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="member_last_Name" class="form-label">Member Last Name</label>
-                                    <input name="member_last_Name" type="text" class="form-control" id="member_last_Name" placeholder="Last Name" value="{{$member->last_Name}}" required>
+                                    <input name="member_last_Name" type="text" class="form-control" id="member_last_Name" placeholder="Last Name" value="{{$member->member_last_Name}}" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="member_designation" class="form-label">Designation</label>
@@ -66,7 +55,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="passport" class="form-label">Passport</label>
-                                    <input name="passport" type="text" class="form-control" id="passport" placeholder="Passport" value="{{$member->passport}}">
+                                    <input name="passport" type="text" class="form-control" id="passport" placeholder="Passport" value="{{$member->member_passport}}">
                                 </div>
                                 <input type="hidden" name="uid" value="{{$member->uid}}" />
                                 <input type="submit" name="submit" class="btn btn-primary" value="Update" />

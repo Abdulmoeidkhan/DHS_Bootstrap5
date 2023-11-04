@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Delegate;
+use App\Models\Delegation;
 use App\Models\Liason;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Redis;
 
 class LiasonsController extends Controller
 {
@@ -79,6 +81,22 @@ class LiasonsController extends Controller
             $liasonSaved = $liason->save();
             if ($liasonSaved) {
                 return back()->with('message', 'Liason has been added Successfully');
+            }
+        } catch (QueryException $exception) {
+            if ($exception->errorInfo[2]) {
+                return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+            } else {
+                return  back()->with('error', $exception->errorInfo[2]);
+            }
+        }
+    }
+    public function attachLiason(Request $req)
+    {
+        try {
+            $updateLiason = Liason::where('liason_uid', $req->liasonSelect)->update(['liason_delegation' => $req->delegationUid, 'liason_assign' => 1]);
+            if ($updateLiason) {
+                $updateDelegation = Delegation::where('uid', $req->delegationUid)->update(['liasons' => $req->liasonSelect]);
+                return back()->with('message', 'Liason has been attach Successfully');
             }
         } catch (QueryException $exception) {
             if ($exception->errorInfo[2]) {

@@ -2,17 +2,6 @@
 @extends('layouts.layout')
 @section("content")
 <div class="container-fluid">
-    @if(session('message'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <div>{{session('message')}}</div>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @elseif(session('error'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <div>{{session('error')}}</div>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
     <div id="liveAlertPlaceholder"></div>
     <div class="row">
         <div class="col-lg-4 d-flex align-items-stretch">

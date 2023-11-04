@@ -94,6 +94,16 @@
                     </a>
                 </li>
                 @endif
+                @if(session()->get('user')->roles[0]->name =="liason")
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.delegationAssigned')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-mail"></i>
+                        </span>
+                        <span class="hide-menu">Delegation</span>
+                    </a>
+                </li>
+                @endif
             </ul>
             <!-- <ul id="sidebarnav">
                 <li class="nav-small-cap">

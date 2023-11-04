@@ -1,11 +1,6 @@
 @auth
 @extends('layouts.layout')
 @section("content")
-@if (session('error'))
-<script>
-    alert("{{session('error')}}");
-</script>
-@endif
 <div class="container-fluid">
     @if(session()->get('user')->roles[0]->name === "delegate")
     <div class="row">

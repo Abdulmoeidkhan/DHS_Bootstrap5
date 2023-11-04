@@ -78,12 +78,29 @@ class MemberController extends Controller
             return  back()->with('error', $exception->errorInfo[2]);
         }
     }
+    public function updateMemberRequest(Request $req,$id)
+    {
+        $arrayToBeUpdate = [];
+        foreach ($req->all() as $key => $value) {
+            if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
+                $arrayToBeUpdate[$key] = $value;
+            }
+        }
+        try {
+            $updatedMember = Member::where('member_uid', $id)->update(['name' => $req->inputUserName, 'contact_number' => $req->inputContactNumber]);
+            if ($updatedMember) {
+                return redirect()->route("pages.addMember", $req->delegation)->with('message', 'Member Updated Successfully');
+            }
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return  back()->with('error', $exception->errorInfo[2]);
+        }
+    }
 
     public function memberFullProfile(Request $req, $id)
     {
         $member = Member::where('member_uid', $id)->first();
         $member->image = Image::where('uid', $id)->first();
         // return $member;
-        return view('pages.memberProfile',['member'=>$member]);
+        return view('pages.memberProfile', ['member' => $member]);
     }
 }

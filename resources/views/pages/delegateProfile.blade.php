@@ -2,17 +2,6 @@
 @extends('layouts.layout')
 @section("content")
 <div class="container-fluid">
-    @if(session('message'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <div>{{session('message')}}</div>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @elseif(session('error'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <div>{{session('error')}}</div>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
     <div id="liveAlertPlaceholder"></div>
     <div class="row">
         <div class="col-lg-4 d-flex align-items-stretch">
@@ -23,13 +12,15 @@
                     </div>
                     <img src="{{$delegateImage?$delegateImage->base64_image:asset('assets/images/profile/user-1.jpg')}}" width="200px" height="200px" class="rounded mx-auto d-block" alt="Delegate Profile Picture">
                     <br />
-                    <form action="{{route('request.imageUpload')}}" method="post" enctype="multipart/form-data">
-                        <div class="input-group">
-                            <input type="hidden" value="{{$delegate->uid}}" name="id" />
-                            <input type="file" class="form-control" id="uploadFile" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="image" accept="image/png, image/jpeg" required>
-                            <button class="btn btn-outline-danger" type="submit">Upload</button>
-                        </div>
-                        @csrf
+                    <form action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ?route('request.imageUpload'):''}}" method="post" enctype="multipart/form-data">
+                        <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
+                            <div class="input-group">
+                                <input type="hidden" value="{{$delegate->uid}}" name="id" />
+                                <input type="file" class="form-control" id="uploadFile" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="image" accept="image/png, image/jpeg" required>
+                                <button class="btn btn-outline-danger" type="submit">Upload</button>
+                            </div>
+                            @csrf
+                        </fieldset>
                     </form>
                 </div>
                 <div class="card-body p-4">
@@ -38,25 +29,26 @@
                     </div>
                     <img src="{{$repImage?$repImage->base64_image:asset('assets/images/profile/user-1.jpg')}}" width="200px" height="200px" class="rounded mx-auto d-block" alt="User Profile Picture">
                     <br />
-                    <form action="{{route('request.imageUpload')}}" method="post" enctype="multipart/form-data">
-                        <div class="input-group">
-                            <input type="hidden" value="{{$delegate->rep_uid}}" name="id" />
-                            <input type="file" class="form-control" id="uploadFile" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="image" accept="image/png, image/jpeg" required>
-                            <button class="btn btn-outline-danger" type="submit">Upload</button>
-                        </div>
-                        @csrf
+                    <form action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ?route('request.imageUpload'):''}}" method="post" enctype="multipart/form-data">
+                        <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
+                            <div class="input-group">
+                                <input type="hidden" value="{{$delegate->rep_uid}}" name="id" />
+                                <input type="file" class="form-control" id="uploadFile" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="image" accept="image/png, image/jpeg" required>
+                                <button class="btn btn-outline-danger" type="submit">Upload</button>
+                            </div>
+                            @csrf
+                        </fieldset>
                     </form>
                 </div>
             </div>
         </div>
-
         <div class="col-lg-8 d-flex align-items-stretch">
             <div class="card w-100">
                 <div class="card-body p-4">
                     <h5 class="card-title fw-semibold mb-4">Delegate Information</h5>
                     <div class="table-responsive">
-                        <form name="delegationInfo" id="delegationInfo" method="POST" action="{{route('request.updateDelegation')}}">
-                            <fieldset>
+                        <form name="delegationInfo" id="delegationInfo" method="POST" action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.updateDelegation'):''}}">
+                            <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
                                 <legend>Delegate Information</legend>
                                 @csrf
                                 <div class="mb-3">

@@ -16,6 +16,17 @@
         <!--  Main wrapper -->
         <div class="body-wrapper">
             @include("layouts.header")
+            @if(session('message'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <div>{{session('message')}}</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @elseif(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div>{{session('error')}}</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
             @yield("content")
         </div>
     </div>

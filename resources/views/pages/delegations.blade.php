@@ -15,6 +15,37 @@
     </div>
     <br />
     @endif
+    <div class="modal fade" id="LiasonModal" tabindex="-1" aria-labelledby="LiasonModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Liason Modal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action='{{route("request.attachLiason")}}'>
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="liasonSelect" class="col-form-label">Liason :</label>
+                            <select class="form-select" aria-label="Liason To Be Associate" id="liasonSelect" name="liasonSelect">
+                                <option value="" selected disabled hidden> Select Liason To Be Associate </option>
+                                @foreach($liasons as $key=>$liason)
+                                <option value="{{$liason->liason_uid}}"> {{$liason->liason_first_name.' '.$liason->liason_last_name}} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <input type="hidden" name="delegationUid" value="" id="delegationUid" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="card w-100">
             <div class="card-body p-4">
@@ -33,7 +64,7 @@
                                 <th data-field="last_Name">Delegates Last Name</th>
                                 <th data-field="name">Invited By</th>
                                 <th data-field="delegates" data-formatter="operateFormatter">Profile</th>
-                                <th data-field="liasons" data-formatter="operateLiason">Attach Liason</th>
+                                <th data-field="liasons" data-formatter="operateLiason">Liason</th>
                             </tr>
                         </thead>
                     </table>
@@ -76,7 +107,7 @@
             } else {
                 return [
                     '<div class="left">',
-                    '<button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#LiasonModal">',
+                    '<button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#LiasonModal">',
                     '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
                     '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
                     '<path d="M6 21v-2a4 4 0 0 1 4 -4h2" />',
@@ -84,20 +115,17 @@
                     '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />',
                     '</svg>',
                     '</button>',
-                    '<div class="modal fade" id="LiasonModal" tabindex="-1" aria-labelledby="LiasonModal" aria-hidden="true">',
-                    '<div class="modal-dialog">',
-                    '<div class="modal-content">',
-                    '<div class="modal-header">',
-                    '<h5 class="modal-title" id="exampleModalLabel">Attach Liason</h5>',
-                    '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>',
-                    '</div>',
-                    '</div>',
-                    '</div>',
-                    '</div>',
                     '</div>'
                 ].join('')
             }
         }
+        const exampleModal = document.getElementById('LiasonModal')
+        exampleModal.addEventListener('show.bs.modal', event => {
+            const button = event.relatedTarget
+            const delegation = button.getAttribute('data-bs-delegation')
+            const modalBodyInput = exampleModal.querySelector('.modal-body #delegationUid')
+            modalBodyInput.value = delegation
+        })
     </script>
     @include("layouts.tableFoot")
     @endsection

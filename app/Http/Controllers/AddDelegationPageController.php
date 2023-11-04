@@ -34,6 +34,7 @@ class AddDelegationPageController extends Controller
     {
         $delegation = new Delegation();
         $delegation->uid = (string) Str::uuid();
+        $delegation->rep_uid = (string) Str::uuid();
         $delegation->country = $req->country;
         $delegation->invited_by = $req->invitedBy;
         $delegation->address = $req->address;
