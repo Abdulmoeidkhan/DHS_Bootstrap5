@@ -6,7 +6,6 @@ use App\Models\Delegation;
 use App\Models\Liason;
 use App\Models\Vips;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
 
 class DelegationsPageController extends Controller
 {

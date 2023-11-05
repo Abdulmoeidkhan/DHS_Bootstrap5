@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use Illuminate\Support\Str;
-use App\Models\Image;
 use Illuminate\Support\Facades\Storage;
 
 class AddEventController extends Controller

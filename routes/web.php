@@ -16,6 +16,7 @@ use App\Http\Controllers\DelegationsPageController;
 use App\Http\Controllers\AddDelegationPageController;
 use App\Http\Controllers\AddVipsController;
 use App\Http\Controllers\ActivateProfileController;
+use App\Http\Controllers\FlightsController;
 use App\Http\Controllers\LiasonsController;
 use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
@@ -91,6 +92,8 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::group(['middleware' => 'userTypeCheck'], function () {
+        Route::get('/flights', [FlightsController::class, 'render'])->name('pages.flights');
+        Route::post('/addItinerary', [FlightsController::class, 'addItinerary'])->name('request.addItinerary');
         Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');
         Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');
         Route::get('/liasons', [LiasonsController::class, 'renderLiasons'])->name('pages.liasons');
