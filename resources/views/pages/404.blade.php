@@ -8,5 +8,4 @@
             <a href="/" class="btn btn-primary">Go Home</a>
         </div>
     </div>
-</div>
 @endsection

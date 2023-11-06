@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('itinerary_name')->unique();
             $table->string('itinerary_remarks')->unique();
             $table->string('itinerary_status')->default(1);
-            $table->uuid('ticket_uid')->unique()->nullable();
             $table->timestamps();
         });
     }

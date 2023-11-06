@@ -59,7 +59,7 @@ class LiasonsController extends Controller
         $delegations = DB::table('liasons')
             ->leftJoin('delegates', 'delegates.delegation', '=', 'liasons.liason_delegation')
             ->leftJoin('delegations', 'delegations.uid', '=', 'liasons.liason_delegation')
-            ->where('liasons.liason_delegation', $id)
+            ->where('liasons.liason_uid', $id)
             ->select('liasons.*', 'delegations.country', 'delegates.last_Name')
             ->get();
         return $delegations;

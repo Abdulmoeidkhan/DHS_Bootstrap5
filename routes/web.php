@@ -79,7 +79,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/addMember/{id}', [MemberController::class, 'addMemberPage'])->name('pages.addMember');
         Route::get('/delegation', [DelegationsPageController::class, 'singleDelegation'])->name('pages.delegation');
         Route::get('/specificLiason', [LiasonsController::class, 'renderSpecificLiason'])->name('pages.renderSpecificLiason');
-        Route::get('/memberFullProfile/{id}', [MemberController::class, 'memberFullProfile'])->name('pages.memberFullProfile');
         Route::post('/addMemberRequest/{id}', [MemberController::class, 'addMemberRequest'])->name('request.addMemberRequest');
         Route::post('/updateMemberRequest/{id}', [MemberController::class, 'updateMemberRequest'])->name('pages.updateMemberRequest');
         Route::get('/specificLiasonsData/{id}', [LiasonsController::class, 'specificLiasonsData'])->name('request.specificLiasonsData');
@@ -88,12 +87,20 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'liasonTypeCheck'], function () {
         Route::get('/delegationAssigned', [DelegationsPageController::class, 'delegationAssigned'])->name('pages.delegationAssigned');
-        Route::get('/liason/delegateProfile/{id}', [UserFullProfileController::class, 'renderSpeceficDelegateProfile'])->name('pages.liasonDelegateProfile');
+        Route::get('/liason/delegateProfile/{id}', [LiasonsController::class, 'specificLiasonsData'])->name('pages.liasonDelegateProfile');
     });
 
     Route::group(['middleware' => 'userTypeCheck'], function () {
         Route::get('/flights', [FlightsController::class, 'render'])->name('pages.flights');
+        Route::get('/addflights', [FlightsController::class, 'addItineraryRender'])->name('pages.addflights');
+        Route::get('/addticketspage', [FlightsController::class, 'addTicketRender'])->name('pages.addticketspage');
+        Route::get('/viewItinerary/{id}', [FlightsController::class, 'viewItinerary'])->name('page.viewItinerary');
+        Route::get('/viewPassenger/{id}', [FlightsController::class, 'viewPassenger'])->name('page.viewPassenger');
+        Route::post('/addTicket', [FlightsController::class, 'addTicket'])->name('request.addTicket');
         Route::post('/addItinerary', [FlightsController::class, 'addItinerary'])->name('request.addItinerary');
+        Route::post('/updateItinerary', [FlightsController::class, 'updateItinerary'])->name('request.updateItinerary');
+        Route::get('/getItinerary', [FlightsController::class, 'getItinerary'])->name('request.getItinerary');
+        Route::get('/getTickets', [FlightsController::class, 'getTickets'])->name('request.getTickets');
         Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');
         Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');
         Route::get('/liasons', [LiasonsController::class, 'renderLiasons'])->name('pages.liasons');
@@ -111,6 +118,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->name('request.updateAuthority');
         Route::get('/delegateProfile/{id}', [UserFullProfileController::class, 'renderSpeceficDelegateProfile'])->name('pages.renderSpeceficDelegateProfile');
         Route::post('/addDelegationRequest', [AddDelegationPageController::class, 'addDelegation'])->name('request.addDelegationRequest');
+        Route::get('/liasonSpecifivProfile/{id}', [LiasonsController::class, 'specificLiasonsData'])->name('pages.liasonSpecifivProfile');
+    });
+    Route::group(['middleware' => 'authorisedUserCheck'], function () {
+        Route::get('/memberFullProfile/{id}', [MemberController::class, 'memberFullProfile'])->name('pages.memberFullProfile');
     });
 });
 

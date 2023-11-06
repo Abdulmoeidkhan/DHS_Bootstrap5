@@ -1,7 +1,7 @@
 @auth
 @extends('layouts.layout')
 @section("content")
-<div class="container-fluid">
+
     <div class="row">
         <div class="card w-100">
             <div class="card-body p-4">
@@ -72,6 +72,6 @@
             ].join('')
         }
     </script>
-    @include("layouts.tableFoot")
-    @endsection
-    @endauth
+@include("layouts.tableFoot")
+@endsection
+@endauth

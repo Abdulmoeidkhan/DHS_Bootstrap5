@@ -1,7 +1,7 @@
 @auth
 @extends('layouts.layout')
 @section("content")
-<div class="container-fluid">
+
     @if(session()->get('user')->roles[0]->name === "delegate")
     <div class="row">
         <div class="d-flex justify-content-center">
@@ -72,6 +72,6 @@
             }
         }
     </script>
-    @include("layouts.tableFoot")
-    @endsection
-    @endauth
+@include("layouts.tableFoot")
+@endsection
+@endauth

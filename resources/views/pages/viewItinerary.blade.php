@@ -5,11 +5,11 @@
         <div class="col-lg-12 d-flex align-items-stretch">
             <div class="card w-100">
                 <div class="card-body p-4">
-                    <h5 class="card-title fw-semibold mb-4">Add Itinerary</h5>
+                    <h5 class="card-title fw-semibold mb-4">Itinerary</h5>
                     <div class="table-responsive">
-                        <form name="addItineraryInfo" id="addItineraryInfo" method="POST" action="{{route('request.addItinerary')}}">
+                        <form name="addItineraryInfo" id="addItineraryInfo" method="POST" action="{{route('request.updateItinerary')}}">
                             <fieldset>
-                                <legend>Add Itinerary Form</legend>
+                                <legend>Update Itinerary Form</legend>
                                 @csrf
                                 <div class="row row-cols-lg-auto g-3 align-items-center">
                                     <div class="col-5">
@@ -19,7 +19,7 @@
                                         <input name="itineraryName" type="text" class="form-control" id="itineraryName" placeholder="Itinerary Name" />
                                     </div>
                                     <div class="col-2">
-                                        <button type="submit" class="btn btn-primary" id="itinerarySubmit">Submit</button>
+                                        <button type="submit" class="btn btn-primary" id="itinerarySubmit">Update</button>
                                     </div>
                                 </div>
                                 <table class="table table-striped">
@@ -34,75 +34,28 @@
                                             <th scope="col" data-toggle="tooltip" data-placement="top" title="Arrival City">Arr City</th>
                                             <th scope="col" data-toggle="tooltip" data-placement="top" title="Arrival Date">Arr Date</th>
                                             <th scope="col" data-toggle="tooltip" data-placement="top" title="Arrival Time">Arr Time</th>
-                                            <th scope="col" data-toggle="tooltip" data-placement="top" title="Actions">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tableBody">
-                                        <tr id='segment-1'>
-                                            <th scope="row">1</th>
-                                            <td><input list="airline" name="segment-1-airline" type="text" id="segment-1-airlineSelect" class="form-control" placeholder="Airline" required /></td>
-                                            <td><input name="segment-1-flightNo" type="text" class="form-control" id="segment-1-flightNo" placeholder="Flight No." minlength="4" maxlength="4" required /></td>
-                                            <td><input list="city" name="segment-1-depCity" type="text" id="segment-1-departureCitySelect" class="form-control" placeholder="Departure City" required></td>
-                                            <td><input name="segment-1-depDate" type="date" id="segment-1-depDate" class="form-control" placeholder="Departure Date" required /></td>
-                                            <td><input name="segment-1-depTime" type="number" id="segment-1-depTime" class="form-control" placeholder="Departure Time" minlength="4" maxlength="4" required /></td>
-                                            <td><input list="city" name="segment-1-arrCity" type="text" id="segment-1-arrivalCitySelect" class="form-control" placeholder="Arrival City" required></td>
-                                            <td><input name="segment-1-arrDate" type="date" id="segment-1-arrDate" class="form-control" placeholder="Arrival Date" required /></td>
-                                            <td><input name="segment-1-arrTime" type="number" id="segment-1-arrTime" class="form-control" placeholder="Arrival Time" minlength="4" maxlength="4" required /></td>
-                                            <td>
-                                                <div class="d-flex align-items-center gap-2" id="div-segment-1-btn">
-                                                    <button type="button" class="btn btn-outline-success" onclick="addSegment(this)" id="segment-1-btn">
-                                                        <span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-row-insert-bottom" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                                <path d="M20 6v4a1 1 0 0 1 -1 1h-14a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1h14a1 1 0 0 1 1 1z" />
-                                                                <path d="M12 15l0 4" />
-                                                                <path d="M14 17l-4 0" />
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                </div>
-                                            </td>
+                                        @foreach($itineraries as $key=>$itinerary)
+                                        <tr id='{{$itinerary->flightsegment_uid}}'>
+                                            <th scope="row">{{$key+1}}</th>
+                                            <td><input list="airline" name="segment-{{$key+1}}-airline" type="text" id="segment-{{$key+1}}-airlineSelect" class="form-control" placeholder="Airline" value="{{$itinerary->airline}}" required /></td>
+                                            <td><input name="segment-{{$key+1}}-flightNo" type="text" class="form-control" id="segment-{{$key+1}}-flightNo" placeholder="Flight No." minlength="4" maxlength="4" value="{{$itinerary->flight_no}}" required /></td>
+                                            <td><input list="city" name="segment-{{$key+1}}-depCity" type="text" id="segment-{{$key+1}}-departureCitySelect" class="form-control" placeholder="Departure City" value="{{$itinerary->departure_city}}" required></td>
+                                            <td><input name="segment-{{$key+1}}-depDate" type="date" id="segment-{{$key+1}}-depDate" class="form-control" placeholder="Departure Date" value="{{$itinerary->departure_date}}" required /></td>
+                                            <td><input name="segment-{{$key+1}}-depTime" type="number" id="segment-{{$key+1}}-depTime" class="form-control" placeholder="Departure Time" minlength="4" maxlength="4" value="{{$itinerary->departure_time}}" required /></td>
+                                            <td><input list="city" name="segment-{{$key+1}}-arrCity" type="text" id="segment-{{$key+1}}-arrivalCitySelect" class="form-control" placeholder="Arrival City" value="{{$itinerary->arrival_city}}" required></td>
+                                            <td><input name="segment-{{$key+1}}-arrDate" type="date" id="segment-{{$key+1}}-arrDate" class="form-control" placeholder="Arrival Date" value="{{$itinerary->arrival_date}}" required /></td>
+                                            <td><input name="segment-{{$key+1}}-arrTime" type="number" id="segment-{{$key+1}}-arrTime" class="form-control" placeholder="Arrival Time" minlength="4" maxlength="4" value="{{$itinerary->arrival_time}}" required /></td>
                                         </tr>
+                                        <input type="hidden" value="{{$itinerary->flightsegment_uid}}" name="segment-{{$key+1}}-uid" id="segment-{{$key+1}}-uid" />
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </fieldset>
-                            <input type="hidden" value="1" name="rows" id="rows" />
+                            <input type="hidden" value="{{count($itineraries)}}" name="rows" id="rows" />
                         </form>
-                        <!-- <form name="addFlightInfo" id="addFlightInfo" method="POST" action="{{route('request.addLiason')}}" enctype="multipart/form-data">
-                            <fieldset>
-                                <legend>Add Flight Form</legend>
-                                @csrf
-                                <div class="mb-3">
-                                    <label for="flight_no" class="form-label">Flight No.</label>
-                                    <input name="flight_no" type="text" class="form-control" id="flight_no" placeholder="Flight No." />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="departure_date" class="form-label">Departure Date</label>
-                                    <input name="departure_date" type="date" class="form-control" id="departure_date" placeholder="Departure Date" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="departure_time" class="form-label">Departure Time</label>
-                                    <input name="departure_time" type="number" class="form-control" id="departure_time" placeholder="Departure Time" minlength="4" maxlength="4" value="0000" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="arrival_date" class="form-label">Arrival Date</label>
-                                    <input name="arrival_date" type="date" class="form-control" id="arrival_date" placeholder="Arrival Date" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="arrival_time" class="form-label">Arrival Time</label>
-                                    <input name="arrival_time" type="number" class="form-control" id="arrival_time" placeholder="Arrival Time" minlength="4" maxlength="4" value="0000" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="liason_last_name" class="form-label">Last Name</label>
-                                    <input name="liason_last_name" type="text" class="form-control" id="liason_last_name" placeholder="Liason Last Name" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="liason_identity" class="form-label">Liason CNIC</label>
-                                    <input name="liason_identity" type="number" class="form-control" id="liason_identity" placeholder="Liason Identity" />
-                                </div>
-                                <input type="submit" name="submit" class="btn btn-primary" value="Add Liason" />
-                            </fieldset>
-                        </form> -->
                     </div>
                 </div>
             </div>
@@ -2916,7 +2869,5 @@
             </datalist>
         </div>
     </div>
-</div>
-<script src="{{asset('assets/js/flights.js')}}"></script>
 @endsection
 @endauth

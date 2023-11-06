@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->string('passenger_type');
             $table->uuid('ticket_uid')->unique();
-            $table->string('remarks')->nullable();
-            $table->uuid('itinerary_uid')->unique();
+            $table->string('ticket_remarks')->nullable();
+            $table->uuid('itinerary_uid');
             $table->uuid('passenger_uid')->unique();
             $table->bigInteger('ticket_number')->nullable();
+            $table->integer('ticket_status')->default(1);
+            $table->string('coupon_status')->default('Open');
             $table->timestamps();
         });
     }

@@ -1,7 +1,7 @@
 @auth
 @extends('layouts.layout')
 @section("content")
-<div class="container-fluid">
+
     @if(session()->get('user')->roles[0]->name === "admin")
     <div class="row">
         <div class="d-flex justify-content-center">
@@ -15,20 +15,7 @@
             <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">Liason</h5>
                 <div class="table-responsive">
-                    <table 
-                    id="table" 
-                    data-flat="true" 
-                    data-search="true" 
-                    data-show-refresh="true" 
-                    data-click-to-select="true" 
-                    data-toggle="table" 
-                    data-url="{{route('request.specificLiasonsData',$delegationUid->delegation)}}"
-                    data-pagination="true"
-                    data-show-toggle="true"
-                    data-show-export="true"
-                    data-show-columns="true"
-                    data-show-columns-toggle-all="true"
-                    data-page-list="[10, 25, 50, 100, all]">
+                    <table id="table" data-flat="true" data-search="true" data-show-refresh="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.specificLiasonsData',$delegationUid->delegation)}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
                         <thead>
                             <tr>
                                 <th data-field="id">Id</th>
@@ -82,6 +69,6 @@
             }
         }
     </script>
-    @include("layouts.tableFoot")
-    @endsection
-    @endauth
+@include("layouts.tableFoot")
+@endsection
+@endauth

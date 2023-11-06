@@ -34,7 +34,7 @@ class AddDelegationPageController extends Controller
     {
         $delegation = new Delegation();
         $delegation->uid = (string) Str::uuid();
-        $delegation->rep_uid = (string) Str::uuid();
+        // $delegation->rep_uid = (string) Str::uuid();
         $delegation->country = $req->country;
         $delegation->invited_by = $req->invitedBy;
         $delegation->address = $req->address;
@@ -47,6 +47,7 @@ class AddDelegationPageController extends Controller
                 return back()->with('message', 'Delegation has been added Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
+            // return $exception->errorInfo[2];
             if ($exception->errorInfo[2]) {
                 return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
             } else {

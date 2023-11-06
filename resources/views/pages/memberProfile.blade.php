@@ -1,7 +1,7 @@
 @auth
 @extends('layouts.layout')
 @section("content")
-<div class="container-fluid">
+
     <div id="liveAlertPlaceholder"></div>
     <div class="row">
         <div class="col-lg-4 d-flex align-items-stretch">
@@ -68,6 +68,5 @@
         </div>
     </div>
     <?php echo $member->country ? '<script id="scriptElement">document.getElementById("country").value="' . $member->country . '";document.getElementById("scriptElement").remove()</script>' : ''; ?>
-</div>
 @endsection
 @endauth
