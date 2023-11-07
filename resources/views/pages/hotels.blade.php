@@ -4,7 +4,7 @@
 @if(session()->get('user')->roles[0]->name === "admin")
 <div class="row">
     <div class="d-flex justify-content-center gap-2">
-        <a type="button" href="{{route('pages.addflights')}}" class="btn btn-outline-success">Add Hotel</a>
+        <a type="button" href="{{route('pages.addHotel')}}" class="btn btn-outline-success">Add Hotel</a>
         <a type="button" href="{{route('pages.addticketspage')}}" class="btn btn-outline-warning">Add Room Type</a>
         <a type="button" href="{{route('pages.addticketspage')}}" class="btn btn-outline-primary">Add Room</a>
     </div>
@@ -82,7 +82,7 @@
         if (value) {
             return [
                 '<div class="left">',
-                '<a class="btn btn-outline-success" href="viewItinerary/' + value + '">',
+                '<a class="btn btn-outline-success" href="addHotelPage/' + value + '">',
                 '<span><i class="ti ti-edit" style="font-size:22px"></i></span>',
                 '</a>',
                 '</div>',

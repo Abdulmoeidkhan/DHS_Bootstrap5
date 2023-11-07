@@ -107,6 +107,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/getTickets', [FlightsController::class, 'getTickets'])->name('request.getTickets');
         Route::get('/getHotels', [HotelController::class, 'getHotels'])->name('request.getHotels');
         Route::get('/getRooms', [HotelController::class, 'getRooms'])->name('request.getRooms');
+        Route::get('/addHotelPage/{id?}', [HotelController::class, 'addHotelRender'])->name('pages.addHotel');
+        Route::post('/updateHotel/{id}', [HotelController::class, 'updateHotel'])->name('request.updateHotel');
+        Route::post('/addHotels', [HotelController::class, 'addHotel'])->name('request.addHotel');
         Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');
         Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');
         Route::get('/liasons', [LiasonsController::class, 'renderLiasons'])->name('pages.liasons');
