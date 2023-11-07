@@ -36,14 +36,6 @@
         </div>
     </div>
     <script>
-        window.operateEvents = {
-            'click .like': function(e, value, row) {
-                alert('You click like action, row: ' + JSON.stringify(row))
-            },
-            'click .remove': function(e, value, row) {
-                alert('You click remove action, row: ' + JSON.stringify(row))
-            }
-        }
 
         function operateFormatter(value, row, index) {
             if (value) {

@@ -104,6 +104,16 @@
                     </a>
                 </li>
                 @endif
+                @if(session()->get('user')->roles[0]->name =="admin")
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.delegationAssigned')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-plane-departure"></i>
+                        </span>
+                        <span class="hide-menu">Flights</span>
+                    </a>
+                </li>
+                @endif
             </ul>
             <!-- <ul id="sidebarnav">
                 <li class="nav-small-cap">
