@@ -1,7 +1,7 @@
 @auth
 @extends('layouts.layout')
 @section("content")
-<div class="container-fluid">
+
     <div class="row">
         <div class="col-lg-12 d-flex align-items-stretch">
             <div class="card w-100">
@@ -40,13 +40,9 @@
                             </fieldset>
                         </form>
                     </div>
-                    <br />
-                    <script async src="https://unpkg.com/axios/dist/axios.min.js"></script>
-                    <script async src="{{asset('assets/js/formValidations.js')}}"></script>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 @endauth

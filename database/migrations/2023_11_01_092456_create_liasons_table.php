@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('liason_first_name');
             $table->string('liason_last_name');
             $table->bigInteger('liason_contact');
-            $table->bigInteger('liason_identity');
+            $table->bigInteger('liason_identity')->unique();
             $table->uuid('liason_delegation')->unique()->nullable();
             $table->uuid('liason_officer')->unique()->nullable();
             $table->string('liasonCode')->unique();

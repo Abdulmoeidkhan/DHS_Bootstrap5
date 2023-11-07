@@ -1,7 +1,7 @@
 @auth
 @extends('layouts.layout')
 @section("content")
-<div class="container-fluid">
+
     <div id="liveAlertPlaceholder"></div>
     <div class="row">
         <div class="col-lg-4 d-flex align-items-stretch">
@@ -270,6 +270,10 @@
                                     <input name="passport" type="text" class="form-control" id="passport" placeholder="Passport" value="{{$delegate->passport}}">
                                 </div>
                                 <div class="mb-3">
+                                    <label for="rank" class="form-label">Rank</label>
+                                    <input name="rank" type="text" class="form-control" id="rank" placeholder="Rank" value="{{$delegate->rank}}">
+                                </div>
+                                <div class="mb-3">
                                     <input class="form-check-input" type="radio" name="self" id="self" value="1" <?php echo $delegate->self ? 'checked' : '' ?>>
                                     <label class="form-check-label" for="self">
                                         Self
@@ -300,6 +304,5 @@
         </div>
     </div>
     <?php echo $delegate->country ? '<script id="scriptElement">document.getElementById("country").value="' . $delegate->country . '";document.getElementById("scriptElement").remove()</script>' : ''; ?>
-</div>
 @endsection
 @endauth

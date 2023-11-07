@@ -69,5 +69,6 @@ class Kernel extends HttpKernel
         'userTypeCheck' =>\App\Http\Middleware\UserTypeCheck::class,
         'delegateTypeCheck' =>\App\Http\Middleware\DelegateTypeCheck::class,
         'liasonTypeCheck' =>\App\Http\Middleware\LiasonTypeCheck::class,
+        'authorisedUserCheck' =>\App\Http\Middleware\authorisedUserCheck::class,
     ];
 }

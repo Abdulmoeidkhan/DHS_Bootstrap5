@@ -1,7 +1,7 @@
 @auth
 @extends('layouts.layout')
 @section("content")
-<div class="container-fluid">
+
     <div class="row">
         <div class="card w-100">
             <div class="card-body p-4">
@@ -113,6 +113,5 @@
             </div>
         </div>
     </div>
-</div>
 @endsection
 @endauth

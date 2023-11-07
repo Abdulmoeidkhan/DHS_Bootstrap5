@@ -1,7 +1,7 @@
 @auth
 @extends('layouts.layout')
 @section("content")
-<div class="container-fluid">
+
     <div id="liveAlertPlaceholder"></div>
     <div class="row">
         <div class="col-lg-8 d-flex align-items-stretch">
@@ -28,7 +28,5 @@
             </div>
         </div>
     </div>
-
-</div>
 @endsection
 @endauth

@@ -1,8 +1,7 @@
 @auth
 @extends('layouts.layout')
 @section("content")
-<div class="container-fluid">
-    <!--  Row 1 -->
+
     @if(session()->get('user')->roles[0]->name === "admin")
     <div class="row">
         <div class="d-flex justify-content-center">
@@ -91,9 +90,5 @@
             </div>
         </div>
     </div>
-
-</div>
-
-
 @endsection
 @endauth

@@ -5,6 +5,6 @@
 <?php $routesIncludedTable = array('/'); ?>
 @if(in_array(Request::path(), $routesIncludedTable))
 <script src="{{asset('assets/libs/apexcharts/dist/apexcharts.min.js')}}"></script>
+<script src="{{asset('assets/js/dashboard.js')}}"></script>
 @endif
 <script src="{{asset('assets/libs/simplebar/dist/simplebar.js')}}"></script>
-<script src="{{asset('assets/js/dashboard.js')}}"></script>

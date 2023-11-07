@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\Redis;
 
 class LiasonsController extends Controller
 {
@@ -60,7 +59,7 @@ class LiasonsController extends Controller
         $delegations = DB::table('liasons')
             ->leftJoin('delegates', 'delegates.delegation', '=', 'liasons.liason_delegation')
             ->leftJoin('delegations', 'delegations.uid', '=', 'liasons.liason_delegation')
-            ->where('liasons.liason_delegation', $id)
+            ->where('liasons.liason_uid', $id)
             ->select('liasons.*', 'delegations.country', 'delegates.last_Name')
             ->get();
         return $delegations;
