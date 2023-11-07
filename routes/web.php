@@ -16,7 +16,9 @@ use App\Http\Controllers\DelegationsPageController;
 use App\Http\Controllers\AddDelegationPageController;
 use App\Http\Controllers\AddVipsController;
 use App\Http\Controllers\ActivateProfileController;
+use App\Http\Controllers\CarsController;
 use App\Http\Controllers\FlightsController;
+use App\Http\Controllers\HotelController;
 use App\Http\Controllers\LiasonsController;
 use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
@@ -92,6 +94,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'userTypeCheck'], function () {
         Route::get('/flights', [FlightsController::class, 'render'])->name('pages.flights');
+        Route::get('/cars', [CarsController::class, 'render'])->name('pages.cars');
+        Route::get('/hotels', [HotelController::class, 'render'])->name('pages.hotels');
         Route::get('/addflights', [FlightsController::class, 'addItineraryRender'])->name('pages.addflights');
         Route::get('/addticketspage', [FlightsController::class, 'addTicketRender'])->name('pages.addticketspage');
         Route::get('/viewItinerary/{id}', [FlightsController::class, 'viewItinerary'])->name('page.viewItinerary');
@@ -101,6 +105,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/updateItinerary', [FlightsController::class, 'updateItinerary'])->name('request.updateItinerary');
         Route::get('/getItinerary', [FlightsController::class, 'getItinerary'])->name('request.getItinerary');
         Route::get('/getTickets', [FlightsController::class, 'getTickets'])->name('request.getTickets');
+        Route::get('/getHotels', [HotelController::class, 'getHotels'])->name('request.getHotels');
+        Route::get('/getRooms', [HotelController::class, 'getRooms'])->name('request.getRooms');
         Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');
         Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');
         Route::get('/liasons', [LiasonsController::class, 'renderLiasons'])->name('pages.liasons');

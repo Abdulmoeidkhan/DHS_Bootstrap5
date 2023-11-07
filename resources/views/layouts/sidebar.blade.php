@@ -114,6 +114,26 @@
                     </a>
                 </li>
                 @endif
+                @if(session()->get('user')->roles[0]->name =="admin")
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.cars')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-car"></i>
+                        </span>
+                        <span class="hide-menu">Cars</span>
+                    </a>
+                </li>
+                @endif
+                @if(session()->get('user')->roles[0]->name =="admin")
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.hotels')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-building-skyscraper"></i>
+                        </span>
+                        <span class="hide-menu">Hotel</span>
+                    </a>
+                </li>
+                @endif
             </ul>
             <!-- <ul id="sidebarnav">
                 <li class="nav-small-cap">
