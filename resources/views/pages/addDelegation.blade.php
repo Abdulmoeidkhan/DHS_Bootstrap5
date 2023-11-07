@@ -6,11 +6,11 @@
     <div class="row">
         <div class="d-flex justify-content-center">
             <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#VIPModal">Add VIP'S</button>
+            <!-- &nbsp;
             &nbsp;
             &nbsp;
-            &nbsp;
-            &nbsp;
-            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#DelegateModal">Add Delegates</button>
+            &nbsp; -->
+            <!-- <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#DelegateModal">Add Delegates</button> -->
             <div class="modal fade" id="VIPModal" tabindex="-1" aria-labelledby="VIPModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">

@@ -65,10 +65,10 @@ class ActivateProfileController extends Controller
 
     protected function activateLiason($recievedParams)
     {
-        $liasonData = Liason::where([['liasonCode', $recievedParams->activationCode . ''], ['liason_delegation', null]])->first();
+        $liasonData = Liason::where([['liasonCode', $recievedParams->activationCode], ['liason_officer', null]])->first();
         if ($liasonData) {
             try {
-                $updateLiason = Liason::where([['liasonCode', $recievedParams->activationCode . ''], ['liason_delegation', null]])->update(['liason_officer' => session()->get('user')->uid]);
+                $updateLiason = Liason::where([['liasonCode', $recievedParams->activationCode . ''], ['liason_officer', null]])->update(['liason_officer' => session()->get('user')->uid]);
                 $rolesAndPermissionGiven = $updateLiason ? $this->liasonRolesAndTeams($recievedParams->uid) : false;
                 return $rolesAndPermissionGiven;
             } catch (\Illuminate\Database\QueryException $exception) {
