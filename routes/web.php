@@ -105,11 +105,25 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/updateItinerary', [FlightsController::class, 'updateItinerary'])->name('request.updateItinerary');
         Route::get('/getItinerary', [FlightsController::class, 'getItinerary'])->name('request.getItinerary');
         Route::get('/getTickets', [FlightsController::class, 'getTickets'])->name('request.getTickets');
+        // Hotels Pages And API Start
         Route::get('/getHotels', [HotelController::class, 'getHotels'])->name('request.getHotels');
-        Route::get('/getRooms', [HotelController::class, 'getRooms'])->name('request.getRooms');
         Route::get('/addHotelPage/{id?}', [HotelController::class, 'addHotelRender'])->name('pages.addHotel');
-        Route::post('/updateHotel/{id}', [HotelController::class, 'updateHotel'])->name('request.updateHotel');
         Route::post('/addHotels', [HotelController::class, 'addHotel'])->name('request.addHotel');
+        Route::post('/updateHotel/{id}', [HotelController::class, 'updateHotel'])->name('request.updateHotel');
+        // Hotels Pages And API End
+
+        // Room Type Pages And API Start
+        Route::get('/getRoomTypes', [HotelController::class, 'getRoomTypes'])->name('request.getRoomTypes');
+        Route::get('/addRoomTypePage/{id?}', [HotelController::class, 'addRoomTypeRender'])->name('pages.addRoomType');
+        Route::post('/addRoomType', [HotelController::class, 'addRoomType'])->name('request.addRoomType');
+        Route::post('/updateRoomType/{id}', [HotelController::class, 'updateRoomType'])->name('request.updateRoomType');
+        // Room Type Pages And API End
+
+        // Room Pages And API Start
+        Route::get('/getRooms', [HotelController::class, 'getRooms'])->name('request.getRooms');
+        Route::get('/addRoomPage/{id?}', [HotelController::class, 'addRoomRender'])->name('pages.addRoom');
+        // Room Pages And API End
+        
         Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');
         Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');
         Route::get('/liasons', [LiasonsController::class, 'renderLiasons'])->name('pages.liasons');

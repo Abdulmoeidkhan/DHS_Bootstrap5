@@ -18,6 +18,7 @@ return new class extends Migration
             $table->uuid('room_type')->unique();
             $table->string('room_no')->unique();
             $table->uuid('assign_to')->nullable();
+            $table->uuid('gusest_delegation')->nullable();
             $table->string('room_checkin')->nullable();
             $table->string('room_checkout')->nullable();
             $table->timestamps();

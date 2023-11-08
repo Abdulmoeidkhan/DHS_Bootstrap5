@@ -5,8 +5,8 @@
 <div class="row">
     <div class="d-flex justify-content-center gap-2">
         <a type="button" href="{{route('pages.addHotel')}}" class="btn btn-outline-success">Add Hotel</a>
-        <a type="button" href="{{route('pages.addticketspage')}}" class="btn btn-outline-warning">Add Room Type</a>
-        <a type="button" href="{{route('pages.addticketspage')}}" class="btn btn-outline-primary">Add Room</a>
+        <a type="button" href="{{route('pages.addRoomType')}}" class="btn btn-outline-warning">Add Room Type</a>
+        <a type="button" href="{{route('pages.addRoom')}}" class="btn btn-outline-primary">Add Room</a>
     </div>
 </div>
 <br />
@@ -38,15 +38,15 @@
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Room Types</h5>
             <div class="table-responsive">
-                <table id="table" data-flat="true" data-search="true" data-show-refresh="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.getRooms')}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
+                <table id="table" data-flat="true" data-search="true" data-show-refresh="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.getRoomTypes')}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
                             <th data-field="room_type">Room Type</th>
                             <th data-field="rooms_quantity">Number of Rooms</th>
-                            <th data-field="hotel_uid">Hotel Name</th>
+                            <th data-field="hotel_name.hotel_names">Hotel Name</th>
                             <th data-field="room_type_status">Status</th>
-                            <th data-field="room_type_uid" data-formatter="operateRoom">Actions</th>
+                            <th data-field="room_type_uid" data-formatter="operateRoomType">Actions</th>
                         </tr>
                     </thead>
                 </table>
@@ -85,8 +85,19 @@
                 '<a class="btn btn-outline-success" href="addHotelPage/' + value + '">',
                 '<span><i class="ti ti-edit" style="font-size:22px"></i></span>',
                 '</a>',
-                '</div>',
-            ];
+                '</div>'
+            ].join('');
+        }
+    }
+    function operateRoomType(value, row, index) {
+        if (value) {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-outline-success" href="addRoomTypePage/' + value + '">',
+                '<span><i class="ti ti-edit" style="font-size:22px"></i></span>',
+                '</a>',
+                '</div>'
+            ].join('');
         }
     }
 

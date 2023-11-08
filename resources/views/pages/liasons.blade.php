@@ -27,7 +27,7 @@
                                 <th data-field="liason_first_name">Liason First Name</th>
                                 <th data-field="liason_last_name">Delegates Last Name</th>
                                 <th data-field="liason_officer">Liason Officer</th>
-                                <th data-field="delegates" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
+                                <th data-field="delegates" data-formatter="operateFormatter">Actions</th>
                             </tr>
                         </thead>
                     </table>

@@ -97,7 +97,7 @@ class FlightsController extends Controller
 
     public function addTicketRender()
     {
-        $delegates = Delegate::where('status', 1)->get();
+        $delegates = Delegate::where('status', 1)->whereNotNull('first_Name')->get();
         $member = Member::where('member_status', 1)->get();
         $itinerary = Itinerary::where('itinerary_status', 1)->get();
         $passengers = [...$delegates, ...$member];
