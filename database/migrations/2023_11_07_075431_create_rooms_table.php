@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
+            $table->uuid('room_type');
             $table->string('room_logged_by');
             $table->uuid('room_uid')->unique();
-            $table->uuid('room_type')->unique();
             $table->string('room_no')->unique();
             $table->uuid('assign_to')->nullable();
-            $table->uuid('gusest_delegation')->nullable();
-            $table->string('room_checkin')->nullable();
-            $table->string('room_checkout')->nullable();
+            $table->date('room_checkin')->nullable();
+            $table->date('room_checkout')->nullable();
             $table->timestamps();
         });
     }

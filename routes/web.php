@@ -118,10 +118,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/addRoomType', [HotelController::class, 'addRoomType'])->name('request.addRoomType');
         Route::post('/updateRoomType/{id}', [HotelController::class, 'updateRoomType'])->name('request.updateRoomType');
         // Room Type Pages And API End
-
+        
         // Room Pages And API Start
         Route::get('/getRooms', [HotelController::class, 'getRooms'])->name('request.getRooms');
         Route::get('/addRoomPage/{id?}', [HotelController::class, 'addRoomRender'])->name('pages.addRoom');
+        Route::post('/addRoom', [HotelController::class, 'addRoom'])->name('request.addRoom');
+        Route::post('/updateRoom/{id}', [HotelController::class, 'updateRoom'])->name('request.updateRoom');
         // Room Pages And API End
         
         Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');

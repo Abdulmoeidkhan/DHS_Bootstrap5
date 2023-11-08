@@ -63,7 +63,8 @@
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
-                            <th data-field="room_type">Room Type</th>
+                            <th data-field="room_type.room_type">Room Type</th>
+                            <th data-field="hotel_names.hotel_names">Hotel Name</th>
                             <th data-field="room_no">Room Number</th>
                             <th data-field="room_checkin">Check-In</th>
                             <th data-field="room_checkout">Check-Out</th>
@@ -129,11 +130,11 @@
         if (value) {
             return [
                 '<div class="left">',
-                '<a class="btn btn-outline-success" href="viewItinerary/' + value + '">',
+                '<a class="btn btn-outline-success" href="addRoomPage/' + value + '">',
                 '<span><i class="ti ti-edit" style="font-size:22px"></i></span>',
                 '</a>',
                 '</div>',
-            ];
+            ].join('');
         }
     }
 </script>

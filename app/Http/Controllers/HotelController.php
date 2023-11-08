@@ -141,10 +141,10 @@ class HotelController extends Controller
     public function getRooms()
     {
         $rooms = Room::get();
-        // foreach ($rooms as $key => $rooms) {
-        //     $rooms[$key]->hotel_name = Hotel::where('hotel_uid', $roomType->hotel_uid)->first('hotel_names');
-        //     $rooms[$key]->room_type_status = $roomtypes[$key]->room_type_status == 1 ? 'Active' : 'InActive';
-        // }
+        foreach ($rooms as $key => $room) {
+            $rooms[$key]->room_type = Roomtype::where('room_type_uid', $room->room_type)->first(['room_type', 'hotel_uid']);
+            $rooms[$key]->hotel_names = Hotel::where('hotel_uid', $rooms[$key]->room_type->hotel_uid)->first('hotel_names');
+        }
         return $rooms;
     }
 
@@ -153,19 +153,35 @@ class HotelController extends Controller
         $rooms = Room::get();
         $hotels = Hotel::get();
         $roomTypes = Roomtype::get();
-        // $members = Member::where('member_status', 1)->get();
-        $members = DB::table('members')
-            ->leftJoin('delegates', 'delegates.delegation', '=', 'members.delegation')
-            ->leftJoin('delegations', 'delegations.uid', '=', 'members.delegation')
-            ->where('member_status', 1)
-            ->select('members.*', 'delegations.country', 'delegations.delegationCode', 'delegates.first_Name', 'delegates.last_Name')
-            ->get();
-        $delegates = DB::table('delegates')
-            ->leftJoin('delegations', 'delegations.uid', '=', 'delegates.delegation')
-            ->where('status', 1)
-            ->select('delegates.*', 'delegations.country', 'delegations.delegationCode')
-            ->get();
-        $delegates = Delegate::where('status', 1)->whereNotNull('first_Name')->get();
+        if ($id) {
+            $members = DB::table('members')
+                ->leftJoin('delegates', 'delegates.delegation', '=', 'members.delegation')
+                ->leftJoin('delegations', 'delegations.uid', '=', 'members.delegation')
+                ->where('member_status', 1)
+                ->select('members.*', 'delegations.country', 'delegations.delegationCode', 'delegates.first_Name', 'delegates.last_Name')
+                ->get();
+            $delegates = DB::table('delegates')
+                ->leftJoin('delegations', 'delegations.uid', '=', 'delegates.delegation')
+                ->where('status',  1)
+                ->whereNotNull('first_Name')
+                ->select('delegates.*', 'delegations.country', 'delegations.delegationCode')
+                ->get();
+        } else {
+            $members = DB::table('members')
+                ->leftJoin('delegates', 'delegates.delegation', '=', 'members.delegation')
+                ->leftJoin('delegations', 'delegations.uid', '=', 'members.delegation')
+                ->where('member_status', 1)
+                ->whereNull('members.accomodated')
+                ->select('members.*', 'delegations.country', 'delegations.delegationCode', 'delegates.first_Name', 'delegates.last_Name')
+                ->get();
+            $delegates = DB::table('delegates')
+                ->leftJoin('delegations', 'delegations.uid', '=', 'delegates.delegation')
+                ->where('status',  1)
+                ->whereNull('accomodated')
+                ->whereNotNull('first_Name')
+                ->select('delegates.*', 'delegations.country', 'delegations.delegationCode')
+                ->get();
+        }
         foreach ($members as $key => $member) {
             $members[$key]->guestType = 'Member';
             $members[$key]->uid = $members[$key]->member_uid;
@@ -181,11 +197,10 @@ class HotelController extends Controller
         }
         $guests = [...$delegates, ...$members];
         if ($id) {
-            $selectedRoom = Room::where('hotel_uid', $id)->first();
+            $selectedRoom = Room::where('room_uid', $id)->first();
             return view('pages.addRoom', ['selectedRoom' => $selectedRoom, 'rooms' => $rooms, 'hotels' => $hotels, 'roomTypes' => $roomTypes, 'guests' => $guests]);
         } else {
-            return $guests;
-            // return view('pages.addRoom', ['rooms' => $rooms, 'hotels' => $hotels, 'roomTypes' => $roomTypes,  'guests' => $guests]);
+            return view('pages.addRoom', ['rooms' => $rooms, 'hotels' => $hotels, 'roomTypes' => $roomTypes,  'guests' => $guests]);
         }
     }
 
@@ -194,15 +209,47 @@ class HotelController extends Controller
         $room = new Room();
         $room->room_uid = (string) Str::uuid();
         $room->room_logged_by = session()->get('user')->uid;
+        $assign_to = Member::where('member_uid', $req->assign_to)->first();
         foreach ($req->all() as $key => $value) {
             if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
-                $roomtype[$key] = $value;
+                $room[$key] = $value;
             }
         }
         try {
-            $savedRoomType = $roomtype->save();
-            if ($savedRoomType) {
-                return back()->with('message', "Room Type Added Successfully");
+            $savedRoom = $room->save();
+            $guestUidUpdate = $assign_to ? Member::where('member_uid', $req->assign_to)->update(['accomodated' => $room->room_uid]) : Delegate::where('uid', $req->assign_to)->update(['accomodated' => $room->room_uid]);
+            if ($savedRoom && $guestUidUpdate) {
+                return back()->with('message', "Room Assigned Successfully");
+            } else {
+                return back()->with('error', "SomeThing Went Wrong");
+            }
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return  back()->with('error', $exception->errorInfo[2]);
+        }
+    }
+    public function updateRoom(Request $req, $id)
+    {
+        try {
+            $arrayToBeUpdate = [];
+            foreach ($req->all() as $key => $value) {
+                if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
+                    $arrayToBeUpdate[$key] = $value;
+                }
+            }
+            $oldRoom = Room::where('room_uid', $id)->first();
+            $updateRoom = Room::where('room_uid', $id)->update($arrayToBeUpdate);
+            if ($oldRoom->assign_to != $req->assign_to) {
+                $assign_toOld = Member::where('member_uid', $oldRoom->assign_to)->first();
+                $oldGuestUidUpdate = $assign_toOld ? Member::where('member_uid', $oldRoom->assign_to)->update(['accomodated' => null]) : Delegate::where('uid', $oldRoom->assign_to)->update(['accomodated' => null]);
+                $assign_to = Member::where('member_uid', $req->assign_to)->first();
+                $guestUidUpdate = $assign_to ? Member::where('member_uid', $req->assign_to)->update(['accomodated' => $req->room_uid]) : Delegate::where('uid', $req->assign_to)->update(['accomodated' => $req->room_uid]);
+            }
+            else{
+                $assign_to = Member::where('member_uid', $req->assign_to)->first();
+                $guestUidUpdate = $assign_to ? Member::where('member_uid', $req->assign_to)->update(['accomodated' => $req->room_uid]) : Delegate::where('uid', $req->assign_to)->update(['accomodated' => $req->room_uid]);
+            }
+            if ($updateRoom) {
+                return back()->with('message', "Room Type Updated Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             return  back()->with('error', $exception->errorInfo[2]);
