@@ -8,6 +8,7 @@ use App\Models\Hotel;
 use App\Models\Member;
 use App\Models\Room;
 use App\Models\Roomtype;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -144,6 +145,9 @@ class HotelController extends Controller
         foreach ($rooms as $key => $room) {
             $rooms[$key]->room_type = Roomtype::where('room_type_uid', $room->room_type)->first(['room_type', 'hotel_uid']);
             $rooms[$key]->hotel_names = Hotel::where('hotel_uid', $rooms[$key]->room_type->hotel_uid)->first('hotel_names');
+            $rooms[$key]->assign_to = Delegate::where('uid', $rooms[$key]->assign_to)->first('uid') ? Delegate::where('uid', $rooms[$key]->assign_to)->first('uid') : Member::where('member_uid', $rooms[$key]->assign_to)->first('member_uid');
+            $rooms[$key]->assign_to = $rooms[$key]->assign_to->uid ? 'delegateProfile/' . $rooms[$key]->assign_to->uid . '' : 'memberFullProfile/' . $rooms[$key]->assign_to->member_uid . '';
+            $rooms[$key]->room_logged_by = User::where('uid', $room->room_logged_by)->first('name');
         }
         return $rooms;
     }
@@ -242,11 +246,10 @@ class HotelController extends Controller
                 $assign_toOld = Member::where('member_uid', $oldRoom->assign_to)->first();
                 $oldGuestUidUpdate = $assign_toOld ? Member::where('member_uid', $oldRoom->assign_to)->update(['accomodated' => null]) : Delegate::where('uid', $oldRoom->assign_to)->update(['accomodated' => null]);
                 $assign_to = Member::where('member_uid', $req->assign_to)->first();
-                $guestUidUpdate = $assign_to ? Member::where('member_uid', $req->assign_to)->update(['accomodated' => $req->room_uid]) : Delegate::where('uid', $req->assign_to)->update(['accomodated' => $req->room_uid]);
-            }
-            else{
+                $guestUidUpdate = $assign_to ? Member::where('member_uid', $req->assign_to)->update(['accomodated' => $id]) : Delegate::where('uid', $req->assign_to)->update(['accomodated' => $id]);
+            } else {
                 $assign_to = Member::where('member_uid', $req->assign_to)->first();
-                $guestUidUpdate = $assign_to ? Member::where('member_uid', $req->assign_to)->update(['accomodated' => $req->room_uid]) : Delegate::where('uid', $req->assign_to)->update(['accomodated' => $req->room_uid]);
+                $guestUidUpdate = $assign_to ? Member::where('member_uid', $req->assign_to)->update(['accomodated' => $id]) : Delegate::where('uid', $req->assign_to)->update(['accomodated' => $id]);
             }
             if ($updateRoom) {
                 return back()->with('message', "Room Type Updated Successfully");

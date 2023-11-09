@@ -68,8 +68,8 @@
                             <th data-field="room_no">Room Number</th>
                             <th data-field="room_checkin">Check-In</th>
                             <th data-field="room_checkout">Check-Out</th>
+                            <th data-field="room_logged_by.name">Assigned By</th>
                             <th data-field="assign_to" data-formatter="operateAssignedTo">Assigned To</th>
-                            <th data-field="room_logged_by" data-formatter="operateAssignedBy">Assigned By</th>
                             <th data-field="room_uid" data-formatter="operateRoom">Actions</th>
                         </tr>
                     </thead>
@@ -90,6 +90,7 @@
             ].join('');
         }
     }
+
     function operateRoomType(value, row, index) {
         if (value) {
             return [
@@ -106,23 +107,11 @@
         if (value) {
             return [
                 '<div class="left">',
-                '<a class="btn btn-outline-success" href="viewItinerary/' + value + '">',
+                '<a class="btn btn-outline-success" href="' + value + '">',
                 '<span><i class="ti ti-paperclip" style="font-size:22px"></i></span>',
                 '</a>',
                 '</div>',
-            ];
-        }
-    }
-
-    function operateAssignedBy(value, row, index) {
-        if (value) {
-            return [
-                '<div class="left">',
-                '<a class="btn btn-outline-accessible" href="viewItinerary/' + value + '">',
-                '<span><i class="ti ti-edit" style="font-size:22px"></i></span>',
-                '</a>',
-                '</div>',
-            ];
+            ].join('');
         }
     }
 

@@ -17,7 +17,7 @@
                                     <option value="" selected disabled hidden> Select Room Type</option>
                                     @foreach($roomTypes as $key=>$roomType)
                                     @if(!empty($selectedRoom) && $selectedRoom->room_type === $roomType->room_type_uid)
-                                    <option value="{{$roomType->room_type_uid}}" selected> {{$roomType->room_type}}-{{$roomType->rooms_quantity}} Rooms </option>
+                                    <option value="{{$roomType->room_type_uid}}" selected> {{$roomType->room_type}}-{{$roomType->rooms_quantity}} Rooms ({{$roomType->hotel_name->hotel_names}})</option>
                                     @else
                                     <option value="{{$roomType->room_type_uid}}"> {{$roomType->room_type}} - {{$roomType->rooms_quantity}} Rooms ({{$roomType->hotel_name->hotel_names}})</option>
                                     @endif

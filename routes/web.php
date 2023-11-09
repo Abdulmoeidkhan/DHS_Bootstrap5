@@ -76,8 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::group(['middleware' => 'delegateTypeCheck'], function () {
-        Route::get('/members', [MemberController::class, 'render'])->name('pages.members');
-        Route::get('/getMembers', [MemberController::class, 'membersData'])->name('request.getMembers');
+        // Route::get('/members', [MemberController::class, 'render'])->name('pages.members');
         Route::get('/addMember/{id}', [MemberController::class, 'addMemberPage'])->name('pages.addMember');
         Route::get('/delegation', [DelegationsPageController::class, 'singleDelegation'])->name('pages.delegation');
         Route::get('/specificLiason', [LiasonsController::class, 'renderSpecificLiason'])->name('pages.renderSpecificLiason');
@@ -141,12 +140,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/addDelegationPage', [AddDelegationPageController::class, 'render'])->name('pages.addDelegationPage');
         Route::get('/getSpecificMembers', [MemberController::class, 'specificMembersData'])->name('pages.getSpecificMembers');
         Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->name('request.updateAuthority');
-        Route::get('/delegateProfile/{id}', [UserFullProfileController::class, 'renderSpeceficDelegateProfile'])->name('pages.renderSpeceficDelegateProfile');
         Route::post('/addDelegationRequest', [AddDelegationPageController::class, 'addDelegation'])->name('request.addDelegationRequest');
-        Route::get('/liasonSpecifivProfile/{id}', [LiasonsController::class, 'specificLiasonsData'])->name('pages.liasonSpecifivProfile');
     });
     Route::group(['middleware' => 'authorisedUserCheck'], function () {
-        Route::get('/memberFullProfile/{id}', [MemberController::class, 'memberFullProfile'])->name('pages.memberFullProfile');
+        Route::get('/liasonSpecificProfile/{id}', [LiasonsController::class, 'specificLiasonsData'])->name('pages.liasonSpecificProfile');
+        Route::get('/members/{id}', [MemberController::class, 'render'])->name('pages.members');
+        Route::get('/getMembers/{id}', [MemberController::class, 'membersData'])->name('request.getMembers');
+        Route::get('/delegateProfile/{id}', [UserFullProfileController::class, 'renderSpeceficDelegateProfile'])->name('pages.renderSpeceficDelegateProfile');
+        Route::get('/members/memberFullProfile/{id}', [MemberController::class, 'memberFullProfile'])->name('pages.memberFullProfile');
     });
 });
 

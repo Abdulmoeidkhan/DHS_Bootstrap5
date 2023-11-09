@@ -15,7 +15,7 @@
             <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">Liason</h5>
                 <div class="table-responsive">
-                    <table id="table" data-flat="true" data-search="true" data-show-refresh="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.specificLiasonsData',$delegationUid->delegation)}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
+                    <table id="table" data-flat="true" data-search="true" data-show-refresh="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.specificLiasonsData',$liason->liasons)}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
                         <thead>
                             <tr>
                                 <th data-field="id">Id</th>
@@ -25,8 +25,8 @@
                                 <th data-field="liason_identity">Identity</th>
                                 <th data-field="liason_first_name">Liason First Name</th>
                                 <th data-field="liason_last_name">Liason Last Name</th>
-                                <th data-field="liason_officer">Liason Officer</th>
-                                <th data-field="delegates" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
+                                <!-- <th data-field="liason_officer">Liason Officer</th> -->
+                                <th data-field="liason_uid" data-formatter="operateFormatter">Actions</th>
                             </tr>
                         </thead>
                     </table>
@@ -39,7 +39,7 @@
             if (value) {
                 return [
                     '<div class="left">',
-                    '<a class="btn btn-outline-success" href="delegateProfile/' + value + '">',
+                    '<a class="btn btn-outline-success" href="liasonSpecificProfile/' + value + '">',
                     '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
                     '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>',
                     '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>',

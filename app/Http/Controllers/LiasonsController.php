@@ -36,7 +36,9 @@ class LiasonsController extends Controller
     public function renderSpecificLiason()
     {
         $delegationUid = Delegate::where('user_uid', session()->get('user')->uid)->first('delegation');
-        return view('pages.liason', ['delegationUid' => $delegationUid]);
+        $liason = Delegation::where('uid', $delegationUid->delegation)->first('liasons');
+        // return $liason;
+        return view('pages.liason', ['delegationUid' => $delegationUid, 'liason' => $liason]);
     }
 
     public function addLiasonPage()
@@ -60,7 +62,7 @@ class LiasonsController extends Controller
             ->leftJoin('delegates', 'delegates.delegation', '=', 'liasons.liason_delegation')
             ->leftJoin('delegations', 'delegations.uid', '=', 'liasons.liason_delegation')
             ->where('liasons.liason_uid', $id)
-            ->select('liasons.*', 'delegations.country', 'delegates.last_Name')
+            ->select('liasons.*', 'delegations.country', 'delegates.last_Name', 'delegates.first_Name')
             ->get();
         return $delegations;
     }

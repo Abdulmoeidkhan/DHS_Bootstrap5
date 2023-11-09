@@ -24,9 +24,9 @@ class MemberController extends Controller
         $image->save();
     }
 
-    public function render()
+    public function render($id)
     {
-        return view('pages.members');
+        return view('pages.members', ['id' => $id]);
     }
 
 
@@ -35,9 +35,10 @@ class MemberController extends Controller
         return view('pages.addMember', ['id' => $id]);
     }
 
-    public function membersData(Request $req)
+    public function membersData(Request $req, $id)
     {
-        $delegationUid = Delegation::where('delegates', session()->get('user')->uid)->first('uid');
+        // return $id;
+        $delegationUid = Delegation::where('delegates', $id)->first('uid');
         $members = DB::table('members')
             ->leftJoin('delegates', 'delegates.delegation', '=', 'members.delegation')
             ->where('members.delegation', $delegationUid->uid)
@@ -47,7 +48,7 @@ class MemberController extends Controller
     }
     public function specificMembersData(Request $req, $id)
     {
-        $delegationUid = Delegation::where('delegates', session()->get('user')->uid)->first('uid');
+        $delegationUid = Delegation::where('delegates', $id)->first('uid');
         $members = DB::table('members')
             ->leftJoin('delegates', 'delegates.delegation', '=', 'members.delegation')
             ->where('members.delegation', $delegationUid->uid)
@@ -78,7 +79,7 @@ class MemberController extends Controller
             return  back()->with('error', $exception->errorInfo[2]);
         }
     }
-    public function updateMemberRequest(Request $req,$id)
+    public function updateMemberRequest(Request $req, $id)
     {
         $arrayToBeUpdate = [];
         foreach ($req->all() as $key => $value) {
