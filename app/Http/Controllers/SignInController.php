@@ -13,7 +13,7 @@ class SignInController extends Controller
     protected function isActivated($req)
     {
         $user = User::where('email', $req->email)->first();
-        return $user?$user->activated:false;
+        return $user ? $user->activated : false;
     }
     public function signIn(Request $req)
     {
@@ -28,7 +28,7 @@ class SignInController extends Controller
                 $user = User::with('roles', 'permissions')->where('id', Auth::user()->id)->first();
                 $user->images = Image::where('uid', Auth::user()->uid)->first();
                 session()->put('user', $user);
-                return redirect()->route('pages.dashboard');
+                return redirect()->route('pages.dashboard')->with('message', "You have successfully Signed In");;
                 // return User::with('roles')->where('email', $req->email)->first();
             } else {
                 // return ['status' => 0, "msg" => 'The provided credentials do not match our records.'];

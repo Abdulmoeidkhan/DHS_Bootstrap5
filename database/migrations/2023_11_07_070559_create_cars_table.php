@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('car_makes');
             $table->string('car_model');
             $table->uuid('car_uid')->unique();
-            $table->uuid('driver_uid')->nullable();
-            $table->uuid('passenger_uid')->unique();
+            // $table->uuid('driver_uid')->nullable();
+            // $table->uuid('passenger_uid')->unique();
             $table->string('car_remarks')->nullable();
             $table->string('car_status')->default('Available');
             $table->timestamps();

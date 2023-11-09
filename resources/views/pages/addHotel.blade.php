@@ -7,7 +7,7 @@
             <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">New Hotel</h5>
                 <div class="table-responsive">
-                    <form name="memberBasicInfo" id="memberBasicInfo" method="POST" action="{{!empty($hotel)?route('request.updateHotel',$hotel->hotel_uid):route('request.addHotel')}}">
+                    <form name="driverInfo" id="driverInfo" method="POST" action="{{!empty($hotel)?route('request.updateHotel',$hotel->hotel_uid):route('request.addHotel')}}">
                         <fieldset>
                             <legend>Add Hotel</legend>
                             @csrf
