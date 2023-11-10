@@ -15,6 +15,7 @@ class DelegationsPageController extends Controller
             ->leftJoin('delegates', 'delegations.uid', '=', 'delegates.delegation')
             ->leftJoin('vips', 'delegations.invited_by', '=', 'vips.uid')
             ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'vips.name')
+            ->orderBy('delegations.country', 'asc')
             ->get();
         return $delegations;
     }
