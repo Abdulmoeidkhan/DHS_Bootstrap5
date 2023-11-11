@@ -4,7 +4,7 @@ return [
     'name' => 'LaravelPWA',
     'manifest' => [
         'name' => env('APP_NAME', 'DHS'),
-        'short_name' => 'DHS PWA',
+        'short_name' => 'DHS BXSS',
         'start_url' => '/',
         'background_color' => '#ffffff',
         'theme_color' => '#000000',

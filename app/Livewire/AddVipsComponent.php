@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Vips;
+use App\Models\Rank;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
@@ -12,10 +13,12 @@ class AddVipsComponent extends Component
 {
     public $name = '';
     public $designation = '';
+    public $ranks = [];
     public $rank = '';
-    public $savedvip=0;
+    public $savedvip = 0;
     public function save()
     {
+        $this->ranks =  Rank::get() || [];
         $vip = new Vips();
         $vip->uid = (string) Str::uuid();
         $vip->rank = $this->rank;

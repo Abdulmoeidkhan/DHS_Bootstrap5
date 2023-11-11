@@ -10,7 +10,14 @@
         </div>
         <div class="mb-3">
             <label for="message-text" class="col-form-label">Rank:</label>
-            <input type="text" class="form-control" wire:model="rank">
+            <select wire:model="rank" class="form-select">
+                <option value="" selected disabled hidden> Select Rank </option>
+                @if(count($ranks)>1)
+                @foreach($ranks as $key=>$rank)
+                <option value="{{$rank->ranks_uid}}">{{$rank->ranks_name}}</option>
+                @endforeach
+                @endif
+            </select>
         </div>
     </div>
     <div class="modal-footer">

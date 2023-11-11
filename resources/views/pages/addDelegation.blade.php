@@ -6,10 +6,11 @@
     <div class="row">
         <div class="d-flex justify-content-center">
             <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#VIPModal">Add VIP'S</button>
-            <!-- &nbsp;
             &nbsp;
             &nbsp;
-            &nbsp; -->
+            &nbsp;
+            &nbsp;
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#DelegateModal">Add Rank's</button>
             <!-- <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#DelegateModal">Add Delegates</button> -->
             <div class="modal fade" id="VIPModal" tabindex="-1" aria-labelledby="VIPModal" aria-hidden="true">
                 <div class="modal-dialog">
@@ -29,7 +30,8 @@
                             <h5 class="modal-title" id="exampleModalLabel">Delegates Form</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <livewire:add-delegate-component />
+                        <livewire:add-rank-component />
+                        <!-- <livewire:add-delegate-component /> -->
                     </div>
                 </div>
             </div>
