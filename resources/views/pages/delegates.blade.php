@@ -11,14 +11,14 @@
                         <thead>
                             <tr>
                                 <th data-field="id">Id</th>
-                                <th data-field="country">Country</th>
-                                <th data-field="delegation_response">Delegation Response</th>
+                                <th data-field="country" data-sortable="true">Country</th>
+                                <th data-field="delegation_response" data-sortable="true">Delegation Response</th>
                                 <th data-field="address">Address</th>
-                                <th data-field="exhibition">Exhibition</th>
+                                <th data-field="exhibition" data-sortable="true">Exhibition</th>
                                 <th data-field="delegationCode">Delegation Code</th>
-                                <th data-field="first_Name">Delegates First Name</th>
-                                <th data-field="last_Name">Delegates Last Name</th>
-                                <th data-field="name">Invited By</th>
+                                <th data-field="first_Name" data-sortable="true">Delegates First Name</th>
+                                <th data-field="last_Name" data-sortable="true">Delegates Last Name</th>
+                                <th data-field="name" data-sortable="true">Invited By</th>
                                 <th data-field="uid" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
                             </tr>
                         </thead>

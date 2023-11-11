@@ -20,10 +20,10 @@
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
-                            <th data-field="hotel_names">Hotel Name</th>
+                            <th data-field="hotel_names" data-sortable="true">Hotel Name</th>
                             <th data-field="hotel_address">Hotel Address</th>
-                            <th data-field="contact_person">Contact Person</th>
-                            <th data-field="contact_number">Contact Number</th>
+                            <th data-field="contact_person" data-sortable="true">Contact Person</th>
+                            <th data-field="contact_number" data-sortable="true">Contact Number</th>
                             <th data-field="hotel_remarks">Remarks</th>
                             <th data-field="hotel_uid" data-formatter="hotelOperator">Actions</th>
                         </tr>
@@ -42,9 +42,9 @@
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
-                            <th data-field="room_type">Room Type</th>
-                            <th data-field="rooms_quantity">Number of Rooms</th>
-                            <th data-field="hotel_name.hotel_names">Hotel Name</th>
+                            <th data-field="room_type" data-sortable="true">Room Type</th>
+                            <th data-field="rooms_quantity" data-sortable="true">Number of Rooms</th>
+                            <th data-field="hotel_name.hotel_names" data-sortable="true">Hotel Name</th>
                             <th data-field="room_type_status">Status</th>
                             <th data-field="room_type_uid" data-formatter="operateRoomType">Actions</th>
                         </tr>
@@ -63,12 +63,12 @@
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
-                            <th data-field="room_type.room_type">Room Type</th>
-                            <th data-field="hotel_names.hotel_names">Hotel Name</th>
-                            <th data-field="room_no">Room Number</th>
-                            <th data-field="room_checkin">Check-In</th>
-                            <th data-field="room_checkout">Check-Out</th>
-                            <th data-field="room_logged_by.name">Assigned By</th>
+                            <th data-field="room_type.room_type" data-sortable="true">Room Type</th>
+                            <th data-field="hotel_names.hotel_names" data-sortable="true">Hotel Name</th>
+                            <th data-field="room_no" data-sortable="true">Room Number</th>
+                            <th data-field="room_checkin" data-sortable="true">Check-In</th>
+                            <th data-field="room_checkout" data-sortable="true">Check-Out</th>
+                            <th data-field="room_logged_by.name" data-sortable="true">Assigned By</th>
                             <th data-field="assign_to" data-formatter="operateAssignedTo">Assigned To</th>
                             <th data-field="room_uid" data-formatter="operateRoom">Actions</th>
                         </tr>

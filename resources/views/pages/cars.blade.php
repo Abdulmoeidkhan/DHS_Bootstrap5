@@ -20,9 +20,9 @@
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
-                            <th data-field="car_number">Car Number</th>
-                            <th data-field="car_makes">Car Makes</th>
-                            <th data-field="car_model">Car Model</th>
+                            <th data-field="car_number" data-sortable="true">Car Number</th>
+                            <th data-field="car_makes" data-sortable="true">Car Makes</th>
+                            <th data-field="car_model" data-sortable="true">Car Model</th>
                             <th data-field="car_remarks">Car Remarks</th>
                             <th data-field="car_status" data-formatter="operateCarRemarks">Car Status</th>
                             <th data-field="car_uid" data-formatter="operateCar">Actions</th>
@@ -42,7 +42,7 @@
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
-                            <th data-field="driver_name">Driver Name</th>
+                            <th data-field="driver_name" data-sortable="true">Driver Name</th>
                             <th data-field="driver_cnic">Driver CNIC</th>
                             <th data-field="driver_contact">Driver Contact</th>
                             <th data-field="driver_remarks">Driver Remarks</th>
@@ -65,10 +65,10 @@
                         <tr>
                             <th data-field="id">Id</th>
                             <th data-field="car_uid.car_number">Car Number</th>
-                            <th data-field="driver_uid.driver_name">Driver Name</th>
-                            <th data-field="journey_pickup">Car Pickup</th>
-                            <th data-field="journey_dropoff">Car Dropoff</th>
-                            <th data-field="journey_logged_by.name">Journey Logged By</th>
+                            <th data-field="driver_uid.driver_name" data-sortable="true">Driver Name</th>
+                            <th data-field="journey_pickup" data-sortable="true">Car Pickup</th>
+                            <th data-field="journey_dropoff" data-sortable="true">Car Dropoff</th>
+                            <th data-field="journey_logged_by.name" data-sortable="true">Journey Logged By</th>
                             <th data-field="journey_assign_to" data-formatter="operateAssignedTo">Assigned To</th>
                             <th data-field="journey_uid" data-formatter="operateJourney">Actions</th>
                         </tr>

@@ -19,15 +19,15 @@
                         <thead>
                             <tr>
                                 <th data-field="id">Id</th>
-                                <th data-field="member_first_Name">First Name</th>
-                                <th data-field="member_last_Name">Last Name</th>
-                                <th data-field="member_designation">Designation</th>
-                                <th data-field="member_organistaion">Organistaion</th>
-                                <th data-field="member_passport">Passport</th>
-                                <th data-field="first_Name">Delegate First Name</th>
-                                <th data-field="last_Name">Delegate Last Name</th>
+                                <th data-field="country" data-sortable="true">Country</th>
+                                <th data-field="member_first_Name" data-sortable="true">First Name</th>
+                                <th data-field="member_last_Name" data-sortable="true">Last Name</th>
+                                <th data-field="member_designation" data-sortable="true">Designation</th>
+                                <th data-field="member_organistaion" data-sortable="true">Organistaion</th>
+                                <th data-field="member_passport" data-sortable="true">Passport</th>
+                                <th data-field="first_Name" data-sortable="true">Delegate First Name</th>
+                                <th data-field="last_Name" data-sortable="true">Delegate Last Name</th>
                                 <!-- <th data-field="first_Name">Delegation Code</th> -->
-                                <th data-field="country">Country</th>
                                 <th data-field="member_uid" data-formatter="operateProfileFormatter" data-events="operateProfile">Profile</th>
                             </tr>
                         </thead>

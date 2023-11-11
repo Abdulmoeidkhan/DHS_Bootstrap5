@@ -19,8 +19,8 @@
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
-                            <th data-field="itinerary_name">Itinerary Name</th>
-                            <th data-field="itinerary_remarks">Itinerary Remarks</th>
+                            <th data-field="itinerary_name" data-sortable="true">Itinerary Name</th>
+                            <th data-field="itinerary_remarks" data-sortable="true">Itinerary Remarks</th>
                             <th data-field="itinerary_status" data-formatter="operateStatus">Status</th>
                             <th data-field="itinerary_uid" data-formatter="operateSegments">View Itinerary</th>
                         </tr>
@@ -39,9 +39,9 @@
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
-                            <th data-field="ticket_remarks">Ticket Remarks</th>
-                            <th data-field="ticket_number">Ticket Numer</th>
-                            <th data-field="coupon_status">Coupon Status</th>
+                            <th data-field="ticket_remarks" data-sortable="true">Ticket Remarks</th>
+                            <th data-field="ticket_number" data-sortable="true">Ticket Numer</th>
+                            <th data-field="coupon_status" data-sortable="true">Coupon Status</th>
                             <th data-field="ticket_status" data-formatter="operateStatus">Ticket Status</th>
                             <th data-field="passenger_uid" data-formatter="operatePassenger">Passenger</th>
                             <th data-field="itinerary_uid" data-formatter="operateSegments">View Itinerary</th>

@@ -19,13 +19,12 @@
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
-                            <th data-field="liason_rank">Rank</th>
-                            <th data-field="liason_designation">Designation</th>
-                            <th data-field="liason_designation">Designation</th>
-                            <th data-field="liason_contact">Contact</th>
-                            <th data-field="liason_identity">Identity</th>
-                            <th data-field="liason_first_name">Liason First Name</th>
-                            <th data-field="liason_last_name">Delegates Last Name</th>
+                            <th data-field="liason_rank" data-sortable="true">Rank</th>
+                            <th data-field="liason_designation" data-sortable="true">Designation</th>
+                            <th data-field="liason_contact" data-sortable="true">Contact</th>
+                            <th data-field="liason_identity" data-sortable="true">Identity</th>
+                            <th data-field="liason_first_name "data-sortable="true">Liason First Name</th>
+                            <th data-field="liason_last_name" data-sortable="true">Liason Last Name</th>
                             <!-- <th data-field="liason_officer">Liason Officer</th> -->
                             <th data-field="liason_uid" data-formatter="operateFormatter">Actions</th>
                         </tr>
