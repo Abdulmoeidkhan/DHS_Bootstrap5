@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('driver_cnic');
             $table->string('driver_contact');
             $table->string('driver_remarks')->nullable();
-            $table->string('driver_status')->default('Available');
+            $table->string('driver_status')->default(1);
             $table->timestamps();
         });
     }

@@ -146,7 +146,7 @@ class HotelController extends Controller
             $rooms[$key]->room_type = Roomtype::where('room_type_uid', $room->room_type)->first(['room_type', 'hotel_uid']);
             $rooms[$key]->hotel_names = Hotel::where('hotel_uid', $rooms[$key]->room_type->hotel_uid)->first('hotel_names');
             $rooms[$key]->assign_to = Delegate::where('uid', $rooms[$key]->assign_to)->first('uid') ? Delegate::where('uid', $rooms[$key]->assign_to)->first('uid') : Member::where('member_uid', $rooms[$key]->assign_to)->first('member_uid');
-            $rooms[$key]->assign_to = $rooms[$key]->assign_to->uid ? 'delegateProfile/' . $rooms[$key]->assign_to->uid . '' : 'memberFullProfile/' . $rooms[$key]->assign_to->member_uid . '';
+            $rooms[$key]->assign_to = $rooms[$key]->assign_to->uid ? 'delegateProfile/' . $rooms[$key]->assign_to->uid . '' : 'members/memberFullProfile/' . $rooms[$key]->assign_to->member_uid . '';
             $rooms[$key]->room_logged_by = User::where('uid', $room->room_logged_by)->first('name');
         }
         return $rooms;
@@ -154,7 +154,6 @@ class HotelController extends Controller
 
     public function addRoomRender($id = null)
     {
-        $rooms = Room::get();
         $hotels = Hotel::get();
         $roomTypes = Roomtype::get();
         if ($id) {
@@ -202,9 +201,9 @@ class HotelController extends Controller
         $guests = [...$delegates, ...$members];
         if ($id) {
             $selectedRoom = Room::where('room_uid', $id)->first();
-            return view('pages.addRoom', ['selectedRoom' => $selectedRoom, 'rooms' => $rooms, 'hotels' => $hotels, 'roomTypes' => $roomTypes, 'guests' => $guests]);
+            return view('pages.addRoom', ['selectedRoom' => $selectedRoom, 'hotels' => $hotels, 'roomTypes' => $roomTypes, 'guests' => $guests]);
         } else {
-            return view('pages.addRoom', ['rooms' => $rooms, 'hotels' => $hotels, 'roomTypes' => $roomTypes,  'guests' => $guests]);
+            return view('pages.addRoom', ['hotels' => $hotels, 'roomTypes' => $roomTypes,  'guests' => $guests]);
         }
     }
 

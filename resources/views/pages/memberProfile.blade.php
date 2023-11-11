@@ -12,7 +12,7 @@
                 </div>
                 <img src="{{$member->image?$member->image->base64_image:asset('assets/images/profile/user-1.jpg')}}" width="200px" height="200px" class="rounded mx-auto d-block" alt="Member Profile Picture">
                 <br />
-                <form action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ?route('request.imageUpload'):''}}" method="post" enctype="multipart/form-data">
+                <form action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ?route('request.imageUpload'):''}}" method="POST" enctype="multipart/form-data">
                     <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
                         <div class="input-group">
                             <input type="hidden" value="{{$member->member_uid}}" name="id" />
@@ -30,12 +30,12 @@
             <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">Member Information</h5>
                 <div class="table-responsive">
-                    <form name="memberInfo" id="memberInfo" method="POST" action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ?route('pages.updateMemberRequest',$member->member_uid):''}}">
+                    <form name="memberInfo" id="memberInfo" method="POST" action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ?route('request.updateMemberRequest',$member->member_uid):''}}">
                         <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
                             <legend>Member Information</legend>
                             @csrf
                             <div class="mb-3">
-                                <label for="member_rank" class="form-label">Member First Name</label>
+                                <label for="member_rank" class="form-label">Member Rank</label>
                                 <input name="member_rank" type="text" class="form-control" id="member_rank" placeholder="Rank" value="{{$member->member_rank}}" required>
                             </div>
                             <div class="mb-3">
@@ -55,10 +55,11 @@
                                 <input name="member_organistaion" type="text" class="form-control" id="member_organistaion" placeholder="Organistaion" value="{{$member->member_organistaion}}" required>
                             </div>
                             <div class="mb-3">
-                                <label for="passport" class="form-label">Passport</label>
-                                <input name="passport" type="text" class="form-control" id="passport" placeholder="Passport" value="{{$member->member_passport}}">
+                                <label for="member_passport" class="form-label">Passport</label>
+                                <input name="member_passport" type="text" class="form-control" id="member_passport" placeholder="Passport" value="{{$member->member_passport}}">
                             </div>
                             <input type="hidden" name="uid" value="{{$member->uid}}" />
+                            <input name="delegation" type="hidden" id="delegation" value="{{$member->delegation}}" required>
                             <input type="submit" name="submit" class="btn btn-primary" value="Update" />
                         </fieldset>
                     </form>

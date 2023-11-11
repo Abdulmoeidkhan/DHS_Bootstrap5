@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('member_passport')->nullable();
             $table->integer('member_status')->default(1);
             $table->uuid('accomodated')->nullable();
+            $table->uuid('car_accomodated')->nullable();
             $table->timestamps();
         });
     }

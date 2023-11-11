@@ -5,6 +5,7 @@
     @include("layouts.head")
     @livewireStyles
     <!-- just remove arrow (->) to make it PWA  @->laravelPWA -->
+    @laravelPWA
     <title>DHS</title>
 </head>
 

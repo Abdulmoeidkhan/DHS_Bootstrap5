@@ -81,7 +81,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/delegation', [DelegationsPageController::class, 'singleDelegation'])->name('pages.delegation');
         Route::get('/specificLiason', [LiasonsController::class, 'renderSpecificLiason'])->name('pages.renderSpecificLiason');
         Route::post('/addMemberRequest/{id}', [MemberController::class, 'addMemberRequest'])->name('request.addMemberRequest');
-        Route::post('/updateMemberRequest/{id}', [MemberController::class, 'updateMemberRequest'])->name('pages.updateMemberRequest');
         Route::get('/specificLiasonsData/{id}', [LiasonsController::class, 'specificLiasonsData'])->name('request.specificLiasonsData');
         Route::get('/userProfile/delegateProfile', [UserFullProfileController::class, 'renderDelegateProfile'])->name('pages.delegateProfile');
     });
@@ -142,7 +141,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Car Pages And API End
 
         // Journey Pages And API Start
-        Route::get('/getJourney', [CarsController::class, 'getJourney'])->name('request.getJourney');
+        Route::get('/getJourney', [CarsController::class, 'getJourneys'])->name('request.getJourney');
         Route::get('/addJourneyPage/{id?}', [CarsController::class, 'addJourneyRender'])->name('pages.addJourney');
         Route::post('/addJourney', [CarsController::class, 'addJourney'])->name('request.addJourney');
         Route::post('/updateJourney/{id}', [CarsController::class, 'updateJourney'])->name('request.updateJourney');
@@ -166,11 +165,21 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/addDelegationRequest', [AddDelegationPageController::class, 'addDelegation'])->name('request.addDelegationRequest');
     });
     Route::group(['middleware' => 'authorisedUserCheck'], function () {
+        // Liason Start
         Route::get('/liasonSpecificProfile/{id}', [LiasonsController::class, 'specificLiasonsData'])->name('pages.liasonSpecificProfile');
+        Route::post('/updateLiasonRequest/{id}', [MemberController::class, 'updateLiasonRequest'])->name('request.updateLiasonRequest');
+        // Liason End
+
+        // Members Start
         Route::get('/members/{id}', [MemberController::class, 'render'])->name('pages.members');
         Route::get('/getMembers/{id}', [MemberController::class, 'membersData'])->name('request.getMembers');
-        Route::get('/delegateProfile/{id}', [UserFullProfileController::class, 'renderSpeceficDelegateProfile'])->name('pages.renderSpeceficDelegateProfile');
+        Route::post('/updateMemberRequest/{id}', [MemberController::class, 'updateMemberRequest'])->name('request.updateMemberRequest');
         Route::get('/members/memberFullProfile/{id}', [MemberController::class, 'memberFullProfile'])->name('pages.memberFullProfile');
+        // Members End
+
+        // Delegate Start
+        Route::get('/delegateProfile/{id}', [UserFullProfileController::class, 'renderSpeceficDelegateProfile'])->name('pages.renderSpeceficDelegateProfile');
+        // Delegate End
     });
 });
 

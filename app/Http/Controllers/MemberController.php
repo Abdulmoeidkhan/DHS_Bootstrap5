@@ -88,9 +88,10 @@ class MemberController extends Controller
             }
         }
         try {
-            $updatedMember = Member::where('member_uid', $id)->update(['name' => $req->inputUserName, 'contact_number' => $req->inputContactNumber]);
+            // $updatedMember = Member::where('member_uid', $id)->update(['name' => $req->inputUserName, 'contact_number' => $req->inputContactNumber]);
+            $updatedMember = Member::where('member_uid', $id)->update($arrayToBeUpdate);
             if ($updatedMember) {
-                return redirect()->route("pages.addMember", $req->delegation)->with('message', 'Member Updated Successfully');
+                return back()->with('message', 'Member Updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             return  back()->with('error', $exception->errorInfo[2]);

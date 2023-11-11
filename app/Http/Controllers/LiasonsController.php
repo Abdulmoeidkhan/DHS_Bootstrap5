@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Delegate;
 use App\Models\Delegation;
+use App\Models\Image;
 use App\Models\Liason;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -58,13 +59,16 @@ class LiasonsController extends Controller
 
     public function specificLiasonsData($id)
     {
-        $delegations = DB::table('liasons')
+        $liason = DB::table('liasons')
             ->leftJoin('delegates', 'delegates.delegation', '=', 'liasons.liason_delegation')
             ->leftJoin('delegations', 'delegations.uid', '=', 'liasons.liason_delegation')
             ->where('liasons.liason_uid', $id)
+            ->orWhere('liasons.liason_officer', $id)
             ->select('liasons.*', 'delegations.country', 'delegates.last_Name', 'delegates.first_Name')
-            ->get();
-        return $delegations;
+            ->first();
+        $liason->image = Image::where('uid', $liason->liason_officer)->first();
+        // return $liason;
+        return view('pages.liasonProfile', ['liason' => $liason]);
     }
 
     public function addLiason(Request $req)
@@ -91,6 +95,25 @@ class LiasonsController extends Controller
             }
         }
     }
+
+    public function updateLiasonRequest(Request $req, $id)
+    {
+        $arrayToBeUpdate = [];
+        foreach ($req->all() as $key => $value) {
+            if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
+                $arrayToBeUpdate[$key] = $value;
+            }
+        }
+        try {
+            $updatedLiason = Liason::where('liason_uid', $id)->update($arrayToBeUpdate);
+            if ($updatedLiason) {
+                return back()->with('message', 'Liason Updated Successfully');
+            }
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return  back()->with('error', $exception->errorInfo[2]);
+        }
+    }
+
     public function attachLiason(Request $req)
     {
         try {

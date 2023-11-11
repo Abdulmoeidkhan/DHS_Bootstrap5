@@ -66,10 +66,10 @@
                             <th data-field="id">Id</th>
                             <th data-field="car_uid.car_number">Car Number</th>
                             <th data-field="driver_uid.driver_name">Driver Name</th>
-                            <th data-field="car_pickup">Car Pickup</th>
-                            <th data-field="car_dropoff">Car Dropoff</th>
-                            <th data-field="journey_logged_by">Journey Logged By</th>
-                            <th data-field="car_assign_to" data-formatter="operateAssignedTo">Assigned To</th>
+                            <th data-field="journey_pickup">Car Pickup</th>
+                            <th data-field="journey_dropoff">Car Dropoff</th>
+                            <th data-field="journey_logged_by.name">Journey Logged By</th>
+                            <th data-field="journey_assign_to" data-formatter="operateAssignedTo">Assigned To</th>
                             <th data-field="journey_uid" data-formatter="operateJourney">Actions</th>
                         </tr>
                     </thead>
@@ -82,7 +82,11 @@
     function operateDriverStatus(value, row, index) {
         if (value) {
             return [
-                `${value == 1?"Booked":"Avaiable"}`
+                value != 0 ? "Avaiable" : "Booked"
+            ];
+        } else {
+            return [
+                "Booked"
             ];
         }
     }
@@ -90,7 +94,11 @@
     function operateCarRemarks(value, row, index) {
         if (value) {
             return [
-                `${value == 1?"Booked":"Avaiable"}`
+                value != 0 ? "Avaiable" : "Booked"
+            ];
+        } else {
+            return [
+                "Booked"
             ];
         }
     }
@@ -135,6 +143,18 @@
                 '<path d="M6 21v-2a4 4 0 0 1 4 -4h3.5"></path>',
                 '<path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z"></path>',
                 '</svg>',
+                '</a>',
+                '</div>',
+            ].join('');
+        }
+    }
+
+    function operateAssignedTo(value, row, index) {
+        if (value) {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-outline-success" href="' + value + '">',
+                '<span><i class="ti ti-paperclip" style="font-size:22px"></i></span>',
                 '</a>',
                 '</div>',
             ].join('');

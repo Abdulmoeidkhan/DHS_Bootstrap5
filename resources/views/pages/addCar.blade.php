@@ -21,7 +21,20 @@
                             </div>
                             <div class="mb-3">
                                 <label for="car_model" class="form-label">Car Model</label>
-                                <input name="car_model" type="text" class="form-control" id="car_model" value="{{!empty($car)?$car->car_model:''}}" placeholder="Contact Person" required>
+                                <input name="car_model" type="text" class="form-control" id="car_model" value="{{!empty($car)?$car->car_model:''}}" placeholder="Car  Model" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="driver_uid" class="form-label">Drivers</label>
+                                <select class="form-select" aria-label="Driver Select" id="driver_uid" name="driver_uid" required>
+                                    <option value="" selected disabled hidden> Select Driver </option>
+                                    @foreach($drivers as $key=>$driver)
+                                    @if(!empty($car) && $car->driver_uid === $driver->driver_uid)
+                                    <option value="{{$driver->driver_uid}}" selected>{{$driver->driver_name}}</option>
+                                    @else
+                                    <option value="{{$driver->driver_uid}}"> {{$driver->driver_name}} </option>
+                                    @endif
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="car_remarks" class="form-label">Car Remarks</label>

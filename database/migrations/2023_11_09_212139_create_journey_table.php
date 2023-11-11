@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('journey', function (Blueprint $table) {
             $table->id();
-            $table->uuid('car_uid');
-            $table->uuid('driver_uid');
+            $table->uuid('car_uid')->unique();
             $table->uuid('journey_logged_by');
             $table->uuid('journey_uid')->unique();
-            $table->string('car_pickup')->nullable();
-            $table->string('car_dropoff')->nullable();
-            $table->uuid('car_assign_to')->nullable();
+            $table->string('journey_pickup')->nullable();
+            $table->string('journey_dropoff')->nullable();
+            $table->uuid('journey_assign_to')->nullable();
             $table->timestamps();
         });
     }

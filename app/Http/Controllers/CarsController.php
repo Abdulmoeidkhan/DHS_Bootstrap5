@@ -85,11 +85,12 @@ class CarsController extends Controller
 
     public function addCarRender($id = null)
     {
+        $driver = Driver::where('driver_status', 1)->get();
         if ($id) {
             $car = Car::where('car_uid', $id)->first();
-            return view('pages.addCar', ['car' => $car]);
+            return view('pages.addCar', ['car' => $car, 'drivers' => $driver]);
         } else {
-            return view('pages.addCar');
+            return view('pages.addCar', ['drivers' => $driver]);
         }
     }
 
@@ -104,7 +105,8 @@ class CarsController extends Controller
         }
         try {
             $savedcar = $car->save();
-            if ($savedcar) {
+            $updateDriver = Driver::where('driver_uid', $car->driver_uid)->update(['driver_status' => 0]);
+            if ($savedcar && $updateDriver) {
                 return back()->with('message', "Car Added Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
@@ -121,9 +123,14 @@ class CarsController extends Controller
                     $arrayToBeUpdate[$key] = $value;
                 }
             }
+            $oldCar = Car::where('car_uid', $id)->first();
             $updateCar = Car::where('car_uid', $id)->update($arrayToBeUpdate);
             if ($updateCar) {
-                return back()->with('message', "Car Updated Successfully");
+                if ($oldCar->driver_uid != $req->driver_uid) {
+                    $oldDriver = Driver::where('driver_uid', $oldCar->driver_uid)->update(['driver_status' => 1]);
+                }
+                $newDriver = Driver::where('driver_uid', $req->driver_uid)->update(['driver_status' => 0]);
+                return $newDriver ? back()->with('message', "Car Updated Successfully") : back()->with('error', "Something Went Wrong");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             return  back()->with('error', $exception->errorInfo[2]);
@@ -134,14 +141,14 @@ class CarsController extends Controller
 
     // Journey  Start
 
-    public function getjourneys()
+    public function getJourneys()
     {
         $journeys = Journey::get();
         foreach ($journeys as $key => $journey) {
             $journeys[$key]->car_uid = Car::where('car_uid', $journey->car_uid)->first();
-            $journeys[$key]->driver_uid = Driver::where('driver_uid', $journeys[$key]->driver_uid)->first();
-            $journeys[$key]->car_assign_to = Delegate::where('uid', $journeys[$key]->car_assign_to)->first('uid') ? Delegate::where('uid', $journeys[$key]->car_assign_to)->first('uid') : Member::where('member_uid', $journeys[$key]->car_assign_to)->first('member_uid');
-            $journeys[$key]->car_assign_to = $journeys[$key]->assign_to->uid ? 'delegateProfile/' . $journeys[$key]->assign_to->uid . '' : 'memberFullProfile/' . $journeys[$key]->assign_to->member_uid . '';
+            $journeys[$key]->driver_uid = Driver::where('driver_uid', $journeys[$key]->car_uid->driver_uid)->first();
+            $journeys[$key]->journey_assign_to = Delegate::where('uid', $journeys[$key]->journey_assign_to)->first('uid') ? Delegate::where('uid', $journeys[$key]->journey_assign_to)->first('uid') : Member::where('member_uid', $journeys[$key]->journey_assign_to)->first('member_uid');
+            $journeys[$key]->journey_assign_to = $journeys[$key]->journey_assign_to->uid ? 'delegateProfile/' . $journeys[$key]->journey_assign_to->uid . '' : 'members/memberFullProfile/' . $journeys[$key]->journey_assign_to->member_uid . '';
             $journeys[$key]->journey_logged_by = User::where('uid', $journey->journey_logged_by)->first('name');
         }
         return $journeys;
@@ -149,9 +156,7 @@ class CarsController extends Controller
 
     public function addJourneyRender($id = null)
     {
-        $journeys = Journey::get();
-        $car = Car::get();
-        $driver = Driver::get();
+        $cars = $id ? Car::get() : Car::where('car_status', 1)->get();
         if ($id) {
             $members = DB::table('members')
                 ->leftJoin('delegates', 'delegates.delegation', '=', 'members.delegation')
@@ -170,13 +175,13 @@ class CarsController extends Controller
                 ->leftJoin('delegates', 'delegates.delegation', '=', 'members.delegation')
                 ->leftJoin('delegations', 'delegations.uid', '=', 'members.delegation')
                 ->where('member_status', 1)
-                ->whereNull('members.accomodated')
+                ->whereNull('members.car_accomodated')
                 ->select('members.*', 'delegations.country', 'delegations.delegationCode', 'delegates.first_Name', 'delegates.last_Name')
                 ->get();
             $delegates = DB::table('delegates')
                 ->leftJoin('delegations', 'delegations.uid', '=', 'delegates.delegation')
                 ->where('status',  1)
-                ->whereNull('accomodated')
+                ->whereNull('car_accomodated')
                 ->whereNotNull('first_Name')
                 ->select('delegates.*', 'delegations.country', 'delegations.delegationCode')
                 ->get();
@@ -190,69 +195,71 @@ class CarsController extends Controller
         foreach ($delegates as $key => $delegate) {
             $delegates[$key]->guestType = 'Delegate';
         }
-        foreach ($journeyTypes as $key => $journeyType) {
-            $journeyTypes[$key]->hotel_name = Hotel::where('hotel_uid', $journeyType->hotel_uid)->first('hotel_names');
-            // $journeys[$key]->journey_type_status = $journeytypes[$key]->journey_type_status == 1 ? 'Active' : 'InActive';
+        foreach ($cars as $key => $car) {
+            $cars[$key]->driver_uid = Driver::where('driver_uid', $car->driver_uid)->first('driver_name');
         }
         $guests = [...$delegates, ...$members];
         if ($id) {
             $selectedJourney = Journey::where('journey_uid', $id)->first();
-            return view('pages.addJourney', ['selectedJourney' => $selectedJourney, 'journeys' => $journeys, 'hotels' => $hotels, 'journeyTypes' => $journeyTypes, 'guests' => $guests]);
+            return view('pages.addJourney', ['selectedJourney' => $selectedJourney, 'cars' => $cars, 'guests' => $guests]);
         } else {
-            return view('pages.addJourney', ['journeys' => $journeys, 'hotels' => $hotels, 'journeyTypes' => $journeyTypes,  'guests' => $guests]);
+            return view('pages.addJourney', ['cars' => $cars, 'guests' => $guests]);
         }
     }
 
-    // public function addJourney(Request $req)
-    // {
-    //     $journey = new Journey();
-    //     $journey->journey_uid = (string) Str::uuid();
-    //     $journey->journey_logged_by = session()->get('user')->uid;
-    //     $assign_to = Member::where('member_uid', $req->assign_to)->first();
-    //     foreach ($req->all() as $key => $value) {
-    //         if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
-    //             $journey[$key] = $value;
-    //         }
-    //     }
-    //     try {
-    //         $savedJourney = $journey->save();
-    //         $guestUidUpdate = $assign_to ? Member::where('member_uid', $req->assign_to)->update(['accomodated' => $journey->journey_uid]) : Delegate::where('uid', $req->assign_to)->update(['accomodated' => $journey->journey_uid]);
-    //         if ($savedJourney && $guestUidUpdate) {
-    //             return back()->with('message', "Journey Assigned Successfully");
-    //         } else {
-    //             return back()->with('error', "SomeThing Went Wrong");
-    //         }
-    //     } catch (\Illuminate\Database\QueryException $exception) {
-    //         return  back()->with('error', $exception->errorInfo[2]);
-    //     }
-    // }
-    // public function updateJourney(Request $req, $id)
-    // {
-    //     try {
-    //         $arrayToBeUpdate = [];
-    //         foreach ($req->all() as $key => $value) {
-    //             if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
-    //                 $arrayToBeUpdate[$key] = $value;
-    //             }
-    //         }
-    //         $oldJourney = Journey::where('journey_uid', $id)->first();
-    //         $updateJourney = Journey::where('journey_uid', $id)->update($arrayToBeUpdate);
-    //         if ($oldJourney->assign_to != $req->assign_to) {
-    //             $assign_toOld = Member::where('member_uid', $oldJourney->assign_to)->first();
-    //             $oldGuestUidUpdate = $assign_toOld ? Member::where('member_uid', $oldJourney->assign_to)->update(['accomodated' => null]) : Delegate::where('uid', $oldJourney->assign_to)->update(['accomodated' => null]);
-    //             $assign_to = Member::where('member_uid', $req->assign_to)->first();
-    //             $guestUidUpdate = $assign_to ? Member::where('member_uid', $req->assign_to)->update(['accomodated' => $id]) : Delegate::where('uid', $req->assign_to)->update(['accomodated' => $id]);
-    //         } else {
-    //             $assign_to = Member::where('member_uid', $req->assign_to)->first();
-    //             $guestUidUpdate = $assign_to ? Member::where('member_uid', $req->assign_to)->update(['accomodated' => $id]) : Delegate::where('uid', $req->assign_to)->update(['accomodated' => $id]);
-    //         }
-    //         if ($updateJourney) {
-    //             return back()->with('message', "Journey Type Updated Successfully");
-    //         }
-    //     } catch (\Illuminate\Database\QueryException $exception) {
-    //         return  back()->with('error', $exception->errorInfo[2]);
-    //     }
-    // }
+    public function addJourney(Request $req)
+    {
+        $journey = new Journey();
+        $journey->journey_uid = (string) Str::uuid();
+        $journey->journey_logged_by = session()->get('user')->uid;
+        $journey_assign_to = Member::where('member_uid', $req->journey_assign_to)->first();
+        foreach ($req->all() as $key => $value) {
+            if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
+                $journey[$key] = $value;
+            }
+        }
+        try {
+            $savedJourney = $journey->save();
+            $updateCar = Car::where('car_uid', $req->car_uid)->update(['car_status' => 0]);
+            $guestUidUpdate = $journey_assign_to ? Member::where('member_uid', $req->journey_assign_to)->update(['car_accomodated' => $journey->journey_uid]) : Delegate::where('uid', $req->journey_assign_to)->update(['car_accomodated' => $journey->journey_uid]);
+            if ($savedJourney && $guestUidUpdate && $updateCar) {
+                return back()->with('message', "Journey Assigned Successfully");
+            } else {
+                return back()->with('error', "SomeThing Went Wrong");
+            }
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return  back()->with('error', $exception->errorInfo[2]);
+        }
+    }
+
+    public function updateJourney(Request $req, $id)
+    {
+        try {
+            $arrayToBeUpdate = [];
+            foreach ($req->all() as $key => $value) {
+                if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
+                    $arrayToBeUpdate[$key] = $value;
+                }
+            }
+            $oldJourney = Journey::where('journey_uid', $id)->first();
+            $updateJourney = Journey::where('journey_uid', $id)->update($arrayToBeUpdate);
+            $journey_assign_to = Member::where('member_uid', $req->journey_assign_to)->first();
+            if ($updateJourney) {
+                if ($oldJourney->journey_assign_to != $req->journey_assign_to) {
+                    $journey_assign_to_Old = Member::where('member_uid', $oldJourney->journey_assign_to)->first();
+                    $oldGuestUidUpdate = $journey_assign_to_Old ? Member::where('member_uid', $oldJourney->journey_assign_to)->update(['car_accomodated' => null]) : Delegate::where('uid', $oldJourney->journey_assign_to)->update(['car_accomodated' => null]);
+                }
+                if ($oldJourney->car_uid != $req->car_uid) {
+                    $oldCarUidUpdate = Car::where('car_uid', $oldJourney->car_uid)->update(['car_status' => 1]);
+                }
+                $carUidUpdate = Car::where('car_uid', $req->car_uid)->update(['car_status' => 0]) ;
+                $guestUidUpdate = $journey_assign_to ? Member::where('member_uid', $req->journey_assign_to)->update(['car_accomodated' => $id]) : Delegate::where('uid', $req->journey_assign_to)->update(['car_accomodated' => $id]);
+                return $guestUidUpdate && $carUidUpdate?back()->with('message', "Journey Updated Successfully"):back()->with('error', "Something Went Wrong");
+            }
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return  back()->with('error', $exception->errorInfo[2]);
+        }
+    }
 
     // Journey End
 }
