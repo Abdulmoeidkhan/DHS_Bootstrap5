@@ -36,7 +36,12 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="member_rank" class="form-label">Member Rank</label>
-                                <input name="member_rank" type="text" class="form-control" id="member_rank" placeholder="Rank" value="{{$member->member_rank}}" required>
+                                <!-- <input name="member_rank" type="text" class="form-control" id="member_rank" placeholder="Rank" value="{{$member->member_rank}}" required> -->
+                                <select name="member_rank" id="member_rank" class="form-select">
+                                    @foreach (\App\Models\Rank::all() as $renderRank)
+                                    <option value="{{$renderRank->ranks_uid}}" <?php echo $renderRank->ranks_uid == $member->member_rank ? 'selected' : '' ?>>{{$renderRank->ranks_name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="member_first_Name" class="form-label">Member First Name</label>
@@ -65,6 +70,32 @@
                     </form>
                 </div>
                 <br />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div id="col-lg-12 d-flex align-items-stretch">
+        <div class="card w-100">
+            <div class="card-body p-4">
+                <div class="mb-4">
+                    <h5 class="card-title fw-semibold">Member Document</h5>
+                </div>
+                <div>
+                    <object data="{{ route('request.getPdf' , $member->member_uid ) }}" type="application/pdf" width="100%" height="1000px">
+                        <p>Your browser does not support PDF embedding. You can <a href="{{ route('request.getPdf' , $member->member_uid ) }}">download the PDF</a> instead.</p>
+                    </object>
+                </div>
+                <br />
+                <form action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ?route('request.uploadDocument'):''}}" method="POST" enctype="multipart/form-data">
+                    <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
+                        <div class="input-group">
+                            <input type="hidden" value="{{$member->member_uid}}" name="id" />
+                            <input type="file" class="form-control" id="pdf" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="pdf" accept="application/pdf" required>
+                            <button class="btn btn-outline-danger" type="submit">Upload</button>
+                        </div>
+                        @csrf
+                </form>
             </div>
         </div>
     </div>

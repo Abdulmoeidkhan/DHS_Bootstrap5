@@ -17,11 +17,11 @@ class AddRankComponent extends Component
         $rank->ranks_uid = (string) Str::uuid();
         $rank->ranks_name = $this->rank;
         $this->savedrank = $rank->save();
-        $this->dispatch('datasaved')->self();
-        $this->dispatch('rankchanged')->to(AddVipsComponent::class);
+        // $this->dispatch('ranksaved')->self();
+        $this->dispatch('ranksaved')->to(AddVipsComponent::class);
         $this->reset();
     }
-    #[On('datasaved')]
+    // #[On('ranksaved')]
     public function render()
     {
         return view('livewire.add-rank-component');

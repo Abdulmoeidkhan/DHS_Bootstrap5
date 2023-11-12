@@ -9,7 +9,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-
+use App\Models\Document;
+use App\Models\Rank;
 
 class MemberController extends Controller
 {
@@ -22,6 +23,18 @@ class MemberController extends Controller
         $image->base64_image = $base64;
         $image->uid = $id;
         $image->save();
+    }
+    protected function documentUpload($file, $id)
+    {
+
+        // $type = $file->extension();
+        // $base64Pdf = base64_encode(file_get_contents($file->getRealPath()));
+        // $pdfBlob = 'data:application/pdf;base64,' . $base64Pdf;
+        $pdfBlob = file_get_contents($file->getRealPath());
+        $pdf = new Document();
+        $pdf->pdf_blob = $pdfBlob;
+        $pdf->uid = $id;
+        $pdf->save();
     }
 
     public function render($id)
@@ -72,6 +85,7 @@ class MemberController extends Controller
         try {
             $savedMember = $member->save();
             $this->imageUpload($req->file('picture'), $member->member_uid);
+            $this->documentUpload($req->file('pdf'), $member->member_uid);
             if ($savedMember) {
                 return redirect()->route("pages.addMember", $req->delegation)->with('message', 'Member Updated Successfully');
             }
@@ -102,6 +116,7 @@ class MemberController extends Controller
     {
         $member = Member::where('member_uid', $id)->first();
         $member->image = Image::where('uid', $id)->first();
+        // $member->document = Document::where('uid', $id)->first();
         // return $member;
         return view('pages.memberProfile', ['member' => $member]);
     }

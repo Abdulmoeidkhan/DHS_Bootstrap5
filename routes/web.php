@@ -17,6 +17,7 @@ use App\Http\Controllers\AddDelegationPageController;
 use App\Http\Controllers\AddVipsController;
 use App\Http\Controllers\ActivateProfileController;
 use App\Http\Controllers\CarsController;
+use App\Http\Controllers\DoucmentController;
 use App\Http\Controllers\FlightsController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\LiasonsController;
@@ -69,7 +70,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     // Request Routes
+    Route::get('/getPdf/{id}', [DoucmentController::class, 'getPdf'])->name('request.getPdf');
     Route::post('/imageUpload', [ProfileImageController::class, 'uploadImage'])->name('request.imageUpload');
+    Route::post('/uploadDocument', [DoucmentController::class, 'uploadDocument'])->name('request.uploadDocument');
     Route::post('/updateProfile', [UpdateProfileController::class, 'updateProflie'])->name('request.updateProfile');
     Route::post('/updateProfilePassowrd', [UpdateProfileController::class, 'updatePassword'])->name('request.updatePassword');
     Route::post('/activateProfile', [ActivateProfileController::class, 'activateProfile'])->name('request.activateProfile');
@@ -81,7 +84,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/delegation', [DelegationsPageController::class, 'singleDelegation'])->name('pages.delegation');
         Route::get('/specificLiason', [LiasonsController::class, 'renderSpecificLiason'])->name('pages.renderSpecificLiason');
         Route::post('/addMemberRequest/{id}', [MemberController::class, 'addMemberRequest'])->name('request.addMemberRequest');
-        Route::get('/specificLiasonsData/{id}', [LiasonsController::class, 'specificLiasonsData'])->name('request.specificLiasonsData');
+        Route::get('/specificLiasonsData/{id?}', [LiasonsController::class, 'specificLiasonsData'])->name('request.specificLiasonsData');
         Route::get('/userProfile/delegateProfile', [UserFullProfileController::class, 'renderDelegateProfile'])->name('pages.delegateProfile');
     });
 

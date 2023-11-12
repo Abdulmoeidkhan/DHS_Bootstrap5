@@ -57,16 +57,16 @@ class LiasonsController extends Controller
         return $delegations;
     }
 
-    public function specificLiasonsData($id)
+    public function specificLiasonsData($id = null)
     {
-        $liason = DB::table('liasons')
+        $liason = $id ? DB::table('liasons')
             ->leftJoin('delegates', 'delegates.delegation', '=', 'liasons.liason_delegation')
             ->leftJoin('delegations', 'delegations.uid', '=', 'liasons.liason_delegation')
             ->where('liasons.liason_uid', $id)
             ->orWhere('liasons.liason_officer', $id)
             ->select('liasons.*', 'delegations.country', 'delegates.last_Name', 'delegates.first_Name')
-            ->first();
-        $liason->image = Image::where('uid', $liason->liason_officer)->first();
+            ->first() : null;
+        $liason->image = $id ? Image::where('uid', $liason->liason_officer)->first() : 'null';
         // return $liason;
         return view('pages.liasonProfile', ['liason' => $liason]);
     }

@@ -15,7 +15,7 @@
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Itineraries</h5>
             <div class="table-responsive">
-                <table id="table" data-flat="true" data-search="true" data-show-refresh="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.getItinerary')}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
+                <table id="table" data-flat="true" data-search="true" data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.getItinerary')}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
@@ -35,7 +35,7 @@
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Tickets</h5>
             <div class="table-responsive">
-                <table id="table" data-flat="true" data-search="true" data-show-refresh="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.getTickets')}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
+                <table id="table" data-flat="true" data-search="true" data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.getTickets')}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>

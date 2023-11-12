@@ -12,11 +12,9 @@
             <label for="message-text" class="col-form-label">Rank:</label>
             <select wire:model="rank" class="form-select">
                 <option value="" selected disabled hidden> Select Rank </option>
-                @if(count($ranks)>1)
-                @foreach($ranks as $key=>$rank)
-                <option value="{{$rank->ranks_uid}}">{{$rank->ranks_name}}</option>
+                @foreach (\App\Models\Rank::all() as $renderRank)
+                <option value="{{$renderRank->ranks_uid}}">{{$renderRank->ranks_name}}</option>
                 @endforeach
-                @endif
             </select>
         </div>
     </div>

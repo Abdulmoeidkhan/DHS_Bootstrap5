@@ -18,9 +18,12 @@
         <div class="body-wrapper">
             @include("layouts.header")
             <div class="container-fluid">
-                @if(session('message'))
+                @if(session('flash_message'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <div>{{session('message')}}</div>
+                    <div class="d-flex flex-row">
+                        <div class="p-2">{{session('flash_message')}}</div>
+                        <button id="installButton" class="btn btn-success p-2" style="display: none;">Install</button>
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 @elseif(session('error'))

@@ -28,8 +28,15 @@
                                 <input name="organistaion" type="text" class="form-control" id="organistaion" placeholder="Organisation" required>
                             </div>
                             <div class="mb-3">
+                                <!-- <label for="rank" class="form-label">Rank</label>
+                                <input name="rank" type="text" class="form-control" id="rank" placeholder="Rank" required> -->
                                 <label for="rank" class="form-label">Rank</label>
-                                <input name="rank" type="text" class="form-control" id="rank" placeholder="Rank" required>
+                                <select name="rank" id="rank" class="form-select">
+                                    <option value="" selected disabled hidden> Select Rank </option>
+                                    @foreach (\App\Models\Rank::all() as $renderRank)
+                                    <option value="{{$renderRank->ranks_uid}}">{{$renderRank->ranks_name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="passport" class="form-label">Passport</label>
@@ -38,6 +45,10 @@
                             <div class="mb-3">
                                 <label for="picture" class="form-label">Picture</label>
                                 <input name="picture" type="file" class="form-control" id="picture" accept="image/png, image/jpeg" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pdf" class="form-label">document</label>
+                                <input name="pdf" type="file" class="form-control" id="pdf" accept="application/pdf" required>
                             </div>
                             <input name="delegation" type="hidden" id="delegation" value="{{$id}}" required>
                             <input type="submit" name="submit" class="btn btn-primary" value="Add Member" />

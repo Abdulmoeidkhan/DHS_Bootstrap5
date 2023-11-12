@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" type="image/png" href="{{asset('assets/images/logos/favicon.png')}}" />
+<link rel="shortcut icon" type="image/png" href="{{asset('images/icons/Badar-icon-128x128.png')}}" />
 <link rel="stylesheet" href="{{asset('assets/css/styles.min.css')}}" />
 <?php $routesIncludedTable = array('pages.delegationsPage', 'pages.members','pages.liasons','pages.liasonSpecificProfile','pages.renderSpecificLiason','pages.liasonDelegateProfile','pages.flights','pages.cars','pages.hotels'); ?>
 @if(in_array(Route::currentRouteName(), $routesIncludedTable))

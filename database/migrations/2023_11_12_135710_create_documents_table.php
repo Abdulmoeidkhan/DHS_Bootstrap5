@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vips', function (Blueprint $table) {
-            $table->id();
-            $table->uuid('uid')->unique();
-            $table->string('name');
-            $table->uuid('rank');
-            $table->string('designation');
-            $table->integer('status')->default(1);
+        Schema::create('documents', function (Blueprint $table) {
+            $table->uuid('uid')->primary();
+            $table->binary('pdf_blob');
             $table->timestamps();
         });
     }
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vips');
+        Schema::dropIfExists('documents');
     }
 };
