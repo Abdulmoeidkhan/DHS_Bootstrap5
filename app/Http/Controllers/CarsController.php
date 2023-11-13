@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Car;
+use App\Models\CarCategory;
 use App\Models\Delegate;
 use App\Models\Driver;
 use App\Models\Journey;
@@ -20,6 +21,133 @@ class CarsController extends Controller
     {
         return view('pages.cars');
     }
+
+    // CarCategory Start
+
+    public function getCarCategory()
+    {
+        $carcategory = CarCategory::get();
+        return $carcategory;
+    }
+
+    public function addCarCategoriesRender($id = null)
+    {
+        if ($id) {
+            $carcategory = CarCategory::where('car_uid', $id)->first();
+            return view('pages.addCarCategory', ['carcategory' => $carcategory]);
+        } else {
+            return view('pages.addCarCategory');
+        }
+    }
+
+    public function addCarCategory(Request $req)
+    {
+        $carcategory = new CarCategory();
+        $carcategory->car_category_uid = (string) Str::uuid();
+        foreach ($req->all() as $key => $value) {
+            if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
+                $carcategory[$key] = $value;
+            }
+        }
+        try {
+            $savedcarcategory = $carcategory->save();
+            if ($savedcarcategory) {
+                return back()->with('message', "Car Category Added Successfully");
+            }
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return  back()->with('error', $exception->errorInfo[2]);
+        }
+    }
+
+    public function updateCarCategory(Request $req, $id)
+    {
+        try {
+            $arrayToBeUpdate = [];
+            foreach ($req->all() as $key => $value) {
+                if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
+                    $arrayToBeUpdate[$key] = $value;
+                }
+            }
+            $oldCar = Car::where('car_uid', $id)->first();
+            $updateCar = Car::where('car_uid', $id)->update($arrayToBeUpdate);
+            if ($updateCar) {
+                if ($oldCar->driver_uid != $req->driver_uid) {
+                    $oldDriver = Driver::where('driver_uid', $oldCar->driver_uid)->update(['driver_status' => 1]);
+                }
+                $newDriver = Driver::where('driver_uid', $req->driver_uid)->update(['driver_status' => 0]);
+                return $newDriver ? back()->with('message', "Car Updated Successfully") : back()->with('error', "Something Went Wrong");
+            }
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return  back()->with('error', $exception->errorInfo[2]);
+        }
+    }
+
+    // CarCategory End
+
+    // Car Start
+
+    public function getCars()
+    {
+        $car = Car::get();
+        return $car;
+    }
+
+    public function addCarRender($id = null)
+    {
+        $driver = Driver::get();
+        $carcategorys = CarCategory::get();
+        if ($id) {
+            $car = Car::where('car_uid', $id)->first();
+            return view('pages.addCar', ['car' => $car, 'drivers' => $driver, 'carcategorys' => $carcategorys]);
+        } else {
+            return view('pages.addCar', ['drivers' => $driver]);
+        }
+    }
+
+    public function addCar(Request $req)
+    {
+        $car = new Car();
+        $car->car_uid = (string) Str::uuid();
+        foreach ($req->all() as $key => $value) {
+            if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
+                $car[$key] = $value;
+            }
+        }
+        try {
+            $savedcar = $car->save();
+            $updateDriver = Driver::where('driver_uid', $car->driver_uid)->update(['driver_status' => 0]);
+            if ($savedcar && $updateDriver) {
+                return back()->with('message', "Car Added Successfully");
+            }
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return  back()->with('error', $exception->errorInfo[2]);
+        }
+    }
+
+    public function updateCar(Request $req, $id)
+    {
+        try {
+            $arrayToBeUpdate = [];
+            foreach ($req->all() as $key => $value) {
+                if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
+                    $arrayToBeUpdate[$key] = $value;
+                }
+            }
+            $oldCar = Car::where('car_uid', $id)->first();
+            $updateCar = Car::where('car_uid', $id)->update($arrayToBeUpdate);
+            if ($updateCar) {
+                if ($oldCar->driver_uid != $req->driver_uid) {
+                    $oldDriver = Driver::where('driver_uid', $oldCar->driver_uid)->update(['driver_status' => 1]);
+                }
+                $newDriver = Driver::where('driver_uid', $req->driver_uid)->update(['driver_status' => 0]);
+                return $newDriver ? back()->with('message', "Car Updated Successfully") : back()->with('error', "Something Went Wrong");
+            }
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return  back()->with('error', $exception->errorInfo[2]);
+        }
+    }
+
+    // Car End
 
     // Drivers Start
     public function getDrivers()
@@ -74,69 +202,6 @@ class CarsController extends Controller
             return  back()->with('error', $exception->errorInfo[2]);
         }
     }
-
-    // Drivers Start
-
-    public function getCars()
-    {
-        $car = Car::get();
-        return $car;
-    }
-
-    public function addCarRender($id = null)
-    {
-        $driver = Driver::where('driver_status', 1)->get();
-        if ($id) {
-            $car = Car::where('car_uid', $id)->first();
-            return view('pages.addCar', ['car' => $car, 'drivers' => $driver]);
-        } else {
-            return view('pages.addCar', ['drivers' => $driver]);
-        }
-    }
-
-    public function addCar(Request $req)
-    {
-        $car = new Car();
-        $car->car_uid = (string) Str::uuid();
-        foreach ($req->all() as $key => $value) {
-            if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
-                $car[$key] = $value;
-            }
-        }
-        try {
-            $savedcar = $car->save();
-            $updateDriver = Driver::where('driver_uid', $car->driver_uid)->update(['driver_status' => 0]);
-            if ($savedcar && $updateDriver) {
-                return back()->with('message', "Car Added Successfully");
-            }
-        } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
-        }
-    }
-
-    public function updateCar(Request $req, $id)
-    {
-        try {
-            $arrayToBeUpdate = [];
-            foreach ($req->all() as $key => $value) {
-                if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
-                    $arrayToBeUpdate[$key] = $value;
-                }
-            }
-            $oldCar = Car::where('car_uid', $id)->first();
-            $updateCar = Car::where('car_uid', $id)->update($arrayToBeUpdate);
-            if ($updateCar) {
-                if ($oldCar->driver_uid != $req->driver_uid) {
-                    $oldDriver = Driver::where('driver_uid', $oldCar->driver_uid)->update(['driver_status' => 1]);
-                }
-                $newDriver = Driver::where('driver_uid', $req->driver_uid)->update(['driver_status' => 0]);
-                return $newDriver ? back()->with('message', "Car Updated Successfully") : back()->with('error', "Something Went Wrong");
-            }
-        } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
-        }
-    }
-
     // Drivers End
 
     // Journey  Start
@@ -252,9 +317,9 @@ class CarsController extends Controller
                 if ($oldJourney->car_uid != $req->car_uid) {
                     $oldCarUidUpdate = Car::where('car_uid', $oldJourney->car_uid)->update(['car_status' => 1]);
                 }
-                $carUidUpdate = Car::where('car_uid', $req->car_uid)->update(['car_status' => 0]) ;
+                $carUidUpdate = Car::where('car_uid', $req->car_uid)->update(['car_status' => 0]);
                 $guestUidUpdate = $journey_assign_to ? Member::where('member_uid', $req->journey_assign_to)->update(['car_accomodated' => $id]) : Delegate::where('uid', $req->journey_assign_to)->update(['car_accomodated' => $id]);
-                return $guestUidUpdate && $carUidUpdate?back()->with('message', "Journey Updated Successfully"):back()->with('error', "Something Went Wrong");
+                return $guestUidUpdate && $carUidUpdate ? back()->with('message', "Journey Updated Successfully") : back()->with('error', "Something Went Wrong");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             return  back()->with('error', $exception->errorInfo[2]);

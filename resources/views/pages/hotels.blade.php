@@ -43,8 +43,6 @@
                         <tr>
                             <th data-field="id">Id</th>
                             <th data-field="room_type" data-sortable="true">Room Type</th>
-                            <th data-field="rooms_quantity" data-sortable="true">Number of Rooms</th>
-                            <th data-field="hotel_name.hotel_names" data-sortable="true">Hotel Name</th>
                             <th data-field="room_type_status">Status</th>
                             <th data-field="room_type_uid" data-formatter="operateRoomType">Actions</th>
                         </tr>

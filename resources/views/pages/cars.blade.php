@@ -4,13 +4,32 @@
 @if(session()->get('user')->roles[0]->name === "admin")
 <div class="row">
     <div class="d-flex justify-content-center gap-2">
-        <a type="button" href="{{route('pages.addCar')}}" class="btn btn-outline-success">Add Car</a>
+        <a type="button" href="{{route('pages.addCarCategories')}}" class="btn btn-outline-warning">Add Car Category</a>
         <a type="button" href="{{route('pages.addDriver')}}" class="btn btn-outline-danger">Add Driver</a>
+        <a type="button" href="{{route('pages.addCar')}}" class="btn btn-outline-success">Add Car</a>
         <a type="button" href="{{route('pages.addJourney')}}" class="btn btn-outline-primary">Add Journey</a>
     </div>
 </div>
 <br />
 @endif
+<div class="row">
+    <div class="card w-100">
+        <div class="card-body p-4">
+            <h5 class="card-title fw-semibold mb-4">Cars</h5>
+            <div class="table-responsive">
+                <table id="table" data-flat="true" data-search="true" data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.getCarCategories')}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
+                    <thead>
+                        <tr>
+                            <th data-field="id">Id</th>
+                            <th data-field="car_category" data-sortable="true">Car Category</th>
+                            <th data-field="car_category_uid" data-formatter="operateCar">Actions</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="card w-100">
         <div class="card-body p-4">

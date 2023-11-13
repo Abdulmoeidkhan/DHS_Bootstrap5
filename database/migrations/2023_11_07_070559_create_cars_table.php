@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('car_makes');
             $table->string('car_model');
+            $table->string('car_category');
             $table->uuid('car_uid')->unique();
             $table->string('car_number')->unique();
             $table->uuid('driver_uid')->nullable()->unique();

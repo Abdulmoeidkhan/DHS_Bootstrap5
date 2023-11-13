@@ -1,7 +1,6 @@
 @auth
 @extends('layouts.layout')
 @section("content")
-
     <div class="row">
         <div class="col-lg-12 d-flex align-items-stretch">
             <div class="card w-100">

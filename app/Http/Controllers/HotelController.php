@@ -143,8 +143,8 @@ class HotelController extends Controller
     {
         $rooms = Room::get();
         foreach ($rooms as $key => $room) {
-            $rooms[$key]->room_type = Roomtype::where('room_type_uid', $room->room_type)->first(['room_type', 'hotel_uid']);
-            $rooms[$key]->hotel_names = Hotel::where('hotel_uid', $rooms[$key]->room_type->hotel_uid)->first('hotel_names');
+            $rooms[$key]->room_type = Roomtype::where('room_type_uid', $room->room_type)->first(['room_type']);
+            $rooms[$key]->hotel_names = Hotel::where('hotel_uid', $room->hotel_uid)->first(['hotel_names','hotel_uid']);
             $rooms[$key]->assign_to = Delegate::where('uid', $rooms[$key]->assign_to)->first('uid') ? Delegate::where('uid', $rooms[$key]->assign_to)->first('uid') : Member::where('member_uid', $rooms[$key]->assign_to)->first('member_uid');
             $rooms[$key]->assign_to = $rooms[$key]->assign_to->uid ? 'delegateProfile/' . $rooms[$key]->assign_to->uid . '' : 'members/memberFullProfile/' . $rooms[$key]->assign_to->member_uid . '';
             $rooms[$key]->room_logged_by = User::where('uid', $room->room_logged_by)->first('name');

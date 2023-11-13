@@ -136,6 +136,13 @@ Route::group(['middleware' => 'auth'], function () {
         // Driver Pages And API End
 
 
+        // CarCategory Pages And API Start
+        Route::get('/getCarCategories', [CarsController::class, 'getCarCategory'])->name('request.getCarCategories');
+        Route::get('/addCarCategoriesPage/{id?}', [CarsController::class, 'addCarCategoriesRender'])->name('pages.addCarCategories');
+        Route::post('/addCarCategory', [CarsController::class, 'addCarCategory'])->name('request.addCarCategory');
+        // Route::post('/updateCar/{id}', [CarsController::class, 'updateCar'])->name('request.updateCar');
+        // Car Pages And API End
+
         // Car Pages And API Start
         Route::get('/getCars', [CarsController::class, 'getCars'])->name('request.getCars');
         Route::get('/addCarPage/{id?}', [CarsController::class, 'addCarRender'])->name('pages.addCar');

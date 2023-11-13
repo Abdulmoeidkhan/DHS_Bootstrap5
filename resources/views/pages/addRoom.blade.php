@@ -17,9 +17,22 @@
                                     <option value="" selected disabled hidden> Select Room Type</option>
                                     @foreach($roomTypes as $key=>$roomType)
                                     @if(!empty($selectedRoom) && $selectedRoom->room_type === $roomType->room_type_uid)
-                                    <option value="{{$roomType->room_type_uid}}" selected> {{$roomType->room_type}}-{{$roomType->rooms_quantity}} Rooms ({{$roomType->hotel_name->hotel_names}})</option>
+                                    <option value="{{$roomType->room_type_uid}}" selected> {{$roomType->room_type}}</option>
                                     @else
-                                    <option value="{{$roomType->room_type_uid}}"> {{$roomType->room_type}} - {{$roomType->rooms_quantity}} Rooms ({{$roomType->hotel_name->hotel_names}})</option>
+                                    <option value="{{$roomType->room_type_uid}}"> {{$roomType->room_type}}</option>
+                                    @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="hotel_uid" class="form-label">Hotel Name</label>
+                                <select class="form-select" aria-label="Hotel Name" id="hotel_uid" name="hotel_uid" required>
+                                    <option value="" selected disabled hidden> Select Hotel</option>
+                                    @foreach($hotels as $key=>$hotel)
+                                    @if(!empty($hotel) && $selectedRoom->hotel_uid === $hotel->hotel_uid)
+                                    <option value="{{$hotel->hotel_uid}}" selected> {{$hotel->hotel_names}}</option>
+                                    @else
+                                    <option value="{{$hotel->hotel_uid}}"> {{$hotel->hotel_names}}</option>
                                     @endif
                                     @endforeach
                                 </select>
