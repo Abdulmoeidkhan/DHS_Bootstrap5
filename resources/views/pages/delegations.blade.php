@@ -65,7 +65,7 @@
                             <th data-field="delegates" data-formatter="operateFormatter">Profile</th>
                             <th data-field="delegates" data-formatter="operateMember">Member</th>
                             <th data-field="liasons" data-formatter="operateLiason">Liason</th>
-                            <th data-field="plan" data-formatter="operatePlan">Plan</th>
+                            <th data-field="delegates" data-formatter="operatePlan">Plan</th>
                         </tr>
                     </thead>
                 </table>
@@ -142,7 +142,7 @@
         if (value) {
             return [
                 '<div class="left">',
-                '<a class="btn btn-outline-success" href="liasonSpecificProfile/' + value + '">',
+                '<a class="btn btn-outline-success" href="addPlan/' + value + '">',
                 '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-timeline" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
                 '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
                 '<path d="M4 16l6 -7l5 5l5 -6" />',
@@ -152,21 +152,6 @@
                 '<path d="M20 8m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />',
                 '</svg>',
                 '</a>',
-                '</div>'
-            ].join('')
-        } else {
-            return [
-                '<div class="left">',
-                '<button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#LiasonModal">',
-                '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-timeline" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
-                '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
-                '<path d="M4 16l6 -7l5 5l5 -6" />',
-                '<path d="M15 14m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />',
-                '<path d="M10 9m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />',
-                '<path d="M4 16m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />',
-                '<path d="M20 8m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />',
-                '</svg>',
-                '</button>',
                 '</div>'
             ].join('')
         }

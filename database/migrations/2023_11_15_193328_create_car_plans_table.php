@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plans', function (Blueprint $table) {
+        Schema::create('car_plans', function (Blueprint $table) {
             $table->id();
-            $table->uuid('plan_uid')->unique();
-            $table->string('suite')->nullable();
-            $table->string('d_occupancy')->nullable();
+            $table->uuid('delegation_uid');
+            $table->uuid('car_plan_uid');
+            $table->uuid('car_category_uid');
+            $table->integer('car_quantity');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plans');
+        Schema::dropIfExists('car_plans');
     }
 };

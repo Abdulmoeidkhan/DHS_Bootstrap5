@@ -2,28 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Plan;
+use App\Models\CarPlan;
+use App\Models\HotelPlan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PlansController extends Controller
 {
     // Plan Start
 
-    public function getPlan()
+    public function getCarPlan()
     {
-        $carcategory = Plan::get();
-        return $carcategory;
+        $carPlan = DB::table('car_plans')
+        ->leftJoin('car_category', 'car_category.car_category_uid', '=', 'car_plans.car_category_uid')
+        ->select('car_plans.*', 'car_category.car_category')
+        ->get();
+        return $carPlan;
+    }
+    public function getHotelPlan()
+    {
+        $hotelPlan = DB::table('hotel_plans')
+        ->leftJoin('hotels', 'hotel_plans.hotel_uid', '=', 'hotels.hotel_uid')
+        ->leftJoin('roomtypes', 'hotel_plans.hotel_roomtpye_uid', '=', 'roomtypes.room_type_uid')
+        ->select('hotel_plans.*', 'hotels.hotel_names', 'roomtypes.room_type')
+        ->get();
+        return $hotelPlan;
     }
 
-    public function addCarCategoriesRender($id = null)
+    public function addPlanRender($id)
     {
-        if ($id) {
-            $carcategory = Plan::where('car_uid', $id)->first();
-            return view('pages.addPlan', ['carcategory' => $carcategory]);
-        } else {
-            return view('pages.addPlan');
-        }
+        // $carPlan = CarPlan::where('delegation_uid', $id)->first();
+        // $hotelPlan = HotelPlan::where('delegation_uid', $id)->first();
+        // return view('pages.addPlan', ['carPlan' => $carPlan, 'hotelPlan' => $hotelPlan]);
+        return view('pages.addPlan', ['id' => $id]);
     }
 
     public function addPlan(Request $req)

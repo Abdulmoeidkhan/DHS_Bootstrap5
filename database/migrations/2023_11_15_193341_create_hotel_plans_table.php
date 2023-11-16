@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('carplan', function (Blueprint $table) {
+        Schema::create('hotel_plans', function (Blueprint $table) {
             $table->id();
             $table->uuid('delegation_uid');
-            $table->uuid('car_plan_uid');
-            $table->uuid('car_category_uid');
-            $table->integer('car_quantity');
+            $table->uuid('hotel_plan_uid');
+            $table->uuid('hotel_roomtpye_uid');
+            $table->uuid('hotel_uid');
+            $table->integer('hotel_quantity');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('carplan');
+        Schema::dropIfExists('hotel_plans');
     }
 };

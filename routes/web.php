@@ -22,6 +22,7 @@ use App\Http\Controllers\FlightsController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\LiasonsController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\PlansController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -94,9 +95,8 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::group(['middleware' => 'userTypeCheck'], function () {
+        // Flights Pages And API Start
         Route::get('/flights', [FlightsController::class, 'render'])->name('pages.flights');
-        Route::get('/cars', [CarsController::class, 'render'])->name('pages.cars');
-        Route::get('/hotels', [HotelController::class, 'render'])->name('pages.hotels');
         Route::get('/addflights', [FlightsController::class, 'addItineraryRender'])->name('pages.addflights');
         Route::get('/addticketspage', [FlightsController::class, 'addTicketRender'])->name('pages.addticketspage');
         Route::get('/viewItinerary/{id}', [FlightsController::class, 'viewItinerary'])->name('page.viewItinerary');
@@ -106,44 +106,47 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/updateItinerary', [FlightsController::class, 'updateItinerary'])->name('request.updateItinerary');
         Route::get('/getItinerary', [FlightsController::class, 'getItinerary'])->name('request.getItinerary');
         Route::get('/getTickets', [FlightsController::class, 'getTickets'])->name('request.getTickets');
+        // Flights Pages And API End
 
         // Hotels Pages And API Start
+        Route::get('/hotels', [HotelController::class, 'render'])->name('pages.hotels');
         Route::get('/getHotels', [HotelController::class, 'getHotels'])->name('request.getHotels');
         Route::get('/addHotelPage/{id?}', [HotelController::class, 'addHotelRender'])->name('pages.addHotel');
         Route::post('/addHotels', [HotelController::class, 'addHotel'])->name('request.addHotel');
         Route::post('/updateHotel/{id}', [HotelController::class, 'updateHotel'])->name('request.updateHotel');
         // Hotels Pages And API End
-
+        
         // Room Type Pages And API Start
         Route::get('/getRoomTypes', [HotelController::class, 'getRoomTypes'])->name('request.getRoomTypes');
         Route::get('/addRoomTypePage/{id?}', [HotelController::class, 'addRoomTypeRender'])->name('pages.addRoomType');
         Route::post('/addRoomType', [HotelController::class, 'addRoomType'])->name('request.addRoomType');
         Route::post('/updateRoomType/{id}', [HotelController::class, 'updateRoomType'])->name('request.updateRoomType');
         // Room Type Pages And API End
-
+        
         // Room Pages And API Start
         Route::get('/getRooms', [HotelController::class, 'getRooms'])->name('request.getRooms');
         Route::get('/addRoomPage/{id?}', [HotelController::class, 'addRoomRender'])->name('pages.addRoom');
         Route::post('/addRoom', [HotelController::class, 'addRoom'])->name('request.addRoom');
         Route::post('/updateRoom/{id}', [HotelController::class, 'updateRoom'])->name('request.updateRoom');
         // Room Pages And API End
-
+        
         // Driver Pages And API Start
         Route::get('/getDrivers', [CarsController::class, 'getDrivers'])->name('request.getDrivers');
         Route::get('/addDriverPage/{id?}', [CarsController::class, 'addDriverRender'])->name('pages.addDriver');
         Route::post('/addDriver', [CarsController::class, 'addDriver'])->name('request.addDriver');
         Route::post('/updateDriver/{id}', [CarsController::class, 'updateDriver'])->name('request.updateDriver');
         // Driver Pages And API End
-
-
+        
+        
         // CarCategory Pages And API Start
         Route::get('/getCarCategories', [CarsController::class, 'getCarCategory'])->name('request.getCarCategories');
         Route::get('/addCarCategoriesPage/{id?}', [CarsController::class, 'addCarCategoriesRender'])->name('pages.addCarCategories');
         Route::post('/addCarCategory', [CarsController::class, 'addCarCategory'])->name('request.addCarCategory');
         // Route::post('/updateCar/{id}', [CarsController::class, 'updateCar'])->name('request.updateCar');
         // Car Pages And API End
-
+        
         // Car Pages And API Start
+        Route::get('/cars', [CarsController::class, 'render'])->name('pages.cars');
         Route::get('/getCars', [CarsController::class, 'getCars'])->name('request.getCars');
         Route::get('/addCarPage/{id?}', [CarsController::class, 'addCarRender'])->name('pages.addCar');
         Route::post('/addCar', [CarsController::class, 'addCar'])->name('request.addCar');
@@ -156,6 +159,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/addJourney', [CarsController::class, 'addJourney'])->name('request.addJourney');
         Route::post('/updateJourney/{id}', [CarsController::class, 'updateJourney'])->name('request.updateJourney');
         // Journey Pages And API End
+
+        // Plan Pages And API Start
+        Route::get('/getHotelPlan', [PlansController::class, 'getHotelPlan'])->name('request.getHotelPlan');
+        Route::get('/getCarPlan', [PlansController::class, 'getCarPlan'])->name('request.getCarPlan');
+        Route::get('/addPlan/{id}', [PlansController::class, 'addPlanRender'])->name('pages.addPlan');
+        // Route::post('/addJourney', [CarsController::class, 'addJourney'])->name('request.addJourney');
+        // Route::post('/updateJourney/{id}', [CarsController::class, 'updateJourney'])->name('request.updateJourney');
+        // Plan Pages And API End
 
         Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');
         Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');
