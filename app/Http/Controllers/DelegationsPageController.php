@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Delegation;
 use App\Models\Liason;
+use App\Models\Member;
 use App\Models\Vips;
 use Illuminate\Support\Facades\DB;
 
@@ -14,9 +15,13 @@ class DelegationsPageController extends Controller
         $delegations = DB::table('delegations')
             ->leftJoin('delegates', 'delegations.uid', '=', 'delegates.delegation')
             ->leftJoin('vips', 'delegations.invited_by', '=', 'vips.uid')
-            ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'vips.name')
+            ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.self', 'vips.name')
             ->orderBy('delegations.country', 'asc')
             ->get();
+        foreach ($delegations as $key => $delegation) {
+            $delegations[$key]->member_count=Member::where('delegation',$delegation->uid)->count();
+            $delegations[$key]->member_count=$delegations[$key]->member_count?$delegations[$key]->member_count+1:0;
+        }
         return $delegations;
     }
     public function render()

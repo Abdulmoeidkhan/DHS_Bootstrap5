@@ -12,6 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('delegations', function (Blueprint $table) {
+            // $table->string('last_Name')->nullable();
+            // $table->string('first_Name')->nullable();
+            // $table->string('designation')->nullable();
+            // $table->uuid('rank')->nullable();
             $table->id();
             $table->uuid('uid')->unique();
             $table->string('country');

@@ -1,5 +1,6 @@
-<div class="table-responsive">
-    <form name="carPlan" id="carPlan" <?php echo $isForSaved ? 'wire:submit="save"' : 'wire:submit="update"' ?>>
+<!-- <div class="table-responsive"> -->
+<form name="carPlan" id="carPlan" <?php echo $isForSaved ? 'wire:submit="save"' : 'wire:submit="update"' ?>>
+    <div class="modal-body">
         <fieldset>
             <legend>Add Car Plan Form</legend>
             <div class="mb-3">
@@ -20,11 +21,15 @@
                 </select>
             </div>
             <input type="hidden" wire:model="delegationUid">
-            @if($isForSaved)
-            <input type="submit" name="savePlan" class="btn btn-primary" value="Add Car Plan" />
-            @else
-            <input type="submit" name="updatePlan" class="btn btn-primary" value="Update Car Plan" />
-            @endif
         </fieldset>
-    </form>
-</div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        @if($isForSaved)
+        <input type="submit" name="savePlan" class="btn btn-primary" value="Add Car Plan" class="btn btn-primary" data-bs-dismiss="modal"/>
+        @else
+        <input type="submit" name="updatePlan" class="btn btn-primary" value="Update Car Plan" class="btn btn-primary" data-bs-dismiss="modal"/>
+        @endif
+        <!-- <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button> -->
+    </div>
+</form>

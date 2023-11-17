@@ -161,8 +161,8 @@ Route::group(['middleware' => 'auth'], function () {
         // Journey Pages And API End
 
         // Plan Pages And API Start
-        Route::get('/getHotelPlan', [PlansController::class, 'getHotelPlan'])->name('request.getHotelPlan');
-        Route::get('/getCarPlan', [PlansController::class, 'getCarPlan'])->name('request.getCarPlan');
+        Route::get('/getHotelPlan/{id}', [PlansController::class, 'getHotelPlan'])->name('request.getHotelPlan');
+        Route::get('/getCarPlan/{id}', [PlansController::class, 'getCarPlan'])->name('request.getCarPlan');
         Route::get('/addPlan/{id}', [PlansController::class, 'addPlanRender'])->name('pages.addPlan');
         // Route::post('/addJourney', [CarsController::class, 'addJourney'])->name('request.addJourney');
         // Route::post('/updateJourney/{id}', [CarsController::class, 'updateJourney'])->name('request.updateJourney');

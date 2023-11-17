@@ -59,13 +59,15 @@
                             <th data-field="address">Address</th>
                             <th data-field="exhibition" data-sortable="true">Exhibition</th>
                             <th data-field="delegationCode">Delegation Code</th>
-                            <th data-field="first_Name" data-sortable="true">Delegates First Name</th>
-                            <th data-field="last_Name" data-sortable="true">Delegates Last Name</th>
+                            <th data-field="self" data-formatter="operateSelf">Self</th>
+                            <th data-field="first_Name" data-sortable="true">First Name</th>
+                            <th data-field="last_Name" data-sortable="true">Last Name</th>
                             <th data-field="name" data-sortable="true">Invited By</th>
+                            <th data-field="member_count" data-sortable="true">Members Count</th>
                             <th data-field="delegates" data-formatter="operateFormatter">Profile</th>
                             <th data-field="delegates" data-formatter="operateMember">Member</th>
                             <th data-field="liasons" data-formatter="operateLiason">Liason</th>
-                            <th data-field="delegates" data-formatter="operatePlan">Plan</th>
+                            <th data-field="delegates" data-formatter="operatePlan">Car/Accomodation</th>
                         </tr>
                     </thead>
                 </table>
@@ -162,6 +164,10 @@
             const modalBodyInput = exampleModal.querySelector('.modal-body #delegationUid')
             modalBodyInput.value = delegation
         })
+    }
+
+    function operateSelf(value, row, index) {
+        return value ? 'Self' : (value == 0 ? 'Rep' : 'N/A');
     }
 </script>
 @include("layouts.tableFoot")

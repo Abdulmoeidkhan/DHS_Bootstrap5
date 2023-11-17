@@ -1,27 +1,48 @@
 @auth
 @extends('layouts.layout')
 @section("content")
-<div class="row">
-    <div class="col-lg-12 d-flex align-items-stretch">
-        <div class="card w-100">
-            <div class="card-body p-4">
-                <h5 class="card-title fw-semibold mb-4">Plans</h5>
-                <div class="table-responsive">
-                    <livewire:car-plan-component delegationUid="{{$id}}" compType='1' />
-                    <br />
-                    <livewire:hotel-plan-component delegationUid="{{$id}}" compType='1' />
 
+@if(session()->get('user')->roles[0]->name === "admin")
+<div class="row">
+    <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#CarPlanModal">Add Car Plan</button>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#HotelPlanModal">Add Hotel Plan</button>
+        <div class="modal fade" id="CarPlanModal" tabindex="-1" aria-labelledby="CarPlanModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel1">Car Plan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <livewire:car-plan-component delegationUid="{{$id}}" compType='1' />
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="HotelPlanModal" tabindex="-1" aria-labelledby="HotelPlanModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel12">Hotel Plan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <livewire:hotel-plan-component delegationUid="{{$id}}" compType='1' />
                 </div>
             </div>
         </div>
     </div>
 </div>
+<br />
+@endif
 <div class="row">
     <div class="card w-100">
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Car Plans</h5>
             <div class="table-responsive">
-                <table id="table1" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getCarPlan')}}">
+                <table id="table1" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getCarPlan',$id)}}">
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
@@ -39,7 +60,7 @@
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Hotel Plans</h5>
             <div class="table-responsive">
-                <table id="table2" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getHotelPlan')}}">
+                <table id="table2" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getHotelPlan',$id)}}">
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
