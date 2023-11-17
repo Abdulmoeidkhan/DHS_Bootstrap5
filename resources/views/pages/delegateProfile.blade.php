@@ -274,7 +274,7 @@
                                 <select name="rank" id="rank" class="form-select">
                                     <option value="" selected disabled hidden> Select Rank </option>
                                     @foreach (\App\Models\Rank::all() as $renderRank)
-                                    <option value="{{$renderRank->ranks_uid}}">{{$renderRank->ranks_name}}</option>
+                                    <option value="{{$renderRank->ranks_uid}}" <?php echo $delegate->rank == $renderRank->ranks_uid ? 'selected' : '' ?>>{{$renderRank->ranks_name}}</option>
                                     @endforeach
                                 </select>
                                 <!-- <input name="rank" type="text" class="form-control" id="rank" placeholder="Rank" value="{{$delegate->rank}}"> -->

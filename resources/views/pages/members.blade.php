@@ -19,7 +19,6 @@
                         <thead>
                             <tr>
                                 <th data-field="id">Id</th>
-                                <th data-field="country" data-sortable="true">Country</th>
                                 <th data-field="member_first_Name" data-sortable="true">First Name</th>
                                 <th data-field="member_last_Name" data-sortable="true">Last Name</th>
                                 <th data-field="member_designation" data-sortable="true">Designation</th>

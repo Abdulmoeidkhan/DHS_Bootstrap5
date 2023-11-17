@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('delegates', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->uuid('uid')->unique();
+            $table->uuid('delegates_uid')->unique();
             $table->string('rank')->nullable();
-            $table->uuid('user_uid')->unique();
+            $table->uuid('user_uid')->nullable()->unique();
             $table->integer('self')->default(1);
             $table->uuid('rep_uid')->nullable();
             $table->uuid('delegation')->unique();

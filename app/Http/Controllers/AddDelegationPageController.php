@@ -34,16 +34,21 @@ class AddDelegationPageController extends Controller
     {
         $delegation = new Delegation();
         $delegation->uid = (string) Str::uuid();
-        // $delegation->rep_uid = (string) Str::uuid();
         $delegation->country = $req->country;
         $delegation->invited_by = $req->invitedBy;
         $delegation->address = $req->address;
-        $delegation->address = $req->address;
         $delegation->exhibition = $req->eventSelect;
         $delegation->delegationCode = $this->badge(8, "DL");
+
+        $delegates = new Delegate();
+        $delegates->uid = (string) Str::uuid();
+        $delegates->country = $req->country;
+        $delegates->self = 1;
+        $delegates->delegation = $delegation->uid;
         try {
+            $delegateSaved = $delegates->save();
             $delegationSaved = $delegation->save();
-            if ($delegationSaved) {
+            if ($delegationSaved && $delegateSaved) {
                 return back()->with('message', 'Delegation has been added Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
@@ -64,7 +69,7 @@ class AddDelegationPageController extends Controller
             }
         }
         try {
-            $updatedDelegate = Delegate::where('uid', $req->uid)->update($arrayToBeUpdate);
+            $updatedDelegate = Delegate::where('user_uid', $req->uid)->orWhere('delegates_uid', $req->uid)->update($arrayToBeUpdate);
             if ($updatedDelegate) {
                 return back()->with('message', 'Delegation has been updated Successfully');
             }

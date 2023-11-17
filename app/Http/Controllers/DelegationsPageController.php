@@ -15,12 +15,12 @@ class DelegationsPageController extends Controller
         $delegations = DB::table('delegations')
             ->leftJoin('delegates', 'delegations.uid', '=', 'delegates.delegation')
             ->leftJoin('vips', 'delegations.invited_by', '=', 'vips.uid')
-            ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.self', 'vips.name')
+            ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.self', 'delegates.delegates_uid', 'vips.name')
             ->orderBy('delegations.country', 'asc')
             ->get();
         foreach ($delegations as $key => $delegation) {
-            $delegations[$key]->member_count=Member::where('delegation',$delegation->uid)->count();
-            $delegations[$key]->member_count=$delegations[$key]->member_count?$delegations[$key]->member_count+1:0;
+            $delegations[$key]->member_count = Member::where('delegation', $delegation->uid)->count();
+            $delegations[$key]->member_count = $delegations[$key]->member_count ? $delegations[$key]->member_count + 1 : 0;
         }
         return $delegations;
     }

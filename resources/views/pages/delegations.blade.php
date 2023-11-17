@@ -63,8 +63,8 @@
                             <th data-field="first_Name" data-sortable="true">First Name</th>
                             <th data-field="last_Name" data-sortable="true">Last Name</th>
                             <th data-field="name" data-sortable="true">Invited By</th>
-                            <th data-field="member_count" data-sortable="true">Members Count</th>
-                            <th data-field="delegates" data-formatter="operateFormatter">Profile</th>
+                            <th data-field="member_count" data-sortable="true">Number Of Person</th>
+                            <th data-field="delegates_uid" data-formatter="operateFormatter">Profile</th>
                             <th data-field="delegates" data-formatter="operateMember">Member</th>
                             <th data-field="liasons" data-formatter="operateLiason">Liason</th>
                             <th data-field="delegates" data-formatter="operatePlan">Car/Accomodation</th>
@@ -167,7 +167,7 @@
     }
 
     function operateSelf(value, row, index) {
-        return value ? 'Self' : (value == 0 ? 'Rep' : 'N/A');
+        return !value ? 'Rep' : 'Self';
     }
 </script>
 @include("layouts.tableFoot")

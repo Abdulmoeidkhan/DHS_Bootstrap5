@@ -37,7 +37,7 @@ class UserFullProfileController extends Controller
     }
     public function renderSpeceficDelegateProfile(Request $req, $id)
     {
-        $delegate = Delegate::where('user_uid', $id)->orWhere('uid', $id)->first();
+        $delegate = Delegate::where('user_uid', $id)->orWhere('delegates_uid', $id)->first();
         $delegateImage = Image::where('uid', $delegate->uid)->first();
         $repImage = Image::where('uid', $delegate->rep_uid)->first();
         return view('pages.delegateProfile', ['delegate' => $delegate, 'delegateImage' => $delegateImage, 'repImage' => $repImage]);
