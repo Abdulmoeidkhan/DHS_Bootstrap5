@@ -13,10 +13,10 @@
                                 @csrf
                                 <div class="row row-cols-lg-auto g-3 align-items-center">
                                     <div class="col-5">
-                                        <input name="itineraryRemarks" type="text" class="form-control" id="itineraryRemarks" placeholder="Remarks" />
+                                        <input name="itineraryRemarks" type="text" class="form-control" id="itineraryRemarks" placeholder="Remarks" value="{{$itineraries->itinerary_remarks}}"/>
                                     </div>
                                     <div class="col-5">
-                                        <input name="itineraryName" type="text" class="form-control" id="itineraryName" placeholder="Itinerary Name" />
+                                        <input name="itineraryName" type="text" class="form-control" id="itineraryName" placeholder="Itinerary Name" value="{{$itineraries->itinerary_name}}"/>
                                     </div>
                                     <div class="col-2">
                                         <button type="submit" class="btn btn-primary" id="itinerarySubmit">Update</button>
@@ -37,24 +37,24 @@
                                         </tr>
                                     </thead>
                                     <tbody id="tableBody">
-                                        @foreach($itineraries as $key=>$itinerary)
-                                        <tr id='{{$itinerary->flightsegment_uid}}'>
+                                        @foreach($flightsegments as $key=>$flightsegment)
+                                        <tr id='{{$flightsegment->flightsegment_uid}}'>
                                             <th scope="row">{{$key+1}}</th>
-                                            <td><input list="airline" name="segment-{{$key+1}}-airline" type="text" id="segment-{{$key+1}}-airlineSelect" class="form-control" placeholder="Airline" value="{{$itinerary->airline}}" required /></td>
-                                            <td><input name="segment-{{$key+1}}-flightNo" type="text" class="form-control" id="segment-{{$key+1}}-flightNo" placeholder="Flight No." minlength="4" maxlength="4" value="{{$itinerary->flight_no}}" required /></td>
-                                            <td><input list="city" name="segment-{{$key+1}}-depCity" type="text" id="segment-{{$key+1}}-departureCitySelect" class="form-control" placeholder="Departure City" value="{{$itinerary->departure_city}}" required></td>
-                                            <td><input name="segment-{{$key+1}}-depDate" type="date" id="segment-{{$key+1}}-depDate" class="form-control" placeholder="Departure Date" value="{{$itinerary->departure_date}}" required /></td>
-                                            <td><input name="segment-{{$key+1}}-depTime" type="number" id="segment-{{$key+1}}-depTime" class="form-control" placeholder="Departure Time" minlength="4" maxlength="4" value="{{$itinerary->departure_time}}" required /></td>
-                                            <td><input list="city" name="segment-{{$key+1}}-arrCity" type="text" id="segment-{{$key+1}}-arrivalCitySelect" class="form-control" placeholder="Arrival City" value="{{$itinerary->arrival_city}}" required></td>
-                                            <td><input name="segment-{{$key+1}}-arrDate" type="date" id="segment-{{$key+1}}-arrDate" class="form-control" placeholder="Arrival Date" value="{{$itinerary->arrival_date}}" required /></td>
-                                            <td><input name="segment-{{$key+1}}-arrTime" type="number" id="segment-{{$key+1}}-arrTime" class="form-control" placeholder="Arrival Time" minlength="4" maxlength="4" value="{{$itinerary->arrival_time}}" required /></td>
+                                            <td><input list="airline" name="segment-{{$key+1}}-airline" type="text" id="segment-{{$key+1}}-airlineSelect" class="form-control" placeholder="Airline" value="{{$flightsegment->airline}}" required /></td>
+                                            <td><input name="segment-{{$key+1}}-flightNo" type="text" class="form-control" id="segment-{{$key+1}}-flightNo" placeholder="Flight No." minlength="4" maxlength="4" value="{{$flightsegment->flight_no}}" required /></td>
+                                            <td><input list="city" name="segment-{{$key+1}}-depCity" type="text" id="segment-{{$key+1}}-departureCitySelect" class="form-control" placeholder="Departure City" value="{{$flightsegment->departure_city}}" required></td>
+                                            <td><input name="segment-{{$key+1}}-depDate" type="date" id="segment-{{$key+1}}-depDate" class="form-control" placeholder="Departure Date" value="{{$flightsegment->departure_date}}" required /></td>
+                                            <td><input name="segment-{{$key+1}}-depTime" type="number" id="segment-{{$key+1}}-depTime" class="form-control" placeholder="Departure Time" minlength="4" maxlength="4" value="{{$flightsegment->departure_time}}" required /></td>
+                                            <td><input list="city" name="segment-{{$key+1}}-arrCity" type="text" id="segment-{{$key+1}}-arrivalCitySelect" class="form-control" placeholder="Arrival City" value="{{$flightsegment->arrival_city}}" required></td>
+                                            <td><input name="segment-{{$key+1}}-arrDate" type="date" id="segment-{{$key+1}}-arrDate" class="form-control" placeholder="Arrival Date" value="{{$flightsegment->arrival_date}}" required /></td>
+                                            <td><input name="segment-{{$key+1}}-arrTime" type="number" id="segment-{{$key+1}}-arrTime" class="form-control" placeholder="Arrival Time" minlength="4" maxlength="4" value="{{$flightsegment->arrival_time}}" required /></td>
                                         </tr>
-                                        <input type="hidden" value="{{$itinerary->flightsegment_uid}}" name="segment-{{$key+1}}-uid" id="segment-{{$key+1}}-uid" />
+                                        <input type="hidden" value="{{$flightsegment->flightsegment_uid}}" name="segment-{{$key+1}}-uid" id="segment-{{$key+1}}-uid" />
                                         @endforeach
                                     </tbody>
                                 </table>
                             </fieldset>
-                            <input type="hidden" value="{{count($itineraries)}}" name="rows" id="rows" />
+                            <input type="hidden" value="{{count($flightsegments)}}" name="rows" id="rows" />
                         </form>
                     </div>
                 </div>

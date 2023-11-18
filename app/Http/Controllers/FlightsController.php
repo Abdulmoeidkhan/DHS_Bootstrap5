@@ -30,8 +30,9 @@ class FlightsController extends Controller
 
     public function viewItinerary($id)
     {
-        $itineraries = Flightsegment::where('itinerary_uid', $id)->get();
-        return view('pages.viewItinerary', ['itineraries' => $itineraries]);
+        $itineraries = Itinerary::where('itinerary_uid', $id)->first();
+        $flightsegments = Flightsegment::where('itinerary_uid', $id)->get();
+        return view('pages.viewItinerary', ['itineraries' => $itineraries, 'flightsegments' => $flightsegments]);
     }
 
     public function addItinerary(Request $req)

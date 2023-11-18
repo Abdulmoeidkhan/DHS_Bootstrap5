@@ -51,7 +51,7 @@ class MemberController extends Controller
     public function membersData(Request $req, $id)
     {
         // return $id;
-        $delegationUid = Delegation::where('delegates', $id)->first('uid');
+        $delegationUid = Delegation::where('delegates', $id)->orWhere('uid', $id)->first('uid');
         $members = DB::table('members')
             ->leftJoin('delegates', 'delegates.delegation', '=', 'members.delegation')
             ->where('members.delegation', $delegationUid->uid)
@@ -72,7 +72,7 @@ class MemberController extends Controller
 
     public function addMemberRequest(Request $req)
     {
-        $delegationUid = Delegation::where('delegates', $req->delegation)->first('uid');
+        $delegationUid = Delegation::where('delegates', $req->delegation)->orWhere('uid', $req->delegation)->first('uid');
         $member = new Member();
         $member->member_uid = (string) Str::uuid();
         $member->delegation = $delegationUid->uid;

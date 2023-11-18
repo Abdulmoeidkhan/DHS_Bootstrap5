@@ -32,6 +32,13 @@ class AddDelegationPageController extends Controller
     }
     public function addDelegation(Request $req)
     {
+
+        $delegates = new Delegate();
+        $delegates->delegates_uid = (string) Str::uuid();
+        $delegates->country = $req->country;
+        $delegates->self = 1;
+
+
         $delegation = new Delegation();
         $delegation->uid = (string) Str::uuid();
         $delegation->country = $req->country;
@@ -39,17 +46,17 @@ class AddDelegationPageController extends Controller
         $delegation->address = $req->address;
         $delegation->exhibition = $req->eventSelect;
         $delegation->delegationCode = $this->badge(8, "DL");
+        $delegation->delegates = $delegates->delegates_uid;
 
-        $delegates = new Delegate();
-        $delegates->uid = (string) Str::uuid();
-        $delegates->country = $req->country;
-        $delegates->self = 1;
+
         $delegates->delegation = $delegation->uid;
         try {
             $delegateSaved = $delegates->save();
-            $delegationSaved = $delegation->save();
-            if ($delegationSaved && $delegateSaved) {
-                return back()->with('message', 'Delegation has been added Successfully');
+            if ($delegateSaved) {
+                $delegationSaved = $delegation->save();
+                if ($delegationSaved) {
+                    return back()->with('message', 'Delegation has been added Successfully');
+                }
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             // return $exception->errorInfo[2];

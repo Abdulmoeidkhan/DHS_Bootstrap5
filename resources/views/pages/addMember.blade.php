@@ -47,7 +47,7 @@
                                 <input name="picture" type="file" class="form-control" id="picture" accept="image/png, image/jpeg" required>
                             </div>
                             <div class="mb-3">
-                                <label for="pdf" class="form-label">document</label>
+                                <label for="pdf" class="form-label">Document</label>
                                 <input name="pdf" type="file" class="form-control" id="pdf" accept="application/pdf" required>
                             </div>
                             <input name="delegation" type="hidden" id="delegation" value="{{$id}}" required>

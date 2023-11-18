@@ -81,10 +81,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'delegateTypeCheck'], function () {
         // Route::get('/members', [MemberController::class, 'render'])->name('pages.members');
-        Route::get('/addMember/{id}', [MemberController::class, 'addMemberPage'])->name('pages.addMember');
         Route::get('/delegation', [DelegationsPageController::class, 'singleDelegation'])->name('pages.delegation');
         Route::get('/specificLiason', [LiasonsController::class, 'renderSpecificLiason'])->name('pages.renderSpecificLiason');
-        Route::post('/addMemberRequest/{id}', [MemberController::class, 'addMemberRequest'])->name('request.addMemberRequest');
         Route::get('/specificLiasonsData/{id?}', [LiasonsController::class, 'specificLiasonsData'])->name('request.specificLiasonsData');
         Route::get('/userProfile/delegateProfile', [UserFullProfileController::class, 'renderDelegateProfile'])->name('pages.delegateProfile');
     });
@@ -168,13 +166,24 @@ Route::group(['middleware' => 'auth'], function () {
         // Route::post('/updateJourney/{id}', [CarsController::class, 'updateJourney'])->name('request.updateJourney');
         // Plan Pages And API End
 
-        Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');
-        Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');
+        // Member Pages And API Start
+        Route::get('/addMember/{id}', [MemberController::class, 'addMemberPage'])->name('pages.addMember');
+        Route::post('/addMemberRequest/{id}', [MemberController::class, 'addMemberRequest'])->name('request.addMemberRequest');
+        // Member Pages And API End
+
+        // Liason Page And API Start
         Route::get('/liasons', [LiasonsController::class, 'renderLiasons'])->name('pages.liasons');
         Route::get('/liasonsData', [LiasonsController::class, 'liasonsData'])->name('request.liasonsData');
         Route::post('/addLiason', [LiasonsController::class, 'addLiason'])->name('request.addLiason');
         Route::get('/addLiasonPages', [LiasonsController::class, 'addLiasonPage'])->name('pages.addLiason');
         Route::post('/attachLiason', [LiasonsController::class, 'attachLiason'])->name('request.attachLiason');
+        // Liason Page And API End
+
+        // VIPS Page And API Start
+        Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');
+        // VIPS Page And API End
+
+        Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');
         Route::get('/userPanel', [UserPanelController::class, 'renderView'])->name("pages.userPanel");
         Route::get('/userProfile/{id}', [UserFullProfileController::class, 'render'])->name('pages.userProfile');
         Route::post('/addEventRequest', [AddEventController::class, 'addEvent'])->name('request.addEventRequest');

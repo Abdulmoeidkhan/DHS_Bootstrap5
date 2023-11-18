@@ -22,7 +22,7 @@ class ActivateProfileController extends Controller
         $delegationUid = Delegation::where([['delegationCode', $recievedParams->activationCode . ''], ['delegates', null]])->first();
         if ($delegationUid) {
             $delegate = new Delegate();
-            $delegate->uid = (string) Str::uuid();
+            // $delegate->uid = (string) Str::uuid();
             $delegate->user_uid = $recievedParams->uid;
             $delegate->delegation = $delegationUid->uid;
             try {

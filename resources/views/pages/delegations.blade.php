@@ -64,10 +64,14 @@
                             <th data-field="last_Name" data-sortable="true">Last Name</th>
                             <th data-field="name" data-sortable="true">Invited By</th>
                             <th data-field="member_count" data-sortable="true">Number Of Person</th>
+                            <th data-field="first_Name" data-sortable="true">LO Name</th>
+                            <th data-field="last_Name" data-sortable="true">LO Contact</th>
+                            <th data-field="created_at" data-sortable="true">Created At</th>
+                            <th data-field="updated_at" data-sortable="true">Last Updated</th>
                             <th data-field="delegates_uid" data-formatter="operateFormatter">Profile</th>
-                            <th data-field="delegates" data-formatter="operateMember">Member</th>
+                            <th data-field="delegates_uid" data-formatter="operateMember">Member</th>
                             <th data-field="liasons" data-formatter="operateLiason">Liason</th>
-                            <th data-field="delegates" data-formatter="operatePlan">Car/Accomodation</th>
+                            <th data-field="delegates_uid" data-formatter="operatePlan">Car/Accomodation</th>
                         </tr>
                     </thead>
                 </table>
@@ -98,12 +102,15 @@
             return [
                 '<div class="left">',
                 '<a class="btn btn-outline-success" href="members/' + value + '">',
-                '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
-                '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>',
-                '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>',
-                '<path d="M6 21v-2a4 4 0 0 1 4 -4h3.5"></path>',
-                '<path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z"></path>',
-                '</svg>',
+                '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
+                '</a>',
+                '</div>',
+            ].join('')
+        } else {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-outline-warning" href="members/' + row.uid + '">',
+                '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
                 '</a>',
                 '</div>',
             ].join('')
@@ -157,18 +164,20 @@
                 '</div>'
             ].join('')
         }
-        const exampleModal = document.getElementById('LiasonModal')
+    }
+
+    function operateSelf(value, row, index) {
+        return !value ? 'Rep' : 'Self';
+    }
+
+    const exampleModal = document.getElementById('LiasonModal')
         exampleModal.addEventListener('show.bs.modal', event => {
             const button = event.relatedTarget
             const delegation = button.getAttribute('data-bs-delegation')
             const modalBodyInput = exampleModal.querySelector('.modal-body #delegationUid')
             modalBodyInput.value = delegation
         })
-    }
 
-    function operateSelf(value, row, index) {
-        return !value ? 'Rep' : 'Self';
-    }
 </script>
 @include("layouts.tableFoot")
 @endsection

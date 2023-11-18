@@ -13,7 +13,12 @@
                                 @csrf
                                 <div class="mb-3">
                                     <label for="liason_rank" class="form-label">Rank</label>
-                                    <input name="liason_rank" type="text" class="form-control" id="liason_rank" placeholder="Liason Officer Rank" />
+                                    <select name="liason_rank" id="liason_rank" class="form-select">
+                                    <option value="" selected disabled hidden> Select Rank </option>
+                                    @foreach (\App\Models\Rank::all() as $renderRank)
+                                    <option value="{{$renderRank->ranks_uid}}">{{$renderRank->ranks_name}}</option>
+                                    @endforeach
+                                </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="liason_designation" class="form-label">Designation</label>
