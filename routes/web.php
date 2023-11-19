@@ -23,6 +23,7 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\LiasonsController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PlansController;
+use App\Http\Controllers\ProgramController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -178,6 +179,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/addLiasonPages', [LiasonsController::class, 'addLiasonPage'])->name('pages.addLiason');
         Route::post('/attachLiason', [LiasonsController::class, 'attachLiason'])->name('request.attachLiason');
         // Liason Page And API End
+
+        // Program Page And API Start
+        Route::get('/programs', [ProgramController::class, 'renderPrograms'])->name('pages.programs');
+        Route::get('/programsData', [ProgramController::class, 'programsData'])->name('request.programsData');
+        Route::get('/addProgramPages', [ProgramController::class, 'addProgramPages'])->name('pages.addProgram');
+        Route::post('/addProgram', [ProgramController::class, 'addProgram'])->name('request.addProgram');
+        // Route::post('/attachLiason', [LiasonsController::class, 'attachLiason'])->name('request.attachLiason');
+        // Program Page And API End
 
         // VIPS Page And API Start
         Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');

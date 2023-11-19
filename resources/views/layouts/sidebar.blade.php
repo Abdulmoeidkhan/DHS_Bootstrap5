@@ -67,11 +67,11 @@
                 @endif
                 @if(session()->get('user')->roles[0]->name =="admin")
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('pages.liasons')}}" aria-expanded="false">
+                    <a class="sidebar-link" href="{{route('pages.programs')}}" aria-expanded="false">
                         <span>
                             <i class="ti ti-list-details"></i>
                         </span>
-                        <span class="hide-menu">Program</span>
+                        <span class="hide-menu">Programs</span>
                     </a>
                 </li>
                 @endif

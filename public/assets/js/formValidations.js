@@ -15,8 +15,8 @@ function getValues(event) {
     axios
         .post("/updateProfile", reqObj)
         .then(function (response) {
-            // appendAlert(response.data, "success");
-            console.log(response)
+            appendAlert(response.data, "success");
+            // console.log(response)
         })
         .catch(function (error) {
             console.log(error);
@@ -91,8 +91,8 @@ function getAuthority(event) {
     axios
         .post("/updateAuthority", reqObj)
         .then(function (response) {
-            console.log(response)
-            // appendAlert(response.data, "success");
+            // console.log(response)
+            appendAlert(response.data, "success");
         })
         .catch(function (error) {
             console.log(error);
