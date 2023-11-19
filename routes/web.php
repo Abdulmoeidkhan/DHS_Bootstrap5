@@ -20,10 +20,13 @@ use App\Http\Controllers\CarsController;
 use App\Http\Controllers\DoucmentController;
 use App\Http\Controllers\FlightsController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\InterestController;
+use App\Http\Controllers\InterpreterController;
 use App\Http\Controllers\LiasonsController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PlansController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\ReceivingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -114,36 +117,36 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/addHotels', [HotelController::class, 'addHotel'])->name('request.addHotel');
         Route::post('/updateHotel/{id}', [HotelController::class, 'updateHotel'])->name('request.updateHotel');
         // Hotels Pages And API End
-        
+
         // Room Type Pages And API Start
         Route::get('/getRoomTypes', [HotelController::class, 'getRoomTypes'])->name('request.getRoomTypes');
         Route::get('/addRoomTypePage/{id?}', [HotelController::class, 'addRoomTypeRender'])->name('pages.addRoomType');
         Route::post('/addRoomType', [HotelController::class, 'addRoomType'])->name('request.addRoomType');
         Route::post('/updateRoomType/{id}', [HotelController::class, 'updateRoomType'])->name('request.updateRoomType');
         // Room Type Pages And API End
-        
+
         // Room Pages And API Start
         Route::get('/getRooms', [HotelController::class, 'getRooms'])->name('request.getRooms');
         Route::get('/addRoomPage/{id?}', [HotelController::class, 'addRoomRender'])->name('pages.addRoom');
         Route::post('/addRoom', [HotelController::class, 'addRoom'])->name('request.addRoom');
         Route::post('/updateRoom/{id}', [HotelController::class, 'updateRoom'])->name('request.updateRoom');
         // Room Pages And API End
-        
+
         // Driver Pages And API Start
         Route::get('/getDrivers', [CarsController::class, 'getDrivers'])->name('request.getDrivers');
         Route::get('/addDriverPage/{id?}', [CarsController::class, 'addDriverRender'])->name('pages.addDriver');
         Route::post('/addDriver', [CarsController::class, 'addDriver'])->name('request.addDriver');
         Route::post('/updateDriver/{id}', [CarsController::class, 'updateDriver'])->name('request.updateDriver');
         // Driver Pages And API End
-        
-        
+
+
         // CarCategory Pages And API Start
         Route::get('/getCarCategories', [CarsController::class, 'getCarCategory'])->name('request.getCarCategories');
         Route::get('/addCarCategoriesPage/{id?}', [CarsController::class, 'addCarCategoriesRender'])->name('pages.addCarCategories');
         Route::post('/addCarCategory', [CarsController::class, 'addCarCategory'])->name('request.addCarCategory');
         // Route::post('/updateCar/{id}', [CarsController::class, 'updateCar'])->name('request.updateCar');
         // Car Pages And API End
-        
+
         // Car Pages And API Start
         Route::get('/cars', [CarsController::class, 'render'])->name('pages.cars');
         Route::get('/getCars', [CarsController::class, 'getCars'])->name('request.getCars');
@@ -176,8 +179,24 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/liasons', [LiasonsController::class, 'renderLiasons'])->name('pages.liasons');
         Route::get('/liasonsData', [LiasonsController::class, 'liasonsData'])->name('request.liasonsData');
         Route::post('/addLiason', [LiasonsController::class, 'addLiason'])->name('request.addLiason');
-        Route::get('/addLiasonPages', [LiasonsController::class, 'addLiasonPage'])->name('pages.addLiason');
+        Route::get('/addLiasonPage', [LiasonsController::class, 'addLiasonPage'])->name('pages.addLiason');
         Route::post('/attachLiason', [LiasonsController::class, 'attachLiason'])->name('request.attachLiason');
+        // Liason Page And API End
+
+        // Liason Page And API Start
+        Route::get('/interpreters', [InterpreterController::class, 'renderInterpreters'])->name('pages.interpreters');
+        Route::get('/interpretersData', [InterpreterController::class, 'interpretersData'])->name('request.interpretersData');
+        Route::post('/addInterpreter', [InterpreterController::class, 'addInterpreter'])->name('request.addInterpreter');
+        Route::get('/addInterpreterPage', [InterpreterController::class, 'addInterpreterPage'])->name('pages.addInterpreter');
+        Route::post('/attachInterpreter', [InterpreterController::class, 'attachInterpreter'])->name('request.attachInterpreter');
+        // Liason Page And API End
+
+        // Liason Page And API Start
+        Route::get('/receivings', [ReceivingController::class, 'renderReceivings'])->name('pages.receivings');
+        Route::get('/receivingsData', [ReceivingController::class, 'receivingsData'])->name('request.receivingsData');
+        Route::post('/addReceiving', [ReceivingController::class, 'addReceiving'])->name('request.addReceiving');
+        Route::get('/addReceivingPages', [ReceivingController::class, 'addReceivingPage'])->name('pages.addReceivings');
+        Route::post('/attachReceiving', [ReceivingController::class, 'attachReceiving'])->name('request.attachReceiving');
         // Liason Page And API End
 
         // Program Page And API Start
@@ -186,6 +205,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/addProgramPages', [ProgramController::class, 'addProgramPages'])->name('pages.addProgram');
         Route::post('/addProgram', [ProgramController::class, 'addProgram'])->name('request.addProgram');
         // Route::post('/attachLiason', [LiasonsController::class, 'attachLiason'])->name('request.attachLiason');
+        // Program Page And API End
+
+        // Program Page And API Start
+        Route::get('/getInterests/{id?}', [InterestController::class, 'getInterests'])->name('request.getInterests');
+        Route::post('/setInterests/{id?}', [InterestController::class, 'setInterests'])->name('request.setInterests');
         // Program Page And API End
 
         // VIPS Page And API Start

@@ -67,6 +67,26 @@
                 @endif
                 @if(session()->get('user')->roles[0]->name =="admin")
                 <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.interpreters')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-language"></i>
+                        </span>
+                        <span class="hide-menu">Interpreters</span>
+                    </a>
+                </li>
+                @endif
+                @if(session()->get('user')->roles[0]->name =="admin")
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.receivings')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-heart-handshake"></i>
+                        </span>
+                        <span class="hide-menu">Receiving Officer</span>
+                    </a>
+                </li>
+                @endif
+                @if(session()->get('user')->roles[0]->name =="admin")
+                <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.programs')}}" aria-expanded="false">
                         <span>
                             <i class="ti ti-list-details"></i>
@@ -102,6 +122,16 @@
                             <i class="ti ti-shield-half-filled"></i>
                         </span>
                         <span class="hide-menu">Liason</span>
+                    </a>
+                </li>
+                @endif
+                @if(session()->get('user')->roles[0]->name =="delegate")
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.renderSpecificInterpreter')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-language"></i>
+                        </span>
+                        <span class="hide-menu">Interpreter</span>
                     </a>
                 </li>
                 @endif

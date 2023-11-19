@@ -119,7 +119,7 @@ class LiasonsController extends Controller
         try {
             $updateLiason = Liason::where('liason_uid', $req->liasonSelect)->update(['liason_delegation' => $req->delegationUid, 'liason_assign' => 1]);
             if ($updateLiason) {
-                $updateDelegation = Delegation::where('uid', $req->delegationUid)->update(['liasons' => $req->liasonSelect]);
+                // $updateDelegation = Delegation::where('uid', $req->delegationUid)->update(['liasons' => $req->liasonSelect]);
                 return back()->with('message', 'Liason has been attach Successfully');
             }
         } catch (QueryException $exception) {

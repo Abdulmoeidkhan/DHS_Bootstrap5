@@ -25,26 +25,9 @@
                             </div>
                             <div class="mb-3">
                                 <label for="program_end_time" class="form-label">Program End Time</label>
-                                <input name="program_end_time" type="number" class="form-control" id="program_end_time" placeholder="Program End
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                Time (0000 - 2359)" minlength="4" maxlength="4" min="0000" max="2359" />
+                                <input name="program_end_time" type="number" class="form-control" id="program_end_time" placeholder="Program End Time (0000 - 2359)" minlength="4" maxlength="4" min="0000" max="2359" />
                             </div>
-                            <br/>
+                            <br />
                             <input type="submit" name="submit" class="btn btn-primary" value="Add Program" />
                         </fieldset>
                     </form>

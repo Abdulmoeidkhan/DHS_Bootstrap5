@@ -15,7 +15,8 @@ class DelegationsPageController extends Controller
         $delegations = DB::table('delegations')
             ->leftJoin('delegates', 'delegations.uid', '=', 'delegates.delegation')
             ->leftJoin('vips', 'delegations.invited_by', '=', 'vips.uid')
-            ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.self', 'delegates.delegates_uid', 'vips.name')
+            ->leftJoin('liasons', 'delegations.uid', '=', 'liasons.liason_delegation')
+            ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.self', 'delegates.delegates_uid', 'vips.name','liasons.liason_uid')
             ->orderBy('delegations.country', 'asc')
             ->get();
         foreach ($delegations as $key => $delegation) {

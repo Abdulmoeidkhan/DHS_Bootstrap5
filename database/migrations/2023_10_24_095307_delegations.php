@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('exhibition');
             $table->string('delegationCode')->unique();
             $table->uuid('delegates')->unique()->nullable();
-            $table->uuid('liasons')->unique()->nullable();
+            // $table->uuid('liasons')->unique()->nullable();
             $table->timestamps();
             $table->foreign('invited_by')->references('uid')->on('vips')
             ->onUpdate('cascade')->onDelete('cascade');

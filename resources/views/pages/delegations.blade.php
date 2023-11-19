@@ -70,7 +70,7 @@
                             <th data-field="updated_at" data-sortable="true">Last Updated</th>
                             <th data-field="delegates_uid" data-formatter="operateFormatter">Profile</th>
                             <th data-field="delegates_uid" data-formatter="operateMember">Member</th>
-                            <th data-field="liasons" data-formatter="operateLiason">Liason</th>
+                            <th data-field="liason_uid" data-formatter="operateLiason">Liason</th>
                             <th data-field="delegates_uid" data-formatter="operatePlan">Car/Accomodation</th>
                         </tr>
                     </thead>
