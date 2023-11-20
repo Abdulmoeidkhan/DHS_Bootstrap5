@@ -19,12 +19,12 @@
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
-                            <th data-field="receiving_officer_designation" data-sortable="true">Designation</th>
-                            <th data-field="receiving_officer_contact" data-sortable="true">Contact</th>
-                            <th data-field="receiving_officer_identity" data-sortable="true">Identity</th>
-                            <th data-field="receiving_officer_first_name" data-sortable="true">Receiving Officer First Name</th>
-                            <th data-field="receiving_officer_last_name" data-sortable="true">Receiving Officer Last Name</th>
-                            <th data-field="receiving_officer_uid" data-formatter="operateFormatter">Actions</th>
+                            <th data-field="receiving_designation" data-sortable="true">Designation</th>
+                            <th data-field="receiving_contact" data-sortable="true">Contact</th>
+                            <th data-field="receiving_identity" data-sortable="true">Identity</th>
+                            <th data-field="receiving_first_name" data-sortable="true">Receiving Officer First Name</th>
+                            <th data-field="receiving_last_name" data-sortable="true">Receiving Officer Last Name</th>
+                            <th data-field="receiving_uid" data-formatter="operateFormatter">Actions</th>
                         </tr>
                     </thead>
                 </table>
@@ -37,7 +37,7 @@
         if (value) {
             return [
                 '<div class="left">',
-                '<a class="btn btn-outline-success" href="receivingOfficerSpecificProfile/' + value + '">',
+                '<a class="btn btn-outline-success" href="specificReceivingData/' + value + '">',
                 '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
                 '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
                 '<path d="M6 21v-2a4 4 0 0 1 4 -4h2" />',

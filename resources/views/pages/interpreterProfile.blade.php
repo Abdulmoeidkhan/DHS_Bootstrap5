@@ -17,8 +17,8 @@
                 <form action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'interpreter' ?route('request.imageUpload'):''}}" method="POST" enctype="multipart/form-data">
                     <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'interpreter' ? '' : 'disabled' ?>>
                         <div class="input-group">
-                            <input type="hidden" value="{{$interpreter->interpreter_officer}}" name="id" />
-                            <input type="file" class="form-control" id="uploadFile" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="image" accept="image/png, image/jpeg" required>
+                            <input type="hidden" value="{{$interpreter->interpreter_officer}}" name="id" /> 
+                            <input type="file" class="form-control" id="uploadFile" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="image" accept="image/png, image/jpeg" required>  
                             <button class="btn btn-outline-danger" type="submit">Upload</button>
                         </div>
                         @csrf
@@ -48,30 +48,35 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="interpreter_rank" class="form-label">Interpreter Rank</label>
-                                <input name="interpreter_rank" type="text" class="form-control" id="interpreter_rank" placeholder="Rank" value="{{$interpreter->interpreter_rank}}" required>
+                                <select name="interpreter_rank" id="interpreter_rank" class="form-select">
+                                    <option value="" selected disabled hidden> Select Rank </option>
+                                    @foreach (\App\Models\Rank::all() as $renderRank)
+                                    <option value="{{$renderRank->ranks_uid}}" <?php echo $interpreter->interpreter_rank == $renderRank->ranks_uid ? 'selected' : '' ?>>{{$renderRank->ranks_name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="interpreter_first_Name" class="form-label">Interpreter First Name</label>
-                                <input name="interpreter_first_Name" type="text" class="form-control" id="interpreter_first_Name" placeholder="First Name" value="{{$interpreter->interpreter_first_name}}" required>
+                                <input name="interpreter_first_Name" type="text" class="form-control" id="interpreter_first_Name" placeholder="First Name" value="{{$interpreter->interpreter_first_name}}" required>   
                             </div>
                             <div class="mb-3">
                                 <label for="interpreter_last_Name" class="form-label">Interpreter Last Name</label>
-                                <input name="interpreter_last_Name" type="text" class="form-control" id="interpreter_last_Name" placeholder="Last Name" value="{{$interpreter->interpreter_last_name}}" required>
+                                <input name="interpreter_last_name" type="text" class="form-control" id="interpreter_last_name" placeholder="Last Name" value="{{$interpreter->interpreter_last_name}}" required>   
                             </div>
                             <div class="mb-3">
                                 <label for="interpreter_designation" class="form-label">Designation</label>
-                                <input name="interpreter_designation" type="text" class="form-control" id="interpreter_designation" placeholder="Designation" value="{{$interpreter->interpreter_designation}}" required>
+                                <input name="interpreter_designation" type="text" class="form-control" id="interpreter_designation" placeholder="Designation" value="{{$interpreter->interpreter_designation}}" required>   
                             </div>
                             <div class="mb-3">
                                 <label for="interpreter_contact" class="form-label">Contact</label>
-                                <input name="interpreter_contact" type="text" class="form-control" id="interpreter_contact" placeholder="Interpreter Contact Number" value="{{$interpreter->interpreter_contact}}" required>
+                                <input name="interpreter_contact" type="text" class="form-control" id="interpreter_contact" placeholder="Interpreter Contact Number" value="{{$interpreter->interpreter_contact}}" required>    
                             </div>
                             <div class="mb-3">
-                                <label for="passport" class="form-label">Passport</label>
-                                <input name="passport" type="text" class="form-control" id="passport" placeholder="Passport" value="{{$interpreter->interpreter_identity}}">
+                                <label for="interpreter_identity" class="form-label">Passport/Identity</label>
+                                <input name="interpreter_identity" type="text" class="form-control" id="interpreter_identity" placeholder="Passport" value="{{$interpreter->interpreter_identity}}">    
                             </div>
-                            <input type="hidden" name="uid" value="{{$interpreter->interpreter_uid}}" />
-                            <input type="submit" name="submit" class="btn btn-primary" value="Update" />
+                            <input type="hidden" name="interpreter_uid" value="{{$interpreter->interpreter_uid}}" />    
+                            <input type="submit" name="submit" class="btn btn-primary" value="Update" />    
                         </fieldset>
                     </form>
                 </div>

@@ -49,24 +49,23 @@ class ReceivingController extends Controller
 
     public function receivingsData()
     {
-        $delegations = DB::table('receiving')
-            ->leftJoin('delegates', 'delegates.delegation', '=', 'receiving.receiving_delegation')
-            ->leftJoin('delegations', 'delegations.uid', '=', 'receiving.receiving_delegation')
-            ->select('receiving.*', 'delegations.country', 'delegates.last_Name', 'delegates.first_Name')
+        $delegations = DB::table('receivings')
+            ->leftJoin('delegates', 'delegates.delegation', '=', 'receivings.receiving_delegation')
+            ->leftJoin('delegations', 'delegations.uid', '=', 'receivings.receiving_delegation')
+            ->select('receivings.*', 'delegations.country', 'delegates.last_Name', 'delegates.first_Name')
             ->get();
         return $delegations;
     }
 
-    public function specificReceivingsData($id = null)
+    public function specificReceivingData($id = null)
     {
-        $receiving = $id ? DB::table('receiving')
-            ->leftJoin('delegates', 'delegates.delegation', '=', 'receiving.receiving_delegation')
-            ->leftJoin('delegations', 'delegations.uid', '=', 'receiving.receiving_delegation')
-            ->where('receiving.receiving_uid', $id)
-            ->orWhere('receiving.receiving', $id)
-            ->select('receiving.*', 'delegations.country', 'delegates.last_Name', 'delegates.first_Name')
+        $receiving = $id ? DB::table('receivings')
+            ->leftJoin('delegates', 'delegates.delegation', '=', 'receivings.receiving_delegation')
+            ->leftJoin('delegations', 'delegations.uid', '=', 'receivings.receiving_delegation')
+            ->where('receivings.receiving_uid', $id)
+            ->select('receivings.*', 'delegations.country', 'delegates.last_Name', 'delegates.first_Name')
             ->first() : null;
-        $receiving->image = $id ? Image::where('uid', $receiving->receiving)->first() : 'null';
+        $receiving->image = $id ? Image::where('uid', $receiving->receiving_uid)->first() : 'null';
         // return $receiving;
         return view('pages.receivingProfile', ['receiving' => $receiving]);
     }
@@ -116,10 +115,10 @@ class ReceivingController extends Controller
 
     public function attachReceiving(Request $req)
     {
+        // return $req->all();
         try {
-            $updateReceiving = Receiving::where('receiving_uid', $req->receivingSelect)->update(['receiving_delegation' => $req->delegationUid, 'receiving_assign' => 1]);
+            $updateReceiving = Receiving::where('receiving_uid', $req->receivingOfficerSelect)->update(['receiving_delegation' => $req->delegationUid_receiving, 'receiving_assign' => 1]);
             if ($updateReceiving) {
-                // $updateDelegation = Delegation::where('uid', $req->delegationUid)->update(['receiving' => $req->receivingSelect]);
                 return back()->with('message', 'Receiving has been attach Successfully');
             }
         } catch (QueryException $exception) {

@@ -135,7 +135,7 @@
                     </a>
                 </li>
                 @endif
-                @if(session()->get('user')->roles[0]->name =="liason")
+                @if(session()->get('user')->roles[0]->name =="liason" || session()->get('user')->roles[0]->name =="receiving"|| session()->get('user')->roles[0]->name =="interpreter")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.delegationAssigned')}}" aria-expanded="false">
                         <span>

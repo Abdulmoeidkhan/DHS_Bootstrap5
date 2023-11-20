@@ -314,7 +314,7 @@
                 <h5 class="card-title fw-semibold mb-4">Programs</h5>
                 <div class="table-responsive">
                     <form name="programInfo" id="programInfo" method="POST" action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.setInterests'):''}}">
-                        <fieldset>
+                        <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
                             <legend>Programs</legend>
                             @csrf
                             @foreach (\App\Models\Program::all() as $key=>$program)
@@ -326,7 +326,9 @@
                             @endforeach
                             <input type="hidden" name="guest_uid" value="{{$delegate->delegates_uid}}" />
                             <input type="hidden" name="delegation_uid" value="{{$delegate->delegation}}" />
+                            @if(session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate')
                             <input type="submit" name="submit" class="btn btn-primary" value="Update Interest" />
+                            @endif
                         </fieldset>
                     </form>
                 </div>

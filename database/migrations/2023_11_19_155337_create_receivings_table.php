@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('receiving', function (Blueprint $table) {
+        Schema::create('receivings', function (Blueprint $table) {
             $table->id();
             $table->uuid('receiving_uid')->unique();
             $table->string('receiving_rank');
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('receiving');
+        Schema::dropIfExists('receivings');
     }
 };

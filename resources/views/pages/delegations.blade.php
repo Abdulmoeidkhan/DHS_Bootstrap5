@@ -34,6 +34,68 @@
                         </select>
                     </div>
                     <div class="mb-3">
+                        <input type="hidden" name="delegationUid_liason" value="" id="delegationUid_liason" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ReceivingModal" tabindex="-1" aria-labelledby="ReceivingModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ReceivingModalLabel">Receiving Officer Modal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" action='{{route("request.attachReceiving")}}'>
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="receivingOfficerSelect" class="col-form-label">Receiving Officer :</label>
+                        <select class="form-select" aria-label="Receiving Officer To Be Associate" id="receivingOfficerSelect" name="receivingOfficerSelect">
+                            <option value="" selected disabled hidden> Select Receiving Officer To Be Associate </option>
+                            @foreach($receivings as $key=>$receiving)
+                            <option value="{{$receiving->receiving_uid}}"> {{$receiving->receiving_first_name.' '.$receiving->receiving_last_name}} </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <input type="hidden" name="delegationUid_receiving" value="" id="delegationUid_receiving" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="LiasonModal" tabindex="-1" aria-labelledby="LiasonModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Liason Modal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" action='{{route("request.attachLiason")}}'>
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="liasonSelect" class="col-form-label">Liason :</label>
+                        <select class="form-select" aria-label="Liason To Be Associate" id="liasonSelect" name="liasonSelect">
+                            <option value="" selected disabled hidden> Select Liason To Be Associate </option>
+                            @foreach($liasons as $key=>$liason)
+                            <option value="{{$liason->liason_uid}}"> {{$liason->liason_first_name.' '.$liason->liason_last_name}} </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <input type="hidden" name="delegationUid" value="" id="delegationUid" />
                     </div>
                 </div>
@@ -64,13 +126,15 @@
                             <th data-field="last_Name" data-sortable="true">Last Name</th>
                             <th data-field="name" data-sortable="true">Invited By</th>
                             <th data-field="member_count" data-sortable="true">Number Of Person</th>
-                            <th data-field="first_Name" data-sortable="true">LO Name</th>
-                            <th data-field="last_Name" data-sortable="true">LO Contact</th>
+                            <th data-field="liason_first_name" data-sortable="true">LO Name</th>
+                            <th data-field="liason_contact" data-sortable="true">LO Contact</th>
                             <th data-field="created_at" data-sortable="true">Created At</th>
                             <th data-field="updated_at" data-sortable="true">Last Updated</th>
                             <th data-field="delegates_uid" data-formatter="operateFormatter">Profile</th>
                             <th data-field="delegates_uid" data-formatter="operateMember">Member</th>
                             <th data-field="liason_uid" data-formatter="operateLiason">Liason</th>
+                            <th data-field="receiving_uid" data-formatter="operateReceiving">Receiving</th>
+                            <th data-field="interpreter_uid" data-formatter="operateInterpreter">Interpreter</th>
                             <th data-field="delegates_uid" data-formatter="operatePlan">Car/Accomodation</th>
                         </tr>
                     </thead>
@@ -147,6 +211,66 @@
         }
     }
 
+    function operateReceiving(value, row, index) {
+        if (value) {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-outline-success" href="specificReceivingData/' + value + '">',
+                '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
+                '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
+                '<path d="M6 21v-2a4 4 0 0 1 4 -4h2" />',
+                '<path d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" />',
+                '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />',
+                '</svg>',
+                '</a>',
+                '</div>'
+            ].join('')
+        } else {
+            return [
+                '<div class="left">',
+                '<button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#ReceivingModal">',
+                '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
+                '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
+                '<path d="M6 21v-2a4 4 0 0 1 4 -4h2" />',
+                '<path d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" />',
+                '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />',
+                '</svg>',
+                '</button>',
+                '</div>'
+            ].join('')
+        }
+    }
+
+    function operateInterpreter(value, row, index) {
+        if (value) {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-outline-success" href="liasonSpecificProfile/' + value + '">',
+                '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
+                '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
+                '<path d="M6 21v-2a4 4 0 0 1 4 -4h2" />',
+                '<path d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" />',
+                '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />',
+                '</svg>',
+                '</a>',
+                '</div>'
+            ].join('')
+        } else {
+            return [
+                '<div class="left">',
+                '<button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#LiasonModal">',
+                '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
+                '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
+                '<path d="M6 21v-2a4 4 0 0 1 4 -4h2" />',
+                '<path d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" />',
+                '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />',
+                '</svg>',
+                '</button>',
+                '</div>'
+            ].join('')
+        }
+    }
+
     function operatePlan(value, row, index) {
         if (value) {
             return [
@@ -171,13 +295,28 @@
     }
 
     const exampleModal = document.getElementById('LiasonModal')
-        exampleModal.addEventListener('show.bs.modal', event => {
-            const button = event.relatedTarget
-            const delegation = button.getAttribute('data-bs-delegation')
-            const modalBodyInput = exampleModal.querySelector('.modal-body #delegationUid')
-            modalBodyInput.value = delegation
-        })
+    exampleModal.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget
+        const delegation = button.getAttribute('data-bs-delegation')
+        const modalBodyInput = exampleModal.querySelector('.modal-body #delegationUid_liason')
+        modalBodyInput.value = delegation
+    })
 
+    const receivingModal = document.getElementById('ReceivingModal')
+    receivingModal.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget
+        const delegation = button.getAttribute('data-bs-delegation')
+        const modalBodyInput = receivingModal.querySelector('.modal-body #delegationUid_receiving')
+        modalBodyInput.value = delegation
+    })
+    
+    const operateModal = document.getElementById('OperateModal')
+    operateModal.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget
+        const delegation = button.getAttribute('data-bs-delegation')
+        const modalBodyInput = operateModal.querySelector('.modal-body #delegationUid')
+        modalBodyInput.value = delegation
+    })
 </script>
 @include("layouts.tableFoot")
 @endsection

@@ -34,28 +34,30 @@ class SignUpController extends Controller
         $role = Role::where('name', 'user')->first();
         $permission = Permission::where('name', 'read')->first();
         $user->addRole($role, $team);
-        $user->givePermission($permission,$team);
+        $user->givePermission($permission, $team);
         // $user->addRole('admin', 'admin');
         // $user->givePermissions(['read', 'create', 'update', 'delete'], 'admin');
     }
 
     public function signUp(Request $req)
     {
-        $resp = 0;
+        $uid = (string) Str::uuid();
         $user = new User();
-        $user->uid = (string) Str::uuid();
+        $user->uid = $uid;
         $user->name = $req->username;
         $user->email = $req->email;
         $user->password = Hash::make($req->password);
         $user->activation_code =
-        
-        $this->badge(8, "");
+
+            $this->badge(8, "");
         $savedUser = 0;
         try {
             $savedUser = $user->save();
             $this->basicRolesAndTeams($user);
             if ($savedUser) {
-                return redirect()->route("accountActivation");
+                $emailSent = (new MailOtpController)->html_email($uid);
+                return $emailSent ? redirect()->route("accountActivation") : back()->with('error', 'Email Address already Exist error : ');
+                // return redirect()->route('request.emailModule',$uid);
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {

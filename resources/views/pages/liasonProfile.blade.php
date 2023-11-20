@@ -47,7 +47,6 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="liason_rank" class="form-label">Liason Rank</label>
-
                                 <select name="liason_rank" id="liason_rank" class="form-select">
                                     <option value="" selected disabled hidden> Select Rank </option>
                                     @foreach (\App\Models\Rank::all() as $renderRank)
@@ -72,10 +71,10 @@
                                 <input name="liason_contact" type="text" class="form-control" id="liason_contact" placeholder="Liason Contact Number" value="{{$liason->liason_contact}}" required>
                             </div>
                             <div class="mb-3">
-                                <label for="passport" class="form-label">Passport</label>
-                                <input name="passport" type="text" class="form-control" id="passport" placeholder="Passport" value="{{$liason->liason_identity}}">
+                                <label for="liason_identity" class="form-label">Passport</label>
+                                <input name="liason_identity" type="text" class="form-control" id="liason_identity" placeholder="Passport" value="{{$liason->liason_identity}}">
                             </div>
-                            <input type="hidden" name="uid" value="{{$liason->liason_uid}}" />
+                            <input type="hidden" name="liason_uid" value="{{$liason->liason_uid}}" />
                             <input type="submit" name="submit" class="btn btn-primary" value="Update" />
                         </fieldset>
                     </form>

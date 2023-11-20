@@ -23,6 +23,7 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\InterestController;
 use App\Http\Controllers\InterpreterController;
 use App\Http\Controllers\LiasonsController;
+use App\Http\Controllers\MailOtpController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PlansController;
 use App\Http\Controllers\ProgramController;
@@ -88,6 +89,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/delegation', [DelegationsPageController::class, 'singleDelegation'])->name('pages.delegation');
         Route::get('/specificLiason', [LiasonsController::class, 'renderSpecificLiason'])->name('pages.renderSpecificLiason');
         Route::get('/specificLiasonsData/{id?}', [LiasonsController::class, 'specificLiasonsData'])->name('request.specificLiasonsData');
+        Route::get('/specificReceivingData/{id?}', [ReceivingController::class, 'specificReceivingData'])->name('request.specificReceivingData');
         Route::get('/userProfile/delegateProfile', [UserFullProfileController::class, 'renderDelegateProfile'])->name('pages.delegateProfile');
     });
 
@@ -230,8 +232,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'authorisedUserCheck'], function () {
         // Liason Start
         Route::get('/liasonSpecificProfile/{id}', [LiasonsController::class, 'specificLiasonsData'])->name('pages.liasonSpecificProfile');
-        Route::post('/updateLiasonRequest/{id}', [MemberController::class, 'updateLiasonRequest'])->name('request.updateLiasonRequest');
+        Route::post('/updateLiasonRequest/{id}', [LiasonsController::class, 'updateLiasonRequest'])->name('request.updateLiasonRequest');
         // Liason End
+        
+        // Receiving Start
+        Route::get('/specificReceivingData/{id?}', [ReceivingController::class, 'specificReceivingData'])->name('request.specificReceivingData');
+        Route::post('/updateReceivingRequest/{id}', [ReceivingController::class, 'updateReceivingRequest'])->name('request.updateReceivingRequest');
+        // Receiving End
+
+        // Interpreter Start
+        Route::get('/interpreterSpecificProfile/{id?}', [InterpreterController::class, 'specificInterpretersData'])->name('request.specificInterpretersData');
+        Route::post('/updateInterpreterRequest/{id}', [InterpreterController::class, 'updateInterpreterRequest'])->name('request.updateInterpreterRequest');
+        // Interpreter End
 
         // Members Start
         Route::get('/members/{id}', [MemberController::class, 'render'])->name('pages.members');
@@ -246,7 +258,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 });
 
-
+Route::get('/sendhtmlemail/{id}', [MailOtpController::class, 'html_email'])->name("request.emailModule");
 Route::post('signUpRequest', [SignUpController::class, 'signUp'])->name('request.signUp');
 Route::post('signInRequest', [SignInController::class, 'signIn'])->name('request.signIn');
 Route::post('activationRequest', [ActivationRequest::class, 'activation'])->name('request.activation');

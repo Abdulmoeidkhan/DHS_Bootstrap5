@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'name' => 'LaravelPWA',
+    'name' => 'DHSPWA',
     'manifest' => [
         'name' => env('APP_NAME', 'DHS'),
         'short_name' => 'DHS BXSS',
