@@ -259,6 +259,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::get('/sendhtmlemail/{id}', [MailOtpController::class, 'html_email'])->name("request.emailModule");
+Route::get('/invitation/{id}', [MailOtpController::class, 'printInvitation'])->name("pages.invitationPage");
 Route::post('signUpRequest', [SignUpController::class, 'signUp'])->name('request.signUp');
 Route::post('signInRequest', [SignInController::class, 'signIn'])->name('request.signIn');
 Route::post('activationRequest', [ActivationRequest::class, 'activation'])->name('request.activation');
