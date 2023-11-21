@@ -26,6 +26,7 @@ use App\Http\Controllers\LiasonsController;
 use App\Http\Controllers\MailOtpController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PlansController;
+use App\Http\Controllers\PrintInvitationController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\ReceivingController;
 use Illuminate\Support\Facades\Route;
@@ -234,7 +235,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/liasonSpecificProfile/{id}', [LiasonsController::class, 'specificLiasonsData'])->name('pages.liasonSpecificProfile');
         Route::post('/updateLiasonRequest/{id}', [LiasonsController::class, 'updateLiasonRequest'])->name('request.updateLiasonRequest');
         // Liason End
-        
+
         // Receiving Start
         Route::get('/specificReceivingData/{id?}', [ReceivingController::class, 'specificReceivingData'])->name('request.specificReceivingData');
         Route::post('/updateReceivingRequest/{id}', [ReceivingController::class, 'updateReceivingRequest'])->name('request.updateReceivingRequest');
@@ -243,6 +244,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Interpreter Start
         Route::get('/interpreterSpecificProfile/{id?}', [InterpreterController::class, 'specificInterpretersData'])->name('request.specificInterpretersData');
         Route::post('/updateInterpreterRequest/{id}', [InterpreterController::class, 'updateInterpreterRequest'])->name('request.updateInterpreterRequest');
+        Route::get('/renderSpecificInterpreter', [InterpreterController::class, 'renderSpecificInterpreter'])->name('pages.renderSpecificInterpreter');
         // Interpreter End
 
         // Members Start
@@ -256,10 +258,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/delegateProfile/{id}', [UserFullProfileController::class, 'renderSpeceficDelegateProfile'])->name('pages.renderSpeceficDelegateProfile');
         // Delegate End
     });
+    Route::get('/invitation/{id}', [PrintInvitationController::class, 'printInvitation'])->name("pages.invitationPage");
 });
 
 Route::get('/sendhtmlemail/{id}', [MailOtpController::class, 'html_email'])->name("request.emailModule");
-Route::get('/invitation/{id}', [MailOtpController::class, 'printInvitation'])->name("pages.invitationPage");
 Route::post('signUpRequest', [SignUpController::class, 'signUp'])->name('request.signUp');
 Route::post('signInRequest', [SignInController::class, 'signIn'])->name('request.signIn');
 Route::post('activationRequest', [ActivationRequest::class, 'activation'])->name('request.activation');

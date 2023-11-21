@@ -125,16 +125,6 @@
                     </a>
                 </li>
                 @endif
-                @if(session()->get('user')->roles[0]->name =="delegate")
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('pages.renderSpecificInterpreter')}}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-language"></i>
-                        </span>
-                        <span class="hide-menu">Interpreter</span>
-                    </a>
-                </li>
-                @endif
                 @if(session()->get('user')->roles[0]->name =="liason" || session()->get('user')->roles[0]->name =="receiving"|| session()->get('user')->roles[0]->name =="interpreter")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.delegationAssigned')}}" aria-expanded="false">

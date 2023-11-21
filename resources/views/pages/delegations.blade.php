@@ -131,6 +131,7 @@
                             <th data-field="created_at" data-sortable="true">Created At</th>
                             <th data-field="updated_at" data-sortable="true">Last Updated</th>
                             <th data-field="delegates_uid" data-formatter="operateFormatter">Profile</th>
+                            <th data-field="delegates_uid" data-formatter="operateInvitaion">Invitation</th>
                             <th data-field="delegates_uid" data-formatter="operateMember">Member</th>
                             <th data-field="liason_uid" data-formatter="operateLiason">Liason</th>
                             <th data-field="receiving_uid" data-formatter="operateReceiving">Receiving</th>
@@ -144,6 +145,20 @@
     </div>
 </div>
 <script>
+    function operateInvitaion(value, row, index) {
+        if (value) {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-outline-success" href="invitation/' + value + '">',
+                '<span>',
+                '<i class="ti ti-mail" style="font-size:24px;"></i>',
+                '</span>',
+                '</a>',
+                '</div>',
+            ].join('')
+        }
+    }
+
     function operateFormatter(value, row, index) {
         if (value) {
             return [
@@ -309,7 +324,7 @@
         const modalBodyInput = receivingModal.querySelector('.modal-body #delegationUid_receiving')
         modalBodyInput.value = delegation
     })
-    
+
     const operateModal = document.getElementById('OperateModal')
     operateModal.addEventListener('show.bs.modal', event => {
         const button = event.relatedTarget

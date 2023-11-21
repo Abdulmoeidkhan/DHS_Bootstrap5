@@ -38,7 +38,6 @@ class LiasonsController extends Controller
     {
         $delegationUid = Delegate::where('user_uid', session()->get('user')->uid)->first('delegation');
         $liason = Delegation::where('uid', $delegationUid->delegation)->first('liasons');
-        // return $liason;
         return view('pages.liason', ['delegationUid' => $delegationUid, 'liason' => $liason]);
     }
 
