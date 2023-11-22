@@ -126,8 +126,8 @@
                             <th data-field="last_Name" data-sortable="true">Last Name</th>
                             <th data-field="name" data-sortable="true">Invited By</th>
                             <th data-field="member_count" data-sortable="true">Number Of Person</th>
-                            <th data-field="liason_first_name" data-sortable="true">LO Name</th>
-                            <th data-field="liason_contact" data-sortable="true">LO Contact</th>
+                            <th data-field="liason_first_name" data-sortable="true">Officer Name</th>
+                            <th data-field="liason_contact" data-sortable="true">Officer Contact</th>
                             <th data-field="created_at" data-sortable="true">Created At</th>
                             <th data-field="updated_at" data-sortable="true">Last Updated</th>
                             <th data-field="delegates_uid" data-formatter="operateFormatter">Profile</th>

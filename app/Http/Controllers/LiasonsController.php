@@ -37,7 +37,7 @@ class LiasonsController extends Controller
     public function renderSpecificLiason()
     {
         $delegationUid = Delegate::where('user_uid', session()->get('user')->uid)->first('delegation');
-        $liason = Delegation::where('uid', $delegationUid->delegation)->first('liasons');
+        $liason = Delegation::where('uid', $delegationUid)->first('liasons');
         return view('pages.liason', ['delegationUid' => $delegationUid, 'liason' => $liason]);
     }
 
@@ -46,14 +46,30 @@ class LiasonsController extends Controller
         return view('pages.addLiasons');
     }
 
-    public function liasonsData()
+    public function specificLiasonData($id)
     {
-        $delegations = DB::table('liasons')
+        $liasons = DB::table('liasons')
+            ->leftJoin('delegates', 'delegates.delegation', '=', 'liasons.liason_delegation')
+            ->leftJoin('delegations', 'delegations.uid', '=', 'liasons.liason_delegation')
+            ->where('liason_delegation', $id)
+            ->select('liasons.*', 'delegations.country', 'delegates.last_Name', 'delegates.first_Name')
+            ->get();
+        return $liasons;
+    }
+
+    public function liasonsData($id = null)
+    {
+        $liasons = $id ? DB::table('liasons')
+            ->leftJoin('delegates', 'delegates.delegation', '=', 'liasons.liason_delegation')
+            ->leftJoin('delegations', 'delegations.uid', '=', 'liasons.liason_delegation')
+            ->where('liason_delegation', $id)
+            ->select('liasons.*', 'delegations.country', 'delegates.last_Name', 'delegates.first_Name')
+            ->get() : DB::table('liasons')
             ->leftJoin('delegates', 'delegates.delegation', '=', 'liasons.liason_delegation')
             ->leftJoin('delegations', 'delegations.uid', '=', 'liasons.liason_delegation')
             ->select('liasons.*', 'delegations.country', 'delegates.last_Name', 'delegates.first_Name')
             ->get();
-        return $delegations;
+        return $liasons;
     }
 
     public function specificLiasonsData($id = null)
@@ -65,7 +81,7 @@ class LiasonsController extends Controller
             ->orWhere('liasons.liason_officer', $id)
             ->select('liasons.*', 'delegations.country', 'delegates.last_Name', 'delegates.first_Name')
             ->first() : null;
-        $liason->image = $id ? Image::where('uid', $liason->liason_officer)->first() : 'null';
+        $liason->image = $id && $liason->liason_officer ? Image::where('uid', $liason->liason_officer)->first() : 'null';
         // return $liason;
         return view('pages.liasonProfile', ['liason' => $liason]);
     }
@@ -116,7 +132,7 @@ class LiasonsController extends Controller
     public function attachLiason(Request $req)
     {
         try {
-            $updateLiason = Liason::where('liason_uid', $req->liasonSelect)->update(['liason_delegation' => $req->delegationUid, 'liason_assign' => 1]);
+            $updateLiason = Liason::where('liason_uid', $req->liasonSelect)->update(['liason_delegation' => $req->delegationUid_liason, 'liason_assign' => 1]);
             if ($updateLiason) {
                 // $updateDelegation = Delegation::where('uid', $req->delegationUid)->update(['liasons' => $req->liasonSelect]);
                 return back()->with('message', 'Liason has been attach Successfully');

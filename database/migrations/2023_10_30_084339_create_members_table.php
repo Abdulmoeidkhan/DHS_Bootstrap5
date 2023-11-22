@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('member_designation');
             $table->string('member_organistaion');
             $table->string('member_rank');
+            $table->integer('invitation_number')->unique();
             $table->string('member_passport')->nullable();
             $table->integer('member_status')->default(1);
             $table->uuid('accomodated')->nullable();

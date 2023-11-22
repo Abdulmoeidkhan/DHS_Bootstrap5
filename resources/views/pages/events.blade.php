@@ -11,9 +11,9 @@
     @endif
     <div class="row mt-5">
         <ul class="nav nav-pills mb-3 d-flex justify-content-center" id="pills-tab" role="tablist">
-            <li class="nav-item mx-2" role="presentation">
+            <!-- <li class="nav-item mx-2" role="presentation">
                 <button class="btn btn-outline-primary active" id="current-event" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Upcoming</button>
-            </li>
+            </li> -->
             <li class="nav-item mx-2" role="presentation">
                 <button class="btn btn-outline-warning" id="past-event" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Past</button>
             </li>

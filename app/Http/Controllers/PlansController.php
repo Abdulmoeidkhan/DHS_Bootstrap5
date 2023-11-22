@@ -17,6 +17,7 @@ class PlansController extends Controller
         $carPlan = DB::table('car_plans')
         ->leftJoin('car_category', 'car_category.car_category_uid', '=', 'car_plans.car_category_uid')
         ->select('car_plans.*', 'car_category.car_category')
+        ->where('delegation_uid',$id)
         ->get();
         return $carPlan;
     }

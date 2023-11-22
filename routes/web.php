@@ -16,6 +16,7 @@ use App\Http\Controllers\DelegationsPageController;
 use App\Http\Controllers\AddDelegationPageController;
 use App\Http\Controllers\AddVipsController;
 use App\Http\Controllers\ActivateProfileController;
+use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\CarsController;
 use App\Http\Controllers\DoucmentController;
 use App\Http\Controllers\FlightsController;
@@ -89,7 +90,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Route::get('/members', [MemberController::class, 'render'])->name('pages.members');
         Route::get('/delegation', [DelegationsPageController::class, 'singleDelegation'])->name('pages.delegation');
         Route::get('/specificLiason', [LiasonsController::class, 'renderSpecificLiason'])->name('pages.renderSpecificLiason');
-        Route::get('/specificLiasonsData/{id?}', [LiasonsController::class, 'specificLiasonsData'])->name('request.specificLiasonsData');
+        Route::get('/specificLiasonData/{id}', [LiasonsController::class, 'specificLiasonData'])->name('request.specificLiasonData');
         Route::get('/specificReceivingData/{id?}', [ReceivingController::class, 'specificReceivingData'])->name('request.specificReceivingData');
         Route::get('/userProfile/delegateProfile', [UserFullProfileController::class, 'renderDelegateProfile'])->name('pages.delegateProfile');
     });
@@ -210,14 +211,17 @@ Route::group(['middleware' => 'auth'], function () {
         // Route::post('/attachLiason', [LiasonsController::class, 'attachLiason'])->name('request.attachLiason');
         // Program Page And API End
 
-        // Program Page And API Start
-        Route::get('/getInterests/{id?}', [InterestController::class, 'getInterests'])->name('request.getInterests');
-        Route::post('/setInterests/{id?}', [InterestController::class, 'setInterests'])->name('request.setInterests');
-        // Program Page And API End
-
         // VIPS Page And API Start
         Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');
         // VIPS Page And API End
+
+        // Badge Page And API Start
+        Route::get('/badges', [BadgeController::class, 'renderBadges'])->name('pages.badges');
+        // Route::get('/receivingsData', [BadgeController::class, 'receivingsData'])->name('request.receivingsData');
+        // Route::post('/addReceiving', [BadgeController::class, 'addReceiving'])->name('request.addReceiving');
+        // Route::get('/addReceivingPages', [BadgeController::class, 'addReceivingPage'])->name('pages.addReceivings');
+        // Route::post('/attachReceiving', [BadgeController::class, 'attachReceiving'])->name('request.attachReceiving');
+        // Badge Page And API End
 
         Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');
         Route::get('/userPanel', [UserPanelController::class, 'renderView'])->name("pages.userPanel");
@@ -246,6 +250,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/updateInterpreterRequest/{id}', [InterpreterController::class, 'updateInterpreterRequest'])->name('request.updateInterpreterRequest');
         Route::get('/renderSpecificInterpreter', [InterpreterController::class, 'renderSpecificInterpreter'])->name('pages.renderSpecificInterpreter');
         // Interpreter End
+
+        // Program Page And API Start
+        Route::get('/getInterests/{id?}', [InterestController::class, 'getInterests'])->name('request.getInterests');
+        Route::post('/setInterests/{id?}', [InterestController::class, 'setInterests'])->name('request.setInterests');
+        // Program Page And API End
 
         // Members Start
         Route::get('/members/{id}', [MemberController::class, 'render'])->name('pages.members');

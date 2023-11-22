@@ -12,6 +12,17 @@
                             <legend>Add Members Form</legend>
                             @csrf
                             <div class="mb-3">
+                                <!-- <label for="rank" class="form-label">Rank</label>
+                                <input name="rank" type="text" class="form-control" id="rank" placeholder="Rank" required> -->
+                                <label for="rank" class="form-label">Rank</label>
+                                <select name="rank" id="rank" class="form-select">
+                                    <option value="" selected disabled hidden> Select Rank </option>
+                                    @foreach (\App\Models\Rank::all() as $renderRank)
+                                    <option value="{{$renderRank->ranks_uid}}">{{$renderRank->ranks_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <label for="firstName" class="form-label">First Name</label>
                                 <input name="firstName" type="text" class="form-control" id="firstName" placeholder="First Name" required>
                             </div>
@@ -26,17 +37,6 @@
                             <div class="mb-3">
                                 <label for="organistaion" class="form-label">Organisation</label>
                                 <input name="organistaion" type="text" class="form-control" id="organistaion" placeholder="Organisation" required>
-                            </div>
-                            <div class="mb-3">
-                                <!-- <label for="rank" class="form-label">Rank</label>
-                                <input name="rank" type="text" class="form-control" id="rank" placeholder="Rank" required> -->
-                                <label for="rank" class="form-label">Rank</label>
-                                <select name="rank" id="rank" class="form-select">
-                                    <option value="" selected disabled hidden> Select Rank </option>
-                                    @foreach (\App\Models\Rank::all() as $renderRank)
-                                    <option value="{{$renderRank->ranks_uid}}">{{$renderRank->ranks_name}}</option>
-                                    @endforeach
-                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="passport" class="form-label">Passport</label>

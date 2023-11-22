@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('itinerary_uid')->nullable();
             $table->string('rep_last_Name')->nullable();
             $table->string('rep_first_Name')->nullable();
+            $table->integer('invitation_number')->unique();
             $table->uuid('accomodated')->nullable();
             $table->uuid('car_accomodated')->nullable();
             // $table->foreign('user_uid')->references('uid')->on('users')

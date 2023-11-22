@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Delegate;
 use App\Models\Delegation;
 use App\Models\Interpreter;
 use App\Models\Liason;
@@ -20,7 +21,7 @@ class DelegationsPageController extends Controller
             ->leftJoin('liasons', 'delegations.uid', '=', 'liasons.liason_delegation')
             ->leftJoin('receivings', 'delegations.uid', '=', 'receivings.receiving_delegation')
             ->leftJoin('interpreters', 'delegations.uid', '=', 'interpreters.interpreter_delegation')
-            ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.self', 'delegates.delegates_uid', 'vips.name', 'liasons.liason_uid', 'receivings.receiving_uid', 'interpreters.interpreter_uid')
+            ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.self', 'delegates.delegates_uid', 'vips.name', 'liasons.liason_uid','liasons.liason_contact','liasons.liason_first_name', 'receivings.receiving_uid', 'interpreters.interpreter_uid')
             ->orderBy('delegations.country', 'asc')
             ->get();
         foreach ($delegations as $key => $delegation) {
@@ -38,7 +39,8 @@ class DelegationsPageController extends Controller
     }
     public function singleDelegation()
     {
-        $delegation = Delegation::where('delegates', session()->get('user')->uid)->first();
+        $delegate = Delegate::where('user_uid', session()->get('user')->uid)->first();
+        $delegation = Delegation::where('delegates', $delegate->delegates_uid)->first();
         $delegation->vip = Vips::where('uid', $delegation->invited_by)->first();
         return view('pages.delegation', ['delegation' => $delegation]);
     }

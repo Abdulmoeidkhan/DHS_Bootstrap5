@@ -16,6 +16,10 @@
             </select>
         </div>
         <div class="mb-3">
+            <label for="rank" class="col-form-label">Rank:</label>
+            <input type="text" class="form-control" wire:model="rank" id="rank">
+        </div>
+        <div class="mb-3">
             <label for="countryInput">Select Country</label>
             <select class="form-select" aria-label="Country Name" id="countryInput" wire:model="country" required>
                 <option value="" selected disabled hidden> Select Country </option>
@@ -217,10 +221,7 @@
             <label for="designation" class="col-form-label">Designation:</label>
             <input type="text" class="form-control" wire:model="designation" id="designation">
         </div>
-        <div class="mb-3">
-            <label for="rank" class="col-form-label">Rank:</label>
-            <input type="text" class="form-control" wire:model="rank" id="rank">
-        </div>
+        
         <div class="mb-3">
             <label for="fName" class="col-form-label">First Name:</label>
             <input type="text" class="form-control" wire:model="firstName" id='firstName'>

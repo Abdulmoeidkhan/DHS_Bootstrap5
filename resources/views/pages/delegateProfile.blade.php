@@ -52,6 +52,16 @@
                             <legend>Delegate Information</legend>
                             @csrf
                             <div class="mb-3">
+                                <label for="rank" class="form-label">Rank</label>
+                                <select name="rank" id="rank" class="form-select">
+                                    <option value="" selected disabled hidden> Select Rank </option>
+                                    @foreach (\App\Models\Rank::all() as $renderRank)
+                                    <option value="{{$renderRank->ranks_uid}}" <?php echo $delegate->rank == $renderRank->ranks_uid ? 'selected' : '' ?>>{{$renderRank->ranks_name}}</option>
+                                    @endforeach
+                                </select>
+                                <!-- <input name="rank" type="text" class="form-control" id="rank" placeholder="Rank" value="{{$delegate->rank}}"> -->
+                            </div>
+                            <div class="mb-3">
                                 <label for="first_Name" class="form-label">Delegate First Name</label>
                                 <input name="first_Name" type="text" class="form-control" id="first_Name" placeholder="First Name" value="{{$delegate->first_Name}}" required>
                             </div>
@@ -269,16 +279,7 @@
                                 <label for="passport" class="form-label">Passport</label>
                                 <input name="passport" type="text" class="form-control" id="passport" placeholder="Passport" value="{{$delegate->passport}}">
                             </div>
-                            <div class="mb-3">
-                                <label for="rank" class="form-label">Rank</label>
-                                <select name="rank" id="rank" class="form-select">
-                                    <option value="" selected disabled hidden> Select Rank </option>
-                                    @foreach (\App\Models\Rank::all() as $renderRank)
-                                    <option value="{{$renderRank->ranks_uid}}" <?php echo $delegate->rank == $renderRank->ranks_uid ? 'selected' : '' ?>>{{$renderRank->ranks_name}}</option>
-                                    @endforeach
-                                </select>
-                                <!-- <input name="rank" type="text" class="form-control" id="rank" placeholder="Rank" value="{{$delegate->rank}}"> -->
-                            </div>
+
                             <div class="mb-3">
                                 <input class="form-check-input" type="radio" name="self" id="self" value="1" <?php echo $delegate->self ? 'checked' : '' ?>>
                                 <label class="form-check-label" for="self">

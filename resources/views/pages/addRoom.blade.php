@@ -29,7 +29,7 @@
                                 <select class="form-select" aria-label="Hotel Name" id="hotel_uid" name="hotel_uid" required>
                                     <option value="" selected disabled hidden> Select Hotel</option>
                                     @foreach($hotels as $key=>$hotel)
-                                    @if(!empty($hotel) && $selectedRoom->hotel_uid === $hotel->hotel_uid)
+                                    @if(!empty($hotel) && !empty($selectedRoom) && $selectedRoom->hotel_uid === $hotel->hotel_uid)
                                     <option value="{{$hotel->hotel_uid}}" selected> {{$hotel->hotel_names}}</option>
                                     @else
                                     <option value="{{$hotel->hotel_uid}}"> {{$hotel->hotel_names}}</option>

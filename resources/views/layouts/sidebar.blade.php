@@ -27,14 +27,6 @@
                         <span class="hide-menu">Dashboard</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('pages.events')}}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-calendar-event"></i>
-                        </span>
-                        <span class="hide-menu">Events</span>
-                    </a>
-                </li>
                 @if(session()->get('user')->roles[0]->name =="admin")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.userPanel')}}" aria-expanded="false">
@@ -165,6 +157,24 @@
                     </a>
                 </li>
                 @endif
+                @if(session()->get('user')->roles[0]->name =="admin")
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.badges')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-id-badge-2"></i>
+                        </span>
+                        <span class="hide-menu">Badges</span>
+                    </a>
+                </li>
+                @endif
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.events')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-calendar-event"></i>
+                        </span>
+                        <span class="hide-menu">Events</span>
+                    </a>
+                </li>
             </ul>
             <!-- <ul id="sidebarnav">
                 <li class="nav-small-cap">

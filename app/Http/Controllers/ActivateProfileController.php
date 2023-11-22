@@ -21,15 +21,14 @@ class ActivateProfileController extends Controller
 {
     protected function activateDelegate($recievedParams)
     {
-        $delegationUid = Delegation::where([['delegationCode', $recievedParams->activationCode . ''], ['delegates', null]])->first();
+        $delegationUid = Delegation::where([['delegationCode', $recievedParams->activationCode . '']])->first();
         if ($delegationUid) {
-            $delegate = new Delegate();
-            // $delegate->uid = (string) Str::uuid();
-            $delegate->user_uid = $recievedParams->uid;
-            $delegate->delegation = $delegationUid->uid;
+            // $delegate = new Delegate();
+            // $delegate->user_uid = $recievedParams->uid;
+            // $delegate->delegation = $delegationUid->uid;
             try {
-                $savedDelegate = $delegate->save();
-                $updatesDone = $savedDelegate ? Delegation::where('delegationCode', $recievedParams->activationCode . '')->update(['delegates' => $recievedParams->uid, 'delegation_response' => 'Accepted']) : false;
+                $savedDelegate = Delegate::where('delegates_uid', $delegationUid->delegates)->update(['user_uid' => $recievedParams->uid]) ;
+                $updatesDone = $savedDelegate ? Delegation::where('delegationCode', $recievedParams->activationCode . '')->update(['delegation_response' => 'Accepted']) : false;
                 $rolesAndPermissionGiven = $updatesDone ? $this->delegationRolesAndTeams($recievedParams->uid) : false;
                 return $rolesAndPermissionGiven;
             } catch (\Illuminate\Database\QueryException $exception) {
