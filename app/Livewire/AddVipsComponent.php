@@ -17,10 +17,10 @@ class AddVipsComponent extends Component
     public function save()
     {
         $vip = new Vips();
-        $vip->uid = (string) Str::uuid();
-        $vip->rank = $this->rank;
-        $vip->name = $this->name;
-        $vip->designation = $this->designation;
+        $vip->vips_uid = (string) Str::uuid();
+        $vip->vips_rank = $this->rank;
+        $vip->vips_name = $this->name;
+        $vip->vips_designation = $this->designation;
         $this->savedvip = $vip->save();
         // Vips::create(
         //     $this->only(['name', 'designation','rank','uid'])

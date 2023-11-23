@@ -7,6 +7,17 @@
         <div class="col-md-8 col-lg-6 col-xxl-3">
           <div class="card mb-0">
             <div class="card-body">
+              @if(session('error'))
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div>{{session('error')}}</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              @elseif(session('message'))
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <div>{{session('message')}}</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              @endif
               <a href="{{route('pages.dashboard')}}" class="text-nowrap logo-img text-center d-block py-3 w-100">
                 <img src="{{asset('images/icons/Badar-Logo-Black.png')}}" width="180" alt="">
               </a>
@@ -46,4 +57,4 @@
       </div>
     </div>
   </div>
-@endsection
+  @endsection

@@ -15,7 +15,7 @@
                 <form action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ?route('request.imageUpload'):''}}" method="post" enctype="multipart/form-data">
                     <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
                         <div class="input-group">
-                            <input type="hidden" value="{{$delegate->uid}}" name="id" />
+                            <input type="hidden" value="{{$delegate->delegates_uid}}" name="id" />
                             <input type="file" class="form-control" id="uploadFile" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="image" accept="image/png, image/jpeg" required>
                             <button class="btn btn-outline-danger" type="submit">Upload</button>
                         </div>
@@ -62,14 +62,14 @@
                                 <!-- <input name="rank" type="text" class="form-control" id="rank" placeholder="Rank" value="{{$delegate->rank}}"> -->
                             </div>
                             <div class="mb-3">
-                                <label for="first_Name" class="form-label">Delegate First Name</label>
+                                <label for="first_Name" class="form-label">First Name</label>
                                 <input name="first_Name" type="text" class="form-control" id="first_Name" placeholder="First Name" value="{{$delegate->first_Name}}" required>
                             </div>
                             <div class="mb-3">
-                                <label for="last_Name" class="form-label">Delegate Last Name</label>
+                                <label for="last_Name" class="form-label">Last Name</label>
                                 <input name="last_Name" type="text" class="form-control" id="last_Name" placeholder="Last Name" value="{{$delegate->last_Name}}" required>
                             </div>
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label for="country">Select Country</label>
                                 <select class="form-select" aria-label="Country Name" id="country" name="country" required>
                                     <option value="" <?php echo $delegate->country ? '' : 'selected'; ?> disabled hidden> Select Country </option>
@@ -266,15 +266,15 @@
                                     <option value="Zambia"> Zambia </option>
                                     <option value="Zimbabwe"> Zimbabwe </option>
                                 </select>
-                            </div>
+                            </div> -->
                             <div class="mb-3">
                                 <label for="designation" class="form-label">Designation</label>
                                 <input name="designation" type="text" class="form-control" id="designation" placeholder="Designation" value="{{$delegate->designation}}" required>
                             </div>
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label for="organistaion" class="form-label">Organistaion</label>
                                 <input name="organistaion" type="text" class="form-control" id="organistaion" placeholder="Organistaion" value="{{$delegate->organistaion}}" required>
-                            </div>
+                            </div> -->
                             <div class="mb-3">
                                 <label for="passport" class="form-label">Passport</label>
                                 <input name="passport" type="text" class="form-control" id="passport" placeholder="Passport" value="{{$delegate->passport}}">

@@ -7,6 +7,7 @@ use App\Models\Delegation;
 use App\Models\Interpreter;
 use App\Models\Liason;
 use App\Models\Member;
+use App\Models\Rank;
 use App\Models\Receiving;
 use App\Models\Vips;
 use Illuminate\Support\Facades\DB;
@@ -17,16 +18,20 @@ class DelegationsPageController extends Controller
     {
         $delegations = DB::table('delegations')
             ->leftJoin('delegates', 'delegations.uid', '=', 'delegates.delegation')
-            ->leftJoin('vips', 'delegations.invited_by', '=', 'vips.uid')
+            ->leftJoin('vips', 'delegations.invited_by', '=', 'vips.vips_uid')
             ->leftJoin('liasons', 'delegations.uid', '=', 'liasons.liason_delegation')
             ->leftJoin('receivings', 'delegations.uid', '=', 'receivings.receiving_delegation')
             ->leftJoin('interpreters', 'delegations.uid', '=', 'interpreters.interpreter_delegation')
-            ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.self', 'delegates.delegates_uid', 'vips.name', 'liasons.liason_uid','liasons.liason_contact','liasons.liason_first_name', 'receivings.receiving_uid', 'interpreters.interpreter_uid')
+            ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name','delegates.rank', 'delegates.self', 'delegates.delegates_uid', 'vips.vips_name', 'vips.vips_rank', 'liasons.liason_uid','liasons.liason_contact','liasons.liason_first_name','liasons.liason_last_name', 'receivings.receiving_uid', 'interpreters.interpreter_uid')
             ->orderBy('delegations.country', 'asc')
             ->get();
         foreach ($delegations as $key => $delegation) {
+            // $delegations[$key]->
             $delegations[$key]->member_count = Member::where('delegation', $delegation->uid)->count();
-            $delegations[$key]->member_count = $delegations[$key]->member_count ? $delegations[$key]->member_count + 1 : 0;
+            $delegations[$key]->rankName = Rank::where('ranks_uid', $delegation->rank)->first('ranks_name');
+            $delegations[$key]->invitedByRankName = Rank::where('ranks_uid', $delegation->vips_rank)->first('ranks_name');
+            $delegations[$key]->invitedByName=$delegations[$key]->invitedByRankName->ranks_name ." ". $delegations[$key]->vips_name;
+            $delegations[$key]->member_count = $delegations[$key]->member_count ? $delegations[$key]->member_count + 1 : 1;
         }
         return $delegations;
     }

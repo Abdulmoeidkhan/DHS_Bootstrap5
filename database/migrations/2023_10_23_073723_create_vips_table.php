@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('vips', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uid')->unique();
-            $table->string('name');
-            $table->uuid('rank');
-            $table->string('designation');
-            $table->integer('status')->default(1);
+            $table->uuid('vips_uid')->unique();
+            $table->string('vips_name');
+            $table->uuid('vips_rank');
+            $table->string('vips_designation');
+            $table->integer('vips_status')->default(1);
             $table->timestamps();
         });
     }

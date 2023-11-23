@@ -4,7 +4,7 @@
         <fieldset>
             <legend>Add Hotel Plan Form</legend>
             <div class="mb-3">
-                <label for="hotel_quantity" class="col-form-label">Hotel Quantity:</label>
+                <label for="hotel_quantity" class="col-form-label">Room Quantity:</label>
                 <input type="number" class="form-control" wire:model="hotelQuantity">
             </div>
             <div class="mb-3">
