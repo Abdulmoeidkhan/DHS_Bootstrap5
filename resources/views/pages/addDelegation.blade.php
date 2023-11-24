@@ -47,10 +47,10 @@
                 <div class="table-responsive">
                     <form name="delegationBasicInfo" id="delegationBasicInfo" method="POST" action="{{route('request.addDelegationRequest')}}" enctype="multipart/form-data">
                         <fieldset>
-                            <legend>Add Delegation Form</legend>
+                            <legend>Add Invitaion Details</legend>
                             @csrf
                             <div class="mb-3">
-                                <label for="countryInput">Select Country</label>
+                                <label for="countryInput" class="form-label">Select Country</label>
                                 <select class="form-select" aria-label="Country Name" id="countryInput" name="country" required>
                                     <option value="Afghanistan"> Afghanistan </option>
                                     <option value="Albania"> Albania </option>
@@ -251,6 +251,14 @@
                                 <label for="address" class="form-label">Address</label>
                                 <textarea name="address" class="form-control" id="address" placeholder="Address"></textarea>
                             </div>
+                            <div class="mb-3">
+                                <label for="delegation_response" class="form-label">Delegation Response</label>
+                                <select class="form-select" aria-label="Delegation Response" id="delegation_response" name="delegation_response" required>
+                                    <option value="Awaited"> Awaited </option>
+                                    <option value="Accepted"> Accepted </option>
+                                    <option value="Regretted"> Regretted </option>
+                                </select>
+                            </div>
                             <!-- <div class="mb-3">
                                 <label for="first_name" class="form-label">First Name</label>
                                 <input name="first_name" class="form-control" id="first_name" placeholder="First Name" />
@@ -273,11 +281,32 @@
                             </div> -->
                             <div class="mb-3">
                                 <label for="eventSelect" class="form-label">Event Name</label>
-                                <select class="form-select" aria-label="Event Name" id="eventSelect" name="eventSelect" required>
+                                <select class="form-select" aria-label="Event Name" id="eventSelect" name="eventSelect" required disabled>
                                     @foreach($events as $event)
                                     <option value="{{$event->name}}"> {{$event->name}} </option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="rank" class="form-label">Rank</label>
+                                <select name="rank" id="rank" class="form-select">
+                                    <option value="" selected disabled hidden> Select Rank </option>
+                                    @foreach (\App\Models\Rank::all() as $renderRank)
+                                    <option value="{{$renderRank->ranks_uid}}">{{$renderRank->ranks_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="first_Name" class="form-label">First Name</label>
+                                <input name="first_Name" type="text" class="form-control" id="first_Name" placeholder="First Name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="last_Name" class="form-label">Last Name</label>
+                                <input name="last_Name" type="text" class="form-control" id="last_Name" placeholder="Last Name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="designation" class="form-label">Designation</label>
+                                <input name="designation" type="text" class="form-control" id="designation" placeholder="Designation" required>
                             </div>
                             <input type="submit" name="submit" class="btn btn-primary" value="Add Delegation" />
                         </fieldset>

@@ -27,10 +27,10 @@ return new class extends Migration
             $table->uuid('delegates')->unique()->nullable();
             // $table->uuid('liasons')->unique()->nullable();
             $table->timestamps();
-            $table->foreign('invited_by')->references('uid')->on('vips')
-            ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('liasons')->references('liasons')->on('liason_uid')
-            ->onUpdate('cascade')->onDelete('cascade');
+            // $table->foreign('invited_by')->references('vips_uid')->on('vips')
+            // ->onUpdate('cascade')->onDelete('cascade');
+            // $table->foreign('liasons')->references('liasons')->on('liason_uid')
+            // ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

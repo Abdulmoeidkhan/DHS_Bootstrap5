@@ -115,13 +115,13 @@
                 <table id="table"  data-auto-refresh-interval="60" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates')}}">
                     <thead>
                         <tr>
-                            <th data-field="id">Id</th>
+                            <th data-field="SNO" data-formatter="operateSerial">S.No.</th>
                             <th data-field="country" data-sortable="true">Country</th>
                             <th data-field="rankName.ranks_name" data-sortable="true">Rank</th>
                             <th data-field="first_Name" data-sortable="true">First Name</th>
                             <th data-field="last_Name" data-sortable="true">Last Name</th>
                             <th data-field="designation" data-sortable="true">Designation</th>
-                            <th data-field="invitedByName" data-sortable="true">Invited By</th>
+                            <th data-field="vips_name" data-sortable="true">Invited By</th>
                             <th data-field="delegation_response" data-sortable="true">Response</th>
                             <th data-field="self" data-formatter="operateSelf">Self</th>
                             <th data-field="member_count" data-sortable="true">Number Of Person</th>
@@ -309,6 +309,9 @@
 
     function operateSelf(value, row, index) {
         return !value ? 'Rep' : 'Self';
+    }
+    function operateSerial(value, row, index) {
+        return index+1;
     }
 
     const exampleModal = document.getElementById('LiasonModal')

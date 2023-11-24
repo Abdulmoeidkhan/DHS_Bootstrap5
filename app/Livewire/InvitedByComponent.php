@@ -13,7 +13,7 @@ class InvitedByComponent extends Component
     #[On('vipchanged')]
     public function render()
     {
-        $this->vips = Vips::where('status',1)->get();
+        $this->vips = Vips::where('vips_status',1)->get();
         return view('livewire.invited-by-component');
     }
 }

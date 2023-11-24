@@ -23,7 +23,7 @@ class ActivationRequest extends Controller
                 if ($user->activation_code == $req->activationCode) {
                     $activated = User::where("id", $user->id)->update(['activated' => 1]);
                     Auth::logout();
-                    return $activated ? redirect()->route('signIn')->with('error', 'Profile has been activated') : back()->with('error', 'Something Went Wrong');
+                    return $activated ? redirect()->route('signIn')->with('message', 'Profile has been activated') : back()->with('error', 'Something Went Wrong');
                 } else {
                     Auth::logout();
                     return back()->with('error', 'Activation Code is not correct');

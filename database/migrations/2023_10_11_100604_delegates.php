@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->uuid('delegates_uid')->unique();
-            $table->string('rank')->nullable();
+            $table->uuid('rank')->nullable();
             $table->uuid('user_uid')->nullable()->unique();
             $table->integer('self')->default(1);
             $table->uuid('rep_uid')->nullable();
@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('itinerary_uid')->nullable();
             $table->string('rep_last_Name')->nullable();
             $table->string('rep_first_Name')->nullable();
-            $table->integer('invitation_number')->unique();
+            $table->integer('invitation_number')->nullable()->unique();
             $table->uuid('accomodated')->nullable();
             $table->uuid('car_accomodated')->nullable();
             // $table->foreign('user_uid')->references('uid')->on('users')
