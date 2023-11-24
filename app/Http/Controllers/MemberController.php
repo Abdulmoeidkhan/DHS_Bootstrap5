@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Delegate;
 use App\Models\Document;
 use App\Models\Rank;
 
@@ -50,14 +51,13 @@ class MemberController extends Controller
 
     public function membersData(Request $req, $id)
     {
-        // return $id;
-        $delegationUid = Delegation::where('delegates', $id)->orWhere('uid', $id)->first('uid');
-        $members = DB::table('members')
-            ->leftJoin('delegates', 'delegates.delegation', '=', 'members.delegation')
-            ->where('members.delegation', $delegationUid->uid)
-            ->select('members.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.country')
-            ->get();
-        return $members;
+        $delegation = Delegation::where('uid', $id)->first();
+        $delegates = Delegate::where('delegation', $delegation->uid)->get();
+        foreach ($delegates as $key => $delegate) {
+            $delegates[$key]->head = $delegate->delegates_uid == $delegation->delegationhead ? "Head" : "Member";
+            $delegates[$key]->rankName = Rank::where('ranks_uid', $delegate->rank)->first('ranks_name');
+        }
+        return $delegates;
     }
     public function specificMembersData(Request $req, $id)
     {
@@ -72,20 +72,21 @@ class MemberController extends Controller
 
     public function addMemberRequest(Request $req)
     {
-        $delegationUid = Delegation::where('delegates', $req->delegation)->orWhere('uid', $req->delegation)->first('uid');
-        $member = new Member();
-        $member->member_uid = (string) Str::uuid();
-        $member->delegation = $delegationUid->uid;
-        $member->member_first_Name = $req->firstName;
-        $member->member_last_Name = $req->lastName;
-        $member->member_designation = $req->designation;
-        $member->member_organistaion = $req->organistaion;
-        $member->member_rank = $req->rank;
-        $member->member_passport = $req->passport;
+        $delegationUid = Delegation::where('uid', $req->delegation)->first('uid');
+        $delegate = new Delegate();
+        $delegate->delegates_uid = (string) Str::uuid();
+        $delegate->rank = $req->rank;
+        $delegate->delegation = $delegationUid->uid;
+        $delegate->first_Name = $req->firstName;
+        $delegate->last_Name = $req->lastName;
+        $delegate->designation = $req->designation;
+        $delegate->organistaion = $req->organistaion;
+        $delegate->passport = $req->passport;
+        $delegate->delegation_type = $req->delegation_type;
         try {
-            $savedMember = $member->save();
-            $this->imageUpload($req->file('picture'), $member->member_uid);
-            $this->documentUpload($req->file('pdf'), $member->member_uid);
+            $savedMember = $delegate->save();
+            $req->file('picture') ? $this->imageUpload($req->file('picture'), $delegate->member_uid) : '';
+            $req->file('pdf') ? $this->documentUpload($req->file('pdf'), $delegate->member_uid) : '';
             if ($savedMember) {
                 return redirect()->route("pages.addMember", $req->delegation)->with('message', 'Member Updated Successfully');
             }

@@ -44,13 +44,14 @@
                             </div>
                             <div class="mb-3">
                                 <label for="picture" class="form-label">Picture</label>
-                                <input name="picture" type="file" class="form-control" id="picture" accept="image/png, image/jpeg" required>
+                                <input name="picture" type="file" class="form-control" id="picture" accept="image/png, image/jpeg" >
                             </div>
                             <div class="mb-3">
                                 <label for="pdf" class="form-label">Document</label>
-                                <input name="pdf" type="file" class="form-control" id="pdf" accept="application/pdf" required>
+                                <input name="pdf" type="file" class="form-control" id="pdf" accept="application/pdf" >
                             </div>
-                            <input name="delegation" type="hidden" id="delegation" value="{{$id}}" required>
+                            <input name="delegation" type="hidden" id="delegation" value="{{$id}}" required> 
+                            <input name="delegation_type" type="hidden" id="delegation_type" value="Member" required> 
                             <input type="submit" name="submit" class="btn btn-primary" value="Add Member" />
                         </fieldset>
                     </form>

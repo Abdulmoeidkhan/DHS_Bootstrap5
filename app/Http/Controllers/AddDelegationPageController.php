@@ -35,7 +35,11 @@ class AddDelegationPageController extends Controller
 
         $delegates = new Delegate();
         $delegates->delegates_uid = (string) Str::uuid();
-        $delegates->country = $req->country;
+        $delegates->rank = $req->rank;
+        $delegates->delegation_type = 'Delegate';
+        $delegates->first_Name = $req->first_Name;
+        $delegates->last_Name = $req->last_Name;
+        $delegates->designation = $req->designation;
         $delegates->self = 1;
 
 
@@ -46,7 +50,7 @@ class AddDelegationPageController extends Controller
         $delegation->address = $req->address;
         $delegation->exhibition = $req->eventSelect;
         $delegation->delegationCode = $this->badge(8, "DL");
-        $delegation->delegates = $delegates->delegates_uid;
+        $delegation->delegationhead = $delegates->delegates_uid;
 
 
         $delegates->delegation = $delegation->uid;

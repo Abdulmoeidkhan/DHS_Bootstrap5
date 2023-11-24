@@ -17,7 +17,7 @@ class DelegationsPageController extends Controller
     public function delegationData()
     {
         $delegations = DB::table('delegations')
-            ->leftJoin('delegates', 'delegations.uid', '=', 'delegates.delegation')
+            ->leftJoin('delegates', 'delegates.delegates_uid', '=', 'delegations.delegationhead')
             ->leftJoin('vips', 'delegations.invited_by', '=', 'vips.vips_uid')
             ->leftJoin('liasons', 'delegations.uid', '=', 'liasons.liason_delegation')
             ->leftJoin('receivings', 'delegations.uid', '=', 'receivings.receiving_delegation')
