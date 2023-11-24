@@ -16,9 +16,8 @@ return new class extends Migration
             $table->timestamps();
             $table->uuid('delegates_uid')->unique();
             $table->uuid('rank')->nullable();
-            $table->uuid('user_uid')->nullable()->unique();
             $table->integer('self')->default(1);
-            $table->uuid('delegation')->unique();
+            $table->uuid('delegation');
             $table->integer('status')->default(1);
             $table->string('passport')->nullable();
             $table->string('delegation_type')->default('Member');
