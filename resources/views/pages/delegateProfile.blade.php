@@ -279,7 +279,6 @@
                                 <label for="passport" class="form-label">Passport</label>
                                 <input name="passport" type="text" class="form-control" id="passport" placeholder="Passport" value="{{$delegate->passport}}">
                             </div>
-
                             <div class="mb-3">
                                 <input class="form-check-input" type="radio" name="self" id="self" value="1" <?php echo $delegate->self ? 'checked' : '' ?>>
                                 <label class="form-check-label" for="self">

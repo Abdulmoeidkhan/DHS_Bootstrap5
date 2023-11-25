@@ -175,7 +175,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Plan Pages And API End
 
         // Member Pages And API Start
-        Route::get('/addMember/{id}', [MemberController::class, 'addMemberPage'])->name('pages.addMember');
+        Route::get('/members/addMember/{id}', [MemberController::class, 'addMemberPage'])->name('pages.addMember');
         Route::post('/addMemberRequest/{id}', [MemberController::class, 'addMemberRequest'])->name('request.addMemberRequest');
         // Member Pages And API End
 
@@ -229,7 +229,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/addEventRequest', [AddEventController::class, 'addEvent'])->name('request.addEventRequest');
         Route::get('/delegationsPage', [DelegationsPageController::class, 'render'])->name('pages.delegationsPage');
         Route::get('/getDelegates', [DelegationsPageController::class, 'delegationData'])->name('request.getDelegates');
-        Route::get('/addDelegationPage', [AddDelegationPageController::class, 'render'])->name('pages.addDelegationPage');
+        Route::get('/addDelegationPage/{id?}', [AddDelegationPageController::class, 'render'])->name('pages.addDelegationPage');
         Route::get('/getSpecificMembers', [MemberController::class, 'specificMembersData'])->name('pages.getSpecificMembers');
         Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->name('request.updateAuthority');
         Route::post('/addDelegationRequest', [AddDelegationPageController::class, 'addDelegation'])->name('request.addDelegationRequest');

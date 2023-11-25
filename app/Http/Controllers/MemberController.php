@@ -88,7 +88,8 @@ class MemberController extends Controller
             $req->file('picture') ? $this->imageUpload($req->file('picture'), $delegate->member_uid) : '';
             $req->file('pdf') ? $this->documentUpload($req->file('pdf'), $delegate->member_uid) : '';
             if ($savedMember) {
-                return redirect()->route("pages.addMember", $req->delegation)->with('message', 'Member Updated Successfully');
+                // return redirect()->route("pages.addMember", $req->delegation)->with('message', 'Member Updated Successfully');
+                return back()->with('message', 'Member Updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             return  back()->with('error', $exception->errorInfo[2]);

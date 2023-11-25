@@ -76,22 +76,22 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="LiasonModal" tabindex="-1" aria-labelledby="LiasonModal" aria-hidden="true">
+<div class="modal fade" id="InterpreterModal" tabindex="-1" aria-labelledby="InterpreterModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Liason Modal</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Interpreter Modal</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" action='{{route("request.attachLiason")}}'>
+            <form method="POST" action='{{route("request.attachInterpreter")}}'>
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="liasonSelect" class="col-form-label">Liason :</label>
-                        <select class="form-select" aria-label="Liason To Be Associate" id="liasonSelect" name="liasonSelect">
-                            <option value="" selected disabled hidden> Select Liason To Be Associate </option>
-                            @foreach($liasons as $key=>$liason)
-                            <option value="{{$liason->liason_uid}}"> {{$liason->liason_first_name.' '.$liason->liason_last_name}} </option>
+                        <label for="interpreterSelect" class="col-form-label">Interpreter :</label>
+                        <select class="form-select" aria-label="Interpreter To Be Associate" id="interpreterSelect" name="interpreterSelect">
+                            <option value="" selected disabled hidden> Select Interpreter To Be Associate </option>
+                            @foreach($interpreters as $key=>$interpreter)
+                            <option value="{{$interpreter->liason_uid}}"> {{$interpreter->interpreter_first_name.' '.$interpreter->interpreter_last_name}} </option>
                             @endforeach
                         </select>
                     </div>
@@ -123,7 +123,7 @@
                             <th data-field="designation" data-sortable="true">Designation</th>
                             <th data-field="vips_name" data-sortable="true">Invited By</th>
                             <th data-field="delegation_response" data-sortable="true">Response</th>
-                            <th data-field="self" data-formatter="operateSelf">Self</th>
+                            <th data-field="self" data-formatter="operateSelf">Status</th>
                             <th data-field="member_count" data-sortable="true">Number Of Person</th>
                             <!-- <th data-field="address">Address</th> -->
                             <!-- <th data-field="exhibition" data-sortable="true">Exhibition</th> -->
@@ -275,7 +275,7 @@
         } else {
             return [
                 '<div class="left">',
-                '<button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#LiasonModal">',
+                '<button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#InterpreterModal">',
                 '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
                 '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
                 '<path d="M6 21v-2a4 4 0 0 1 4 -4h2" />',

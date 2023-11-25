@@ -308,6 +308,39 @@
                                 <label for="designation" class="form-label">Designation</label>
                                 <input name="designation" type="text" class="form-control" id="designation" placeholder="Designation" required>
                             </div>
+                            <div class="mb-3">
+                                <input class="form-check-input" type="radio" name="self" id="self" value="1" checked>
+                                <label class="form-check-label" for="self">
+                                    Self
+                                </label>
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-check-input" type="radio" name="self" id="rep" value="0">
+                                <label class="form-check-label" for="rep">
+                                    Representative
+                                </label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="rep_rank" class="form-label">Rank</label>
+                                <select name="rep_rank" id="rep_rank" class="form-select">
+                                    <option value="" selected disabled hidden> Select Rank </option>
+                                    @foreach (\App\Models\Rank::all() as $renderRank)
+                                    <option value="{{$renderRank->ranks_uid}}">{{$renderRank->ranks_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="rep_first_Name" class="form-label">Representative First Name</label>
+                                <input name="rep_first_Name" type="text" class="form-control" id="rep_first_Name" placeholder="Representative First Name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="rep_last_Name" class="form-label">Representative Last Name</label>
+                                <input name="rep_last_Name" type="text" class="form-control" id="rep_last_Name" placeholder="Representative Last Name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="rep_designation" class="form-label">Designation</label>
+                                <input name="rep_designation" type="text" class="form-control" id="rep_designation" placeholder="Representative Designation">
+                            </div>
                             <input type="submit" name="submit" class="btn btn-primary" value="Add Delegation" />
                         </fieldset>
                     </form>

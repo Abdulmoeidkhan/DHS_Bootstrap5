@@ -40,8 +40,6 @@ class AddDelegationPageController extends Controller
         $delegates->first_Name = $req->first_Name;
         $delegates->last_Name = $req->last_Name;
         $delegates->designation = $req->designation;
-        $delegates->self = 1;
-
 
         $delegation = new Delegation();
         $delegation->uid = (string) Str::uuid();
@@ -50,12 +48,35 @@ class AddDelegationPageController extends Controller
         $delegation->address = $req->address;
         $delegation->exhibition = $req->eventSelect;
         $delegation->delegationCode = $this->badge(8, "DL");
-        $delegation->delegationhead = $delegates->delegates_uid;
 
 
-        $delegates->delegation = $delegation->uid;
-        try {
+        $delegateSaved = 0;
+        if ($req->self) {
+            $delegates->self = 1;
+            $delegation->delegationhead = $delegates->delegates_uid;
+            $delegates->delegation = $delegation->uid;
             $delegateSaved = $delegates->save();
+        } else {
+            $representative = new Delegate();
+            $representative->delegates_uid = (string) Str::uuid();
+            $representative->rank = $req->rep_rank;
+            $representative->delegation_type = 'Represerntative';
+            $representative->first_Name = $req->rep_first_Name;
+            $representative->last_Name = $req->rep_last_Name;
+            $representative->designation = $req->rep_designation;
+            $delegation->delegationhead = $representative->delegates_uid;
+            $representative->delegation = $delegation->uid;
+            $delegates->self = 0;
+            $delegateSaved = $delegates->save();
+            if ($delegateSaved) {
+                $delegateSaved = $delegates->save();
+            }
+        }
+
+
+
+        try {
+
             if ($delegateSaved) {
                 $delegationSaved = $delegation->save();
                 if ($delegationSaved) {
