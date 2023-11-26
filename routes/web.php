@@ -18,6 +18,7 @@ use App\Http\Controllers\AddVipsController;
 use App\Http\Controllers\ActivateProfileController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\CarsController;
+use App\Http\Controllers\DelegateFlightController;
 use App\Http\Controllers\DoucmentController;
 use App\Http\Controllers\FlightsController;
 use App\Http\Controllers\HotelController;
@@ -261,6 +262,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/getMembers/{id}', [MemberController::class, 'membersData'])->name('request.getMembers');
         Route::post('/updateMemberRequest/{id}', [MemberController::class, 'updateMemberRequest'])->name('request.updateMemberRequest');
         Route::get('/members/memberFullProfile/{id}', [MemberController::class, 'memberFullProfile'])->name('pages.memberFullProfile');
+        // Members End
+
+        // Members Start
+        Route::get('/getDelegationFlight/{id?}', [DelegateFlightController::class, 'getFlight'])->name('request.getDelegationFlight');
+        Route::post('/addDelegationFlight/{id}', [DelegateFlightController::class, 'setFlight'])->name('request.addDelegationFlight');
         // Members End
 
         // Delegate Start

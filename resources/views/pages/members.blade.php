@@ -90,7 +90,6 @@
                             <th data-field="designation" data-sortable="true">Designation</th>
                             <th data-field="delegation_type" data-sortable="true">Type</th>
                             <th data-field="head" data-sortable="true">Role</th>
-                            <th data-field="passport" data-sortable="true">Passport</th>
                             <th data-field="delegates_uid" data-sortable="true" data-formatter="operateDelegate">Actions</th>
                             <!-- <th data-field="organistaion" data-sortable="true">Organistaion</th> -->
                             <!-- <th data-field="last_Name" data-sortable="true">Delegate Last Name</th>

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer('self')->default(1);
             $table->uuid('delegation');
             $table->integer('status')->default(1);
-            $table->string('passport')->nullable();
             $table->string('delegation_type')->default('Member');
             $table->string('last_Name')->nullable();
             $table->string('first_Name')->nullable();

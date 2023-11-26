@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Delegate;
+use App\Models\DelegateFlight;
 use App\Models\Document;
 use App\Models\Rank;
 
@@ -46,7 +47,10 @@ class MemberController extends Controller
 
     public function addMemberPage(Request $req, $id)
     {
-        return view('pages.addMember', ['id' => $id]);
+        $member = Delegate::where('delegates_uid', $id)->first();
+        $flight = DelegateFlight::where('delegate_uid', $id)->first();
+        // return $member;
+        return view('pages.addMember', ['member' => $member, 'flight' => $flight, 'id' => $id]);
     }
 
     public function membersData(Request $req, $id)
