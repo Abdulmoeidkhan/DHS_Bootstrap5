@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('arrival_time');
             $table->string('departure_date');
             $table->string('departure_time');
+            $table->string('passport')->unique();
             $table->uuid('flightsegment_uid')->unique();
             $table->string('arrived')->default(0);
             $table->string('departed')->default(0);
