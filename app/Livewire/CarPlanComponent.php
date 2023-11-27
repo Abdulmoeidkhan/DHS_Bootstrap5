@@ -24,7 +24,7 @@ class CarPlanComponent extends Component
         $carPlan->car_quantity = $this->carQuantity;
         $carPlan->delegation_uid = $this->delegationUid;
         $this->savedcarplan = $carPlan->save();
-        $this->reset();
+        // $this->reset();
         $this->dispatch('carplansaved')->self();
         $this->js("alert('Plan saved!')"); 
     }

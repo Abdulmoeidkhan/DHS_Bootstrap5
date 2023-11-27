@@ -91,12 +91,12 @@
                         <select class="form-select" aria-label="Interpreter To Be Associate" id="interpreterSelect" name="interpreterSelect">
                             <option value="" selected disabled hidden> Select Interpreter To Be Associate </option>
                             @foreach($interpreters as $key=>$interpreter)
-                            <option value="{{$interpreter->liason_uid}}"> {{$interpreter->interpreter_first_name.' '.$interpreter->interpreter_last_name}} </option>
+                            <option value="{{$interpreter->interpreter_uid}}"> {{$interpreter->interpreter_first_name.' '.$interpreter->interpreter_last_name}} </option>
                             @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
-                        <input type="hidden" name="delegationUid" value="" id="delegationUid" />
+                        <input type="hidden" name="delegationUid_interpreter" value="" id="delegationUid_interpreter" />
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -327,6 +327,14 @@
         const button = event.relatedTarget
         const delegation = button.getAttribute('data-bs-delegation')
         const modalBodyInput = receivingModal.querySelector('.modal-body #delegationUid_receiving')
+        modalBodyInput.value = delegation
+    })
+
+    const interpreterModal = document.getElementById('InterpreterModal')
+    interpreterModal.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget
+        const delegation = button.getAttribute('data-bs-delegation')
+        const modalBodyInput = receivingModal.querySelector('.modal-body #delegationUid_interpreter')
         modalBodyInput.value = delegation
     })
 

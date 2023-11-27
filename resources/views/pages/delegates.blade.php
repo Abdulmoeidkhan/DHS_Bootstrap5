@@ -19,7 +19,7 @@
                                 <th data-field="first_Name" data-sortable="true">Delegates First Name</th>
                                 <th data-field="last_Name" data-sortable="true">Delegates Last Name</th>
                                 <th data-field="name" data-sortable="true">Invited By</th>
-                                <th data-field="uid" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
+                                <th data-field="uid" data-formatter="operateFormatter" data-events="operateEvents" data-force-hide="true">Actions</th>
                             </tr>
                         </thead>
                         <tbody>

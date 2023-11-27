@@ -12,6 +12,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Delegate;
 use App\Models\DelegateFlight;
 use App\Models\Document;
+use App\Models\Flightsegment;
+use App\Models\ImageBlob;
 use App\Models\Rank;
 
 class MemberController extends Controller
@@ -28,10 +30,14 @@ class MemberController extends Controller
     }
     protected function documentUpload($file, $id)
     {
-
-        // $type = $file->extension();
-        // $base64Pdf = base64_encode(file_get_contents($file->getRealPath()));
-        // $pdfBlob = 'data:application/pdf;base64,' . $base64Pdf;
+        $pdfBlob = file_get_contents($file->getRealPath());
+        $pdf = new Document();
+        $pdf->pdf_blob = $pdfBlob;
+        $pdf->uid = $id;
+        $pdf->save();
+    }
+    protected function imageBlobUpload($file, $id)
+    {
         $pdfBlob = file_get_contents($file->getRealPath());
         $pdf = new Document();
         $pdf->pdf_blob = $pdfBlob;
@@ -49,8 +55,9 @@ class MemberController extends Controller
     {
         $member = Delegate::where('delegates_uid', $id)->first();
         $flight = DelegateFlight::where('delegate_uid', $id)->first();
+        $memberPicture = ImageBlob::where('delegate_uid', $id)->first();
         // return $member;
-        return view('pages.addMember', ['member' => $member, 'flight' => $flight, 'id' => $id]);
+        return view('pages.addMember', ['member' => $member, 'flight' => $flight, 'id' => $id, 'memberPicture' => $memberPicture]);
     }
 
     public function membersData(Request $req, $id)
@@ -60,6 +67,8 @@ class MemberController extends Controller
         foreach ($delegates as $key => $delegate) {
             $delegates[$key]->head = $delegate->delegates_uid == $delegation->delegationhead ? "Head" : "Member";
             $delegates[$key]->rankName = Rank::where('ranks_uid', $delegate->rank)->first('ranks_name');
+            $delegates[$key]->flight = DelegateFlight::where('delegate_uid', $delegate->delegates_uid)->first();
+            $delegates[$key]->image = ImageBlob::where('delegate_uid', $delegate->delegates_uid)->first();
         }
         return $delegates;
     }
@@ -103,13 +112,22 @@ class MemberController extends Controller
     {
         $arrayToBeUpdate = [];
         foreach ($req->all() as $key => $value) {
-            if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
+            if ($key != 'submit' && $key != '_token' && $key != 'savedpicture'  && $key != 'picture' && strlen($value) > 0) {
                 $arrayToBeUpdate[$key] = $value;
             }
         }
         try {
+            // return $req->all();
             // $updatedMember = Member::where('member_uid', $id)->update(['name' => $req->inputUserName, 'contact_number' => $req->inputContactNumber]);
-            $updatedMember = Member::where('member_uid', $id)->update($arrayToBeUpdate);
+            $updatedMember = Delegate::where('delegates_uid', $id)->update($arrayToBeUpdate);
+            if ($req->savedpicture) {
+                ImageBlob::where('delegate_uid', $id)->delete();
+                $imageBlog = new ImageBlob;
+                $imageBlog->uid = (string) Str::uuid();
+                $imageBlog->delegate_uid = $id;
+                $imageBlog->img_blob = $req->savedpicture;
+                $imageBlog->save();
+            }
             if ($updatedMember) {
                 return back()->with('message', 'Member Updated Successfully');
             }

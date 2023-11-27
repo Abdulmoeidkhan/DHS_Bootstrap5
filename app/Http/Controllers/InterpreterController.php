@@ -116,18 +116,19 @@ class InterpreterController extends Controller
 
     public function attachInterpreter(Request $req)
     {
-        try {
-            $updateInterpreter = Interpreter::where('interpreter_uid', $req->interpreterSelect)->update(['interpreter_delegation' => $req->delegationUid, 'interpreter_assign' => 1]);
-            if ($updateInterpreter) {
-                $updateDelegation = Delegation::where('uid', $req->delegationUid)->update(['interpreters' => $req->interpreterSelect]);
-                return back()->with('message', 'Interpreter has been attach Successfully');
-            }
-        } catch (QueryException $exception) {
-            if ($exception->errorInfo[2]) {
-                return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
-            } else {
-                return  back()->with('error', $exception->errorInfo[2]);
-            }
-        }
+        return $req->all();
+        // try {
+        //     $updateInterpreter = Interpreter::where('interpreter_uid', $req->interpreterSelect)->update(['interpreter_delegation' => $req->delegationUid, 'interpreter_assign' => 1]);
+        //     if ($updateInterpreter) {
+        //         $updateDelegation = Delegation::where('uid', $req->delegationUid)->update(['interpreters' => $req->interpreterSelect]);
+        //         return back()->with('message', 'Interpreter has been attach Successfully');
+        //     }
+        // } catch (QueryException $exception) {
+        //     if ($exception->errorInfo[2]) {
+        //         return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+        //     } else {
+        //         return  back()->with('error', $exception->errorInfo[2]);
+        //     }
+        // }
     }
 }

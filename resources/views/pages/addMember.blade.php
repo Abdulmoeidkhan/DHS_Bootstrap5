@@ -4,14 +4,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css'>
 <style>
-    .page {
+    /* .page {
         margin: 1em auto;
         max-width: 768px;
         display: flex;
         align-items: flex-start;
         flex-wrap: wrap;
         height: 100%;
-    }
+    } */
 
     .box {
         padding: 0.5em;
@@ -24,11 +24,11 @@
         width: calc(100%/2 - 1em);
     }
 
-    .options label,
+    /* .options label,
     .options input {
         width: 4em;
         padding: 0.5em 1em;
-    }
+    } */
 
     /* .btn {
         background: white;
@@ -71,33 +71,30 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="firstName" class="form-label">First Name</label>
-                                <input name="firstName" type="text" class="form-control" id="firstName" placeholder="First Name" value="{{$member->first_Name}}" required>
+                                <label for="first_Name" class="form-label">First Name</label>
+                                <input name="first_Name" type="text" class="form-control" id="first_Name" placeholder="First Name" value="{{$member->first_Name}}" required>
                             </div>
                             <div class="mb-3">
-                                <label for="lastName" class="form-label">Last Name</label>
-                                <input name="lastName" type="text" class="form-control" id="lastName" placeholder="Last Name" value="{{$member->last_Name}}" required>
+                                <label for="last_Name" class="form-label">Last Name</label>
+                                <input name="last_Name" type="text" class="form-control" id="last_Name" placeholder="Last Name" value="{{$member->last_Name}}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="designation" class="form-label">Designation</label>
                                 <input name="designation" type="text" class="form-control" id="designation" placeholder="Designation" value="{{$member->designation}}" required>
                             </div>
                             <div class="mb-3">
-                                <label for="organistaion" class="form-label">Organisation</label>
-                                <input name="organistaion" type="text" class="form-control" id="organistaion" placeholder="Organisation" value="{{$member->organisation}}" required>
-                            </div>
-                            <div class="mb-3">
                                 <label for="picture" class="form-label">Picture</label>
                                 <input name="picture" type="file" class="form-control" id="picture" accept="image/png, image/jpeg">
+                                <input name="savedpicture" type="hidden" class="form-control" id="savedpicture" value="">
                                 <div class="box-2">
                                     <div class="result"></div>
                                 </div>
-                                <div class="box-2 img-result hide">
-                                    <img class="cropped" src="" alt="" name="picture" />
+                                <div class="box-2 img-result <?php echo $memberPicture?->img_blob ? '' : 'hide' ?>">
+                                    <img class="cropped" src="{{$memberPicture?->img_blob}}" alt="" />
                                 </div>
                                 <div class="box">
                                     <div class="options hide">
-                                        <label> Width</label>
+                                        <label>Width</label>
                                         <input type="number" class="img-w" value="300" min="100" max="1200" />
                                     </div>
                                     <button class="btn save hide">Save</button>
@@ -107,7 +104,7 @@
                                 <label for="pdf" class="form-label">Document</label>
                                 <input name="pdf" type="file" class="form-control" id="pdf" accept="application/pdf">
                             </div>
-                            <input type="submit" name="submit" class="btn btn-primary" value="update Member" />
+                            <input type="submit" name="submit" class="btn btn-primary" value="Update Member" />
                         </fieldset>
                     </form>
                 </div>
@@ -129,6 +126,12 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
+                                            <label for="arrival_flight" class="form-label">Arrival Flight</label>
+                                            <input name="arrival_flight" type="text" class="form-control" id="arrival_flight" value="{{$flight?->arrival_flight}}" placeholder="Arrival Flight" required>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="mb-3">
                                             <label for="arrival_date" class="form-label">Arrival Date</label>
                                             <input name="arrival_date" type="date" class="form-control" id="arrival_date" value="{{$flight?->arrival_date}}" placeholder="Arrival Date" required>
                                         </div>
@@ -141,6 +144,12 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label for="departure_flight" class="form-label">Departure Flight</label>
+                                            <input name="departure_flight" type="text" class="form-control" id="departure_flight" value="{{$flight?->departure_flight}}" placeholder="Departure Flight" required>
+                                        </div>
+                                    </div>
                                     <div class="col">
                                         <div class="mb-3">
                                             <label for="departure_date" class="form-label">Departure Date</label>
@@ -161,7 +170,7 @@
                                             <input name="passport" type="text" class="form-control" value="{{$flight?->passport}}" id="passport" placeholder="Passport" required>
                                         </div>
                                     </div>
-                                    <div class="col align-self-center">
+                                    <!-- <div class="col align-self-center">
                                         <div class="mb-3">
                                             <label class="form-label">Arrived : </label>
                                             <input class="form-check-input" type="radio" name="arrived" id="arrived" value="1" <?php echo $flight?->arrived ? 'checked' : '' ?>>
@@ -188,7 +197,7 @@
                                                 No
                                             </label>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <!-- <div class="mb-3">
@@ -271,6 +280,7 @@
         img_result.classList.remove('hide');
         // show image cropped
         cropped.src = imgSrc;
+        document.getElementById('savedpicture').value = imgSrc;
         dwn.classList.remove('hide');
         dwn.download = 'imagename.png';
         dwn.setAttribute('href', imgSrc);

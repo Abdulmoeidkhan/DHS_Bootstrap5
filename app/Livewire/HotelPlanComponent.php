@@ -26,7 +26,7 @@ class HotelPlanComponent extends Component
         $hotelPlan->hotel_quantity = $this->hotelQuantity;
         $hotelPlan->delegation_uid = $this->delegationUid;
         $this->savedhotelplan = $hotelPlan->save();
-        $this->reset();
+        // $this->reset();
         $this->dispatch('hotelplansaved')->self();
         $this->js("alert('Plan saved!')");
     }

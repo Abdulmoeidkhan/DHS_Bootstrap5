@@ -89,8 +89,15 @@
                             <th data-field="last_Name" data-sortable="true">Last Name</th>
                             <th data-field="designation" data-sortable="true">Designation</th>
                             <th data-field="delegation_type" data-sortable="true">Type</th>
-                            <th data-field="head" data-sortable="true">Role</th>
-                            <th data-field="delegates_uid" data-sortable="true" data-formatter="operateDelegate">Actions</th>
+                            <th data-field="flight.passport" data-sortable="true">Passport</th>
+                            <th data-field="flight.arrival_flight" data-sortable="true">Arrival Flight</th>
+                            <th data-field="flight.arrival_date" data-sortable="true">Arrival Date</th>
+                            <th data-field="flight.arrival_time" data-sortable="true">Arrival Time</th>
+                            <th data-field="flight.departure_flight" data-sortable="true">Departure Flight</th>
+                            <th data-field="flight.departure_date" data-sortable="true">Departure Date</th>
+                            <th data-field="flight.departure_time" data-sortable="true">Departure Time</th>
+                            <th data-field="image.img_blob" data-sortable="true" data-formatter="operatePicture" data-force-hide="true">Image</th>
+                            <th data-field="delegates_uid" data-sortable="true" data-formatter="operateDelegate" data-force-hide="true">Actions</th>
                             <!-- <th data-field="organistaion" data-sortable="true">Organistaion</th> -->
                             <!-- <th data-field="last_Name" data-sortable="true">Delegate Last Name</th>
                             <th data-field="last_Name" data-sortable="true">Delegate Last Name</th> -->
@@ -155,10 +162,20 @@
                 '<div class="right">',
                 '<a class="like" href="javascript:void(0)" title="Like">',
                 '<i class="fa fa-heart"></i>',
-                '</a>  ',
+                '</a>',
                 '<a class="remove" href="javascript:void(0)" title="Remove">',
                 '<i class="fa fa-trash"></i>',
                 '</a>',
+                '</div>'
+            ].join('')
+        }
+    }
+
+    function operatePicture(value, row, index) {
+        if (value) {
+            return [
+                '<div class="left">',
+                '<img src="' + value + '" /> ',
                 '</div>'
             ].join('')
         }
