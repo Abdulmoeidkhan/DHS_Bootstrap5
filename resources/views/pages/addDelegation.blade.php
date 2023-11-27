@@ -282,7 +282,8 @@
                             <div class="mb-3">
                                 <label for="eventSelect" class="form-label">Event Name</label>
                                 <select class="form-select" aria-label="Event Name" id="eventSelect" name="eventSelect" required>
-                                    @foreach($events as $event)
+                                    <option value="" selected disabled hidden> Select Event </option>
+                                    @foreach(\App\Models\Event::all() as $event)
                                     <option value="{{$event->name}}"> {{$event->name}} </option>
                                     @endforeach
                                 </select>

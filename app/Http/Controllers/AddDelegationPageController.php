@@ -66,10 +66,12 @@ class AddDelegationPageController extends Controller
             $representative->designation = $req->rep_designation;
             $delegation->delegationhead = $representative->delegates_uid;
             $representative->delegation = $delegation->uid;
+            $delegates->delegation = $delegation->uid;
             $delegates->self = 0;
-            $delegateSaved = $delegates->save();
-            if ($delegateSaved) {
+            $representativeSaved = $representative->save();
+            if($representativeSaved){
                 $delegateSaved = $delegates->save();
+
             }
         }
 
