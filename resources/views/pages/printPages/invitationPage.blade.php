@@ -22,7 +22,7 @@
     <div class="row container-first-child">
         <div class="col-md-12 parent-print-program d-print-inline">
             <div>
-                <h3 class="text-capitalize">Dear {{$delegate->first_Name}}&nbsp;{{$delegate->last_Name}} - {{$delegate->country}}</h3>
+                <h3 class="text-capitalize">Dear {{$delegate->first_Name}}&nbsp;{{$delegate->last_Name}} - {{$delegation->country}}</h3>
                 <br />
                 <br />
                 <p>{{config('localvariables.para1')}}</p>

@@ -22,25 +22,25 @@
                             </div>
                             <div class="mb-3">
                                 <label for="interpreter_designation" class="form-label">Designation</label>
-                                <input name="interpreter_designation" type="text" class="form-control" id="interpreter_designation" placeholder="Interpreter Officer Designation" />
+                                <input name="interpreter_designation" type="text" class="form-control" id="interpreter_designation" placeholder="Interpreter Officer Designation" required/>
                             </div>
                             <div class="mb-3">
                                 <label for="interpreter_first_name" class="form-label">First Name</label>
-                                <input name="interpreter_first_name" type="text" class="form-control" id="interpreter_first_name" placeholder="Interpreter First Name" />
+                                <input name="interpreter_first_name" type="text" class="form-control" id="interpreter_first_name" placeholder="Interpreter First Name" required/>
                             </div>
                             <div class="mb-3">
                                 <label for="interpreter_last_name" class="form-label">Last Name</label>
-                                <input name="interpreter_last_name" type="text" class="form-control" id="interpreter_last_name" placeholder="Interpreter Last Name" />
+                                <input name="interpreter_last_name" type="text" class="form-control" id="interpreter_last_name" placeholder="Interpreter Last Name" required/>
                             </div>
                             <div class="mb-3">
                                 <label for="interpreter_contact" class="form-label">Contact Number</label>
-                                <input name="interpreter_contact" type="number" class="form-control" id="interpreter_contact" placeholder="Interpreter Contact Number" />
+                                <input name="interpreter_contact" type="number" class="form-control" id="interpreter_contact" placeholder="Interpreter Contact Number" required/>
                             </div>
                             <div class="mb-3">
                                 <label for="interpreter_identity" class="form-label">Interpreter CNIC</label>
-                                <input name="interpreter_identity" type="number" class="form-control" id="interpreter_identity" placeholder="Interpreter Identity" />
+                                <input name="interpreter_identity" type="number" class="form-control" id="interpreter_identity" placeholder="Interpreter Identity" required/>
                             </div>
-                            <input type="submit" name="submit" class="btn btn-primary" value="Add Interpreter" />
+                            <input type="submit" name="submit" class="btn btn-primary" value="Add Interpreter" required/>
                         </fieldset>
                     </form>
                 </div>
