@@ -112,7 +112,7 @@
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Delegations</h5>
             <div class="table-responsive">
-                <table id="table"  data-auto-refresh-interval="60" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates')}}">
+                <table id="table" data-auto-refresh-interval="60" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates')}}">
                     <thead>
                         <tr>
                             <th data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -307,11 +307,12 @@
             ].join('')
         }
     }
+
     function operateDelegation(value, row, index) {
         if (value) {
             return [
                 '<div class="left">',
-                '<a class="btn btn-outline-success" href="addPlan/' + value + '">',
+                '<a class="btn btn-outline-success" href="addDelegationPage/' + value + '">',
                 '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
                 '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>',
                 '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>',
@@ -327,8 +328,9 @@
     function operateSelf(value, row, index) {
         return !value ? 'Rep' : 'Self';
     }
+
     function operateSerial(value, row, index) {
-        return index+1;
+        return index + 1;
     }
 
     const exampleModal = document.getElementById('LiasonModal')

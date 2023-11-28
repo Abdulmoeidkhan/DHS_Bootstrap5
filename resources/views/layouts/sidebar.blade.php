@@ -49,6 +49,16 @@
                 @endif
                 @if(session()->get('user')->roles[0]->name =="admin")
                 <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.officer')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-shield-half-filled"></i>
+                        </span>
+                        <span class="hide-menu">Officers</span>
+                    </a>
+                </li>
+                @endif
+                <!-- @if(session()->get('user')->roles[0]->name =="admin")
+                <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.liasons')}}" aria-expanded="false">
                         <span>
                             <i class="ti ti-shield-half-filled"></i>
@@ -76,7 +86,7 @@
                         <span class="hide-menu">Receiving Officer</span>
                     </a>
                 </li>
-                @endif
+                @endif -->
                 @if(session()->get('user')->roles[0]->name =="admin")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.programs')}}" aria-expanded="false">

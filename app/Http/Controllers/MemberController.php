@@ -55,7 +55,7 @@ class MemberController extends Controller
     {
         $member = Delegate::where('delegates_uid', $id)->first();
         $flight = DelegateFlight::where('delegate_uid', $id)->first();
-        $memberPicture = ImageBlob::where('delegate_uid', $id)->first();
+        $memberPicture = ImageBlob::where('uid', $id)->first();
         // return $member;
         return view('pages.addMember', ['member' => $member, 'flight' => $flight, 'id' => $id, 'memberPicture' => $memberPicture]);
     }
@@ -68,7 +68,7 @@ class MemberController extends Controller
             $delegates[$key]->head = $delegate->delegates_uid == $delegation->delegationhead ? "Head" : "Member";
             $delegates[$key]->rankName = Rank::where('ranks_uid', $delegate->rank)->first('ranks_name');
             $delegates[$key]->flight = DelegateFlight::where('delegate_uid', $delegate->delegates_uid)->first();
-            $delegates[$key]->image = ImageBlob::where('delegate_uid', $delegate->delegates_uid)->first();
+            $delegates[$key]->image = ImageBlob::where('uid', $delegate->delegates_uid)->first();
         }
         return $delegates;
     }
@@ -94,7 +94,7 @@ class MemberController extends Controller
         $delegate->last_Name = $req->lastName;
         $delegate->designation = $req->designation;
         $delegate->organistaion = $req->organistaion;
-        $delegate->passport = $req->passport;
+        // $delegate->passport = $req->passport;
         $delegate->delegation_type = $req->delegation_type;
         try {
             $savedMember = $delegate->save();
@@ -121,7 +121,7 @@ class MemberController extends Controller
             // $updatedMember = Member::where('member_uid', $id)->update(['name' => $req->inputUserName, 'contact_number' => $req->inputContactNumber]);
             $updatedMember = Delegate::where('delegates_uid', $id)->update($arrayToBeUpdate);
             if ($req->savedpicture) {
-                ImageBlob::where('delegate_uid', $id)->delete();
+                ImageBlob::where('uid', $id)->delete();
                 $imageBlog = new ImageBlob;
                 $imageBlog->uid = (string) Str::uuid();
                 $imageBlog->delegate_uid = $id;

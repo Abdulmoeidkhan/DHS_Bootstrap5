@@ -52,10 +52,10 @@
                                 <label for="organistaion" class="form-label">Organisation</label>
                                 <input name="organistaion" type="text" class="form-control" id="organistaion" placeholder="Organisation" required>
                             </div> -->
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label for="passport" class="form-label">Passport</label>
                                 <input name="passport" type="text" class="form-control" id="passport" placeholder="Passport" required>
-                            </div>
+                            </div> -->
                             <div class="mb-3">
                                 <label for="picture" class="form-label">Picture</label>
                                 <input name="picture" type="file" class="form-control" id="picture" accept="image/png, image/jpeg">

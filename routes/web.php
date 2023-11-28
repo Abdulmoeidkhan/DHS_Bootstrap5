@@ -27,6 +27,7 @@ use App\Http\Controllers\InterpreterController;
 use App\Http\Controllers\LiasonsController;
 use App\Http\Controllers\MailOtpController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\OfficerController;
 use App\Http\Controllers\PlansController;
 use App\Http\Controllers\PrintInvitationController;
 use App\Http\Controllers\ProgramController;
@@ -163,11 +164,11 @@ Route::group(['middleware' => 'auth'], function () {
         // Journey Pages And API Start
         Route::get('/getJourney', [CarsController::class, 'getJourneys'])->name('request.getJourney');
         Route::get('/addJourneyPage/{id?}', [CarsController::class, 'addJourneyRender'])->name('pages.addJourney');
+        // Plan Pages And API Start
         Route::post('/addJourney', [CarsController::class, 'addJourney'])->name('request.addJourney');
         Route::post('/updateJourney/{id}', [CarsController::class, 'updateJourney'])->name('request.updateJourney');
         // Journey Pages And API End
 
-        // Plan Pages And API Start
         Route::get('/getHotelPlan/{id}', [PlansController::class, 'getHotelPlan'])->name('request.getHotelPlan');
         Route::get('/getCarPlan/{id}', [PlansController::class, 'getCarPlan'])->name('request.getCarPlan');
         Route::get('/addPlan/{id}', [PlansController::class, 'addPlanRender'])->name('pages.addPlan');
@@ -180,6 +181,16 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/addMemberRequest/{id}', [MemberController::class, 'addMemberRequest'])->name('request.addMemberRequest');
         // Member Pages And API End
 
+        // Officer Page And API Start
+        Route::get('/officer', [OfficerController::class, 'renderOfficer'])->name('pages.officer');
+        Route::get('/officerData/{id?}', [OfficerController::class, 'officerData'])->name('request.officerData');
+        Route::get('/addOfficerPage/{id?}', [OfficerController::class, 'addOfficerPage'])->name('pages.addOfficer');
+        Route::post('/addOfficer', [OfficerController::class, 'addOfficer'])->name('request.addOfficer');
+        Route::post('/updateOfficer/{id}', [OfficerController::class, 'updateOfficer'])->name('request.updateOfficer');
+        Route::post('/attachOfficer', [OfficerController::class, 'attachOfficer'])->name('request.attachOfficer');
+        // Officer Page And API End
+
+
         // Liason Page And API Start
         Route::get('/liasons', [LiasonsController::class, 'renderLiasons'])->name('pages.liasons');
         Route::get('/liasonsData', [LiasonsController::class, 'liasonsData'])->name('request.liasonsData');
@@ -188,21 +199,21 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/attachLiason', [LiasonsController::class, 'attachLiason'])->name('request.attachLiason');
         // Liason Page And API End
 
-        // Liason Page And API Start
+        // interpreters Page And API Start
         Route::get('/interpreters', [InterpreterController::class, 'renderInterpreters'])->name('pages.interpreters');
         Route::get('/interpretersData', [InterpreterController::class, 'interpretersData'])->name('request.interpretersData');
         Route::post('/addInterpreter', [InterpreterController::class, 'addInterpreter'])->name('request.addInterpreter');
         Route::get('/addInterpreterPage', [InterpreterController::class, 'addInterpreterPage'])->name('pages.addInterpreter');
         Route::post('/attachInterpreter', [InterpreterController::class, 'attachInterpreter'])->name('request.attachInterpreter');
-        // Liason Page And API End
+        // interpreters Page And API End
 
-        // Liason Page And API Start
+        // receivings Page And API Start
         Route::get('/receivings', [ReceivingController::class, 'renderReceivings'])->name('pages.receivings');
         Route::get('/receivingsData', [ReceivingController::class, 'receivingsData'])->name('request.receivingsData');
         Route::post('/addReceiving', [ReceivingController::class, 'addReceiving'])->name('request.addReceiving');
         Route::get('/addReceivingPages', [ReceivingController::class, 'addReceivingPage'])->name('pages.addReceivings');
         Route::post('/attachReceiving', [ReceivingController::class, 'attachReceiving'])->name('request.attachReceiving');
-        // Liason Page And API End
+        // receivings Page And API End
 
         // Program Page And API Start
         Route::get('/programs', [ProgramController::class, 'renderPrograms'])->name('pages.programs');

@@ -25,10 +25,16 @@ class AddDelegationPageController extends Controller
         }
         return $code;
     }
-    public function render()
+    public function render($id = null)
     {
         $events = Event::where('end_date', '>', date('Y-m-d'))->orderBy('start_date', 'desc')->get();
-        return view('pages.addDelegation', ['events' => $events]);
+        if ($id) {
+            $delegationHead = Delegate::where([['delegation_type', 'Delegate'], ['delegates_uid', $id]])->first();
+            $representative = Delegate::where([['delegation_type', 'Representative'], ['delegates_uid', $id]])->first();
+            return view('pages.addDelegation', ['events' => $events, 'delegationHead' => $delegationHead, 'representative' => $representative]);
+        } else {
+            return view('pages.addDelegation', ['events' => $events]);
+        }
     }
     public function addDelegation(Request $req)
     {
@@ -69,9 +75,8 @@ class AddDelegationPageController extends Controller
             $delegates->delegation = $delegation->uid;
             $delegates->self = 0;
             $representativeSaved = $representative->save();
-            if($representativeSaved){
+            if ($representativeSaved) {
                 $delegateSaved = $delegates->save();
-
             }
         }
 

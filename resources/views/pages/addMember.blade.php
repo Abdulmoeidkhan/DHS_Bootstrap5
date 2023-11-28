@@ -216,16 +216,12 @@
     </div>
 </div>
 <main class="page">
-    <!-- leftbox -->
     <div class="box-2">
         <div class="result"></div>
     </div>
-    <!--rightbox-->
     <div class="box-2 img-result hide">
-        <!-- result of crop -->
         <img class="cropped" src="" alt="">
     </div>
-    <!-- input file -->
     <div class="box">
         <button class="btn save hide">Save</button>
     </div>

@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('image_blobs', function (Blueprint $table) {
-            $table->uuid('uid')->primary();
-            $table->binary('img_blob');
+        Schema::create('country', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();
+            $table->string('value')->unique();
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('image_blobs');
+        Schema::dropIfExists('country');
     }
 };
