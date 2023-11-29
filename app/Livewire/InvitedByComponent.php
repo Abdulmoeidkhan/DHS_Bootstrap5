@@ -9,6 +9,7 @@ use App\Models\Vips;
 class InvitedByComponent extends Component
 {
     public $vips = '';
+    public $selectedVip;
 
     #[On('vipchanged')]
     public function render()

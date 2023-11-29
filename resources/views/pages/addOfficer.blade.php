@@ -72,6 +72,14 @@
                                 <input name="officer_identity" type="number" class="form-control" id="officer_identity" placeholder="Officer Identity" value="{{isset($officer) ? $officer->officer_identity : ''}}" required />
                             </div>
                             <div class="mb-3">
+                                <label for="officer_address" class="form-label">Officer Address</label>
+                                <input name="officer_address" type="text" class="form-control" id="officer_address" placeholder="Officer Address" value="{{isset($officer) ? $officer->officer_address : ''}}" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="officer_remarks" class="form-label">Officer Remarks</label>
+                                <input name="officer_remarks" type="text" class="form-control" id="officer_remarks" placeholder="Officer Remarks" value="{{isset($officer) ? $officer->officer_remarks : ''}}" required />
+                            </div>
+                            <div class="mb-3">
                                 <label for="officer_picture" class="form-label">Picture</label>
                                 <input name="officer_picture" type="file" class="form-control" id="officer_picture" accept="image/png, image/jpeg">
                                 <input name="savedpicture" type="hidden" class="form-control" id="savedpicture" value="">
@@ -89,7 +97,7 @@
                                     <button class="btn save hide">Save</button>
                                 </div>
                             </div>
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label for="pdf" class="form-label">Document</label>
                                 <input name="pdf" type="file" class="form-control" id="pdf" accept="application/pdf">
                                 @if(isset($officer?->officer_document))
@@ -97,7 +105,7 @@
                                     <p>Your browser does not support PDF embedding. You can <a href="{{ route('request.getPdf' , $officer->officer_uid ) }}">download the PDF</a> instead.</p>
                                 </object>
                                 @endif
-                            </div>
+                            </div> -->
                             <input type="submit" name="submit" class="btn {{isset($officer->officer_uid)?'btn-success':'btn-primary'}}" value="{{isset($officer->officer_uid)?'Update Officer':'Add Officer'}}" />
                         </fieldset>
                     </form>

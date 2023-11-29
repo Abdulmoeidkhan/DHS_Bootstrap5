@@ -1,8 +1,32 @@
 @auth
 @extends('layouts.layout')
 @section("content")
-
 @if(session()->get('user')->roles[0]->name === "admin")
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css'>
+<style>
+    .box,
+    .box-representatives {
+        padding: 0.5em;
+        width: 100%;
+        margin: 0.5em;
+    }
+
+    .box-2,
+    .box-2-representatives {
+        padding: 0.5em;
+        width: calc(100%/2 - 1em);
+    }
+
+    .hide,
+    .hide-representatives {
+        display: none;
+    }
+
+    img {
+        max-width: 100%;
+    }
+</style>
 <div class="row">
     <div class="d-flex justify-content-center">
         <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#VIPModal">Add VIP'S</button>
@@ -45,218 +69,30 @@
             <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">New Delegation</h5>
                 <div class="table-responsive">
-                    <form name="delegationBasicInfo" id="delegationBasicInfo" method="POST" action="{{route('request.addDelegationRequest')}}" enctype="multipart/form-data">
+                    <form name="delegationBasicInfo" id="delegationBasicInfo" method="POST" action="{{isset($delegations)?route('request.updateDelegationRequest'):route('request.addDelegationRequest')}}" enctype="multipart/form-data">
                         <fieldset>
                             <legend>Add Invitaion Details</legend>
                             @csrf
                             <div class="mb-3">
                                 <label for="countryInput" class="form-label">Select Country</label>
                                 <select class="form-select" aria-label="Country Name" id="countryInput" name="country" required>
-                                    <option value="Afghanistan"> Afghanistan </option>
-                                    <option value="Albania"> Albania </option>
-                                    <option value="Algeria"> Algeria </option>
-                                    <option value="Andorra"> Andorra </option>
-                                    <option value="Angola"> Angola </option>
-                                    <option value="Antigua-and-Barbuda"> Antigua and Barbuda </option>
-                                    <option value="Argentina"> Argentina </option>
-                                    <option value="Armenia"> Armenia </option>
-                                    <option value="Austria"> Austria </option>
-                                    <option value="Azerbaijan"> Azerbaijan </option>
-                                    <option value="Bahrain"> Bahrain </option>
-                                    <option value="Bangladesh"> Bangladesh </option>
-                                    <option value="Barbados"> Barbados </option>
-                                    <option value="Belarus"> Belarus </option>
-                                    <option value="Belgium"> Belgium </option>
-                                    <option value="Belize"> Belize </option>
-                                    <option value="Benin"> Benin </option>
-                                    <option value="Bhutan"> Bhutan </option>
-                                    <option value="Bolivia"> Bolivia </option>
-                                    <option value="Bosnia-and-Herzegovina"> Bosnia and Herzegovina </option>
-                                    <option value="Botswana"> Botswana </option>
-                                    <option value="Brazil"> Brazil </option>
-                                    <option value="Brunei"> Brunei </option>
-                                    <option value="Bulgaria"> Bulgaria </option>
-                                    <option value="Burkina-Faso"> Burkina Faso </option>
-                                    <option value="Burundi"> Burundi </option>
-                                    <option value="Cabo-Verde"> Cabo Verde </option>
-                                    <option value="Cambodia"> Cambodia </option>
-                                    <option value="Cameroon"> Cameroon </option>
-                                    <option value="Canada"> Canada </option>
-                                    <option value="Central-African-Republic"> Central African Republic </option>
-                                    <option value="Chad"> Chad </option>
-                                    <option value="Channel-Islands"> Channel Islands </option>
-                                    <option value="Chile"> Chile </option>
-                                    <option value="China"> China </option>
-                                    <option value="Colombia"> Colombia </option>
-                                    <option value="Comoros"> Comoros </option>
-                                    <option value="Congo"> Congo </option>
-                                    <option value="Costa-Rica"> Costa Rica </option>
-                                    <option value="Côte-d-Ivoire"> Côte d Ivoire </option>
-                                    <option value="Croatia"> Croatia </option>
-                                    <option value="Cuba"> Cuba </option>
-                                    <option value="Cyprus"> Cyprus </option>
-                                    <option value="Czech-Republic"> Czech Republic </option>
-                                    <option value="Denmark"> Denmark </option>
-                                    <option value="Djibouti"> Djibouti </option>
-                                    <option value="Dominica"> Dominica </option>
-                                    <option value="Dominican-Republic"> Dominican Republic </option>
-                                    <option value="DR-Congo"> DR Congo </option>
-                                    <option value="Ecuador"> Ecuador </option>
-                                    <option value="Egypt"> Egypt </option>
-                                    <option value="El-Salvador"> El Salvador </option>
-                                    <option value="Equatorial-Guinea"> Equatorial Guinea </option>
-                                    <option value="Eritrea"> Eritrea </option>
-                                    <option value="Estonia"> Estonia </option>
-                                    <option value="Eswatini"> Eswatini </option>
-                                    <option value="Ethiopia"> Ethiopia </option>
-                                    <option value="Faeroe-Islands"> Faeroe Islands </option>
-                                    <option value="Finland"> Finland </option>
-                                    <option value="France"> France </option>
-                                    <option value="French-Guiana"> French Guiana </option>
-                                    <option value="Gabon"> Gabon </option>
-                                    <option value="Gambia"> Gambia </option>
-                                    <option value="Georgia"> Georgia </option>
-                                    <option value="Germany"> Germany </option>
-                                    <option value="Ghana"> Ghana </option>
-                                    <option value="Gibraltar"> Gibraltar </option>
-                                    <option value="Greece"> Greece </option>
-                                    <option value="Grenada"> Grenada </option>
-                                    <option value="Guatemala"> Guatemala </option>
-                                    <option value="Guinea"> Guinea </option>
-                                    <option value="Guinea-Bissau"> Guinea-Bissau </option>
-                                    <option value="Guyana"> Guyana </option>
-                                    <option value="Haiti"> Haiti </option>
-                                    <option value="Holy-See"> Holy See </option>
-                                    <option value="Honduras"> Honduras </option>
-                                    <option value="Hong-Kong"> Hong Kong </option>
-                                    <option value="Hungary"> Hungary </option>
-                                    <option value="Iceland"> Iceland </option>
-                                    <option value="India"> India </option>
-                                    <option value="Indonesia"> Indonesia </option>
-                                    <option value="Iran"> Iran </option>
-                                    <option value="Iraq"> Iraq </option>
-                                    <option value="Ireland"> Ireland </option>
-                                    <option value="Isle-of-Man"> Isle of Man </option>
-                                    <option value="Italy"> Italy </option>
-                                    <option value="Jamaica"> Jamaica </option>
-                                    <option value="Japan"> Japan </option>
-                                    <option value="Jordan"> Jordan </option>
-                                    <option value="Kazakhstan"> Kazakhstan </option>
-                                    <option value="Kenya"> Kenya </option>
-                                    <option value="Kuwait"> Kuwait </option>
-                                    <option value="Kyrgyzstan"> Kyrgyzstan </option>
-                                    <option value="Laos"> Laos </option>
-                                    <option value="Latvia"> Latvia </option>
-                                    <option value="Lebanon"> Lebanon </option>
-                                    <option value="Lesotho"> Lesotho </option>
-                                    <option value="Liberia"> Liberia </option>
-                                    <option value="Libya"> Libya </option>
-                                    <option value="Liechtenstein"> Liechtenstein </option>
-                                    <option value="Lithuania"> Lithuania </option>
-                                    <option value="Luxembourg"> Luxembourg </option>
-                                    <option value="Macao"> Macao </option>
-                                    <option value="Madagascar"> Madagascar </option>
-                                    <option value="Malawi"> Malawi </option>
-                                    <option value="Malaysia"> Malaysia </option>
-                                    <option value="Maldives"> Maldives </option>
-                                    <option value="Mali"> Mali </option>
-                                    <option value="Malta"> Malta </option>
-                                    <option value="Mauritania"> Mauritania </option>
-                                    <option value="Mauritius"> Mauritius </option>
-                                    <option value="Mayotte"> Mayotte </option>
-                                    <option value="Mexico"> Mexico </option>
-                                    <option value="Moldova"> Moldova </option>
-                                    <option value="Monaco"> Monaco </option>
-                                    <option value="Mongolia"> Mongolia </option>
-                                    <option value="Montenegro"> Montenegro </option>
-                                    <option value="Morocco"> Morocco </option>
-                                    <option value="Mozambique"> Mozambique </option>
-                                    <option value="Myanmar"> Myanmar </option>
-                                    <option value="Namibia"> Namibia </option>
-                                    <option value="Nepal"> Nepal </option>
-                                    <option value="Netherlands"> Netherlands </option>
-                                    <option value="Nicaragua"> Nicaragua </option>
-                                    <option value="Niger"> Niger </option>
-                                    <option value="Nigeria"> Nigeria </option>
-                                    <option value="North-Korea"> North Korea </option>
-                                    <option value="North-Macedonia"> North Macedonia </option>
-                                    <option value="Norway"> Norway </option>
-                                    <option value="Oman"> Oman </option>
-                                    <option value="Pakistan"> Pakistan </option>
-                                    <option value="Panama"> Panama </option>
-                                    <option value="Paraguay"> Paraguay </option>
-                                    <option value="Peru"> Peru </option>
-                                    <option value="Philippines"> Philippines </option>
-                                    <option value="Poland"> Poland </option>
-                                    <option value="Portugal"> Portugal </option>
-                                    <option value="Qatar"> Qatar </option>
-                                    <option value="Réunion"> Réunion </option>
-                                    <option value="Romania"> Romania </option>
-                                    <option value="Russia"> Russia </option>
-                                    <option value="Rwanda"> Rwanda </option>
-                                    <option value="Saint-Helena"> Saint Helena </option>
-                                    <option value="Saint-Kitts-and-Nevis"> Saint Kitts and Nevis </option>
-                                    <option value="Saint-Lucia"> Saint Lucia </option>
-                                    <option value="Saint-Vincent-and-the-Grenadines"> Saint Vincent and the Grenadines </option>
-                                    <option value="San-Marino"> San Marino </option>
-                                    <option value="Sao-Tome-&amp;-Principe"> Sao Tome &amp; Principe </option>
-                                    <option value="Saudi-Arabia"> Saudi Arabia </option>
-                                    <option value="Senegal"> Senegal </option>
-                                    <option value="Serbia"> Serbia </option>
-                                    <option value="Seychelles"> Seychelles </option>
-                                    <option value="Sierra-Leone"> Sierra Leone </option>
-                                    <option value="Singapore"> Singapore </option>
-                                    <option value="Slovakia"> Slovakia </option>
-                                    <option value="Slovenia"> Slovenia </option>
-                                    <option value="Somalia"> Somalia </option>
-                                    <option value="South-Africa"> South Africa </option>
-                                    <option value="South-Korea"> South Korea </option>
-                                    <option value="South-Sudan"> South Sudan </option>
-                                    <option value="Spain"> Spain </option>
-                                    <option value="Sri-Lanka"> Sri Lanka </option>
-                                    <option value="State-of-Palestine"> State of Palestine </option>
-                                    <option value="Sudan"> Sudan </option>
-                                    <option value="Suriname"> Suriname </option>
-                                    <option value="Sweden"> Sweden </option>
-                                    <option value="Switzerland"> Switzerland </option>
-                                    <option value="Syria"> Syria </option>
-                                    <option value="Taiwan"> Taiwan </option>
-                                    <option value="Tajikistan"> Tajikistan </option>
-                                    <option value="Tanzania"> Tanzania </option>
-                                    <option value="Thailand"> Thailand </option>
-                                    <option value="The-Bahamas"> The Bahamas </option>
-                                    <option value="Timor-Leste"> Timor-Leste </option>
-                                    <option value="Togo"> Togo </option>
-                                    <option value="Trinidad-and-Tobago"> Trinidad and Tobago </option>
-                                    <option value="Tunisia"> Tunisia </option>
-                                    <option value="Turkey"> Turkey </option>
-                                    <option value="Turkmenistan"> Turkmenistan </option>
-                                    <option value="Uganda"> Uganda </option>
-                                    <option value="Ukraine"> Ukraine </option>
-                                    <option value="United-Arab-Emirates"> United Arab Emirates </option>
-                                    <option value="United-Kingdom"> United Kingdom </option>
-                                    <option value="United-States"> United States </option>
-                                    <option value="Uruguay"> Uruguay </option>
-                                    <option value="Uzbekistan"> Uzbekistan </option>
-                                    <option value="Venezuela"> Venezuela </option>
-                                    <option value="Vietnam"> Vietnam </option>
-                                    <option value="Western-Sahara"> Western Sahara </option>
-                                    <option value="Yemen"> Yemen </option>
-                                    <option value="Zambia"> Zambia </option>
-                                    <option value="Zimbabwe"> Zimbabwe </option>
+                                    <option value="" selected disabled hidden> Select Country </option>
+                                    @foreach(\App\Models\Country::all() as $country)
+                                    <option value="{{$country->name}}" {{isset($delegations)?($delegations->country == $country->value ? 'Selected':''):''}}> {{$country->value}} </option>
+                                    @endforeach
                                 </select>
                             </div>
-                            <livewire:invited-by-component />
+                            <livewire:invited-by-component selectedVip="{{isset($delegations)?$delegations->invited_by:''}}" />
                             <div class="mb-3">
                                 <label for="address" class="form-label">Address</label>
-                                <textarea name="address" class="form-control" id="address" placeholder="Address"></textarea>
+                                <textarea name="address" class="form-control" id="address" placeholder="Address">{{isset($delegations)?$delegations->address:''}}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="delegation_response" class="form-label">Delegation Response</label>
                                 <select class="form-select" aria-label="Delegation Response" id="delegation_response" name="delegation_response" required>
-                                    <option value="Awaited"> Awaited </option>
-                                    <option value="Accepted"> Accepted </option>
-                                    <option value="Regretted"> Regretted </option>
+                                    <option value="Awaited" {{isset($delegations)?($delegations->delegation_response == 'Awaited' ? 'Selected':''):''}}> Awaited </option>
+                                    <option value="Accepted" {{isset($delegations)?($delegations->delegation_response == 'Accepted' ? 'Selected':''):''}}> Accepted </option>
+                                    <option value="Regretted" {{isset($delegations)?($delegations->delegation_response == 'Regretted' ? 'Selected':''):''}}> Regretted </option>
                                 </select>
                             </div>
                             <!-- <div class="mb-3">
@@ -284,65 +120,119 @@
                                 <select class="form-select" aria-label="Event Name" id="eventSelect" name="eventSelect" required>
                                     <option value="" selected disabled hidden> Select Event </option>
                                     @foreach(\App\Models\Event::all() as $event)
-                                    <option value="{{$event->name}}"> {{$event->name}} </option>
+                                    <option value="{{$event->name}}" {{isset($delegations)?($delegations->exhibition == $event->name ? 'Selected':''):''}}> {{$event->name}} </option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="rank" class="form-label">Rank</label>
-                                <select name="rank" id="rank" class="form-select">
+                                <select name="rank" id="rank" class="form-select" required>
                                     <option value="" selected disabled hidden> Select Rank </option>
                                     @foreach (\App\Models\Rank::all() as $renderRank)
-                                    <option value="{{$renderRank->ranks_uid}}">{{$renderRank->ranks_name}}</option>
+                                    <option value="{{$renderRank->ranks_uid}}" {{isset($delegationHead)?($delegationHead->rank == $renderRank->ranks_uid ? 'Selected':''):''}}>{{$renderRank->ranks_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="first_Name" class="form-label">First Name</label>
-                                <input name="first_Name" type="text" class="form-control" id="first_Name" placeholder="First Name" required>
+                                <input name="first_Name" type="text" class="form-control" id="first_Name" value="{{isset($delegationHead)?($delegationHead->first_Name):''}}" placeholder="First Name" required>
                             </div>
                             <div class="mb-3">
                                 <label for="last_Name" class="form-label">Last Name</label>
-                                <input name="last_Name" type="text" class="form-control" id="last_Name" placeholder="Last Name" required>
+                                <input name="last_Name" type="text" class="form-control" id="last_Name" value="{{isset($delegationHead)?($delegationHead->last_Name):''}}" placeholder="Last Name" required>
                             </div>
                             <div class="mb-3">
                                 <label for="designation" class="form-label">Designation</label>
-                                <input name="designation" type="text" class="form-control" id="designation" placeholder="Designation" required>
+                                <input name="designation" type="text" class="form-control" id="designation" value="{{isset($delegationHead)?($delegationHead->designation):''}}" placeholder="Designation" required>
                             </div>
                             <div class="mb-3">
-                                <input class="form-check-input" type="radio" name="self" id="self" value="1" checked>
+                                <label for="delegation_picture" class="form-label">Picture</label>
+                                <input name="delegation_picture" type="file" class="form-control" id="delegation_picture" accept="image/png, image/jpeg">
+                                <input name="savedpicture" type="hidden" class="form-control" id="savedpicture" value="">
+                                <div class="box-2">
+                                    <div class="result"></div>
+                                </div>
+                                <div class="box-2 img-result {{isset($delegationHead->delegation_picture) ? ($delegationHead?->delegation_picture?->img_blob ? '' : 'hide') : ''}}">
+                                    <img class="cropped" src="{{isset($delegationHead->delegation_picture)? $delegationHead?->delegation_picture?->img_blob:''}}" alt="" />
+                                </div>
+                                <div class="box">
+                                    <div class="options hide">
+                                        <label>Width</label>
+                                        <input type="number" class="img-w" value="300" min="100" max="1200" />
+                                    </div>
+                                    <button class="btn save hide">Save</button>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pdf" class="form-label">Document</label>
+                                <input name="pdf" type="file" class="form-control" id="pdf" accept="application/pdf">
+                                @if(isset($delegationHead)?$delegationHead->delegation_document:0)
+                                <object data="{{ route('request.getPdf' , $delegationHead->delegates_uid ) }}" type="application/pdf" width="100%" height="1000px">
+                                    <p>Your browser does not support PDF embedding. You can <a href="{{ route('request.getPdf' , $delegationHead->delegates_uid ) }}">download the PDF</a> instead.</p>
+                                </object>
+                                @endif
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-check-input" type="radio" name="self" id="self" value="1" {{isset($delegationHead)?($delegationHead->self?'checked':''):'checked'}} />
                                 <label class="form-check-label" for="self">
                                     Self
                                 </label>
                             </div>
                             <div class="mb-3">
-                                <input class="form-check-input" type="radio" name="self" id="rep" value="0">
+                                <input class="form-check-input" type="radio" name="self" id="rep" value="0" {{isset($delegationHead)?($delegationHead->self?'':'checked'):''}}>
                                 <label class="form-check-label" for="rep">
                                     Representative
                                 </label>
                             </div>
                             <div class="mb-3">
                                 <label for="rep_rank" class="form-label">Rank</label>
-                                <select name="rep_rank" id="rep_rank" class="form-select">
+                                <select name="rep_rank" id="rep_rank" class="form-select" required>
                                     <option value="" selected disabled hidden> Select Rank </option>
                                     @foreach (\App\Models\Rank::all() as $renderRank)
-                                    <option value="{{$renderRank->ranks_uid}}">{{$renderRank->ranks_name}}</option>
+                                    <option value="{{$renderRank->ranks_uid}}" {{isset($representatives)?($representatives->rank == $renderRank->ranks_uid ? 'Selected':''):''}}>{{$renderRank->ranks_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="rep_first_Name" class="form-label">Representative First Name</label>
-                                <input name="rep_first_Name" type="text" class="form-control" id="rep_first_Name" placeholder="Representative First Name">
+                                <input name="rep_first_Name" type="text" class="form-control" id="rep_first_Name" value="{{isset($representatives)?$representatives->first_Name :''}}" placeholder="Representative First Name">
                             </div>
                             <div class="mb-3">
                                 <label for="rep_last_Name" class="form-label">Representative Last Name</label>
-                                <input name="rep_last_Name" type="text" class="form-control" id="rep_last_Name" placeholder="Representative Last Name">
+                                <input name="rep_last_Name" type="text" class="form-control" id="rep_last_Name" value="{{isset($representatives)?$representatives->last_Name :''}}" placeholder="Representative Last Name">
                             </div>
                             <div class="mb-3">
                                 <label for="rep_designation" class="form-label">Designation</label>
-                                <input name="rep_designation" type="text" class="form-control" id="rep_designation" placeholder="Representative Designation">
+                                <input name="rep_designation" type="text" class="form-control" id="rep_designation" value="{{isset($representatives)?$representatives->designation :''}}" placeholder="Representative Designation">
                             </div>
-                            <input type="submit" name="submit" class="btn btn-primary" value="Add Delegation" />
+                            <div class="mb-3">
+                                <label for="representatives_picture" class="form-label">Picture</label>
+                                <input name="representatives_picture" type="file" class="form-control" id="representatives_picture" accept="image/png, image/jpeg">
+                                <input name="savedRepresentativesPicture" type="hidden" class="form-control" id="savedRepresentativesPicture" value="">
+                                <div class="box-2-representatives">
+                                    <div class="result-representatives"></div>
+                                </div>
+                                <div class="box-2-representatives img-result-representatives {{isset($representatives->delegation_picture) ? ($representatives?->delegation_picture?->img_blob ? '' : 'hide') : ''}}">
+                                    <img class="cropped-representatives" src="{{isset($representatives->delegation_picture)? $representatives?->delegation_picture?->img_blob:''}}" alt="" />
+                                </div>
+                                <div class="box-representatives">
+                                    <div class="options-representatives hide-representatives">
+                                        <label>Width</label>
+                                        <input type="number" class="img-w-representatives" value="300" min="100" max="1200" />
+                                    </div>
+                                    <button class="btn save-representatives hide-representatives">Save</button>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="repPdf" class="form-label">Document</label>
+                                <input name="repPdf" type="file" class="form-control" id="repPdf" accept="application/pdf">
+                                @if(isset($representatives)?$representatives->delegation_document:0)
+                                <object data="{{ route('request.getPdf' , $representatives->delegates_uid ) }}" type="application/pdf" width="100%" height="1000px">
+                                    <p>Your browser does not support PDF embedding. You can <a href="{{ route('request.getPdf' , $representatives->delegates_uid ) }}">download the PDF</a> instead.</p>
+                                </object>
+                                @endif
+                            </div>
+                            <input type="submit" name="submit" class="btn {{isset($delegations)?'btn-success':'btn-primary'}}" value="{{isset($delegations)?'Update Delegation':'Add Delegation'}}" />
                         </fieldset>
                     </form>
                 </div>
@@ -353,5 +243,116 @@
         </div>
     </div>
 </div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.min.js'></script>
+<script>
+    // vars
+    let result = document.querySelector('.result'),
+        img_result = document.querySelector('.img-result'),
+        save = document.querySelector('.save'),
+        cropped = document.querySelector('.cropped'),
+        img_w = document.querySelector('.img-w'),
+        dwn = document.querySelector('.download'),
+        upload = document.querySelector('#delegation_picture'),
+        cropper = '';
+
+    // on change show image with crop options
+    upload.addEventListener('change', e => {
+        if (e.target.files.length) {
+            // start file reader
+            const reader = new FileReader();
+            reader.onload = e => {
+                if (e.target.result) {
+                    // create new image
+                    let img = document.createElement('img');
+                    img.id = 'image';
+                    img.src = e.target.result;
+                    // clean result before
+                    result.innerHTML = '';
+                    // append new image
+                    result.appendChild(img);
+                    // show save btn and options
+                    save.classList.remove('hide');
+                    // options.classList.remove('hide');
+                    // init cropper
+                    cropper = new Cropper(img);
+                }
+            };
+            reader.readAsDataURL(e.target.files[0]);
+        }
+    });
+
+    // save on click
+    save.addEventListener('click', e => {
+        e.preventDefault();
+        // get result to data uri
+        let imgSrc = cropper.getCroppedCanvas({
+            width: img_w.value // input value
+        }).toDataURL();
+        // remove hide class of img
+        cropped.classList.remove('hide');
+        img_result.classList.remove('hide');
+        // show image cropped
+        cropped.src = imgSrc;
+        document.getElementById('savedpicture').value = imgSrc;
+        dwn.classList.remove('hide');
+        dwn.download = 'imagename.png';
+        dwn.setAttribute('href', imgSrc);
+    });
+</script>
+<script>
+    // vars
+    let result_representatives = document.querySelector('.result-representatives'),
+        img_result_representatives = document.querySelector('.img-result-representatives'),
+        save_representatives = document.querySelector('.save-representatives'),
+        cropped_representatives = document.querySelector('.cropped-representatives'),
+        img_w_representatives = document.querySelector('.img-w-representatives'),
+        dwn_representatives = document.querySelector('.download-representatives'),
+        upload_representatives = document.querySelector('#representatives_picture'),
+        cropper_representatives = '';
+
+    // on change show image with crop options
+    upload_representatives.addEventListener('change', e => {
+        if (e.target.files.length) {
+            // start file reader
+            const reader = new FileReader();
+            reader.onload = e => {
+                if (e.target.result) {
+                    // create new image
+                    let img = document.createElement('img');
+                    img.id = 'image';
+                    img.src = e.target.result;
+                    // clean result before
+                    result_representatives.innerHTML = '';
+                    // append new image
+                    result_representatives.appendChild(img);
+                    // show save btn and options
+                    save_representatives.classList.remove('hide-representatives');
+                    // options.classList.remove('hide');
+                    // init cropper
+                    cropper_representatives = new Cropper(img);
+                }
+            };
+            reader.readAsDataURL(e.target.files[0]);
+        }
+    });
+
+    // save on click
+    save_representatives.addEventListener('click', e => {
+        e.preventDefault();
+        // get result to data uri
+        let imgSrc = cropper_representatives.getCroppedCanvas({
+            width: img_w_representatives.value // input value
+        }).toDataURL();
+        // remove hide class of img
+        cropped_representatives.classList.remove('hide-representatives');
+        img_result_representatives.classList.remove('hide-representatives');
+        // show image cropped
+        cropped_representatives.src = imgSrc;
+        document.getElementById('savedRepresentativesPicture').value = imgSrc;
+        dwn_representatives.classList.remove('hide-representatives');
+        dwn_representatives.download = 'imagename.png';
+        dwn_representatives.setAttribute('href', imgSrc);
+    });
+</script>
 @endsection
 @endauth

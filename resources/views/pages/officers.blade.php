@@ -27,6 +27,9 @@
                             <th data-field="officer_identity" data-sortable="true">Identity</th>
                             <th data-field="officer_type" data-sortable="true">Type</th>
                             <th data-field="officerCode" data-sortable="true">Code</th>
+                            <th data-field="officer_address" data-sortable="true">Address</th>
+                            <th data-field="officer_remarks" data-sortable="true">Remarks</th>
+                            <th data-field="officer_picture.img_blob" data-formatter="operatePicture">Picture</th>
                             <th data-field="officer_uid" data-formatter="operateProfile">Actions</th>
                         </tr>
                     </thead>
@@ -56,6 +59,16 @@
                 '<a class="remove" href="javascript:void(0)" title="Remove">',
                 '<i class="fa fa-trash"></i>',
                 '</a>',
+                '</div>'
+            ].join('')
+        }
+    }
+
+    function operatePicture(value, row, index) {
+        if (value) {
+            return [
+                '<div class="left">',
+                '<img src="' + value + '" width="80px" height="80px"/>',
                 '</div>'
             ].join('')
         }

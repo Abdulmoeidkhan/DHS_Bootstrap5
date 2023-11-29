@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('officer_designation');
             $table->string('officer_first_name');
             $table->string('officer_last_name');
+            $table->string('officer_address');
             $table->bigInteger('officer_contact');
             $table->bigInteger('officer_identity')->unique();
             $table->uuid('officer_delegation')->unique()->nullable();

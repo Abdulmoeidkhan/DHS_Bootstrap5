@@ -44,15 +44,15 @@ class OfficerController extends Controller
         }
         return $code;
     }
-    protected function documentUpload($file, $id)
-    {
-        $pdfBlob = file_get_contents($file->getRealPath());
-        $pdf = new Document();
-        $pdf->pdf_blob = $pdfBlob;
-        $pdf->uid = $id;
-        $pdfSaved = $pdf->save();
-        return $pdfSaved;
-    }
+    // protected function documentUpload($file, $id)
+    // {
+    //     $pdfBlob = file_get_contents($file->getRealPath());
+    //     $pdf = new Document();
+    //     $pdf->pdf_blob = $pdfBlob;
+    //     $pdf->uid = $id;
+    //     $pdfSaved = $pdf->save();
+    //     return $pdfSaved;
+    // }
     protected function imageBlobUpload($file, $id)
     {
         $imageBlob = $file;
@@ -62,12 +62,12 @@ class OfficerController extends Controller
         $imgSaved = $imgBlob->save();
         return $imgSaved;
     }
-    protected function documentUpdate($file, $id)
-    {
-        $pdfBlob = file_get_contents($file->getRealPath());
-        $updatePdfBlob = Document::where('uid', $id)->first() ? Document::where('uid', $id)->update(['pdf_blob' => $pdfBlob]) : $this->documentUpload($file, $id);
-        return $updatePdfBlob;
-    }
+    // protected function documentUpdate($file, $id)
+    // {
+    //     $pdfBlob = file_get_contents($file->getRealPath());
+    //     $updatePdfBlob = Document::where('uid', $id)->first() ? Document::where('uid', $id)->update(['pdf_blob' => $pdfBlob]) : $this->documentUpload($file, $id);
+    //     return $updatePdfBlob;
+    // }
     protected function imageBlobUpdate($file, $id)
     {
         $imageBlob = $file;
@@ -86,12 +86,14 @@ class OfficerController extends Controller
         $officer->officer_contact = $req->officer_contact;
         $officer->officer_identity = $req->officer_identity;
         $officer->officer_type  = $req->officer_type;
+        $officer->officer_address  = $req->officer_address;
+        $officer->officer_remarks  = $req->officer_remarks;
         $officer->officerCode  = $this->badge(8, $req->officer_type);
         try {
             $officerSaved = $officer->save();
             $imgSaved = $req->savedpicture ? $this->imageBlobUpload($req->savedpicture, $officer->officer_uid) : '';
-            $pdfSaved = $req->file('pdf') ? $this->documentUpload($req->file('pdf'), $officer->officer_uid) : '';
-            if ($officerSaved && $imgSaved && $pdfSaved) {
+            // $pdfSaved = $req->file('pdf') ? $this->documentUpload($req->file('pdf'), $officer->officer_uid) : '';
+            if ($officerSaved) {
                 return back()->with('message', 'Officer has been added Successfully');
             }
         } catch (QueryException $exception) {
@@ -113,9 +115,9 @@ class OfficerController extends Controller
         try {
 
             $officerUpdate = Officer::where('officer_uid', $id)->update($arrayToBeUpdate);
-            $pdfUpdate = $req->pdf ? $this->documentUpdate($req->file('pdf'), $id) : 0;
+            // $pdfUpdate = $req->pdf ? $this->documentUpdate($req->file('pdf'), $id) : 0;
             $imgUpdate = $req->savedpicture ? $this->imageBlobUpdate($req->savedpicture, $id) : 0;
-            if ($officerUpdate && $imgUpdate && $pdfUpdate) {
+            if ($officerUpdate) {
                 return back()->with('message', 'Officer has been updated Successfully');
             }
         } catch (QueryException $exception) {
@@ -139,9 +141,9 @@ class OfficerController extends Controller
         foreach ($officers as $key => $officer) {
             $officers[$key]->officer_rank = Rank::where('ranks_uid', $officer->officer_rank)->first();
             $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
-            if ($id) {
-                $officers[$key]->officer_document = Document::where('uid', $officer->officer_uid)->first();
-            }
+            // if ($id) {
+            //     $officers[$key]->officer_document = Document::where('uid', $officer->officer_uid)->first();
+            // }
         }
         return $officers;
     }

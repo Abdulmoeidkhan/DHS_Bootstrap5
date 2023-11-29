@@ -245,6 +245,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/getSpecificMembers', [MemberController::class, 'specificMembersData'])->name('pages.getSpecificMembers');
         Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->name('request.updateAuthority');
         Route::post('/addDelegationRequest', [AddDelegationPageController::class, 'addDelegation'])->name('request.addDelegationRequest');
+        Route::post('/updateDelegationRequest', [AddDelegationPageController::class, 'updateDelegationRequest'])->name('request.updateDelegationRequest');
     });
     Route::group(['middleware' => 'authorisedUserCheck'], function () {
         // Liason Start
