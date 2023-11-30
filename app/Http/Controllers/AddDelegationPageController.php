@@ -47,6 +47,19 @@ class AddDelegationPageController extends Controller
         return $imgSaved;
     }
 
+    protected function documentUpdate($file, $id)
+    {
+        $pdfBlob = file_get_contents($file->getRealPath());
+        $updatePdfBlob = Document::where('uid', $id)->first() ? Document::where('uid', $id)->update(['pdf_blob' => $pdfBlob]) : $this->documentUpload($file, $id);
+        return $updatePdfBlob;
+    }
+    protected function imageBlobUpdate($file, $id)
+    {
+        $imageBlob = $file;
+        $updateImageBlob = ImageBlob::where('uid', $id)->first() ? ImageBlob::where('uid', $id)->update(['img_blob' => $imageBlob]) : $this->imageBlobUpload($file, $id);
+        return $updateImageBlob;
+    }
+
     public function render($id = null)
     {
         $events = Event::where('end_date', '>', date('Y-m-d'))->orderBy('start_date', 'desc')->get();
@@ -109,7 +122,7 @@ class AddDelegationPageController extends Controller
             $representativeSaved = $representative->save();
             if ($representativeSaved) {
                 $imgSaved = $req->savedRepresentativesPicture ? $this->imageBlobUpload($req->savedRepresentativesPicture, $representative->delegates_uid) : '';
-                $pdfSaved = $req->file('repPdf') ? $this->documentUpload($req->file('repPdf'), $representative->delegates_uid) : '';
+                $pdfSaved = $req->file('rep_Pdf') ? $this->documentUpload($req->file('rep_Pdf'), $representative->delegates_uid) : '';
                 $delegateSaved = $delegates->save();
             }
         }
@@ -134,28 +147,48 @@ class AddDelegationPageController extends Controller
     public function updateDelegationRequest(Request $req)
     {
         $arrayToBeUpdate = [];
-        return "Working";
-        // return $req->all();
-        // foreach ($req->all() as $key => $value) {
-        //     if ($key != 'submit' && $key != '_token' && $key != 'savedpicture'  && $key != 'picture' && $key != 'delegation_picture' && $key != 'pdf' && $key != 'savedRepresentativesPicture' && $key != 'repPdf' && strlen($value) > 0) {
-        //         $arrayToBeUpdate[$key] = $value;
-        //     }
-        // }
-        // try {
-
-        //     $officerUpdate = Delegate::where('officer_uid', $id)->update($arrayToBeUpdate);
-        //     // $pdfUpdate = $req->pdf ? $this->documentUpdate($req->file('pdf'), $id) : 0;
-        //     $imgUpdate = $req->savedpicture ? $this->imageBlobUpdate($req->savedpicture, $id) : 0;
-        //     if ($officerUpdate) {
-        //         return back()->with('message', 'Officer has been updated Successfully');
-        //     }
-        // } catch (\Illuminate\Database\QueryException $exception) {
-        //     if ($exception->errorInfo[2]) {
-        //         return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
-        //     } else {
-        //         return  back()->with('error', $exception->errorInfo[2]);
-        //     }
-        // }
+        $arrayToBeUpdateRep = [];
+        $arrayToBeUpdateSelf = [];
+        foreach ($req->all() as $key => $value) {
+            if ($key != 'submit' && $key != '_token' && $key != 'savedpicture'  && $key != 'delegation_picture' && $key != 'pdf' && $key != 'rep_Pdf' && $key != 'rep_saved_picture' && $key != 'rep_picture' && strlen($value) > 0) {
+                if (substr($key, 0, 4) == 'rep_') {
+                    $arrayToBeUpdateRep[substr($key, 4)] = $value;
+                } elseif (substr($key, 0, 5) == 'self_') {
+                    $arrayToBeUpdateSelf[substr($key, 5)] = $value;
+                } else {
+                    if ($key == 'self') {
+                        $arrayToBeUpdate['delegationhead'] = $value ? $req->self_delegation_uid : $req->rep_delegation_uid;
+                        $arrayToBeUpdateRep['self'] = $value ? 0 : 1;
+                        $arrayToBeUpdateSelf['self'] = $value;
+                    }
+                    if ($key !== 'self') {
+                        $arrayToBeUpdate[$key] = $value;
+                    }
+                }
+            }
+        }
+        $delegationRepUid = $arrayToBeUpdateRep['delegation_uid'];
+        $delegationSelfUid = $arrayToBeUpdateSelf['delegation_uid'];
+        unset($arrayToBeUpdateRep['delegation_uid']);
+        unset($arrayToBeUpdateSelf['delegation_uid']);
+        try {
+            $delegationUpdate = Delegation::where('uid', $arrayToBeUpdate['uid'])->update($arrayToBeUpdate);
+            $representativeUpdate = Delegate::where('delegates_uid', $delegationRepUid)->update($arrayToBeUpdateRep);
+            $delegateUpdate = Delegate::where('delegates_uid', $delegationSelfUid)->update($arrayToBeUpdateSelf);
+            $req->rep_Pdf ? $this->documentUpdate($req->file('rep_Pdf'), $delegationRepUid) : 0;
+            $req->rep_saved_picture ? $this->imageBlobUpdate($req->rep_saved_picture, $delegationRepUid) : 0;
+            $req->pdf ? $this->documentUpdate($req->file('pdf'), $delegationSelfUid) : 0;
+            $req->savedpicture ? $this->imageBlobUpdate($req->savedpicture, $delegationSelfUid) : 0;
+            if ($delegateUpdate) {
+                return back()->with('message', 'Delegation has been updated Successfully');
+            }
+        } catch (\Illuminate\Database\QueryException $exception) {
+            if ($exception->errorInfo[2]) {
+                return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+            } else {
+                return  back()->with('error', $exception->errorInfo[2]);
+            }
+        }
     }
 
     // public function updateDelegation(Request $req)

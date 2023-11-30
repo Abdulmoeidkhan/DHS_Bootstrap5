@@ -116,8 +116,8 @@
                                 </select>
                             </div> -->
                             <div class="mb-3">
-                                <label for="eventSelect" class="form-label">Event Name</label>
-                                <select class="form-select" aria-label="Event Name" id="eventSelect" name="eventSelect" required>
+                                <label for="exhibition" class="form-label">Event Name</label>
+                                <select class="form-select" aria-label="Event Name" id="exhibition" name="exhibition" required>
                                     <option value="" selected disabled hidden> Select Event </option>
                                     @foreach(\App\Models\Event::all() as $event)
                                     <option value="{{$event->name}}" {{isset($delegations)?($delegations->exhibition == $event->name ? 'Selected':''):''}}> {{$event->name}} </option>
@@ -126,7 +126,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="rank" class="form-label">Rank</label>
-                                <select name="rank" id="rank" class="form-select" required>
+                                <select name="self_rank" id="self_rank" class="form-select" required>
                                     <option value="" selected disabled hidden> Select Rank </option>
                                     @foreach (\App\Models\Rank::all() as $renderRank)
                                     <option value="{{$renderRank->ranks_uid}}" {{isset($delegationHead)?($delegationHead->rank == $renderRank->ranks_uid ? 'Selected':''):''}}>{{$renderRank->ranks_name}}</option>
@@ -134,16 +134,16 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="first_Name" class="form-label">First Name</label>
-                                <input name="first_Name" type="text" class="form-control" id="first_Name" value="{{isset($delegationHead)?($delegationHead->first_Name):''}}" placeholder="First Name" required>
+                                <label for="self_first_Name" class="form-label">First Name</label>
+                                <input name="self_first_Name" type="text" class="form-control" id="self_first_Name" value="{{isset($delegationHead)?($delegationHead->first_Name):''}}" placeholder="First Name" required>
                             </div>
                             <div class="mb-3">
-                                <label for="last_Name" class="form-label">Last Name</label>
-                                <input name="last_Name" type="text" class="form-control" id="last_Name" value="{{isset($delegationHead)?($delegationHead->last_Name):''}}" placeholder="Last Name" required>
+                                <label for="self_last_Name" class="form-label">Last Name</label>
+                                <input name="self_last_Name" type="text" class="form-control" id="self_last_Name" value="{{isset($delegationHead)?($delegationHead->last_Name):''}}" placeholder="Last Name" required>
                             </div>
                             <div class="mb-3">
-                                <label for="designation" class="form-label">Designation</label>
-                                <input name="designation" type="text" class="form-control" id="designation" value="{{isset($delegationHead)?($delegationHead->designation):''}}" placeholder="Designation" required>
+                                <label for="self_designation" class="form-label">Designation</label>
+                                <input name="self_designation" type="text" class="form-control" id="self_designation" value="{{isset($delegationHead)?($delegationHead->designation):''}}" placeholder="Designation" required>
                             </div>
                             <div class="mb-3">
                                 <label for="delegation_picture" class="form-label">Picture</label>
@@ -163,6 +163,9 @@
                                     <button class="btn save hide">Save</button>
                                 </div>
                             </div>
+                            @if(isset($delegationHead))
+                            <input name="self_delegation_uid" type="hidden" class="form-control" id="self_delegation_uid" value="{{isset($delegationHead)?$delegationHead->delegates_uid :''}}">
+                            @endif
                             <div class="mb-3">
                                 <label for="pdf" class="form-label">Document</label>
                                 <input name="pdf" type="file" class="form-control" id="pdf" accept="application/pdf">
@@ -206,9 +209,9 @@
                                 <input name="rep_designation" type="text" class="form-control" id="rep_designation" value="{{isset($representatives)?$representatives->designation :''}}" placeholder="Representative Designation">
                             </div>
                             <div class="mb-3">
-                                <label for="representatives_picture" class="form-label">Picture</label>
-                                <input name="representatives_picture" type="file" class="form-control" id="representatives_picture" accept="image/png, image/jpeg">
-                                <input name="savedRepresentativesPicture" type="hidden" class="form-control" id="savedRepresentativesPicture" value="">
+                                <label for="rep_picture" class="form-label">Picture</label>
+                                <input name="rep_picture" type="file" class="form-control" id="rep_picture" accept="image/png, image/jpeg">
+                                <input name="rep_saved_picture" type="hidden" class="form-control" id="rep_saved_picture" value="">
                                 <div class="box-2-representatives">
                                     <div class="result-representatives"></div>
                                 </div>
@@ -224,14 +227,21 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="repPdf" class="form-label">Document</label>
-                                <input name="repPdf" type="file" class="form-control" id="repPdf" accept="application/pdf">
+                                <label for="rep_Pdf" class="form-label">Document</label>
+                                <input name="rep_Pdf" type="file" class="form-control" id="rep_Pdf" accept="application/pdf">
                                 @if(isset($representatives)?$representatives->delegation_document:0)
-                                <object data="{{ route('request.getPdf' , $representatives->delegates_uid ) }}" type="application/pdf" width="100%" height="1000px">
-                                    <p>Your browser does not support PDF embedding. You can <a href="{{ route('request.getPdf' , $representatives->delegates_uid ) }}">download the PDF</a> instead.</p>
+                                <object data="{{route('request.getPdf' , $representatives->delegates_uid)}}" type="application/pdf" width="100%" height="1000px">
+                                    <p>Your browser does not support PDF embedding. You can <a href="{{route('request.getPdf',$representatives->delegates_uid)}}">download the PDF</a> instead.</p>
                                 </object>
                                 @endif
                             </div>
+                            @if(isset($representatives))
+                            <input name="rep_delegation_uid" type="hidden" class="form-control" id="rep_delegation_uid" value="{{isset($representatives)?$representatives->delegates_uid :''}}">
+                            @endif
+                            @if(isset($delegations))
+                            <input name="uid" type="hidden" class="form-control" id="uid" value="{{isset($delegations)?$delegations->uid :''}}">
+                            @endif
+                            
                             <input type="submit" name="submit" class="btn {{isset($delegations)?'btn-success':'btn-primary'}}" value="{{isset($delegations)?'Update Delegation':'Add Delegation'}}" />
                         </fieldset>
                     </form>
@@ -307,7 +317,7 @@
         cropped_representatives = document.querySelector('.cropped-representatives'),
         img_w_representatives = document.querySelector('.img-w-representatives'),
         dwn_representatives = document.querySelector('.download-representatives'),
-        upload_representatives = document.querySelector('#representatives_picture'),
+        upload_representatives = document.querySelector('#rep_picture'),
         cropper_representatives = '';
 
     // on change show image with crop options
@@ -348,7 +358,7 @@
         img_result_representatives.classList.remove('hide-representatives');
         // show image cropped
         cropped_representatives.src = imgSrc;
-        document.getElementById('savedRepresentativesPicture').value = imgSrc;
+        document.getElementById('rep_saved_picture').value = imgSrc;
         dwn_representatives.classList.remove('hide-representatives');
         dwn_representatives.download = 'imagename.png';
         dwn_representatives.setAttribute('href', imgSrc);

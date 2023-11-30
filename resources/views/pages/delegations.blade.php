@@ -14,6 +14,37 @@
 </div>
 <br />
 @endif
+<div class="modal fade" id="officerModal" tabindex="-1" aria-labelledby="officerModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="officerModalLabel">Officer Modal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" action='{{route("request.attachOfficer")}}'>
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="officerSelect" class="col-form-label">Officer :</label>
+                        <select class="form-select" aria-label="Officer To Be Associate" id="officerSelect" name="officerSelect" required>
+                            <option value="" selected disabled hidden> Select Officer To Be Associate </option>
+                            @foreach(\App\Models\Officer::where('officer_assign',0)->get() as $key=>$officer)
+                            <option value="{{$officer->officer_uid}}"> {{$officer->officer_first_name.' '.$officer->officer_last_name.' - '.$officer->officer_type}} </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <input type="hidden" name="delegationUidOfficer" value="" id="delegationUidOfficer" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="LiasonModal" tabindex="-1" aria-labelledby="LiasonModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

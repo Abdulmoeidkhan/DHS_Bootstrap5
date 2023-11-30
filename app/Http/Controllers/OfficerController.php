@@ -134,6 +134,9 @@ class OfficerController extends Controller
         return view('pages.officers');
     }
 
+    public function attachOfficer(){
+        
+    }
 
     public function officerData($id = null)
     {
