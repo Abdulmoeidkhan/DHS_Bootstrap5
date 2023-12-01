@@ -84,20 +84,26 @@ class AddDelegationPageController extends Controller
 
         $delegates = new Delegate();
         $delegates->delegates_uid = (string) Str::uuid();
-        $delegates->rank = $req->rank;
+        $delegates->rank = $req->self_rank;
         $delegates->delegation_type = 'Delegate';
-        $delegates->first_Name = $req->first_Name;
-        $delegates->last_Name = $req->last_Name;
-        $delegates->designation = $req->designation;
+        $delegates->first_Name = $req->self_first_Name;
+        $delegates->last_Name = $req->self_last_Name;
+        $delegates->designation = $req->self_designation;
 
         $delegation = new Delegation();
         $delegation->uid = (string) Str::uuid();
         $delegation->country = $req->country;
-        $delegation->invited_by = $req->invitedBy;
+        $delegation->invited_by = $req->invited_by;
         $delegation->address = $req->address;
-        $delegation->exhibition = $req->eventSelect;
+        $delegation->delegation_response = $req->delegation_response;
+        $delegation->exhibition = $req->exhibition;
         $delegation->delegationCode = $this->badge(8, "DL");
 
+        $representative = new Delegate();
+        $representative->delegates_uid = (string) Str::uuid();
+        $representative->delegation_type = 'Representative';
+        $representative->delegation = $delegation->uid;
+        $representativeSaved = $representative->save();
 
         $delegateSaved = 0;
         if ($req->self) {
@@ -108,18 +114,13 @@ class AddDelegationPageController extends Controller
             $pdfSaved = $req->file('pdf') ? $this->documentUpload($req->file('pdf'), $delegates->delegates_uid) : '';
             $delegateSaved = $delegates->save();
         } else {
-            $representative = new Delegate();
-            $representative->delegates_uid = (string) Str::uuid();
             $representative->rank = $req->rep_rank;
-            $representative->delegation_type = 'Representative';
             $representative->first_Name = $req->rep_first_Name;
             $representative->last_Name = $req->rep_last_Name;
             $representative->designation = $req->rep_designation;
-            $delegation->delegationhead = $representative->delegates_uid;
-            $representative->delegation = $delegation->uid;
+            $delegation->delegationhead = $delegates->delegates_uid;
             $delegates->delegation = $delegation->uid;
             $delegates->self = 0;
-            $representativeSaved = $representative->save();
             if ($representativeSaved) {
                 $imgSaved = $req->savedRepresentativesPicture ? $this->imageBlobUpload($req->savedRepresentativesPicture, $representative->delegates_uid) : '';
                 $pdfSaved = $req->file('rep_Pdf') ? $this->documentUpload($req->file('rep_Pdf'), $representative->delegates_uid) : '';
@@ -157,7 +158,7 @@ class AddDelegationPageController extends Controller
                     $arrayToBeUpdateSelf[substr($key, 5)] = $value;
                 } else {
                     if ($key == 'self') {
-                        $arrayToBeUpdate['delegationhead'] = $value ? $req->self_delegation_uid : $req->rep_delegation_uid;
+                        $arrayToBeUpdate['delegationhead'] = $req->self_delegation_uid;
                         $arrayToBeUpdateRep['self'] = $value ? 0 : 1;
                         $arrayToBeUpdateSelf['self'] = $value;
                     }
@@ -167,6 +168,7 @@ class AddDelegationPageController extends Controller
                 }
             }
         }
+        // return [$arrayToBeUpdate, $arrayToBeUpdateRep, $arrayToBeUpdateSelf];
         $delegationRepUid = $arrayToBeUpdateRep['delegation_uid'];
         $delegationSelfUid = $arrayToBeUpdateSelf['delegation_uid'];
         unset($arrayToBeUpdateRep['delegation_uid']);

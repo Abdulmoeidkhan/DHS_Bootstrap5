@@ -85,7 +85,7 @@ class MemberController extends Controller
 
     public function addMemberRequest(Request $req)
     {
-        $delegationUid = Delegation::where('uid', $req->delegation)->first('uid');
+        $delegationUid = Delegation::where('uid', $req->delegation)->first();
         $delegate = new Delegate();
         $delegate->delegates_uid = (string) Str::uuid();
         $delegate->rank = $req->rank;
@@ -93,13 +93,14 @@ class MemberController extends Controller
         $delegate->first_Name = $req->firstName;
         $delegate->last_Name = $req->lastName;
         $delegate->designation = $req->designation;
-        $delegate->organistaion = $req->organistaion;
-        // $delegate->passport = $req->passport;
         $delegate->delegation_type = $req->delegation_type;
+        // $delegate->organistaion = $req->organistaion;
+        // $delegate->passport = $req->passport;
+        // return $req->all();
         try {
             $savedMember = $delegate->save();
-            $req->file('picture') ? $this->imageUpload($req->file('picture'), $delegate->member_uid) : '';
-            $req->file('pdf') ? $this->documentUpload($req->file('pdf'), $delegate->member_uid) : '';
+            $req->file('picture') ? $this->imageUpload($req->file('picture'), $delegate->delegates_uid) : '';
+            $req->file('pdf') ? $this->documentUpload($req->file('pdf'), $delegate->delegates_uid) : '';
             if ($savedMember) {
                 // return redirect()->route("pages.addMember", $req->delegation)->with('message', 'Member Updated Successfully');
                 return back()->with('message', 'Member Updated Successfully');
@@ -123,8 +124,7 @@ class MemberController extends Controller
             if ($req->savedpicture) {
                 ImageBlob::where('uid', $id)->delete();
                 $imageBlog = new ImageBlob;
-                $imageBlog->uid = (string) Str::uuid();
-                $imageBlog->delegate_uid = $id;
+                $imageBlog->uid = $id;
                 $imageBlog->img_blob = $req->savedpicture;
                 $imageBlog->save();
             }
@@ -136,12 +136,12 @@ class MemberController extends Controller
         }
     }
 
-    public function memberFullProfile(Request $req, $id)
-    {
-        $member = Member::where('member_uid', $id)->first();
-        $member->image = Image::where('uid', $id)->first();
-        // $member->document = Document::where('uid', $id)->first();
-        // return $member;
-        return view('pages.memberProfile', ['member' => $member]);
-    }
+    // public function memberFullProfile(Request $req, $id)
+    // {
+    //     $member = Member::where('member_uid', $id)->first();
+    //     $member->image = Image::where('uid', $id)->first();
+    //     // $member->document = Document::where('uid', $id)->first();
+    //     // return $member;
+    //     return view('pages.memberProfile', ['member' => $member]);
+    // }
 }

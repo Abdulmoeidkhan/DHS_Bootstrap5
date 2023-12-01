@@ -175,7 +175,7 @@
         if (value) {
             return [
                 '<div class="left">',
-                '<img src="' + value + '" /> ',
+                '<img src="' + value + '" width="80px" height="80px"/>',
                 '</div>'
             ].join('')
         }

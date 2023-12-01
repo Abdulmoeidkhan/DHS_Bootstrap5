@@ -189,7 +189,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="rep_rank" class="form-label">Rank</label>
-                                <select name="rep_rank" id="rep_rank" class="form-select" required>
+                                <select name="rep_rank" id="rep_rank" class="form-select">
                                     <option value="" selected disabled hidden> Select Rank </option>
                                     @foreach (\App\Models\Rank::all() as $renderRank)
                                     <option value="{{$renderRank->ranks_uid}}" {{isset($representatives)?($representatives->rank == $renderRank->ranks_uid ? 'Selected':''):''}}>{{$renderRank->ranks_name}}</option>
@@ -235,9 +235,9 @@
                                 </object>
                                 @endif
                             </div>
-                            @if(isset($representatives))
+                            <!-- @if(isset($representatives)) -->
                             <input name="rep_delegation_uid" type="hidden" class="form-control" id="rep_delegation_uid" value="{{isset($representatives)?$representatives->delegates_uid :''}}">
-                            @endif
+                            <!-- @endif -->
                             @if(isset($delegations))
                             <input name="uid" type="hidden" class="form-control" id="uid" value="{{isset($delegations)?$delegations->uid :''}}">
                             @endif

@@ -167,9 +167,10 @@
                             <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
                             <th data-field="uid" data-formatter="operateDelegation">Edit</th>
                             <th data-field="uid" data-formatter="operateMember">Member</th>
-                            <th data-field="liason_uid" data-formatter="operateLiason">Liason</th>
+                            <th data-field="officer_uid" data-formatter="operateOfficer">Officer</th>
+                            <!-- <th data-field="liason_uid" data-formatter="operateLiason">Liason</th>
                             <th data-field="receiving_uid" data-formatter="operateReceiving">Receiving</th>
-                            <th data-field="interpreter_uid" data-formatter="operateInterpreter">Interpreter</th>
+                            <th data-field="interpreter_uid" data-formatter="operateInterpreter">Interpreter</th> -->
                             <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
                         </tr>
                     </thead>
