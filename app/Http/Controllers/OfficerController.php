@@ -134,8 +134,35 @@ class OfficerController extends Controller
         return view('pages.officers');
     }
 
-    public function attachOfficer(){
-        
+    public function attachOfficer(Request $req)
+    {
+        $liasons = $req->liasonSelect;
+        $receivings = $req->recievingSelect;
+        $interpreters = $req->interpreterSelect;
+        $delegationUid = $req->delegationUid_officer;
+        foreach ($liasons as $key => $liason) {
+            Officer::where('officer_uid', $liason)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
+        }
+        foreach ($receivings as $key => $receiving) {
+            Officer::where('officer_uid', $receiving)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
+        }
+        foreach ($interpreters as $key => $interpreter) {
+            Officer::where('officer_uid', $interpreter)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
+        }
+        // return [$liason,$receiving,$interpreter,$delegationUid];
+    }
+    public function detachOfficerData($id){
+        $officers = Officer::where('officer_delegation', $id)->get();
+        return $officers;
+    }
+    public function detachOfficer(Request $req)
+    {
+        $officers = $req->officers;
+        $delegationUid = $req->delegationUid_officer;
+        foreach ($officers as $key => $officers) {
+            Officer::where('officer_delegation', $delegationUid)->update(['officer_delegation' => null, 'officer_assign' => 0]);
+        }
+        // return [$liason,$receiving,$interpreter,$delegationUid];
     }
 
     public function officerData($id = null)

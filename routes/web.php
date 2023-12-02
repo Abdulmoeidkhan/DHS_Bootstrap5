@@ -188,6 +188,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/addOfficer', [OfficerController::class, 'addOfficer'])->name('request.addOfficer');
         Route::post('/updateOfficer/{id}', [OfficerController::class, 'updateOfficer'])->name('request.updateOfficer');
         Route::post('/attachOfficer', [OfficerController::class, 'attachOfficer'])->name('request.attachOfficer');
+        Route::post('/detachOfficer', [OfficerController::class, 'detachOfficer'])->name('request.detachOfficer');
+        Route::get('/detachOfficerData/{id}', [OfficerController::class, 'detachOfficerData'])->name('data.detachOfficer');
         // Officer Page And API End
 
 

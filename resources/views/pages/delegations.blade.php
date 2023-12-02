@@ -14,7 +14,35 @@
 </div>
 <br />
 @endif
-<div class="modal fade" id="officerModal" tabindex="-1" aria-labelledby="officerModal" aria-hidden="true">
+<div class="modal fade" id="DetachModal" tabindex="-1" aria-labelledby="DetachModal" aria-hidden="true" onchange="console.log('a')">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="officerModalLabel">Officer Modal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" action='{{route("request.detachOfficer")}}'>
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="officerSelect" class="col-form-label">Officers :</label>
+                        <select class="form-select" multiple aria-label="Officer To Be Detach" id="officerSelect" name="officerSelect[]" required>
+                            <option value="" selected disabled hidden> Select Officer To Be Detach </option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <input type="hidden" name="delegationUid_officer" value="" id="delegationUid_officer" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="OfficerModal" tabindex="-1" aria-labelledby="OfficerModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -25,16 +53,34 @@
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="officerSelect" class="col-form-label">Officer :</label>
-                        <select class="form-select" aria-label="Officer To Be Associate" id="officerSelect" name="officerSelect" required>
+                        <label for="liasonSelect" class="col-form-label">Liason Officer :</label>
+                        <select class="form-select" multiple aria-label="Officer To Be Associate" id="liasonSelect" name="liasonSelect[]" required>
                             <option value="" selected disabled hidden> Select Officer To Be Associate </option>
-                            @foreach(\App\Models\Officer::where('officer_assign',0)->get() as $key=>$officer)
-                            <option value="{{$officer->officer_uid}}"> {{$officer->officer_first_name.' '.$officer->officer_last_name.' - '.$officer->officer_type}} </option>
+                            @foreach(\App\Models\Officer::where([['officer_assign',0],['officer_type','Liason']])->get() as $key=>$officer)
+                            <option class="text-capitalize" value="{{$officer->officer_uid}}"> {{$officer->officer_first_name.' '.$officer->officer_last_name.' - '.$officer->officer_type}} </option>
                             @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
-                        <input type="hidden" name="delegationUidOfficer" value="" id="delegationUidOfficer" />
+                        <label for="recievingSelect" class="col-form-label">Recieving Officer :</label>
+                        <select class="form-select" multiple aria-label="Officer To Be Associate" id="recievingSelect" name="recievingSelect[]" required>
+                            <option value="" selected disabled hidden> Select Officer To Be Associate </option>
+                            @foreach(\App\Models\Officer::where([['officer_assign',0],['officer_type','Receiving']])->get() as $key=>$officer)
+                            <option class="text-capitalize" value="{{$officer->officer_uid}}"> {{$officer->officer_first_name.' '.$officer->officer_last_name.' - '.$officer->officer_type}} </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="interpreterSelect" class="col-form-label">Interpreter Officer :</label>
+                        <select class="form-select" multiple aria-label="Officer To Be Associate" id="interpreterSelect" name="interpreterSelect[]" required>
+                            <option value="" selected disabled hidden> Select Officer To Be Associate </option>
+                            @foreach(\App\Models\Officer::where([['officer_assign',0],['officer_type','Interpreter']])->get() as $key=>$officer)
+                            <option class="text-capitalize" value="{{$officer->officer_uid}}"> {{$officer->officer_first_name.' '.$officer->officer_last_name.' - '.$officer->officer_type}} </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <input type="hidden" name="delegationUid_officer" value="" id="delegationUid_officer" />
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -168,6 +214,7 @@
                             <th data-field="uid" data-formatter="operateDelegation">Edit</th>
                             <th data-field="uid" data-formatter="operateMember">Member</th>
                             <th data-field="officer_uid" data-formatter="operateOfficer">Officer</th>
+                            <th data-field="uid" data-formatter="detachOfficer">Detach Officer</th>
                             <!-- <th data-field="liason_uid" data-formatter="operateLiason">Liason</th>
                             <th data-field="receiving_uid" data-formatter="operateReceiving">Receiving</th>
                             <th data-field="interpreter_uid" data-formatter="operateInterpreter">Interpreter</th> -->
@@ -229,6 +276,48 @@
                 '</div>',
             ].join('')
         }
+    }
+
+
+    function operateOfficer(value, row, index) {
+
+        return [
+            '<div class="left">',
+            '<button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#OfficerModal">',
+            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
+            '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
+            '<path d="M6 21v-2a4 4 0 0 1 4 -4h2" />',
+            '<path d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" />',
+            '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />',
+            '</svg>',
+            '</button>',
+            '</div>'
+        ].join('')
+    }
+
+    function detachOfficer(value, row, index) {
+        axios.get('/detachOfficerData/' + row.uid + '')
+            .then(function(response) {
+                console.log(response);
+            })
+            .catch(function(error) {
+                console.log(error);
+            })
+            .finally(function() {
+                // always executed
+            });
+        return [
+            '<div class="left">',
+            '<button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#DetachModal">',
+            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
+            '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
+            '<path d="M6 21v-2a4 4 0 0 1 4 -4h2" />',
+            '<path d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" />',
+            '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />',
+            '</svg>',
+            '</button>',
+            '</div>'
+        ].join('')
     }
 
     function operateLiason(value, row, index) {
@@ -365,6 +454,14 @@
         return index + 1;
     }
 
+    const officerModal = document.getElementById('OfficerModal')
+    officerModal.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget
+        const delegation = button.getAttribute('data-bs-delegation')
+        const modalBodyInput = officerModal.querySelector('.modal-body #delegationUid_officer')
+        modalBodyInput.value = delegation
+    })
+
     const exampleModal = document.getElementById('LiasonModal')
     exampleModal.addEventListener('show.bs.modal', event => {
         const button = event.relatedTarget
@@ -397,6 +494,7 @@
         modalBodyInput.value = delegation
     })
 </script>
+<script async src="https://unpkg.com/axios/dist/axios.min.js"></script>
 @include("layouts.tableFoot")
 @endsection
 @endauth

@@ -64,7 +64,7 @@ class AddDelegationPageController extends Controller
     {
         $events = Event::where('end_date', '>', date('Y-m-d'))->orderBy('start_date', 'desc')->get();
         if ($id) {
-            $delegationHead = Delegate::where([['delegation_type', 'Delegate'], ['delegation', $id]])->first();
+            $delegationHead = Delegate::where([['delegation_type', 'Self'], ['delegation', $id]])->first();
             $representatives = Delegate::where([['delegation_type', 'Representative'], ['delegation', $id]])->first();
             $delegations = Delegation::where([['uid', $delegationHead->delegation]])->first();
             $delegationHead->delegation_picture = ImageBlob::where('uid', $delegationHead->delegates_uid)->first();
@@ -85,7 +85,7 @@ class AddDelegationPageController extends Controller
         $delegates = new Delegate();
         $delegates->delegates_uid = (string) Str::uuid();
         $delegates->rank = $req->self_rank;
-        $delegates->delegation_type = 'Delegate';
+        $delegates->delegation_type = 'Self';
         $delegates->first_Name = $req->self_first_Name;
         $delegates->last_Name = $req->self_last_Name;
         $delegates->designation = $req->self_designation;

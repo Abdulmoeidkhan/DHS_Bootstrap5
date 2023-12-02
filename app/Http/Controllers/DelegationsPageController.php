@@ -19,12 +19,12 @@ class DelegationsPageController extends Controller
         $delegations = DB::table('delegations')
             ->leftJoin('delegates', 'delegates.delegates_uid', '=', 'delegations.delegationhead')
             ->leftJoin('vips', 'delegations.invited_by', '=', 'vips.vips_uid')
-            ->leftJoin('officers', 'delegations.uid', '=', 'officers.officer_delegation')
+            // ->leftJoin('officers', 'delegations.uid', '=', 'officers.officer_delegation')
             // ->leftJoin('liasons', 'delegations.uid', '=', 'liasons.liason_delegation')
             // ->leftJoin('receivings', 'delegations.uid', '=', 'receivings.receiving_delegation')
             // ->leftJoin('interpreters', 'delegations.uid', '=', 'interpreters.interpreter_delegation')
             // ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.rank', 'delegates.self', 'delegates.delegates_uid', 'delegates.designation', 'vips.vips_name', 'vips.vips_rank', 'liasons.liason_uid', 'liasons.liason_contact', 'liasons.liason_first_name', 'liasons.liason_last_name', 'receivings.receiving_uid', 'interpreters.interpreter_uid')
-            ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.rank', 'delegates.self', 'delegates.delegates_uid', 'delegates.designation', 'vips.vips_name', 'vips.vips_rank', 'officers.officer_uid')
+            ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.rank', 'delegates.self', 'delegates.delegates_uid', 'delegates.designation', 'vips.vips_name', 'vips.vips_rank')
             ->orderBy('delegations.country', 'asc')
             ->get();
         foreach ($delegations as $key => $delegation) {
