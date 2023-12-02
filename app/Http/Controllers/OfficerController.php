@@ -140,18 +140,26 @@ class OfficerController extends Controller
         $receivings = $req->recievingSelect;
         $interpreters = $req->interpreterSelect;
         $delegationUid = $req->delegationUid_officer;
-        foreach ($liasons as $key => $liason) {
-            Officer::where('officer_uid', $liason)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
+        if ($liasons) {
+
+            foreach ($liasons as $key => $liason) {
+                Officer::where('officer_uid', $liason)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
+            }
         }
-        foreach ($receivings as $key => $receiving) {
-            Officer::where('officer_uid', $receiving)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
+        if($receivings){
+            foreach ($receivings as $key => $receiving) {
+                Officer::where('officer_uid', $receiving)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
+            }
         }
-        foreach ($interpreters as $key => $interpreter) {
-            Officer::where('officer_uid', $interpreter)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
+        if($interpreters){
+            foreach ($interpreters as $key => $interpreter) {
+                Officer::where('officer_uid', $interpreter)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
+            }
         }
         // return [$liason,$receiving,$interpreter,$delegationUid];
     }
-    public function detachOfficerData($id){
+    public function detachOfficerData($id)
+    {
         $officers = Officer::where('officer_delegation', $id)->get();
         return $officers;
     }

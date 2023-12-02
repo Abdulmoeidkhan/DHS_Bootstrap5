@@ -18,7 +18,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="officerModalLabel">Officer Modal</h5>
+                <h5 class="modal-title" id="officerDetachModalLabel">Officer Detach Modal</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form method="POST" action='{{route("request.detachOfficer")}}'>
@@ -298,26 +298,23 @@
     function detachOfficer(value, row, index) {
         axios.get('/detachOfficerData/' + row.uid + '')
             .then(function(response) {
-                console.log(response);
+                let data = JSON.stringify(response.data);
+                return [
+                    '<div class="left">',
+                    '<button type="button" class="btn btn-outline-warning"  data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#DetachModal">',
+                    '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
+                    '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
+                    '<path d="M6 21v-2a4 4 0 0 1 4 -4h2" />',
+                    '<path d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" />',
+                    '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />',
+                    '</svg>',
+                    '</button>',
+                    '</div>'
+                ].join('')
             })
             .catch(function(error) {
                 console.log(error);
             })
-            .finally(function() {
-                // always executed
-            });
-        return [
-            '<div class="left">',
-            '<button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#DetachModal">',
-            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
-            '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
-            '<path d="M6 21v-2a4 4 0 0 1 4 -4h2" />',
-            '<path d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" />',
-            '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />',
-            '</svg>',
-            '</button>',
-            '</div>'
-        ].join('')
     }
 
     function operateLiason(value, row, index) {
@@ -459,6 +456,16 @@
         const button = event.relatedTarget
         const delegation = button.getAttribute('data-bs-delegation')
         const modalBodyInput = officerModal.querySelector('.modal-body #delegationUid_officer')
+        modalBodyInput.value = delegation
+    })
+
+    const officerDetachModal = document.getElementById('DetachModal')
+    officerDetachModal.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget
+        const delegation = button.getAttribute('data-bs-delegation')
+        const optionsData = button.getAttribute('data-bs-options')
+        console.log(optionsData)
+        const modalBodyInput = officerDetachModal.querySelector('.modal-body #delegationUid_officer')
         modalBodyInput.value = delegation
     })
 
