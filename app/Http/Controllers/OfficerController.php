@@ -146,16 +146,17 @@ class OfficerController extends Controller
                 Officer::where('officer_uid', $liason)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
             }
         }
-        if($receivings){
+        if ($receivings) {
             foreach ($receivings as $key => $receiving) {
                 Officer::where('officer_uid', $receiving)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
             }
         }
-        if($interpreters){
+        if ($interpreters) {
             foreach ($interpreters as $key => $interpreter) {
                 Officer::where('officer_uid', $interpreter)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
             }
         }
+        return back()->with('message', 'Officer has been Attach Successfully');
         // return [$liason,$receiving,$interpreter,$delegationUid];
     }
     public function detachOfficerData($id)
@@ -165,12 +166,14 @@ class OfficerController extends Controller
     }
     public function detachOfficer(Request $req)
     {
-        $officers = $req->officers;
-        $delegationUid = $req->delegationUid_officer;
-        foreach ($officers as $key => $officers) {
-            Officer::where('officer_delegation', $delegationUid)->update(['officer_delegation' => null, 'officer_assign' => 0]);
+        $officers = $req->officerSelect;
+        // $delegationUid = $req->delegationUid_officer;
+        foreach ($officers as $key => $officer) {
+            Officer::where('officer_uid', $officer)->update(['officer_delegation' => null, 'officer_assign' => 0]);
         }
+        return back()->with('message', 'Officer has been deattach Successfully');
         // return [$liason,$receiving,$interpreter,$delegationUid];
+        return $req->all();
     }
 
     public function officerData($id = null)
