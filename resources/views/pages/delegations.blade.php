@@ -296,21 +296,6 @@
     }
 
     function detachOfficer(value, row, index) {
-        $('#DetachModal').on('shown.bs.modal', function() {
-            axios.get('/detachOfficerData/' + row.uid + '')
-                .then(function(response) {
-                    let data = response.data;
-                    let data2 = [];
-                    data.map((val) => {
-                        data2.push(`<option class="text-capitalize" value="${val.officer_uid}">${val.officer_first_name} ${val.officer_last_name} - ${val.officer_type} </option>`)
-                    })
-                    let targetElement = document.getElementById('officerSelect');
-                    targetElement.innerHTML = data2;
-                })
-                .catch(function(error) {
-                    console.log(error);
-                })
-        })
         return [
             '<div class="left">',
             '<button type="button" class="btn btn-outline-warning"  data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#DetachModal">',
@@ -471,10 +456,24 @@
     officerDetachModal.addEventListener('show.bs.modal', event => {
         const button = event.relatedTarget
         const delegation = button.getAttribute('data-bs-delegation')
-        const optionsData = button.getAttribute('data-bs-options')
-        // console.log(optionsData)
         const modalBodyInput = officerDetachModal.querySelector('.modal-body #delegationUid_officer')
         modalBodyInput.value = delegation
+        $('#DetachModal').on('shown.bs.modal', function() {
+            let targetElement = document.getElementById('officerSelect');
+            targetElement.innerHTML = '';
+            axios.get('/detachOfficerData/' + delegation + '')
+                .then(function(response) {
+                    let data = response.data;
+                    let data2 = [];
+                    data.map((val) => {
+                        data2.push(`<option class="text-capitalize" value="${val.officer_uid}">${val.officer_first_name} ${val.officer_last_name} - ${val.officer_type} </option>`)
+                    })
+                    targetElement.innerHTML = data2;
+                })
+                .catch(function(error) {
+                    console.log(error);
+                })
+        })
     })
 
     const exampleModal = document.getElementById('LiasonModal')
