@@ -202,6 +202,8 @@
                             <th data-field="delegation_response" data-sortable="true">Response</th>
                             <th data-field="self" data-formatter="operateSelf">Status</th>
                             <th data-field="member_count" data-sortable="true">Number Of Person</th>
+                            <th data-field="carA.car_quantity" data-sortable="true">Car A</th>
+                            <th data-field="carB.car_quantity" data-sortable="true">Car B</th>
                             <!-- <th data-field="address">Address</th> -->
                             <!-- <th data-field="exhibition" data-sortable="true">Exhibition</th> -->
                             <!-- <th data-field="delegates_uid" data-formatter="operateFormatter">Profile</th> -->
@@ -454,14 +456,11 @@
 
     const officerDetachModal = document.getElementById('DetachModal')
     officerDetachModal.addEventListener('show.bs.modal', event => {
-        const button = event.relatedTarget
-        const delegation = button.getAttribute('data-bs-delegation')
-        const modalBodyInput = officerDetachModal.querySelector('.modal-body #delegationUid_officer')
-        modalBodyInput.value = delegation
         $('#DetachModal').on('shown.bs.modal', function() {
             let targetElement = document.getElementById('officerSelect');
+            let officerDeSelect = document.getElementById('delegationUid_officer').value;
             targetElement.innerHTML = '';
-            axios.get('/detachOfficerData/' + delegation + '')
+            axios.get('/detachOfficerData/' + officerDeSelect + '')
                 .then(function(response) {
                     let data = response.data;
                     let data2 = [];
@@ -474,6 +473,10 @@
                     console.log(error);
                 })
         })
+        const button = event.relatedTarget
+        const delegation = button.getAttribute('data-bs-delegation')
+        const modalBodyInput = officerDetachModal.querySelector('.modal-body #delegationUid_officer')
+        modalBodyInput.value = delegation
     })
 
     const exampleModal = document.getElementById('LiasonModal')

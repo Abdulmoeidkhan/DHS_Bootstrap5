@@ -15,11 +15,11 @@
                                 <label for="room_type" class="form-label">Room Type</label>
                                 <input name="room_type" type="text" class="form-control" id="room_type" value="{{!empty($roomType)?$roomType->room_type:''}}" placeholder="Room Type" required>
                             </div>
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label for="rooms_quantity" class="form-label">Room Type Quantity</label>
                                 <input name="rooms_quantity" type="number" class="form-control" id="rooms_quantity" value="{{!empty($roomType)?$roomType->rooms_quantity:''}}" placeholder="Room Type Quantity" min="1" max="99" required>
-                            </div>
-                            <div class="mb-3">
+                            </div> -->
+                            <!-- <div class="mb-3">
                                 <label for="hotel_uid" class="form-label">Hotels</label>
                                 <select class="form-select" aria-label="Hotel Select" id="hotel_uid" name="hotel_uid" required>
                                     <option value="" selected disabled hidden> Select Hotel </option>
@@ -31,7 +31,7 @@
                                     @endif
                                     @endforeach
                                 </select>
-                            </div>
+                            </div> -->
                             <div class="mb-3">
                                 <label for="room_type_status" class="form-label">Status</label>
                                 <select class="form-select" aria-label="Status" id="room_type_status" name="room_type_status" required>
