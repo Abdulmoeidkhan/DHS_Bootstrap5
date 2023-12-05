@@ -287,10 +287,10 @@
     function operateInvitedBy(value, row, index) {
         // let arrayToRank = value.rank;
         // let rank = arrayToRank.map((val) => val.ranks_name);
-        console.log(value);
+        // console.log(value);
         if (value) {
             return [
-                // value.rank[0].ranks_name + '-' + value.vips_name + '-',
+                value.rank.ranks_name + '-' + value.vips_name ,
             ].join('')
         } else {
             return [
