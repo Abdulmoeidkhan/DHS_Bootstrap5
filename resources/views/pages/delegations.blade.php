@@ -198,13 +198,17 @@
                             <th data-field="first_Name" data-sortable="true">First Name</th>
                             <th data-field="last_Name" data-sortable="true">Last Name</th>
                             <th data-field="designation" data-sortable="true">Designation</th>
-                            <th data-field="vips_name" data-sortable="true">Invited By</th>
+                            <th data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                             <th data-field="delegation_response" data-sortable="true">Response</th>
                             <th data-field="self" data-formatter="operateSelf">Status</th>
                             <th data-field="member_count" data-sortable="true">Number Of Person</th>
                             <th data-field="carA.car_quantity" data-sortable="true">Car A</th>
                             <th data-field="carB.car_quantity" data-sortable="true">Car B</th>
-                            <!-- <th data-field="address">Address</th> -->
+                            <th data-field="hotelData.hotel_names">Hotel Name</th>
+                            <th data-field="standard.hotel_quantity">Standard</th>
+                            <th data-field="suite.hotel_quantity">Suite</th>
+                            <th data-field="superior.hotel_quantity">Superior</th>
+                            <th data-field="dOccupancy.hotel_quantity">Double Occupancy</th>
                             <!-- <th data-field="exhibition" data-sortable="true">Exhibition</th> -->
                             <!-- <th data-field="delegates_uid" data-formatter="operateFormatter">Profile</th> -->
                             <th data-field="delegationCode">Delegation Code</th>
@@ -268,6 +272,25 @@
                 '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
                 '</a>',
                 '</div>',
+            ].join('')
+        } else {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-outline-warning" href="members/' + row.uid + '">',
+                '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
+                '</a>',
+                '</div>',
+            ].join('')
+        }
+    }
+
+    function operateInvitedBy(value, row, index) {
+        // let arrayToRank = value.rank;
+        // let rank = arrayToRank.map((val) => val.ranks_name);
+        console.log(value);
+        if (value) {
+            return [
+                // value.rank[0].ranks_name + '-' + value.vips_name + '-',
             ].join('')
         } else {
             return [
