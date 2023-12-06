@@ -20,6 +20,14 @@
                                 <input name="car_makes" type="text" class="form-control" id="car_makes" value="{{!empty($car)?$car->car_makes:''}}" placeholder="Car Makes" required>
                             </div>
                             <div class="mb-3">
+                                <label for="car_vendor" class="form-label">Car Vendor</label>
+                                <input name="car_vendor" type="text" class="form-control" id="car_vendor" value="{{!empty($car)?$car->car_vendor:''}}" placeholder="Car Vendor" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="car_color" class="form-label">Car Color</label>
+                                <input name="car_color" type="text" class="form-control" id="car_color" value="{{!empty($car)?$car->car_color:''}}" placeholder="Car Color" required>
+                            </div>
+                            <div class="mb-3">
                                 <label for="car_model" class="form-label">Car Model</label>
                                 <input name="car_model" type="text" class="form-control" id="car_model" value="{{!empty($car)?$car->car_model:''}}" placeholder="Car  Model" required>
                             </div>
@@ -30,7 +38,7 @@
                                     @foreach($drivers as $key=>$driver)
                                     @if(!empty($car) && $car->driver_uid === $driver->driver_uid)
                                     <option value="{{$driver->driver_uid}}" selected>{{$driver->driver_name}}</option>
-                                    @elseif(!empty($car) && $driver->driver_status ==1)
+                                    @elseif($driver->driver_status ==1)
                                     <option value="{{$driver->driver_uid}}">{{$driver->driver_name}}</option>
                                     @endif
                                     @endforeach

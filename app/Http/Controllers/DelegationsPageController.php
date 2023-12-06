@@ -10,6 +10,7 @@ use App\Models\HotelPlan;
 use App\Models\Interpreter;
 use App\Models\Liason;
 use App\Models\Member;
+use App\Models\Officer;
 use App\Models\Rank;
 use App\Models\Receiving;
 use App\Models\Vips;
@@ -34,7 +35,7 @@ class DelegationsPageController extends Controller
             ->get();
         $ranks = Rank::get();
         // return $ranks;
-        $hotels = Hotel::all();
+        // $hotels = Hotel::all();
         foreach ($delegations as $key => $delegation) {
             $delegations[$key]->standard = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4f']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
             $delegations[$key]->superior = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4h']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
@@ -45,6 +46,8 @@ class DelegationsPageController extends Controller
             $delegations[$key]->member_count = Delegate::where([['delegation', $delegation->uid], ['delegation_type', '!=', 'Representative']])->count();
             $delegations[$key]->rankName = Rank::where('ranks_uid', $delegation->rank)->first('ranks_name');
             $delegations[$key]->vips = Vips::where('vips_uid', $delegation->vips_uid)->first();
+            $delegations[$key]->officers = Officer::where('officer_delegation', $delegation->uid)->get();
+            $delegations[$key]->officers->rank = Rank::where('ranks_uid', $delegations[$key]->officers->officer_rank)->first('ranks_name');
             $delegations[$key]->vips->rank = Rank::where('ranks_uid', $delegations[$key]->vips->vips_rank)->first('ranks_name');
             $delegations[$key]->hotelData = $delegations[$key]->standard ? Hotel::where('hotel_uid', $delegations[$key]->standard?->hotel_uid)->first('hotel_names') : null;
             // $delegations[$key]->vips->rank = array_filter($ranks->toArray(),fn ($rank) => $rank['ranks_uid'] == $delegations[$key]->vips->vips_rank);

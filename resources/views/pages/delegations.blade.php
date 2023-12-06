@@ -212,7 +212,7 @@
                             <!-- <th data-field="exhibition" data-sortable="true">Exhibition</th> -->
                             <!-- <th data-field="delegates_uid" data-formatter="operateFormatter">Profile</th> -->
                             <th data-field="delegationCode">Delegation Code</th>
-                            <th data-field="liason_first_name" data-sortable="true">Officer Name</th>
+                            <th data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name</th>
                             <th data-field="liason_contact" data-sortable="true">Officer Contact</th>
                             <th data-field="created_at" data-sortable="true">Created At</th>
                             <th data-field="updated_at" data-sortable="true">Last Updated</th>
@@ -285,13 +285,24 @@
     }
 
     function operateInvitedBy(value, row, index) {
-        // let arrayToRank = value.rank;
-        // let rank = arrayToRank.map((val) => val.ranks_name);
-        // console.log(value);
         if (value) {
             return [
-                value.rank.ranks_name + '-' + value.vips_name ,
+                value.vips_designation,
             ].join('')
+        } else {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-outline-warning" href="members/' + row.uid + '">',
+                '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
+                '</a>',
+                '</div>',
+            ].join('')
+        }
+    }
+
+    function operateOfficerName(value, row, index) {
+        if (value) {
+            return value.map((val) => '' + val.officer_type + ' ' + val.officer_first_name + ' ' + val.officer_last_name + '-' + val.officer_contact + '<br/>').join('')
         } else {
             return [
                 '<div class="left">',

@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('car_makes');
             $table->string('car_model');
             $table->string('car_category');
+            $table->string('car_vendor')->nullable();
+            $table->string('car_color')->nullable();
+            $table->string('car_delegation')->nullable();
             $table->uuid('car_uid')->unique();
             $table->string('car_number')->unique();
             $table->uuid('driver_uid')->nullable()->unique();

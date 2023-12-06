@@ -96,11 +96,12 @@ class CarsController extends Controller
     {
         $driver = Driver::get();
         $carcategorys = CarCategory::get();
+        // return $carcategorys;
         if ($id) {
             $car = Car::where('car_uid', $id)->first();
             return view('pages.addCar', ['car' => $car, 'drivers' => $driver, 'carcategorys' => $carcategorys]);
         } else {
-            return view('pages.addCar', ['drivers' => $driver]);
+            return view('pages.addCar', ['drivers' => $driver,'carcategorys' => $carcategorys]);
         }
     }
 
