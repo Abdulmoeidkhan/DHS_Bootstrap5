@@ -101,7 +101,7 @@ class CarsController extends Controller
             $car = Car::where('car_uid', $id)->first();
             return view('pages.addCar', ['car' => $car, 'drivers' => $driver, 'carcategorys' => $carcategorys]);
         } else {
-            return view('pages.addCar', ['drivers' => $driver,'carcategorys' => $carcategorys]);
+            return view('pages.addCar', ['drivers' => $driver, 'carcategorys' => $carcategorys]);
         }
     }
 
@@ -328,4 +328,19 @@ class CarsController extends Controller
     }
 
     // Journey End
+
+    // Attach car
+
+    public function attachCar(Request $req)
+    {
+        $updatedCarSelect = Car::where('car_uid', $req->carSelect)->update(['car_delegation' => $req->delegationUid_car]);
+        return $updatedCarSelect ? back()->with('message', "Car Attach Successfully") : back()->with('error', "Something Went Wrong");
+    }
+
+    public function detachCarData($id)
+    {
+        $cars = Car::where('car_delegation', $id)->get();
+        return $cars;
+    }
+    // Attach Car
 }

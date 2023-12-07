@@ -43,7 +43,7 @@
                             <th data-field="car_makes" data-sortable="true">Car Makes</th>
                             <th data-field="car_model" data-sortable="true">Car Model</th>
                             <th data-field="car_remarks">Car Remarks</th>
-                            <th data-field="car_status" data-formatter="operateCarRemarks">Car Status</th>
+                            <th data-field="car_delegation" data-formatter="operateCarRemarks">Car Status</th>
                             <th data-field="car_uid" data-formatter="operateCar">Actions</th>
                         </tr>
                     </thead>
@@ -113,11 +113,11 @@
     function operateCarRemarks(value, row, index) {
         if (value) {
             return [
-                value != 0 ? "Avaiable" : "Booked"
+                "Booked"
             ];
         } else {
             return [
-                "Booked"
+                "Avaiable"
             ];
         }
     }

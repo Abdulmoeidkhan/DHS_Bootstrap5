@@ -48,6 +48,7 @@
                             <th data-field="id">Id</th>
                             <th data-field="car_category" data-sortable="true">Category</th>
                             <th data-field="car_quantity" data-sortable="true">Quantity</th>
+                            <th data-field="car_plan_uid" data-sortable="true">Actions</th>
                         </tr>
                     </thead>
                 </table>
@@ -67,6 +68,7 @@
                             <th data-field="hotel_names" data-sortable="true">Hotel</th>
                             <th data-field="room_type" data-sortable="true">Room Type</th>
                             <th data-field="hotel_quantity" data-sortable="true">Quantity</th>
+                            <th data-field="car_plan_uid" data-sortable="true">Actions</th>
                         </tr>
                     </thead>
                 </table>

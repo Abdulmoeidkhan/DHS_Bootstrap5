@@ -150,6 +150,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/getCarCategories', [CarsController::class, 'getCarCategory'])->name('request.getCarCategories');
         Route::get('/addCarCategoriesPage/{id?}', [CarsController::class, 'addCarCategoriesRender'])->name('pages.addCarCategories');
         Route::post('/addCarCategory', [CarsController::class, 'addCarCategory'])->name('request.addCarCategory');
+        Route::post('/attachCar', [CarsController::class, 'attachCar'])->name('request.attachCar');
+        Route::post('/deattachCar', [CarsController::class, 'deattachCar'])->name('request.deattachCar');
         // Route::post('/updateCar/{id}', [CarsController::class, 'updateCar'])->name('request.updateCar');
         // Car Pages And API End
 
@@ -159,6 +161,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/addCarPage/{id?}', [CarsController::class, 'addCarRender'])->name('pages.addCar');
         Route::post('/addCar', [CarsController::class, 'addCar'])->name('request.addCar');
         Route::post('/updateCar/{id}', [CarsController::class, 'updateCar'])->name('request.updateCar');
+        Route::get('/detachCarData/{id}', [CarsController::class, 'detachCarData'])->name('data.detachCarData');
         // Car Pages And API End
 
         // Journey Pages And API Start
