@@ -31,7 +31,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <input type="hidden" name="delegationUid_officer" value="" id="delegationUid_officer" />
+                        <input type="hidden" name="delegationUid_dis_officer" value="" id="delegationUid_dis_officer" />
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -141,7 +141,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="deattachCarSelect" class="col-form-label">Car :</label>
-                        <select class="form-select" aria-label="Car To Be De-Attach" id="deattachCarSelect" name="deattachCarSelect">
+                        <select class="form-select" aria-label="Car To Be De-Attach" id="deattachCarSelect" name="deattachCarSelect[]">
                             <option value="" selected disabled hidden> Select Car To Be Disassociate </option>
                             @foreach(\App\Models\Car::where([['car_status',1],['car_delegation','!=',null]])->get() as $key=>$car)
                             <option value="{{$car->car_uid}}">
@@ -156,7 +156,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <input type="hidden" name="delegationUid_car" value="" id="delegationUid_car" />
+                        <input type="hidden" name="delegationUid_dis_car" value="" id="delegationUid_dis_car" />
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -291,6 +291,7 @@
                             <th data-filter-control="input" data-field="delegationCode">Delegation Code</th>
                             <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                             <!-- <th data-filter-control="input" data-field="liason_contact" data-sortable="true">Officer Contact</th> -->
+                            <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Status</th>
                             <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
                             <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
@@ -300,10 +301,11 @@
                             <th data-field="uid" data-formatter="operateDetachCar">Detach Car</th>
                             <th data-field="officer_uid" data-formatter="operateOfficer">Officer</th>
                             <th data-field="uid" data-formatter="detachOfficer">Detach Officer</th>
+                            <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
+                            <th data-field="delegation_status" data-formatter="statusChangerFormatter">Status Changer</th>
                             <!-- <th data-filter-control="input" data-field="liason_uid" data-formatter="operateLiason">Liason</th>
                             <th data-filter-control="input" data-field="receiving_uid" data-formatter="operateReceiving">Receiving</th>
                             <th data-filter-control="input" data-field="interpreter_uid" data-formatter="operateInterpreter">Interpreter</th> -->
-                            <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
                         </tr>
                     </thead>
                 </table>
@@ -312,14 +314,46 @@
     </div>
 </div>
 <script>
+    function statusChangerFormatter(value, row, index) {
+        if (value) {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-outline-danger" href="statusChanger/' + row.uid + '/' + value + '">',
+                '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
+                '</a>',
+                '</div>',
+            ].join('')
+        } else {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-outline-success" href="statusChanger/' + row.uid + '/' + value + '">',
+                '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
+                '</a>',
+                '</div>',
+            ].join('')
+        }
+    }
+
+    function statusFormatter(value, row, index) {
+        if (value) {
+            return value ? "Active" : "Inactive";
+        }
+    }
+
     function operateInvitaion(value, row, index) {
         if (value) {
             return [
                 '<div class="left">',
-                '<a class="btn btn-outline-success" href="invitation/' + value + '">',
-                '<span>',
-                '<i class="ti ti-mail" style="font-size:24px;"></i>',
-                '</span>',
+                '<a class="btn btn-outline-success" href="members/' + value + '">',
+                '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
+                '</a>',
+                '</div>',
+            ].join('')
+        } else {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-outline-warning" href="members/' + row.uid + '">',
+                '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
                 '</a>',
                 '</div>',
             ].join('')
@@ -529,17 +563,15 @@
     }
 
     function operateDetachCar(value, row, index) {
-        if (value) {
-            return [
-                '<div class="left">',
-                '<button type="button" class="btn btn-outline-badar" data-bs-toggle="modal" data-bs-delegation="' + value + '" data-bs-target="#DeattachCar">',
-                '<span>',
-                '<i class="ti ti-car" style="font-size:24px;"></i>',
-                '</span>',
-                '</button>',
-                '</div>'
-            ].join('')
-        }
+        return [
+            '<div class="left">',
+            '<button type="button" class="btn btn-outline-badar" data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#DeattachCar">',
+            '<span>',
+            '<i class="ti ti-car" style="font-size:24px;"></i>',
+            '</span>',
+            '</button>',
+            '</div>'
+        ].join('')
     }
 
     function operatePlan(value, row, index) {
@@ -596,27 +628,28 @@
 
     const officerDetachModal = document.getElementById('DetachModal')
     officerDetachModal.addEventListener('show.bs.modal', event => {
-        $('#DetachModal').on('shown.bs.modal', function() {
-            let targetElement = document.getElementById('officerSelect');
-            let officerDeSelect = document.getElementById('delegationUid_officer').value;
-            targetElement.innerHTML = '';
-            axios.get('/detachOfficerData/' + officerDeSelect + '')
-                .then(function(response) {
-                    let data = response.data;
-                    let data2 = [];
-                    data.map((val) => {
-                        data2.push(`<option class="text-capitalize" value="${val.officer_uid}">${val.officer_first_name} ${val.officer_last_name} - ${val.officer_type} </option>`)
-                    })
-                    targetElement.innerHTML = data2;
-                })
-                .catch(function(error) {
-                    console.log(error);
-                })
-        })
         const button = event.relatedTarget
         const delegation = button.getAttribute('data-bs-delegation')
-        const modalBodyInput = officerDetachModal.querySelector('.modal-body #delegationUid_officer')
+        const modalBodyInput = officerDetachModal.querySelector('.modal-body #delegationUid_dis_officer')
         modalBodyInput.value = delegation
+        $('#DetachModal').on('shown.bs.modal', function() {
+            let targetElement = document.getElementById('officerSelect');
+            let officerDeSelect = document.getElementById('delegationUid_dis_officer').value;
+            targetElement.innerHTML = '';
+            // axios.get('/detachOfficerData/' + officerDeSelect + '')
+            //     .then(function(response) {
+            //         let data = response.data;
+            //         let data2 = [];
+            //         data.map((val) => {
+            //             data2.push(`<option class="text-capitalize" value="${val.officer_uid}">${val.officer_first_name} ${val.officer_last_name} - ${val.officer_type} </option>`)
+            //         })
+            //         targetElement.innerHTML = data2;
+            //     })
+            //     .catch(function(error) {
+            //         console.log(error);
+            //     })
+        })
+
     })
 
     // const exampleModal = document.getElementById('LiasonModal')
@@ -661,17 +694,22 @@
 
     const carDetachModal = document.getElementById('DeattachCar')
     carDetachModal.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget
+        const delegation = button.getAttribute('data-bs-delegation')
+        console.log(delegation)
+        const modalBodyInput = carDetachModal.querySelector('.modal-body #delegationUid_dis_car')
+        modalBodyInput.value = delegation
         $('#DeattachCar').on('shown.bs.modal', function() {
             let targetElement = document.getElementById('deattachCarSelect');
-            let carDisassociate = document.getElementById('delegationUid_car').value;
+            let carDisassociate = document.getElementById('delegationUid_dis_car').value;
             targetElement.innerHTML = '';
-            console.log('carDisassociate')
             axios.get('/detachCarData/' + carDisassociate + '')
                 .then(function(response) {
+                    console.log(response)
                     let data = response.data;
                     let data2 = [];
                     data.map((val) => {
-                        data2.push(`<option class="text-capitalize" value="${val.officer_uid}">${val.officer_first_name} ${val.officer_last_name} - ${val.officer_type} </option>`)
+                        data2.push(`<option class="text-capitalize" value="${val.car_uid}">${val.car_makes} ${val.car_model} </option>`)
                     })
                     targetElement.innerHTML = data2;
                 })
@@ -679,10 +717,6 @@
                     console.log(error);
                 })
         })
-        const button = event.relatedTarget
-        const delegation = button.getAttribute('data-bs-delegation')
-        const modalBodyInput = officerDetachModal.querySelector('.modal-body #delegationUid_car_disassociate')
-        modalBodyInput.value = delegation
     })
 
     // const carDetachModal = document.getElementById('DeattachCar')

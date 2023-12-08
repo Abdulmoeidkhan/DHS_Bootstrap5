@@ -173,7 +173,7 @@ class OfficerController extends Controller
         }
         return back()->with('message', 'Officer has been deattach Successfully');
         // return [$liason,$receiving,$interpreter,$delegationUid];
-        return $req->all();
+        // return $req->all();
     }
 
     public function officerData($id = null)
