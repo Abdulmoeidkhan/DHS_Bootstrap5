@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('exhibition');
             $table->string('delegationCode')->unique();
             $table->uuid('delegationhead')->unique()->nullable();
+            $table->integer('delegation_status')->default(1);
             // $table->uuid('liasons')->unique()->nullable();
             $table->timestamps();
             // $table->foreign('invited_by')->references('vips_uid')->on('vips')

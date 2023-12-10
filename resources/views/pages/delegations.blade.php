@@ -290,8 +290,8 @@
                             <!-- <th data-filter-control="input" data-field="delegates_uid" data-formatter="operateFormatter">Profile</th> -->
                             <th data-filter-control="input" data-field="delegationCode">Delegation Code</th>
                             <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
-                            <!-- <th data-filter-control="input" data-field="liason_contact" data-sortable="true">Officer Contact</th> -->
                             <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Status</th>
+                            <!-- <th data-filter-control="input" data-field="liason_contact" data-sortable="true">Officer Contact</th> -->
                             <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
                             <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
@@ -336,7 +336,7 @@
 
     function statusFormatter(value, row, index) {
         if (value) {
-            return value ? "Active" : "Inactive";
+            return value ? ['<div class="left">', 'Active', '</div>'].join('') : ['<div class="left">', 'Inactive', '</div>'].join('');
         }
     }
 
