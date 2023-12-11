@@ -18,7 +18,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="officerDetachModalLabel">Officer Detach Modal</h5>
+                <h5 class="modal-title" id="officerDetachModalLabel">Remove Officer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form method="POST" action='{{route("request.detachOfficer")}}'>
@@ -28,6 +28,9 @@
                         <label for="officerSelect" class="col-form-label">Officers :</label>
                         <select class="form-select" multiple aria-label="Officer To Be Detach" id="officerSelect" name="officerSelect[]" required>
                             <option value="" selected disabled hidden> Select Officer To Be Detach </option>
+                            <select class="form-select" multiple aria-label="Officer To Be Associate" id="recievingSelect" name="recievingSelect[]" required>
+                                <option value="" selected disabled hidden> Select Officer To Be Associate </option>
+                            </select>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -46,7 +49,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="officerModalLabel">Officer Modal</h5>
+                <h5 class="modal-title" id="officerModalLabel">Add Officer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form method="POST" action='{{route("request.attachOfficer")}}'>
@@ -313,8 +316,8 @@
                             <th data-field="uid" data-formatter="operateMember">Member</th>
                             <th data-field="uid" data-formatter="operateCar">Add Car</th>
                             <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
-                            <th data-field="officer_uid" data-formatter="operateOfficer">Officer</th>
-                            <th data-field="uid" data-formatter="detachOfficer">Detach Officer</th>
+                            <th data-field="officer_uid" data-formatter="operateOfficer">Add Officer</th>
+                            <th data-field="uid" data-formatter="detachOfficer">Remove Officer</th>
                             <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
                             <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
                             <!-- <th data-filter-control="input" data-field="exhibition" data-sortable="true">Exhibition</th> -->
@@ -444,7 +447,7 @@
 
     function operateCarsName(value, row, index) {
         if (value) {
-            return value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val.car_makes + ' ' + val.car_model + ' ' + val.car_number + ' - ' + val.driver.driver_name + ' - ' + val.driver.driver_contact + '</div><br/>').join('')
+            return value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + (val.car_category == '61346491-983a-40ed-8477-2d9ed84e6767' ? 'Cat A' : 'Cat B') + '  ' + val.car_makes + ' ' + val.car_model + ' ' + val.car_number + '  ' + ' - ' + val.driver.driver_name + ' - ' + val.driver.driver_contact + '</div><br/>').join('')
         } else {
             return [
                 '<div class="left">',
