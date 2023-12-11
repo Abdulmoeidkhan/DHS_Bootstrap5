@@ -1,6 +1,29 @@
 @auth
 @extends('layouts.layout')
 @section("content")
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css'>
+<style>
+
+    .box {
+        padding: 0.5em;
+        width: 100%;
+        margin: 0.5em;
+    }
+
+    .box-2 {
+        padding: 0.5em;
+        width: calc(100%/2 - 1em);
+    }
+
+    .hide {
+        display: none;
+    }
+
+    img {
+        max-width: 100%;
+    }
+</style>
 
 <!-- @if(session()->get('user')->roles[0]->name === "delegate" )
 <div class="row">
@@ -59,11 +82,33 @@
                             <div class="mb-3">
                                 <label for="picture" class="form-label">Picture</label>
                                 <input name="picture" type="file" class="form-control" id="picture" accept="image/png, image/jpeg">
+                                <input name="savedpicture" type="hidden" class="form-control" id="savedpicture" value="">
+                                <div class="box-2">
+                                    <div class="result"></div>
+                                </div>
+                                <div class="box-2 img-result hide">
+                                    <img class="cropped" src="" alt="" />
+                                </div>
+                                <div class="box">
+                                    <div class="options hide">
+                                        <label>Width</label>
+                                        <input type="number" class="img-w" value="300" min="100" max="1200" />
+                                    </div>
+                                    <button class="btn save hide">Save</button>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="pdf" class="form-label">Document</label>
                                 <input name="pdf" type="file" class="form-control" id="pdf" accept="application/pdf">
                             </div>
+                            <!-- <div class="mb-3">
+                                <label for="picture" class="form-label">Picture</label>
+                                <input name="picture" type="file" class="form-control" id="picture" accept="image/png, image/jpeg">
+                            </div>
+                            <div class="mb-3">
+                                <label for="pdf" class="form-label">Document</label>
+                                <input name="pdf" type="file" class="form-control" id="pdf" accept="application/pdf">
+                            </div> -->
                             <input name="delegation" type="hidden" id="delegation" value="{{$id}}" required>
                             <input name="delegation_type" type="hidden" id="delegation_type" value="Member" required>
                             <input type="submit" name="submit" class="btn btn-primary" value="Add Member" />
@@ -90,6 +135,8 @@
                             <th data-field="designation" data-sortable="true">Designation</th>
                             <th data-field="delegation_type" data-sortable="true">Type</th>
                             <th data-field="flight.passport" data-sortable="true">Passport</th>
+                            <th data-field="status" data-sortable="true" data-field="status" data-formatter="statusFormatter">Member Active</th>
+                            <th data-field="delegates_uid" data-sortable="true" data-field="status" data-formatter="statusChangerFormatter">Status Changer</th>
                             <th data-field="flight.arrival_flight" data-sortable="true">Arrival Flight</th>
                             <th data-field="flight.arrival_date" data-sortable="true">Arrival Date</th>
                             <th data-field="flight.arrival_time" data-sortable="true">Arrival Time</th>
@@ -180,6 +227,86 @@
             ].join('')
         }
     }
+
+    function statusFormatter(value, row, index) {
+        return value ? ['<div class="left">', 'Yes', '</div>'].join('') : ['<div class="left">', 'No', '</div>'].join('');
+    }
+
+    function statusChangerFormatter(value, row, index) {
+        if (value) {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-outline-danger" href="delegateStatusChanger/' + row.delegates_uid + '">',
+                '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
+                '</a>',
+                '</div>',
+            ].join('')
+        } else {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-outline-success" href="delegateStatusChanger/' + row.delegates_uid + '">',
+                '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
+                '</a>',
+                '</div>',
+            ].join('')
+        }
+    }
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.min.js'></script>
+<script>
+    // vars
+    let result = document.querySelector('.result'),
+        img_result = document.querySelector('.img-result'),
+        save = document.querySelector('.save'),
+        cropped = document.querySelector('.cropped'),
+        img_w = document.querySelector('.img-w'),
+        dwn = document.querySelector('.download'),
+        upload = document.querySelector('#picture'),
+        cropper = '';
+
+    // on change show image with crop options
+    upload.addEventListener('change', e => {
+        if (e.target.files.length) {
+            // start file reader
+            const reader = new FileReader();
+            reader.onload = e => {
+                if (e.target.result) {
+                    // create new image
+                    let img = document.createElement('img');
+                    img.id = 'image';
+                    img.src = e.target.result;
+                    // clean result before
+                    result.innerHTML = '';
+                    // append new image
+                    result.appendChild(img);
+                    // show save btn and options
+                    save.classList.remove('hide');
+                    // options.classList.remove('hide');
+                    // init cropper
+                    cropper = new Cropper(img);
+                }
+            };
+            reader.readAsDataURL(e.target.files[0]);
+        }
+    });
+
+    // save on click
+    save.addEventListener('click', e => {
+        e.preventDefault();
+        // get result to data uri
+        let imgSrc = cropper.getCroppedCanvas({
+            width: img_w.value // input value
+        }).toDataURL();
+        // remove hide class of img
+        cropped.classList.remove('hide');
+        img_result.classList.remove('hide');
+        // show image cropped
+        cropped.src = imgSrc;
+        document.getElementById('savedpicture').value = imgSrc;
+        dwn.classList.remove('hide');
+        dwn.download = 'imagename.png';
+        dwn.setAttribute('href', imgSrc);
+    });
 </script>
 @include("layouts.tableFoot")
 @endsection

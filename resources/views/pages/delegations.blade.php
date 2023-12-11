@@ -102,10 +102,26 @@
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="carSelect" class="col-form-label">Car :</label>
-                        <select class="form-select" aria-label="Car To Be Associate" id="carSelect" name="carSelect">
-                            <option value="" selected disabled hidden> Select Car To Be Associate </option>
-                            @foreach(\App\Models\Car::where([['car_status',1],['car_delegation',null]])->get() as $key=>$car)
+                        <label for="carSelect" class="col-form-label">Car A:</label>
+                        <select class="form-select" aria-label="Car A To Be Associate" id="carASelect" name="carASelect">
+                            <option value="" selected disabled hidden> Select Car A To Be Associate </option>
+                            @foreach(\App\Models\Car::where([['car_status',1],['car_delegation',null],['car_category','61346491-983a-40ed-8477-2d9ed84e6767']])->get() as $key=>$car)
+                            <option value="{{$car->car_uid}}">
+                                {{$car->car_makes.' '.$car->car_model.' '}}
+                                (
+                                @foreach(\App\Models\CarCategory::where('car_category_uid',$car->car_category)->get('car_category') as $carkey=>$carcat)
+                                {{$carcat->car_category}}
+                                @endforeach
+                                )
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="liasonSelect" class="col-form-label">Car B :</label>
+                        <select class="form-select" aria-label="Car B To Be Associate" id="carBSelect" name="carBSelect">
+                            <option value="" selected disabled hidden> Select Car B To Be Associate </option>
+                            @foreach(\App\Models\Car::where([['car_status',1],['car_delegation',null],['car_category','a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->get() as $key=>$car)
                             <option value="{{$car->car_uid}}">
                                 {{$car->car_makes.' '.$car->car_model.' '}}
                                 (
@@ -279,6 +295,7 @@
                             <th data-filter-control="input" data-field="delegation_response" data-sortable="true">Response</th>
                             <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                             <th data-filter-control="input" data-field="member_count" data-sortable="true">Number Of Person</th>
+                            <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                             <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true">Car A</th>
                             <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true">Car B</th>
                             <th data-filter-control="input" data-field="hotelData.hotel_names">Hotel Name</th>
@@ -290,19 +307,19 @@
                             <!-- <th data-filter-control="input" data-field="delegates_uid" data-formatter="operateFormatter">Profile</th> -->
                             <th data-filter-control="input" data-field="delegationCode">Delegation Code</th>
                             <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
-                            <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Status</th>
+                            <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
                             <!-- <th data-filter-control="input" data-field="liason_contact" data-sortable="true">Officer Contact</th> -->
                             <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
                             <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
                             <th data-field="uid" data-formatter="operateDelegation">Edit</th>
                             <th data-field="uid" data-formatter="operateMember">Member</th>
-                            <th data-field="uid" data-formatter="operateCar">Car</th>
-                            <th data-field="uid" data-formatter="operateDetachCar">Detach Car</th>
+                            <th data-field="uid" data-formatter="operateCar">Add Car</th>
+                            <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
                             <th data-field="officer_uid" data-formatter="operateOfficer">Officer</th>
                             <th data-field="uid" data-formatter="detachOfficer">Detach Officer</th>
                             <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
-                            <th data-field="delegation_status" data-formatter="statusChangerFormatter">Status Changer</th>
+                            <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
                             <!-- <th data-filter-control="input" data-field="liason_uid" data-formatter="operateLiason">Liason</th>
                             <th data-filter-control="input" data-field="receiving_uid" data-formatter="operateReceiving">Receiving</th>
                             <th data-filter-control="input" data-field="interpreter_uid" data-formatter="operateInterpreter">Interpreter</th> -->
@@ -318,7 +335,7 @@
         if (value) {
             return [
                 '<div class="left">',
-                '<a class="btn btn-outline-danger" href="statusChanger/' + row.uid + '/' + value + '">',
+                '<a class="btn btn-outline-danger" href="statusChanger/' + row.uid + '">',
                 '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
                 '</a>',
                 '</div>',
@@ -326,7 +343,7 @@
         } else {
             return [
                 '<div class="left">',
-                '<a class="btn btn-outline-success" href="statusChanger/' + row.uid + '/' + value + '">',
+                '<a class="btn btn-outline-success" href="statusChanger/' + row.uid + '">',
                 '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
                 '</a>',
                 '</div>',
@@ -335,9 +352,7 @@
     }
 
     function statusFormatter(value, row, index) {
-        if (value) {
-            return value ? ['<div class="left">', 'Active', '</div>'].join('') : ['<div class="left">', 'Inactive', '</div>'].join('');
-        }
+        return value ? ['<div class="left">', 'Yes', '</div>'].join('') : ['<div class="left">', 'No', '</div>'].join('');
     }
 
     function operateInvitaion(value, row, index) {
@@ -416,6 +431,20 @@
     function operateOfficerName(value, row, index) {
         if (value) {
             return value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val.officer_type + ' - ' + val.ranks_name + ' ' + val.officer_first_name + ' ' + val.officer_last_name + '-' + val.officer_contact + '</div><br/>').join('')
+        } else {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-outline-warning" href="members/' + row.uid + '">',
+                '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
+                '</a>',
+                '</div>',
+            ].join('')
+        }
+    }
+
+    function operateCarsName(value, row, index) {
+        if (value) {
+            return value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val.car_makes + ' - ' + val.car_model + ' ' + val.car_number + ' ' + val.car_color + '-' + val.car_vendor + '</div><br/>').join('')
         } else {
             return [
                 '<div class="left">',

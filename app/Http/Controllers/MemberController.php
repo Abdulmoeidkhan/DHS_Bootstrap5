@@ -36,13 +36,28 @@ class MemberController extends Controller
         $pdf->uid = $id;
         $pdf->save();
     }
+
     protected function imageBlobUpload($file, $id)
     {
+        $imageBlob = $file;
+        $imgBlob = new ImageBlob();
+        $imgBlob->img_blob = $imageBlob;
+        $imgBlob->uid = $id;
+        $imgSaved = $imgBlob->save();
+        return $imgSaved;
+    }
+
+    protected function documentUpdate($file, $id)
+    {
         $pdfBlob = file_get_contents($file->getRealPath());
-        $pdf = new Document();
-        $pdf->pdf_blob = $pdfBlob;
-        $pdf->uid = $id;
-        $pdf->save();
+        $updatePdfBlob = Document::where('uid', $id)->first() ? Document::where('uid', $id)->update(['pdf_blob' => $pdfBlob]) : $this->documentUpload($file, $id);
+        return $updatePdfBlob;
+    }
+    protected function imageBlobUpdate($file, $id)
+    {
+        $imageBlob = $file;
+        $updateImageBlob = ImageBlob::where('uid', $id)->first() ? ImageBlob::where('uid', $id)->update(['img_blob' => $imageBlob]) : $this->imageBlobUpload($file, $id);
+        return $updateImageBlob;
     }
 
     public function render($id)
@@ -99,10 +114,9 @@ class MemberController extends Controller
         // return $req->all();
         try {
             $savedMember = $delegate->save();
-            $req->file('picture') ? $this->imageUpload($req->file('picture'), $delegate->delegates_uid) : '';
+            $imgSaved = $req->savedpicture ? $this->imageBlobUpload($req->savedpicture, $delegate->delegates_uid) : '';
             $req->file('pdf') ? $this->documentUpload($req->file('pdf'), $delegate->delegates_uid) : '';
             if ($savedMember) {
-                // return redirect()->route("pages.addMember", $req->delegation)->with('message', 'Member Updated Successfully');
                 return back()->with('message', 'Member Updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
@@ -113,20 +127,18 @@ class MemberController extends Controller
     {
         $arrayToBeUpdate = [];
         foreach ($req->all() as $key => $value) {
-            if ($key != 'submit' && $key != '_token' && $key != 'savedpicture'  && $key != 'picture' && strlen($value) > 0) {
+            if ($key != 'submit' && $key != '_token' && $key != 'savedpicture'  && $key != 'picture' && $key != 'pdf' && strlen($value) > 0) {
                 $arrayToBeUpdate[$key] = $value;
             }
         }
         try {
-            // return $req->all();
-            // $updatedMember = Member::where('member_uid', $id)->update(['name' => $req->inputUserName, 'contact_number' => $req->inputContactNumber]);
             $updatedMember = Delegate::where('delegates_uid', $id)->update($arrayToBeUpdate);
             if ($req->savedpicture) {
-                ImageBlob::where('uid', $id)->delete();
-                $imageBlog = new ImageBlob;
-                $imageBlog->uid = $id;
-                $imageBlog->img_blob = $req->savedpicture;
-                $imageBlog->save();
+                $imgSaved = $req->savedpicture ? $this->imageBlobUpdate($req->savedpicture, $id) : '';
+            }
+            if ($req->pdf) {
+
+                $req->file('pdf') ? $this->documentUpdate($req->file('pdf'), $id) : '';
             }
             if ($updatedMember) {
                 return back()->with('message', 'Member Updated Successfully');

@@ -333,7 +333,7 @@ class CarsController extends Controller
 
     public function attachCar(Request $req)
     {
-        $updatedCarSelect = Car::where('car_uid', $req->carSelect)->update(['car_delegation' => $req->delegationUid_car]);
+        $updatedCarSelect = $req->carASelect ? Car::where('car_uid', $req->carASelect)->update(['car_delegation' => $req->delegationUid_car]) : Car::where('car_uid', $req->carBSelect)->update(['car_delegation' => $req->delegationUid_car]);
         return $updatedCarSelect ? back()->with('message', "Car Attach Successfully") : back()->with('error', "Something Went Wrong");
     }
 

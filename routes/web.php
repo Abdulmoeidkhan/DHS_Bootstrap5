@@ -32,6 +32,8 @@ use App\Http\Controllers\PlansController;
 use App\Http\Controllers\PrintInvitationController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\ReceivingController;
+use App\Models\Delegate;
+use App\Models\Delegation;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -248,6 +250,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/getDelegates', [DelegationsPageController::class, 'delegationData'])->name('request.getDelegates');
         Route::get('/addDelegationPage/{id?}', [AddDelegationPageController::class, 'render'])->name('pages.addDelegationPage');
         Route::get('/getSpecificMembers', [MemberController::class, 'specificMembersData'])->name('pages.getSpecificMembers');
+        Route::get('/statusChanger/{id}', [DelegationsPageController::class, 'updateStatus'])->name('request.updateStatus');
+        Route::get('/members/delegateStatusChanger/{id}', [DelegationsPageController::class, 'delegateStatusChanger'])->name('request.updateDelegateStatus');
         Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->name('request.updateAuthority');
         Route::post('/addDelegationRequest', [AddDelegationPageController::class, 'addDelegation'])->name('request.addDelegationRequest');
         Route::post('/updateDelegationRequest', [AddDelegationPageController::class, 'updateDelegationRequest'])->name('request.updateDelegationRequest');
