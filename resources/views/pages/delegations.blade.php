@@ -303,12 +303,9 @@
                             <th data-filter-control="input" data-field="suite.hotel_quantity">Suite</th>
                             <th data-filter-control="input" data-field="superior.hotel_quantity">Superior</th>
                             <th data-filter-control="input" data-field="dOccupancy.hotel_quantity">Double Occupancy</th>
-                            <!-- <th data-filter-control="input" data-field="exhibition" data-sortable="true">Exhibition</th> -->
-                            <!-- <th data-filter-control="input" data-field="delegates_uid" data-formatter="operateFormatter">Profile</th> -->
                             <th data-filter-control="input" data-field="delegationCode">Delegation Code</th>
                             <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                             <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
-                            <!-- <th data-filter-control="input" data-field="liason_contact" data-sortable="true">Officer Contact</th> -->
                             <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
                             <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
@@ -320,6 +317,9 @@
                             <th data-field="uid" data-formatter="detachOfficer">Detach Officer</th>
                             <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
                             <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
+                            <!-- <th data-filter-control="input" data-field="exhibition" data-sortable="true">Exhibition</th> -->
+                            <!-- <th data-filter-control="input" data-field="delegates_uid" data-formatter="operateFormatter">Profile</th> -->
+                            <!-- <th data-filter-control="input" data-field="liason_contact" data-sortable="true">Officer Contact</th> -->
                             <!-- <th data-filter-control="input" data-field="liason_uid" data-formatter="operateLiason">Liason</th>
                             <th data-filter-control="input" data-field="receiving_uid" data-formatter="operateReceiving">Receiving</th>
                             <th data-filter-control="input" data-field="interpreter_uid" data-formatter="operateInterpreter">Interpreter</th> -->
@@ -444,7 +444,7 @@
 
     function operateCarsName(value, row, index) {
         if (value) {
-            return value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val.car_makes + ' - ' + val.car_model + ' ' + val.car_number + ' ' + val.car_color + '-' + val.car_vendor + '</div><br/>').join('')
+            return value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val.car_makes + ' ' + val.car_model + ' ' + val.car_number + ' - ' + val.driver.driver_name + ' - ' + val.driver.driver_contact + '</div><br/>').join('')
         } else {
             return [
                 '<div class="left">',

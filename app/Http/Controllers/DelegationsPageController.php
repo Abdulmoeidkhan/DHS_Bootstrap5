@@ -6,6 +6,7 @@ use App\Models\Car;
 use App\Models\CarPlan;
 use App\Models\Delegate;
 use App\Models\Delegation;
+use App\Models\Driver;
 use App\Models\Hotel;
 use App\Models\HotelPlan;
 use App\Models\Interpreter;
@@ -48,6 +49,9 @@ class DelegationsPageController extends Controller
             $delegations[$key]->vips = Vips::where('vips_uid', $delegation->vips_uid)->first();
             $delegations[$key]->vips->rank = Rank::where('ranks_uid', $delegations[$key]->vips->vips_rank)->first('ranks_name');
             $delegations[$key]->cars = Car::where('car_delegation', $delegation->uid)->get();
+            foreach ($delegations[$key]->cars as $keyCar => $car) {
+                $delegations[$key]->cars[$keyCar]->driver = Driver::where('driver_uid', $car->driver_uid)->first();
+            }
             $delegations[$key]->hotelData = $delegations[$key]->standard ? Hotel::where('hotel_uid', $delegations[$key]->standard?->hotel_uid)->first('hotel_names') : null;
             // $delegations[$key]->vips->rank = array_filter($ranks->toArray(),fn ($rank) => $rank['ranks_uid'] == $delegations[$key]->vips->vips_rank);
             // $delegations[$key]->vips->rank = Rank::where('vips_uid', $delegations[$key]->vips['vips_rank'])->first('ranks_name');
