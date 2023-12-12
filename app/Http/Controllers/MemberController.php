@@ -78,7 +78,7 @@ class MemberController extends Controller
     public function membersData(Request $req, $id)
     {
         $delegation = Delegation::where('uid', $id)->first();
-        $delegates = Delegate::where('delegation', $delegation->uid)->get();
+        $delegates = Delegate::where([['delegation', $delegation->uid],['first_Name','!=',null]])->get();
         foreach ($delegates as $key => $delegate) {
             $delegates[$key]->head = $delegate->delegates_uid == $delegation->delegationhead ? "Head" : "Member";
             $delegates[$key]->rankName = Rank::where('ranks_uid', $delegate->rank)->first('ranks_name');

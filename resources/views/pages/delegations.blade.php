@@ -14,6 +14,12 @@
 </div>
 <br />
 @endif
+<style>
+    .active {
+        color: green;
+        font-weight: bold;
+    }
+</style>
 <div class="modal fade" id="DetachModal" tabindex="-1" aria-labelledby="DetachModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -289,16 +295,15 @@
                     <thead>
                         <tr>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
-                            <th data-filter-control="input" data-field="country" data-sortable="true">Country</th>
-                            <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true">Rank</th>
-                            <th data-filter-control="input" data-field="first_Name" data-sortable="true">First Name</th>
-                            <th data-filter-control="input" data-field="last_Name" data-sortable="true">Last Name</th>
+                            <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true">Country</th>
+                            <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true">Rank</th>
+                            <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true">First Name</th>
+                            <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true">Last Name</th>
                             <th data-filter-control="input" data-field="designation" data-sortable="true">Designation</th>
                             <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                             <th data-filter-control="input" data-field="delegation_response" data-sortable="true">Response</th>
                             <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                             <th data-filter-control="input" data-field="member_count" data-sortable="true">Number Of Person</th>
-                            <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                             <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true">Car A</th>
                             <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true">Car B</th>
                             <th data-filter-control="input" data-field="hotelData.hotel_names">Hotel Name</th>
@@ -307,6 +312,8 @@
                             <th data-filter-control="input" data-field="superior.hotel_quantity">Superior</th>
                             <th data-filter-control="input" data-field="dOccupancy.hotel_quantity">Double Occupancy</th>
                             <th data-filter-control="input" data-field="delegationCode">Delegation Code</th>
+                            <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
+                            <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                             <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                             <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
                             <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
@@ -334,6 +341,10 @@
     </div>
 </div>
 <script>
+    function memberFormatter(value, row, index) {
+        return value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val.rank.ranks_name + ' ' + val.first_Name + ' ' + val.last_Name + ' - ' + val.delegation_type + '</div><br/>').join('')
+    }
+
     function statusChangerFormatter(value, row, index) {
         if (value) {
             return [
@@ -355,6 +366,7 @@
     }
 
     function statusFormatter(value, row, index) {
+        
         return value ? ['<div class="left">', 'Yes', '</div>'].join('') : ['<div class="left">', 'No', '</div>'].join('');
     }
 
@@ -668,18 +680,18 @@
             let targetElement = document.getElementById('officerSelect');
             let officerDeSelect = document.getElementById('delegationUid_dis_officer').value;
             targetElement.innerHTML = '';
-            // axios.get('/detachOfficerData/' + officerDeSelect + '')
-            //     .then(function(response) {
-            //         let data = response.data;
-            //         let data2 = [];
-            //         data.map((val) => {
-            //             data2.push(`<option class="text-capitalize" value="${val.officer_uid}">${val.officer_first_name} ${val.officer_last_name} - ${val.officer_type} </option>`)
-            //         })
-            //         targetElement.innerHTML = data2;
-            //     })
-            //     .catch(function(error) {
-            //         console.log(error);
-            //     })
+            axios.get('/detachOfficerData/' + officerDeSelect + '')
+                .then(function(response) {
+                    let data = response.data;
+                    let data2 = [];
+                    data.map((val) => {
+                        data2.push(`<option class="text-capitalize" value="${val.officer_uid}">${val.officer_first_name} ${val.officer_last_name} - ${val.officer_type} </option>`)
+                    })
+                    targetElement.innerHTML = data2;
+                })
+                .catch(function(error) {
+                    console.log(error);
+                })
         })
 
     })
@@ -761,5 +773,26 @@
 </script>
 <script async src="https://unpkg.com/axios/dist/axios.min.js"></script>
 @include("layouts.tableFoot")
+<script>
+    var $table = $('#table')
+    var selectedRow = {}
+
+    $(function() {
+        $table.on('click-row.bs.table', function(e, row, $element) {
+            selectedRow = row
+            $('.active').removeClass('active')
+            $($element).addClass('active')
+        })
+    })
+
+    function rowStyle(row) {
+        if (row.id === selectedRow.id) {
+            return {
+                classes: 'active'
+            }
+        }
+        return {}
+    }
+</script>
 @endsection
 @endauth
