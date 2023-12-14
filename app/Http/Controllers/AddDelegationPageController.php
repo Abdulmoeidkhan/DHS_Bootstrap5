@@ -103,7 +103,7 @@ class AddDelegationPageController extends Controller
         $representative->delegates_uid = (string) Str::uuid();
         $representative->delegation_type = 'Representative';
         $representative->delegation = $delegation->uid;
-        $representativeSaved = $representative->save();
+
 
         $delegateSaved = 0;
         if ($req->self) {
@@ -112,7 +112,7 @@ class AddDelegationPageController extends Controller
             $delegates->delegation = $delegation->uid;
             $imgSaved = $req->savedpicture ? $this->imageBlobUpload($req->savedpicture, $delegates->delegates_uid) : '';
             $pdfSaved = $req->file('pdf') ? $this->documentUpload($req->file('pdf'), $delegates->delegates_uid) : '';
-            $delegateSaved = $delegates->save();
+            $representative->self = 0;
         } else {
             $representative->rank = $req->rep_rank;
             $representative->first_Name = $req->rep_first_Name;
@@ -121,18 +121,18 @@ class AddDelegationPageController extends Controller
             $delegation->delegationhead = $delegates->delegates_uid;
             $delegates->delegation = $delegation->uid;
             $delegates->self = 0;
-            if ($representativeSaved) {
-                $imgSaved = $req->savedRepresentativesPicture ? $this->imageBlobUpload($req->savedRepresentativesPicture, $representative->delegates_uid) : '';
-                $pdfSaved = $req->file('rep_Pdf') ? $this->documentUpload($req->file('rep_Pdf'), $representative->delegates_uid) : '';
-                $delegateSaved = $delegates->save();
-            }
+        }
+        $representativeSaved = $representative->save();
+        $delegateSaved = $delegates->save();
+        if ($representativeSaved) {
+            $imgSaved = $req->savedRepresentativesPicture ? $this->imageBlobUpload($req->savedRepresentativesPicture, $representative->delegates_uid) : '';
+            $pdfSaved = $req->file('rep_Pdf') ? $this->documentUpload($req->file('rep_Pdf'), $representative->delegates_uid) : '';
         }
         try {
-
             if ($delegateSaved) {
                 $delegationSaved = $delegation->save();
                 if ($delegationSaved) {
-                    return back()->with('message', 'Delegation has been added Successfully');
+                    return $req->submitAndRetain ? back()->with('message', 'Delegation has been added Successfully') : redirect()->route('pages.delegationsPage')->with('message', 'Profile has been activated');
                 }
             }
         } catch (\Illuminate\Database\QueryException $exception) {
@@ -145,13 +145,13 @@ class AddDelegationPageController extends Controller
         }
     }
 
-    public function updateDelegationRequest(Request $req)
+    public function updateDelegationRequest(Request $req, $retain = null)
     {
         $arrayToBeUpdate = [];
         $arrayToBeUpdateRep = [];
         $arrayToBeUpdateSelf = [];
         foreach ($req->all() as $key => $value) {
-            if ($key != 'submit' && $key != '_token' && $key != 'savedpicture'  && $key != 'delegation_picture' && $key != 'pdf' && $key != 'rep_Pdf' && $key != 'rep_saved_picture' && $key != 'rep_picture' && strlen($value) > 0) {
+            if ($key != 'submit' && $key != '_token' && $key != 'savedpicture' && $key != 'submitAndRetain'  && $key != 'delegation_picture' && $key != 'pdf' && $key != 'rep_Pdf' && $key != 'rep_saved_picture' && $key != 'rep_picture' && strlen($value) > 0) {
                 if (substr($key, 0, 4) == 'rep_') {
                     $arrayToBeUpdateRep[substr($key, 4)] = $value;
                 } elseif (substr($key, 0, 5) == 'self_') {
@@ -182,7 +182,7 @@ class AddDelegationPageController extends Controller
             $req->pdf ? $this->documentUpdate($req->file('pdf'), $delegationSelfUid) : 0;
             $req->savedpicture ? $this->imageBlobUpdate($req->savedpicture, $delegationSelfUid) : 0;
             if ($delegateUpdate) {
-                return back()->with('message', 'Delegation has been updated Successfully');
+                return $req->submitAndRetain ? back()->with('message', 'Delegation has been updated Successfully') : redirect()->route('pages.delegationsPage')->with('message', 'Profile has been activated');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {

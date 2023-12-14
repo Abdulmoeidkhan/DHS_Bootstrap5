@@ -241,8 +241,8 @@
                             @if(isset($delegations))
                             <input name="uid" type="hidden" class="form-control" id="uid" value="{{isset($delegations)?$delegations->uid :''}}">
                             @endif
-                            
                             <input type="submit" name="submit" class="btn {{isset($delegations)?'btn-success':'btn-primary'}}" value="{{isset($delegations)?'Update Delegation':'Add Delegation'}}" />
+                            <input type="submit" name="submitAndRetain" class="btn {{isset($delegations)?'btn-success':'btn-primary'}}" value="{{isset($delegations)?'Update Delegation & Retain':'Add Delegation & Retain'}}" />
                         </fieldset>
                     </form>
                 </div>
