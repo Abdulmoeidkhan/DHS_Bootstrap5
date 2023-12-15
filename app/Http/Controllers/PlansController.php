@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\CarPlan;
+use App\Models\HotelPlan;
 
 class PlansController extends Controller
 {
@@ -35,6 +38,17 @@ class PlansController extends Controller
         // $hotelPlan = HotelPlan::where('delegation_uid', $id)->first();
         // return view('pages.addPlan', ['carPlan' => $carPlan, 'hotelPlan' => $hotelPlan]);
         return view('pages.addPlan', ['id' => $id]);
+    }
+
+    public function deleteHotelPlan($id)
+    {
+        $hotelPlan = HotelPlan::where('hotel_plan_uid', $id)->delete();
+        return $hotelPlan ? back()->with('message', "Hotel Plan Deleted Successfully") : back()->with('error', "Something Went Wrong");
+    }
+    public function deleteCarPlan($id)
+    {
+        $carPlan = CarPlan::where('car_plan_uid', $id)->delete();
+        return $carPlan ? back()->with('message', "Car Plan Deleted Successfully") : back()->with('error', "Something Went Wrong");
     }
 
     // public function addPlan(Request $req)

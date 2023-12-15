@@ -43,14 +43,14 @@ class HotelController extends Controller
         $hotel = new Hotel();
         $hotel->hotel_uid = (string) Str::uuid();
         foreach ($req->all() as $key => $value) {
-            if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
+            if ($key != 'submit' && $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
                 $hotel[$key] = $value;
             }
         }
         try {
             $savedhotel = $hotel->save();
             if ($savedhotel) {
-                return back()->with('message', "Hotels Added Successfully");
+                return $req->submitMore ? back()->with('message', "Hotels Added Successfully") : redirect()->route('pages.hotels');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             return  back()->with('error', $exception->errorInfo[2]);
@@ -62,13 +62,13 @@ class HotelController extends Controller
         try {
             $arrayToBeUpdate = [];
             foreach ($req->all() as $key => $value) {
-                if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
+                if ($key != 'submit' && $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
                     $arrayToBeUpdate[$key] = $value;
                 }
             }
             $updateHotel = Hotel::where('hotel_uid', $id)->update($arrayToBeUpdate);
             if ($updateHotel) {
-                return back()->with('message', "Hotels Updated Successfully");
+                return $req->submitMore ? back()->with('message', "Hotels Updated Successfully") : redirect()->route('pages.hotels');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             return  back()->with('error', $exception->errorInfo[2]);
@@ -144,7 +144,7 @@ class HotelController extends Controller
         $rooms = Room::get();
         foreach ($rooms as $key => $room) {
             $rooms[$key]->room_type = Roomtype::where('room_type_uid', $room->room_type)->first(['room_type']);
-            $rooms[$key]->hotel_names = Hotel::where('hotel_uid', $room->hotel_uid)->first(['hotel_names','hotel_uid']);
+            $rooms[$key]->hotel_names = Hotel::where('hotel_uid', $room->hotel_uid)->first(['hotel_names', 'hotel_uid']);
             $rooms[$key]->assign_to = Delegate::where('delegates_uid', $rooms[$key]->assign_to)->first('uid') ? Delegate::where('delegates_uid', $rooms[$key]->assign_to)->first('uid') : Member::where('member_uid', $rooms[$key]->assign_to)->first('member_uid');
             $rooms[$key]->assign_to = $rooms[$key]->assign_to->uid ? 'delegateProfile/' . $rooms[$key]->assign_to->uid . '' : 'members/memberFullProfile/' . $rooms[$key]->assign_to->member_uid . '';
             $rooms[$key]->room_logged_by = User::where('uid', $room->room_logged_by)->first('name');

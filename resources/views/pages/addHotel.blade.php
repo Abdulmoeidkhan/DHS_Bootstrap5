@@ -17,21 +17,22 @@
                             </div>
                             <div class="mb-3">
                                 <label for="hotel_address" class="form-label">Hotel Address</label>
-                                <input name="hotel_address" type="text" class="form-control" id="hotel_address" value="{{!empty($hotel)?$hotel->hotel_address:''}}" placeholder="Hotel Address" required>
+                                <input name="hotel_address" type="text" class="form-control" id="hotel_address" value="{{!empty($hotel)?$hotel->hotel_address:''}}" placeholder="Hotel Address">
                             </div>
                             <div class="mb-3">
                                 <label for="contact_person" class="form-label">Contact Person</label>
-                                <input name="contact_person" type="text" class="form-control" id="contact_person" value="{{!empty($hotel)?$hotel->contact_person:''}}" placeholder="Contact Person" required>
+                                <input name="contact_person" type="text" class="form-control" id="contact_person" value="{{!empty($hotel)?$hotel->contact_person:''}}" placeholder="Contact Person">
                             </div>
                             <div class="mb-3">
                                 <label for="contact_number" class="form-label">Contact Number</label>
-                                <input name="contact_number" type="text" class="form-control" id="contact_number" value="{{!empty($hotel)?$hotel->contact_number:''}}" placeholder="Contact Number" required>
+                                <input name="contact_number" type="text" class="form-control" id="contact_number" value="{{!empty($hotel)?$hotel->contact_number:''}}" placeholder="Contact Number">
                             </div>
                             <div class="mb-3">
                                 <label for="hotel_remarks" class="form-label">Hotel Remarks</label>
-                                <input name="hotel_remarks" type="text" class="form-control" id="hotel_remarks" value="{{!empty($hotel)?$hotel->hotel_remarks:''}}" placeholder="Hotel Remarks" required>
+                                <input name="hotel_remarks" type="text" class="form-control" id="hotel_remarks" value="{{!empty($hotel)?$hotel->hotel_remarks:''}}" placeholder="Hotel Remarks">
                             </div>
                             <input type="submit" name="submit" class="btn btn-primary" value="{{!empty($hotel)?'Update Hotel':'Add Hotel'}}" />
+                            <input type="submit" name="submitMore" class="btn btn-success" value="{{!empty($hotel)?'Update Hotel And More':'Add Hotel And More'}}" />
                         </fieldset>
                     </form>
                 </div>

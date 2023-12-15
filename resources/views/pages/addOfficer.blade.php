@@ -76,8 +76,8 @@
                                 <input name="officer_address" type="text" class="form-control" id="officer_address" placeholder="Officer Address" value="{{isset($officer) ? $officer->officer_address : ''}}" required />
                             </div>
                             <div class="mb-3">
-                                <label for="officer_remarks" class="form-label">Officer Remarks</label>
-                                <input name="officer_remarks" type="text" class="form-control" id="officer_remarks" placeholder="Officer Remarks" value="{{isset($officer) ? $officer->officer_remarks : ''}}" required />
+                                <label for="officer_remarks" class="form-label">Force Type</label>
+                                <input name="officer_remarks" type="text" class="form-control" id="officer_remarks" placeholder="Force Type" value="{{isset($officer) ? $officer->officer_remarks : ''}}" required />
                             </div>
                             <div class="mb-3">
                                 <label for="officer_picture" class="form-label">Picture</label>
@@ -107,6 +107,7 @@
                                 @endif
                             </div> -->
                             <input type="submit" name="submit" class="btn {{isset($officer->officer_uid)?'btn-success':'btn-primary'}}" value="{{isset($officer->officer_uid)?'Update Officer':'Add Officer'}}" />
+                            <input type="submit" name="submitMore" class="btn {{isset($officer->officer_uid)?'btn-primary':'btn-success'}}" value="{{isset($officer->officer_uid)?'Update Officer & More':'Add Officer & More'}}" />
                         </fieldset>
                     </form>
                 </div>

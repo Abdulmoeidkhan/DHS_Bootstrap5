@@ -5,12 +5,12 @@
 @if(session()->get('user')->roles[0]->name === "admin")
 <div class="row">
     <div class="d-flex justify-content-center">
-        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#CarPlanModal">Add Car Plan</button>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#CarPlanModal">Add Car Plan</button>
         &nbsp;
         &nbsp;
         &nbsp;
         &nbsp;
-        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#HotelPlanModal">Add Hotel Plan</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#HotelPlanModal">Add Hotel Plan</button>
         <div class="modal fade" id="CarPlanModal" tabindex="-1" aria-labelledby="CarPlanModal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -68,7 +68,7 @@
                             <th data-field="hotel_names" data-sortable="true">Hotel</th>
                             <th data-field="room_type" data-sortable="true">Room Type</th>
                             <th data-field="hotel_quantity" data-sortable="true">Quantity</th>
-                            <th data-field="car_plan_uid" data-formatter="deleteHotelPlan" data-sortable="true">Actions</th>
+                            <th data-field="hotel_plan_uid" data-formatter="deleteHotelPlan" data-sortable="true">Actions</th>
                         </tr>
                     </thead>
                 </table>
@@ -80,7 +80,7 @@
     function deleteHotelPlan(value, row, index) {
         return [
             '<div class="left">',
-            '<a class="btn btn-outline-badar" href="delegateProfile/' + value + '">',
+            '<a class="btn btn-badar" href="deleteHotelPlan/' + value + '">',
             '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"/><path d="M6 21v-2a4 4 0 0 1 4 -4h3.5"/><path d="M22 22l-5 -5"/><path d="M17 22l5 -5"/></svg>',
             '</a>',
             '</div>',
@@ -90,7 +90,7 @@
     function deleteCarPlan(value, row, index) {
         return [
             '<div class="left">',
-            '<a class="btn btn-outline-badar" href="delegateProfile/' + value + '">',
+            '<a class="btn btn-badar" href="deleteCarPlan/' + value + '">',
             '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"/><path d="M6 21v-2a4 4 0 0 1 4 -4h3.5"/><path d="M22 22l-5 -5"/><path d="M17 22l5 -5"/></svg>',
             '</a>',
             '</div>',

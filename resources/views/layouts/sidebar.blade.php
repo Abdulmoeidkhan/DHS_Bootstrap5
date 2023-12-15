@@ -143,7 +143,27 @@
                         <span>
                             <i class="ti ti-plane-departure"></i>
                         </span>
+                        <span class="hide-menu">Airport</span>
+                    </a>
+                </li>
+                @endif
+                <!-- @if(session()->get('user')->roles[0]->name =="admin")
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.flights')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-plane-departure"></i>
+                        </span>
                         <span class="hide-menu">Flights</span>
+                    </a>
+                </li>
+                @endif -->
+                @if(session()->get('user')->roles[0]->name =="admin")
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.hotels')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-category-2"></i>
+                        </span>
+                        <span class="hide-menu">Category</span>
                     </a>
                 </li>
                 @endif
@@ -185,7 +205,401 @@
                         <span class="hide-menu">Events</span>
                     </a>
                 </li>
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Reports</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                        <span class="d-flex">
+                            <i class="ti ti-report"></i>
+                        </span>
+                        <span class="hide-menu">Delegation</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="../main/blog-posts.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">List Of All Delegation</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">List Of All Delegates</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Delegate Badge Count</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Delegation Attendance</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                        <span class="d-flex">
+                            <i class="ti ti-report"></i>
+                        </span>
+                        <span class="hide-menu">Invitation & Response</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="../main/blog-posts.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Country</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">VIP</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Country & VIP</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Self/Rep</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">List of Invited Dignitaries</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                        <span class="d-flex">
+                            <i class="ti ti-report"></i>
+                        </span>
+                        <span class="hide-menu">Meeting Request & Delegation</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="../main/blog-posts.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Posts</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Details</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li> -->
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                        <span class="d-flex">
+                            <i class="ti ti-report"></i>
+                        </span>
+                        <span class="hide-menu">Airports</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="../main/blog-posts.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Delegation Arrival Status - Country</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Delegation Arrival Status - VIP</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Delegates Arrival Status - Country</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Delegates Arrival Status - VIP</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Delegates Arrival Details</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Delegation Arrival Status - Country</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Delegation Arrival Status - VIP</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Delegates Arrival Status - Country</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Delegates Arrival Status - VIP</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Delegates Departure Details</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                        <span class="d-flex">
+                            <i class="ti ti-report"></i>
+                        </span>
+                        <span class="hide-menu">Hotels</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="../main/blog-posts.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Delegation Check-In Status - Country</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Delegation Check-In Status - VIP</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Delegates Check-In Status - Country</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Delegates Check-In Status - VIP</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Hotel Check-In Details</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Delegation Check-Out Status - Country</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Delegation Check-Out Status - VIP</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Delegates Check-Out Status - Country</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Delegates Check-Out Status - VIP</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Hotel Check-Out Details</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                        <span class="d-flex">
+                            <i class="ti ti-report"></i>
+                        </span>
+                        <span class="hide-menu">Officers</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="../main/blog-posts.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Responsibilities - LOs</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Responsibilities - ROs</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Responsibilities - Interpreters</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                        <span class="d-flex">
+                            <i class="ti ti-report"></i>
+                        </span>
+                        <span class="hide-menu">Persons</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="../main/blog-posts.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">List of VIPs</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">List of Officer</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../main/blog-detail.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">List of Driver</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                        <span class="d-flex">
+                            <i class="ti ti-report"></i>
+                        </span>
+                        <span class="hide-menu">Tracking</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="../main/blog-posts.html" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">View Delegates Status</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
+            <div class="unlimited-access hide-menu bg-light-primary position-relative mb-7 mt-5 rounded">
+                <div class="d-flex">
+                    <br />
+                </div>
+            </div>
+
             <!-- <ul id="sidebarnav">
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
@@ -295,7 +709,9 @@
                 @endif
             </ul> -->
         </nav>
+
         <!-- End Sidebar navigation -->
+
     </div>
     <!-- End Sidebar scroll-->
 </aside>
