@@ -14,6 +14,7 @@ use App\Models\Liason;
 use App\Models\Rank;
 use App\Models\Receiving;
 use App\Models\Vips;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class DelegationsPageController extends Controller
@@ -24,7 +25,7 @@ class DelegationsPageController extends Controller
             $delegations = DB::table('delegations')
                 ->leftJoin('delegates', 'delegates.delegates_uid', '=', 'delegations.delegationhead')
                 ->leftJoin('vips', 'delegations.invited_by', '=', 'vips.vips_uid')
-                ->where('delegations.delegation_response', 'Accepted')
+                ->where([['delegations.delegation_response', 'Accepted'],['delegations.delegation_status', '1']])
                 ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.rank', 'delegates.self', 'delegates.delegates_uid', 'delegates.designation', 'vips.vips_uid')
                 ->orderBy('delegations.country', 'asc')
                 ->orderBy('vips.vips_rank', 'asc')
@@ -60,6 +61,7 @@ class DelegationsPageController extends Controller
             $delegations = DB::table('delegations')
                 ->leftJoin('delegates', 'delegates.delegates_uid', '=', 'delegations.delegationhead')
                 ->leftJoin('vips', 'vips.vips_uid', '=', 'delegations.invited_by')
+                ->where('delegations.delegation_status', '1')
                 ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.rank', 'delegates.self', 'delegates.delegates_uid', 'delegates.designation', 'vips.vips_uid')
                 ->orderBy('delegations.country', 'asc')
                 ->orderBy('vips.vips_rank', 'asc')
@@ -92,7 +94,7 @@ class DelegationsPageController extends Controller
             $delegations = DB::table('delegations')
                 ->leftJoin('delegates', 'delegates.delegates_uid', '=', 'delegations.delegationhead')
                 ->leftJoin('vips', 'delegations.invited_by', '=', 'vips.vips_uid')
-                ->where('delegations.delegation_response', 'Awaited')
+                ->where([['delegations.delegation_response', 'Awaited'], ['delegations.delegation_status', '1']])
                 ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.rank', 'delegates.self', 'delegates.delegates_uid', 'delegates.designation', 'vips.vips_uid')
                 ->orderBy('delegations.country', 'asc')
                 ->orderBy('vips.vips_rank', 'asc')
@@ -127,7 +129,42 @@ class DelegationsPageController extends Controller
             $delegations = DB::table('delegations')
                 ->leftJoin('delegates', 'delegates.delegates_uid', '=', 'delegations.delegationhead')
                 ->leftJoin('vips', 'delegations.invited_by', '=', 'vips.vips_uid')
-                ->where('delegations.delegation_response', 'Regretted')
+                ->where([['delegations.delegation_response', 'Regretted'], ['delegations.delegation_status', '1']])
+                ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.rank', 'delegates.self', 'delegates.delegates_uid', 'delegates.designation', 'vips.vips_uid')
+                ->orderBy('delegations.country', 'asc')
+                ->orderBy('vips.vips_rank', 'asc')
+                ->get();
+            foreach ($delegations as $key => $delegation) {
+                $delegations[$key]->standard = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4f']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                $delegations[$key]->superior = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4h']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                $delegations[$key]->dOccupancy = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4i']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                $delegations[$key]->officers = DB::table('officers')->leftJoin('ranks', 'officers.officer_rank', '=', 'ranks.ranks_uid')->where('officer_delegation', $delegation->uid)->select('officers.*', 'ranks.ranks_name')->get();
+                $delegations[$key]->suite = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4g']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                $delegations[$key]->carA = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', '61346491-983a-40ed-8477-2d9ed84e6767']])->first(['car_quantity', 'car_plan_uid']);
+                $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
+                $delegations[$key]->member_count = Delegate::where([['delegation', $delegation->uid], ['delegation_type', '!=', 'Representative'], ['status', 1]])->count();
+                $delegations[$key]->members = Delegate::where([['delegation', $delegation->uid], ['delegation_type', '!=', 'Self'], ['status', 1]])->get();
+                $delegations[$key]->rankName = Rank::where('ranks_uid', $delegation->rank)->first('ranks_name');
+                $delegations[$key]->vips = Vips::where('vips_uid', $delegation->vips_uid)->first();
+                $delegations[$key]->vips->rank = Rank::where('ranks_uid', $delegations[$key]->vips->vips_rank)->first('ranks_name');
+                $delegations[$key]->cars = Car::where('car_delegation', $delegation->uid)->get();
+                foreach ($delegations[$key]->members as $memberkey => $members) {
+                    $delegations[$key]->members[$memberkey]->rank = Rank::where('ranks_uid', $members->rank)->first('ranks_name');
+                }
+                foreach ($delegations[$key]->cars as $keyCar => $car) {
+                    $delegations[$key]->cars[$keyCar]->driver = Driver::where('driver_uid', $car->driver_uid)->first();
+                }
+                $delegations[$key]->hotelData = $delegations[$key]->standard ? Hotel::where('hotel_uid', $delegations[$key]->standard?->hotel_uid)->first('hotel_names') : null;
+                // $delegations[$key]->vips->rank = array_filter($ranks->toArray(),fn ($rank) => $rank['ranks_uid'] == $delegations[$key]->vips->vips_rank);
+                // $delegations[$key]->vips->rank = Rank::where('vips_uid', $delegations[$key]->vips['vips_rank'])->first('ranks_name');
+                // $delegations[$key]->member_count = $delegations[$key]->member_count ? $delegations[$key]->member_count + 1 : 1;
+            }
+            return $delegations;
+        } else if ($status == 3) {
+            $delegations = DB::table('delegations')
+                ->leftJoin('delegates', 'delegates.delegates_uid', '=', 'delegations.delegationhead')
+                ->leftJoin('vips', 'delegations.invited_by', '=', 'vips.vips_uid')
+                ->where('delegations.delegation_status', '0')
                 ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.rank', 'delegates.self', 'delegates.delegates_uid', 'delegates.designation', 'vips.vips_uid')
                 ->orderBy('delegations.country', 'asc')
                 ->orderBy('vips.vips_rank', 'asc')
