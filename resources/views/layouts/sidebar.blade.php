@@ -36,8 +36,6 @@
                         <span class="hide-menu">User Panel</span>
                     </a>
                 </li>
-                @endif
-                @if(session()->get('user')->roles[0]->name =="admin")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.delegationsPage')}}" aria-expanded="false">
                         <span>
@@ -46,8 +44,14 @@
                         <span class="hide-menu">Delegations</span>
                     </a>
                 </li>
-                @endif
-                @if(session()->get('user')->roles[0]->name =="admin")
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.delegatesPage')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-mail"></i>
+                        </span>
+                        <span class="hide-menu">Delegates</span>
+                    </a>
+                </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.officer')}}" aria-expanded="false">
                         <span>

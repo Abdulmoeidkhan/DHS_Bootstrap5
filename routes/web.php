@@ -19,6 +19,7 @@ use App\Http\Controllers\ActivateProfileController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\CarsController;
 use App\Http\Controllers\DelegateFlightController;
+use App\Http\Controllers\DelegatesPageController;
 use App\Http\Controllers\DoucmentController;
 use App\Http\Controllers\FlightsController;
 use App\Http\Controllers\HotelController;
@@ -249,7 +250,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/userProfile/{id}', [UserFullProfileController::class, 'render'])->name('pages.userProfile');
         Route::post('/addEventRequest', [AddEventController::class, 'addEvent'])->name('request.addEventRequest');
         Route::get('/delegationsPage', [DelegationsPageController::class, 'render'])->name('pages.delegationsPage');
-        Route::get('/getDelegates/{status?}', [DelegationsPageController::class, 'delegationData'])->name('request.getDelegates');
+        Route::get('/delegatesPage', [DelegatesPageController::class, 'render'])->name('pages.delegatesPage');
+        Route::get('/getDelegation/{status?}', [DelegationsPageController::class, 'delegationData'])->name('request.getDelegation');
+        Route::get('/getDelegates/{status?}', [DelegatesPageController::class, 'delegatesData'])->name('request.getDelegates');
         Route::get('/addDelegationPage/{id?}', [AddDelegationPageController::class, 'render'])->name('pages.addDelegationPage');
         Route::get('/getSpecificMembers', [MemberController::class, 'specificMembersData'])->name('pages.getSpecificMembers');
         Route::get('/statusChanger/{id}', [DelegationsPageController::class, 'updateStatus'])->name('request.updateStatus');

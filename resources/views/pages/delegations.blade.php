@@ -363,7 +363,7 @@
             <div class="tab-content pt-5" id="tab-content">
                 <div class="tab-pane active" id="simple-tabpanel-0" role="tabpanel" aria-labelledby="simple-tab-0">
                     <div class="table-responsive">
-                        <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates',1)}}">
+                        <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',1)}}">
                             <thead>
                                 <tr>
                                     <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -406,7 +406,7 @@
                 </div>
                 <div class="tab-pane" id="simple-tabpanel-1" role="tabpanel" aria-labelledby="simple-tab-1">
                     <div class="table-responsive">
-                        <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates',0)}}">
+                        <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',0)}}">
                             <thead>
                                 <tr>
                                     <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -449,7 +449,7 @@
                 </div>
                 <div class="tab-pane" id="simple-tabpanel-2" role="tabpanel" aria-labelledby="simple-tab-2">
                     <div class="table-responsive">
-                        <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates')}}">
+                        <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation')}}">
                             <thead>
                                 <tr>
                                     <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -492,7 +492,7 @@
                 </div>
                 <div class="tab-pane" id="simple-tabpanel-3" role="tabpanel" aria-labelledby="simple-tab-3">
                     <div class="table-responsive">
-                        <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates',2)}}">
+                        <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',2)}}">
                             <thead>
                                 <tr>
                                     <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -552,27 +552,27 @@
                 <br />
                 @endif
                 <div class="table-responsive">
-                    <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates',1)}}">
+                    <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',1)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
-                                <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true">Country</th>
-                                <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true">Rank</th>
-                                <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true">First Name</th>
-                                <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true">Last Name</th>
-                                <th data-filter-control="input" data-field="designation" data-sortable="true">Designation</th>
+                                <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
+                                <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Rank</th>
+                                <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th>
+                                <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th>
+                                <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                                 <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
-                                <th data-filter-control="input" data-field="delegation_response" data-sortable="true">Response</th>
+                                <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                                 <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
-                                <th data-filter-control="input" data-field="member_count" data-sortable="true">Number Of Person</th>
-                                <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true">Car A</th>
-                                <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true">Car B</th>
-                                <th data-filter-control="input" data-field="hotelData.hotel_names">Hotel Name</th>
-                                <th data-filter-control="input" data-field="standard.hotel_quantity">Standard</th>
-                                <th data-filter-control="input" data-field="suite.hotel_quantity">Suite</th>
-                                <th data-filter-control="input" data-field="superior.hotel_quantity">Superior</th>
-                                <th data-filter-control="input" data-field="dOccupancy.hotel_quantity">Double Occupancy</th>
-                                <th data-filter-control="input" data-field="delegationCode">Delegation Code</th>
+                                <th data-filter-control="input" data-field="member_count" data-sortable="true" data-formatter="operateText">Number Of Person</th>
+                                <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true" data-formatter="operateText">Car A</th>
+                                <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true" data-formatter="operateText">Car B</th>
+                                <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
+                                <th data-filter-control="input" data-field="standard.hotel_quantity" data-formatter="operateText">Standard</th>
+                                <th data-filter-control="input" data-field="suite.hotel_quantity" data-formatter="operateText">Suite</th>
+                                <th data-filter-control="input" data-field="superior.hotel_quantity" data-formatter="operateText">Superior</th>
+                                <th data-filter-control="input" data-field="dOccupancy.hotel_quantity" data-formatter="operateText">Double Occupancy</th>
+                                <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th>
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
@@ -605,27 +605,27 @@
                 <br />
                 @endif
                 <div class="table-responsive">
-                    <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates',0)}}">
+                    <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',0)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
-                                <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true">Country</th>
-                                <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true">Rank</th>
-                                <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true">First Name</th>
-                                <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true">Last Name</th>
-                                <th data-filter-control="input" data-field="designation" data-sortable="true">Designation</th>
+                                <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
+                                <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Rank</th>
+                                <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th>
+                                <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th>
+                                <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                                 <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
-                                <th data-filter-control="input" data-field="delegation_response" data-sortable="true">Response</th>
+                                <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                                 <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
-                                <th data-filter-control="input" data-field="member_count" data-sortable="true">Number Of Person</th>
-                                <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true">Car A</th>
-                                <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true">Car B</th>
-                                <th data-filter-control="input" data-field="hotelData.hotel_names">Hotel Name</th>
-                                <th data-filter-control="input" data-field="standard.hotel_quantity">Standard</th>
-                                <th data-filter-control="input" data-field="suite.hotel_quantity">Suite</th>
-                                <th data-filter-control="input" data-field="superior.hotel_quantity">Superior</th>
-                                <th data-filter-control="input" data-field="dOccupancy.hotel_quantity">Double Occupancy</th>
-                                <th data-filter-control="input" data-field="delegationCode">Delegation Code</th>
+                                <th data-filter-control="input" data-field="member_count" data-sortable="true" data-formatter="operateText">Number Of Person</th>
+                                <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true" data-formatter="operateText">Car A</th>
+                                <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true" data-formatter="operateText">Car B</th>
+                                <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
+                                <th data-filter-control="input" data-field="standard.hotel_quantity" data-formatter="operateText">Standard</th>
+                                <th data-filter-control="input" data-field="suite.hotel_quantity" data-formatter="operateText">Suite</th>
+                                <th data-filter-control="input" data-field="superior.hotel_quantity" data-formatter="operateText">Superior</th>
+                                <th data-filter-control="input" data-field="dOccupancy.hotel_quantity" data-formatter="operateText">Double Occupancy</th>
+                                <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th>
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
@@ -649,7 +649,7 @@
             </div>
             <div id="Regretted" class="tabcontent">
                 <p>
-                @if(session()->get('user')->roles[0]->name === "admin")
+                    @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
                     <div class="d-flex">
                         <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-primary">Add Delegations</a>
@@ -658,27 +658,27 @@
                 <br />
                 @endif
                 <div class="table-responsive">
-                    <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates',2)}}">
+                    <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',2)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
-                                <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true">Country</th>
-                                <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true">Rank</th>
-                                <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true">First Name</th>
-                                <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true">Last Name</th>
-                                <th data-filter-control="input" data-field="designation" data-sortable="true">Designation</th>
+                                <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
+                                <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Rank</th>
+                                <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th>
+                                <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th>
+                                <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                                 <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
-                                <th data-filter-control="input" data-field="delegation_response" data-sortable="true">Response</th>
-                                <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
-                                <th data-filter-control="input" data-field="member_count" data-sortable="true">Number Of Person</th>
-                                <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true">Car A</th>
-                                <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true">Car B</th>
-                                <th data-filter-control="input" data-field="hotelData.hotel_names">Hotel Name</th>
-                                <th data-filter-control="input" data-field="standard.hotel_quantity">Standard</th>
-                                <th data-filter-control="input" data-field="suite.hotel_quantity">Suite</th>
-                                <th data-filter-control="input" data-field="superior.hotel_quantity">Superior</th>
-                                <th data-filter-control="input" data-field="dOccupancy.hotel_quantity">Double Occupancy</th>
-                                <th data-filter-control="input" data-field="delegationCode">Delegation Code</th>
+                                <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
+                                <th data-filter-control="input" data-field="self" data-formatter="operateSelf" data-formatter="operateText">Status</th>
+                                <th data-filter-control="input" data-field="member_count" data-sortable="true" data-formatter="operateText">Number Of Person</th>
+                                <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true" data-formatter="operateText">Car A</th>
+                                <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true" data-formatter="operateText">Car B</th>
+                                <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
+                                <th data-filter-control="input" data-field="standard.hotel_quantity" data-formatter="operateText">Standard</th>
+                                <th data-filter-control="input" data-field="suite.hotel_quantity" data-formatter="operateText">Suite</th>
+                                <th data-filter-control="input" data-field="superior.hotel_quantity" data-formatter="operateText">Superior</th>
+                                <th data-filter-control="input" data-field="dOccupancy.hotel_quantity" data-formatter="operateText">Double Occupancy</th>
+                                <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th>
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
@@ -702,7 +702,7 @@
             </div>
             <div id="Deactive" class="tabcontent">
                 <p>
-                @if(session()->get('user')->roles[0]->name === "admin")
+                    @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
                     <div class="d-flex">
                         <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-primary">Add Delegations</a>
@@ -711,27 +711,27 @@
                 <br />
                 @endif
                 <div class="table-responsive">
-                    <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates',3)}}">
+                    <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',3)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
-                                <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true">Country</th>
-                                <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true">Rank</th>
-                                <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true">First Name</th>
-                                <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true">Last Name</th>
-                                <th data-filter-control="input" data-field="designation" data-sortable="true">Designation</th>
+                                <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
+                                <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Rank</th>
+                                <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th>
+                                <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th>
+                                <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                                 <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
-                                <th data-filter-control="input" data-field="delegation_response" data-sortable="true">Response</th>
+                                <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                                 <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
-                                <th data-filter-control="input" data-field="member_count" data-sortable="true">Number Of Person</th>
-                                <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true">Car A</th>
-                                <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true">Car B</th>
-                                <th data-filter-control="input" data-field="hotelData.hotel_names">Hotel Name</th>
-                                <th data-filter-control="input" data-field="standard.hotel_quantity">Standard</th>
-                                <th data-filter-control="input" data-field="suite.hotel_quantity">Suite</th>
-                                <th data-filter-control="input" data-field="superior.hotel_quantity">Superior</th>
-                                <th data-filter-control="input" data-field="dOccupancy.hotel_quantity">Double Occupancy</th>
-                                <th data-filter-control="input" data-field="delegationCode">Delegation Code</th>
+                                <th data-filter-control="input" data-field="member_count" data-sortable="true" data-formatter="operateText">Number Of Person</th>
+                                <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true" data-formatter="operateText">Car A</th>
+                                <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true" data-formatter="operateText">Car B</th>
+                                <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
+                                <th data-filter-control="input" data-field="standard.hotel_quantity" data-formatter="operateText">Standard</th>
+                                <th data-filter-control="input" data-field="suite.hotel_quantity" data-formatter="operateText">Suite</th>
+                                <th data-filter-control="input" data-field="superior.hotel_quantity" data-formatter="operateText">Superior</th>
+                                <th data-filter-control="input" data-field="dOccupancy.hotel_quantity" data-formatter="operateText">Double Occupancy</th>
+                                <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th>
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
@@ -755,7 +755,7 @@
             </div>
             <div id="All" class="tabcontent">
                 <p>
-                @if(session()->get('user')->roles[0]->name === "admin")
+                    @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
                     <div class="d-flex">
                         <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-primary">Add Delegations</a>
@@ -764,27 +764,27 @@
                 <br />
                 @endif
                 <div class="table-responsive">
-                    <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates')}}">
+                    <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation')}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
-                                <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true">Country</th>
-                                <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true">Rank</th>
-                                <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true">First Name</th>
-                                <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true">Last Name</th>
-                                <th data-filter-control="input" data-field="designation" data-sortable="true">Designation</th>
+                                <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
+                                <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Rank</th>
+                                <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th>
+                                <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th>
+                                <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                                 <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
-                                <th data-filter-control="input" data-field="delegation_response" data-sortable="true">Response</th>
+                                <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                                 <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
-                                <th data-filter-control="input" data-field="member_count" data-sortable="true">Number Of Person</th>
-                                <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true">Car A</th>
-                                <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true">Car B</th>
-                                <th data-filter-control="input" data-field="hotelData.hotel_names">Hotel Name</th>
-                                <th data-filter-control="input" data-field="standard.hotel_quantity">Standard</th>
-                                <th data-filter-control="input" data-field="suite.hotel_quantity">Suite</th>
-                                <th data-filter-control="input" data-field="superior.hotel_quantity">Superior</th>
-                                <th data-filter-control="input" data-field="dOccupancy.hotel_quantity">Double Occupancy</th>
-                                <th data-filter-control="input" data-field="delegationCode">Delegation Code</th>
+                                <th data-filter-control="input" data-field="member_count" data-sortable="true" data-formatter="operateText">Number Of Person</th>
+                                <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true" data-formatter="operateText">Car A</th>
+                                <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true" data-formatter="operateText">Car B</th>
+                                <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
+                                <th data-filter-control="input" data-field="standard.hotel_quantity" data-formatter="operateText">Standard</th>
+                                <th data-filter-control="input" data-field="suite.hotel_quantity" data-formatter="operateText">Suite</th>
+                                <th data-filter-control="input" data-field="superior.hotel_quantity" data-formatter="operateText">Superior</th>
+                                <th data-filter-control="input" data-field="dOccupancy.hotel_quantity" data-formatter="operateText">Double Occupancy</th>
+                                <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th>
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
@@ -824,7 +824,7 @@
             <br /> -->
 <!-- endif -->
 <!-- <div class="table-responsive">
-                <table id="table" data-height="800" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates')}}">
+                <table id="table" data-height="800" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation')}}">
                     <thead>
                         <tr>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -874,28 +874,28 @@
     </div>
 </div> -->
 <script>
+    function operateText(value, row, index) {
+        return value ? value : "(blank)"
+    }
+
     function memberFormatter(value, row, index) {
-        return value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val?.rank?.ranks_name + ' ' + val?.first_Name + ' ' + val?.last_Name + ' - ' + val?.delegation_type + '</div><br/>').join('')
+        return value ? value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val?.rank?.ranks_name + ' ' + val?.first_Name + ' ' + val?.last_Name + ' - ' + val?.delegation_type + '</div><br/>').join('') : '(blank)';
     }
 
     function statusChangerFormatter(value, row, index) {
-        // if (value) {
-        return [
-            '<div class="left">',
-            '<a class="btn btn-danger" href="statusChanger/' + row.uid + '">',
-            '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
-            '</a>',
-            '</div>',
-        ].join('')
-        // } else {
-        //     return [
-        //         '<div class="left">',
-        //         '<a class="btn btn-success" href="statusChanger/' + row.uid + '">',
-        //         '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
-        //         '</a>',
-        //         '</div>',
-        //     ].join('')
-        // }
+        if (value) {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-danger" href="statusChanger/' + row.uid + '">',
+                '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
+                '</a>',
+                '</div>',
+            ].join('')
+        } else {
+            return [
+                '(blank)',
+            ].join('')
+        }
     }
 
     function statusFormatter(value, row, index) {
@@ -973,11 +973,7 @@
             ].join('')
         } else {
             return [
-                '<div class="left">',
-                '<a class="btn btn-warning" href="members/' + row.uid + '">',
-                '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
-                '</a>',
-                '</div>',
+                '(blank)',
             ].join('')
         }
     }
@@ -987,27 +983,13 @@
             return value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val.officer_type + ' - ' + val.ranks_name + ' ' + val.officer_first_name + ' ' + val.officer_last_name + '-' + val.officer_contact + '</div><br/>').join('')
         } else {
             return [
-                '<div class="left">',
-                '<a class="btn btn-warning" href="members/' + row.uid + '">',
-                '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
-                '</a>',
-                '</div>',
+                '(blank)',
             ].join('')
         }
     }
 
     function operateCarsName(value, row, index) {
-        if (value) {
-            return value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + (val.car_category == '61346491-983a-40ed-8477-2d9ed84e6767' ? 'Cat A' : 'Cat B') + '  ' + val.car_makes + ' ' + val.car_model + ' ' + val.car_number + '  ' + ' - ' + val.driver.driver_name + ' - ' + val.driver.driver_contact + '</div><br/>').join('')
-        } else {
-            return [
-                '<div class="left">',
-                '<a class="btn btn-warning" href="members/' + row.uid + '">',
-                '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
-                '</a>',
-                '</div>',
-            ].join('')
-        }
+        return value ? value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + (val.car_category == '61346491-983a-40ed-8477-2d9ed84e6767' ? 'Cat A' : 'Cat B') + '  ' + val.car_makes + ' ' + val.car_model + ' ' + val.car_number + '  ' + ' - ' + val.driver.driver_name + ' - ' + val.driver.driver_contact + '</div><br/>').join('') : '<div>(blank)</div>';
     }
 
 
