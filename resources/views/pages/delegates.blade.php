@@ -101,7 +101,7 @@
                                 <th data-filter-control="input" data-field="passport" data-sortable="true" data-formatter="operateText">Passport</th>
                                 <th data-filter-control="input" data-field="arrival_date" data-sortable="true" data-formatter="operateText">Arr Date</th>
                                 <th data-filter-control="input" data-field="arrival_time" data-sortable="true" data-formatter="operateText">Arr Time</th>
-                                <th data-filter-control="input" data-field="arrival_time" data-sortable="true" data-formatter="operateText">Arr Flight</th>
+                                <th data-filter-control="input" data-field="arrival_flight" data-sortable="true" data-formatter="operateText">Arr Flight</th>
                                 <th data-filter-control="input" data-field="departure_date" data-sortable="true" data-formatter="operateText">Dep Date</th>
                                 <th data-filter-control="input" data-field="departure_time" data-sortable="true" data-formatter="operateText">Dep Time</th>
                                 <th data-filter-control="input" data-field="departure_flight" data-sortable="true" data-formatter="operateText">Dep Flight</th>
@@ -130,7 +130,7 @@
                             <th data-filter-control="input" data-field="passport" data-sortable="true" data-formatter="operateText">Passport</th>
                             <th data-filter-control="input" data-field="arrival_date" data-sortable="true" data-formatter="operateText">Arr Date</th>
                             <th data-filter-control="input" data-field="arrival_time" data-sortable="true" data-formatter="operateText">Arr Time</th>
-                            <th data-filter-control="input" data-field="arrival_time" data-sortable="true" data-formatter="operateText">Arr Flight</th>
+                            <th data-filter-control="input" data-field="arrival_flight" data-sortable="true" data-formatter="operateText">Arr Flight</th>
                             <th data-filter-control="input" data-field="departure_date" data-sortable="true" data-formatter="operateText">Dep Date</th>
                             <th data-filter-control="input" data-field="departure_time" data-sortable="true" data-formatter="operateText">Dep Time</th>
                             <th data-filter-control="input" data-field="departure_flight" data-sortable="true" data-formatter="operateText">Dep Flight</th>

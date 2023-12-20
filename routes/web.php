@@ -107,6 +107,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'userTypeCheck'], function () {
         // Flights Pages And API Start
+        Route::get('/airport', [DelegateFlightController::class, 'render'])->name('pages.airport');
         Route::get('/flights', [FlightsController::class, 'render'])->name('pages.flights');
         Route::get('/addflights', [FlightsController::class, 'addItineraryRender'])->name('pages.addflights');
         Route::get('/addticketspage', [FlightsController::class, 'addTicketRender'])->name('pages.addticketspage');
@@ -291,7 +292,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Members End
 
         // Members Start
-        Route::get('/getDelegationFlight/{id?}', [DelegateFlightController::class, 'getFlight'])->name('request.getDelegationFlight');
+        Route::get('/getDelegationFlight/{status?}', [DelegateFlightController::class, 'getFlight'])->name('request.getDelegationFlight');
         Route::post('/addDelegationFlight/{id}', [DelegateFlightController::class, 'setFlight'])->name('request.addDelegationFlight');
         // Members End
 

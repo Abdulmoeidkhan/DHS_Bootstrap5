@@ -2,15 +2,39 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Delegate;
 use App\Models\DelegateFlight;
+use App\Models\Delegation;
+use App\Models\Rank;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class DelegateFlightController extends Controller
 {
-    public function getFlight()
+    public function getFlight($status = 0)
     {
-        return;
+        $flights = '';
+        switch ($status) {
+            case 0:
+                $flights = DelegateFlight::where([['arrived', 0], ['departed', 0]])->get();
+                break;
+            case 1:
+                $flights = DelegateFlight::where([['arrived', 1], ['departed', 0]])->get();
+                break;
+            case 2:
+                $flights = DelegateFlight::where([['arrived', 1], ['departed', 1]])->get();
+                break;
+            default:
+                break;
+        }
+
+        foreach ($flights as $key => $flight) {
+            $flights[$key]->delegate = Delegate::where('delegates_uid', $flight->delegate_uid)->first(['rank', 'delegation_type', 'last_Name', 'first_Name', 'designation', 'delegation']);
+            $flights[$key]->country = Delegation::where('uid', $flights[$key]->delegate->delegation)->first('country');
+            $flights[$key]->rank = Rank::where('ranks_uid', $flights[$key]->delegate->rank)->first('ranks_name');
+        }
+
+        return $flights;
     }
     public function setFlight(Request $req)
     {
@@ -46,5 +70,9 @@ class DelegateFlightController extends Controller
                 return  back()->with('error', $exception->errorInfo[2]);
             }
         }
+    }
+    public function render(Request $req)
+    {
+        return view('pages.airport');
     }
 }

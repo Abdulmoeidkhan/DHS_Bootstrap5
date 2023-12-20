@@ -49,6 +49,10 @@
         max-width: 100%;
     }
 </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<!-- Flatpickr JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <div class="row">
     <div class="col-lg-12 d-flex align-items-stretch">
         <div class="card w-100">
@@ -127,22 +131,22 @@
                             @csrf
                             <div class="container">
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="arrival_flight" class="form-label">Arrival Flight</label>
                                             <input name="arrival_flight" type="text" class="form-control" id="arrival_flight" value="{{$flight?->arrival_flight}}" placeholder="Arrival Flight" required>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="arrival_date" class="form-label">Arrival Date</label>
                                             <input name="arrival_date" type="date" class="form-control" id="arrival_date" value="{{$flight?->arrival_date}}" placeholder="Arrival Date" required>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="arrival_time" class="form-label">Arrival Time</label>
-                                            <input name="arrival_time" type="time" class="form-control" id="arrival_time" value="{{$flight?->arrival_time}}" placeholder="Arrival Time" required>
+                                            <input name="arrival_time" type="time" step="1" inputmode="numeric" class="form-control" id="arrival_time" value="{{$flight?->arrival_time}}" placeholder="Arrival Time" required>
                                         </div>
                                     </div>
                                 </div>
@@ -162,7 +166,7 @@
                                     <div class="col">
                                         <div class="mb-3">
                                             <label for="departure_time" class="form-label">Departure Time</label>
-                                            <input name="departure_time" type="time" class="form-control" id="departure_time" value="{{$flight?->departure_time}}" placeholder="Departure Time" required>
+                                            <input name="departure_time" type="time" step="1" inputmode="numeric" class="form-control" id="departure_time" value="{{$flight?->departure_time}}" placeholder="Departure Time" required>
                                         </div>
                                     </div>
                                 </div>
@@ -283,6 +287,21 @@
         dwn.classList.remove('hide');
         dwn.download = 'imagename.png';
         dwn.setAttribute('href', imgSrc);
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr("#arrival_time", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            time_24hr: true
+        });
+        flatpickr("#departure_time", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            time_24hr: true
+        });
     });
 </script>
 @endsection

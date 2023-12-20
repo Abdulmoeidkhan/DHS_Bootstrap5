@@ -669,7 +669,7 @@
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                                 <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
-                                <th data-filter-control="input" data-field="self" data-formatter="operateSelf" data-formatter="operateText">Status</th>
+                                <th data-filter-control="input" data-field="self" data-formatter="operateSelf" >Status</th>
                                 <th data-filter-control="input" data-field="member_count" data-sortable="true" data-formatter="operateText">Number Of Person</th>
                                 <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true" data-formatter="operateText">Car A</th>
                                 <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true" data-formatter="operateText">Car B</th>

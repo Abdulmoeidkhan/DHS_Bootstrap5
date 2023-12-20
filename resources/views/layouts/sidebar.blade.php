@@ -143,7 +143,7 @@
                 @endif
                 @if(session()->get('user')->roles[0]->name =="admin")
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('pages.flights')}}" aria-expanded="false">
+                    <a class="sidebar-link" href="{{route('pages.airport')}}" aria-expanded="false">
                         <span>
                             <i class="ti ti-plane-departure"></i>
                         </span>
