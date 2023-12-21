@@ -19,10 +19,13 @@ class DelegateFlightController extends Controller
                 $flights = DelegateFlight::where([['arrived', 0], ['departed', 0]])->get();
                 break;
             case 1:
-                $flights = DelegateFlight::where([['arrived', 1], ['departed', 0]])->get();
+                $flights = DelegateFlight::where([['arrived', 1], ['departed', 0]])->orWhere([['arrived', 0], ['departed', 1]])->get();
                 break;
             case 2:
                 $flights = DelegateFlight::where([['arrived', 1], ['departed', 1]])->get();
+                break;
+            case 3:
+                $flights = DelegateFlight::get();
                 break;
             default:
                 break;
@@ -74,5 +77,16 @@ class DelegateFlightController extends Controller
     public function render(Request $req)
     {
         return view('pages.airport');
+    }
+
+    public function departureStatusChanger($id, $status)
+    {
+        $update = DelegateFlight::where('delegate_uid', $id)->update(['departed' => $status]);
+        return $update ? back()->with('message', 'Flight Status has been updated Successfully') : back()->with('error', 'Something went wrong');
+    }
+    public function arrivalStatusChanger($id, $status)
+    {
+        $update = DelegateFlight::where('delegate_uid', $id)->update(['arrived' => $status]);
+        return $update ? back()->with('message', 'Flight Status has been updated Successfully') : back()->with('error', 'Something went wrong');
     }
 }

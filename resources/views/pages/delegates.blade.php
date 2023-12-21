@@ -97,6 +97,7 @@
                                 <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                 <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
+                                <th data-filter-control="input" data-field="delegation_type" data-sortable="true" data-formatter="operateText">Type</th>
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                                 <th data-filter-control="input" data-field="passport" data-sortable="true" data-formatter="operateText">Passport</th>
                                 <th data-filter-control="input" data-field="arrival_date" data-sortable="true" data-formatter="operateText">Arr Date</th>
@@ -126,6 +127,7 @@
                             <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                             <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                             <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
+                            <th data-filter-control="input" data-field="delegation_type" data-sortable="true" data-formatter="operateText">Type</th>
                             <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                             <th data-filter-control="input" data-field="passport" data-sortable="true" data-formatter="operateText">Passport</th>
                             <th data-filter-control="input" data-field="arrival_date" data-sortable="true" data-formatter="operateText">Arr Date</th>
@@ -246,7 +248,6 @@
     function operateCarsName(value, row, index) {
         return value ? value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + (val.car_category == '61346491-983a-40ed-8477-2d9ed84e6767' ? 'Cat A' : 'Cat B') + '  ' + val.car_makes + ' ' + val.car_model + ' ' + val.car_number + '  ' + ' - ' + val.driver.driver_name + ' - ' + val.driver.driver_contact + '</div><br/>').join('') : '<div>(blank)</div>';
     }
-
 
     function operateOfficer(value, row, index) {
         return row.delegation_response == 'Accepted' ? [
@@ -391,7 +392,6 @@
         }
     }
 
-
     function operateSelf(value, row, index) {
         return !value ? 'Rep' : 'Self';
     }
@@ -399,7 +399,6 @@
     function operateSerial(value, row, index) {
         return index + 1;
     }
-
 
     function openTab(evt, cityName) {
         var i, tabcontent, tablinks;
@@ -414,6 +413,7 @@
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " active";
     }
+
 </script>
 <script async src="https://unpkg.com/axios/dist/axios.min.js"></script>
 @include("layouts.tableFoot")
