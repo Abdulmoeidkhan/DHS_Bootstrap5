@@ -199,6 +199,7 @@ class HotelController extends Controller
             // $rooms[$key]->room_type_status = $roomtypes[$key]->room_type_status == 1 ? 'Active' : 'InActive';
         }
         $guests = [...$delegates, ...$members];
+        // return $guests;
         if ($id) {
             $selectedRoom = Room::where('room_uid', $id)->first();
             return view('pages.addRoom', ['selectedRoom' => $selectedRoom, 'hotels' => $hotels, 'roomTypes' => $roomTypes, 'guests' => $guests]);

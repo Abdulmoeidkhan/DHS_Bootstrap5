@@ -47,9 +47,9 @@
                                     <option value="" selected disabled hidden> Select Guest </option>
                                     @foreach($guests as $key=>$guest)
                                     @if(!empty($selectedRoom) && $selectedRoom->assign_to === $guest->uid )
-                                    <option value="{{$guest->uid}}" selected> {{$guest->first_Name}} {{$guest->last_Name}} ({{$guest->guestType}}) - ({{$guest->delegationCode}}) </option>
+                                    <option value="{{$guest->delegates_uid}}" selected> {{$guest->first_Name}} {{$guest->last_Name}} ({{$guest->guestType}}) - ({{$guest->delegationCode}}) </option>
                                     @else
-                                    <option value="{{$guest->uid}}"> {{$guest->first_Name}} {{$guest->last_Name}} ({{$guest->guestType}}) - ({{$guest->delegationCode}})</option>
+                                    <option value="{{$guest->delegates_uid}}"> {{$guest->first_Name}} {{$guest->last_Name}} ({{$guest->guestType}}) - ({{$guest->delegationCode}})</option>
                                     @endif
                                     @endforeach
                                 </select>
