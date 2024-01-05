@@ -12,6 +12,14 @@
                             <legend>Add Room</legend>
                             @csrf
                             <div class="mb-3">
+                                <label for="rooms" class="form-label">Room</label>
+                                <select class="form-select" aria-label="Rooms" id="rooms" name="rooms" required>
+                                    @foreach($rooms as $key=>$room)
+                                    <option value="{{$room->hotel_plan_uid}}">{{$room->hotel_names}} - {{$room->room_type}} - {{$room->hotel_quantity}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <label for="room_type" class="form-label">Room Type</label>
                                 <select class="form-select" aria-label="Room Type" id="room_type" name="room_type" required>
                                     <option value="" selected disabled hidden> Select Room Type</option>

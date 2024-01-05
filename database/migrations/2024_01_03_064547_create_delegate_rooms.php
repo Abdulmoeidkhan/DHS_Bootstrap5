@@ -13,17 +13,13 @@ return new class extends Migration
     {
         Schema::create('delegate_rooms', function (Blueprint $table) {
             $table->id();
-            $table->uuid('delegate_uid')->unique();
-            $table->string('room_no')->unique();
-            $table->string('arrival_date');
-            $table->string('arrival_flight');
-            $table->string('departure_date');
-            $table->string('departure_flight');
             $table->uuid('room_booked_uid')->unique();
+            $table->string('hotel_plan_uid');
+            $table->string('room_nos')->nullable();
             $table->string('checked_in')->default(0);
-            $table->string('checked_in_time');
+            $table->string('checked_in_time')->nullable();
             $table->string('checked_out')->default(0);
-            $table->string('checked_out_time');
+            $table->string('checked_out_time')->nullable();
             $table->timestamps();
         });
     }

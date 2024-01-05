@@ -155,6 +155,11 @@ class HotelController extends Controller
     public function addRoomRender($id = null)
     {
         $hotels = Hotel::get();
+        $rooms = DB::table('hotel_plans')
+            ->leftJoin('hotels', 'hotel_plans.hotel_uid', '=', 'hotels.hotel_uid')
+            ->leftJoin('roomtypes', 'hotel_plans.hotel_roomtpye_uid', '=', 'roomtypes.room_type_uid')
+            ->select('hotel_plans.*', 'hotels.hotel_names', 'roomtypes.room_type')
+            ->get();
         $roomTypes = Roomtype::get();
         if ($id) {
             $members = DB::table('members')
@@ -199,12 +204,11 @@ class HotelController extends Controller
             // $rooms[$key]->room_type_status = $roomtypes[$key]->room_type_status == 1 ? 'Active' : 'InActive';
         }
         $guests = [...$delegates, ...$members];
-        // return $guests;
         if ($id) {
             $selectedRoom = Room::where('room_uid', $id)->first();
-            return view('pages.addRoom', ['selectedRoom' => $selectedRoom, 'hotels' => $hotels, 'roomTypes' => $roomTypes, 'guests' => $guests]);
+            return view('pages.addRoom', ['selectedRoom' => $selectedRoom, 'hotels' => $hotels, 'roomTypes' => $roomTypes, 'guests' => $guests, 'rooms' => $rooms]);
         } else {
-            return view('pages.addRoom', ['hotels' => $hotels, 'roomTypes' => $roomTypes,  'guests' => $guests]);
+            return view('pages.addRoom', ['hotels' => $hotels, 'roomTypes' => $roomTypes,  'guests' => $guests, 'rooms' => $rooms]);
         }
     }
 
