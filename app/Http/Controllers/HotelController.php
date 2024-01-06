@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Delegate;
+use App\Models\DelegateRooms;
 use App\Models\Hotel;
+use App\Models\HotelPlan;
 use App\Models\Member;
 use App\Models\Room;
 use App\Models\Roomtype;
@@ -159,6 +161,7 @@ class HotelController extends Controller
             ->leftJoin('hotels', 'hotel_plans.hotel_uid', '=', 'hotels.hotel_uid')
             ->leftJoin('roomtypes', 'hotel_plans.hotel_roomtpye_uid', '=', 'roomtypes.room_type_uid')
             ->select('hotel_plans.*', 'hotels.hotel_names', 'roomtypes.room_type')
+            ->where('plan_status',0)
             ->get();
         $roomTypes = Roomtype::get();
         if ($id) {
@@ -210,6 +213,33 @@ class HotelController extends Controller
         } else {
             return view('pages.addRoom', ['hotels' => $hotels, 'roomTypes' => $roomTypes,  'guests' => $guests, 'rooms' => $rooms]);
         }
+    }
+
+    public function assignedRoom(Request $req)
+    {
+        $delegateRoom = new DelegateRooms();
+        $delegateRoom->room_booked_uid = (string) Str::uuid();
+        foreach ($req->all() as $key => $value) {
+            if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
+                $delegateRoom[$key] = $value;
+            }
+        }
+        try {
+            $savedRoom = $delegateRoom->save();
+            $hotel_plan_updated = HotelPlan::where('hotel_plan_uid', $delegateRoom->hotel_plan_uid)->update(['plan_status' => 1]);
+            if ($savedRoom && $hotel_plan_updated) {
+                return back()->with('message', "Room Assigned Successfully");
+            } else {
+                return back()->with('error', "SomeThing Went Wrong");
+            }
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return  back()->with('error', $exception->errorInfo[2]);
+        }
+        // return $req->all();
+    }
+
+    public function assignedRoomUpdate(Request $req)
+    {
     }
 
     public function addRoom(Request $req)
