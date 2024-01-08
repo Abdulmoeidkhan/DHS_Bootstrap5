@@ -7,7 +7,7 @@
         <a type="button" href="{{route('pages.addCarCategories')}}" class="btn btn-outline-warning">Add Car Category</a>
         <a type="button" href="{{route('pages.addDriver')}}" class="btn btn-outline-danger">Add Driver</a>
         <a type="button" href="{{route('pages.addCar')}}" class="btn btn-outline-success">Add Car</a>
-        <a type="button" href="{{route('pages.addJourney')}}" class="btn btn-outline-primary">Add Journey</a>
+        <!-- <a type="button" href="{{route('pages.addJourney')}}" class="btn btn-outline-primary">Add Journey</a> -->
     </div>
 </div>
 <br />
@@ -74,7 +74,7 @@
         </div>
     </div>
 </div>
-<div class="row">
+<!-- <div class="row">
     <div class="card w-100">
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Journey</h5>
@@ -96,7 +96,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <script>
     function operateDriverStatus(value, row, index) {
         if (value) {

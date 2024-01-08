@@ -16,7 +16,7 @@
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Hotels</h5>
             <div class="table-responsive">
-                <table id="table"  data-auto-refresh-interval="60" data-flat="true" data-search="true" data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.getHotels')}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
+                <table id="table" data-auto-refresh-interval="60" data-flat="true" data-search="true" data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.getHotels')}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
@@ -38,7 +38,7 @@
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Room Types</h5>
             <div class="table-responsive">
-                <table id="table"  data-auto-refresh-interval="60" data-flat="true" data-search="true" data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.getRoomTypes')}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
+                <table id="table" data-auto-refresh-interval="60" data-flat="true" data-search="true" data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.getRoomTypes')}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
@@ -57,18 +57,22 @@
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Rooms</h5>
             <div class="table-responsive">
-                <table id="table"  data-auto-refresh-interval="60" data-flat="true" data-search="true" data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.getRooms')}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
+                <table id="table" data-auto-refresh-interval="60" data-flat="true" data-search="true" data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true" data-toggle="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getRooms')}}">
                     <thead>
                         <tr>
-                            <th data-field="id">Id</th>
-                            <th data-field="room_type.room_type" data-sortable="true">Room Type</th>
-                            <th data-field="hotel_names.hotel_names" data-sortable="true">Hotel Name</th>
-                            <th data-field="room_no" data-sortable="true">Room Number</th>
-                            <th data-field="room_checkin" data-sortable="true">Check-In</th>
-                            <th data-field="room_checkout" data-sortable="true">Check-Out</th>
-                            <th data-field="room_logged_by.name" data-sortable="true">Assigned By</th>
-                            <th data-field="assign_to" data-formatter="operateAssignedTo">Assigned To</th>
-                            <th data-field="room_uid" data-formatter="operateRoom">Actions</th>
+                            <th data-filter-control="input" data-formatter="operateSerial">S.No</th>
+                            <!-- <th data-field="room_type.room_type" data-sortable="true">Room Type</th> -->
+                            <th data-filter-control="input" data-field="hotel_names" data-sortable="true">Hotel Name</th>
+                            <th data-filter-control="input" data-field="room_type" data-sortable="true">Room Types</th>
+                            <th data-filter-control="input" data-field="room_nos" data-sortable="true">Room Number</th>
+                            <th data-filter-control="input" data-field="delegationCode" data-sortable="true">Delegation Code</th>
+                            <th data-filter-control="input" data-field="country" data-sortable="true">Delegation Country</th>
+                            <th data-filter-control="input" data-field="hotel_quantity" data-sortable="true">Room Quantity</th>
+                            <th data-filter-control="input" data-field="checked_in" data-sortable="true">Check In</th>
+                            <th data-filter-control="input" data-field="checked_in_time" data-sortable="true">Checked In Time</th>
+                            <th data-filter-control="input" data-field="checked_out" data-sortable="true">Checked Out</th>
+                            <th data-filter-control="input" data-field="checked_out_time" data-formatter="true">Checked Out Time</th>
+                            <th data-field="room_booked_uid" data-formatter="deleteRoom">Delete</th>
                         </tr>
                     </thead>
                 </table>
@@ -123,6 +127,21 @@
                 '</div>',
             ].join('');
         }
+    }
+    function deleteRoom(value, row, index) {
+        if (value) {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-outline-badar" href="deleteRoom/' + value + '">',
+                '<span><i class="ti ti-trash" style="font-size:22px"></i></span>',
+                '</a>',
+                '</div>',
+            ].join('');
+        }
+    }
+
+    function operateSerial(value, row, index) {
+        return index + 1;
     }
 </script>
 @include("layouts.tableFoot")

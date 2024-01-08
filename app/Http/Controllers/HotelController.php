@@ -143,14 +143,26 @@ class HotelController extends Controller
 
     public function getRooms()
     {
-        $rooms = Room::get();
-        foreach ($rooms as $key => $room) {
-            $rooms[$key]->room_type = Roomtype::where('room_type_uid', $room->room_type)->first(['room_type']);
-            $rooms[$key]->hotel_names = Hotel::where('hotel_uid', $room->hotel_uid)->first(['hotel_names', 'hotel_uid']);
-            $rooms[$key]->assign_to = Delegate::where('delegates_uid', $rooms[$key]->assign_to)->first('uid') ? Delegate::where('delegates_uid', $rooms[$key]->assign_to)->first('uid') : Member::where('member_uid', $rooms[$key]->assign_to)->first('member_uid');
-            $rooms[$key]->assign_to = $rooms[$key]->assign_to->uid ? 'delegateProfile/' . $rooms[$key]->assign_to->uid . '' : 'members/memberFullProfile/' . $rooms[$key]->assign_to->member_uid . '';
-            $rooms[$key]->room_logged_by = User::where('uid', $room->room_logged_by)->first('name');
-        }
+        // $rooms = Room::get();
+        // foreach ($rooms as $key => $room) {
+        //     $rooms[$key]->room_type = Roomtype::where('room_type_uid', $room->room_type)->first(['room_type']);
+        //     $rooms[$key]->hotel_names = Hotel::where('hotel_uid', $room->hotel_uid)->first(['hotel_names', 'hotel_uid']);
+        //     $rooms[$key]->assign_to = Delegate::where('delegates_uid', $rooms[$key]->assign_to)->first('uid') ? Delegate::where('delegates_uid', $rooms[$key]->assign_to)->first('uid') : Member::where('member_uid', $rooms[$key]->assign_to)->first('member_uid');
+        //     $rooms[$key]->assign_to = $rooms[$key]->assign_to->uid ? 'delegateProfile/' . $rooms[$key]->assign_to->uid . '' : 'members/memberFullProfile/' . $rooms[$key]->assign_to->member_uid . '';
+        //     $rooms[$key]->room_logged_by = User::where('uid', $room->room_logged_by)->first('name');
+        // }
+        // return $rooms;
+        // $rooms = DelegateRooms::orderBy('checked_in_time', 'asc')->get();
+        $rooms = DB::table('delegate_rooms')
+            ->leftJoin('hotel_plans', 'delegate_rooms.hotel_plan_uid', '=', 'hotel_plans.hotel_plan_uid')
+            ->leftJoin('hotels', 'hotel_plans.hotel_uid', '=', 'hotels.hotel_uid')
+            ->leftJoin('roomtypes', 'hotel_plans.hotel_roomtpye_uid', '=', 'roomtypes.room_type_uid')
+            ->leftJoin('delegations', 'hotel_plans.delegation_uid', '=', 'delegations.uid')
+            ->select('delegate_rooms.*','hotel_plans.*', 'hotels.*', 'roomtypes.*','delegations.delegationCode','delegations.country')
+            ->get();
+        // foreach ($rooms as $key => $room) {
+        //     $rooms[$key]->plan = HotelPlan::where('hotel_plan_uid', $room->hotel_plan_uid)->first();
+        // }
         return $rooms;
     }
 
@@ -161,7 +173,7 @@ class HotelController extends Controller
             ->leftJoin('hotels', 'hotel_plans.hotel_uid', '=', 'hotels.hotel_uid')
             ->leftJoin('roomtypes', 'hotel_plans.hotel_roomtpye_uid', '=', 'roomtypes.room_type_uid')
             ->select('hotel_plans.*', 'hotels.hotel_names', 'roomtypes.room_type')
-            ->where('plan_status',0)
+            ->where('plan_status', 0)
             ->get();
         $roomTypes = Roomtype::get();
         if ($id) {
