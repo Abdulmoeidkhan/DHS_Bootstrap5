@@ -94,7 +94,7 @@
                                 <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Rank</th>
                                 <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th>
                                 <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th>
-                                <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
+                                <th data-filter-control="input" data-field="vips_designation" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                 <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                                 <th data-filter-control="input" data-field="delegation_type" data-sortable="true" data-formatter="operateText">Type</th>
@@ -124,7 +124,7 @@
                             <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Rank</th>
                             <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th>
                             <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th>
-                            <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
+                            <th data-filter-control="input" data-field="vips_designation" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                             <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                             <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                             <th data-filter-control="input" data-field="delegation_type" data-sortable="true" data-formatter="operateText">Type</th>
@@ -224,9 +224,11 @@
     }
 
     function operateInvitedBy(value, row, index) {
+        console.log(value)
         if (value) {
             return [
-                '<div class="left">' + value.vips_name + value.vips_designation + '</div>',
+                // '<div class="left">' + value.vips_name + value.vips_designation + '</div>',
+                value,
             ].join('')
         } else {
             return [

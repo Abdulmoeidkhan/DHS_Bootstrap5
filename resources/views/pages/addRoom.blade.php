@@ -15,7 +15,7 @@
                                 <label for="hotel_plan_uid" class="form-label">Room Plan</label>
                                 <select class="form-select" aria-label="Rooms" id="hotel_plan_uid" name="hotel_plan_uid" required>
                                     @foreach($rooms as $key=>$room)
-                                    <option value="{{$room->hotel_plan_uid}}">{{$room->hotel_names}} - {{$room->room_type}} - {{$room->hotel_quantity}}</option>
+                                    <option value="{{$room->hotel_plan_uid}}">{{$room->hotel_names}} - {{$room->room_type}} - {{$room->hotel_quantity}} - {{$room->delegationCode}} - {{$room->country}}</option>
                                     @endforeach
                                 </select>
                             </div>

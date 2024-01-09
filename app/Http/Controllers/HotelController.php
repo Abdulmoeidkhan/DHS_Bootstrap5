@@ -172,7 +172,8 @@ class HotelController extends Controller
         $rooms = DB::table('hotel_plans')
             ->leftJoin('hotels', 'hotel_plans.hotel_uid', '=', 'hotels.hotel_uid')
             ->leftJoin('roomtypes', 'hotel_plans.hotel_roomtpye_uid', '=', 'roomtypes.room_type_uid')
-            ->select('hotel_plans.*', 'hotels.hotel_names', 'roomtypes.room_type')
+            ->leftJoin('delegations', 'hotel_plans.delegation_uid', '=', 'delegations.uid')
+            ->select('hotel_plans.*', 'hotels.hotel_names', 'roomtypes.room_type','delegations.*')
             ->where('plan_status', 0)
             ->get();
         $roomTypes = Roomtype::get();
