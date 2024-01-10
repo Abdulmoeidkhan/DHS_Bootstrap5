@@ -259,6 +259,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/getSpecificMembers', [MemberController::class, 'specificMembersData'])->name('pages.getSpecificMembers');
         Route::get('/statusChanger/{id}', [DelegationsPageController::class, 'updateStatus'])->name('request.updateStatus');
         Route::get('/members/delegateStatusChanger/{id}', [DelegationsPageController::class, 'delegateStatusChanger'])->name('request.updateDelegateStatus');
+        Route::post('/invitationUpdate', [DelegatesPageController::class, 'invitationUpdate'])->name('request.invitaionNumberUpdate');
         Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->name('request.updateAuthority');
         Route::post('/addDelegationRequest', [AddDelegationPageController::class, 'addDelegation'])->name('request.addDelegationRequest');
         Route::post('/updateDelegationRequest', [AddDelegationPageController::class, 'updateDelegationRequest'])->name('request.updateDelegationRequest');
@@ -303,7 +304,11 @@ Route::group(['middleware' => 'auth'], function () {
         // Route::get('/delegateProfile/{id}', [UserFullProfileController::class, 'renderSpeceficDelegateProfile'])->name('pages.renderSpeceficDelegateProfile');
         // Delegate End
     });
+
     Route::get('/invitation/{id}', [PrintInvitationController::class, 'printInvitation'])->name("pages.invitationPage");
+    Route::get('/printDelegationBadge/{id}', [PrintInvitationController::class, 'printDelegationBadge'])->name("pages.printDelegationBadge");
+    Route::get('/printDelegationEnvelope/{id}', [PrintInvitationController::class, 'printDelegationEnvelope'])->name("pages.printDelegationEnvelope");
+
 });
 
 Route::get('/sendhtmlemail/{id}', [MailOtpController::class, 'html_email'])->name("request.emailModule");

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Delegate;
 use App\Models\Rank;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,7 +24,7 @@ class DelegatesPageController extends Controller
                 ->leftJoin('delegations', 'delegates.delegation', '=', 'delegations.uid')
                 ->leftJoin('vips', 'vips.vips_uid', '=', 'delegations.invited_by')
                 ->where([['delegates.first_Name', '!=', null], ['delegates.status', '1'], ['self', '1']])
-                ->select('delegates.*', 'delegate_flights.*', 'image_blobs.uid', 'delegations.country', 'delegations.delegationCode','delegations.delegation_status', 'delegations.invited_by', 'vips.*')
+                ->select('delegates.*', 'delegate_flights.*', 'image_blobs.uid', 'delegations.country', 'delegations.delegationCode', 'delegations.delegation_status', 'delegations.invited_by', 'vips.*')
                 ->orderBy('delegations.country', 'asc')
                 ->get();
 
@@ -50,5 +51,11 @@ class DelegatesPageController extends Controller
             }
             return $delegates;
         }
+    }
+
+    public function invitationUpdate(Request $req)
+    {
+        $updatedDelegate = Delegate::where('delegates_uid', $req->delegationUid)->update(['invitation_number' => $req->invitaionNumber]);
+        return $updatedDelegate ? back()->with('message', 'Invitation Number Updated Successfully') : back()->with('error', 'Something Went Wrong');
     }
 }
