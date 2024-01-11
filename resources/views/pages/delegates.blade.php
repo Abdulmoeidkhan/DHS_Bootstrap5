@@ -83,7 +83,7 @@
                 <button class="tablinks active" onclick="openTab(event, 'Active')">Active</button>
                 <button class="tablinks" onclick="openTab(event, 'Inactive')">Inactive</button>
             </div>
-            <div id="Active" class="tabcontent">
+            <div id="Active" class="tabcontent" style="display: block;">
                 <p>
                 <div class="table-responsive">
                     <table id="table" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates',1)}}">

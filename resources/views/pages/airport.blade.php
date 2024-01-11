@@ -52,10 +52,10 @@
     <div class="card w-100">
         <div class="card-body p-4">
             <div class="tab">
-                <button class="tablinks active" onclick="openTab(event, 'Unused')">Unused</button>
-                <button class="tablinks" onclick="openTab(event, 'PartialUsed')">Partial Used</button>
-                <button class="tablinks" onclick="openTab(event, 'Used')">Used</button>
-                <button class="tablinks" onclick="openTab(event, 'All')">All</button>
+                <button class="tablinks active" onclick="openTab(event, 'All')">All</button>
+                <button class="tablinks" onclick="openTab(event, 'Unused')">Not Arrived</button>
+                <button class="tablinks" onclick="openTab(event, 'PartialUsed')">Arrived</button>
+                <button class="tablinks" onclick="openTab(event, 'Used')">Departed</button>
             </div>
             <div id="Unused" class="tabcontent">
                 <p>
@@ -144,7 +144,7 @@
                 </div>
                 </p>
             </div>
-            <div id="All" class="tabcontent">
+            <div id="All" class="tabcontent" style="display: block;">
                 <p>
                 <div class="table-responsive">
                     <table id="table" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegationFlight',3)}}">

@@ -541,7 +541,7 @@
                 <button class="tablinks" onclick="openCity(event, 'Deactive')">Deactive</button>
                 <button class="tablinks" onclick="openCity(event, 'All')">All</button>
             </div>
-            <div id="Accepted" class="tabcontent">
+            <div id="Accepted" class="tabcontent" style="display: block;">
                 <p>
                     @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">

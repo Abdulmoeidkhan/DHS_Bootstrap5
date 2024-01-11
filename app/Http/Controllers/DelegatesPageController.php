@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Delegate;
+use App\Models\Delegation;
 use App\Models\Rank;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +25,7 @@ class DelegatesPageController extends Controller
                 ->leftJoin('delegations', 'delegates.delegation', '=', 'delegations.uid')
                 ->leftJoin('vips', 'vips.vips_uid', '=', 'delegations.invited_by')
                 ->where([['delegates.first_Name', '!=', null], ['delegates.status', '1'], ['self', '1']])
-                ->select('delegates.*', 'delegate_flights.*', 'image_blobs.uid', 'delegations.country', 'delegations.delegationCode', 'delegations.delegation_status', 'delegations.invited_by', 'vips.*')
+                ->select('delegates.*', 'delegate_flights.*', 'image_blobs.uid','image_blobs.img_blob', 'delegations.country', 'delegations.delegationCode', 'delegations.delegation_status', 'delegations.invited_by', 'vips.*')
                 ->orderBy('delegations.country', 'asc')
                 ->get();
 
@@ -51,6 +52,14 @@ class DelegatesPageController extends Controller
             }
             return $delegates;
         }
+    }
+
+    public function getDelegatesStats()
+    {
+        $accepted = Delegation::where('delegation_response', 'Accepted')->count();
+        $awaited = Delegation::where('delegation_response', 'Awaited')->count();
+        $regretted = Delegation::where('delegation_response', 'Regretted')->count();
+        return ['names' => ['Accepted', 'Awaited', 'Regretted'], 'values' => [$accepted, $awaited, $regretted]];
     }
 
     public function invitationUpdate(Request $req)

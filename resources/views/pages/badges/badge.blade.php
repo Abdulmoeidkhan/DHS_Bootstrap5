@@ -45,6 +45,7 @@
                             <th data-field="delegation_status" data-filter-control="input" data-sortable="true" data-formatter="statusFormatter">Delegation Active</th>
                             <th data-field="isHead" data-filter-control="input" data-sortable="true">Delegation Head</th>
                             <th data-field="invitation_number" data-filter-control="input" data-sortable="true">Invitation Number</th>
+                            <th data-field="img_blob" data-width="150"  data-sortable="true" data-formatter="operatePicture" data-force-hide="true">Image</th>
                             <th data-field="delegates_uid" data-width="200" data-sortable="true" data-formatter="operatePlans">Actions</th>
                         </tr>
                     </thead>
@@ -96,6 +97,16 @@
         const modalBodyInputInvitation = invitationNumberModal.querySelector('.modal-body #invitaionNumber')
         modalBodyInputInvitation.value = invitation
     })
+
+    function operatePicture(value, row, index) {
+        if (value) {
+            return [
+                '<div class="left">',
+                '<img src="' + value + '" width="100%"/>',
+                '</div>'
+            ].join('')
+        }
+    }
 </script>
 @include("layouts.tableFoot")
 @endsection

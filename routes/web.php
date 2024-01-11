@@ -255,6 +255,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/delegatesPage', [DelegatesPageController::class, 'render'])->name('pages.delegatesPage');
         Route::get('/getDelegation/{status?}', [DelegationsPageController::class, 'delegationData'])->name('request.getDelegation');
         Route::get('/getDelegates/{status?}', [DelegatesPageController::class, 'delegatesData'])->name('request.getDelegates');
+        Route::get('/getDelegatesStats', [DelegatesPageController::class, 'getDelegatesStats'])->name('request.getDelegatesStats');
         Route::get('/addDelegationPage/{id?}', [AddDelegationPageController::class, 'render'])->name('pages.addDelegationPage');
         Route::get('/getSpecificMembers', [MemberController::class, 'specificMembersData'])->name('pages.getSpecificMembers');
         Route::get('/statusChanger/{id}', [DelegationsPageController::class, 'updateStatus'])->name('request.updateStatus');

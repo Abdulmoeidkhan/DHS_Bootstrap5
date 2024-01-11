@@ -19,10 +19,45 @@
 </head>
 
 <body class="antialiased">
-    <div class="btn-parent">
-        <button class="btn btn-outline-primary" onclick="window.print()">Print this E-badge</button>
-    </div>
-    <div class="container ">
+    <div class="container">
+        <br />
+        <div class="row">
+            <div class="btn-parent d-flex justify-content-center">
+                <button class="btn btn-outline-primary" onclick="window.print()">Print this Envelope</button>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col">
+            </div>
+            <div class="col">
+                <div class="d-flex justify-content-end align-items-center">
+                    <p class="text-right">{{$delegate->invitation_number}} / {{$delegation->delegationCode}}</p>
+                </div>
+            </div>
+            <div class="col">
+            </div>
+        </div>
+        <div class="row">
+            <div class="d-flex justify-content-evenly align-items-center">
+                <div>
+                    <h5 style="text-transform:capitalize; font-weight:700;">{{$delegate->rank->ranks_name}}</h5>
+                    <h5 style="text-transform:capitalize; font-weight:700;">
+                        {{$delegate->first_Name}} {{$delegate->last_Name}}
+                    </h5>
+                    <h6 class="text-left" style="text-transform:uppercase;">
+                        {{$delegate->designation}}
+                    </h6>
+                    <h6 class="text-left" style="text-transform:uppercase;">
+                        {{$delegation->country}}
+                    </h6>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="container ">
         <div class="row float-left container-first-child">
             <div class="col-md-12 parent-print-program text-center d-print-inline badge-box-2">
                 <div>
@@ -46,9 +81,9 @@
                 </div>
             </div>
         </div>
-    </div>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="{{ asset('assets/js/badge.js') }}"></script>
+    </div> -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="{{ asset('assets/js/badge.js') }}"></script>
 </body>
 
 </html>

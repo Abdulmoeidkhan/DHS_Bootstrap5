@@ -20,39 +20,69 @@
 </head>
 
 <body class="antialiased">
-    <div class="btn-parent">
-        <button class="btn btn-outline-primary" onclick="window.print()">Print this E-badge</button>
-    </div>
-    <div class="container ">
-        <div class="row float-left container-first-child">
-            <div class="col-md-12 parent-print-program text-center d-print-inline badge-box-2">
-                <div>
-                    <div class="card-border">
-                        <div class="logo-child">
-                            <!-- <div>
-                                <img src="" class="logo-img responsive" alt="Pimec" />&nbsp;&nbsp;
-                            </div> -->
-                            <div>
-                                <h5>
-                                    {{$delegate->rank->ranks_name}} {{$delegate->first_Name}} {{$delegate->last_Name}}
-                                </h5>
-                            </div>
+    <div class="container">
+        <br />
+        <div class="row">
+            <div class="btn-parent d-flex justify-content-center">
+                <button class="btn btn-outline-primary" onclick="window.print()">Print this E-badge</button>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <div class="d-flex justify-content-evenly align-items-center">
+                <div class="card-border ">
+                    <div class="logo-child">
+                        <div>
+                            <h5 class="text-center">
+                                {{$delegate->rank->ranks_name}} {{$delegate->first_Name}} {{$delegate->last_Name}}
+                            </h5>
                         </div>
-                        <!-- Bar Code Tag -->
+                    </div>
+                    <div class="d-flex justify-content-center">
                         <div id="barCode" custom-id="43251"></div>
-                        <h2 style="text-transform:uppercase; font-weight:700;">
-                            {{$delegation->country}}
-                        </h2>
-                        <h6 style="text-transform: uppercase;">{{$delegation->delegationCode}} </h6>
-                        <!-- <div class="logo-child">
-                            <img src="{{asset('/images/Partners.png')}}" style="height: 80px;" class="img-fluid" alt="BXSS" />
-                        </div> -->
+                    </div>
+                    <h2 style="text-transform:uppercase; font-weight:700;" class="text-center">
+                        {{$delegation->country}}
+                    </h2>
+                    <h6 style="text-transform: uppercase;" class="text-center">{{$delegation->delegationCode}} </h6>
+                </div>
+                <div class="card-border">
+                    <div class="logo-child">
+                        <img src="{{$delegate->image->img_blob}}" style="height: 80px; width: 80px;" class="img-fluid" alt="" />
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
+    <!-- <div class="container">
+        <div class="row float-left container-first-child">
+            <div class="col-md-12 parent-print-program text-center d-print-inline badge-box-2">
+                <div class="card-border">
+                    <div class="logo-child">
+                        <div>
+                                <img src="" class="logo-img responsive" alt="Pimec" />&nbsp;&nbsp;
+                            </div> 
+                        <div>
+                            <h5>
+                                {{$delegate->rank->ranks_name}} {{$delegate->first_Name}} {{$delegate->last_Name}}
+                            </h5>
+                        </div>
+                    </div>
+                    <div id="barCode" custom-id="43251"></div>
+                    <h2 style="text-transform:uppercase; font-weight:700;">
+                        {{$delegation->country}}
+                    </h2>
+                    <h6 style="text-transform: uppercase;">{{$delegation->delegationCode}} </h6>
+                </div>
+                <div class="card-border">
+                    <div class="logo-child">
+                        <img src="{{$delegate->image->img_blob}}" style="height: 80px; width: 80px;" class="img-fluid" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>

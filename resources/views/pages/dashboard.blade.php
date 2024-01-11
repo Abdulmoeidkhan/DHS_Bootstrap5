@@ -353,4 +353,5 @@
         </div>
     </div>
 @endsection
+<script async src="https://unpkg.com/axios/dist/axios.min.js"></script>
 @endauth
