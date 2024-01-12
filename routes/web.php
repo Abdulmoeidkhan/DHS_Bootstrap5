@@ -121,6 +121,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Flights Pages And API End
 
         // Hotels Pages And API Start
+        Route::get('/category', [HotelController::class, 'categoryRender'])->name('pages.category');
         Route::get('/hotels', [HotelController::class, 'render'])->name('pages.hotels');
         Route::get('/getHotels', [HotelController::class, 'getHotels'])->name('request.getHotels');
         Route::get('/addHotelPage/{id?}', [HotelController::class, 'addHotelRender'])->name('pages.addHotel');
@@ -136,7 +137,8 @@ Route::group(['middleware' => 'auth'], function () {
         // Room Type Pages And API End
 
         // Room Pages And API Start
-        Route::get('/getRooms', [HotelController::class, 'getRooms'])->name('request.getRooms');
+        // Route::get('/getRooms', [HotelController::class, 'getRooms'])->name('request.getRooms');
+        Route::get('/getRoomsForDelegate', [HotelController::class, 'getRoomsForDelegate'])->name('request.getRoomsForDelegate');
         Route::get('/addRoomPage/{id?}', [HotelController::class, 'addRoomRender'])->name('pages.addRoom');
         Route::post('/addRoom', [HotelController::class, 'addRoom'])->name('request.addRoom');
         Route::post('/assignedRoom', [HotelController::class, 'assignedRoom'])->name('request.assignedRoom');

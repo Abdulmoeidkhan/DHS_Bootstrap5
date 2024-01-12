@@ -163,13 +163,23 @@
                 @endif -->
                 @if(session()->get('user')->roles[0]->name =="admin")
                 <!-- <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('pages.hotels')}}" aria-expanded="false">
+                    <a class="sidebar-link" href="{{route('pages.category')}}" aria-expanded="false">
                         <span>
                             <i class="ti ti-category-2"></i>
                         </span>
                         <span class="hide-menu">Category</span>
                     </a>
                 </li> -->
+                @endif
+                @if(session()->get('user')->roles[0]->name =="admin")
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.category')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-category"></i>
+                        </span>
+                        <span class="hide-menu">Category</span>
+                    </a>
+                </li>
                 @endif
                 @if(session()->get('user')->roles[0]->name =="admin")
                 <li class="sidebar-item">
