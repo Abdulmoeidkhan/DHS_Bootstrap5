@@ -1,14 +1,92 @@
 @auth
 @extends('layouts.layout')
 @section("content")
-@if(session()->get('user')->roles[0]->name === "admin")
+<!-- @if(session()->get('user')->roles[0]->name === "admin")
 <div class="row">
     <div class="d-flex justify-content-center gap-2">
         <a type="button" href="{{route('pages.addRoom')}}" class="btn btn-outline-primary">Add Room</a>
     </div>
 </div>
 <br />
-@endif
+@endif -->
+<div class="row">
+    <div class="d-flex justify-content-center">
+        <div class="modal fade" id="addRoom" tabindex="-1" aria-labelledby="addRoom" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addRoomModalLabel">Add Room</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="POST" action='{{route("request.roomUpdate")}}'>
+                        @csrf
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <input type="hidden" name="assign_to" value="" id="delegationUid" />
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-control" type="number" placeholder="Room Number" name="room_no" value="" id="room_no" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="hotel" class="form-label">Hotel</label>
+                                <select class="form-select" aria-label="hotel" id="hotel_uid" name="hotel_uid" required>
+                                    @foreach (\App\Models\Hotel::all() as $hotel)
+                                    <option value="{{$hotel->hotel_uid}}"> {{$hotel->hotel_names}} {{$hotel->hotel_address}} {{$hotel->contact_person}} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="room_type" class="form-label">Room Type</label>
+                                <select class="form-select" aria-label="room_type" id="room_type" name="room_type" required>
+                                    @foreach (\App\Models\Roomtype::all() as $key=>$roomType)
+                                    <option value="{{$roomType->room_type_uid}}"> {{$roomType->room_type}} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="room_checkin" class="form-label">Check In</label>
+                                <input name="room_checkin" type="date" class="form-control" id="room_checkin" placeholder="Check In" value="{{date('Y-m-d');}}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="room_checkout" class="form-label">Check Out</label>
+                                <input name="room_checkout" type="date" class="form-control" id="room_checkout" placeholder="Check Out">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="updateRoom" tabindex="-1" aria-labelledby="updateRoom" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="updateRoomModalLabel">Update Room</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="POST" action='{{route("request.invitaionNumberUpdate")}}'>
+                        @csrf
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <input type="hidden" name="delegationUid" value="" id="delegationUid" />
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-control" type="number" placeholder="Invitation Number" name="invitaionNumber" value="" id="invitaionNumber" />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="card w-100">
         <div class="card-body p-4">
@@ -80,17 +158,17 @@
         }
     }
 
-    function operateRoom(value, row, index) {
-        if (value) {
-            return [
-                '<div class="left">',
-                '<a class="btn btn-outline-success" href="addRoomPage/' + value + '">',
-                '<span><i class="ti ti-edit" style="font-size:22px"></i></span>',
-                '</a>',
-                '</div>',
-            ].join('');
-        }
-    }
+    // function operateRoom(value, row, index) {
+    //     if (value) {
+    //         return [
+    //             '<div class="left">',
+    //             '<a class="btn btn-outline-success" href="addRoomPage/' + value + '">',
+    //             '<span><i class="ti ti-edit" style="font-size:22px"></i></span>',
+    //             '</a>',
+    //             '</div>',
+    //         ].join('');
+    //     }
+    // }
 
     function deleteRoom(value, row, index) {
         if (value) {
@@ -125,8 +203,34 @@
     }
 
     function operateRoom(value, row, index) {
-        return value !== null ? "Edit " + value + "" : "Add " + row.delegates_uid + "";
+        console.log(value)
+        if (value != null) {
+            return [
+                '<div class="left">',
+                '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-delegation="' + value + '" data-bs-target="#updateRoom">',
+                '<span><i class="ti ti-key" style="font-size:22px"></i></span>',
+                '</button>',
+                '</div>',
+            ].join('');
+        } else {
+            return [
+                '<div class="left">',
+                '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-delegation="' + row.delegates_uid + '" data-bs-target="#addRoom">',
+                '<span><i class="ti ti-door" style="font-size:22px"></i></span>',
+                '</button>',
+                '</div>',
+            ].join('');
+        }
+        // return value !== null ? "Edit " + value + "" : "Add " + row.delegates_uid + "";
     }
+
+    const officerModal = document.getElementById('addRoom')
+    officerModal.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget
+        const delegation = button.getAttribute('data-bs-delegation')
+        const modalBodyInput = officerModal.querySelector('.modal-body #delegationUid')
+        modalBodyInput.value = delegation
+    })
 </script>
 @include("layouts.tableFoot")
 @endsection

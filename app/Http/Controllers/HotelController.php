@@ -12,6 +12,7 @@ use App\Models\Room;
 use App\Models\Roomtype;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -320,6 +321,27 @@ class HotelController extends Controller
             }
             if ($updateRoom) {
                 return back()->with('message', "Room Type Updated Successfully");
+            }
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return  back()->with('error', $exception->errorInfo[2]);
+        }
+    }
+
+    public function roomUpdate(Request $req)
+    {
+        $addRoom = new Room();
+        $addRoom->room_uid = (string) Str::uuid();
+        $addRoom->room_logged_by = Auth::user()->uid;
+        foreach ($req->all() as $key => $value) {
+            if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
+                $addRoom[$key] = $value;
+            }
+        }
+        $addRoom->room_checkout = $req->room_checkout;
+        try {
+            $roomAdded = $addRoom->save();
+            if ($roomAdded) {
+                return back()->with('message', "Room Added Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             return  back()->with('error', $exception->errorInfo[2]);

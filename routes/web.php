@@ -143,6 +143,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/addRoom', [HotelController::class, 'addRoom'])->name('request.addRoom');
         Route::post('/assignedRoom', [HotelController::class, 'assignedRoom'])->name('request.assignedRoom');
         Route::post('/updateRoom/{id}', [HotelController::class, 'updateRoom'])->name('request.updateRoom');
+        Route::post('/roomUpdate/{id?}', [HotelController::class, 'roomUpdate'])->name('request.roomUpdate');
         // Room Pages And API End
 
         // Driver Pages And API Start
