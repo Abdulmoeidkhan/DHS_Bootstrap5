@@ -25,7 +25,7 @@
                                 <input type="hidden" name="assign_to" value="" id="delegationUid" />
                             </div>
                             <div class="mb-3">
-                                <input class="form-control" type="number" placeholder="Room Number" name="room_no" value="" id="room_no" />
+                                <input class="form-control" type="number" placeholder="Room Number" name="room_no" value="" id="room_no" required />
                             </div>
                             <div class="mb-3">
                                 <label for="hotel" class="form-label">Hotel</label>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
+                            <button type="submit" class="btn btn-primary">Add Room</button>
                         </div>
                     </form>
                 </div>
@@ -67,19 +67,65 @@
                         <h5 class="modal-title" id="updateRoomModalLabel">Update Room</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form method="POST" action='{{route("request.invitaionNumberUpdate")}}'>
+                    <form method="POST" action='{{route("request.roomUpdate")}}'>
                         @csrf
                         <div class="modal-body">
                             <div class="mb-3">
-                                <input type="hidden" name="delegationUid" value="" id="delegationUid" />
+                                <input type="hidden" name="room_uid" value="" id="room_uid" />
                             </div>
                             <div class="mb-3">
-                                <input class="form-control" type="number" placeholder="Invitation Number" name="invitaionNumber" value="" id="invitaionNumber" />
+                                <input class="form-control" type="number" placeholder="Room Number" name="room_no" value="" id="room_no_update" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="hotel" class="form-label">Hotel</label>
+                                <select class="form-select" aria-label="hotel" id="hotel_uid_update" name="hotel_uid" required>
+                                    @foreach (\App\Models\Hotel::all() as $hotel)
+                                    <option value="{{$hotel->hotel_uid}}"> {{$hotel->hotel_names}} {{$hotel->hotel_address}} {{$hotel->contact_person}} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="room_type" class="form-label">Room Type</label>
+                                <select class="form-select" aria-label="room_type" id="room_type_update" name="room_type" required>
+                                    @foreach (\App\Models\Roomtype::all() as $key=>$roomType)
+                                    <option value="{{$roomType->room_type_uid}}"> {{$roomType->room_type}} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="room_checkin" class="form-label">Check In</label>
+                                <input name="room_checkin" type="date" class="form-control" id="room_checkin_update" placeholder="Check In" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="room_checkout" class="form-label">Check Out</label>
+                                <input name="room_checkout" type="date" class="form-control" id="room_checkout_update" placeholder="Check Out">
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="deleteRoom" tabindex="-1" aria-labelledby="deleteRoom" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteRoomModalLabel">Deleet Room</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="POST" action='{{route("request.deleteroom")}}'>
+                        @csrf
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <input type="hidden" name="room_uid" value="" id="room_uid_delete" />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="closeBtn" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-badar">Delete</button>
                         </div>
                     </form>
                 </div>
@@ -113,7 +159,8 @@
                             <th data-filter-control="input" data-field="room_checkin" data-formatter="true">Room Check-In Date</th>
                             <th data-filter-control="input" data-formatter="operateRoomCheckOutStatus">Room Check-Out</th>
                             <th data-filter-control="input" data-field="room_checkout" data-formatter="true">Room Check-Out Date</th>
-                            <th data-field="room_uid" data-formatter="operateRoom">Actions</th>
+                            <th data-field="room_uid" data-formatter="operateRoom">Add/Edit</th>
+                            <th data-field="room_uid" data-formatter="deleteRoom">Delete</th>
                         </tr>
                     </thead>
                 </table>
@@ -174,9 +221,9 @@
         if (value) {
             return [
                 '<div class="left">',
-                '<a class="btn btn-outline-badar" href="deleteRoom/' + value + '">',
+                '<button type="button" class="btn btn-badar" data-bs-toggle="modal" data-bs-roomToBeDelete="' + value + '" data-bs-target="#deleteRoom">',
                 '<span><i class="ti ti-trash" style="font-size:22px"></i></span>',
-                '</a>',
+                '</button>',
                 '</div>',
             ].join('');
         }
@@ -203,16 +250,7 @@
     }
 
     function operateRoom(value, row, index) {
-        console.log(value)
-        if (value != null) {
-            return [
-                '<div class="left">',
-                '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-delegation="' + value + '" data-bs-target="#updateRoom">',
-                '<span><i class="ti ti-key" style="font-size:22px"></i></span>',
-                '</button>',
-                '</div>',
-            ].join('');
-        } else {
+        if (value == null) {
             return [
                 '<div class="left">',
                 '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-delegation="' + row.delegates_uid + '" data-bs-target="#addRoom">',
@@ -220,16 +258,70 @@
                 '</button>',
                 '</div>',
             ].join('');
+        } else {
+            let {
+                room_no,
+                hotel_uid,
+                room_type,
+                room_type_uid,
+                room_uid,
+                room_checkin,
+                room_checkout
+            } = row;
+
+            return [
+                '<div class="left">',
+                '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-roomcheckout="' + room_checkout + '"  data-bs-roomcheckin="' + room_checkin + '" data-bs-roomuid="' + room_uid + '" data-bs-room="' + room_no + '" data-bs-hoteluid="' + hotel_uid + '"  data-bs-roomtypeuid="' + room_type_uid + '" data-bs-target="#updateRoom">',
+                '<span><i class="ti ti-key" style="font-size:22px"></i></span>',
+                '</button>',
+                '</div>',
+            ].join('');
         }
         // return value !== null ? "Edit " + value + "" : "Add " + row.delegates_uid + "";
     }
 
-    const officerModal = document.getElementById('addRoom')
-    officerModal.addEventListener('show.bs.modal', event => {
+    const addroomModal = document.getElementById('addRoom')
+    addroomModal.addEventListener('show.bs.modal', event => {
         const button = event.relatedTarget
         const delegation = button.getAttribute('data-bs-delegation')
-        const modalBodyInput = officerModal.querySelector('.modal-body #delegationUid')
+        const modalBodyInput = addroomModal.querySelector('.modal-body #delegationUid')
         modalBodyInput.value = delegation
+    })
+    const deleteroomModal = document.getElementById('deleteRoom')
+    deleteroomModal.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget
+        const delegation = button.getAttribute('data-bs-roomToBeDelete')
+        const modalBodyDeleteRoom = deleteroomModal.querySelector('.modal-body #room_uid_delete')
+        modalBodyDeleteRoom.value = delegation
+    })
+
+    const updateRoomModal = document.getElementById('updateRoom')
+    updateRoomModal.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget
+        const roomNo = button.getAttribute('data-bs-room')
+        const modalBodyRoomNoInput = updateRoomModal.querySelector('.modal-body #room_no_update')
+        modalBodyRoomNoInput.value = roomNo;
+
+        const hotel = button.getAttribute('data-bs-hoteluid')
+        const modalBodyHotelInput = updateRoomModal.querySelector('.modal-body #hotel_uid_update')
+        modalBodyHotelInput.value = hotel;
+
+        const roomType = button.getAttribute('data-bs-roomtypeuid')
+        const modalBodyRoomTypeInput = updateRoomModal.querySelector('.modal-body #room_type_update')
+        modalBodyRoomTypeInput.value = roomType;
+
+        const room = button.getAttribute('data-bs-roomuid')
+        const modalBodyRoomUid = updateRoomModal.querySelector('.modal-body #room_uid')
+        modalBodyRoomUid.value = room;
+
+        const roomCheckIn = button.getAttribute('data-bs-roomcheckin')
+        const modalBodyroomCheckIn = updateRoomModal.querySelector('.modal-body #room_checkin_update')
+        modalBodyroomCheckIn.value = roomCheckIn;
+
+        const roomCheckOut = button.getAttribute('data-bs-roomcheckout')
+        const modalBodyroomCheckOut = updateRoomModal.querySelector('.modal-body #room_checkout_update')
+        modalBodyroomCheckOut.value = roomCheckOut;
+
     })
 </script>
 @include("layouts.tableFoot")

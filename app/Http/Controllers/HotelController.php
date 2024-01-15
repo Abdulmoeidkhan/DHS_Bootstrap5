@@ -329,19 +329,53 @@ class HotelController extends Controller
 
     public function roomUpdate(Request $req)
     {
-        $addRoom = new Room();
-        $addRoom->room_uid = (string) Str::uuid();
-        $addRoom->room_logged_by = Auth::user()->uid;
-        foreach ($req->all() as $key => $value) {
-            if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
-                $addRoom[$key] = $value;
+        if ($req->room_uid) {
+            $updateRoom = [];
+            $updateRoom['room_logged_by'] = Auth::user()->uid;
+            foreach ($req->all() as $key => $value) {
+                if ($key != 'submit' && $key != '_token' && $key != 'room_uid' && strlen($value) > 0) {
+                    $updateRoom[$key] = $value;
+                }
+            }
+            // return $updateRoom;
+            try {
+                $updatedRoom = Room::where('room_uid', $req->room_uid)->update($updateRoom);
+                if ($updatedRoom) {
+                    return back()->with('message', "Room Updated Successfully");
+                }
+            } catch (\Illuminate\Database\QueryException $exception) {
+                return  back()->with('error', $exception->errorInfo[2]);
+            }
+        } else {
+            $addRoom = new Room();
+            $addRoom->room_uid = (string) Str::uuid();
+            $addRoom->room_logged_by = Auth::user()->uid;
+            foreach ($req->all() as $key => $value) {
+                if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
+                    $addRoom[$key] = $value;
+                }
+            }
+            $addRoom->room_checkout = $req->room_checkout;
+            try {
+                $roomAdded = $addRoom->save();
+                if ($roomAdded) {
+                    Delegate::where('delegates_uid', $req->assign_to)->update(['accomodated' => $addRoom->room_uid]);
+                    return back()->with('message', "Room Added Successfully");
+                }
+            } catch (\Illuminate\Database\QueryException $exception) {
+                return  back()->with('error', $exception->errorInfo[2]);
             }
         }
-        $addRoom->room_checkout = $req->room_checkout;
+    }
+
+    public function deleteRoom(Request $req)
+    {
         try {
-            $roomAdded = $addRoom->save();
-            if ($roomAdded) {
-                return back()->with('message', "Room Added Successfully");
+            $roomToBeDelete = Room::where('room_uid', $req->room_uid)->first();
+            $roomDeleted = Room::where('room_uid', $req->room_uid)->delete();
+            if ($roomDeleted) {
+                Delegate::where('delegates_uid', $roomToBeDelete->assign_to)->update(['accomodated' => null]);
+                return back()->with('error', "Room Deleted Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             return  back()->with('error', $exception->errorInfo[2]);

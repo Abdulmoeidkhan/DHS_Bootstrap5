@@ -143,7 +143,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/addRoom', [HotelController::class, 'addRoom'])->name('request.addRoom');
         Route::post('/assignedRoom', [HotelController::class, 'assignedRoom'])->name('request.assignedRoom');
         Route::post('/updateRoom/{id}', [HotelController::class, 'updateRoom'])->name('request.updateRoom');
-        Route::post('/roomUpdate/{id?}', [HotelController::class, 'roomUpdate'])->name('request.roomUpdate');
+        Route::post('/roomUpdate', [HotelController::class, 'roomUpdate'])->name('request.roomUpdate');
+        Route::post('/deleteroom', [HotelController::class, 'deleteroom'])->name('request.deleteroom');
         // Room Pages And API End
 
         // Driver Pages And API Start
@@ -312,7 +313,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/invitation/{id}', [PrintInvitationController::class, 'printInvitation'])->name("pages.invitationPage");
     Route::get('/printDelegationBadge/{id}', [PrintInvitationController::class, 'printDelegationBadge'])->name("pages.printDelegationBadge");
     Route::get('/printDelegationEnvelope/{id}', [PrintInvitationController::class, 'printDelegationEnvelope'])->name("pages.printDelegationEnvelope");
-
 });
 
 Route::get('/sendhtmlemail/{id}', [MailOtpController::class, 'html_email'])->name("request.emailModule");
