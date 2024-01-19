@@ -49,7 +49,7 @@
                 </div>
                 <div class="card-border">
                     <div class="logo-child">
-                        <img src="{{$delegate->image->img_blob}}" style="height: 80px; width: 80px;" class="img-fluid" alt="" />
+                        <img src="{{$delegate->image?$delegate->image->img_blob:''}}" style="height: 80px; width: 80px;" class="img-fluid" alt="" />
                     </div>
                 </div>
             </div>

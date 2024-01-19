@@ -74,11 +74,11 @@ class UpdateProfileController extends Controller
         // return [$rolesRemoved, $rolesAdded];
         // return [$updatedUser];
         $updatedUser = User::with('roles', 'permissions')->where('uid', $req->uid)->first();
-        return [$updatedUser];
+        // return [$updatedUser];
         // $user->images = Image::where('uid', Auth::user()->uid)->first();
         // session()->forget('user');
         // session()->put('user', $user);
-        // return "Profile has been updated";
+        return "Profile has been updated";
     }
     public function updatePassword(Request $req)
     {

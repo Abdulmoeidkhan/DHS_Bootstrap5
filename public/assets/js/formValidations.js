@@ -104,6 +104,7 @@ function getAuthority(event) {
 const alertPlaceholder = document.getElementById("liveAlertPlaceholder");
 const appendAlert = (message, type) => {
     const wrapper = document.createElement("div");
+    console.log(message)
     wrapper.innerHTML = [
         `<div class="alert alert-${type} alert-dismissible fade show" role="alert">`,
         `   <div>${message}</div>`,

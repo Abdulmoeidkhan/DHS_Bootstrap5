@@ -27,8 +27,9 @@ class ActivateProfileController extends Controller
             // $delegate->user_uid = $recievedParams->uid;
             // $delegate->delegation = $delegationUid->uid;
             try {
-                $savedDelegate = Delegate::where('delegates_uid', $delegationUid->delegates)->update(['user_uid' => $recievedParams->uid]) ;
-                $updatesDone = $savedDelegate ? Delegation::where('delegationCode', $recievedParams->activationCode . '')->update(['delegation_response' => 'Accepted']) : false;
+                $delegateClaim = Delegation::where('uid', $delegationUid->uid)->update(['user_uid' => Auth::user()->uid]);
+                // $savedDelegate = Delegation::where('delegates_uid', $delegationUid->uid)->update(['user_uid' => $recievedParams->uid]);
+                $updatesDone = $delegateClaim ? Delegation::where('delegationCode', $recievedParams->activationCode . '')->update(['delegation_response' => 'Accepted']) : false;
                 $rolesAndPermissionGiven = $updatesDone ? $this->delegationRolesAndTeams($recievedParams->uid) : false;
                 return $rolesAndPermissionGiven;
             } catch (\Illuminate\Database\QueryException $exception) {
@@ -51,9 +52,9 @@ class ActivateProfileController extends Controller
         foreach ($oldPermissions as $oldPermission) {
             $user->removePermission($oldPermission, $user->roles[0]);
         }
-        $rolesRemoved = $user->removeRole($user->roles[0], $user->roles[0]);
-        $rolesAdded = $user->addRole($role, $team);
-        $newdPermissions = $user->givePermissions(['read', 'create'], $team);
+        $user->removeRole($user->roles[0], $user->roles[0]);
+        $user->addRole($role, $team);
+        $user->givePermissions(['read', 'create'], $team);
         $updatedUser = User::with('roles', 'permissions')->where('uid', $uid)->first();
         $updatedUser->images = Image::where('uid', $uid)->first();
         session()->forget('user');
