@@ -208,9 +208,9 @@ class DelegationsPageController extends Controller
 
     public function singleDelegation()
     {
-        $delegate = Delegate::where('user_uid', session()->get('user')->uid)->first();
-        $delegation = Delegation::where('delegates', $delegate->delegates_uid)->first();
-        $delegation->vip = Vips::where('uid', $delegation->invited_by)->first();
+        // $delegate = Delegate::where('delegation', session()->get('user')->delegationUid)->first();
+        $delegation = Delegation::where('uid', session()->get('user')->delegationUid)->first();
+        $delegation->vip = Vips::where('vips_uid', $delegation->invited_by)->first();
         return view('pages.delegation', ['delegation' => $delegation]);
     }
 

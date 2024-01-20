@@ -102,8 +102,13 @@
                 </li>
                 @endif
                 @if(session()->get('user')->roles[0]->name =="delegate")
+                <script>
+                    console.log(
+                        <?php echo session()->get('user');?>
+                    )
+                </script>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('pages.members',session()->get('user')->uid)}}" aria-expanded="false">
+                    <a class="sidebar-link" href="{{route('pages.members',session()->get('user')->delegationUid)}}" aria-expanded="false">
                         <span>
                             <i class="ti ti-users"></i>
                         </span>

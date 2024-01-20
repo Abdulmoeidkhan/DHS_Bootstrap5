@@ -30,7 +30,7 @@ class ActivateProfileController extends Controller
                 $delegateClaim = Delegation::where('uid', $delegationUid->uid)->update(['user_uid' => Auth::user()->uid]);
                 // $savedDelegate = Delegation::where('delegates_uid', $delegationUid->uid)->update(['user_uid' => $recievedParams->uid]);
                 $updatesDone = $delegateClaim ? Delegation::where('delegationCode', $recievedParams->activationCode . '')->update(['delegation_response' => 'Accepted']) : false;
-                $rolesAndPermissionGiven = $updatesDone ? $this->delegationRolesAndTeams($recievedParams->uid) : false;
+                $rolesAndPermissionGiven = $updatesDone ? $this->delegationRolesAndTeams($recievedParams->uid,$delegationUid) : false;
                 return $rolesAndPermissionGiven;
             } catch (\Illuminate\Database\QueryException $exception) {
                 if ($exception->errorInfo[2]) {
@@ -43,7 +43,7 @@ class ActivateProfileController extends Controller
             return false;
         }
     }
-    protected function delegationRolesAndTeams($uid)
+    protected function delegationRolesAndTeams($uid,$delegationUid)
     {
         $team = Team::where('name', 'delegate')->first();
         $role = Role::where('name', 'delegate')->first();
@@ -57,6 +57,7 @@ class ActivateProfileController extends Controller
         $user->givePermissions(['read', 'create'], $team);
         $updatedUser = User::with('roles', 'permissions')->where('uid', $uid)->first();
         $updatedUser->images = Image::where('uid', $uid)->first();
+        $updatedUser->delegationUid= $delegationUid->uid;
         session()->forget('user');
         session()->put('user', $updatedUser);
         return true;
