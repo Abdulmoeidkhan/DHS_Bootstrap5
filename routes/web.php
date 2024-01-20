@@ -190,11 +190,6 @@ Route::group(['middleware' => 'auth'], function () {
         // Route::post('/updateJourney/{id}', [CarsController::class, 'updateJourney'])->name('request.updateJourney');
         // Plan Pages And API End
 
-        // Member Pages And API Start
-        Route::get('/members/addMember/{id}', [MemberController::class, 'addMemberPage'])->name('pages.addMember');
-        Route::post('/addMemberRequest/{id}', [MemberController::class, 'addMemberRequest'])->name('request.addMemberRequest');
-        // Member Pages And API End
-
         // Officer Page And API Start
         Route::get('/officer', [OfficerController::class, 'renderOfficer'])->name('pages.officer');
         Route::get('/officerData/{id?}', [OfficerController::class, 'officerData'])->name('request.officerData');
@@ -304,6 +299,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/departureStatusChanger/{id}/{status}', [DelegateFlightController::class, 'departureStatusChanger'])->name('request.departureStatusChanger');
         Route::get('/arrivalStatusChanger/{id}/{status}', [DelegateFlightController::class, 'arrivalStatusChanger'])->name('request.arrivalStatusChanger');
         // Members End
+
+        // Member Pages And API Start
+        Route::get('/members/addMember/{id}', [MemberController::class, 'addMemberPage'])->name('pages.addMember');
+        Route::post('/addMemberRequest/{id}', [MemberController::class, 'addMemberRequest'])->name('request.addMemberRequest');
+        // Member Pages And API End
 
         // Delegate Start
         // Route::get('/delegateProfile/{id}', [UserFullProfileController::class, 'renderSpeceficDelegateProfile'])->name('pages.renderSpeceficDelegateProfile');
