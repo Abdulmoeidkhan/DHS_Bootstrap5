@@ -37,6 +37,14 @@ class AddDelegationPageController extends Controller
         $pdfSaved = $pdf->save();
         return $pdfSaved;
     }
+
+    protected function documentUpdate($file, $id)
+    {
+        $pdfBlob = file_get_contents($file->getRealPath());
+        $updatePdfBlob = Document::where('uid', $id)->first() ? Document::where('uid', $id)->update(['pdf_blob' => $pdfBlob]) : $this->documentUpload($file, $id);
+        return $updatePdfBlob;
+    }
+
     protected function imageBlobUpload($file, $id)
     {
         $imageBlob = $file;
@@ -47,12 +55,6 @@ class AddDelegationPageController extends Controller
         return $imgSaved;
     }
 
-    protected function documentUpdate($file, $id)
-    {
-        $pdfBlob = file_get_contents($file->getRealPath());
-        $updatePdfBlob = Document::where('uid', $id)->first() ? Document::where('uid', $id)->update(['pdf_blob' => $pdfBlob]) : $this->documentUpload($file, $id);
-        return $updatePdfBlob;
-    }
     protected function imageBlobUpdate($file, $id)
     {
         $imageBlob = $file;

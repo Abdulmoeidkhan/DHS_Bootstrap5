@@ -84,7 +84,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Request Routes
     Route::get('/getPdf/{id}', [DoucmentController::class, 'getPdf'])->name('request.getPdf');
-    Route::post('/imageUpload', [ProfileImageController::class, 'uploadImage'])->name('request.imageUpload');
+    Route::post('/imageUpload', [ProfileImageController::class, 'imageBlobUpload'])->name('request.imageUpload');
     Route::post('/uploadDocument', [DoucmentController::class, 'uploadDocument'])->name('request.uploadDocument');
     Route::post('/updateProfile', [UpdateProfileController::class, 'updateProflie'])->name('request.updateProfile');
     Route::post('/updateProfilePassowrd', [UpdateProfileController::class, 'updatePassword'])->name('request.updatePassword');

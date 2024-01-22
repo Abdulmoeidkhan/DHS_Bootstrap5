@@ -245,6 +245,7 @@ class DelegationsPageController extends Controller
         $updatedStatus = $status->delegation_status ? Delegation::where('uid', $id)->update(['delegation_status' => 0]) : Delegation::where('uid', $id)->update(['delegation_status' => 1]);
         return $updatedStatus ? back()->with('message', 'Delegation Status Updated Successfully') : back()->with('error', 'Something Went Wrong');
     }
+    
     public function delegateStatusChanger($id)
     {
         $status = Delegate::where('delegates_uid', $id)->first('status');

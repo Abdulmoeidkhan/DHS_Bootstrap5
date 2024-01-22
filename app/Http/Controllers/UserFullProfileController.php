@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Delegate;
 use Illuminate\Http\Request;
 use App\Models\Image;
+use App\Models\ImageBlob;
 use App\Models\InterestedProgram;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Laratrust\Models\Role;
 use Laratrust\Models\Permission;
 
@@ -31,16 +33,19 @@ class UserFullProfileController extends Controller
     }
     public function renderDelegateProfile()
     {
-        $delegate = Delegate::where('user_uid', auth()->user()->uid)->first();
-        $delegateImage = Image::where('uid', $delegate->uid)->first();
-        $repImage = Image::where('uid', $delegate->rep_uid)->first();
+        $delegate = Delegate::where([['delegation', session()->get('user')->delegationUid], ['delegation_type', 'Self']])->first();
+        $rep = Delegate::where([['delegation', session()->get('user')->delegationUid], ['delegation_type', 'Representative']])->first();
+        // return session()->get('user')->delegationUid;
+        $delegateImage = ImageBlob::where('uid', $delegate->delegates_uid)->first();
+        $repImage = ImageBlob::where('uid', $rep->delegates_uid)->first();
         $delegateInterests = InterestedProgram::where('guest_uid', $delegate->delegates_uid)->get();
         $interests = [];
         foreach ($delegateInterests as $key => $delegateInterest) {
             array_push($interests, $delegateInterest->program_uid);
         }
         $delegate->interests = $interests;
-        return view('pages.delegateProfile', ['delegate' => $delegate, 'delegateImage' => $delegateImage, 'repImage' => $repImage]);
+        // return $repImage->img_blob;
+        return view('pages.delegateProfile', ['delegate' => $delegate, 'delegateImage' => $delegateImage, 'repImage' => $repImage, 'rep' => $rep]);
     }
     public function renderSpeceficDelegateProfile(Request $req, $id)
     {
