@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Delegate;
 use App\Models\Delegation;
 use App\Models\Image;
+use App\Models\ImageBlob;
 use App\Models\Liason;
+use App\Models\Officer;
+use App\Models\Rank;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -36,9 +39,10 @@ class LiasonsController extends Controller
 
     public function renderSpecificLiason()
     {
-        $delegationUid = Delegate::where('user_uid', session()->get('user')->uid)->first('delegation');
-        $liason = Delegation::where('uid', $delegationUid)->first('liasons');
-        return view('pages.liason', ['delegationUid' => $delegationUid, 'liason' => $liason]);
+        // $delegationUid = Delegate::where('user_uid', session()->get('user')->uid)->first('delegation');
+        $officer = Officer::where('officer_delegation', session()->get('user')->delegationUid)->first();
+        // return $liason;
+        return view('pages.liason', ['delegationUid' => session()->get('user')->delegationUid, 'officer' => $officer]);
     }
 
     public function addLiasonPage()
@@ -48,13 +52,15 @@ class LiasonsController extends Controller
 
     public function specificLiasonData($id)
     {
-        $liasons = DB::table('liasons')
-            ->leftJoin('delegates', 'delegates.delegation', '=', 'liasons.liason_delegation')
-            ->leftJoin('delegations', 'delegations.uid', '=', 'liasons.liason_delegation')
-            ->where('liason_delegation', $id)
-            ->select('liasons.*', 'delegations.country', 'delegates.last_Name', 'delegates.first_Name')
+        $officers = DB::table('officers')
+            ->leftJoin('delegations', 'delegations.uid', '=', 'officers.officer_delegation')
+            ->where('officer_delegation', $id)
+            ->select('officers.*', 'delegations.country')
             ->get();
-        return $liasons;
+        foreach ($officers as $key => $officer) {
+            $officers[$key]->rank = Rank::where('ranks_uid', $officer->officer_rank)->first('ranks_name');
+        }
+        return $officers;
     }
 
     public function liasonsData($id = null)
@@ -74,16 +80,15 @@ class LiasonsController extends Controller
 
     public function specificLiasonsData($id = null)
     {
-        $liason = $id ? DB::table('liasons')
-            ->leftJoin('delegates', 'delegates.delegation', '=', 'liasons.liason_delegation')
-            ->leftJoin('delegations', 'delegations.uid', '=', 'liasons.liason_delegation')
-            ->where('liasons.liason_uid', $id)
-            ->orWhere('liasons.liason_officer', $id)
-            ->select('liasons.*', 'delegations.country', 'delegates.last_Name', 'delegates.first_Name')
+        $officer = $id ? DB::table('officers')
+            ->leftJoin('delegations', 'delegations.uid', '=', 'officers.officer_delegation')
+            ->where('officers.officer_delegation', $id)
+            ->orWhere('officers.officer_uid', $id)
+            ->orWhere('officers.officer_user', $id)
+            ->select('officers.*', 'delegations.country')
             ->first() : null;
-        $liason->image = $id && $liason->liason_officer ? Image::where('uid', $liason->liason_officer)->first() : 'null';
-        // return $liason;
-        return view('pages.liasonProfile', ['liason' => $liason]);
+        $officer->image = $id && $officer->officer_user ? ImageBlob::where('uid', $officer->officer_uid)->first() : 'null';
+        return view('pages.liasonProfile', ['officer' => $officer]);
     }
 
     public function addLiason(Request $req)
@@ -111,7 +116,7 @@ class LiasonsController extends Controller
         }
     }
 
-    public function updateLiasonRequest(Request $req, $id)
+    public function updateOfficerRequest(Request $req, $id)
     {
         $arrayToBeUpdate = [];
         foreach ($req->all() as $key => $value) {
@@ -120,8 +125,8 @@ class LiasonsController extends Controller
             }
         }
         try {
-            $updatedLiason = Liason::where('liason_uid', $id)->update($arrayToBeUpdate);
-            if ($updatedLiason) {
+            $updatedOfficer = Officer::where('officer_uid', $id)->update($arrayToBeUpdate);
+            if ($updatedOfficer) {
                 return back()->with('message', 'Liason Updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {

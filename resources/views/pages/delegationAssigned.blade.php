@@ -28,9 +28,9 @@
                             <th class="border-bottom-0">
                                 <h6 class="fw-semibold mb-0">Members</h6>
                             </th>
-                            <th class="border-bottom-0">
+                            <!-- <th class="border-bottom-0">
                                 <h6 class="fw-semibold mb-0">Delegate Profile</h6>
-                            </th>
+                            </th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -52,18 +52,18 @@
                             </td>
                             <td class="border-bottom-0">
                                 <div class="mb-0 fw-normal">
-                                <a class="btn btn-outline-danger" href="{{route('pages.members',$delegation->delegates)}}">
+                                    <a class="btn btn-outline-danger" href="{{route('pages.members',$delegation->uid)}}">
                                         <i class="ti ti-users" style="font-size: 24px;"></i>
                                     </a>
                                 </div>
                             </td>
-                            <td class="border-bottom-0">
+                            <!-- <td class="border-bottom-0">
                                 <div class="mb-0 fw-normal">
-                                    <a class="btn btn-outline-success" href="{{route('pages.renderSpeceficDelegateProfile',$delegation->delegates)}}">
+                                    <a class="btn btn-outline-success" href="{{route('pages.renderSpeceficDelegateProfile',$delegation->uid)}}">
                                         <i class="ti ti-user-check" style="font-size: 24px;"></i>
                                     </a>
                                 </div>
-                            </td>
+                            </td> -->
                         </tr>
                     </tbody>
                 </table>

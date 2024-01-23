@@ -20,7 +20,7 @@ class UserFullProfileController extends Controller
         $roles = Role::all();
         $permissions = Permission::all();
         $user = User::with('roles', 'permissions')->where('uid', $id)->first();
-        $image = Image::where('uid', $id)->first();
+        $image = ImageBlob::where('uid', $id)->first();
         $user->images = $image;
         return view('pages.userProfile', ['user' => $user, 'roles' => $roles, 'permissions' => $permissions]);
     }
@@ -29,6 +29,7 @@ class UserFullProfileController extends Controller
         $roles = Role::all();
         $permissions = Permission::all();
         $user = session()->get('user');
+        // return $user;
         return view('pages.userProfile', ['user' => $user,  'roles' => $roles, 'permissions' => $permissions]);
     }
     public function renderDelegateProfile()
@@ -50,8 +51,8 @@ class UserFullProfileController extends Controller
     public function renderSpeceficDelegateProfile(Request $req, $id)
     {
         $delegate = Delegate::where('user_uid', $id)->orWhere('delegates_uid', $id)->first();
-        $delegateImage = Image::where('uid', $delegate->delegates_uid)->first();
-        $repImage = Image::where('uid', $delegate->rep_uid)->first();
+        $delegateImage = ImageBlob::where('uid', $delegate->delegates_uid)->first();
+        $repImage = ImageBlob::where('uid', $delegate->rep_uid)->first();
         $delegateInterests = InterestedProgram::where('guest_uid', $delegate->delegates_uid)->get(['program_uid']);
         $interests = [];
         foreach ($delegateInterests as $key => $delegateInterest) {

@@ -38,6 +38,7 @@
     </div>
 </div>
 @endif -->
+@if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="delegate")
 <div class="row">
     <div class="col-lg-12 d-flex align-items-stretch">
         <div class="card w-100">
@@ -119,6 +120,7 @@
         </div>
     </div>
 </div>
+@endif
 <br />
 <div class="row">
     <div class="card w-100">
@@ -136,7 +138,9 @@
                             <th data-field="delegation_type" data-sortable="true">Type</th>
                             <th data-field="flight.passport" data-sortable="true">Passport</th>
                             <th data-field="status" data-sortable="true" data-field="status" data-formatter="statusFormatter">Member Active</th>
+                            @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="delegate")
                             <th data-field="delegates_uid" data-sortable="true" data-field="status" data-formatter="statusChangerFormatter">Status Changer</th>
+                            @endif
                             <th data-field="flight.arrival_flight" data-sortable="true">Arrival Flight</th>
                             <th data-field="flight.arrival_date" data-sortable="true">Arrival Date</th>
                             <th data-field="flight.arrival_time" data-sortable="true">Arrival Time</th>
@@ -144,7 +148,9 @@
                             <th data-field="flight.departure_date" data-sortable="true">Departure Date</th>
                             <th data-field="flight.departure_time" data-sortable="true">Departure Time</th>
                             <th data-field="image.img_blob" data-sortable="true" data-formatter="operatePicture" data-force-hide="true">Image</th>
+                            @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="delegate")
                             <th data-field="delegates_uid" data-sortable="true" data-formatter="operateDelegate" data-force-hide="true">Actions</th>
+                            @endif
                             <!-- <th data-field="organistaion" data-sortable="true">Organistaion</th> -->
                             <!-- <th data-field="last_Name" data-sortable="true">Delegate Last Name</th>
                             <th data-field="last_Name" data-sortable="true">Delegate Last Name</th> -->

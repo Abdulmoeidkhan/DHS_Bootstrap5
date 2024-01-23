@@ -13,7 +13,9 @@ use Illuminate\Support\Str;
 use Laratrust\Models\Role;
 use Laratrust\Models\Team;
 use App\Models\Image;
+use App\Models\ImageBlob;
 use App\Models\Interpreter;
+use App\Models\Officer;
 use App\Models\Receiving;
 use Laratrust\Models\Permission;
 
@@ -30,7 +32,7 @@ class ActivateProfileController extends Controller
                 $delegateClaim = Delegation::where('uid', $delegationUid->uid)->update(['user_uid' => Auth::user()->uid]);
                 // $savedDelegate = Delegation::where('delegates_uid', $delegationUid->uid)->update(['user_uid' => $recievedParams->uid]);
                 $updatesDone = $delegateClaim ? Delegation::where('delegationCode', $recievedParams->activationCode . '')->update(['delegation_response' => 'Accepted']) : false;
-                $rolesAndPermissionGiven = $updatesDone ? $this->delegationRolesAndTeams($recievedParams->uid,$delegationUid) : false;
+                $rolesAndPermissionGiven = $updatesDone ? $this->delegationRolesAndTeams($recievedParams->uid, $delegationUid) : false;
                 return $rolesAndPermissionGiven;
             } catch (\Illuminate\Database\QueryException $exception) {
                 if ($exception->errorInfo[2]) {
@@ -43,7 +45,7 @@ class ActivateProfileController extends Controller
             return false;
         }
     }
-    protected function delegationRolesAndTeams($uid,$delegationUid)
+    protected function delegationRolesAndTeams($uid, $delegationUid)
     {
         $team = Team::where('name', 'delegate')->first();
         $role = Role::where('name', 'delegate')->first();
@@ -57,7 +59,7 @@ class ActivateProfileController extends Controller
         $user->givePermissions(['read', 'create'], $team);
         $updatedUser = User::with('roles', 'permissions')->where('uid', $uid)->first();
         $updatedUser->images = Image::where('uid', $uid)->first();
-        $updatedUser->delegationUid= $delegationUid->uid;
+        $updatedUser->delegationUid = $delegationUid->uid;
         session()->forget('user');
         session()->put('user', $updatedUser);
         return true;
@@ -66,13 +68,13 @@ class ActivateProfileController extends Controller
     }
 
 
-    protected function activateLiason($recievedParams)
+    protected function activateOfficer($recievedParams)
     {
-        $liasonData = Liason::where([['liasonCode', $recievedParams->activationCode], ['liason_officer', null]])->first();
-        if ($liasonData) {
+        $officerData = Officer::where([['officerCode', $recievedParams->activationCode], ['officer_user', null]])->first();
+        if ($officerData) {
             try {
-                $updateLiason = Liason::where([['liasonCode', $recievedParams->activationCode . ''], ['liason_officer', null]])->update(['liason_officer' => session()->get('user')->uid]);
-                $rolesAndPermissionGiven = $updateLiason ? $this->liasonRolesAndTeams($recievedParams->uid) : false;
+                $updateOfficer = Officer::where([['officerCode', $recievedParams->activationCode . ''], ['officer_user', null]])->update(['officer_user' => session()->get('user')->uid]);
+                $rolesAndPermissionGiven = $updateOfficer ? $this->liasonRolesAndTeams($recievedParams->uid, $officerData->officer_type) : false;
                 return $rolesAndPermissionGiven;
             } catch (\Illuminate\Database\QueryException $exception) {
                 if ($exception->errorInfo[2]) {
@@ -187,10 +189,10 @@ class ActivateProfileController extends Controller
             return false;
         }
     }
-    protected function liasonRolesAndTeams($uid)
+    protected function liasonRolesAndTeams($uid, $type)
     {
-        $team = Team::where('name', 'liason')->first();
-        $role = Role::where('name', 'liason')->first();
+        $team = Team::where('display_name', $type)->first();
+        $role = Role::where('display_name', $type)->first();
         $user = User::with('roles', 'permissions')->where('uid', $uid)->first();
         $oldPermissions = $user->permissions;
         $rolesRemoved = $user->removeRole($user->roles[0], $user->roles[0]);
@@ -202,7 +204,7 @@ class ActivateProfileController extends Controller
                 $rolesAdded = $user->addRole($role, $team);
                 $newdPermissions = $user->givePermissions(['read', 'create'], $team);
                 $updatedUser = User::with('roles', 'permissions')->where('uid', $uid)->first();
-                $updatedUser->images = Image::where('uid', $uid)->first();
+                $updatedUser->images = ImageBlob::where('uid', $uid)->first();
                 session()->forget('user');
                 session()->put('user', $updatedUser);
                 return true;
@@ -229,18 +231,18 @@ class ActivateProfileController extends Controller
                 // $delegateRolesPermission = $this->delegationRolesAndTeams($req->uid);
                 return $delegateActivated ? back()->with('message', 'Delegation Updated Successfully') : back()->with('error', 'Delegation already assigned');
                 break;
-            case "LO":
-                $liasonActivated = $this->activateLiason($req);
-                return $liasonActivated ? back()->with('message', 'Liason Updated Successfully') : back()->with('error', 'Liason already assigned');
+            case "LO" || "RO" || "IO":
+                $officerActivated = $this->activateOfficer($req);
+                return $officerActivated ? back()->with('message', 'Officer Updated Successfully') : back()->with('error', 'Officer already assigned');
                 break;
-            case "RO":
-                $receivingActivated = $this->activateReceiving($req);
-                return $receivingActivated ? back()->with('message', 'Receiving Updated Successfully') : back()->with('error', 'Receiving already assigned');
-                break;
-            case "IO":
-                $interpreterActivated = $this->activateInterpreter($req);
-                return $interpreterActivated ? back()->with('message', 'Receiving Updated Successfully') : back()->with('error', 'Receiving already assigned');
-                break;
+            // case "RO":
+            //     $receivingActivated = $this->activateReceiving($req);
+            //     return $receivingActivated ? back()->with('message', 'Receiving Updated Successfully') : back()->with('error', 'Receiving already assigned');
+            //     break;
+            // case "IO":
+            //     $interpreterActivated = $this->activateInterpreter($req);
+            //     return $interpreterActivated ? back()->with('message', 'Receiving Updated Successfully') : back()->with('error', 'Receiving already assigned');
+            //     break;
             default:
                 return back()->with('error', 'Something Went Wrong');
         }

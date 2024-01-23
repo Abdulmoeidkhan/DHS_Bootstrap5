@@ -44,7 +44,7 @@
                                     <h6 class="fw-semibold mb-1 text-capitalize">{{$delegation->country}}</h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <p class="mb-0 fw-normal">{{$delegation->vip->name}}</p>
+                                    <p class="mb-0 fw-normal">{{$delegation->vip->rank_name->ranks_name}}</p>
                                 </td>
                                 <td class="border-bottom-0">
                                     <div class="d-flex align-items-center gap-2">

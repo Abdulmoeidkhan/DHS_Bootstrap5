@@ -11,6 +11,7 @@ use App\Models\Hotel;
 use App\Models\HotelPlan;
 use App\Models\Interpreter;
 use App\Models\Liason;
+use App\Models\Officer;
 use App\Models\Rank;
 use App\Models\Receiving;
 use App\Models\Vips;
@@ -25,7 +26,7 @@ class DelegationsPageController extends Controller
             $delegations = DB::table('delegations')
                 ->leftJoin('delegates', 'delegates.delegates_uid', '=', 'delegations.delegationhead')
                 ->leftJoin('vips', 'delegations.invited_by', '=', 'vips.vips_uid')
-                ->where([['delegations.delegation_response', 'Accepted'],['delegations.delegation_status', '1']])
+                ->where([['delegations.delegation_response', 'Accepted'], ['delegations.delegation_status', '1']])
                 ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.rank', 'delegates.self', 'delegates.delegates_uid', 'delegates.designation', 'vips.vips_uid')
                 ->orderBy('delegations.country', 'asc')
                 ->orderBy('vips.vips_rank', 'asc')
@@ -211,6 +212,10 @@ class DelegationsPageController extends Controller
         // $delegate = Delegate::where('delegation', session()->get('user')->delegationUid)->first();
         $delegation = Delegation::where('uid', session()->get('user')->delegationUid)->first();
         $delegation->vip = Vips::where('vips_uid', $delegation->invited_by)->first();
+        foreach ($delegation as $delegate) {
+            $delegation->vip->rank_name = Rank::where('ranks_uid', $delegation->vip->vips_rank)->first('ranks_name');
+        }
+        // return $delegation->vips_rank;
         return view('pages.delegation', ['delegation' => $delegation]);
     }
 
@@ -218,24 +223,25 @@ class DelegationsPageController extends Controller
     {
         $delegationUid = 0;
         switch (session()->get('user')->roles[0]->name) {
-            case "liason":
-                $officers = Liason::where('liason_officer', session()->get('user')->uid)->first('liason_delegation');
-                $delegationUid = $officers ? $officers->liason_delegation : 0;
+            case "liason" || "receiving" || "interpreter":
+                $officers = Officer::where('officer_user', session()->get('user')->uid)->first('officer_delegation');
+                $delegationUid = $officers ? $officers->officer_delegation : 0;
                 break;
-            case "receiving":
-                $officers = Receiving::where('receiving_uid', session()->get('user')->uid)->first('receiving_delegation');
-                $delegationUid = $officers ? $officers->receiving_delegation : 0;
-                break;
-            case "interpreter":
-                $officers = Interpreter::where('interpreter_uid', session()->get('user')->uid)->first('interpreter_delegation');
-                $delegationUid = $officers ? $officers->interpreter_delegation : 0;
-                break;
+            // case "receiving":
+            //     $officers = Receiving::where('receiving_uid', session()->get('user')->uid)->first('receiving_delegation');
+            //     $delegationUid = $officers ? $officers->receiving_delegation : 0;
+            //     break;
+            // case "interpreter":
+            //     $officers = Interpreter::where('interpreter_uid', session()->get('user')->uid)->first('interpreter_delegation');
+            //     $delegationUid = $officers ? $officers->interpreter_delegation : 0;
+            //     break;
             default:
                 return back()->with('error', 'Something Went Wrong');
         }
 
         $delegation = Delegation::where('uid', $delegationUid)->first();
-        $delegation->vip = Vips::where('uid', $delegation->invited_by)->first();
+        $delegation->vip = Vips::where('vips_uid', $delegation->invited_by)->first();
+        // return $delegation;
         return view('pages.delegationAssigned', ['delegation' => $delegation]);
     }
 
@@ -245,7 +251,7 @@ class DelegationsPageController extends Controller
         $updatedStatus = $status->delegation_status ? Delegation::where('uid', $id)->update(['delegation_status' => 0]) : Delegation::where('uid', $id)->update(['delegation_status' => 1]);
         return $updatedStatus ? back()->with('message', 'Delegation Status Updated Successfully') : back()->with('error', 'Something Went Wrong');
     }
-    
+
     public function delegateStatusChanger($id)
     {
         $status = Delegate::where('delegates_uid', $id)->first('status');

@@ -132,7 +132,7 @@
                         <span>
                             <i class="ti ti-shield-half-filled"></i>
                         </span>
-                        <span class="hide-menu">Liason</span>
+                        <span class="hide-menu">Officers</span>
                     </a>
                 </li>
                 @endif
@@ -224,6 +224,7 @@
                         <span class="hide-menu">Events</span>
                     </a>
                 </li>
+                @if(session()->get('user')->roles[0]->name =="admin")
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Reports</span>
@@ -612,6 +613,7 @@
                         </li>
                     </ul>
                 </li>
+                @endif
             </ul>
             <div class="unlimited-access hide-menu bg-light-primary position-relative mb-7 mt-5 rounded">
                 <div class="d-flex">

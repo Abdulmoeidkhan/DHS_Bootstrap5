@@ -267,7 +267,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'authorisedUserCheck'], function () {
         // Liason Start
         Route::get('/liasonSpecificProfile/{id}', [LiasonsController::class, 'specificLiasonsData'])->name('pages.liasonSpecificProfile');
-        Route::post('/updateLiasonRequest/{id}', [LiasonsController::class, 'updateLiasonRequest'])->name('request.updateLiasonRequest');
+        Route::post('/updateOfficerRequest/{id}', [LiasonsController::class, 'updateOfficerRequest'])->name('request.updateOfficerRequest');
         // Liason End
 
         // Receiving Start
@@ -308,7 +308,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/members/delegateStatusChanger/{id}', [DelegationsPageController::class, 'delegateStatusChanger'])->name('request.updateDelegateStatus');
 
         // Delegate Start
-        // Route::get('/delegateProfile/{id}', [UserFullProfileController::class, 'renderSpeceficDelegateProfile'])->name('pages.renderSpeceficDelegateProfile');
+        Route::get('/delegateProfile/{id}', [UserFullProfileController::class, 'renderSpeceficDelegateProfile'])->name('pages.renderSpeceficDelegateProfile');
         // Delegate End
     });
 

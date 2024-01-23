@@ -19,7 +19,7 @@
                 <h4 class="text-capitalize">Hi, {{session()->get('user')->name}} &nbsp;</h4>
                 <li class="nav-item dropdown">
                     <a class="nav-link nav-icon-hover" style="text-transform:capitalize" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{session()->get('user')->images?session()->get('user')->images->base64_image:(session()->get('user')->avatar?session()->get('user')->avatar:asset('assets/images/profile/user-1.jpg'))}}" alt="" width="35" height="35" class="rounded-circle">
+                        <img src="{{session()->get('user')->images?session()->get('user')->images->img_blob:(session()->get('user')->avatar?session()->get('user')->avatar:asset('assets/images/profile/user-1.jpg'))}}" alt="" width="35" height="35" class="rounded-circle">
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                         <div class="message-body">
