@@ -149,9 +149,10 @@
                             <th data-filter-control="input" data-field="last_Name" data-sortable="true">Last Name</th>
                             <th data-filter-control="input" data-field="passport" data-sortable="true">Passport</th>
                             <th data-filter-control="input" data-field="delegation_type" data-sortable="true" data-formatter="operateDelegateType">Delegation Type</th>
-                            <th data-filter-control="input" data-field="hotel_names" data-sortable="true">Hotel</th>
+                            <th data-filter-control="input" data-field="officers" data-formatter="operateOfficer" data-sortable="true">Officer</th>
+                            <th data-filter-control="input" data-field="hotel_name" data-formatter="operateHotel" data-sortable="true">Hotel</th>
+                            <th data-filter-control="input" data-field="hotel_plans" data-formatter="operateRoomType" data-formatter="true">Room Type</th>
                             <th data-filter-control="input" data-field="room_no" data-sortable="true">Room</th>
-                            <th data-filter-control="input" data-field="room_type" data-formatter="true">Room Type</th>
                             <th data-filter-control="input" data-field="arrival_date" data-formatter="true">Arrival Date</th>
                             <th data-filter-control="input" data-field="arrival_time" data-formatter="true">Arrival Time</th>
                             <th data-filter-control="input" data-field="arrived" data-formatter="operateFlghtStatus">Arrived</th>
@@ -247,6 +248,24 @@
 
     function operateDelegateType(value, row, index) {
         return value == "Self" ? "Head" : value;
+    }
+
+    function operateOfficer(value, row, index) {
+        if (value) {
+            return value.map((val) => `${val.officer_first_name} ${val.officer_last_name} - ${val.officer_contact}`)
+        }
+    }
+
+    function operateHotel(value, row, index) {
+        if (value) {
+            return value.hotel_names;
+        }
+    }
+
+    function operateRoomType(value, row, index) {
+        if (value) {
+            return value.map((val) => `${val.room_type}`)
+        }
     }
 
     function operateRoom(value, row, index) {
