@@ -179,20 +179,20 @@ class HotelController extends Controller
             ->leftJoin('delegations', 'delegates.delegation', '=', 'delegations.uid')
             ->leftJoin('rooms', 'delegates.delegates_uid', '=', 'rooms.assign_to')
             ->leftJoin('hotels', 'hotels.hotel_uid', '=', 'rooms.hotel_uid')
-            ->leftJoin('roomtypes', 'rooms.room_type', '=', 'roomtypes.room_type_uid')
+            // ->leftJoin('roomtypes', 'rooms.room_type', '=', 'roomtypes.room_type_uid')
             ->leftJoin('delegate_flights', 'delegates.delegates_uid', '=', 'delegate_flights.delegate_uid')
             ->leftJoin('ranks', 'delegates.rank', '=', 'ranks.ranks_uid')
-            ->select('delegates.*', 'rooms.*', 'hotels.*', 'roomtypes.*', 'delegate_flights.*', 'delegations.delegationCode', 'delegations.country', 'ranks.ranks_name')
+            ->select('delegates.*', 'rooms.*', 'hotels.*', 'delegate_flights.*', 'delegations.delegationCode', 'delegations.country', 'ranks.ranks_name')
             ->where([['delegations.delegation_response', 'Accepted'], ['delegates.self', 1]])
             ->get();
 
         foreach ($delegatesWithRooms as $key => $delegatesWithRoom) {
             $delegatesWithRooms[$key]->officers = Officer::where('officer_delegation', $delegatesWithRoom->delegation)->get(['officer_rank', 'officer_first_name', 'officer_last_name', 'officer_contact']);
-            $delegatesWithRooms[$key]->hotel_plans = DB::table('hotel_plans')
-                ->leftJoin('roomtypes', 'hotel_plans.hotel_roomtpye_uid', '=', 'roomtypes.room_type_uid')
-                ->where('hotel_plans.delegation_uid', $delegatesWithRoom->delegation)
-                ->select('roomtypes.room_type')
-                ->get();
+            // $delegatesWithRooms[$key]->hotel_plans = DB::table('hotel_plans')
+            //     ->leftJoin('roomtypes', 'hotel_plans.hotel_roomtpye_uid', '=', 'roomtypes.room_type_uid')
+            //     ->where('hotel_plans.delegation_uid', $delegatesWithRoom->delegation)
+            //     ->select('roomtypes.room_type')
+            //     ->get();
             $delegatesWithRooms[$key]->hotel_name = DB::table('hotel_plans')
                 ->leftJoin('hotels', 'hotel_plans.hotel_uid', '=', 'hotels.hotel_uid')
                 ->where('hotel_plans.delegation_uid', $delegatesWithRoom->delegation)

@@ -33,13 +33,10 @@ class DelegationsPageController extends Controller
                 ->get();
 
             foreach ($delegations as $key => $delegation) {
-                $delegations[$key]->standard = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4f']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
-                $delegations[$key]->superior = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4h']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
-                $delegations[$key]->dOccupancy = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4i']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                $delegations[$key]->hotelPlan = HotelPlan::where([['delegation_uid', $delegation->uid]])->first(['hotel_uid', 'hotel_roomtype_standard','hotel_roomtype_suite','hotel_roomtype_superior','hotel_roomtype_doubleOccupancy', 'hotel_plan_uid']);
                 $delegations[$key]->officers = DB::table('officers')->leftJoin('ranks', 'officers.officer_rank', '=', 'ranks.ranks_uid')->where('officer_delegation', $delegation->uid)->select('officers.*', 'ranks.ranks_name')->get();
-                $delegations[$key]->suite = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4g']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
-                $delegations[$key]->carA = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', '61346491-983a-40ed-8477-2d9ed84e6767']])->first(['car_quantity', 'car_plan_uid']);
-                $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
+                $delegations[$key]->car = CarPlan::where([['delegation_uid', $delegation->uid]])->first(['car_category_a', 'car_category_b', 'car_plan_uid']);
+                // $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
                 $delegations[$key]->member_count = Delegate::where([['delegation', $delegation->uid], ['delegation_type', '!=', 'Representative'], ['status', 1]])->count();
                 $delegations[$key]->members = Delegate::where([['delegation', $delegation->uid], ['delegation_type', 'Member'], ['status', 1]])->get();
                 $delegations[$key]->rankName = Rank::where('ranks_uid', $delegation->rank)->first('ranks_name');
@@ -52,7 +49,7 @@ class DelegationsPageController extends Controller
                 foreach ($delegations[$key]->cars as $keyCar => $car) {
                     $delegations[$key]->cars[$keyCar]->driver = Driver::where('driver_uid', $car->driver_uid)->first();
                 }
-                $delegations[$key]->hotelData = $delegations[$key]->standard ? Hotel::where('hotel_uid', $delegations[$key]->standard?->hotel_uid)->first('hotel_names') : null;
+                $delegations[$key]->hotelData = $delegations[$key]->hotelPlan ? Hotel::where('hotel_uid', $delegations[$key]->hotelPlan?->hotel_uid)->first('hotel_names') : null;
                 // $delegations[$key]->vips->rank = array_filter($ranks->toArray(),fn ($rank) => $rank['ranks_uid'] == $delegations[$key]->vips->vips_rank);
                 // $delegations[$key]->vips->rank = Rank::where('vips_uid', $delegations[$key]->vips['vips_rank'])->first('ranks_name');
                 // $delegations[$key]->member_count = $delegations[$key]->member_count ? $delegations[$key]->member_count + 1 : 1;
@@ -68,13 +65,14 @@ class DelegationsPageController extends Controller
                 ->orderBy('vips.vips_rank', 'asc')
                 ->get();
             foreach ($delegations as $key => $delegation) {
-                $delegations[$key]->standard = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4f']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
-                $delegations[$key]->superior = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4h']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
-                $delegations[$key]->dOccupancy = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4i']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
-                $delegations[$key]->suite = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4g']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                $delegations[$key]->hotelPlan = HotelPlan::where([['delegation_uid', $delegation->uid]])->first(['hotel_uid', 'hotel_roomtype_standard','hotel_roomtype_suite','hotel_roomtype_superior','hotel_roomtype_doubleOccupancy', 'hotel_plan_uid']);
+                // $delegations[$key]->standard = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4f']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                // $delegations[$key]->superior = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4h']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                // $delegations[$key]->dOccupancy = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4i']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                // $delegations[$key]->suite = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4g']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                // $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
                 $delegations[$key]->officers = DB::table('officers')->leftJoin('ranks', 'officers.officer_rank', '=', 'ranks.ranks_uid')->where('officer_delegation', $delegation->uid)->select('officers.*', 'ranks.ranks_name')->get();
-                $delegations[$key]->carA = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', '61346491-983a-40ed-8477-2d9ed84e6767']])->first(['car_quantity', 'car_plan_uid']);
-                $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
+                $delegations[$key]->car = CarPlan::where([['delegation_uid', $delegation->uid]])->first(['car_category_a', 'car_category_b', 'car_plan_uid']);
                 $delegations[$key]->member_count = Delegate::where([['delegation', $delegation->uid], ['delegation_type', '!=', 'Representative'], ['status', 1]])->count();
                 $delegations[$key]->members = Delegate::where([['delegation', $delegation->uid], ['status', 1], ['self', 1], ['delegation_type', '!=', 'Self']])->get();
                 $delegations[$key]->rankName = Rank::where('ranks_uid', $delegation->rank)->first('ranks_name');
@@ -88,7 +86,8 @@ class DelegationsPageController extends Controller
                 foreach ($delegations[$key]->cars as $keyCar => $car) {
                     $delegations[$key]->cars[$keyCar]->driver = Driver::where('driver_uid', $car->driver_uid)->first();
                 }
-                $delegations[$key]->hotelData = $delegations[$key]->hotelPlan ? Hotel::where('hotel_uid', $delegations[$key]->hotelPlan->hotel_uid)->first('hotel_names') : '';
+                $delegations[$key]->hotelData = $delegations[$key]->hotelPlan ? Hotel::where('hotel_uid', $delegations[$key]->hotelPlan?->hotel_uid)->first('hotel_names') : null;
+                // $delegations[$key]->hotelData = $delegations[$key]->hotelPlan ? Hotel::where('hotel_uid', $delegations[$key]->hotelPlan->hotel_uid)->first('hotel_names') : '';
             }
             return $delegations;
         } else if ($status == 0) {
@@ -101,13 +100,14 @@ class DelegationsPageController extends Controller
                 ->orderBy('vips.vips_rank', 'asc')
                 ->get();
             foreach ($delegations as $key => $delegation) {
-                $delegations[$key]->standard = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4f']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
-                $delegations[$key]->superior = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4h']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
-                $delegations[$key]->dOccupancy = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4i']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                $delegations[$key]->hotelPlan = HotelPlan::where([['delegation_uid', $delegation->uid]])->first(['hotel_uid', 'hotel_roomtype_standard','hotel_roomtype_suite','hotel_roomtype_superior','hotel_roomtype_doubleOccupancy', 'hotel_plan_uid']);
+                // $delegations[$key]->standard = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4f']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                // $delegations[$key]->superior = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4h']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                // $delegations[$key]->dOccupancy = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4i']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                // $delegations[$key]->suite = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4g']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
                 $delegations[$key]->officers = DB::table('officers')->leftJoin('ranks', 'officers.officer_rank', '=', 'ranks.ranks_uid')->where('officer_delegation', $delegation->uid)->select('officers.*', 'ranks.ranks_name')->get();
-                $delegations[$key]->suite = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4g']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
-                $delegations[$key]->carA = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', '61346491-983a-40ed-8477-2d9ed84e6767']])->first(['car_quantity', 'car_plan_uid']);
-                $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
+                $delegations[$key]->car = CarPlan::where([['delegation_uid', $delegation->uid]])->first(['car_category_a', 'car_category_b', 'car_plan_uid']);
+                // $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
                 $delegations[$key]->member_count = Delegate::where([['delegation', $delegation->uid], ['delegation_type', '!=', 'Representative'], ['status', 1]])->count();
                 $delegations[$key]->members = Delegate::where([['delegation', $delegation->uid], ['delegation_type', 'Member'], ['status', 1]])->get();
                 $delegations[$key]->rankName = Rank::where('ranks_uid', $delegation->rank)->first('ranks_name');
@@ -120,7 +120,8 @@ class DelegationsPageController extends Controller
                 foreach ($delegations[$key]->cars as $keyCar => $car) {
                     $delegations[$key]->cars[$keyCar]->driver = Driver::where('driver_uid', $car->driver_uid)->first();
                 }
-                $delegations[$key]->hotelData = $delegations[$key]->standard ? Hotel::where('hotel_uid', $delegations[$key]->standard?->hotel_uid)->first('hotel_names') : null;
+                $delegations[$key]->hotelData = $delegations[$key]->hotelPlan ? Hotel::where('hotel_uid', $delegations[$key]->hotelPlan?->hotel_uid)->first('hotel_names') : null;
+                // $delegations[$key]->hotelData = $delegations[$key]->standard ? Hotel::where('hotel_uid', $delegations[$key]->standard?->hotel_uid)->first('hotel_names') : null;
                 // $delegations[$key]->vips->rank = array_filter($ranks->toArray(),fn ($rank) => $rank['ranks_uid'] == $delegations[$key]->vips->vips_rank);
                 // $delegations[$key]->vips->rank = Rank::where('vips_uid', $delegations[$key]->vips['vips_rank'])->first('ranks_name');
                 // $delegations[$key]->member_count = $delegations[$key]->member_count ? $delegations[$key]->member_count + 1 : 1;
@@ -136,13 +137,14 @@ class DelegationsPageController extends Controller
                 ->orderBy('vips.vips_rank', 'asc')
                 ->get();
             foreach ($delegations as $key => $delegation) {
-                $delegations[$key]->standard = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4f']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
-                $delegations[$key]->superior = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4h']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
-                $delegations[$key]->dOccupancy = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4i']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                $delegations[$key]->hotelPlan = HotelPlan::where([['delegation_uid', $delegation->uid]])->first(['hotel_uid', 'hotel_roomtype_standard','hotel_roomtype_suite','hotel_roomtype_superior','hotel_roomtype_doubleOccupancy', 'hotel_plan_uid']);
+                // $delegations[$key]->standard = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4f']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                // $delegations[$key]->superior = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4h']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                // $delegations[$key]->dOccupancy = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4i']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                // $delegations[$key]->suite = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4g']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
                 $delegations[$key]->officers = DB::table('officers')->leftJoin('ranks', 'officers.officer_rank', '=', 'ranks.ranks_uid')->where('officer_delegation', $delegation->uid)->select('officers.*', 'ranks.ranks_name')->get();
-                $delegations[$key]->suite = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4g']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
-                $delegations[$key]->carA = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', '61346491-983a-40ed-8477-2d9ed84e6767']])->first(['car_quantity', 'car_plan_uid']);
-                $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
+                $delegations[$key]->car = CarPlan::where([['delegation_uid', $delegation->uid]])->first(['car_category_a', 'car_category_b', 'car_plan_uid']);
+                // $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
                 $delegations[$key]->member_count = Delegate::where([['delegation', $delegation->uid], ['delegation_type', '!=', 'Representative'], ['status', 1]])->count();
                 $delegations[$key]->members = Delegate::where([['delegation', $delegation->uid], ['delegation_type', '!=', 'Self'], ['status', 1]])->get();
                 $delegations[$key]->rankName = Rank::where('ranks_uid', $delegation->rank)->first('ranks_name');
@@ -155,7 +157,8 @@ class DelegationsPageController extends Controller
                 foreach ($delegations[$key]->cars as $keyCar => $car) {
                     $delegations[$key]->cars[$keyCar]->driver = Driver::where('driver_uid', $car->driver_uid)->first();
                 }
-                $delegations[$key]->hotelData = $delegations[$key]->standard ? Hotel::where('hotel_uid', $delegations[$key]->standard?->hotel_uid)->first('hotel_names') : null;
+                $delegations[$key]->hotelData = $delegations[$key]->hotelPlan ? Hotel::where('hotel_uid', $delegations[$key]->hotelPlan?->hotel_uid)->first('hotel_names') : null;
+                // $delegations[$key]->hotelData = $delegations[$key]->standard ? Hotel::where('hotel_uid', $delegations[$key]->standard?->hotel_uid)->first('hotel_names') : null;
                 // $delegations[$key]->vips->rank = array_filter($ranks->toArray(),fn ($rank) => $rank['ranks_uid'] == $delegations[$key]->vips->vips_rank);
                 // $delegations[$key]->vips->rank = Rank::where('vips_uid', $delegations[$key]->vips['vips_rank'])->first('ranks_name');
                 // $delegations[$key]->member_count = $delegations[$key]->member_count ? $delegations[$key]->member_count + 1 : 1;
@@ -171,13 +174,14 @@ class DelegationsPageController extends Controller
                 ->orderBy('vips.vips_rank', 'asc')
                 ->get();
             foreach ($delegations as $key => $delegation) {
-                $delegations[$key]->standard = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4f']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
-                $delegations[$key]->superior = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4h']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
-                $delegations[$key]->dOccupancy = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4i']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                $delegations[$key]->hotelPlan = HotelPlan::where([['delegation_uid', $delegation->uid]])->first(['hotel_uid', 'hotel_roomtype_standard','hotel_roomtype_suite','hotel_roomtype_superior','hotel_roomtype_doubleOccupancy', 'hotel_plan_uid']);
+                // $delegations[$key]->standard = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4f']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                // $delegations[$key]->superior = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4h']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                // $delegations[$key]->dOccupancy = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4i']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
+                // $delegations[$key]->suite = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4g']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
                 $delegations[$key]->officers = DB::table('officers')->leftJoin('ranks', 'officers.officer_rank', '=', 'ranks.ranks_uid')->where('officer_delegation', $delegation->uid)->select('officers.*', 'ranks.ranks_name')->get();
-                $delegations[$key]->suite = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4g']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
-                $delegations[$key]->carA = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', '61346491-983a-40ed-8477-2d9ed84e6767']])->first(['car_quantity', 'car_plan_uid']);
-                $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
+                $delegations[$key]->car = CarPlan::where([['delegation_uid', $delegation->uid]])->first(['car_category_a', 'car_category_b', 'car_plan_uid']);
+                // $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
                 $delegations[$key]->member_count = Delegate::where([['delegation', $delegation->uid], ['delegation_type', '!=', 'Representative'], ['status', 1]])->count();
                 $delegations[$key]->members = Delegate::where([['delegation', $delegation->uid], ['delegation_type', '!=', 'Self'], ['status', 1]])->get();
                 $delegations[$key]->rankName = Rank::where('ranks_uid', $delegation->rank)->first('ranks_name');
@@ -190,7 +194,8 @@ class DelegationsPageController extends Controller
                 foreach ($delegations[$key]->cars as $keyCar => $car) {
                     $delegations[$key]->cars[$keyCar]->driver = Driver::where('driver_uid', $car->driver_uid)->first();
                 }
-                $delegations[$key]->hotelData = $delegations[$key]->standard ? Hotel::where('hotel_uid', $delegations[$key]->standard?->hotel_uid)->first('hotel_names') : null;
+                $delegations[$key]->hotelData = $delegations[$key]->hotelPlan ? Hotel::where('hotel_uid', $delegations[$key]->hotelPlan?->hotel_uid)->first('hotel_names') : null;
+                // $delegations[$key]->hotelData = $delegations[$key]->standard ? Hotel::where('hotel_uid', $delegations[$key]->standard?->hotel_uid)->first('hotel_names') : null;
                 // $delegations[$key]->vips->rank = array_filter($ranks->toArray(),fn ($rank) => $rank['ranks_uid'] == $delegations[$key]->vips->vips_rank);
                 // $delegations[$key]->vips->rank = Rank::where('vips_uid', $delegations[$key]->vips['vips_rank'])->first('ranks_name');
                 // $delegations[$key]->member_count = $delegations[$key]->member_count ? $delegations[$key]->member_count + 1 : 1;
@@ -227,14 +232,14 @@ class DelegationsPageController extends Controller
                 $officers = Officer::where('officer_user', session()->get('user')->uid)->first('officer_delegation');
                 $delegationUid = $officers ? $officers->officer_delegation : 0;
                 break;
-            // case "receiving":
-            //     $officers = Receiving::where('receiving_uid', session()->get('user')->uid)->first('receiving_delegation');
-            //     $delegationUid = $officers ? $officers->receiving_delegation : 0;
-            //     break;
-            // case "interpreter":
-            //     $officers = Interpreter::where('interpreter_uid', session()->get('user')->uid)->first('interpreter_delegation');
-            //     $delegationUid = $officers ? $officers->interpreter_delegation : 0;
-            //     break;
+                // case "receiving":
+                //     $officers = Receiving::where('receiving_uid', session()->get('user')->uid)->first('receiving_delegation');
+                //     $delegationUid = $officers ? $officers->receiving_delegation : 0;
+                //     break;
+                // case "interpreter":
+                //     $officers = Interpreter::where('interpreter_uid', session()->get('user')->uid)->first('interpreter_delegation');
+                //     $delegationUid = $officers ? $officers->interpreter_delegation : 0;
+                //     break;
             default:
                 return back()->with('error', 'Something Went Wrong');
         }

@@ -5,12 +5,12 @@
 @if(session()->get('user')->roles[0]->name === "admin")
 <div class="row">
     <div class="d-flex justify-content-center">
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#CarPlanModal">Add Car Plan</button>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#CarPlanModal">Add/Update Car Plan</button>
         &nbsp;
         &nbsp;
         &nbsp;
         &nbsp;
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#HotelPlanModal">Add Hotel Plan</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#HotelPlanModal">Add/Update  Hotel Plan</button>
         <div class="modal fade" id="CarPlanModal" tabindex="-1" aria-labelledby="CarPlanModal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -46,8 +46,8 @@
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
-                            <th data-field="car_category" data-sortable="true">Category</th>
-                            <th data-field="car_quantity" data-sortable="true">Quantity</th>
+                            <th data-field="car_category_a" data-sortable="true">Category A</th>
+                            <th data-field="car_category_b" data-sortable="true">Category B</th>
                             <th data-field="car_plan_uid" data-formatter="deleteCarPlan" data-sortable="true">Actions</th>
                         </tr>
                     </thead>
@@ -66,8 +66,10 @@
                         <tr>
                             <th data-field="id">Id</th>
                             <th data-field="hotel_names" data-sortable="true">Hotel</th>
-                            <th data-field="room_type" data-sortable="true">Room Type</th>
-                            <th data-field="hotel_quantity" data-sortable="true">Quantity</th>
+                            <th data-field="hotel_roomtype_standard" data-sortable="true">Standard Room</th>
+                            <th data-field="hotel_roomtype_suite" data-sortable="true">Suite Room</th>
+                            <th data-field="hotel_roomtype_superior" data-sortable="true">Superior Room</th>
+                            <th data-field="hotel_roomtype_doubleOccupancy" data-sortable="true">Double Occupancy Room</th>
                             <th data-field="hotel_plan_uid" data-formatter="deleteHotelPlan" data-sortable="true">Actions</th>
                         </tr>
                     </thead>

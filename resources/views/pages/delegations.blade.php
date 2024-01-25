@@ -565,13 +565,13 @@
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                                 <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                                 <th data-filter-control="input" data-field="member_count" data-sortable="true" data-formatter="operateText">Number Of Person</th>
-                                <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true" data-formatter="operateText">Car A</th>
-                                <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true" data-formatter="operateText">Car B</th>
+                                <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
+                                <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
-                                <th data-filter-control="input" data-field="standard.hotel_quantity" data-formatter="operateText">Standard</th>
-                                <th data-filter-control="input" data-field="suite.hotel_quantity" data-formatter="operateText">Suite</th>
-                                <th data-filter-control="input" data-field="superior.hotel_quantity" data-formatter="operateText">Superior</th>
-                                <th data-filter-control="input" data-field="dOccupancy.hotel_quantity" data-formatter="operateText">Double Occupancy</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText">Standard</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior" data-formatter="operateText">Superior</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
                                 <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th>
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
@@ -618,13 +618,13 @@
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                                 <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                                 <th data-filter-control="input" data-field="member_count" data-sortable="true" data-formatter="operateText">Number Of Person</th>
-                                <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true" data-formatter="operateText">Car A</th>
-                                <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true" data-formatter="operateText">Car B</th>
+                                <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
+                                <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
-                                <th data-filter-control="input" data-field="standard.hotel_quantity" data-formatter="operateText">Standard</th>
-                                <th data-filter-control="input" data-field="suite.hotel_quantity" data-formatter="operateText">Suite</th>
-                                <th data-filter-control="input" data-field="superior.hotel_quantity" data-formatter="operateText">Superior</th>
-                                <th data-filter-control="input" data-field="dOccupancy.hotel_quantity" data-formatter="operateText">Double Occupancy</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText">Standard</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior" data-formatter="operateText">Superior</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
                                 <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th>
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
@@ -671,13 +671,13 @@
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                                 <th data-filter-control="input" data-field="self" data-formatter="operateSelf" >Status</th>
                                 <th data-filter-control="input" data-field="member_count" data-sortable="true" data-formatter="operateText">Number Of Person</th>
-                                <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true" data-formatter="operateText">Car A</th>
-                                <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true" data-formatter="operateText">Car B</th>
+                                <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
+                                <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
-                                <th data-filter-control="input" data-field="standard.hotel_quantity" data-formatter="operateText">Standard</th>
-                                <th data-filter-control="input" data-field="suite.hotel_quantity" data-formatter="operateText">Suite</th>
-                                <th data-filter-control="input" data-field="superior.hotel_quantity" data-formatter="operateText">Superior</th>
-                                <th data-filter-control="input" data-field="dOccupancy.hotel_quantity" data-formatter="operateText">Double Occupancy</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText">Standard</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior" data-formatter="operateText">Superior</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
                                 <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th>
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
@@ -724,13 +724,13 @@
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                                 <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                                 <th data-filter-control="input" data-field="member_count" data-sortable="true" data-formatter="operateText">Number Of Person</th>
-                                <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true" data-formatter="operateText">Car A</th>
-                                <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true" data-formatter="operateText">Car B</th>
+                                <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
+                                <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
-                                <th data-filter-control="input" data-field="standard.hotel_quantity" data-formatter="operateText">Standard</th>
-                                <th data-filter-control="input" data-field="suite.hotel_quantity" data-formatter="operateText">Suite</th>
-                                <th data-filter-control="input" data-field="superior.hotel_quantity" data-formatter="operateText">Superior</th>
-                                <th data-filter-control="input" data-field="dOccupancy.hotel_quantity" data-formatter="operateText">Double Occupancy</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText">Standard</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior" data-formatter="operateText">Superior</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
                                 <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th>
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
@@ -777,13 +777,13 @@
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                                 <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                                 <th data-filter-control="input" data-field="member_count" data-sortable="true" data-formatter="operateText">Number Of Person</th>
-                                <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true" data-formatter="operateText">Car A</th>
-                                <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true" data-formatter="operateText">Car B</th>
+                                <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
+                                <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
-                                <th data-filter-control="input" data-field="standard.hotel_quantity" data-formatter="operateText">Standard</th>
-                                <th data-filter-control="input" data-field="suite.hotel_quantity" data-formatter="operateText">Suite</th>
-                                <th data-filter-control="input" data-field="superior.hotel_quantity" data-formatter="operateText">Superior</th>
-                                <th data-filter-control="input" data-field="dOccupancy.hotel_quantity" data-formatter="operateText">Double Occupancy</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText">Standard</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior" data-formatter="operateText">Superior</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
                                 <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th>
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>

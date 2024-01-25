@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id();
             $table->uuid('delegation_uid');
             $table->uuid('hotel_plan_uid');
-            $table->uuid('hotel_roomtpye_uid');
+            $table->integer('hotel_roomtype_standard');
+            $table->integer('hotel_roomtype_suite');
+            $table->integer('hotel_roomtype_superior');
+            $table->integer('hotel_roomtype_doubleOccupancy');
             $table->uuid('hotel_uid');
             $table->integer('hotel_quantity');
             $table->timestamps();

@@ -14,19 +14,14 @@ class PlansController extends Controller
 
     public function getCarPlan($id)
     {
-        $carPlan = DB::table('car_plans')
-            ->leftJoin('car_category', 'car_category.car_category_uid', '=', 'car_plans.car_category_uid')
-            ->select('car_plans.*', 'car_category.car_category')
-            ->where('delegation_uid', $id)
-            ->get();
+        $carPlan = CarPlan::where('delegation_uid', $id)->get();
         return $carPlan;
     }
     public function getHotelPlan($id)
     {
         $hotelPlan = DB::table('hotel_plans')
             ->leftJoin('hotels', 'hotel_plans.hotel_uid', '=', 'hotels.hotel_uid')
-            ->leftJoin('roomtypes', 'hotel_plans.hotel_roomtpye_uid', '=', 'roomtypes.room_type_uid')
-            ->select('hotel_plans.*', 'hotels.hotel_names', 'roomtypes.room_type')
+            ->select('hotel_plans.*', 'hotels.hotel_names')
             ->where('delegation_uid', $id)
             ->get();
         return $hotelPlan;

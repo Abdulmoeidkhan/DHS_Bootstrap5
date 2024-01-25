@@ -4,13 +4,25 @@
         <fieldset>
             <legend>Add Hotel Plan Form</legend>
             <div class="mb-3">
-                <label for="hotel_quantity" class="col-form-label">Room Quantity:</label>
-                <input type="number" class="form-control" wire:model="hotelQuantity" required>
+                <label for="hotel_roomtype_standard" class="col-form-label">Standard Quantity:</label>
+                <input type="number" class="form-control" wire:model="standardQuantity" required>
+            </div>
+            <div class="mb-3">
+                <label for="hotel_roomtype_suite" class="col-form-label">Suite Quantity:</label>
+                <input type="number" class="form-control" wire:model="suiteQuantity" required>
+            </div>
+            <div class="mb-3">
+                <label for="hotel_roomtype_superior" class="col-form-label">Superior Quantity:</label>
+                <input type="number" class="form-control" wire:model="superiorQuantity" required>
+            </div>
+            <div class="mb-3">
+                <label for="hotel_roomtype_doubleOccupancy" class="col-form-label">Double Occupancy Quantity:</label>
+                <input type="number" class="form-control" wire:model="dOccupancyQuantity" required>
             </div>
             <div class="mb-3">
                 <label for="hotelUid" class="col-form-label">Hotel:</label>
                 <select wire:model="hotelUid" class="form-select" required>
-                    <option value="" selected disabled hidden >Select Hotel</option>
+                    <option value="" selected disabled hidden>Select Hotel</option>
                     @foreach (\App\Models\Hotel::all() as $Category)
                     @if($hotelUid == $Category->hotel_uid)
                     <option value="{{$Category->hotel_uid}}" wire:key="{{ $Category->hotel_uid }}" selected>{{$Category->hotel_names}}</option>
@@ -20,19 +32,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="mb-3">
-                <label for="hotelRoomtypeUid" class="col-form-label">Room Type:</label>
-                <select wire:model="hotelRoomtypeUid" class="form-select" required>
-                    <option value="" selected disabled hidden>Select Room Type</option>
-                    @foreach (\App\Models\Roomtype::all() as $Category)
-                    @if($hotelRoomtypeUid == $Category->room_type_uid)
-                    <option value="{{$Category->room_type_uid}}" wire:key="{{ $Category->room_type_uid }}" selected>{{$Category->room_type}}</option>
-                    @else
-                    <option value="{{$Category->room_type_uid}}" wire:key="{{ $Category->room_type_uid }}">{{$Category->room_type}}</option>
-                    @endif
-                    @endforeach
-                </select>
-            </div>
+
             <input type="hidden" wire:model="delegationUid">
         </fieldset>
     </div>

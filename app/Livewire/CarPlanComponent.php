@@ -10,8 +10,9 @@ use Livewire\Attributes\On;
 class CarPlanComponent extends Component
 {
     public $delegationUid;
-    public $carQuantity = 0;
-    public $carCategory = '';
+    public $carAQuantity = 0;
+    public $carBQuantity = 0;
+    // public $carCategory = '';
     public $carPlanuid = 0;
     public $savedcarplan = 0;
     public $isForSaved = 1;
@@ -20,8 +21,8 @@ class CarPlanComponent extends Component
     {
         $carPlan = new CarPlan();
         $carPlan->car_plan_uid = (string) Str::uuid();
-        $carPlan->car_category_uid = $this->carCategory;
-        $carPlan->car_quantity = $this->carQuantity;
+        $carPlan->car_category_a = $this->carAQuantity;
+        $carPlan->car_category_b = $this->carBQuantity;
         $carPlan->delegation_uid = $this->delegationUid;
         $this->savedcarplan = $carPlan->save();
         // $this->reset();
@@ -31,7 +32,7 @@ class CarPlanComponent extends Component
 
     public function update()
     {
-        $carsPlan = CarPlan::where('car_plan_uid', $this->carPlanuid)->update(['car_category_uid' => $this->carCategory, 'car_quantity' => $this->carQuantity]);
+        $carsPlan = CarPlan::where('car_plan_uid', $this->carPlanuid)->update(['car_category_a' => $this->carAQuantity, 'car_category_b' => $this->carBQuantity]);
         if ($carsPlan) {
             // $this->reset();
             $this->js("alert('Plan Updated!')"); 
@@ -42,10 +43,12 @@ class CarPlanComponent extends Component
     #[On('carplansaved')]
     public function render()
     {
-        $carsPlan = !$this->isForSaved ? CarPlan::where('delegation_uid', $this->delegationUid)->first():0;
+        $carsPlan=CarPlan::where('delegation_uid', $this->delegationUid)->first();
+        // $carsPlan = !$this->isForSaved ? CarPlan::where('delegation_uid', $this->delegationUid)->first():0;
         if ($carsPlan) {
-            $this->carQuantity = $carsPlan->car_quantity;
-            $this->carCategory = $carsPlan->car_category_uid;
+            $this->isForSaved=0;
+            $this->carAQuantity = $carsPlan->car_category_a;
+            $this->carBQuantity = $carsPlan->car_category_b;
             $this->carPlanuid = $carsPlan->car_plan_uid;
         }
         return view('livewire.car-plan-component');

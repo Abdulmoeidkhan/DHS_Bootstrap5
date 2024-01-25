@@ -4,21 +4,12 @@
         <fieldset>
             <legend>Add Car Plan Form</legend>
             <div class="mb-3">
-                <label for="car_quantity" class="col-form-label">Car Quantity:</label>
-                <input type="number" class="form-control" wire:model="carQuantity">
+                <label for="car_a_quantity" class="col-form-label">Car A Quantity:</label>
+                <input type="number" class="form-control" wire:model="carAQuantity">
             </div>
             <div class="mb-3">
-                <label for="car_category_uid" class="col-form-label">Car Category:</label>
-                <select wire:model="carCategory" class="form-select">
-                    <option value="" selected disabled hidden>Select Car Category </option>
-                    @foreach (\App\Models\CarCategory::all() as $Category)
-                    @if($carCategory == $Category->car_category_uid)
-                    <option value="{{$Category->car_category_uid}}" wire:key="{{ $Category->car_category_uid }}" selected>{{$Category->car_category}}</option>
-                    @else
-                    <option value="{{$Category->car_category_uid}}" wire:key="{{ $Category->car_category_uid }}">{{$Category->car_category}}</option>
-                    @endif
-                    @endforeach
-                </select>
+                <label for="car_b_quantity" class="col-form-label">Car B Quantity:</label>
+                <input type="number" class="form-control" wire:model="carBQuantity">
             </div>
             <input type="hidden" wire:model="delegationUid">
         </fieldset>

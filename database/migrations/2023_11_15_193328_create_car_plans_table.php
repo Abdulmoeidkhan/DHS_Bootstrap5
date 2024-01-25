@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('car_plans', function (Blueprint $table) {
             $table->id();
-            $table->uuid('delegation_uid');
+            $table->uuid('delegation_uid')->unique();;
             $table->uuid('car_plan_uid');
-            $table->uuid('car_category_uid');
-            $table->integer('car_quantity');
+            $table->integer('car_category_a');
+            $table->integer('car_category_b');
+            // $table->uuid('car_category_uid');
+            // $table->integer('car_a_quantity');
+            // $table->integer('car_b_quantity');
             $table->timestamps();
         });
     }

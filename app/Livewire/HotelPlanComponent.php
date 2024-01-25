@@ -10,9 +10,11 @@ use Livewire\Attributes\On;
 class HotelPlanComponent extends Component
 {
     public $delegationUid;
-    public $hotelQuantity = 0;
     public $hotelUid = '';
-    public $hotelRoomtypeUid = '';
+    public $standardQuantity = '';
+    public $suiteQuantity = '';
+    public $superiorQuantity = '';
+    public $dOccupancyQuantity = '';
     public $hotelPlanuid = 0;
     public $savedhotelplan = 0;
     public $isForSaved = 1;
@@ -21,11 +23,15 @@ class HotelPlanComponent extends Component
     {
         $hotelPlan = new HotelPlan();
         $hotelPlan->hotel_plan_uid = (string) Str::uuid();
-        $hotelPlan->hotel_roomtpye_uid = $this->hotelRoomtypeUid;
         $hotelPlan->hotel_uid = $this->hotelUid;
-        $hotelPlan->hotel_quantity = $this->hotelQuantity;
         $hotelPlan->delegation_uid = $this->delegationUid;
+        $hotelPlan->hotel_roomtype_standard = $this->standardQuantity;
+        $hotelPlan->hotel_roomtype_suite = $this->suiteQuantity;
+        $hotelPlan->hotel_roomtype_superior = $this->superiorQuantity;
+        $hotelPlan->hotel_roomtype_doubleOccupancy = $this->dOccupancyQuantity;
         $this->savedhotelplan = $hotelPlan->save();
+        // $hotelPlan->hotel_roomtpye_uid = $this->hotelRoomtypeUid;
+        // $hotelPlan->hotel_quantity = $this->hotelQuantity;
         // $this->reset();
         $this->dispatch('hotelplansaved')->self();
         $this->js("alert('Plan saved!')");
@@ -33,7 +39,7 @@ class HotelPlanComponent extends Component
 
     public function update()
     {
-        $hotelsPlan = HotelPlan::where('hotel_plan_uid', $this->hotelPlanuid)->update(['hotel_roomtpye_uid' => $this->hotel_roomtpye_uid, 'hotel_uid' => $this->hotelCategory, 'hotel_quantity' => $this->hotelQuantity]);
+        $hotelsPlan = HotelPlan::where('hotel_plan_uid', $this->hotelPlanuid)->update(['hotel_uid' => $this->hotelUid, 'hotel_roomtype_standard' => $this->standardQuantity,'hotel_roomtype_suite' => $this->suiteQuantity,'hotel_roomtype_superior' => $this->superiorQuantity,'hotel_roomtype_doubleOccupancy' => $this->dOccupancyQuantity]);
         if ($hotelsPlan) {
             $this->js("alert('Plan Updated!')");
             $this->dispatch('hotelplansaved')->self();
@@ -43,11 +49,15 @@ class HotelPlanComponent extends Component
     #[On('hotelplansaved')]
     public function render()
     {
-        $hotelPlan = !$this->isForSaved ? HotelPlan::where('delegation_uid', $this->delegationUid)->first() : 0;
+        $hotelPlan = HotelPlan::where('delegation_uid', $this->delegationUid)->first();
+        // $hotelPlan = !$this->isForSaved ? HotelPlan::where('delegation_uid', $this->delegationUid)->first() : 0;
         if ($hotelPlan) {
-            $this->hotelQuantity = $hotelPlan->hotel_quantity;
+            $this->isForSaved = 0;
+            $this->standardQuantity = $hotelPlan->hotel_roomtype_standard;
+            $this->suiteQuantity = $hotelPlan->hotel_roomtype_suite;
+            $this->superiorQuantity = $hotelPlan->hotel_roomtype_superior;
+            $this->dOccupancyQuantity = $hotelPlan->hotel_roomtype_doubleOccupancy;
             $this->hotelUid = $hotelPlan->hotel_uid;
-            $this->hotelRoomtypeUid = $hotelPlan->hotel_roomtpye_uid;
             $this->hotelPlanuid = $hotelPlan->hotel_plan_uid;
         }
         return view('livewire.hotel-plan-component');
