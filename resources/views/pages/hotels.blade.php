@@ -161,7 +161,7 @@
                             <th data-filter-control="input" data-field="room_checkin" data-formatter="true">Room Check-In Date</th>
                             <th data-filter-control="input" data-formatter="operateRoomCheckOutStatus">Room Check-Out</th>
                             <th data-filter-control="input" data-field="room_checkout" data-formatter="true">Room Check-Out Date</th>
-                            <th data-field="room_uid" data-formatter="operateRoom">Add/Edit</th>
+                            <th data-field="delegates_uid" data-formatter="operateRoom">Add/Edit</th>
                             <th data-field="room_uid" data-formatter="deleteRoom">Delete</th>
                         </tr>
                     </thead>
@@ -207,17 +207,17 @@
         }
     }
 
-    // function operateRoom(value, row, index) {
-    //     if (value) {
-    //         return [
-    //             '<div class="left">',
-    //             '<a class="btn btn-outline-success" href="addRoomPage/' + value + '">',
-    //             '<span><i class="ti ti-edit" style="font-size:22px"></i></span>',
-    //             '</a>',
-    //             '</div>',
-    //         ].join('');
-    //     }
-    // }
+    function operateRoom(value, row, index) {
+        if (value) {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-outline-success" href="addRoomPage/' + value + '">',
+                '<span><i class="ti ti-edit" style="font-size:22px"></i></span>',
+                '</a>',
+                '</div>',
+            ].join('');
+        }
+    }
 
     function deleteRoom(value, row, index) {
         if (value) {
@@ -269,36 +269,36 @@
         }
     }
 
-    function operateRoom(value, row, index) {
-        if (value == null) {
-            return [
-                '<div class="left">',
-                '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-delegation="' + row.delegates_uid + '" data-bs-target="#addRoom">',
-                '<span><i class="ti ti-door" style="font-size:22px"></i></span>',
-                '</button>',
-                '</div>',
-            ].join('');
-        } else {
-            let {
-                room_no,
-                hotel_uid,
-                room_type,
-                room_type_uid,
-                room_uid,
-                room_checkin,
-                room_checkout
-            } = row;
+    // function operateRoom(value, row, index) {
+    //     if (value == null) {
+    //         return [
+    //             '<div class="left">',
+    //             '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-delegation="' + row.delegates_uid + '" data-bs-target="#addRoom">',
+    //             '<span><i class="ti ti-door" style="font-size:22px"></i></span>',
+    //             '</button>',
+    //             '</div>',
+    //         ].join('');
+    //     } else {
+    //         let {
+    //             room_no,
+    //             hotel_uid,
+    //             room_type,
+    //             room_type_uid,
+    //             room_uid,
+    //             room_checkin,
+    //             room_checkout
+    //         } = row;
 
-            return [
-                '<div class="left">',
-                '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-roomcheckout="' + room_checkout + '"  data-bs-roomcheckin="' + room_checkin + '" data-bs-roomuid="' + room_uid + '" data-bs-room="' + room_no + '" data-bs-hoteluid="' + hotel_uid + '"  data-bs-roomtypeuid="' + room_type_uid + '" data-bs-target="#updateRoom">',
-                '<span><i class="ti ti-key" style="font-size:22px"></i></span>',
-                '</button>',
-                '</div>',
-            ].join('');
-        }
-        // return value !== null ? "Edit " + value + "" : "Add " + row.delegates_uid + "";
-    }
+    //         return [
+    //             '<div class="left">',
+    //             '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-roomcheckout="' + room_checkout + '"  data-bs-roomcheckin="' + room_checkin + '" data-bs-roomuid="' + room_uid + '" data-bs-room="' + room_no + '" data-bs-hoteluid="' + hotel_uid + '"  data-bs-roomtypeuid="' + room_type_uid + '" data-bs-target="#updateRoom">',
+    //             '<span><i class="ti ti-key" style="font-size:22px"></i></span>',
+    //             '</button>',
+    //             '</div>',
+    //         ].join('');
+    //     }
+    //     // return value !== null ? "Edit " + value + "" : "Add " + row.delegates_uid + "";
+    // }
 
     const addroomModal = document.getElementById('addRoom')
     addroomModal.addEventListener('show.bs.modal', event => {
