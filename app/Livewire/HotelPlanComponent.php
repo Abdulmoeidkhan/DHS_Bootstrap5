@@ -11,10 +11,10 @@ class HotelPlanComponent extends Component
 {
     public $delegationUid;
     public $hotelUid = '';
-    public $standardQuantity = '';
-    public $suiteQuantity = '';
-    public $superiorQuantity = '';
-    public $dOccupancyQuantity = '';
+    public $standardQuantity = 0;
+    public $suiteQuantity = 0;
+    public $superiorQuantity = 0;
+    public $dOccupancyQuantity = 0;
     public $hotelPlanuid = 0;
     public $savedhotelplan = 0;
     public $isForSaved = 1;

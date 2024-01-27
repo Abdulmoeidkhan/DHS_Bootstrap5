@@ -81,6 +81,7 @@ class AddDelegationPageController extends Controller
             return view('pages.addDelegation', ['events' => $events]);
         }
     }
+
     public function addDelegation(Request $req)
     {
 
@@ -147,6 +148,55 @@ class AddDelegationPageController extends Controller
         }
     }
 
+    public function updateDelegation(Request $req)
+    {
+        $arrayToBeUpdate = [];
+        $arrayToBeUpdateRep = [];
+        $arrayToBeUpdateSelf = [];
+        foreach ($req->all() as $key => $value) {
+            if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
+                if (substr($key, 0, 4) == 'rep_') {
+                    $arrayToBeUpdateRep[substr($key, 4)] = $value;
+                } elseif (substr($key, 0, 5) == 'self_') {
+                    $arrayToBeUpdateSelf[substr($key, 5)] = $value;
+                } else {
+                    $arrayToBeUpdate['delegationuid'] = $req->delegation_uid;
+                    if ($key == 'self' && $value == 1) {
+                        $arrayToBeUpdate['delegationhead'] = $req->self_delegate_uid;
+                        $arrayToBeUpdateRep['self'] = 0;
+                        $arrayToBeUpdateSelf['self'] = 1;
+                    }
+                    if ($key == 'self' && $value == 0) {
+                        $arrayToBeUpdate['delegationhead'] = $req->rep_delegate_uid;
+                        $arrayToBeUpdateRep['self'] = 1;
+                        $arrayToBeUpdateSelf['self'] = 0;
+                    }
+                }
+            }
+        }
+        $delegationUid=$arrayToBeUpdate['delegationuid'];
+        $delegationRepUid = $arrayToBeUpdateRep['delegate_uid'];
+        $delegationSelfUid = $arrayToBeUpdateSelf['delegate_uid'];
+        unset($arrayToBeUpdateRep['delegate_uid']);
+        unset($arrayToBeUpdateSelf['delegate_uid']);
+        unset($arrayToBeUpdate['delegationuid']);
+        try {
+            $delegationUpdate = Delegation::where('uid', $delegationUid)->update($arrayToBeUpdate);
+            $representativeUpdate = Delegate::where('delegates_uid', $delegationRepUid)->update($arrayToBeUpdateRep);
+            $delegateUpdate = Delegate::where('delegates_uid', $delegationSelfUid)->update($arrayToBeUpdateSelf);
+            return $delegateUpdate ? back()->with('message', 'Delegation has been updated Successfully') : back()->with('message', 'Something Went Wrong');
+        } catch (\Illuminate\Database\QueryException $exception) {
+            if ($exception->errorInfo[2]) {
+                return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+            } else {
+                return  back()->with('error', $exception->errorInfo[2]);
+            }
+        }
+
+        // return $req->all();
+        // return [$arrayToBeUpdate, $arrayToBeUpdateRep, $arrayToBeUpdateSelf];
+    }
+
     public function updateDelegationRequest(Request $req, $retain = null)
     {
         $arrayToBeUpdate = [];
@@ -170,7 +220,6 @@ class AddDelegationPageController extends Controller
                 }
             }
         }
-        // return [$arrayToBeUpdate, $arrayToBeUpdateRep, $arrayToBeUpdateSelf];
         $delegationRepUid = $arrayToBeUpdateRep['delegation_uid'];
         $delegationSelfUid = $arrayToBeUpdateSelf['delegation_uid'];
         unset($arrayToBeUpdateRep['delegation_uid']);
@@ -193,6 +242,8 @@ class AddDelegationPageController extends Controller
                 return  back()->with('error', $exception->errorInfo[2]);
             }
         }
+
+        // return [$arrayToBeUpdate, $arrayToBeUpdateRep, $arrayToBeUpdateSelf];
     }
 
     // public function updateDelegation(Request $req)

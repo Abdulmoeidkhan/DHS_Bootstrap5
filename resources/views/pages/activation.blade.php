@@ -21,8 +21,8 @@
                                     <input type="password" class="form-control" id="password" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;">
                                 </div>
                                 <div class="mb-4">
-                                    <label for="activationCode" class="form-label">Activation Code</label>
-                                    <input type="text" class="form-control" id="activationCode" name="activationCode" placeholder="Enter your Activation Code" />
+                                    <label for="activationCode" class="form-label">Email OTP</label>
+                                    <input type="text" class="form-control" id="activationCode" name="activationCode" placeholder="Enter your Email OTP" required/>
                                 </div>
                                 @csrf
                                 <input type="submit" name="Activation" value="Activate" value="Sign Up" class="btn btn-badar w-100 py-8 fs-4 mb-4 rounded-2" />

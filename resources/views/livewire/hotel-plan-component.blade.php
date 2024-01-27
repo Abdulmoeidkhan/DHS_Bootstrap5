@@ -4,6 +4,19 @@
         <fieldset>
             <legend>Add Hotel Plan Form</legend>
             <div class="mb-3">
+                <label for="hotelUid" class="col-form-label">Hotel:</label>
+                <select wire:model="hotelUid" class="form-select" required>
+                    <option value="" selected disabled hidden>Select Hotel</option>
+                    @foreach (\App\Models\Hotel::all() as $Category)
+                    @if($hotelUid == $Category->hotel_uid)
+                    <option value="{{$Category->hotel_uid}}" wire:key="{{ $Category->hotel_uid }}" selected>{{$Category->hotel_names}}</option>
+                    @else
+                    <option value="{{$Category->hotel_uid}}" wire:key="{{ $Category->hotel_uid }}">{{$Category->hotel_names}}</option>
+                    @endif
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
                 <label for="hotel_roomtype_standard" class="col-form-label">Standard Quantity:</label>
                 <input type="number" class="form-control" wire:model="standardQuantity" required>
             </div>
@@ -19,19 +32,7 @@
                 <label for="hotel_roomtype_doubleOccupancy" class="col-form-label">Double Occupancy Quantity:</label>
                 <input type="number" class="form-control" wire:model="dOccupancyQuantity" required>
             </div>
-            <div class="mb-3">
-                <label for="hotelUid" class="col-form-label">Hotel:</label>
-                <select wire:model="hotelUid" class="form-select" required>
-                    <option value="" selected disabled hidden>Select Hotel</option>
-                    @foreach (\App\Models\Hotel::all() as $Category)
-                    @if($hotelUid == $Category->hotel_uid)
-                    <option value="{{$Category->hotel_uid}}" wire:key="{{ $Category->hotel_uid }}" selected>{{$Category->hotel_names}}</option>
-                    @else
-                    <option value="{{$Category->hotel_uid}}" wire:key="{{ $Category->hotel_uid }}">{{$Category->hotel_names}}</option>
-                    @endif
-                    @endforeach
-                </select>
-            </div>
+
 
             <input type="hidden" wire:model="delegationUid">
         </fieldset>

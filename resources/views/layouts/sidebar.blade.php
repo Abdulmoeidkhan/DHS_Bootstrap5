@@ -216,6 +216,7 @@
                     </a>
                 </li>
                 @endif
+                @if(session()->get('user')->roles[0]->name =="admin")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.events')}}" aria-expanded="false">
                         <span>
@@ -224,6 +225,7 @@
                         <span class="hide-menu">Events</span>
                     </a>
                 </li>
+                @endif
                 @if(session()->get('user')->roles[0]->name =="admin")
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>

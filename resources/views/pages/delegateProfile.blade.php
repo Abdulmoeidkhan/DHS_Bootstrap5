@@ -81,21 +81,21 @@
                         </div> -->
                         <input type="hidden" value="{{$rep->delegates_uid}}" name="id" />
                         <div class="mb-3">
-                            <label for="delegation_picture" class="form-label">Picture</label>
-                            <input name="delegation_picture" type="file" class="form-control" id="delegation_picture" accept="image/png, image/jpeg">
-                            <input name="savedpicture" type="hidden" class="form-control" id="savedpicture" value="">
+                            <label for="rep_picture" class="form-label">Picture</label>
+                            <input name="rep_picture" type="file" class="form-control" id="rep_picture" accept="image/png, image/jpeg">
+                            <input name="savedpicture" type="hidden" class="form-control" id="savedpicture-2" value="">
                             <div class="box-2">
-                                <div class="result"></div>
+                                <div class="result-representatives"></div>
                             </div>
-                            <div class="box-2 img-result {{isset($delegationHead->delegation_picture) ? ($delegationHead?->delegation_picture?->img_blob ? '' : 'hide') : ''}}">
-                                <img class="cropped" src="{{isset($delegationHead->delegation_picture)? $delegationHead?->delegation_picture?->img_blob:''}}" alt="" />
+                            <div class="box-2 img-result-representatives {{isset($delegationHead->delegation_picture) ? ($delegationHead?->delegation_picture?->img_blob ? '' : 'hide') : ''}}">
+                                <img class="cropped-representatives" src="{{isset($delegationHead->delegation_picture)? $delegationHead?->delegation_picture?->img_blob:''}}" alt="" />
                             </div>
                             <div class="box">
-                                <div class="options hide">
+                                <div class="options hide-representatives">
                                     <label>Width</label>
-                                    <input type="number" class="img-w" value="300" min="100" max="1200" />
+                                    <input type="number" class="img-w-representatives" value="300" min="100" max="1200" />
                                 </div>
-                                <button class="btn save hide">Save</button>
+                                <button class="btn save-representatives hide-representatives">Save</button>
                             </div>
                             <button class="btn btn-outline-danger" type="submit">Upload</button>
                         </div>
@@ -114,8 +114,8 @@
                             <legend>Delegate Information</legend>
                             @csrf
                             <div class="mb-3">
-                                <label for="rank" class="form-label">Rank</label>
-                                <select name="rank" id="rank" class="form-select">
+                                <label for="self_rank" class="form-label">Rank</label>
+                                <select name="self_rank" id="self_rank" class="form-select">
                                     <option value="" selected disabled hidden> Select Rank </option>
                                     @foreach (\App\Models\Rank::all() as $renderRank)
                                     <option value="{{$renderRank->ranks_uid}}" <?php echo $delegate->rank == $renderRank->ranks_uid ? 'selected' : '' ?>>{{$renderRank->ranks_name}}</option>
@@ -124,25 +124,21 @@
                                 <!-- <input name="rank" type="text" class="form-control" id="rank" placeholder="Rank" value="{{$delegate->rank}}"> -->
                             </div>
                             <div class="mb-3">
-                                <label for="first_Name" class="form-label">First Name</label>
-                                <input name="first_Name" type="text" class="form-control" id="first_Name" placeholder="First Name" value="{{$delegate->first_Name}}" required>
+                                <label for="self_first_Name" class="form-label">First Name</label>
+                                <input name="self_first_Name" type="text" class="form-control" id="self_first_Name" placeholder="First Name" value="{{$delegate->first_Name}}" required>
                             </div>
                             <div class="mb-3">
-                                <label for="last_Name" class="form-label">Last Name</label>
-                                <input name="last_Name" type="text" class="form-control" id="last_Name" placeholder="Last Name" value="{{$delegate->last_Name}}" required>
+                                <label for="self_last_Name" class="form-label">Last Name</label>
+                                <input name="self_last_Name" type="text" class="form-control" id="self_last_Name" placeholder="Last Name" value="{{$delegate->last_Name}}" required>
                             </div>
                             <div class="mb-3">
-                                <label for="designation" class="form-label">Designation</label>
-                                <input name="designation" type="text" class="form-control" id="designation" placeholder="Designation" value="{{$delegate->designation}}" required>
+                                <label for="self_designation" class="form-label">Designation</label>
+                                <input name="self_designation" type="text" class="form-control" id="self_designation" placeholder="Designation" value="{{$delegate->designation}}" required>
                             </div>
                             <!-- <div class="mb-3">
                                 <label for="organistaion" class="form-label">Organistaion</label>
                                 <input name="organistaion" type="text" class="form-control" id="organistaion" placeholder="Organistaion" value="{{$delegate->organistaion}}" required>
                             </div> -->
-                            <div class="mb-3">
-                                <label for="passport" class="form-label">Passport</label>
-                                <input name="passport" type="text" class="form-control" id="passport" placeholder="Passport" value="{{$delegate->passport}}">
-                            </div>
                             <div class="mb-3">
                                 <input class="form-check-input" type="radio" name="self" id="self" value="1" <?php echo $delegate->self ? 'checked' : '' ?>>
                                 <label class="form-check-label" for="self">
@@ -156,14 +152,29 @@
                                 </label>
                             </div>
                             <div class="mb-3">
+                                <label for="rep_rank" class="form-label">Rank</label>
+                                <select name="rep_rank" id="rep_rank" class="form-select">
+                                    <option value="" selected disabled hidden> Select Rank </option>
+                                    @foreach (\App\Models\Rank::all() as $renderRank)
+                                    <option value="{{$renderRank->ranks_uid}}" {{isset($rep)?($rep->rank == $renderRank->ranks_uid ? 'Selected':''):''}}>{{$renderRank->ranks_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <label for="rep_first_Name" class="form-label">Representative First Name</label>
-                                <input name="rep_first_Name" type="text" class="form-control" id="rep_first_Name" placeholder="Representative First Name" value="{{$delegate->rep_first_Name}}">
+                                <input name="rep_first_Name" type="text" class="form-control" id="rep_first_Name" placeholder="Representative First Name" value="{{$rep->first_Name}}">
                             </div>
                             <div class="mb-3">
                                 <label for="rep_last_Name" class="form-label">Representative Last Name</label>
-                                <input name="rep_last_Name" type="text" class="form-control" id="rep_last_Name" placeholder="Representative Last Name" value="{{$delegate->rep_last_Name}}">
+                                <input name="rep_last_Name" type="text" class="form-control" id="rep_last_Name" placeholder="Representative Last Name" value="{{$rep->last_Name}}">
                             </div>
-                            <input type="hidden" name="uid" value="{{$delegate->uid}}" />
+                            <div class="mb-3">
+                                <label for="rep_designation" class="form-label">Designation</label>
+                                <input name="rep_designation" type="text" class="form-control" id="rep_designation" value="{{isset($rep)?$rep->designation :''}}" placeholder="Representative Designation">
+                            </div>
+                            <input type="hidden" name="delegation_uid" value="{{$delegate->delegation}}" />
+                            <input type="hidden" name="self_delegate_uid" value="{{$delegate->delegates_uid}}" />
+                            <input type="hidden" name="rep_delegate_uid" value="{{$rep->delegates_uid}}" />
                             <input type="submit" name="submit" class="btn btn-primary" value="Update" />
                         </fieldset>
                     </form>
@@ -306,7 +317,7 @@
         img_result_representatives.classList.remove('hide-representatives');
         // show image cropped
         cropped_representatives.src = imgSrc;
-        document.getElementById('rep_saved_picture').value = imgSrc;
+        document.getElementById('savedpicture-2').value = imgSrc;
         dwn_representatives.classList.remove('hide-representatives');
         dwn_representatives.download = 'imagename.png';
         dwn_representatives.setAttribute('href', imgSrc);

@@ -149,11 +149,11 @@
 
 <script>
     function operateText(value, row, index) {
-        return value ? value : "(blank)"
+        return value ? value : "N/A"
     }
 
     function memberFormatter(value, row, index) {
-        return value ? value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val?.rank?.ranks_name + ' ' + val?.first_Name + ' ' + val?.last_Name + ' - ' + val?.delegation_type + '</div><br/>').join('') : '(blank)';
+        return value ? value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val?.rank?.ranks_name + ' ' + val?.first_Name + ' ' + val?.last_Name + ' - ' + val?.delegation_type + '</div><br/>').join('') : 'N/A';
     }
 
     function statusChangerFormatter(value, row, index) {
@@ -167,7 +167,7 @@
             ].join('')
         } else {
             return [
-                '(blank)',
+                'N/A',
             ].join('')
         }
     }
@@ -232,7 +232,7 @@
             ].join('')
         } else {
             return [
-                '(blank)',
+                'N/A',
             ].join('')
         }
     }
@@ -242,13 +242,13 @@
             return value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val.officer_type + ' - ' + val.ranks_name + ' ' + val.officer_first_name + ' ' + val.officer_last_name + '-' + val.officer_contact + '</div><br/>').join('')
         } else {
             return [
-                '(blank)',
+                'N/A',
             ].join('')
         }
     }
 
     function operateCarsName(value, row, index) {
-        return value ? value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + (val.car_category == '61346491-983a-40ed-8477-2d9ed84e6767' ? 'Cat A' : 'Cat B') + '  ' + val.car_makes + ' ' + val.car_model + ' ' + val.car_number + '  ' + ' - ' + val.driver.driver_name + ' - ' + val.driver.driver_contact + '</div><br/>').join('') : '<div>(blank)</div>';
+        return value ? value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + (val.car_category == '61346491-983a-40ed-8477-2d9ed84e6767' ? 'Cat A' : 'Cat B') + '  ' + val.car_makes + ' ' + val.car_model + ' ' + val.car_number + '  ' + ' - ' + val.driver.driver_name + ' - ' + val.driver.driver_contact + '</div><br/>').join('') : '<div>N/A</div>';
     }
 
     function operateOfficer(value, row, index) {

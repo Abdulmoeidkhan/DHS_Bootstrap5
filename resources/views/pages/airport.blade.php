@@ -210,7 +210,7 @@
     }
 
     function operateText(value, row, index) {
-        return value ? value : "(blank)"
+        return value ? value : "-"
     }
 
     function operateStatus(value, row, index) {
