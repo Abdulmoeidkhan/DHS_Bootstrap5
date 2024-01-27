@@ -374,7 +374,7 @@
                                     <th data-filter-control="input" data-field="designation" data-sortable="true">Designation</th>
                                     <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                     <th data-filter-control="input" data-field="delegation_response" data-sortable="true">Response</th>
-                                    <!-- <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th> -->
+                                    <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                                     <th data-filter-control="input" data-field="member_count" data-sortable="true">Number Of Person</th>
                                     <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true">Car A</th>
                                     <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true">Car B</th>
@@ -417,7 +417,7 @@
                                     <th data-filter-control="input" data-field="designation" data-sortable="true">Designation</th>
                                     <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                     <th data-filter-control="input" data-field="delegation_response" data-sortable="true">Response</th>
-                                    <!-- <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th> -->
+                                    <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                                     <th data-filter-control="input" data-field="member_count" data-sortable="true">Number Of Person</th>
                                     <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true">Car A</th>
                                     <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true">Car B</th>
@@ -460,7 +460,7 @@
                                     <th data-filter-control="input" data-field="designation" data-sortable="true">Designation</th>
                                     <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                     <th data-filter-control="input" data-field="delegation_response" data-sortable="true">Response</th>
-                                    <!-- <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th> -->
+                                    <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                                     <th data-filter-control="input" data-field="member_count" data-sortable="true">Number Of Person</th>
                                     <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true">Car A</th>
                                     <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true">Car B</th>
@@ -503,7 +503,7 @@
                                     <th data-filter-control="input" data-field="designation" data-sortable="true">Designation</th>
                                     <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                     <th data-filter-control="input" data-field="delegation_response" data-sortable="true">Response</th>
-                                    <!-- <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th> -->
+                                    <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                                     <th data-filter-control="input" data-field="member_count" data-sortable="true">Number Of Person</th>
                                     <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true">Car A</th>
                                     <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true">Car B</th>
@@ -835,7 +835,7 @@
                             <th data-filter-control="input" data-field="designation" data-sortable="true">Designation</th>
                             <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                             <th data-filter-control="input" data-field="delegation_response" data-sortable="true">Response</th>
-                            <!-- <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th> -->
+                            <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                             <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                             <th data-filter-control="input" data-field="member_count" data-sortable="true">Number Of Person</th>
                             <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
