@@ -74,6 +74,7 @@
             ].join('')
         }
     }
+    
 </script>
 @include("layouts.tableFoot")
 @endsection

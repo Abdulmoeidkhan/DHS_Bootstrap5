@@ -35,7 +35,7 @@ class UserFullProfileController extends Controller
     public function renderDelegateProfile()
     {
         $delegate = Delegate::where([['delegation', session()->get('user')->delegationUid], ['delegation_type', 'Self']])->first();
-        $rep = Delegate::where([['delegation', session()->get('user')->delegationUid], ['delegation_type', 'Representative']])->first();
+        $rep = Delegate::where([['delegation', session()->get('user')->delegationUid], ['delegation_type', 'Rep']])->first();
         // return session()->get('user')->delegationUid;
         $delegateImage = ImageBlob::where('uid', $delegate->delegates_uid)->first();
         $repImage = ImageBlob::where('uid', $rep->delegates_uid)->first();

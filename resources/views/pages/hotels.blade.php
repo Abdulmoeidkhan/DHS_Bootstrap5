@@ -152,17 +152,19 @@
                             <th data-filter-control="input" data-field="delegation_type" data-sortable="true" data-formatter="operateDelegateType">Delegation Type</th>
                             <th data-filter-control="input" data-field="officers" data-formatter="operateOfficer" data-sortable="true">Officer</th>
                             <th data-filter-control="input" data-field="hotel_name" data-formatter="operateHotel" data-sortable="true">Hotel</th>
-                            <th data-filter-control="input" data-field="hotel_plans" data-formatter="operateRoomType" data-formatter="true">Room Type</th>
+                            <th data-filter-control="input" data-field="room_type" data-formatter="true">Room Type</th>
                             <th data-filter-control="input" data-field="room_no" data-sortable="true">Room</th>
                             <th data-filter-control="input" data-field="arrival_date" data-formatter="true">Arrival Date</th>
                             <th data-filter-control="input" data-field="arrival_time" data-formatter="true">Arrival Time</th>
                             <th data-filter-control="input" data-field="arrived" data-formatter="operateFlghtStatus">Arrived</th>
                             <th data-filter-control="input" data-formatter="operateRoomCheckInStatus">Room Check-In</th>
                             <th data-filter-control="input" data-field="room_checkin" data-formatter="true">Room Check-In Date</th>
+                            <th data-filter-control="input" data-field="checked_in_time" data-formatter="true">Room Check-In Time</th>
                             <th data-filter-control="input" data-formatter="operateRoomCheckOutStatus">Room Check-Out</th>
                             <th data-filter-control="input" data-field="room_checkout" data-formatter="true">Room Check-Out Date</th>
+                            <th data-filter-control="input" data-field="checked_out_time" data-formatter="true">Room Check-Out Time</th>
                             <th data-field="delegates_uid" data-formatter="operateRoom">Add/Edit</th>
-                            <th data-field="room_uid" data-formatter="deleteRoom">Delete</th>
+                            <!-- <th data-field="room_uid" data-formatter="deleteRoom">Delete</th> -->
                         </tr>
                     </thead>
                 </table>
@@ -263,11 +265,11 @@
         }
     }
 
-    function operateRoomType(value, row, index) {
-        if (value) {
-            return value.map((val) => `${val.room_type}`)
-        }
-    }
+    // function operateRoomType(value, row, index) {
+    //     if (value) {
+    //         return value.map((val) => `${val.room_type}`)
+    //     }
+    // }
 
     // function operateRoom(value, row, index) {
     //     if (value == null) {

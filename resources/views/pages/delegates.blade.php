@@ -122,7 +122,7 @@
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <h4 class="fw-semibold mb-3">
-                                {{App\Models\Delegation::where('delegation_response','Accepted')->count()}}
+                                    {{App\Models\Delegation::where('delegation_response','Accepted')->count()}}
                                 </h4>
                             </div>
                         </div>
@@ -182,7 +182,8 @@
                                 <th data-filter-control="input" data-field="departure_time" data-sortable="true" data-formatter="operateText">Dep Time</th>
                                 <th data-filter-control="input" data-field="departure_flight" data-sortable="true" data-formatter="operateText">Dep Flight</th>
                                 <th data-filter-control="input" data-field="invitation_number" data-sortable="true" data-formatter="operateText">Invitation Number</th>
-                                <th data-filter-control="input" data-field="image" data-sortable="true" data-formatter="operateText">Image Upload</th>
+                                <th data-filter-control="input" data-field="img_blob" data-sortable="true" data-formatter="operatePictureData">Image Uploaded</th>
+                                <th data-filter-control="input" data-field="img_blob" data-sortable="true" data-formatter="operatePicture">Image Upload</th>
                             </tr>
                         </thead>
                     </table>
@@ -212,7 +213,8 @@
                             <th data-filter-control="input" data-field="departure_time" data-sortable="true" data-formatter="operateText">Dep Time</th>
                             <th data-filter-control="input" data-field="departure_flight" data-sortable="true" data-formatter="operateText">Dep Flight</th>
                             <th data-filter-control="input" data-field="invitation_number" data-sortable="true" data-formatter="operateText">Invitation Number</th>
-                            <th data-filter-control="input" data-field="image" data-sortable="true" data-formatter="operateText">Image Upload</th>
+                            <th data-filter-control="input" data-field="img_blob" data-sortable="true" data-formatter="operatePictureData">Image Uploaded</th>
+                            <th data-filter-control="input" data-field="img_blob" data-sortable="true" data-formatter="operatePicture">Image Upload</th>
                         </thead>
                     </table>
                 </div>
@@ -490,7 +492,6 @@
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " active";
     }
-
 </script>
 <script async src="https://unpkg.com/axios/dist/axios.min.js"></script>
 @include("layouts.tableFoot")
@@ -513,6 +514,24 @@
             }
         }
         return {}
+    }
+
+    function operatePicture(value, row, index) {
+        if (value) {
+            return [
+                '<div class="left">',
+                '<img src="' + value + '" width="80px" height="80px"/>',
+                '</div>'
+            ].join('')
+        }
+    }
+
+    function operatePictureData(value, row, index) {
+        if (value) {
+            return "Yes";
+        } else {
+            return "No";
+        }
     }
 </script>
 @endsection

@@ -67,7 +67,7 @@ class AddDelegationPageController extends Controller
         $events = Event::where('end_date', '>', date('Y-m-d'))->orderBy('start_date', 'desc')->get();
         if ($id) {
             $delegationHead = Delegate::where([['delegation_type', 'Self'], ['delegation', $id]])->first();
-            $representatives = Delegate::where([['delegation_type', 'Representative'], ['delegation', $id]])->first();
+            $representatives = Delegate::where([['delegation_type', 'Rep'], ['delegation', $id]])->first();
             $delegations = Delegation::where([['uid', $delegationHead->delegation]])->first();
             $delegationHead->delegation_picture = ImageBlob::where('uid', $delegationHead->delegates_uid)->first();
             $delegationHead->delegation_document =  Document::where('uid', $delegationHead->delegates_uid)->count();
@@ -104,7 +104,7 @@ class AddDelegationPageController extends Controller
 
         $representative = new Delegate();
         $representative->delegates_uid = (string) Str::uuid();
-        $representative->delegation_type = 'Representative';
+        $representative->delegation_type = 'Rep';
         $representative->delegation = $delegation->uid;
 
 
@@ -128,7 +128,7 @@ class AddDelegationPageController extends Controller
         $representativeSaved = $representative->save();
         $delegateSaved = $delegates->save();
         if ($representativeSaved) {
-            $imgSaved = $req->savedRepresentativesPicture ? $this->imageBlobUpload($req->savedRepresentativesPicture, $representative->delegates_uid) : '';
+            $imgSaved = $req->savedRepsPicture ? $this->imageBlobUpload($req->savedRepsPicture, $representative->delegates_uid) : '';
             $pdfSaved = $req->file('rep_Pdf') ? $this->documentUpload($req->file('rep_Pdf'), $representative->delegates_uid) : '';
         }
         try {
@@ -174,7 +174,7 @@ class AddDelegationPageController extends Controller
                 }
             }
         }
-        $delegationUid=$arrayToBeUpdate['delegationuid'];
+        $delegationUid = $arrayToBeUpdate['delegationuid'];
         $delegationRepUid = $arrayToBeUpdateRep['delegate_uid'];
         $delegationSelfUid = $arrayToBeUpdateSelf['delegate_uid'];
         unset($arrayToBeUpdateRep['delegate_uid']);
@@ -232,6 +232,7 @@ class AddDelegationPageController extends Controller
             $req->rep_saved_picture ? $this->imageBlobUpdate($req->rep_saved_picture, $delegationRepUid) : 0;
             $req->pdf ? $this->documentUpdate($req->file('pdf'), $delegationSelfUid) : 0;
             $req->savedpicture ? $this->imageBlobUpdate($req->savedpicture, $delegationSelfUid) : 0;
+            // $delegateStatusUpdate = $req->delegation_response == "Accepted" ? Delegate::where('delegation', $arrayToBeUpdate['uid'])->update(['status' => 1]) : Delegate::where('delegation', $arrayToBeUpdate['uid'])->update(['status' => 0]);
             if ($delegateUpdate) {
                 return $req->submitAndRetain ? back()->with('message', 'Delegation has been updated Successfully') : redirect()->route('pages.delegationsPage')->with('message', 'Profile has been activated');
             }

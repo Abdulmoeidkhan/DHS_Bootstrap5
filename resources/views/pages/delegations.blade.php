@@ -49,7 +49,7 @@
     /* Style the tab content */
     .tabcontent {
         display: none;
-        padding: 6px 12px;
+        padding: 0px 12px;
         border: 1px solid #ccc;
         border-top: none;
     }
@@ -101,7 +101,7 @@
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <h4 class="fw-semibold mb-3">
-                                {{App\Models\Delegation::where('delegation_response','Accepted')->count()}}
+                                    {{App\Models\Delegation::where('delegation_response','Accepted')->count()}}
                                 </h4>
                             </div>
                         </div>
@@ -115,11 +115,11 @@
             <div class="col-lg-12">
                 <div class="card overflow-hidden">
                     <div class="card-body p-4">
-                        <h5 class="card-title mb-9 fw-semibold">Active Delegate Count</h5>
+                        <h5 class="card-title mb-9 fw-semibold">Regretted</h5>
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <h4 class="fw-semibold mb-3">
-                                    {{App\Models\Delegate::where([['self',1],['status',1]])->count()}}
+                                    {{App\Models\Delegation::where('delegation_response','Regretted')->count()}}
                                 </h4>
                             </div>
                         </div>
@@ -133,7 +133,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="officerDetachModalLabel">Remove Officer</h5>
+                <h5 class="modal-title" id="officerDetachModalLabel">Unassign Officer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form method="POST" action='{{route("request.detachOfficer")}}'>
@@ -164,7 +164,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="officerModalLabel">Add Officer</h5>
+                <h5 class="modal-title" id="officerModalLabel">Assign Officer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form method="POST" action='{{route("request.attachOfficer")}}'>
@@ -470,8 +470,8 @@
                                     <th data-field="uid" data-formatter="operateMember">Member</th>
                                     <th data-field="uid" data-formatter="operateCar">Add Car</th>
                                     <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
-                                    <th data-field="officer_uid" data-formatter="operateOfficer">Add Officer</th>
-                                    <th data-field="uid" data-formatter="detachOfficer">Remove Officer</th>
+                                    <th data-field="officer_uid" data-formatter="operateOfficer">Assign Officer</th>
+                                    <th data-field="uid" data-formatter="detachOfficer">Unassign Officer</th>
                                     <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
                                     <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
                                 </tr>
@@ -513,8 +513,8 @@
                                     <th data-field="uid" data-formatter="operateMember">Member</th>
                                     <th data-field="uid" data-formatter="operateCar">Add Car</th>
                                     <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
-                                    <th data-field="officer_uid" data-formatter="operateOfficer">Add Officer</th>
-                                    <th data-field="uid" data-formatter="detachOfficer">Remove Officer</th>
+                                    <th data-field="officer_uid" data-formatter="operateOfficer">Assign Officer</th>
+                                    <th data-field="uid" data-formatter="detachOfficer">Unassign Officer</th>
                                     <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
                                     <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
                                 </tr>
@@ -556,8 +556,8 @@
                                     <th data-field="uid" data-formatter="operateMember">Member</th>
                                     <th data-field="uid" data-formatter="operateCar">Add Car</th>
                                     <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
-                                    <th data-field="officer_uid" data-formatter="operateOfficer">Add Officer</th>
-                                    <th data-field="uid" data-formatter="detachOfficer">Remove Officer</th>
+                                    <th data-field="officer_uid" data-formatter="operateOfficer">Assign Officer</th>
+                                    <th data-field="uid" data-formatter="detachOfficer">Unassign Officer</th>
                                     <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
                                     <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
                                 </tr>
@@ -599,8 +599,8 @@
                                     <th data-field="uid" data-formatter="operateMember">Member</th>
                                     <th data-field="uid" data-formatter="operateCar">Add Car</th>
                                     <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
-                                    <th data-field="officer_uid" data-formatter="operateOfficer">Add Officer</th>
-                                    <th data-field="uid" data-formatter="detachOfficer">Remove Officer</th>
+                                    <th data-field="officer_uid" data-formatter="operateOfficer">Assign Officer</th>
+                                    <th data-field="uid" data-formatter="detachOfficer">Unassign Officer</th>
                                     <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
                                     <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
                                 </tr>
@@ -617,15 +617,14 @@
                 <button class="tablinks" onclick="openCity(event, 'All')">All</button>
             </div>
             <div id="Accepted" class="tabcontent" style="display: block;">
-                <p>
                     @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
-                    <div class="d-flex">
+                    <div class="d-flex" style="position: absolute;top: 95px;">
                         <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-primary">Add Delegations</a>
                     </div>
                 </div>
-                <br />
                 @endif
+                <!-- <br /> -->
                 <div class="table-responsive">
                     <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',1)}}">
                         <thead>
@@ -638,7 +637,7 @@
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                                 <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
-                                <!-- <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th> -->
+                                <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                                 <th data-filter-control="input" data-field="member_count" data-sortable="true" data-formatter="operateText">Number Of Person</th>
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
@@ -659,8 +658,8 @@
                                 <th data-field="uid" data-formatter="operateMember">Member</th>
                                 <th data-field="uid" data-formatter="operateCar">Add Car</th>
                                 <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
-                                <th data-field="officer_uid" data-formatter="operateOfficer">Add Officer</th>
-                                <th data-field="uid" data-formatter="detachOfficer">Remove Officer</th>
+                                <th data-field="officer_uid" data-formatter="operateOfficer">Assign Officer</th>
+                                <th data-field="uid" data-formatter="detachOfficer">Unassign Officer</th>
                                 <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
                                 <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
                             </tr>
@@ -670,15 +669,14 @@
                 </p>
             </div>
             <div id="Awaited" class="tabcontent">
-                <p>
                     @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
-                    <div class="d-flex">
+                    <div class="d-flex" style="position: absolute;top: 95px;">
                         <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-primary">Add Delegations</a>
                     </div>
                 </div>
-                <br />
                 @endif
+                <!-- <br /> -->
                 <div class="table-responsive">
                     <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',0)}}">
                         <thead>
@@ -691,7 +689,7 @@
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                                 <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
-                                <!-- <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th> -->
+                                <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                                 <th data-filter-control="input" data-field="member_count" data-sortable="true" data-formatter="operateText">Number Of Person</th>
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
@@ -712,8 +710,8 @@
                                 <th data-field="uid" data-formatter="operateMember">Member</th>
                                 <th data-field="uid" data-formatter="operateCar">Add Car</th>
                                 <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
-                                <th data-field="officer_uid" data-formatter="operateOfficer">Add Officer</th>
-                                <th data-field="uid" data-formatter="detachOfficer">Remove Officer</th>
+                                <th data-field="officer_uid" data-formatter="operateOfficer">Assign Officer</th>
+                                <th data-field="uid" data-formatter="detachOfficer">Unassign Officer</th>
                                 <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
                                 <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
                             </tr>
@@ -723,15 +721,14 @@
                 </p>
             </div>
             <div id="Regretted" class="tabcontent">
-                <p>
                     @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
-                    <div class="d-flex">
+                    <div class="d-flex" style="position: absolute;top: 95px;">
                         <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-primary">Add Delegations</a>
                     </div>
                 </div>
-                <br />
                 @endif
+                <!-- <br /> -->
                 <div class="table-responsive">
                     <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',2)}}">
                         <thead>
@@ -765,8 +762,8 @@
                                 <th data-field="uid" data-formatter="operateMember">Member</th>
                                 <th data-field="uid" data-formatter="operateCar">Add Car</th>
                                 <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
-                                <th data-field="officer_uid" data-formatter="operateOfficer">Add Officer</th>
-                                <th data-field="uid" data-formatter="detachOfficer">Remove Officer</th>
+                                <th data-field="officer_uid" data-formatter="operateOfficer">Assign Officer</th>
+                                <th data-field="uid" data-formatter="detachOfficer">Unassign Officer</th>
                                 <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
                                 <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
                             </tr>
@@ -776,15 +773,14 @@
                 </p>
             </div>
             <div id="Deactive" class="tabcontent">
-                <p>
                     @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
-                    <div class="d-flex">
+                    <div class="d-flex" style="position: absolute;top: 95px;">
                         <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-primary">Add Delegations</a>
                     </div>
                 </div>
-                <br />
                 @endif
+                <!-- <br /> -->
                 <div class="table-responsive">
                     <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',3)}}">
                         <thead>
@@ -797,7 +793,7 @@
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                                 <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
-                                <!-- <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th> -->
+                                <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                                 <th data-filter-control="input" data-field="member_count" data-sortable="true" data-formatter="operateText">Number Of Person</th>
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
@@ -818,8 +814,8 @@
                                 <th data-field="uid" data-formatter="operateMember">Member</th>
                                 <th data-field="uid" data-formatter="operateCar">Add Car</th>
                                 <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
-                                <th data-field="officer_uid" data-formatter="operateOfficer">Add Officer</th>
-                                <th data-field="uid" data-formatter="detachOfficer">Remove Officer</th>
+                                <th data-field="officer_uid" data-formatter="operateOfficer">Assign Officer</th>
+                                <th data-field="uid" data-formatter="detachOfficer">Unassign Officer</th>
                                 <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
                                 <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
                             </tr>
@@ -829,15 +825,14 @@
                 </p>
             </div>
             <div id="All" class="tabcontent">
-                <p>
                     @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
-                    <div class="d-flex">
+                    <div class="d-flex" style="position: absolute;top: 95px;">
                         <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-primary">Add Delegations</a>
                     </div>
                 </div>
-                <br />
                 @endif
+                <!-- <br /> -->
                 <div class="table-responsive">
                     <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation')}}">
                         <thead>
@@ -850,7 +845,7 @@
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                                 <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
-                                <!-- <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th> -->
+                                <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                                 <th data-filter-control="input" data-field="member_count" data-sortable="true" data-formatter="operateText">Number Of Person</th>
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
@@ -871,8 +866,8 @@
                                 <th data-field="uid" data-formatter="operateMember">Member</th>
                                 <th data-field="uid" data-formatter="operateCar">Add Car</th>
                                 <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
-                                <th data-field="officer_uid" data-formatter="operateOfficer">Add Officer</th>
-                                <th data-field="uid" data-formatter="detachOfficer">Remove Officer</th>
+                                <th data-field="officer_uid" data-formatter="operateOfficer">Assign Officer</th>
+                                <th data-field="uid" data-formatter="detachOfficer">Unassign Officer</th>
                                 <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
                                 <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
                             </tr>
@@ -932,8 +927,8 @@
                             <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
                             <th data-field="uid" data-formatter="operateCar">Add Car</th>
                             <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
-                            <th data-field="officer_uid" data-formatter="operateOfficer">Add Officer</th>
-                            <th data-field="uid" data-formatter="detachOfficer">Remove Officer</th>
+                            <th data-field="officer_uid" data-formatter="operateOfficer">Assign Officer</th>
+                            <th data-field="uid" data-formatter="detachOfficer">Unassign Officer</th>
                             <th data-field="uid" data-formatter="statusChangerFormatter">Active/Suspended</th> -->
 <!-- <th data-filter-control="input" data-field="exhibition" data-sortable="true">Exhibition</th> -->
 <!-- <th data-filter-control="input" data-field="delegates_uid" data-formatter="operateFormatter">Profile</th> -->

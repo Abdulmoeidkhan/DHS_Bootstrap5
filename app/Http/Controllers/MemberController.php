@@ -101,11 +101,11 @@ class MemberController extends Controller
     public function addMemberRequest(Request $req)
     {
         // return $req;
-        $delegationUid = Delegation::where('user_uid', $req->delegation)->first();
+        // $delegationUid = Delegation::where('user_uid', $req->delegation)->first();
         $delegate = new Delegate();
         $delegate->delegates_uid = (string) Str::uuid();
         $delegate->rank = $req->rank;
-        $delegate->delegation = $delegationUid->uid;
+        $delegate->delegation = $req->delegation;
         $delegate->first_Name = $req->firstName;
         $delegate->last_Name = $req->lastName;
         $delegate->designation = $req->designation;
