@@ -78,7 +78,7 @@
                                 <select class="form-select" aria-label="Country Name" id="countryInput" name="country" required>
                                     <option value="" selected disabled hidden> Select Country </option>
                                     @foreach(\App\Models\Country::all() as $country)
-                                    <option value="{{$country->name}}" {{isset($delegations)?($delegations->country == $country->value ? 'Selected':''):''}}> {{$country->value}} </option>
+                                    <option value="{{$country->name}}" {{isset($delegations)?($delegations->country == $country->name ? 'Selected':''):''}}> {{$country->value}} </option>
                                     @endforeach
                                 </select>
                             </div>

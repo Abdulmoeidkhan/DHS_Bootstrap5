@@ -252,8 +252,6 @@
                                     <td class="border-bottom-0">
                                         <p class="mb-0 fw-normal">{{$hotelPlan->hotel_roomtype_doubleOccupancy}}</p>
                                     </td>
-
-
                                 </tr>
                                 @endforeach
                             </tbody>

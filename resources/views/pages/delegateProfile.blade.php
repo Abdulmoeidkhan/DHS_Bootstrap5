@@ -140,6 +140,13 @@
                                 <input name="organistaion" type="text" class="form-control" id="organistaion" placeholder="Organistaion" value="{{$delegate->organistaion}}" required>
                             </div> -->
                             <div class="mb-3">
+                                <label for="delegation_response" class="form-label">Delegation Response</label>
+                                <select class="form-select" aria-label="Delegation Response" id="delegation_response" name="delegation_response" required>
+                                    <option value="Accepted" {{isset($delegationData)?($delegationData->delegation_response == 'Accepted' ? 'Selected':''):''}}> Accepted </option>
+                                    <option value="Regretted" {{isset($delegationData)?($delegationData->delegation_response == 'Regretted' ? 'Selected':''):''}}> Regretted </option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <input class="form-check-input" type="radio" name="self" id="self" value="1" <?php echo $delegate->self ? 'checked' : '' ?>>
                                 <label class="form-check-label" for="self">
                                     Self

@@ -9,6 +9,7 @@ use App\Models\Event;
 use App\Models\Delegation;
 use App\Models\Document;
 use App\Models\ImageBlob;
+use App\Models\Officer;
 use Illuminate\Support\Str;
 
 class AddDelegationPageController extends Controller
@@ -75,6 +76,7 @@ class AddDelegationPageController extends Controller
                 $representatives->delegation_picture =  ImageBlob::where('uid', $representatives->delegates_uid)->first();
                 $representatives->delegation_document =  Document::where('uid', $representatives->delegates_uid)->count();
             }
+            // return [$representatives];
             return view('pages.addDelegation', ['events' => $events, 'delegationHead' => $delegationHead, 'representatives' => $representatives, 'delegations' => $delegations]);
             // return [$delegationHead, $representatives, $delegations];
         } else {
@@ -116,6 +118,7 @@ class AddDelegationPageController extends Controller
             $imgSaved = $req->savedpicture ? $this->imageBlobUpload($req->savedpicture, $delegates->delegates_uid) : '';
             $pdfSaved = $req->file('pdf') ? $this->documentUpload($req->file('pdf'), $delegates->delegates_uid) : '';
             $representative->self = 0;
+            $representative->status = 0;
         } else {
             $representative->rank = $req->rep_rank;
             $representative->first_Name = $req->rep_first_Name;
@@ -124,6 +127,7 @@ class AddDelegationPageController extends Controller
             $delegation->delegationhead = $delegates->delegates_uid;
             $delegates->delegation = $delegation->uid;
             $delegates->self = 0;
+            $delegates->status = 0;
         }
         $representativeSaved = $representative->save();
         $delegateSaved = $delegates->save();
@@ -161,15 +165,20 @@ class AddDelegationPageController extends Controller
                     $arrayToBeUpdateSelf[substr($key, 5)] = $value;
                 } else {
                     $arrayToBeUpdate['delegationuid'] = $req->delegation_uid;
+                    $arrayToBeUpdate['delegation_response'] = $req->delegation_response;
                     if ($key == 'self' && $value == 1) {
                         $arrayToBeUpdate['delegationhead'] = $req->self_delegate_uid;
                         $arrayToBeUpdateRep['self'] = 0;
                         $arrayToBeUpdateSelf['self'] = 1;
+                        $arrayToBeUpdateRep['status'] = 1;
+                        $arrayToBeUpdateSelf['status'] = 0;
                     }
                     if ($key == 'self' && $value == 0) {
                         $arrayToBeUpdate['delegationhead'] = $req->rep_delegate_uid;
                         $arrayToBeUpdateRep['self'] = 1;
                         $arrayToBeUpdateSelf['self'] = 0;
+                        $arrayToBeUpdateRep['status'] = 0;
+                        $arrayToBeUpdateSelf['status'] = 1;
                     }
                 }
             }
@@ -234,6 +243,9 @@ class AddDelegationPageController extends Controller
             $req->savedpicture ? $this->imageBlobUpdate($req->savedpicture, $delegationSelfUid) : 0;
             // $delegateStatusUpdate = $req->delegation_response == "Accepted" ? Delegate::where('delegation', $arrayToBeUpdate['uid'])->update(['status' => 1]) : Delegate::where('delegation', $arrayToBeUpdate['uid'])->update(['status' => 0]);
             if ($delegateUpdate) {
+                if ($arrayToBeUpdate['delegation_response'] == 'Regretted') {
+                    $removeOfficer= Officer::where('officer_delegation',$arrayToBeUpdate['uid'])->update(['officer_delegation'=>null]);
+                }
                 return $req->submitAndRetain ? back()->with('message', 'Delegation has been updated Successfully') : redirect()->route('pages.delegationsPage')->with('message', 'Profile has been activated');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
