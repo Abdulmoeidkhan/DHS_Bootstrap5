@@ -102,8 +102,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'liasonTypeCheck'], function () {
         Route::get('/delegationAssigned', [DelegationsPageController::class, 'delegationAssigned'])->name('pages.delegationAssigned');
+        Route::get('/hotelPlans', [HotelController::class, 'hotelPlans'])->name('pages.hotelPlans');
         Route::get('/liason/delegateProfile/{id}', [LiasonsController::class, 'specificLiasonsData'])->name('pages.liasonDelegateProfile');
     });
+
+
 
     Route::group(['middleware' => 'userTypeCheck'], function () {
         // Flights Pages And API Start

@@ -14,49 +14,42 @@
                                 <h6 class="fw-semibold mb-0">S.No</h6>
                             </th>
                             <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Country</h6>
+                                <h6 class="fw-semibold mb-0">Hotel</h6>
                             </th>
                             <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Invited By</h6>
+                                <h6 class="fw-semibold mb-0">Standard</h6>
                             </th>
                             <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Address</h6>
+                                <h6 class="fw-semibold mb-0">Suite</h6>
                             </th>
                             <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Exhibition</h6>
+                                <h6 class="fw-semibold mb-0">Superior</h6>
                             </th>
                             <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Members</h6>
+                                <h6 class="fw-semibold mb-0">Double Occupance</h6>
                             </th>
-                            <!-- <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Delegate Profile</h6>
-                            </th> -->
                         </tr>
                     </thead>
-                    @if($delegation!=null)
+                    @if($hotelPlans!=null)
                     <tbody>
                         <tr>
                             <td class="border-bottom-0">
                                 <h6 class="fw-semibold mb-0">1</h6>
                             </td>
                             <td class="border-bottom-0">
-                                <h6 class="fw-semibold mb-1 text-capitalize">{{$delegation?$delegation->country:''}}</h6>
+                                <p class="mb-0 fw-normal">{{$hotelPlans->hotelName->hotel_names}}</p>
                             </td>
                             <td class="border-bottom-0">
-                                <p class="mb-0 fw-normal">{{$delegation?$delegation->vip->vips_name:''}}</p>
+                                <h6 class="fw-semibold mb-1 text-capitalize">{{$hotelPlans->hotel_roomtype_standard}}</h6>
                             </td>
                             <td class="border-bottom-0">
-                                <p class="mb-0 fw-normal">{{$delegation?$delegation->address:''}}</p>
+                                <p class="mb-0 fw-normal">{{$hotelPlans->hotel_roomtype_suite}}</p>
                             </td>
                             <td class="border-bottom-0">
-                                <p class="mb-0 fw-normal">{{$delegation?$delegation->exhibition:''}}</p>
+                                <p class="mb-0 fw-normal">{{$hotelPlans->hotel_roomtype_superior}}</p>
                             </td>
                             <td class="border-bottom-0">
-                                <div class="mb-0 fw-normal">
-                                    <a class="btn btn-outline-danger" href="{{$delegation?route('pages.members',$delegation->uid):''}}">
-                                        <i class="ti ti-users" style="font-size: 24px;"></i>
-                                    </a>
-                                </div>
+                                <p class="mb-0 fw-normal">{{$hotelPlans->hotel_roomtype_doubleOccupancy}}</p>
                             </td>
                         </tr>
                     </tbody>

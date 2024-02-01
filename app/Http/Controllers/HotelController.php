@@ -22,6 +22,22 @@ use Illuminate\Support\Str;
 
 class HotelController extends Controller
 {
+    protected function badge($characters, $prefix)
+    {
+        $possible = '0123456789';
+        $code = $prefix;
+        $i = 0;
+        while ($i < $characters) {
+            $code .= substr($possible, mt_rand(0, strlen($possible) - 1), 1);
+            if ($i < $characters - 1) {
+                $code .= "";
+            }
+            $i++;
+        }
+        return $code;
+    }
+
+
     // Main Display
     public function categoryRender()
     {
@@ -54,6 +70,7 @@ class HotelController extends Controller
     {
         $hotel = new Hotel();
         $hotel->hotel_uid = (string) Str::uuid();
+        $hotel->hotel_code = $this->badge(8, "HL");
         foreach ($req->all() as $key => $value) {
             if ($key != 'submit' && $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
                 $hotel[$key] = $value;
@@ -343,7 +360,7 @@ class HotelController extends Controller
         try {
             $arrayToBeUpdate = [];
             foreach ($req->all() as $key => $value) {
-                if ($key != 'submit' && $key != '_token' && strlen($value) > 0 && $key != 'assign_to'&& $key != 'room_uid') {
+                if ($key != 'submit' && $key != '_token' && strlen($value) > 0 && $key != 'assign_to' && $key != 'room_uid') {
                     $arrayToBeUpdate[$key] = $value;
                 }
             }
@@ -424,4 +441,17 @@ class HotelController extends Controller
 
     // Room End
 
+
+    // Hotel Plans for Liaons Start
+
+    public function hotelPlans()
+    {
+        $officerDelegation = Officer::where('officer_uid', session()->get('user')->officerUid->officer_uid)->first('officer_delegation');
+        $hotelPlans = $officerDelegation ? HotelPlan::where('delegation_uid', $officerDelegation->officer_delegation)->first() : null;
+        $hotelPlans->hotelName = Hotel::where('hotel_uid', $hotelPlans->hotel_uid)->first('hotel_names');
+        // return $hotelPlans;
+        return view('pages.hotelPlan', ['hotelPlans' => $hotelPlans]);
+    }
+
+    // Hotel Plans for Liaons End
 }

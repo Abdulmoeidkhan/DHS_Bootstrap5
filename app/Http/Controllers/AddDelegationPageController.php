@@ -244,7 +244,7 @@ class AddDelegationPageController extends Controller
             // $delegateStatusUpdate = $req->delegation_response == "Accepted" ? Delegate::where('delegation', $arrayToBeUpdate['uid'])->update(['status' => 1]) : Delegate::where('delegation', $arrayToBeUpdate['uid'])->update(['status' => 0]);
             if ($delegateUpdate) {
                 if ($arrayToBeUpdate['delegation_response'] == 'Regretted') {
-                    $removeOfficer= Officer::where('officer_delegation',$arrayToBeUpdate['uid'])->update(['officer_delegation'=>null]);
+                    $removeOfficer = Officer::where('officer_delegation', $arrayToBeUpdate['uid'])->update(['officer_delegation' => null, 'officer_assign' => 0]);
                 }
                 return $req->submitAndRetain ? back()->with('message', 'Delegation has been updated Successfully') : redirect()->route('pages.delegationsPage')->with('message', 'Profile has been activated');
             }

@@ -102,11 +102,6 @@
                 </li>
                 @endif
                 @if(session()->get('user')->roles[0]->name =="delegate")
-                <script>
-                    console.log(
-                        <?php echo session()->get('user');?>
-                    )
-                </script>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.members',session()->get('user')->delegationUid)}}" aria-expanded="false">
                         <span>
@@ -143,6 +138,14 @@
                             <i class="ti ti-mail"></i>
                         </span>
                         <span class="hide-menu">Delegation</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.hotelPlans')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-mail"></i>
+                        </span>
+                        <span class="hide-menu">Hotel Plan</span>
                     </a>
                 </li>
                 @endif
@@ -617,11 +620,11 @@
                 </li>
                 @endif
             </ul>
-            <div class="unlimited-access hide-menu bg-light-primary position-relative mb-7 mt-5 rounded">
+            <!-- <div class="unlimited-access hide-menu bg-light-primary position-relative mb-7 mt-5 rounded">
                 <div class="d-flex">
                     <br />
                 </div>
-            </div>
+            </div> -->
 
             <!-- <ul id="sidebarnav">
                 <li class="nav-small-cap">

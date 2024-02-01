@@ -147,6 +147,10 @@
                             <th data-field="flight.departure_flight" data-sortable="true">Departure Flight</th>
                             <th data-field="flight.departure_date" data-sortable="true">Departure Date</th>
                             <th data-field="flight.departure_time" data-sortable="true">Departure Time</th>
+                            <th data-field="rooms.hotelName.hotel_names" data-sortable="true">Hotel Name</th>
+                            <th data-field="rooms.room_type.room_type" data-sortable="true">Room Type</th>
+                            <th data-field="rooms.room_checkin" data-sortable="true">Room Check In</th>
+                            <th data-field="rooms.room_checkout" data-sortable="true">Room Check Out</th>
                             <th data-field="image.img_blob" data-sortable="true" data-formatter="operatePicture" data-force-hide="true">Image</th>
                             @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="delegate")
                             <th data-field="delegates_uid" data-sortable="true" data-formatter="operateDelegate" data-force-hide="true">Actions</th>
