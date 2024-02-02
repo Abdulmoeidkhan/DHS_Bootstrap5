@@ -37,9 +37,8 @@ class ActivateProfileController extends Controller
             $assignOperator->hotel_operator_status = 1;
             try {
                 $operatorSaved = $assignOperator->save();
-                return $operatorSaved;
-                // $rolesAndPermissionGiven = $operatorSaved ? $this->operatorRolesAndTeams($assignOperator->hotel_operator_user) : false;
-                // return $rolesAndPermissionGiven;
+                $rolesAndPermissionGiven = $operatorSaved ? $this->operatorRolesAndTeams($assignOperator->hotel_operator_user) : false;
+                return $rolesAndPermissionGiven;
             } catch (\Illuminate\Database\QueryException $exception) {
                 if ($exception->errorInfo[2]) {
                     return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
@@ -292,8 +291,7 @@ class ActivateProfileController extends Controller
                 break;
             case "HL":
                 $operatorActivated = $this->activateHotelOperator($req);
-                // return $operatorActivated ?  "true" : "False";
-                return $operatorActivated;
+                return $operatorActivated ? back()->with('message', 'Profile Updated Successfully') : back()->with('error', 'Officer already assigned');
                 break;
             case "LO":
                 $officerActivated = $this->activateOfficer($req);
