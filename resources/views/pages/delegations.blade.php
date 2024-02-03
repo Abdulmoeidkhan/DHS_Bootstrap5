@@ -617,7 +617,7 @@
                 <button class="tablinks" onclick="openCity(event, 'All')">All</button>
             </div>
             <div id="Accepted" class="tabcontent" style="display: block;">
-                    @if(session()->get('user')->roles[0]->name === "admin")
+                @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
                     <div class="d-flex" style="position: absolute;top: 95px;">
                         <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-primary">Add Delegations</a>
@@ -626,7 +626,7 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table"   data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',1)}}">
+                    <table id="table" data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',1)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -669,7 +669,7 @@
                 </p>
             </div>
             <div id="Awaited" class="tabcontent">
-                    @if(session()->get('user')->roles[0]->name === "admin")
+                @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
                     <div class="d-flex" style="position: absolute;top: 95px;">
                         <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-primary">Add Delegations</a>
@@ -678,7 +678,7 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table"    data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',0)}}">
+                    <table id="table" data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',0)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -721,7 +721,7 @@
                 </p>
             </div>
             <div id="Regretted" class="tabcontent">
-                    @if(session()->get('user')->roles[0]->name === "admin")
+                @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
                     <div class="d-flex" style="position: absolute;top: 95px;">
                         <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-primary">Add Delegations</a>
@@ -730,7 +730,7 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table"      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',2)}}">
+                    <table id="table" data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',2)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -773,7 +773,7 @@
                 </p>
             </div>
             <div id="Deactive" class="tabcontent">
-                    @if(session()->get('user')->roles[0]->name === "admin")
+                @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
                     <div class="d-flex" style="position: absolute;top: 95px;">
                         <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-primary">Add Delegations</a>
@@ -782,7 +782,7 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table"      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',3)}}">
+                    <table id="table" data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',3)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -825,7 +825,7 @@
                 </p>
             </div>
             <div id="All" class="tabcontent">
-                    @if(session()->get('user')->roles[0]->name === "admin")
+                @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
                     <div class="d-flex" style="position: absolute;top: 95px;">
                         <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-primary">Add Delegations</a>
@@ -834,7 +834,7 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table"      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation')}}">
+                    <table id="table" data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation')}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -969,8 +969,9 @@
     }
 
     function statusFormatter(value, row, index) {
-
-        return value ? ['<div class="left">', 'Yes', '</div>'].join('') : ['<div class="left">', 'No', '</div>'].join('');
+        if (value != null) {
+            return value ? ['<div class="left">', 'Yes', '</div>'].join('') : ['<div class="left">', 'No', '</div>'].join('');
+        }
     }
 
     function operateInvitaion(value, row, index) {
@@ -1298,7 +1299,9 @@
 
 
     function operateSelf(value, row, index) {
-        return !value ? 'Rep' : 'Self';
+        if (value != null) {
+            return !value ? 'Rep' : 'Self';
+        }
     }
 
     function operateSerial(value, row, index) {
@@ -1451,6 +1454,12 @@
         }
         return {}
     }
+
+    $('#table').bootstrapTable({
+        exportOptions: {
+            fileName: 'List Of All Delegation'
+        }
+    });
 </script>
 @endsection
 @endauth

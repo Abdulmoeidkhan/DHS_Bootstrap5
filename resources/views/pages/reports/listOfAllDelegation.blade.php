@@ -90,7 +90,9 @@
 </div>
 <script>
     function operateSelf(value, row, index) {
-        return !value ? 'Rep' : 'Self';
+        if (value != null) {
+            return !value ? 'Rep' : 'Self';
+        }
     }
 
     function operateSerial(value, row, index) {
@@ -132,8 +134,9 @@
     }
 
     function statusFormatter(value, row, index) {
-
-        return value ? ['<div class="left">', 'Yes', '</div>'].join('') : ['<div class="left">', 'No', '</div>'].join('');
+        if (value != null) {
+            return value ? ['<div class="left">', 'Yes', '</div>'].join('') : ['<div class="left">', 'No', '</div>'].join('');
+        }
     }
 </script>
 <script async src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -158,6 +161,13 @@
         }
         return {}
     }
+
+    $('#table').bootstrapTable({
+        exportOptions: {
+            fileName: 'List Of All Delegation'
+        }
+    });
 </script>
+
 @endsection
 @endauth

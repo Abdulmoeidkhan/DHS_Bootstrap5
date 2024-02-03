@@ -116,23 +116,26 @@ class DelegationsPageController extends Controller
                 }
                 $delegations[$key]->hotelData = $delegations[$key]->hotelPlan ? Hotel::where('hotel_uid', $delegations[$key]->hotelPlan?->hotel_uid)->first('hotel_names') : null;
             }
-            // array_push($delegations, [
-            //     'car' =>
-            //     [
-            //         'car_category_a' => $delegations->sum('car.car_category_a'),
-            //         'car_category_b' => $delegations->sum('car.car_category_b'),
-            //     ],
-            //     'member_count' => $delegations->sum('member_count'),
-            //     'hotelPlan' =>
-            //     [
-            //         'hotel_roomtype_doubleOccupancy' => $delegations->sum('hotelPlan.hotel_roomtype_doubleOccupancy'),
-            //         'hotel_roomtype_standard' => $delegations->sum('hotelPlan.hotel_roomtype_standard'),
-            //         'hotel_roomtype_suite' => $delegations->sum('hotelPlan.hotel_roomtype_suite'),
-            //         'hotel_roomtype_superior' => $delegations->sum('hotelPlan.hotel_roomtype_superior'),
-            //     ]
-            // ]);
+            $delegations[$delegations->count()] = [
+                'car' =>
+                [
+                    'car_category_a' => $delegations->sum('car.car_category_a'),
+                    'car_category_b' => $delegations->sum('car.car_category_b'),
+                ],
+                'member_count' => $delegations->sum('member_count'),
+                'hotelPlan' =>
+                [
+                    'hotel_roomtype_doubleOccupancy' => $delegations->sum('hotelPlan.hotel_roomtype_doubleOccupancy'),
+                    'hotel_roomtype_standard' => $delegations->sum('hotelPlan.hotel_roomtype_standard'),
+                    'hotel_roomtype_suite' => $delegations->sum('hotelPlan.hotel_roomtype_suite'),
+                    'hotel_roomtype_superior' => $delegations->sum('hotelPlan.hotel_roomtype_superior'),
+                ],
+                'country'=>'Total'
+
+            ];
             // return $total=$delegations->sum('car.car_category_a');
-            return  $delegations->count();
+
+            return  $delegations;
         } else if ($status == 0) {
             $delegations = DB::table('delegations')
                 ->leftJoin('delegates', 'delegates.delegates_uid', '=', 'delegations.delegationhead')

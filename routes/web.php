@@ -269,6 +269,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Reports Start
         Route::get('reports/listOfAllDelegation', [ReportController::class, 'listOfAllDelegation'])->name('pages.listOfAllDelegation');
+        Route::get('reports/listOfAllDelegates', [ReportController::class, 'listOfAllDelegates'])->name('pages.listOfAllDelegates');
 
         // Reports End
     });
