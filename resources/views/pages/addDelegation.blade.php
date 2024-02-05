@@ -78,7 +78,7 @@
                                 <select class="form-select" aria-label="Country Name" id="countryInput" name="country" required>
                                     <option value="" selected disabled hidden> Select Country </option>
                                     @foreach(\App\Models\Country::all() as $country)
-                                    <option value="{{$country->name}}" {{isset($delegations)?($delegations->country == $country->value ? 'Selected':''):''}}> {{$country->value}} </option>
+                                    <option value="{{$country->name}}" {{isset($delegations)?($delegations->country == $country->name ? 'Selected':''):''}}> {{$country->value}} </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -184,7 +184,7 @@
                             <div class="mb-3">
                                 <input class="form-check-input" type="radio" name="self" id="rep" value="0" {{isset($delegationHead)?($delegationHead->self?'':'checked'):''}}>
                                 <label class="form-check-label" for="rep">
-                                    Representative
+                                    Rep
                                 </label>
                             </div>
                             <div class="mb-3">
@@ -197,16 +197,16 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="rep_first_Name" class="form-label">Representative First Name</label>
-                                <input name="rep_first_Name" type="text" class="form-control" id="rep_first_Name" value="{{isset($representatives)?$representatives->first_Name :''}}" placeholder="Representative First Name">
+                                <label for="rep_first_Name" class="form-label">Rep First Name</label>
+                                <input name="rep_first_Name" type="text" class="form-control" id="rep_first_Name" value="{{isset($representatives)?$representatives->first_Name :''}}" placeholder="Rep First Name">
                             </div>
                             <div class="mb-3">
-                                <label for="rep_last_Name" class="form-label">Representative Last Name</label>
-                                <input name="rep_last_Name" type="text" class="form-control" id="rep_last_Name" value="{{isset($representatives)?$representatives->last_Name :''}}" placeholder="Representative Last Name">
+                                <label for="rep_last_Name" class="form-label">Rep Last Name</label>
+                                <input name="rep_last_Name" type="text" class="form-control" id="rep_last_Name" value="{{isset($representatives)?$representatives->last_Name :''}}" placeholder="Rep Last Name">
                             </div>
                             <div class="mb-3">
                                 <label for="rep_designation" class="form-label">Designation</label>
-                                <input name="rep_designation" type="text" class="form-control" id="rep_designation" value="{{isset($representatives)?$representatives->designation :''}}" placeholder="Representative Designation">
+                                <input name="rep_designation" type="text" class="form-control" id="rep_designation" value="{{isset($representatives)?$representatives->designation :''}}" placeholder="Rep Designation">
                             </div>
                             <div class="mb-3">
                                 <label for="rep_picture" class="form-label">Picture</label>

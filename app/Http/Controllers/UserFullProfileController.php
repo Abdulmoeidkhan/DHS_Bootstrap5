@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Delegate;
+use App\Models\Delegation;
 use Illuminate\Http\Request;
 use App\Models\Image;
 use App\Models\ImageBlob;
@@ -35,7 +36,8 @@ class UserFullProfileController extends Controller
     public function renderDelegateProfile()
     {
         $delegate = Delegate::where([['delegation', session()->get('user')->delegationUid], ['delegation_type', 'Self']])->first();
-        $rep = Delegate::where([['delegation', session()->get('user')->delegationUid], ['delegation_type', 'Representative']])->first();
+        $rep = Delegate::where([['delegation', session()->get('user')->delegationUid], ['delegation_type', 'Rep']])->first();
+        $delegationData = Delegation::where('uid', session()->get('user')->delegationUid)->first();
         // return session()->get('user')->delegationUid;
         $delegateImage = ImageBlob::where('uid', $delegate->delegates_uid)->first();
         $repImage = ImageBlob::where('uid', $rep->delegates_uid)->first();
@@ -46,7 +48,7 @@ class UserFullProfileController extends Controller
         }
         $delegate->interests = $interests;
         // return $repImage->img_blob;
-        return view('pages.delegateProfile', ['delegate' => $delegate, 'delegateImage' => $delegateImage, 'repImage' => $repImage, 'rep' => $rep]);
+        return view('pages.delegateProfile', ['delegate' => $delegate, 'delegateImage' => $delegateImage, 'repImage' => $repImage, 'rep' => $rep,'delegationData'=>$delegationData]);
     }
     public function renderSpeceficDelegateProfile(Request $req, $id)
     {

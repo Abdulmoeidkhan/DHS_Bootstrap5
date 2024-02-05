@@ -102,11 +102,6 @@
                 </li>
                 @endif
                 @if(session()->get('user')->roles[0]->name =="delegate")
-                <script>
-                    console.log(
-                        <?php echo session()->get('user');?>
-                    )
-                </script>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.members',session()->get('user')->delegationUid)}}" aria-expanded="false">
                         <span>
@@ -143,6 +138,14 @@
                             <i class="ti ti-mail"></i>
                         </span>
                         <span class="hide-menu">Delegation</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.hotelPlans')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-mail"></i>
+                        </span>
+                        <span class="hide-menu">Hotel Plan</span>
                     </a>
                 </li>
                 @endif
@@ -240,7 +243,7 @@
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
                         <li class="sidebar-item">
-                            <a href="../main/blog-posts.html" class="sidebar-link">
+                            <a href="{{route('pages.listOfAllDelegation')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
@@ -248,7 +251,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="../main/blog-detail.html" class="sidebar-link">
+                            <a href="{{route('pages.listOfAllDelegates')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
@@ -616,12 +619,36 @@
                     </ul>
                 </li>
                 @endif
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                    </a>
+                </li>
             </ul>
-            <div class="unlimited-access hide-menu bg-light-primary position-relative mb-7 mt-5 rounded">
+            <!-- <div class="unlimited-access hide-menu bg-light-primary position-relative mb-7 mt-5 rounded">
                 <div class="d-flex">
                     <br />
                 </div>
-            </div>
+            </div> -->
 
             <!-- <ul id="sidebarnav">
                 <li class="nav-small-cap">

@@ -13,8 +13,12 @@ use App\Models\Delegate;
 use App\Models\DelegateFlight;
 use App\Models\Document;
 use App\Models\Flightsegment;
+use App\Models\Hotel;
+use App\Models\HotelPlan;
 use App\Models\ImageBlob;
 use App\Models\Rank;
+use App\Models\Room;
+use App\Models\Roomtype;
 
 class MemberController extends Controller
 {
@@ -78,12 +82,17 @@ class MemberController extends Controller
     public function membersData(Request $req, $id)
     {
         $delegation = Delegation::where('uid', $id)->first();
-        $delegates = Delegate::where([['delegation', $delegation->uid],['first_Name','!=',null]])->get();
+        $delegates = Delegate::where([['delegation', $delegation->uid], ['first_Name', '!=', null]])->get();
         foreach ($delegates as $key => $delegate) {
             $delegates[$key]->head = $delegate->delegates_uid == $delegation->delegationhead ? "Head" : "Member";
             $delegates[$key]->rankName = Rank::where('ranks_uid', $delegate->rank)->first('ranks_name');
             $delegates[$key]->flight = DelegateFlight::where('delegate_uid', $delegate->delegates_uid)->first();
+            $delegates[$key]->rooms = HotelPlan::where('assign_to', $delegate->delegates_uid)->first();
             $delegates[$key]->image = ImageBlob::where('uid', $delegate->delegates_uid)->first();
+            if ($delegate->rooms) {
+                $delegates[$key]->rooms->hotelName = Hotel::where('hotel_uid', $delegate->rooms->hotel_uid)->first('hotel_names');
+                $delegates[$key]->rooms->room_type = Roomtype::where('room_type_uid', $delegate->rooms->room_type)->first('room_type');
+            }
         }
         return $delegates;
     }
@@ -101,11 +110,11 @@ class MemberController extends Controller
     public function addMemberRequest(Request $req)
     {
         // return $req;
-        $delegationUid = Delegation::where('user_uid', $req->delegation)->first();
+        // $delegationUid = Delegation::where('user_uid', $req->delegation)->first();
         $delegate = new Delegate();
         $delegate->delegates_uid = (string) Str::uuid();
         $delegate->rank = $req->rank;
-        $delegate->delegation = $delegationUid->uid;
+        $delegate->delegation = $req->delegation;
         $delegate->first_Name = $req->firstName;
         $delegate->last_Name = $req->lastName;
         $delegate->designation = $req->designation;

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Delegate;
 use App\Models\Delegation;
+use App\Models\Hotel;
+use App\Models\HotelOperator;
 use App\Models\Liason;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,16 +23,72 @@ use Laratrust\Models\Permission;
 
 class ActivateProfileController extends Controller
 {
+
+    protected function activateHotelOperator($recievedParams)
+    {
+        $hotel = Hotel::where([['hotel_code', $recievedParams->activationCode . '']])->first();
+        if ($hotel) {
+            $assignOperator = new HotelOperator();
+            $assignOperator->hotel_operator_uid  = (string) Str::uuid();
+            $assignOperator->hotel_uid = $hotel->hotel_uid;
+            $assignOperator->hotel_code  = $hotel->hotel_code;
+            $assignOperator->hotel_operator_assign = 1;
+            $assignOperator->hotel_operator_user  = Auth::user()->uid;
+            $assignOperator->hotel_operator_status = 1;
+            try {
+                $operatorSaved = $assignOperator->save();
+                $rolesAndPermissionGiven = $operatorSaved ? $this->operatorRolesAndTeams($assignOperator->hotel_operator_user) : false;
+                return $rolesAndPermissionGiven;
+            } catch (\Illuminate\Database\QueryException $exception) {
+                if ($exception->errorInfo[2]) {
+                    return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+                } else {
+                    return  back()->with('error', $exception->errorInfo[2]);
+                }
+            }
+        } else {
+            return false;
+        }
+    }
+
+    protected function operatorRolesAndTeams($uid)
+    {
+        $team = Team::where('name', 'hotels')->first();
+        $role = Role::where('name', 'hotels')->first();
+        $user = User::with('roles', 'permissions')->where('uid', $uid)->first();
+        $oldPermissions = $user->permissions;
+        $rolesRemoved = $user->removeRole($user->roles[0], $user->roles[0]);
+        foreach ($oldPermissions as $oldPermission) {
+            $user->removePermission($oldPermission, $user->roles[0]);
+        }
+        if ($rolesRemoved) {
+            try {
+                $rolesAdded = $user->addRole($role, $team);
+                $newdPermissions = $user->givePermissions(['read', 'create'], $team);
+                $updatedUser = User::with('roles', 'permissions')->where('uid', $uid)->first();
+                $updatedUser->images = Image::where('uid', $uid)->first();
+                session()->forget('user');
+                session()->put('user', $updatedUser);
+                return true;
+            } catch (\Illuminate\Database\QueryException $exception) {
+                if ($exception->errorInfo[2]) {
+                    return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+                } else {
+                    return  back()->with('error', $exception->errorInfo[2]);
+                }
+            }
+        } else {
+            return false;
+        }
+    }
+
+
     protected function activateDelegate($recievedParams)
     {
         $delegationUid = Delegation::where([['delegationCode', $recievedParams->activationCode . '']])->first();
         if ($delegationUid) {
-            // $delegate = new Delegate();
-            // $delegate->user_uid = $recievedParams->uid;
-            // $delegate->delegation = $delegationUid->uid;
             try {
                 $delegateClaim = Delegation::where('uid', $delegationUid->uid)->update(['user_uid' => Auth::user()->uid]);
-                // $savedDelegate = Delegation::where('delegates_uid', $delegationUid->uid)->update(['user_uid' => $recievedParams->uid]);
                 $updatesDone = $delegateClaim ? Delegation::where('delegationCode', $recievedParams->activationCode . '')->update(['delegation_response' => 'Accepted']) : false;
                 $rolesAndPermissionGiven = $updatesDone ? $this->delegationRolesAndTeams($recievedParams->uid, $delegationUid) : false;
                 return $rolesAndPermissionGiven;
@@ -231,18 +289,22 @@ class ActivateProfileController extends Controller
                 // $delegateRolesPermission = $this->delegationRolesAndTeams($req->uid);
                 return $delegateActivated ? back()->with('message', 'Delegation Updated Successfully') : back()->with('error', 'Delegation already assigned');
                 break;
-            case "LO" || "RO" || "IO":
+            case "HL":
+                $operatorActivated = $this->activateHotelOperator($req);
+                return $operatorActivated ? back()->with('message', 'Profile Updated Successfully') : back()->with('error', 'Officer already assigned');
+                break;
+            case "LO":
                 $officerActivated = $this->activateOfficer($req);
                 return $officerActivated ? back()->with('message', 'Officer Updated Successfully') : back()->with('error', 'Officer already assigned');
                 break;
-            // case "RO":
-            //     $receivingActivated = $this->activateReceiving($req);
-            //     return $receivingActivated ? back()->with('message', 'Receiving Updated Successfully') : back()->with('error', 'Receiving already assigned');
-            //     break;
-            // case "IO":
-            //     $interpreterActivated = $this->activateInterpreter($req);
-            //     return $interpreterActivated ? back()->with('message', 'Receiving Updated Successfully') : back()->with('error', 'Receiving already assigned');
-            //     break;
+            case "RO":
+                $officerActivated = $this->activateOfficer($req);
+                return $officerActivated ? back()->with('message', 'Officer Updated Successfully') : back()->with('error', 'Officer already assigned');
+                break;
+            case "IO":
+                $officerActivated = $this->activateOfficer($req);
+                return $officerActivated ? back()->with('message', 'Officer Updated Successfully') : back()->with('error', 'Officer already assigned');
+                break;
             default:
                 return back()->with('error', 'Something Went Wrong');
         }

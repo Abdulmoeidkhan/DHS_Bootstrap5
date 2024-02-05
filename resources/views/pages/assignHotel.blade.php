@@ -1,7 +1,10 @@
 @auth
 @extends('layouts.layout')
 @section("content")
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
+<!-- Flatpickr JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <div class="row">
     <div class="col-lg-12 d-flex align-items-stretch">
         <div class="card w-100">
@@ -249,8 +252,6 @@
                                     <td class="border-bottom-0">
                                         <p class="mb-0 fw-normal">{{$hotelPlan->hotel_roomtype_doubleOccupancy}}</p>
                                     </td>
-
-
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -270,7 +271,7 @@
             <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">New Room Assignment</h5>
                 <div class="table-responsive">
-                    <form name="roomInfo" id="roomInfo" method="POST" action="{{route('request.assignedRoom')}}">
+                    <form name="roomInfo" id="roomInfo" method="POST" action="{{$assignHotel?route('request.updateRoom',$assignHotel->room_uid):route('request.assignedRoom')}}">
                         <fieldset>
                             <legend>Add Room</legend>
                             @csrf
@@ -278,32 +279,37 @@
                                 <label for="room_type" class="form-label">Room Type</label>
                                 <select class="form-select" aria-label="Rooms" id="room_type" name="room_type" required>
                                     @foreach($renderRank=\App\Models\Roomtype::all() as $key=>$roomtype)
-                                    <option value="{{$roomtype->room_type_uid}}">{{$roomtype->room_type}}</option>
+                                    <option value="{{$roomtype->room_type_uid}}" {{!empty($assignHotel)&& $assignHotel->room_type == $roomtype->room_type_uid?'selected':''}}>{{$roomtype->room_type}}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <input type="hidden" name="hotel_uid" value="{{$hotelPlans[0]->hotel_plan_uid}}"/>
+                            <input type="hidden" name="hotel_uid" value="{{$hotelPlans[0]->hotel_plan_uid}}" />
+                            <input type="hidden" name="assign_to" value="{{$id}}" />
+                            @if(!empty($assignHotel)&& $assignHotel->room_type)
+                            <input type="hidden" name="room_uid" value="{{$assignHotel->room_uid}}" />
+                            @endif
                             <div class="mb-3">
-                                <label for="room_nos" class="form-label">Room No.</label>
-                                <input type="text" class="form-control" id="room_nos" name="room_no" placeholder="302" value="{{!empty($selectedRoom) && $selectedRoom->room_nos ? $selectedRoom->room_nos : ''}}" />
+                                <label for="room_no" class="form-label">Room No.</label>
+                                <input type="text" class="form-control" id="room_no" name="room_no" placeholder="302" value="{{!empty($assignHotel) && $assignHotel->room_no ? $assignHotel->room_no : ''}}" />
                             </div>
                             <div class="mb-3">
                                 <label for="room_checkin" class="form-label">Check-In</label>
-                                <input type="date" class="form-control" id="room_checkin" name="room_checkin" value="{{!empty($selectedRoom) &&$selectedRoom->checked_in?$selectedRoom->room_checkin:''}}" />
-                            </div>
-                            <div class="mb-3">
-                                <label for="room_checkout" class="form-label">Check-Out</label>
-                                <input type="date" class="form-control" id="room_checkout" name="room_checkout" value="{{!empty($selectedRoom) &&$selectedRoom->checked_out?$selectedRoom->room_checkout:''}}" />
+                                <input type="date" class="form-control" id="room_checkin" name="room_checkin" value="{{!empty($assignHotel) &&$assignHotel->room_checkin?$assignHotel->room_checkin:''}}" />
                             </div>
                             <div class="mb-3">
                                 <label for="checked_in_time" class="form-label">Check-In Time</label>
-                                <input type="time" class="form-control" id="checked_in_time" name="checked_in_time" value="{{!empty($selectedRoom) &&$selectedRoom->checked_in_time?$selectedRoom->checked_in_time:''}}" />
+                                <input type="time" class="form-control" id="checked_in_time" name="checked_in_time" value="{{!empty($assignHotel) &&$assignHotel->checked_in_time?$assignHotel->checked_in_time:''}}" step="1" inputmode="numeric" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="room_checkout" class="form-label">Check-Out</label>
+                                <input type="date" class="form-control" id="room_checkout" name="room_checkout" value="{{!empty($assignHotel) &&$assignHotel->room_checkout?$assignHotel->room_checkout:''}}" />
                             </div>
                             <div class="mb-3">
                                 <label for="checked_out_time" class="form-label">Check-Out Time</label>
-                                <input type="time" class="form-control" id="checked_out_time" name="checked_out_time" value="{{!empty($selectedRoom) &&$selectedRoom->checked_out_time?$selectedRoom->checked_out_time:''}}" />
+                                <input type="time" class="form-control" id="checked_out_time" name="checked_out_time" value="{{!empty($assignHotel) &&$assignHotel->checked_out_time?$assignHotel->checked_out_time:''}}" step="1" inputmode="numeric" />
                             </div>
-                            <input type="submit" name="submit" class="btn btn-primary" value="{{!empty($selectedRoom)?'Update Room':'Add Room'}}" />
+
+                            <input type="submit" name="submit" class="btn btn-{{!empty($assignHotel)?'success':'primary'}}" value="{{!empty($assignHotel)?'Update Room':'Add Room'}}" />
                         </fieldset>
                     </form>
                 </div>
@@ -312,5 +318,21 @@
     </div>
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr("#checked_in_time", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            time_24hr: true
+        });
+        flatpickr("#checked_out_time", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            time_24hr: true
+        });
+    });
+</script>
 @endsection
 @endauth

@@ -69,7 +69,7 @@
             </div>
             <div class="card-body p-4">
                 <div class="mb-4">
-                    <h5 class="card-title fw-semibold">Representative Picture</h5>
+                    <h5 class="card-title fw-semibold">Rep Picture</h5>
                 </div>
                 <img src="{{$repImage?$repImage->img_blob:asset('assets/images/profile/user-1.jpg')}}" width="200px" height="200px" class="rounded mx-auto d-block" alt="User Profile Picture">
                 <br />
@@ -140,6 +140,13 @@
                                 <input name="organistaion" type="text" class="form-control" id="organistaion" placeholder="Organistaion" value="{{$delegate->organistaion}}" required>
                             </div> -->
                             <div class="mb-3">
+                                <label for="delegation_response" class="form-label">Delegation Response</label>
+                                <select class="form-select" aria-label="Delegation Response" id="delegation_response" name="delegation_response" required>
+                                    <option value="Accepted" {{isset($delegationData)?($delegationData->delegation_response == 'Accepted' ? 'Selected':''):''}}> Accepted </option>
+                                    <option value="Regretted" {{isset($delegationData)?($delegationData->delegation_response == 'Regretted' ? 'Selected':''):''}}> Regretted </option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <input class="form-check-input" type="radio" name="self" id="self" value="1" <?php echo $delegate->self ? 'checked' : '' ?>>
                                 <label class="form-check-label" for="self">
                                     Self
@@ -148,7 +155,7 @@
                             <div class="mb-3">
                                 <input class="form-check-input" type="radio" name="self" id="rep" value="0" <?php echo !$delegate->self ? 'checked' : '' ?>>
                                 <label class="form-check-label" for="rep">
-                                    Representative
+                                    Rep
                                 </label>
                             </div>
                             <div class="mb-3">
@@ -161,16 +168,16 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="rep_first_Name" class="form-label">Representative First Name</label>
-                                <input name="rep_first_Name" type="text" class="form-control" id="rep_first_Name" placeholder="Representative First Name" value="{{$rep->first_Name}}">
+                                <label for="rep_first_Name" class="form-label">Rep First Name</label>
+                                <input name="rep_first_Name" type="text" class="form-control" id="rep_first_Name" placeholder="Rep First Name" value="{{$rep->first_Name}}">
                             </div>
                             <div class="mb-3">
-                                <label for="rep_last_Name" class="form-label">Representative Last Name</label>
-                                <input name="rep_last_Name" type="text" class="form-control" id="rep_last_Name" placeholder="Representative Last Name" value="{{$rep->last_Name}}">
+                                <label for="rep_last_Name" class="form-label">Rep Last Name</label>
+                                <input name="rep_last_Name" type="text" class="form-control" id="rep_last_Name" placeholder="Rep Last Name" value="{{$rep->last_Name}}">
                             </div>
                             <div class="mb-3">
                                 <label for="rep_designation" class="form-label">Designation</label>
-                                <input name="rep_designation" type="text" class="form-control" id="rep_designation" value="{{isset($rep)?$rep->designation :''}}" placeholder="Representative Designation">
+                                <input name="rep_designation" type="text" class="form-control" id="rep_designation" value="{{isset($rep)?$rep->designation :''}}" placeholder="Rep Designation">
                             </div>
                             <input type="hidden" name="delegation_uid" value="{{$delegate->delegation}}" />
                             <input type="hidden" name="self_delegate_uid" value="{{$delegate->delegates_uid}}" />

@@ -25,7 +25,7 @@ class DelegatesPageController extends Controller
                 ->leftJoin('delegations', 'delegates.delegation', '=', 'delegations.uid')
                 ->leftJoin('vips', 'vips.vips_uid', '=', 'delegations.invited_by')
                 ->where([['delegates.first_Name', '!=', null], ['delegates.status', '1'], ['self', '1']])
-                ->select('delegates.*', 'delegate_flights.*', 'image_blobs.uid','image_blobs.img_blob', 'delegations.country', 'delegations.delegationCode', 'delegations.delegation_status', 'delegations.invited_by', 'vips.*')
+                ->select('delegates.*', 'delegate_flights.*', 'image_blobs.uid', 'image_blobs.img_blob', 'delegations.country', 'delegations.delegation_response', 'delegations.delegationCode', 'delegations.delegation_status', 'delegations.invited_by', 'vips.*')
                 ->orderBy('delegations.country', 'asc')
                 ->get();
 
@@ -42,7 +42,7 @@ class DelegatesPageController extends Controller
                 ->leftJoin('delegations', 'delegates.delegation', '=', 'delegations.uid')
                 ->leftJoin('vips', 'delegations.invited_by', '=', 'vips.vips_uid')
                 ->where([['delegates.first_Name', '!=', null], ['delegates.status', '0'], ['self', '1']])
-                ->select('delegates.*', 'delegate_flights.*', 'image_blobs.uid', 'delegations.country', 'delegations.invited_by', 'vips.*')
+                ->select('delegates.*', 'delegate_flights.*', 'image_blobs.uid', 'delegations.country', 'delegations.delegation_response', 'delegations.invited_by', 'vips.*')
                 ->orderBy('delegations.country', 'asc')
                 ->get();
 

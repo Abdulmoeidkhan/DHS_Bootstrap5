@@ -69,9 +69,9 @@
                                         <a class="btn btn-outline-success" href="{{route('pages.delegateProfile')}}">
                                             <i class="ti ti-user-check" style="font-size: 24px;"></i>
                                         </a>
-                                        <a class="btn btn-outline-badar" href="{{route('pages.members',session()->get('user')->uid)}}">
+                                        <!-- <a class="btn btn-outline-badar" href="{{route('pages.members',session()->get('user')->uid)}}">
                                             <i class="ti ti-user-plus" style="font-size: 24px;"></i>
-                                        </a>
+                                        </a> -->
                                     </div>
                                 </td>
                             </tr>

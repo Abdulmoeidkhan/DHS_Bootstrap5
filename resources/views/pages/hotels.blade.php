@@ -138,7 +138,7 @@
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Hotels</h5>
             <div class="table-responsive">
-                <table id="table" data-auto-refresh-interval="60" data-flat="true" data-search="true" data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true" data-toggle="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getRoomsForDelegate')}}">
+                <table id="table"      data-virtual-scroll="true"   data-flat="true" data-search="true" data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true" data-toggle="table"   data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getRoomsForDelegate')}}">
                     <thead>
                         <tr>
                             <th data-filter-control="input" data-formatter="operateSerial">S.No</th>
@@ -152,17 +152,19 @@
                             <th data-filter-control="input" data-field="delegation_type" data-sortable="true" data-formatter="operateDelegateType">Delegation Type</th>
                             <th data-filter-control="input" data-field="officers" data-formatter="operateOfficer" data-sortable="true">Officer</th>
                             <th data-filter-control="input" data-field="hotel_name" data-formatter="operateHotel" data-sortable="true">Hotel</th>
-                            <th data-filter-control="input" data-field="hotel_plans" data-formatter="operateRoomType" data-formatter="true">Room Type</th>
+                            <th data-filter-control="input" data-field="room_type" data-formatter="true">Room Type</th>
                             <th data-filter-control="input" data-field="room_no" data-sortable="true">Room</th>
                             <th data-filter-control="input" data-field="arrival_date" data-formatter="true">Arrival Date</th>
                             <th data-filter-control="input" data-field="arrival_time" data-formatter="true">Arrival Time</th>
                             <th data-filter-control="input" data-field="arrived" data-formatter="operateFlghtStatus">Arrived</th>
                             <th data-filter-control="input" data-formatter="operateRoomCheckInStatus">Room Check-In</th>
                             <th data-filter-control="input" data-field="room_checkin" data-formatter="true">Room Check-In Date</th>
+                            <th data-filter-control="input" data-field="checked_in_time" data-formatter="true">Room Check-In Time</th>
                             <th data-filter-control="input" data-formatter="operateRoomCheckOutStatus">Room Check-Out</th>
                             <th data-filter-control="input" data-field="room_checkout" data-formatter="true">Room Check-Out Date</th>
+                            <th data-filter-control="input" data-field="checked_out_time" data-formatter="true">Room Check-Out Time</th>
                             <th data-field="delegates_uid" data-formatter="operateRoom">Add/Edit</th>
-                            <th data-field="room_uid" data-formatter="deleteRoom">Delete</th>
+                            <!-- <th data-field="room_uid" data-formatter="deleteRoom">Delete</th> -->
                         </tr>
                     </thead>
                 </table>
@@ -263,11 +265,11 @@
         }
     }
 
-    function operateRoomType(value, row, index) {
-        if (value) {
-            return value.map((val) => `${val.room_type}`)
-        }
-    }
+    // function operateRoomType(value, row, index) {
+    //     if (value) {
+    //         return value.map((val) => `${val.room_type}`)
+    //     }
+    // }
 
     // function operateRoom(value, row, index) {
     //     if (value == null) {

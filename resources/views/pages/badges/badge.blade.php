@@ -31,7 +31,7 @@
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Badges</h5>
             <div class="table-responsive">
-                <table id="table" data-auto-refresh-interval="60" data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates',1)}}">
+                <table id="table"      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" data-search="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates',1)}}">
                     <thead>
                         <tr>
                             <th data-formatter="operateSerial" data-filter-control="input">S.No.</th>
@@ -102,7 +102,7 @@
         if (value) {
             return [
                 '<div class="left">',
-                '<img src="' + value + '" width="100%"/>',
+                '<img src="' + value + '" width="80px" height="80px"/>',
                 '</div>'
             ].join('')
         }

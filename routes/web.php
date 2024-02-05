@@ -33,6 +33,7 @@ use App\Http\Controllers\PlansController;
 use App\Http\Controllers\PrintInvitationController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\ReceivingController;
+use App\Http\Controllers\ReportController;
 use App\Models\Delegate;
 use App\Models\Delegation;
 use Illuminate\Support\Facades\Route;
@@ -102,6 +103,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'liasonTypeCheck'], function () {
         Route::get('/delegationAssigned', [DelegationsPageController::class, 'delegationAssigned'])->name('pages.delegationAssigned');
+        Route::get('/hotelPlans', [HotelController::class, 'hotelPlans'])->name('pages.hotelPlans');
         Route::get('/liason/delegateProfile/{id}', [LiasonsController::class, 'specificLiasonsData'])->name('pages.liasonDelegateProfile');
     });
 
@@ -263,6 +265,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->name('request.updateAuthority');
         Route::post('/addDelegationRequest', [AddDelegationPageController::class, 'addDelegation'])->name('request.addDelegationRequest');
         Route::post('/updateDelegationRequest', [AddDelegationPageController::class, 'updateDelegationRequest'])->name('request.updateDelegationRequest');
+
+
+        // Reports Start
+        Route::get('reports/listOfAllDelegation', [ReportController::class, 'listOfAllDelegation'])->name('pages.listOfAllDelegation');
+        Route::get('reports/listOfAllDelegates', [ReportController::class, 'listOfAllDelegates'])->name('pages.listOfAllDelegates');
+
+        // Reports End
     });
     Route::group(['middleware' => 'authorisedUserCheck'], function () {
         // Liason Start
