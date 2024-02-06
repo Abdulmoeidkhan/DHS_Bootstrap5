@@ -270,6 +270,8 @@ Route::group(['middleware' => 'auth'], function () {
         // Reports Start
         Route::get('reports/listOfAllDelegation', [ReportController::class, 'listOfAllDelegation'])->name('pages.listOfAllDelegation');
         Route::get('reports/listOfAllDelegates', [ReportController::class, 'listOfAllDelegates'])->name('pages.listOfAllDelegates');
+        Route::get('reports/delegationAttendance', [ReportController::class, 'delegationAttendance'])->name('pages.delegationAttendance');
+        Route::get('reports/delegationAttendanceData', [ReportController::class, 'delegationAttendanceData'])->name('request.delegationAttendanceData');
 
         // Reports End
     });

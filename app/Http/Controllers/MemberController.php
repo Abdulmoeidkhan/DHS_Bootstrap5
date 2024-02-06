@@ -87,7 +87,7 @@ class MemberController extends Controller
             $delegates[$key]->head = $delegate->delegates_uid == $delegation->delegationhead ? "Head" : "Member";
             $delegates[$key]->rankName = Rank::where('ranks_uid', $delegate->rank)->first('ranks_name');
             $delegates[$key]->flight = DelegateFlight::where('delegate_uid', $delegate->delegates_uid)->first();
-            $delegates[$key]->rooms = HotelPlan::where('assign_to', $delegate->delegates_uid)->first();
+            $delegates[$key]->rooms = HotelPlan::where('delegation_uid', $id)->first();
             $delegates[$key]->image = ImageBlob::where('uid', $delegate->delegates_uid)->first();
             if ($delegate->rooms) {
                 $delegates[$key]->rooms->hotelName = Hotel::where('hotel_uid', $delegate->rooms->hotel_uid)->first('hotel_names');

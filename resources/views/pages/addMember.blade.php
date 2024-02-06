@@ -213,6 +213,7 @@
                             </div> -->
                             <br />
                             <input name="delegate_uid" type="hidden" id="delegate_uid" value="{{$id}}" required>
+                            <input name="delegation_uid" type="hidden" id="delegation_uid" value="{{$member->delegation}}" required>
                             <input name="flightsegment_uid" type="hidden" id="flightsegment_uid" value="{{$flight?->flightsegment_uid}}">
                             <input type="submit" name="submit" class="btn btn-primary" value="Update Flight" />
                         </fieldset>
