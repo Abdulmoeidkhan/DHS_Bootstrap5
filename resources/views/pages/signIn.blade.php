@@ -19,7 +19,7 @@
               </div>
               @endif
               <a href="{{route('pages.dashboard')}}" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                <img src="{{asset('images/icons/ideas_logo_2024.png')}}" width="180" alt="">
+                <img src="{{asset('images/icons/Badar-Logo-Black.png')}}" width="180" alt="">
               </a>
               <p class="text-center">Delegation Handling System</p>
               <form action="{{route('request.signIn')}}" method="POST">
