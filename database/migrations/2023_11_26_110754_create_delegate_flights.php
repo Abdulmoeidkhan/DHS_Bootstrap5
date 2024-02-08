@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('delegate_flights', function (Blueprint $table) {
             $table->id();
             $table->uuid('delegate_uid')->unique();
+            $table->uuid('delegation_uid');
             $table->string('passport')->unique();
             $table->string('arrival_date');
             $table->string('arrival_time');
