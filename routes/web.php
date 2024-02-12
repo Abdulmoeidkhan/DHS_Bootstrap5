@@ -270,6 +270,8 @@ Route::group(['middleware' => 'auth'], function () {
         // Reports Start
         Route::get('reports/countryData', [ReportController::class, 'countryData'])->name('request.countryData');
         Route::get('reports/countryReport', [ReportController::class, 'countryReport'])->name('pages.countryReport');
+        Route::get('reports/countryAndVipReport', [ReportController::class, 'countryAndVipReport'])->name('pages.countryAndVipReport');
+        Route::get('reports/countryAndVipData', [ReportController::class, 'countryAndVipData'])->name('request.countryAndVipData');
         Route::get('reports/vipDelegationData', [ReportController::class, 'vipDelegationData'])->name('request.vipDelegationData');
         Route::get('reports/listOfAllDelegates', [ReportController::class, 'listOfAllDelegates'])->name('pages.listOfAllDelegates');
         Route::get('reports/vipDelegationReport', [ReportController::class, 'vipDelegationReport'])->name('pages.vipDelegationReport');

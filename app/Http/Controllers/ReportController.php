@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\DelegateFlight;
 use App\Models\Delegation;
+use App\Models\Rank;
 use App\Models\Vips;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -52,7 +53,7 @@ class ReportController extends Controller
     // Country Report End
 
     // Vip Start
-    
+
     public function vipDelegationReport()
     {
         return view('pages.reports.delegationByVip');
@@ -62,7 +63,7 @@ class ReportController extends Controller
     {
         $invitees = Delegation::distinct('invited_by')->get('invited_by');
         foreach ($invitees as $inviteeskey => $invitee) {
-            $invitees[$inviteeskey]->name = Vips::where('vips_uid',$invitee->invited_by)->first('vips_designation');
+            $invitees[$inviteeskey]->name = Vips::where('vips_uid', $invitee->invited_by)->first('vips_designation');
             $invitees[$inviteeskey]->count = Delegation::where('invited_by', $invitee->invited_by)->count();
             $invitees[$inviteeskey]->regretted = Delegation::where([['invited_by', $invitee->invited_by], ['delegation_response', 'Regretted']])->count();
             $invitees[$inviteeskey]->accepted = Delegation::where([['invited_by', $invitee->invited_by], ['delegation_response', 'Accepted']])->count();
@@ -73,6 +74,31 @@ class ReportController extends Controller
     }
 
     // Vip End
+
+    // Country And Vip Start
+
+    public function countryAndVipReport()
+    {
+        $vips = Vips::get();
+        return view('pages.reports.countryAndVipReport', ['vips' => $vips]);
+    }
+
+    public function countryAndVipData()
+    {
+
+        $countries = Delegation::distinct('country')->get('country');
+        $vips = Vips::get();
+        foreach ($countries as $countrieskey => $country) {
+            foreach ($vips as $vipsKey => $vip) {
+                $vips[$vipsKey]->rankName = Rank::where('ranks_uid', $vip->vips_rank)->first('ranks_name');
+                $countries[$countrieskey]->count = Delegation::where([['invited_by', $vip->vips_uid], ['country', $country->country]])->count();
+                $countries[$countrieskey]->vip = $vips[$vipsKey];
+            }
+        }
+        // return $vips;
+        return $countries;
+    }
+    // Country And Vip End
 
     public function listOfAllDelegation()
     {
