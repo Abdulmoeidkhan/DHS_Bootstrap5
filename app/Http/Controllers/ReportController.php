@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Delegate;
 use App\Models\DelegateFlight;
 use App\Models\Delegation;
 use App\Models\Rank;
@@ -94,7 +95,7 @@ class ReportController extends Controller
             foreach ($delegations as $delegationsKey => $delegation) {
                 $vip = Vips::where('vips_uid', $delegation->invited_by)->first('vips_rank');
                 $rank = Rank::where('ranks_uid', $vip->vips_rank)->first('ranks_name');
-                $renameArray = [$rank->ranks_name=>1];
+                $renameArray = [$rank->ranks_name => 1];
                 array_push($countArray, [...$renameArray]);
             }
             $countries[$countrieskey]->totalCount = count($delegations);
@@ -108,7 +109,31 @@ class ReportController extends Controller
         }
         return $countries;
     }
+
     // Country And Vip End
+
+    // Self/Rep Start
+    public function selfRepReport()
+    {
+        return view('pages.reports.selfRepReport');
+    }
+
+    public function selfRepData()
+    {
+        $invitees = Delegation::distinct('invited_by')->get();
+        foreach ($invitees as $inviteeskey => $invitee) {
+            $invitees[$inviteeskey]->name = Vips::where('vips_uid', $invitee->invited_by)->first('vips_designation');
+            $invitees[$inviteeskey]->count = Delegation::where('invited_by', $invitee->invited_by)->count();
+            $invitees[$inviteeskey]->awaited = Delegation::where([['invited_by', $invitee->invited_by], ['delegation_response', 'Awaited']])->count();
+            $invitees[$inviteeskey]->regretted = Delegation::where([['invited_by', $invitee->invited_by], ['delegation_response', 'Regretted']])->count();
+            $acceptedSelf = Delegation::where([['invited_by', $invitee->invited_by], ['delegation_response', 'Accepted']])->first();
+            $invitees[$inviteeskey]->self = Delegate::where([['delegation', $acceptedSelf->uid], ['delegation_type', 'Self'], ['self', 1]])->count();
+            $invitees[$inviteeskey]->rep = Delegate::where([['delegation', $acceptedSelf->uid], ['delegation_type', 'Rep'], ['self', 1]])->count();
+        }
+        return $invitees;
+    }
+
+    // Self/Rep End
 
     public function listOfAllDelegation()
     {
