@@ -6,12 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Delegate;
 use App\Models\DelegateFlight;
 use App\Models\Delegation;
+use App\Models\Flightsegment;
 use App\Models\Rank;
 use App\Models\Vips;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use PDO;
 
 class ReportController extends Controller
 {
@@ -134,6 +133,26 @@ class ReportController extends Controller
     }
 
     // Self/Rep End
+
+    // Delegation Arrival Status Start
+
+    public function delegationArrivalStatusReport()
+    {
+        $flights = DelegateFlight::distinct('arrival_date')->get('arrival_date');
+        return view('pages.reports.delegationArrivalStatus', ['flights' => $flights]);
+    }
+    public function delegationArrivalStatusData()
+    {
+        $flights = DelegateFlight::distinct('delegation_uid')->get('delegation_uid');
+        foreach ($flights as $key => $flight) {
+        }
+        // $countries = array_map(function ($flight) {
+        //     return Delegation::where('uid', $flight->delegation_uid)->get();
+        // }, $flights);
+        // return $countries;
+    }
+
+    // Delegation Arrival Status End
 
     public function listOfAllDelegation()
     {
