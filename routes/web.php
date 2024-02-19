@@ -34,8 +34,6 @@ use App\Http\Controllers\PrintInvitationController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\ReceivingController;
 use App\Http\Controllers\ReportController;
-use App\Models\Delegate;
-use App\Models\Delegation;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -64,6 +62,10 @@ Route::get('/accountActivation', function () {
 Route::get('/404', function () {
     return view('pages.404');
 })->name("404");
+
+Route::get('/eBadge',function (){
+    return view('pages.badges.e-badge');
+})->name('e-badge');
 
 // Route::get('/userList', function () {
 //     return view('pages.userList');

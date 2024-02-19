@@ -143,17 +143,23 @@ class ReportController extends Controller
     }
     public function delegationArrivalStatusData()
     {
-        $flights = DelegateFlight::distinct('delegation_uid')->get('delegation_uid');
-        $delegations=[];
-        foreach ($flights as $key => $flight) {
-            array_push($delegations,Delegation::where('uid',$flight->delegation_uid)->first());
-            $delegations[0]->flight=DelegateFlight::where('delegation_uid',$flight->delegation_uid)->get();
+        $countries = Delegation::distinct('country')->get('country');
+        // return Delegation::where('country', $countries[0]->country)->count();
+        foreach ($countries as $keyCountry => $country) {
+            $countries[$keyCountry]->totalCount = Delegation::where('country', $country->country)->count();
+            
         }
+        // $flights = DelegateFlight::distinct('delegation_uid')->get('delegation_uid');
+        // $delegations=[];
+        // foreach ($flights as $key => $flight) {
+        //     array_push($delegations,Delegation::where('uid',$flight->delegation_uid)->first());
+        //     $delegations[0]->flight=DelegateFlight::where('delegation_uid',$flight->delegation_uid)->get();
+        // }
         // $countries = array_map(function ($flight) {
         //     return Delegation::where('uid', $flight->delegation_uid)->get();
         // }, $flights);
-        // return $countries;
-        return $delegations;
+        return $countries;
+        // return $delegations;
     }
 
     // Delegation Arrival Status End
