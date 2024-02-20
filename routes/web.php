@@ -63,9 +63,7 @@ Route::get('/404', function () {
     return view('pages.404');
 })->name("404");
 
-Route::get('/eBadge',function (){
-    return view('pages.badges.e-badge');
-})->name('e-badge');
+
 
 // Route::get('/userList', function () {
 //     return view('pages.userList');
@@ -332,6 +330,11 @@ Route::group(['middleware' => 'auth'], function () {
         // Delegate Start
         Route::get('/delegateProfile/{id}', [UserFullProfileController::class, 'renderSpeceficDelegateProfile'])->name('pages.renderSpeceficDelegateProfile');
         // Delegate End
+
+        // E-Badge Printing Start
+        Route::get('/eBadge/{id}', [BadgeController::class, 'renderEBadge'])->name('pages.e-badge');
+        Route::get('/listEBadge', [BadgeController::class, 'renderListEBadge'])->name('pages.e-listEBadge');
+        // E-Badge Printing End
     });
 
     Route::get('/invitation/{id}', [PrintInvitationController::class, 'printInvitation'])->name("pages.invitationPage");

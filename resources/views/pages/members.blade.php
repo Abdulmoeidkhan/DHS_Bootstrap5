@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css'>
 <style>
-
     .box {
         padding: 0.5em;
         width: 100%;
@@ -127,7 +126,7 @@
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Delegates</h5>
             <div class="table-responsive">
-                <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-flat="true" table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.getMembers',$id)}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
+                <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-flat="true" table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.getMembers',$id)}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]">
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
@@ -138,9 +137,6 @@
                             <th data-field="delegation_type" data-sortable="true">Type</th>
                             <th data-field="flight.passport" data-sortable="true">Passport</th>
                             <th data-field="status" data-sortable="true" data-field="status" data-formatter="statusFormatter">Member Active</th>
-                            @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="delegate")
-                            <th data-field="delegates_uid" data-sortable="true" data-field="status" data-formatter="statusChangerFormatter">Status Changer</th>
-                            @endif
                             <th data-field="flight.arrival_flight" data-sortable="true">Arrival Flight</th>
                             <th data-field="flight.arrival_date" data-sortable="true">Arrival Date</th>
                             <th data-field="flight.arrival_time" data-sortable="true">Arrival Time</th>
@@ -153,7 +149,8 @@
                             <th data-field="rooms.room_checkout" data-sortable="true">Room Check Out</th>
                             <th data-field="image.img_blob" data-sortable="true" data-formatter="operatePicture" data-force-hide="true">Image</th>
                             @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="delegate")
-                            <th data-field="delegates_uid" data-sortable="true" data-formatter="operateDelegate" data-force-hide="true">Actions</th>
+                            <th data-field="delegates_uid" data-sortable="true" data-field="status" data-formatter="statusChangerFormatter">Active/Deactive</th>
+                            <th data-field="delegates_uid" data-sortable="true" data-formatter="operateDelegate" data-force-hide="true">Update Flight Info</th>
                             @endif
                             <!-- <th data-field="organistaion" data-sortable="true">Organistaion</th> -->
                             <!-- <th data-field="last_Name" data-sortable="true">Delegate Last Name</th>
