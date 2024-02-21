@@ -31,12 +31,16 @@
             background-color: #c8c8c8;
             padding: 20px;
         }
+        @media screen {
+            .container-fluid{
+                padding:50px 500px;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <br />
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col">
                 <img src="{{asset('images/icons/ideas_logo_2024.png')}}" width="180px" />
@@ -50,7 +54,6 @@
                 <p>Delegation ID : {{$delegations[0]->delegationCode}}</p>
             </div>
         </div>
-        <br />
         <div class="row">
             <div class="col">
                 <ul>
@@ -66,7 +69,7 @@
                 </div>
             </div>
             <div class="col barcode-class">
-                <div id="barCode" custom-id="{{$delegations[0]->delegationCode}}"></div>
+                <div id="barCode" class="mx-auto" custom-id="{{$delegations[0]->delegationCode}}"></div>
             </div>
             <div class="col">
                 <div class="special-col">
@@ -74,7 +77,6 @@
                 </div>
             </div>
         </div>
-        <br />
         <div class="row">
             <table class="table table-bordered">
                 <thead>
@@ -144,11 +146,13 @@
                         </td>
                         <td>
                             <ul>
+                                @if($hotelNames)
                                 @foreach($hotelNames as $key=>$hotelName)
                                 <li class="text-capitalize">
                                     {{$hotelName->hotel_names}}
                                 </li>
                                 @endforeach
+                                @endif
                             </ul>
                         </td>
                     </tr>
@@ -165,16 +169,24 @@
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Passport</th>
-                        <th scope="col">Arrival</th>
-                        <th scope="col">Departure</th>
+                        <th scope="col">Arrival Flight</th>
+                        <th scope="col">Arrival Date</th>
+                        <th scope="col">Arrival Time</th>
+                        <th scope="col">Departure Flight</th>
+                        <th scope="col">Departure Date</th>
+                        <th scope="col">Departure Time</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($flightDetails as $key=>$flightDetail)
                     <tr>
                         <td>{{$flightDetail->passport}}</td>
-                        <td>{{$flightDetail->arrival_flight.' '.$flightDetail->arrival_time.' ( '.$flightDetail->arrival_date}})</td>
-                        <td>{{$flightDetail->departure_flight.' '.$flightDetail->departure_time.' ( '.$flightDetail->departure_date}})</td>
+                        <td>{{$flightDetail->arrival_flight}}</td>
+                        <td>{{$flightDetail->arrival_date}}</td>
+                        <td>{{$flightDetail->arrival_time}}</td>
+                        <td>{{$flightDetail->departure_flight}}</td>
+                        <td>{{$flightDetail->departure_date}}</td>
+                        <td>{{$flightDetail->departure_time}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -188,6 +200,9 @@
             <p>
                 <b>Please print and bring this e-Badge with you on your arrival</b>
             </p>
+        </div>
+        <div class="row">
+            <img src="{{asset('images/icons/Partners.png')}}" style="width:100%;" alt="Partners LOGO" />
         </div>
     </div>
     <script src="{{asset('assets/libs/jquery/dist/jquery.min.js')}}"></script>
