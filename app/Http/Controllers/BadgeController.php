@@ -33,7 +33,7 @@ class BadgeController extends Controller
         $invitedBys = Vips::where('vips_uid', $delegations[0]->invited_by)->get();
         $officers = Officer::where('officer_delegation', $delegates[0]->delegation)->get();
         $hotelPlan = HotelPlan::where('delegation_uid', $delegates[0]->delegation)->get('hotel_uid');
-        $hotelNames = Hotel::where('hotel_uid', $hotelPlan[0]->hotel_uid)->get();
+        $hotelNames =sizeof($hotelPlan)>1 ?Hotel::where('hotel_uid', $hotelPlan[0]->hotel_uid)->get():'';
         $flightDetails = DelegateFlight::where('delegate_uid', $id)->get();
         // return $delegations->delegationCode;
         return view('pages.badges.e-badge', ['delegations' => $delegations, 'delegates' => $delegates, 'invitedBys' => $invitedBys, 'officers' => $officers, 'hotelNames' => $hotelNames, 'flightDetails' => $flightDetails]);
