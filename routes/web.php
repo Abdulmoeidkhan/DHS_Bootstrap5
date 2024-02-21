@@ -107,6 +107,31 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/liason/delegateProfile/{id}', [LiasonsController::class, 'specificLiasonsData'])->name('pages.liasonDelegateProfile');
     });
 
+
+    Route::group(['middleware' => 'hotelUserTypeCheck'], function () {
+
+        // Hotels Pages And API Start
+        Route::get('/category', [HotelController::class, 'categoryRender'])->name('pages.category');
+        Route::get('/hotels', [HotelController::class, 'render'])->name('pages.hotels');
+        Route::get('/getHotels', [HotelController::class, 'getHotels'])->name('request.getHotels');
+        Route::get('/addHotelPage/{id?}', [HotelController::class, 'addHotelRender'])->name('pages.addHotel');
+        Route::post('/addHotels', [HotelController::class, 'addHotel'])->name('request.addHotel');
+        Route::post('/updateHotel/{id}', [HotelController::class, 'updateHotel'])->name('request.updateHotel');
+        // Hotels Pages And API End
+
+        // Room Pages And API Start
+        // Route::get('/getRooms', [HotelController::class, 'getRooms'])->name('request.getRooms');
+        Route::get('/getRoomsForDelegate', [HotelController::class, 'getRoomsForDelegate'])->name('request.getRoomsForDelegate');
+        Route::get('/addRoomPage/{id?}', [HotelController::class, 'addRoomRender'])->name('pages.addRoom');
+        Route::post('/addRoom', [HotelController::class, 'addRoom'])->name('request.addRoom');
+        Route::post('/assignedRoom', [HotelController::class, 'assignedRoom'])->name('request.assignedRoom');
+        Route::post('/updateRoom/{id}', [HotelController::class, 'updateRoom'])->name('request.updateRoom');
+        Route::post('/roomUpdate', [HotelController::class, 'roomUpdate'])->name('request.roomUpdate');
+        Route::post('/deleteroom', [HotelController::class, 'deleteroom'])->name('request.deleteroom');
+        // Room Pages And API End
+
+    });
+
     Route::group(['middleware' => 'userTypeCheck'], function () {
         // Flights Pages And API Start
         Route::get('/airport', [DelegateFlightController::class, 'render'])->name('pages.airport');
@@ -122,14 +147,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/getTickets', [FlightsController::class, 'getTickets'])->name('request.getTickets');
         // Flights Pages And API End
 
-        // Hotels Pages And API Start
-        Route::get('/category', [HotelController::class, 'categoryRender'])->name('pages.category');
-        Route::get('/hotels', [HotelController::class, 'render'])->name('pages.hotels');
-        Route::get('/getHotels', [HotelController::class, 'getHotels'])->name('request.getHotels');
-        Route::get('/addHotelPage/{id?}', [HotelController::class, 'addHotelRender'])->name('pages.addHotel');
-        Route::post('/addHotels', [HotelController::class, 'addHotel'])->name('request.addHotel');
-        Route::post('/updateHotel/{id}', [HotelController::class, 'updateHotel'])->name('request.updateHotel');
-        // Hotels Pages And API End
+
 
         // Room Type Pages And API Start
         Route::get('/getRoomTypes', [HotelController::class, 'getRoomTypes'])->name('request.getRoomTypes');

@@ -82,7 +82,6 @@ class ActivateProfileController extends Controller
         }
     }
 
-
     protected function activateDelegate($recievedParams)
     {
         $delegationUid = Delegation::where([['delegationCode', $recievedParams->activationCode . '']])->first();
@@ -103,6 +102,7 @@ class ActivateProfileController extends Controller
             return false;
         }
     }
+
     protected function delegationRolesAndTeams($uid, $delegationUid)
     {
         $team = Team::where('name', 'delegate')->first();
@@ -124,7 +124,6 @@ class ActivateProfileController extends Controller
         // $user->addRole('admin', 'admin');
         // $user->givePermissions(['read', 'create', 'update', 'delete'], 'admin');
     }
-
 
     protected function activateOfficer($recievedParams)
     {
@@ -247,6 +246,7 @@ class ActivateProfileController extends Controller
             return false;
         }
     }
+
     protected function liasonRolesAndTeams($uid, $type)
     {
         $team = Team::where('display_name', $type)->first();
@@ -278,7 +278,6 @@ class ActivateProfileController extends Controller
         }
     }
 
-
     public function activateProfile(Request $req)
     {
         $prefixSelect = substr(trim($req->activationCode), 0, 2);
@@ -309,6 +308,7 @@ class ActivateProfileController extends Controller
                 return back()->with('error', 'Something Went Wrong');
         }
     }
+    
     public function renderProfileActivation()
     {
         $user = User::with('roles', 'permissions')->where('id', Auth::user()->id)->first();
