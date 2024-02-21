@@ -170,15 +170,15 @@ class AddDelegationPageController extends Controller
                         $arrayToBeUpdate['delegationhead'] = $req->self_delegate_uid;
                         $arrayToBeUpdateRep['self'] = 0;
                         $arrayToBeUpdateSelf['self'] = 1;
-                        $arrayToBeUpdateRep['status'] = 1;
-                        $arrayToBeUpdateSelf['status'] = 0;
+                        $arrayToBeUpdateRep['status'] = 0;
+                        $arrayToBeUpdateSelf['status'] = 1;
                     }
                     if ($key == 'self' && $value == 0) {
                         $arrayToBeUpdate['delegationhead'] = $req->rep_delegate_uid;
                         $arrayToBeUpdateRep['self'] = 1;
                         $arrayToBeUpdateSelf['self'] = 0;
-                        $arrayToBeUpdateRep['status'] = 0;
-                        $arrayToBeUpdateSelf['status'] = 1;
+                        $arrayToBeUpdateRep['status'] = 1;
+                        $arrayToBeUpdateSelf['status'] = 0;
                     }
                 }
             }

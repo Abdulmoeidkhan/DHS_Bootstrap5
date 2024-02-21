@@ -6,11 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Delegate;
 use App\Models\Delegation;
 use Illuminate\Http\Request;
-use App\Models\Image;
 use App\Models\ImageBlob;
 use App\Models\InterestedProgram;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Laratrust\Models\Role;
 use Laratrust\Models\Permission;
 
