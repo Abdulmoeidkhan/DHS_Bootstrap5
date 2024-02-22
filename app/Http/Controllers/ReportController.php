@@ -144,10 +144,14 @@ class ReportController extends Controller
     public function delegationArrivalStatusData()
     {
         $countries = Delegation::distinct('country')->get('country');
-        // return Delegation::where('country', $countries[0]->country)->count();
+        $flights = DelegateFlight::distinct('arrival_date')->get('arrival_date');
         foreach ($countries as $keyCountry => $country) {
             $countries[$keyCountry]->totalCount = Delegation::where('country', $country->country)->count();
-            
+            $delegations = Delegation::where('country', $country->country)->get('uid');
+            foreach ($flights as $flightKey => $flight) {
+
+            }
+            $countries[$keyCountry]->$delegations = $delegations;
         }
         // $flights = DelegateFlight::distinct('delegation_uid')->get('delegation_uid');
         // $delegations=[];

@@ -17,7 +17,7 @@ return [
     // "li6" => "Go to “IDEAS Delegation Online” for account login and activation at:",
     "subli7" => "www.dhs.ideaspakistan.gov.pk",
     "subli8" => "www.delegation.com.pk",
-    "li7" => "Click on the “New Account Activation” button in login page.",
+    "li7" => "First, you need to go to www.delegation.ideaspakistan.gov.pk. After that, you'll need to create an account. During the account creation process, an OTP (One-Time Password) will be sent to your email for email verification. After verifying your email, you'll need to click on the activation button. Then, you'll need to enter your ID and Password along with the OTP. After that, you'll be logged in. Then, you'll need to enter the provided code to activate your delegation.",
     "li8" => "You will need to enter the “login ID” and “activation code” exactly as show in this letter.",
     "li9" => "Enter your account activation information and then click “Submit”. After successfully completed your activation you will need created a user login account to login and access “Delegation Online System”",
     "li10" => "Provide complete your required “user login” account information and click “Submit”. After is successful submitted your registration information, then you can access login page to login Delegation Online using “login name” and “password”.",

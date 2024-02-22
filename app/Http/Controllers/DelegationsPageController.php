@@ -9,9 +9,11 @@ use App\Models\Delegation;
 use App\Models\Driver;
 use App\Models\Hotel;
 use App\Models\HotelPlan;
+use App\Models\InterestedProgram;
 use App\Models\Interpreter;
 use App\Models\Liason;
 use App\Models\Officer;
+use App\Models\Program;
 use App\Models\Rank;
 use App\Models\Receiving;
 use App\Models\Vips;
@@ -43,12 +45,19 @@ class DelegationsPageController extends Controller
                 $delegations[$key]->vips = Vips::where('vips_uid', $delegation->vips_uid)->first();
                 $delegations[$key]->vips->rank = Rank::where('ranks_uid', $delegations[$key]->vips->vips_rank)->first('ranks_name');
                 $delegations[$key]->cars = Car::where('car_delegation', $delegation->uid)->get();
+                $delegations[$key]->interests = InterestedProgram::where('delegation_uid', $delegation->uid)->get();
+
+                foreach ($delegations[$key]->interests as $keyInterests => $interest) {
+                    $delegations[$key]->interests[$keyInterests]->program = Program::where('program_uid', $interest->program_uid)->first();
+                }
                 foreach ($delegations[$key]->members as $memberkey => $members) {
                     $delegations[$key]->members[$memberkey]->rank = Rank::where('ranks_uid', $members->rank)->first('ranks_name');
                 }
                 foreach ($delegations[$key]->cars as $keyCar => $car) {
                     $delegations[$key]->cars[$keyCar]->driver = Driver::where('driver_uid', $car->driver_uid)->first();
                 }
+
+
                 $delegations[$key]->hotelData = $delegations[$key]->hotelPlan ? Hotel::where('hotel_uid', $delegations[$key]->hotelPlan?->hotel_uid)->first('hotel_names') : null;
                 // $delegations[$key]->vips->rank = array_filter($ranks->toArray(),fn ($rank) => $rank['ranks_uid'] == $delegations[$key]->vips->vips_rank);
                 // $delegations[$key]->vips->rank = Rank::where('vips_uid', $delegations[$key]->vips['vips_rank'])->first('ranks_name');
@@ -108,6 +117,11 @@ class DelegationsPageController extends Controller
                 $delegations[$key]->vips = Vips::where('vips_uid', $delegation->vips_uid)->first();
                 $delegations[$key]->vips->rank = Rank::where('ranks_uid', $delegations[$key]->vips->vips_rank)->first('ranks_name');
                 $delegations[$key]->cars = Car::where('car_delegation', $delegation->uid)->get();
+                $delegations[$key]->interests = InterestedProgram::where('delegation_uid', $delegation->uid)->get();
+
+                foreach ($delegations[$key]->interests as $keyInterests => $interest) {
+                    $delegations[$key]->interests[$keyInterests]->program = Program::where('program_uid', $interest->program_uid)->first();
+                }
                 foreach ($delegations[$key]->members as $memberkey => $members) {
                     $delegations[$key]->members[$memberkey]->rank = Rank::where('ranks_uid', $members->rank)->first('ranks_name');
                 }
@@ -130,7 +144,7 @@ class DelegationsPageController extends Controller
                     'hotel_roomtype_suite' => $delegations->sum('hotelPlan.hotel_roomtype_suite'),
                     'hotel_roomtype_superior' => $delegations->sum('hotelPlan.hotel_roomtype_superior'),
                 ],
-                'country'=>'Total'
+                'country' => 'Total'
 
             ];
             // return $total=$delegations->sum('car.car_category_a');
@@ -160,6 +174,11 @@ class DelegationsPageController extends Controller
                 $delegations[$key]->vips = Vips::where('vips_uid', $delegation->vips_uid)->first();
                 $delegations[$key]->vips->rank = Rank::where('ranks_uid', $delegations[$key]->vips->vips_rank)->first('ranks_name');
                 $delegations[$key]->cars = Car::where('car_delegation', $delegation->uid)->get();
+                $delegations[$key]->interests = InterestedProgram::where('delegation_uid', $delegation->uid)->get();
+
+                foreach ($delegations[$key]->interests as $keyInterests => $interest) {
+                    $delegations[$key]->interests[$keyInterests]->program = Program::where('program_uid', $interest->program_uid)->first();
+                }
                 foreach ($delegations[$key]->members as $memberkey => $members) {
                     $delegations[$key]->members[$memberkey]->rank = Rank::where('ranks_uid', $members->rank)->first('ranks_name');
                 }
@@ -234,6 +253,11 @@ class DelegationsPageController extends Controller
                 $delegations[$key]->vips = Vips::where('vips_uid', $delegation->vips_uid)->first();
                 $delegations[$key]->vips->rank = Rank::where('ranks_uid', $delegations[$key]->vips->vips_rank)->first('ranks_name');
                 $delegations[$key]->cars = Car::where('car_delegation', $delegation->uid)->get();
+                $delegations[$key]->interests = InterestedProgram::where('delegation_uid', $delegation->uid)->get();
+
+                foreach ($delegations[$key]->interests as $keyInterests => $interest) {
+                    $delegations[$key]->interests[$keyInterests]->program = Program::where('program_uid', $interest->program_uid)->first();
+                }
                 foreach ($delegations[$key]->members as $memberkey => $members) {
                     $delegations[$key]->members[$memberkey]->rank = Rank::where('ranks_uid', $members->rank)->first('ranks_name');
                 }

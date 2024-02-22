@@ -283,7 +283,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <input type="hidden" name="hotel_uid" value="{{$hotelPlans[0]->hotel_plan_uid}}" />
+                            <input type="hidden" name="hotel_uid" value="{{$hotelPlans[0]->hotel_uid}}" />
                             <input type="hidden" name="assign_to" value="{{$id}}" />
                             @if(!empty($assignHotel)&& $assignHotel->room_type)
                             <input type="hidden" name="room_uid" value="{{$assignHotel->room_uid}}" />

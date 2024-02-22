@@ -50,8 +50,8 @@
                 <div class="card-border">
                     <div class="logo-child">
                         @if($delegate->image)
-                    <img src="{{$delegate->image?$delegate->image->img_blob:''}}" style="height: 80px; width: 80px;" class="img-fluid" alt="" />
-                    @endif
+                        <img src="{{$delegate->image?$delegate->image->img_blob:''}}" style="height: 80px; width: 80px;" class="img-fluid" alt="" />
+                        @endif
                     </div>
                 </div>
             </div>

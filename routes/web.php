@@ -121,7 +121,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Room Pages And API Start
         // Route::get('/getRooms', [HotelController::class, 'getRooms'])->name('request.getRooms');
-        Route::get('/getRoomsForDelegate', [HotelController::class, 'getRoomsForDelegate'])->name('request.getRoomsForDelegate');
+        Route::get('/getRoomsForDelegate/{id?}', [HotelController::class, 'getRoomsForDelegate'])->name('request.getRoomsForDelegate');
         Route::get('/addRoomPage/{id?}', [HotelController::class, 'addRoomRender'])->name('pages.addRoom');
         Route::post('/addRoom', [HotelController::class, 'addRoom'])->name('request.addRoom');
         Route::post('/assignedRoom', [HotelController::class, 'assignedRoom'])->name('request.assignedRoom');
@@ -156,16 +156,16 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/updateRoomType/{id}', [HotelController::class, 'updateRoomType'])->name('request.updateRoomType');
         // Room Type Pages And API End
 
-        // Room Pages And API Start
-        // Route::get('/getRooms', [HotelController::class, 'getRooms'])->name('request.getRooms');
-        Route::get('/getRoomsForDelegate', [HotelController::class, 'getRoomsForDelegate'])->name('request.getRoomsForDelegate');
-        Route::get('/addRoomPage/{id?}', [HotelController::class, 'addRoomRender'])->name('pages.addRoom');
-        Route::post('/addRoom', [HotelController::class, 'addRoom'])->name('request.addRoom');
-        Route::post('/assignedRoom', [HotelController::class, 'assignedRoom'])->name('request.assignedRoom');
-        Route::post('/updateRoom/{id}', [HotelController::class, 'updateRoom'])->name('request.updateRoom');
-        Route::post('/roomUpdate', [HotelController::class, 'roomUpdate'])->name('request.roomUpdate');
-        Route::post('/deleteroom', [HotelController::class, 'deleteroom'])->name('request.deleteroom');
-        // Room Pages And API End
+        // // Room Pages And API Start
+        // // Route::get('/getRooms', [HotelController::class, 'getRooms'])->name('request.getRooms');
+        // Route::get('/getRoomsForDelegate', [HotelController::class, 'getRoomsForDelegate'])->name('request.getRoomsForDelegate');
+        // Route::get('/addRoomPage/{id?}', [HotelController::class, 'addRoomRender'])->name('pages.addRoom');
+        // Route::post('/addRoom', [HotelController::class, 'addRoom'])->name('request.addRoom');
+        // Route::post('/assignedRoom', [HotelController::class, 'assignedRoom'])->name('request.assignedRoom');
+        // Route::post('/updateRoom/{id}', [HotelController::class, 'updateRoom'])->name('request.updateRoom');
+        // Route::post('/roomUpdate', [HotelController::class, 'roomUpdate'])->name('request.roomUpdate');
+        // Route::post('/deleteroom', [HotelController::class, 'deleteroom'])->name('request.deleteroom');
+        // // Room Pages And API End
 
         // Driver Pages And API Start
         Route::get('/getDrivers', [CarsController::class, 'getDrivers'])->name('request.getDrivers');

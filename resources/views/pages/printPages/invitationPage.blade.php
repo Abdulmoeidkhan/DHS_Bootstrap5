@@ -74,32 +74,32 @@
                 <p class="blockquote">
                     <?php echo config('localvariables.eventName'); ?>
                 </p>
-                <p>
+                <!-- <p>
                     Location : <?php echo config('localvariables.eventLocation'); ?>
                 </p>
                 <p>
                     Date : <?php echo config('localvariables.eventDate'); ?>
-                </p>
+                </p> -->
             </div>
         </div>
     </div>
     <div class="row container-first-child">
         <div class="col-md-12 parent-print-program">
             <div>
-            <br />
+                <br />
                 <h2>How to Print your e-Badge?</h2>
-              
+
                 <p>Go to the Badge Tab in Navigation Bar (Side Bar)</p>
-                    <p>
-                        Click on the Blue Button in a row to print required Badge
-                    </p>
+                <p>
+                    Click on the Blue Button in a row to print required Badge
+                </p>
             </div>
         </div>
 
     </div>
     <div class="row">
         <div class="col-md-12">
-        <br />
+            <br />
             <div>
                 <h2>Important Note:</h2>
                 <br />
@@ -111,6 +111,29 @@
                 </p>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <br />
+            <div>
+                <h2>Contact Information:</h2>
+                <br />
+                <p class="blockquote">
+                <ol>
+                    <li class="list-group-item">
+                        DEFENCE EXPORT PROMOTION ORGANIZATION E-10 SECTOR DEFENCE COMPLEX ISLAMABAD
+                    </li>
+                    <li class="list-group-item">
+                        Phone : 92-51-9262017, 92-51-9262031, 92-51-9262042, 92-51-9262018
+                        Email : info@depo.gov.pk, www.depo.gov.pk
+                    </li>
+                </ol>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <img src="{{asset('images/icons/Partners.png')}}" style="width:100%;" alt="Partners LOGO" />
     </div>
 </div>
 @endsection

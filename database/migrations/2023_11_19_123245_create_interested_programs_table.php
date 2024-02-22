@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('interested_programs', function (Blueprint $table) {
             $table->id();
             $table->uuid('interest_uid')->unique();
-            $table->uuid('guest_uid')->unique();
-            $table->uuid('program_uid')->unique();
-            $table->uuid('delegation_uid')->unique();
+            $table->uuid('guest_uid');
+            $table->uuid('program_uid');
+            $table->uuid('delegation_uid');
             $table->timestamps();
         });
     }

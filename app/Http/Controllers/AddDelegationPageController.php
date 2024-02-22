@@ -167,14 +167,14 @@ class AddDelegationPageController extends Controller
                     $arrayToBeUpdate['delegationuid'] = $req->delegation_uid;
                     $arrayToBeUpdate['delegation_response'] = $req->delegation_response;
                     if ($key == 'self' && $value == 1) {
-                        $arrayToBeUpdate['delegationhead'] = $req->self_delegate_uid;
+                        // $arrayToBeUpdate['delegationhead'] = $req->self_delegate_uid;
                         $arrayToBeUpdateRep['self'] = 0;
                         $arrayToBeUpdateSelf['self'] = 1;
                         $arrayToBeUpdateRep['status'] = 0;
                         $arrayToBeUpdateSelf['status'] = 1;
                     }
                     if ($key == 'self' && $value == 0) {
-                        $arrayToBeUpdate['delegationhead'] = $req->rep_delegate_uid;
+                        // $arrayToBeUpdate['delegationhead'] = $req->rep_delegate_uid;
                         $arrayToBeUpdateRep['self'] = 1;
                         $arrayToBeUpdateSelf['self'] = 0;
                         $arrayToBeUpdateRep['status'] = 1;
@@ -221,7 +221,9 @@ class AddDelegationPageController extends Controller
                     if ($key == 'self') {
                         $arrayToBeUpdate['delegationhead'] = $req->self_delegation_uid;
                         $arrayToBeUpdateRep['self'] = $value ? 0 : 1;
+                        $arrayToBeUpdateRep['status'] = $value ? 0 : 1;
                         $arrayToBeUpdateSelf['self'] = $value;
+                        $arrayToBeUpdateSelf['status'] = $value;
                     }
                     if ($key !== 'self') {
                         $arrayToBeUpdate[$key] = $value;

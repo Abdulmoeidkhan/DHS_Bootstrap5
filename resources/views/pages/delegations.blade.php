@@ -449,11 +449,7 @@
                                     <th data-filter-control="input" data-field="designation" data-sortable="true">Designation</th>
                                     <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                     <th data-filter-control="input" data-field="delegation_response" data-sortable="true">Response</th>
-<<<<<<< HEAD
-                                    <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
-=======
                                     <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th> 
->>>>>>> e55767cd8f62adc8e7133c8e7cc2a590f75cc922
                                     <th data-filter-control="input" data-field="member_count" data-sortable="true">Number Of Person</th>
                                     <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true">Car A</th>
                                     <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true">Car B</th>
@@ -496,11 +492,7 @@
                                     <th data-filter-control="input" data-field="designation" data-sortable="true">Designation</th>
                                     <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                     <th data-filter-control="input" data-field="delegation_response" data-sortable="true">Response</th>
-<<<<<<< HEAD
-                                    <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
-=======
                                     <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th> 
->>>>>>> e55767cd8f62adc8e7133c8e7cc2a590f75cc922
                                     <th data-filter-control="input" data-field="member_count" data-sortable="true">Number Of Person</th>
                                     <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true">Car A</th>
                                     <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true">Car B</th>
@@ -543,11 +535,7 @@
                                     <th data-filter-control="input" data-field="designation" data-sortable="true">Designation</th>
                                     <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                     <th data-filter-control="input" data-field="delegation_response" data-sortable="true">Response</th>
-<<<<<<< HEAD
-                                    <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
-=======
                                     <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th> 
->>>>>>> e55767cd8f62adc8e7133c8e7cc2a590f75cc922
                                     <th data-filter-control="input" data-field="member_count" data-sortable="true">Number Of Person</th>
                                     <th data-filter-control="input" data-field="carA.car_quantity" data-sortable="true">Car A</th>
                                     <th data-filter-control="input" data-field="carB.car_quantity" data-sortable="true">Car B</th>
@@ -663,6 +651,7 @@
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
+                                <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interesed Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
                                 <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
@@ -715,6 +704,7 @@
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
+                                <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interesed Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
                                 <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
@@ -767,6 +757,7 @@
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
+                                <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interesed Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
                                 <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
@@ -819,6 +810,7 @@
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
+                                <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interesed Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
                                 <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
@@ -871,6 +863,7 @@
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
+                                <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interesed Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
                                 <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
@@ -1074,7 +1067,6 @@
     function operateCarsName(value, row, index) {
         return value ? value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + (val.car_category == '61346491-983a-40ed-8477-2d9ed84e6767' ? 'Cat A' : 'Cat B') + '  ' + val.car_makes + ' ' + val.car_model + ' ' + val.car_number + '  ' + ' - ' + val.driver.driver_name + ' - ' + val.driver.driver_contact + '</div><br/>').join('') : '<div>-</div>';
     }
-
 
     function operateOfficer(value, row, index) {
         return row.delegation_response == 'Accepted' ? [
@@ -1309,7 +1301,6 @@
         }
     }
 
-
     function operateSelf(value, row, index) {
         if (value != null) {
             return !value ? 'Rep' : 'Self';
@@ -1318,6 +1309,16 @@
 
     function operateSerial(value, row, index) {
         return index + 1;
+    }
+
+    function operateInterets(value, row, index) {
+        if (value) {
+            return value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val.program.program_name + ' - Day ' + val.program.program_day + ' ' + val.program.program_start_time + ' ' + val.program.program_end_time + '</div><br/>').join('')
+        } else {
+            return [
+                '-',
+            ].join('')
+        }
     }
 
     const officerModal = document.getElementById('OfficerModal')
