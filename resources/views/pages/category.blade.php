@@ -24,6 +24,7 @@
                             <th data-field="hotel_address">Hotel Address</th>
                             <th data-field="contact_person" data-sortable="true">Contact Person</th>
                             <th data-field="contact_number" data-sortable="true">Contact Number</th>
+                            <th data-field="hotel_code" data-sortable="true">Hotel Code</th>
                             <th data-field="hotel_remarks">Remarks</th>
                             <th data-field="hotel_uid" data-formatter="hotelOperator">Actions</th>
                         </tr>

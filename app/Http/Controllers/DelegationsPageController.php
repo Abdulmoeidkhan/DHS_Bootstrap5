@@ -63,6 +63,25 @@ class DelegationsPageController extends Controller
                 // $delegations[$key]->vips->rank = Rank::where('vips_uid', $delegations[$key]->vips['vips_rank'])->first('ranks_name');
                 // $delegations[$key]->member_count = $delegations[$key]->member_count ? $delegations[$key]->member_count + 1 : 1;
             }
+
+            if ($delegations->count() > 0) {
+                $delegations[$delegations->count()] = [
+                    'car' =>
+                    [
+                        'car_category_a' => $delegations->sum('car.car_category_a'),
+                        'car_category_b' => $delegations->sum('car.car_category_b'),
+                    ],
+                    'member_count' => $delegations->sum('member_count'),
+                    'hotelPlan' =>
+                    [
+                        'hotel_roomtype_doubleOccupancy' => $delegations->sum('hotelPlan.hotel_roomtype_doubleOccupancy'),
+                        'hotel_roomtype_standard' => $delegations->sum('hotelPlan.hotel_roomtype_standard'),
+                        'hotel_roomtype_suite' => $delegations->sum('hotelPlan.hotel_roomtype_suite'),
+                        'hotel_roomtype_superior' => $delegations->sum('hotelPlan.hotel_roomtype_superior'),
+                    ],
+                    'country' => 'Total'
+                ];
+            }
             return $delegations;
         } else if ($status == null) {
             // $delegations = DB::table('delegations')
@@ -130,23 +149,24 @@ class DelegationsPageController extends Controller
                 }
                 $delegations[$key]->hotelData = $delegations[$key]->hotelPlan ? Hotel::where('hotel_uid', $delegations[$key]->hotelPlan?->hotel_uid)->first('hotel_names') : null;
             }
-            $delegations[$delegations->count()] = [
-                'car' =>
-                [
-                    'car_category_a' => $delegations->sum('car.car_category_a'),
-                    'car_category_b' => $delegations->sum('car.car_category_b'),
-                ],
-                'member_count' => $delegations->sum('member_count'),
-                'hotelPlan' =>
-                [
-                    'hotel_roomtype_doubleOccupancy' => $delegations->sum('hotelPlan.hotel_roomtype_doubleOccupancy'),
-                    'hotel_roomtype_standard' => $delegations->sum('hotelPlan.hotel_roomtype_standard'),
-                    'hotel_roomtype_suite' => $delegations->sum('hotelPlan.hotel_roomtype_suite'),
-                    'hotel_roomtype_superior' => $delegations->sum('hotelPlan.hotel_roomtype_superior'),
-                ],
-                'country' => 'Total'
-
-            ];
+            if ($delegations->count() > 0) {
+                $delegations[$delegations->count()] = [
+                    'car' =>
+                    [
+                        'car_category_a' => $delegations->sum('car.car_category_a'),
+                        'car_category_b' => $delegations->sum('car.car_category_b'),
+                    ],
+                    'member_count' => $delegations->sum('member_count'),
+                    'hotelPlan' =>
+                    [
+                        'hotel_roomtype_doubleOccupancy' => $delegations->sum('hotelPlan.hotel_roomtype_doubleOccupancy'),
+                        'hotel_roomtype_standard' => $delegations->sum('hotelPlan.hotel_roomtype_standard'),
+                        'hotel_roomtype_suite' => $delegations->sum('hotelPlan.hotel_roomtype_suite'),
+                        'hotel_roomtype_superior' => $delegations->sum('hotelPlan.hotel_roomtype_superior'),
+                    ],
+                    'country' => 'Total'
+                ];
+            }
             // return $total=$delegations->sum('car.car_category_a');
 
             return  $delegations;
@@ -191,6 +211,25 @@ class DelegationsPageController extends Controller
                 // $delegations[$key]->vips->rank = Rank::where('vips_uid', $delegations[$key]->vips['vips_rank'])->first('ranks_name');
                 // $delegations[$key]->member_count = $delegations[$key]->member_count ? $delegations[$key]->member_count + 1 : 1;
             }
+
+            if ($delegations->count() > 0) {
+                $delegations[$delegations->count()] = [
+                    'car' =>
+                    [
+                        'car_category_a' => $delegations->sum('car.car_category_a'),
+                        'car_category_b' => $delegations->sum('car.car_category_b'),
+                    ],
+                    'member_count' => $delegations->sum('member_count'),
+                    'hotelPlan' =>
+                    [
+                        'hotel_roomtype_doubleOccupancy' => $delegations->sum('hotelPlan.hotel_roomtype_doubleOccupancy'),
+                        'hotel_roomtype_standard' => $delegations->sum('hotelPlan.hotel_roomtype_standard'),
+                        'hotel_roomtype_suite' => $delegations->sum('hotelPlan.hotel_roomtype_suite'),
+                        'hotel_roomtype_superior' => $delegations->sum('hotelPlan.hotel_roomtype_superior'),
+                    ],
+                    'country' => 'Total'
+                ];
+            }
             return $delegations;
         } else if ($status == 2) {
             $delegations = DB::table('delegations')
@@ -227,6 +266,25 @@ class DelegationsPageController extends Controller
                 // $delegations[$key]->vips->rank = array_filter($ranks->toArray(),fn ($rank) => $rank['ranks_uid'] == $delegations[$key]->vips->vips_rank);
                 // $delegations[$key]->vips->rank = Rank::where('vips_uid', $delegations[$key]->vips['vips_rank'])->first('ranks_name');
                 // $delegations[$key]->member_count = $delegations[$key]->member_count ? $delegations[$key]->member_count + 1 : 1;
+            }
+
+            if ($delegations->count() > 0) {
+                $delegations[$delegations->count()] = [
+                    'car' =>
+                    [
+                        'car_category_a' => $delegations->sum('car.car_category_a'),
+                        'car_category_b' => $delegations->sum('car.car_category_b'),
+                    ],
+                    'member_count' => $delegations->sum('member_count'),
+                    'hotelPlan' =>
+                    [
+                        'hotel_roomtype_doubleOccupancy' => $delegations->sum('hotelPlan.hotel_roomtype_doubleOccupancy'),
+                        'hotel_roomtype_standard' => $delegations->sum('hotelPlan.hotel_roomtype_standard'),
+                        'hotel_roomtype_suite' => $delegations->sum('hotelPlan.hotel_roomtype_suite'),
+                        'hotel_roomtype_superior' => $delegations->sum('hotelPlan.hotel_roomtype_superior'),
+                    ],
+                    'country' => 'Total'
+                ];
             }
             return $delegations;
         } else if ($status == 3) {
@@ -269,6 +327,25 @@ class DelegationsPageController extends Controller
                 // $delegations[$key]->vips->rank = array_filter($ranks->toArray(),fn ($rank) => $rank['ranks_uid'] == $delegations[$key]->vips->vips_rank);
                 // $delegations[$key]->vips->rank = Rank::where('vips_uid', $delegations[$key]->vips['vips_rank'])->first('ranks_name');
                 // $delegations[$key]->member_count = $delegations[$key]->member_count ? $delegations[$key]->member_count + 1 : 1;
+            }
+
+            if ($delegations->count() > 0) {
+                $delegations[$delegations->count()] = [
+                    'car' =>
+                    [
+                        'car_category_a' => $delegations->sum('car.car_category_a'),
+                        'car_category_b' => $delegations->sum('car.car_category_b'),
+                    ],
+                    'member_count' => $delegations->sum('member_count'),
+                    'hotelPlan' =>
+                    [
+                        'hotel_roomtype_doubleOccupancy' => $delegations->sum('hotelPlan.hotel_roomtype_doubleOccupancy'),
+                        'hotel_roomtype_standard' => $delegations->sum('hotelPlan.hotel_roomtype_standard'),
+                        'hotel_roomtype_suite' => $delegations->sum('hotelPlan.hotel_roomtype_suite'),
+                        'hotel_roomtype_superior' => $delegations->sum('hotelPlan.hotel_roomtype_superior'),
+                    ],
+                    'country' => 'Total'
+                ];
             }
 
             return $delegations;

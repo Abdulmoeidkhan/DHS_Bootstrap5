@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('last_Name')->nullable();
             $table->string('first_Name')->nullable();
             $table->string('designation')->nullable();
+            $table->string('delegateCode')->unique();
             // $table->string('organistaion')->nullable();
             $table->string('itinerary_uid')->nullable();
             $table->integer('invitation_number')->nullable()->unique();

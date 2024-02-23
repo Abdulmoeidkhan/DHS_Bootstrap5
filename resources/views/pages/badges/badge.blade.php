@@ -80,6 +80,7 @@
     }
 
     function operateSelf(value, row, index) {
+        console.log(role)
         return !value ? 'Rep' : 'Self';
     }
 

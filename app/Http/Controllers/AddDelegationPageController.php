@@ -94,6 +94,7 @@ class AddDelegationPageController extends Controller
         $delegates->first_Name = $req->self_first_Name;
         $delegates->last_Name = $req->self_last_Name;
         $delegates->designation = $req->self_designation;
+        $delegates->delegateCode = $this->badge(8, "DLG");
 
         $delegation = new Delegation();
         $delegation->uid = (string) Str::uuid();
@@ -108,6 +109,7 @@ class AddDelegationPageController extends Controller
         $representative->delegates_uid = (string) Str::uuid();
         $representative->delegation_type = 'Rep';
         $representative->delegation = $delegation->uid;
+        $representative->delegateCode = $this->badge(8, "DLG");
 
 
         $delegateSaved = 0;

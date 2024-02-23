@@ -200,8 +200,9 @@ class HotelController extends Controller
             $hotelOperator = HotelOperator::where('hotel_operator_user', $id)->first();
             $delegatesWithRooms = DB::table('delegates')
                 ->leftJoin('delegations', 'delegates.delegation', '=', 'delegations.uid')
+                ->leftJoin('hotel_plans', 'hotel_plans.delegation_uid', '=', 'delegations.uid')
+                ->leftJoin('hotels', 'hotels.hotel_uid', '=', 'hotel_plans.hotel_uid')
                 ->leftJoin('rooms', 'delegates.delegates_uid', '=', 'rooms.assign_to')
-                ->leftJoin('hotels', 'hotels.hotel_uid', '=', 'rooms.hotel_uid')
                 ->leftJoin('roomtypes', 'rooms.room_type', '=', 'roomtypes.room_type_uid')
                 ->leftJoin('delegate_flights', 'delegates.delegates_uid', '=', 'delegate_flights.delegate_uid')
                 ->leftJoin('ranks', 'delegates.rank', '=', 'ranks.ranks_uid')

@@ -1313,7 +1313,8 @@
 
     function operateInterets(value, row, index) {
         if (value) {
-            return value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val.program.program_name + ' - Day ' + val.program.program_day + ' ' + val.program.program_start_time + ' ' + val.program.program_end_time + '</div><br/>').join('')
+            return value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val.program.program_name + '</div><br/>').join('')
+            // return value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val.program.program_name + ' - Day ' + val.program.program_day + ' ' + val.program.program_start_time + ' ' + val.program.program_end_time + '</div><br/>').join('')
         } else {
             return [
                 '-',
