@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\AirportOperator;
 use App\Models\User;
 use App\Models\Delegate;
 use App\Models\Delegation;
@@ -37,7 +38,7 @@ class ActivateProfileController extends Controller
             $assignOperator->hotel_operator_status = 1;
             try {
                 $operatorSaved = $assignOperator->save();
-                $rolesAndPermissionGiven = $operatorSaved ? $this->operatorRolesAndTeams($assignOperator->hotel_operator_user) : false;
+                $rolesAndPermissionGiven = $operatorSaved ? $this->operatorRolesAndTeams($assignOperator->hotel_operator_user, 'hotels') : false;
                 return $rolesAndPermissionGiven;
             } catch (\Illuminate\Database\QueryException $exception) {
                 if ($exception->errorInfo[2]) {
@@ -51,10 +52,31 @@ class ActivateProfileController extends Controller
         }
     }
 
-    protected function operatorRolesAndTeams($uid)
+    protected function activateAirportOperator($recievedParams)
     {
-        $team = Team::where('name', 'hotels')->first();
-        $role = Role::where('name', 'hotels')->first();
+
+        $assignOperator = new AirportOperator();
+        $assignOperator->airport_operator_uid   = (string) Str::uuid();
+        $assignOperator->airport_operator_assign = 1;
+        $assignOperator->airport_operator_user  = Auth::user()->uid;
+        $assignOperator->airport_operator_status = 1;
+        try {
+            $operatorSaved = $assignOperator->save();
+            $rolesAndPermissionGiven = $operatorSaved ? $this->operatorRolesAndTeams($assignOperator->airport_operator_user, 'airport') : false;
+            return $rolesAndPermissionGiven;
+        } catch (\Illuminate\Database\QueryException $exception) {
+            if ($exception->errorInfo[2]) {
+                return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+            } else {
+                return  back()->with('error', $exception->errorInfo[2]);
+            }
+        }
+    }
+
+    protected function operatorRolesAndTeams($uid, $rolesAndTeam)
+    {
+        $team = Team::where('name', $rolesAndTeam)->first();
+        $role = Role::where('name', $rolesAndTeam)->first();
         $user = User::with('roles', 'permissions')->where('uid', $uid)->first();
         $oldPermissions = $user->permissions;
         $rolesRemoved = $user->removeRole($user->roles[0], $user->roles[0]);
@@ -304,11 +326,15 @@ class ActivateProfileController extends Controller
                 $officerActivated = $this->activateOfficer($req);
                 return $officerActivated ? back()->with('message', 'Officer Updated Successfully') : back()->with('error', 'Officer already assigned');
                 break;
+            case "AP":
+                $airportOperator = $this->activateAirportOperator($req);
+                return $airportOperator ? back()->with('message', 'Airport Operator Updated Successfully') : back()->with('error', 'Operator already assigned');
+                break;
             default:
                 return back()->with('error', 'Something Went Wrong');
         }
     }
-    
+
     public function renderProfileActivation()
     {
         $user = User::with('roles', 'permissions')->where('id', Auth::user()->id)->first();

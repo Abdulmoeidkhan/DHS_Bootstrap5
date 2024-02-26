@@ -132,6 +132,23 @@ Route::group(['middleware' => 'auth'], function () {
 
     });
 
+
+    Route::group(['middleware' => 'airportUserTypeCheck'], function () {
+        // Flights Pages And API Start
+        Route::get('/airport', [DelegateFlightController::class, 'render'])->name('pages.airport');
+        Route::get('/flights', [FlightsController::class, 'render'])->name('pages.flights');
+        Route::get('/addflights', [FlightsController::class, 'addItineraryRender'])->name('pages.addflights');
+        Route::get('/addticketspage', [FlightsController::class, 'addTicketRender'])->name('pages.addticketspage');
+        Route::get('/viewItinerary/{id}', [FlightsController::class, 'viewItinerary'])->name('page.viewItinerary');
+        Route::get('/viewPassenger/{id}', [FlightsController::class, 'viewPassenger'])->name('page.viewPassenger');
+        Route::post('/addTicket', [FlightsController::class, 'addTicket'])->name('request.addTicket');
+        Route::post('/addItinerary', [FlightsController::class, 'addItinerary'])->name('request.addItinerary');
+        Route::post('/updateItinerary', [FlightsController::class, 'updateItinerary'])->name('request.updateItinerary');
+        Route::get('/getItinerary', [FlightsController::class, 'getItinerary'])->name('request.getItinerary');
+        Route::get('/getTickets', [FlightsController::class, 'getTickets'])->name('request.getTickets');
+        // Flights Pages And API End
+    });
+
     Route::group(['middleware' => 'userTypeCheck'], function () {
         // Flights Pages And API Start
         Route::get('/airport', [DelegateFlightController::class, 'render'])->name('pages.airport');

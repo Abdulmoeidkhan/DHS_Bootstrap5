@@ -1,8 +1,8 @@
 @auth
 @extends('layouts.layout')
 @section("content")
-
-    <div class="row">
+<h2>Welcome</h2>
+<!-- <div class="row">
         <div class="col-lg-8 d-flex align-items-strech">
             <div class="card w-100">
                 <div class="card-body">
@@ -26,7 +26,6 @@
         <div class="col-lg-4">
             <div class="row">
                 <div class="col-lg-12">
-                    <!-- Yearly Breakup -->
                     <div class="card overflow-hidden">
                         <div class="card-body p-4">
                             <h5 class="card-title mb-9 fw-semibold">Yearly Breakup</h5>
@@ -61,7 +60,6 @@
                     </div>
                 </div>
                 <div class="col-lg-12">
-                    <!-- Monthly Earnings -->
                     <div class="card">
                         <div class="card-body">
                             <div class="row alig n-items-start">
@@ -90,8 +88,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
+    </div> -->
+<!-- <div class="row">
         <div class="col-lg-4 d-flex align-items-stretch">
             <div class="card w-100">
                 <div class="card-body p-4">
@@ -265,8 +263,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
+    </div> -->
+<!-- <div class="row">
         <div class="col-sm-6 col-xl-3">
             <div class="card overflow-hidden rounded-2">
                 <div class="position-relative">
@@ -351,7 +349,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 @endsection
 <script async src="https://unpkg.com/axios/dist/axios.min.js"></script>
 @endauth

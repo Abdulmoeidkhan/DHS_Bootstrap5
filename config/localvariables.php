@@ -37,5 +37,6 @@ return [
     "li22" => "Important Note:",
     "li23" => "If you have more than one delegate, you can enter that information with “Add New” and enter your required information and save.",
     "li24" => "For your participation confirmation on IDEAS 2022, you will need your e- Badge paper print along with further required documents at your “Arrival” in Pakistan. Please bring your e-Badge print copy and show our Airport Welcome Desk or assigned receiving officer.",
+    "airportCode"=>"AP73177781"
 
 ];
