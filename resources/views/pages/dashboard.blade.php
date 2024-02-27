@@ -2,6 +2,7 @@
 @extends('layouts.layout')
 @section("content")
 <h2>Welcome</h2>
+<img src="{{asset('images/welcome.jpg')}}" width="100%" height="1600px"/>
 <!-- <div class="row">
         <div class="col-lg-8 d-flex align-items-strech">
             <div class="card w-100">

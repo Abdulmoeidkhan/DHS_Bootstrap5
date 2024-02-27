@@ -651,7 +651,7 @@
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
-                                <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interesed Programs</th>
+                                <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
                                 <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
@@ -704,7 +704,7 @@
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
-                                <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interesed Programs</th>
+                                <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
                                 <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
@@ -757,7 +757,7 @@
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
-                                <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interesed Programs</th>
+                                <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
                                 <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
@@ -810,7 +810,7 @@
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
-                                <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interesed Programs</th>
+                                <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
                                 <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
@@ -863,7 +863,7 @@
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
-                                <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interesed Programs</th>
+                                <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
                                 <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
@@ -988,15 +988,16 @@
                 '</a>',
                 '</div>',
             ].join('')
-        } else {
-            return [
-                '<div class="left">',
-                '<a class="btn btn-warning" href="invitation/' + row.uid + '">',
-                '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
-                '</a>',
-                '</div>',
-            ].join('')
         }
+        //  else {
+        //     return [
+        //         '<div class="left">',
+        //         '<a class="btn btn-warning" href="invitation/' + row.uid + '">',
+        //         '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
+        //         '</a>',
+        //         '</div>',
+        //     ].join('')
+        // }
     }
 
     // function operateFormatter(value, row, index) {
@@ -1031,15 +1032,16 @@
                 '</a>',
                 '</li></ul></div>',
             ].join('')
-        } else {
-            return [
-                '<div class="left">',
-                '<a class="btn btn-warning" href="members/' + row.uid + '">',
-                '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
-                '</a>',
-                '</div>',
-            ].join('')
         }
+        // else {
+        //     return [
+        //         '<div class="left">',
+        //         '<a class="btn btn-warning" href="members/' + row.uid + '">',
+        //         '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
+        //         '</a>',
+        //         '</div>',
+        //     ].join('')
+        // }
     }
 
     function operateInvitedBy(value, row, index) {
@@ -1069,55 +1071,60 @@
     }
 
     function operateOfficer(value, row, index) {
-        return row.delegation_response == 'Accepted' ? [
-            '<div class="left">',
-            '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#OfficerModal">',
-            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
-            '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
-            '<path d="M6 21v-2a4 4 0 0 1 4 -4h2" />',
-            '<path d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" />',
-            '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />',
-            '</svg>',
-            '</button>',
-            '</div>'
-        ].join('') : [
-            '<div class="left">',
-            '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#OfficerModal" disabled>',
-            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
-            '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
-            '<path d="M6 21v-2a4 4 0 0 1 4 -4h2" />',
-            '<path d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" />',
-            '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />',
-            '</svg>',
-            '</button>',
-            '</div>'
-        ].join('');
+        if (row.delegation_response) {
+
+            return row.delegation_response == 'Accepted' ? [
+                '<div class="left">',
+                '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#OfficerModal">',
+                '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
+                '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
+                '<path d="M6 21v-2a4 4 0 0 1 4 -4h2" />',
+                '<path d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" />',
+                '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />',
+                '</svg>',
+                '</button>',
+                '</div>'
+            ].join('') : [
+                '<div class="left">',
+                '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#OfficerModal" disabled>',
+                '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
+                '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
+                '<path d="M6 21v-2a4 4 0 0 1 4 -4h2" />',
+                '<path d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" />',
+                '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />',
+                '</svg>',
+                '</button>',
+                '</div>'
+            ].join('');
+        }
     }
 
     function detachOfficer(value, row, index) {
-        return row.delegation_response == 'Accepted' ? [
-            '<div class="left">',
-            '<button type="button" class="btn btn-badar"  data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#DetachModal">',
-            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
-            '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
-            '<path d="M6 21v-2a4 4 0 0 1 4 -4h2" />',
-            '<path d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" />',
-            '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />',
-            '</svg>',
-            '</button>',
-            '</div>'
-        ].join('') : [
-            '<div class="left">',
-            '<button type="button" class="btn btn-badar"  data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#DetachModal" disabled>',
-            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
-            '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
-            '<path d="M6 21v-2a4 4 0 0 1 4 -4h2" />',
-            '<path d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" />',
-            '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />',
-            '</svg>',
-            '</button>',
-            '</div>'
-        ].join('');
+        if (row.delegation_response) {
+            return row.delegation_response == 'Accepted' ? [
+                '<div class="left">',
+                '<button type="button" class="btn btn-badar"  data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#DetachModal">',
+                '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
+                '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
+                '<path d="M6 21v-2a4 4 0 0 1 4 -4h2" />',
+                '<path d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" />',
+                '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />',
+                '</svg>',
+                '</button>',
+                '</div>'
+            ].join('') : [
+                '<div class="left">',
+                '<button type="button" class="btn btn-badar"  data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#DetachModal" disabled>',
+                '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
+                '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
+                '<path d="M6 21v-2a4 4 0 0 1 4 -4h2" />',
+                '<path d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" />',
+                '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />',
+                '</svg>',
+                '</button>',
+                '</div>'
+            ].join('');
+        }
     }
 
     // function operateLiason(value, row, index) {
@@ -1233,23 +1240,25 @@
     }
 
     function operateDetachCar(value, row, index) {
-        return row.delegation_response == 'Accepted' ? [
-            '<div class="left">',
-            '<button type="button" class="btn btn-badar" data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#DeattachCar">',
-            '<span>',
-            '<i class="ti ti-car" style="font-size:24px;"></i>',
-            '</span>',
-            '</button>',
-            '</div>'
-        ].join('') : [
-            '<div class="left">',
-            '<button type="button" class="btn btn-badar" data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#DeattachCar" disabled>',
-            '<span>',
-            '<i class="ti ti-car" style="font-size:24px;"></i>',
-            '</span>',
-            '</button>',
-            '</div>'
-        ].join('');
+        if (row.delegation_response) {
+            return row.delegation_response == 'Accepted' ? [
+                '<div class="left">',
+                '<button type="button" class="btn btn-badar" data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#DeattachCar">',
+                '<span>',
+                '<i class="ti ti-car" style="font-size:24px;"></i>',
+                '</span>',
+                '</button>',
+                '</div>'
+            ].join('') : [
+                '<div class="left">',
+                '<button type="button" class="btn btn-badar" data-bs-toggle="modal" data-bs-delegation="' + row.uid + '" data-bs-target="#DeattachCar" disabled>',
+                '<span>',
+                '<i class="ti ti-car" style="font-size:24px;"></i>',
+                '</span>',
+                '</button>',
+                '</div>'
+            ].join('');
+        }
     }
 
     function operatePlan(value, row, index) {
@@ -1313,7 +1322,7 @@
 
     function operateInterets(value, row, index) {
         if (value) {
-            return value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val.program.program_name + '</div><br/>').join('')
+            return value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val?.program?.program_name + '</div><br/>').join('')
             // return value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val.program.program_name + ' - Day ' + val.program.program_day + ' ' + val.program.program_start_time + ' ' + val.program.program_end_time + '</div><br/>').join('')
         } else {
             return [

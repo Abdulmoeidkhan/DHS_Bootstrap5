@@ -157,6 +157,9 @@
                             <th data-filter-control="input" data-field="arrival_date" data-formatter="true">Arrival Date</th>
                             <th data-filter-control="input" data-field="arrival_time" data-formatter="true">Arrival Time</th>
                             <th data-filter-control="input" data-field="arrived" data-formatter="operateFlghtStatus">Arrived</th>
+                            <th data-filter-control="input" data-field="departure_date" data-formatter="true">Departure Date</th>
+                            <th data-filter-control="input" data-field="departure_time" data-formatter="true">Departure Time</th>
+                            <th data-filter-control="input" data-field="departed" data-formatter="operateFlghtStatus">Departed</th>
                             <th data-filter-control="input" data-formatter="operateRoomCheckInStatus">Room Check-In</th>
                             <th data-filter-control="input" data-field="room_checkin" data-formatter="true">Room Check-In Date</th>
                             <th data-filter-control="input" data-field="checked_in_time" data-formatter="true">Room Check-In Time</th>

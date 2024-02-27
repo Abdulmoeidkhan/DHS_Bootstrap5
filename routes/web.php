@@ -134,6 +134,15 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::group(['middleware' => 'airportUserTypeCheck'], function () {
+
+        // Members Start
+        Route::get('/getDelegationFlight/{status?}', [DelegateFlightController::class, 'getFlight'])->name('request.getDelegationFlight');
+        Route::post('/addDelegationFlight/{id}', [DelegateFlightController::class, 'setFlight'])->name('request.addDelegationFlight');
+        Route::get('/departureStatusChanger/{id}/{status}', [DelegateFlightController::class, 'departureStatusChanger'])->name('request.departureStatusChanger');
+        Route::get('/arrivalStatusChanger/{id}/{status}', [DelegateFlightController::class, 'arrivalStatusChanger'])->name('request.arrivalStatusChanger');
+        // Members End
+
+
         // Flights Pages And API Start
         Route::get('/airport', [DelegateFlightController::class, 'render'])->name('pages.airport');
         Route::get('/flights', [FlightsController::class, 'render'])->name('pages.flights');
@@ -151,17 +160,17 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'userTypeCheck'], function () {
         // Flights Pages And API Start
-        Route::get('/airport', [DelegateFlightController::class, 'render'])->name('pages.airport');
-        Route::get('/flights', [FlightsController::class, 'render'])->name('pages.flights');
-        Route::get('/addflights', [FlightsController::class, 'addItineraryRender'])->name('pages.addflights');
-        Route::get('/addticketspage', [FlightsController::class, 'addTicketRender'])->name('pages.addticketspage');
-        Route::get('/viewItinerary/{id}', [FlightsController::class, 'viewItinerary'])->name('page.viewItinerary');
-        Route::get('/viewPassenger/{id}', [FlightsController::class, 'viewPassenger'])->name('page.viewPassenger');
-        Route::post('/addTicket', [FlightsController::class, 'addTicket'])->name('request.addTicket');
-        Route::post('/addItinerary', [FlightsController::class, 'addItinerary'])->name('request.addItinerary');
-        Route::post('/updateItinerary', [FlightsController::class, 'updateItinerary'])->name('request.updateItinerary');
-        Route::get('/getItinerary', [FlightsController::class, 'getItinerary'])->name('request.getItinerary');
-        Route::get('/getTickets', [FlightsController::class, 'getTickets'])->name('request.getTickets');
+        // Route::get('/airport', [DelegateFlightController::class, 'render'])->name('pages.airport');
+        // Route::get('/flights', [FlightsController::class, 'render'])->name('pages.flights');
+        // Route::get('/addflights', [FlightsController::class, 'addItineraryRender'])->name('pages.addflights');
+        // Route::get('/addticketspage', [FlightsController::class, 'addTicketRender'])->name('pages.addticketspage');
+        // Route::get('/viewItinerary/{id}', [FlightsController::class, 'viewItinerary'])->name('page.viewItinerary');
+        // Route::get('/viewPassenger/{id}', [FlightsController::class, 'viewPassenger'])->name('page.viewPassenger');
+        // Route::post('/addTicket', [FlightsController::class, 'addTicket'])->name('request.addTicket');
+        // Route::post('/addItinerary', [FlightsController::class, 'addItinerary'])->name('request.addItinerary');
+        // Route::post('/updateItinerary', [FlightsController::class, 'updateItinerary'])->name('request.updateItinerary');
+        // Route::get('/getItinerary', [FlightsController::class, 'getItinerary'])->name('request.getItinerary');
+        // Route::get('/getTickets', [FlightsController::class, 'getTickets'])->name('request.getTickets');
         // Flights Pages And API End
 
 
@@ -268,6 +277,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/programsData', [ProgramController::class, 'programsData'])->name('request.programsData');
         Route::get('/addProgramPages', [ProgramController::class, 'addProgramPages'])->name('pages.addProgram');
         Route::post('/addProgram', [ProgramController::class, 'addProgram'])->name('request.addProgram');
+        Route::get('/deleteProgram/{id}', [ProgramController::class, 'deleteProgram'])->name('request.deleteProgram');
         // Route::post('/attachLiason', [LiasonsController::class, 'attachLiason'])->name('request.attachLiason');
         // Program Page And API End
 
@@ -346,13 +356,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/getMembers/{id}', [MemberController::class, 'membersData'])->name('request.getMembers');
         Route::post('/updateMemberRequest/{id}', [MemberController::class, 'updateMemberRequest'])->name('request.updateMemberRequest');
         Route::get('/members/memberFullProfile/{id}', [MemberController::class, 'memberFullProfile'])->name('pages.memberFullProfile');
-        // Members End
-
-        // Members Start
-        Route::get('/getDelegationFlight/{status?}', [DelegateFlightController::class, 'getFlight'])->name('request.getDelegationFlight');
-        Route::post('/addDelegationFlight/{id}', [DelegateFlightController::class, 'setFlight'])->name('request.addDelegationFlight');
-        Route::get('/departureStatusChanger/{id}/{status}', [DelegateFlightController::class, 'departureStatusChanger'])->name('request.departureStatusChanger');
-        Route::get('/arrivalStatusChanger/{id}/{status}', [DelegateFlightController::class, 'arrivalStatusChanger'])->name('request.arrivalStatusChanger');
         // Members End
 
         // Member Pages And API Start

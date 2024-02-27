@@ -77,9 +77,9 @@ class ReportController extends Controller
     public function countryAndVipReport()
     {
         $vips = Vips::get();
-        foreach ($vips as $key => $vip) {
-            $vips[$key]->rankDetails = Rank::where('ranks_uid', $vip->vips_rank)->first();
-        }
+        // foreach ($vips as $key => $vip) {
+        //     $vips[$key]->rankDetails = Rank::where('ranks_uid', $vip->vips_rank)->first();
+        // }
         return view('pages.reports.countryAndVipReport', ['vips' => $vips]);
     }
 
@@ -89,16 +89,30 @@ class ReportController extends Controller
         $countries = Delegation::distinct('country')->get('country');
         // $vips = Vips::get();
         foreach ($countries as $countrieskey => $country) {
-            $delegations = Delegation::where('country', $country->country)->get();
+            $delegations = Delegation::where('country', $country->country)->distinct('invited_by')->get('invited_by');
+            $delegationsCount = Delegation::where('country', $country->country)->count('invited_by');
             $countArray = [];
             foreach ($delegations as $delegationsKey => $delegation) {
-                $vip = Vips::where('vips_uid', $delegation->invited_by)->first('vips_rank');
-                $rank = Rank::where('ranks_uid', $vip->vips_rank)->first('ranks_name');
-                $renameArray = [$rank->ranks_name => 1];
-                array_push($countArray, [...$renameArray]);
+                $designation = Delegation::where([['invited_by', $delegation->invited_by], ['country', $country->country]])->count();
+                $vip = Vips::where('vips_uid', $delegation->invited_by)->first('vips_designation');
+                $delegations[$delegationsKey]->designation = $vip->vips_designation;
+                $delegations[$delegationsKey]->designationCount = $designation;
+                // $renameArray = [$vip->vips_designation => $designation];
+                // array_push($countArray, [...$renameArray]);
             }
-            $countries[$countrieskey]->totalCount = count($delegations);
-            $countries[$countrieskey]->countArray = $countArray;
+            // foreach ($delegations as $delegationsKey => $delegation) {
+            //     $vip = Vips::where('vips_uid', $delegation->invited_by)->first('vips_rank');
+            //     $rank = Rank::where('ranks_uid', $vip->vips_rank)->first('ranks_name');
+            //     $renameArray = [$rank->ranks_name => 1];
+            //     array_push($countArray, [...$renameArray]);
+            // }
+            // foreach ($delegations as $delegationsKey => $delegation) {
+            //     $vip = Vips::where('vips_uid', $delegation->invited_by)->first();
+            //     $renameArray = [$vip->vips_designation => 1];
+            //     array_push($countArray, [...$renameArray]);
+            // }
+            $countries[$countrieskey]->totalCount = $delegationsCount;
+            $countries[$countrieskey]->delegations = $delegations;
             // foreach ($vips as $vipsKey => $vip) {
             //     $vips[$vipsKey]->rankName = Rank::where('ranks_uid', $vip->vips_rank)->first('ranks_name');
             //     array_push($vipArray, $vips[$vipsKey]);
@@ -149,7 +163,6 @@ class ReportController extends Controller
             $countries[$keyCountry]->totalCount = Delegation::where('country', $country->country)->count();
             $delegations = Delegation::where('country', $country->country)->get('uid');
             foreach ($flights as $flightKey => $flight) {
-
             }
             $countries[$keyCountry]->$delegations = $delegations;
         }

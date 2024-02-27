@@ -254,7 +254,7 @@
     //     if (value) {
     //         return [
     //             '<div class="left">',
-    //             '<a class="btn btn-outline-success" href="viewItinerary/' + value + '">',
+    //             '<a class="btn btn-success" href="viewItinerary/' + value + '">',
     //             '<span><i class="ti ti-plane" style="font-size:22px"></i></span>',
     //             '</a>',
     //             '</div>',
@@ -266,7 +266,7 @@
     //     if (value) {
     //         return [
     //             '<div class="left">',
-    //             '<a class="btn btn-outline-success" href="viewPassenger/' + value + '">',
+    //             '<a class="btn btn-success" href="viewPassenger/' + value + '">',
     //             '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
     //             '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>',
     //             '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>',
@@ -283,16 +283,16 @@
         if (value == 1) {
             return [
                 '<div class="left">',
-                '<a class="btn btn-outline-badar" href="arrivalStatusChanger/' + row.delegate_uid + '/0">',
-                '<span><i class="ti ti-plane" style="font-size:22px"></i></span>',
+                '<a class="btn btn-badar" href="arrivalStatusChanger/' + row.delegate_uid + '/0">',
+                '<span><i class="ti ti-plane-arrival" style="font-size:22px"></i></span>',
                 '</a>',
                 '</div>',
             ].join('');
         } else {
             return [
                 '<div class="left">',
-                '<a class="btn btn-outline-success" href="arrivalStatusChanger/' + row.delegate_uid + '/1">',
-                '<span><i class="ti ti-plane" style="font-size:22px"></i></span>',
+                '<a class="btn btn-success" href="arrivalStatusChanger/' + row.delegate_uid + '/1">',
+                '<span><i class="ti ti-plane-arrival" style="font-size:22px"></i></span>',
                 '</a>',
                 '</div>',
             ].join('');
@@ -304,16 +304,16 @@
         if (value == 1) {
             return [
                 '<div class="left">',
-                '<a class="btn btn-outline-badar" href="departureStatusChanger/' + row.delegate_uid + '/0">',
-                '<span><i class="ti ti-plane" style="font-size:22px"></i></span>',
+                '<a class="btn btn-badar" href="departureStatusChanger/' + row.delegate_uid + '/0">',
+                '<span><i class="ti ti-plane-departure" style="font-size:22px"></i></span>',
                 '</a>',
                 '</div>',
             ].join('');
         } else {
             return [
                 '<div class="left">',
-                '<a class="btn btn-outline-success" href="departureStatusChanger/' + row.delegate_uid + '/1">',
-                '<span><i class="ti ti-plane" style="font-size:22px"></i></span>',
+                '<a class="btn btn-success" href="departureStatusChanger/' + row.delegate_uid + '/1">',
+                '<span><i class="ti ti-plane-departure" style="font-size:22px"></i></span>',
                 '</a>',
                 '</div>',
             ].join('');

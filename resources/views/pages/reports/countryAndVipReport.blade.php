@@ -59,7 +59,7 @@
                             <th data-width="50" data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                             <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
                             @foreach($vips as $key=>$vip)
-                            <th data-filter-control="input" data-field="countArray.{{$key}}.{{$vip->rankDetails->ranks_name}}" data-sortable="true" data-fixed-columns="true" data-formatter="operateRank">{{$vip->rankDetails->ranks_name}}</th>
+                            <th data-filter-control="input" data-field="delegations.{{$key}}" data-sortable="true" data-fixed-columns="true" data-formatter="operateDesignation">{{$vip->vips_designation}}</th>
                             @endforeach
                             <th data-filter-control="input" data-field="totalCount" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">TotalCount</th>
                         </tr>
@@ -82,8 +82,9 @@
         return value ? value : 0
     }
 
-    function operateRank(value, row, index) {
-        return value ? value : 0
+    function operateDesignation(value, row, index) {
+        console.log(value);
+        return value ? value.designationCount : 0
         // console.log(value);
     }
 </script>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InterestedProgram;
 use App\Models\Program;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -41,6 +42,20 @@ class ProgramController extends Controller
             $savedProgram = $program->save();
             if ($savedProgram) {
                 return back()->with('message', "Program Added Successfully");
+            }
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return  back()->with('error', $exception->errorInfo[2]);
+        }
+    }
+
+    public function deleteProgram(Request $req, $id)
+    {
+
+        try {
+            $deleteProgram = Program::where('program_uid', $id)->delete();
+            if ($deleteProgram) {
+                $deletedInterests = InterestedProgram::where('program_uid', $id)->delete();
+                return back()->with('message', "Program Deleted Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             return  back()->with('error', $exception->errorInfo[2]);
