@@ -71,6 +71,6 @@ class Kernel extends HttpKernel
         'liasonTypeCheck' =>\App\Http\Middleware\LiasonTypeCheck::class,
         'authorisedUserCheck' =>\App\Http\Middleware\authorisedUserCheck::class,
         'hotelUserTypeCheck' =>\App\Http\Middleware\HotelUserTypeCheck::class,
-        'airportUserTypeCheck' =>\App\Http\Middleware\airportUserTypeCheck::class,
+        'airportUserTypeCheck' =>\App\Http\Middleware\AirportUserTypeCheck::class,
     ];
 }
