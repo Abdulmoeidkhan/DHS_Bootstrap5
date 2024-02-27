@@ -13,6 +13,7 @@ class DelegateFlightController extends Controller
 {
     public function getFlight($status = 0)
     {
+        $dataFlight = [];
         $flights = '';
         switch ($status) {
             case 0:
@@ -25,19 +26,22 @@ class DelegateFlightController extends Controller
                 $flights = DelegateFlight::where([['arrived', 1], ['departed', 1]])->get();
                 break;
             case 3:
-                $flights = DelegateFlight::get();
+                $flights = DelegateFlight::all();
                 break;
             default:
                 break;
         }
 
         foreach ($flights as $key => $flight) {
-            $flights[$key]->delegate = Delegate::where('delegates_uid', $flight->delegate_uid)->first(['rank', 'delegation_type', 'last_Name', 'first_Name', 'designation', 'delegation']);
-            $flights[$key]->country = Delegation::where('uid', $flights[$key]->delegate->delegation)->first('country');
-            $flights[$key]->rank = Rank::where('ranks_uid', $flights[$key]->delegate->rank)->first('ranks_name');
+            $flights[$key]->delegate = Delegate::where([['delegates_uid', $flight->delegate_uid], ['status', 1]])->first(['rank', 'delegation_type', 'last_Name', 'first_Name', 'designation', 'delegation']);
+            $flights[$key]->country = Delegation::where('uid', $flights[$key]->delegate?->delegation)->first('country');
+            $flights[$key]->rank = Rank::where('ranks_uid', $flights[$key]->delegate?->rank)->first('ranks_name');
+            if ($flights[$key]->delegate != null) {
+                array_push($dataFlight, $flights[$key]);
+            }
         }
 
-        return $flights;
+        return $dataFlight;
     }
     public function setFlight(Request $req)
     {

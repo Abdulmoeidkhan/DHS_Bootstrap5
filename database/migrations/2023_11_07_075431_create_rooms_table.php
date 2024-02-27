@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('room_logged_by');
             $table->uuid('room_uid')->unique();
             $table->uuid('hotel_uid')->nullable();
-            $table->string('room_no')->unique();
+            $table->string('room_no')->nullable();
             $table->uuid('assign_to')->nullable();
             $table->date('room_checkin')->nullable();
             $table->date('room_checkout')->nullable();

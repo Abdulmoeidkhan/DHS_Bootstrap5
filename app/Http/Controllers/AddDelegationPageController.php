@@ -156,6 +156,7 @@ class AddDelegationPageController extends Controller
 
     public function updateDelegation(Request $req)
     {
+
         $arrayToBeUpdate = [];
         $arrayToBeUpdateRep = [];
         $arrayToBeUpdateSelf = [];
