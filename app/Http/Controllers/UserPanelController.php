@@ -19,7 +19,7 @@ class UserPanelController extends Controller
         foreach ($users as $key => $user) {
             switch ($user->roles[0]->name) {
                 case "delegate":
-                    $users[$key]->generalInfo=Delegation::where('uid',Delegate::where('delegates_uid',$user->uid)->first())->first();
+                    // $users[$key]->generalInfo=Delegation::where('uid',Delegate::where('delegates_uid',$user->uid)->first())->first();
                     break;
                 case "receiving":
                     
