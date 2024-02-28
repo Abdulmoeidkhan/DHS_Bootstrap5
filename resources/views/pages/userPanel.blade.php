@@ -41,22 +41,22 @@
                             </td>
                             <td class="border-bottom-0">
                                 <h6 class="fw-semibold mb-1 text-capitalize">{{$user->name}}</h6>
-                                <span class="fw-normal">{{$user->roles[0]->display_name}}</span>
+                                <span class="fw-normal mx-auto ">{{$user->roles[0]->display_name}}</span>
                             </td>
                             <td class="border-bottom-0">
-                                <p class="mb-0 fw-normal">{{$user->email}}</p>
+                                <p class="mb-0 fw-normal mx-auto ">{{$user->email}}</p>
                             </td>
                             <td class="border-bottom-0">
                                 <div class="d-flex align-items-center gap-2">
-                                    <span class="fw-normal">{{$user->contact_number?$user->contact_number:"Not Provided"}}</span>
+                                    <span class="fw-normal mx-auto ">{{$user->contact_number?$user->contact_number:"Not Provided"}}</span>
                                 </div>
                             </td>
                             <td class="border-bottom-0">
                                 <div class="d-flex align-items-center gap-2">
                                     @if($user->activated)
-                                    <span class="badge bg-success rounded-3 fw-semibold">Activated</span>
+                                    <span class="badge mx-auto  bg-success rounded-3 fw-semibold">Activated</span>
                                     @else
-                                    <h6 class="fw-semibold mb-1">{{$user->activation_code}}</h6>
+                                    <h6 class="fw-semibold mx-auto  mb-1">{{$user->activation_code}}</h6>
                                     @endif
                                 </div>
                             </td>

@@ -223,7 +223,7 @@
                     </a>
                 </li>
                 @endif
-                @if(session()->get('user')->roles[0]->name =="admin"|| session()->get('user')->roles[0]->name =="hotels")
+                @if(session()->get('user')->roles[0]->name =="admin")
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Reports</span>
@@ -252,14 +252,14 @@
                                 <span class="hide-menu">List Of All Delegates</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <!-- <li class="sidebar-item">
                             <a href="../main/blog-detail.html" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
                                 <span class="hide-menu">Delegate Badge Count</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="sidebar-item">
                             <a href="{{route('pages.delegationAttendance')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
@@ -310,14 +310,14 @@
                                 <span class="hide-menu">Self/Rep</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <!-- <li class="sidebar-item">
                             <a href="../main/blog-detail.html" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
                                 <span class="hide-menu">List of Invited Dignitaries</span>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
                 <!-- <li class="sidebar-item">

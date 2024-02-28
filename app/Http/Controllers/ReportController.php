@@ -133,15 +133,16 @@ class ReportController extends Controller
 
     public function selfRepData()
     {
-        $invitees = Delegation::distinct('invited_by')->get();
+        $invitees = Delegation::distinct('invited_by')->get('invited_by');
+        $acceptedself = [];
         foreach ($invitees as $inviteeskey => $invitee) {
             $invitees[$inviteeskey]->name = Vips::where('vips_uid', $invitee->invited_by)->first('vips_designation');
             $invitees[$inviteeskey]->count = Delegation::where('invited_by', $invitee->invited_by)->count();
+            $invitees[$inviteeskey]->acceptedself = Delegation::where([['invited_by', $invitee->invited_by], ['delegation_response', 'Accepted']])->first();
             $invitees[$inviteeskey]->awaited = Delegation::where([['invited_by', $invitee->invited_by], ['delegation_response', 'Awaited']])->count();
             $invitees[$inviteeskey]->regretted = Delegation::where([['invited_by', $invitee->invited_by], ['delegation_response', 'Regretted']])->count();
-            $acceptedSelf = Delegation::where([['invited_by', $invitee->invited_by], ['delegation_response', 'Accepted']])->first();
-            $invitees[$inviteeskey]->self = Delegate::where([['delegation', $acceptedSelf->uid], ['delegation_type', 'Self'], ['self', 1]])->count();
-            $invitees[$inviteeskey]->rep = Delegate::where([['delegation', $acceptedSelf->uid], ['delegation_type', 'Rep'], ['self', 1]])->count();
+            $invitees[$inviteeskey]->self = $acceptedself ? Delegate::where([['delegation', $invitees[$inviteeskey]->acceptedself->uid], ['delegation_type', 'Self'], ['self', 1]])->count() : 0;
+            $invitees[$inviteeskey]->rep = $acceptedself ? Delegate::where([['delegation', $invitees[$inviteeskey]->acceptedself->uid], ['delegation_type', 'Rep'], ['self', 1]])->count() : 0;
         }
         return $invitees;
     }

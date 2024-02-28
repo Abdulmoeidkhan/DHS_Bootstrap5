@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Car;
 use App\Models\Delegate;
 use Illuminate\Http\Request;
 use App\Models\Event;
@@ -10,6 +11,7 @@ use App\Models\Delegation;
 use App\Models\Document;
 use App\Models\ImageBlob;
 use App\Models\Officer;
+use App\Models\Room;
 use Illuminate\Support\Str;
 
 class AddDelegationPageController extends Controller
@@ -249,7 +251,12 @@ class AddDelegationPageController extends Controller
             // $delegateStatusUpdate = $req->delegation_response == "Accepted" ? Delegate::where('delegation', $arrayToBeUpdate['uid'])->update(['status' => 1]) : Delegate::where('delegation', $arrayToBeUpdate['uid'])->update(['status' => 0]);
             if ($delegateUpdate) {
                 if ($arrayToBeUpdate['delegation_response'] == 'Regretted') {
+                    $delegates = Delegate::where('delegation', $arrayToBeUpdate['uid'])->get('delegates_uid');
+                    foreach ($delegates as $key => $delegate) {
+                        Room::where('assign_to', $delegate->delegates_uid)->delete();
+                    }
                     $removeOfficer = Officer::where('officer_delegation', $arrayToBeUpdate['uid'])->update(['officer_delegation' => null, 'officer_assign' => 0]);
+                    $removeCar = Car::where('car_delegation', $arrayToBeUpdate['uid'])->update(['car_delegation' => null]);
                 }
                 return $req->submitAndRetain ? back()->with('message', 'Delegation has been updated Successfully') : redirect()->route('pages.delegationsPage')->with('message', 'Profile has been activated');
             }

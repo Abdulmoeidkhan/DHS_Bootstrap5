@@ -18,8 +18,8 @@
                                 <th class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">Invited By</h6>
                                 </th>
-                                <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Delegation Response</h6>
+                                <th class="border-bottom-0 align-items-center">
+                                    <h6 class="fw-semibold align-items-center mb-0">Delegation Response</h6>
                                 </th>
                                 <th class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">Address</h6>
@@ -47,9 +47,9 @@
                                     <p class="mb-0 fw-normal">{{$delegation->vip->rank_name->ranks_name}}</p>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <div class="d-flex align-items-center gap-2">
+                                    <div class="d-flex gap-2">
                                         @if($delegation->delegation_response ==="Accepted")
-                                        <span class="badge bg-success rounded-3 fw-semibold">Accepted</span>
+                                        <span class="badge bg-success mx-auto align-items-center rounded-3 fw-semibold">Accepted</span>
                                         @else
                                         <h6 class="fw-semibold mb-1">{{$delegation->delegation_response}}</h6>
                                         @endif
