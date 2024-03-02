@@ -36,6 +36,8 @@
                         <span class="hide-menu">User Panel</span>
                     </a>
                 </li>
+                @endif
+                @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="dho")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.delegationsPage')}}" aria-expanded="false">
                         <span>

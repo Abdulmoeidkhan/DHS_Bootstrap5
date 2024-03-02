@@ -13,6 +13,7 @@
     })();
 </script>
 <!--End of Tawk.to Script-->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
 <script src="{{asset('assets/libs/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('assets/js/sidebarmenu.js')}}"></script>

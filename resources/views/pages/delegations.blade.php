@@ -611,10 +611,12 @@
             </div> -->
             <div class="tab">
                 <button class="tablinks active" onclick="openCity(event, 'Accepted')">Accepted</button>
+                @if(session()->get('user')->roles[0]->name === "admin")
                 <button class="tablinks" onclick="openCity(event, 'Awaited')">Awaited</button>
                 <button class="tablinks" onclick="openCity(event, 'Regretted')">Regretted</button>
                 <button class="tablinks" onclick="openCity(event, 'Deactive')">Deactive</button>
                 <button class="tablinks" onclick="openCity(event, 'All')">All</button>
+                @endif
             </div>
             <div id="Accepted" class="tabcontent" style="display: block;">
                 @if(session()->get('user')->roles[0]->name === "admin")
@@ -654,21 +656,26 @@
                                 <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
+                                @if(session()->get('user')->roles[0]->name === "admin")
                                 <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
                                 <th data-field="uid" data-formatter="operateDelegation">Edit</th>
                                 <th data-field="uid" data-formatter="operateMember">Member</th>
+                                @endif
                                 <th data-field="uid" data-formatter="operateCar">Add Car</th>
                                 <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
                                 <th data-field="officer_uid" data-formatter="operateOfficer">Assign Officer</th>
                                 <th data-field="uid" data-formatter="detachOfficer">Unassign Officer</th>
+                                @if(session()->get('user')->roles[0]->name === "admin")
                                 <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
                                 <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
+                                @endif
                             </tr>
                         </thead>
                     </table>
                 </div>
                 </p>
             </div>
+            @if(session()->get('user')->roles[0]->name === "admin")
             <div id="Awaited" class="tabcontent">
                 @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
@@ -881,6 +888,7 @@
                 </div>
                 </p>
             </div>
+            @endif
         </div>
     </div>
 </div>
