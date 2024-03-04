@@ -156,7 +156,9 @@
         <div class="card-body p-4">
             <div class="tab">
                 <button class="tablinks active" onclick="openTab(event, 'Active')">Active</button>
+                @if(session()->get('user')->roles[0]->name =="admin")
                 <button class="tablinks" onclick="openTab(event, 'Inactive')">Inactive</button>
+                @endif
             </div>
             <div id="Active" class="tabcontent" style="display: block;">
                 <p>
@@ -190,6 +192,7 @@
                 </div>
                 </p>
             </div>
+            @if(session()->get('user')->roles[0]->name =="admin")
             <div id="Inactive" class="tabcontent">
                 <p>
                 <div class="table-responsive">
@@ -220,6 +223,7 @@
                 </div>
                 </p>
             </div>
+            @endif
         </div>
     </div>
 </div>

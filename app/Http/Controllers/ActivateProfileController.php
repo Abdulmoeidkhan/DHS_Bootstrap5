@@ -9,6 +9,8 @@ use App\Models\Delegate;
 use App\Models\Delegation;
 use App\Models\Hotel;
 use App\Models\HotelOperator;
+use App\Models\Car;
+use App\Models\CarOperator;
 use App\Models\Liason;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,6 +65,27 @@ class ActivateProfileController extends Controller
         try {
             $operatorSaved = $assignOperator->save();
             $rolesAndPermissionGiven = $operatorSaved ? $this->operatorRolesAndTeams($assignOperator->airport_operator_user, 'airport') : false;
+            return $rolesAndPermissionGiven;
+        } catch (\Illuminate\Database\QueryException $exception) {
+            if ($exception->errorInfo[2]) {
+                return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+            } else {
+                return  back()->with('error', $exception->errorInfo[2]);
+            }
+        }
+    }
+
+    protected function activateCarOperator($recievedParams)
+    {
+
+        $assignOperator = new CarOperator();
+        $assignOperator->car_operator_uid = (string) Str::uuid();
+        $assignOperator->car_operator_assign = 1;
+        $assignOperator->car_operator_user  = Auth::user()->uid;
+        $assignOperator->car_operator_status = 1;
+        try {
+            $operatorSaved = $assignOperator->save();
+            $rolesAndPermissionGiven = $operatorSaved ? $this->operatorRolesAndTeams($assignOperator->car_operator_user, 'vendor') : false;
             return $rolesAndPermissionGiven;
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
@@ -329,6 +352,10 @@ class ActivateProfileController extends Controller
             case "AP":
                 $airportOperator = $this->activateAirportOperator($req);
                 return $airportOperator ? back()->with('message', 'Airport Operator Updated Successfully') : back()->with('error', 'Operator already assigned');
+                break;
+            case "CA":
+                $carOperator = $this->activateCarOperator($req);
+                return $carOperator ? back()->with('message', 'Car Operator Updated Successfully') : back()->with('error', 'Operator already assigned');
                 break;
             default:
                 return back()->with('error', 'Something Went Wrong');

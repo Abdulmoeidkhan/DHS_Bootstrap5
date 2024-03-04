@@ -17,19 +17,21 @@ class UserFullProfileController extends Controller
     public function render(Request $req, $id)
     {
         $roles = Role::all();
+        $selectiveRoles = Role::where('name', 'user')->orWhere('name', 'admin')->orWhere('name', 'dho')->orWhere('name', 'vendor')->get();
         $permissions = Permission::all();
         $user = User::with('roles', 'permissions')->where('uid', $id)->first();
         $image = ImageBlob::where('uid', $id)->first();
         $user->images = $image;
-        return view('pages.userProfile', ['user' => $user, 'roles' => $roles, 'permissions' => $permissions]);
+        return view('pages.userProfile', ['user' => $user, 'roles' => $roles, 'permissions' => $permissions, 'selectiveRoles' => $selectiveRoles]);
     }
     public function renderMyProfile(Request $req)
     {
         $roles = Role::all();
+        $selectiveRoles = Role::where('name', 'user')->orWhere('name', 'admin')->orWhere('name', 'dho')->orWhere('name', 'vendor')->get();
         $permissions = Permission::all();
         $user = session()->get('user');
         // return $user;
-        return view('pages.userProfile', ['user' => $user,  'roles' => $roles, 'permissions' => $permissions]);
+        return view('pages.userProfile', ['user' => $user,  'roles' => $roles, 'permissions' => $permissions, 'selectiveRoles' => $selectiveRoles]);
     }
     public function renderDelegateProfile()
     {
@@ -46,7 +48,7 @@ class UserFullProfileController extends Controller
         }
         $delegate->interests = $interests;
         // return $repImage->img_blob;
-        return view('pages.delegateProfile', ['delegate' => $delegate, 'delegateImage' => $delegateImage, 'repImage' => $repImage, 'rep' => $rep,'delegationData'=>$delegationData]);
+        return view('pages.delegateProfile', ['delegate' => $delegate, 'delegateImage' => $delegateImage, 'repImage' => $repImage, 'rep' => $rep, 'delegationData' => $delegationData]);
     }
     public function renderSpeceficDelegateProfile(Request $req, $id)
     {

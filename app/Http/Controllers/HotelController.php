@@ -474,8 +474,8 @@ class HotelController extends Controller
     {
         $officerDelegation = Officer::where('officer_user', session()->get('user')->uid)->orWhere('officer_uid', session()->get('user')->officerUid?->officer_uid)->first('officer_delegation');
         $hotelPlans = $officerDelegation ? HotelPlan::where('delegation_uid', $officerDelegation->officer_delegation)->first() : null;
-        $hotelPlans->hotelName = Hotel::where('hotel_uid', $hotelPlans->hotel_uid)->first('hotel_names');
-        // return $hotelPlans;
+        $hotelPlans ? $hotelPlans->hotelName = Hotel::where('hotel_uid', $hotelPlans?->hotel_uid)->first('hotel_names') : null;
+        // return $officerDelegation;
         return view('pages.hotelPlan', ['hotelPlans' => $hotelPlans]);
     }
 

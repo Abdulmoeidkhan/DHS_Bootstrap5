@@ -199,7 +199,7 @@
                 </li>
 
                 @endif
-                @if(session()->get('user')->roles[0]->name =="admin")
+                @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="dho" || session()->get('user')->roles[0]->name =="vendor")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.cars')}}" aria-expanded="false">
                         <span>
@@ -208,6 +208,8 @@
                         <span class="hide-menu">Cars</span>
                     </a>
                 </li>
+                @endif
+                @if(session()->get('user')->roles[0]->name =="admin")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.badges')}}" aria-expanded="false">
                         <span>
@@ -225,7 +227,7 @@
                     </a>
                 </li>
                 @endif
-                @if(session()->get('user')->roles[0]->name =="admin")
+                @if(session()->get('user')->roles[0]->name =="admin"|| session()->get('user')->roles[0]->name =="dho")
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Reports</span>
@@ -626,28 +628,28 @@
                 </li>
                 @endif
                 <li class="sidebar-item">
-                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
-                    </a>
+                    <!-- <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                    </a> -->
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
-                    </a>
+                    <!-- <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                    </a> -->
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
-                    </a>
+                    <!-- <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                    </a> -->
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
-                    </a>
+                    <!-- <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                    </a> -->
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
-                    </a>
+                    <!-- <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                    </a> -->
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
-                    </a>
+                    <!-- <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                    </a> -->
                 </li>
             </ul>
             <!-- <div class="unlimited-access hide-menu bg-light-primary position-relative mb-7 mt-5 rounded">

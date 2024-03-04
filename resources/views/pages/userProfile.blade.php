@@ -138,9 +138,9 @@
                                     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                                 </div>
                             </fieldset> -->
+                            <input type="hidden" name="uid" value="{{$user->uid}}" />
+                            <input type="submit" name="submit" class="btn btn-badar" value="Change" />
                         </fieldset>
-                        <input type="hidden" name="uid" value="{{$user->uid}}" />
-                        <input type="submit" name="submit" class="btn btn-badar" value="Change" />
                     </form>
                 </div>
                 <br />
@@ -151,13 +151,22 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="roleSelect" class="form-label">Roles</label>
-                                <select id="roleSelect" name="roles" class="form-select" <?php echo $user->uid === auth()->user()->uid ? 'disabled' : ($user->roles[0]->name == "delegate" ? 'disabled' : ''); ?>>
+                                @if($user->roles[0]->name == "delegate" || $user->roles[0]->name == "liason" || $user->roles[0]->name == "interpreter" || $user->roles[0]->name == "receiving" || $user->roles[0]->name == "hotels" || $user->roles[0]->name == "airport")
+                                <select id="roleSelect" name="roles" class="form-select" <?php echo $user->uid === auth()->user()->uid ? 'disabled' : ($user->roles[0]->name == "delegate" || $user->roles[0]->name == "liason" || $user->roles[0]->name == "interpreter" || $user->roles[0]->name == "receiving" || $user->roles[0]->name == "hotels" || $user->roles[0]->name == "airport" ? 'disabled' : ''); ?>>
                                     @foreach($roles as $role)
                                     <option value="{{$role->name}}" <?php echo $user->roles[0]->name === $role->name ? 'selected' : '' ?>>{{$role->display_name}}</option>
                                     @endforeach
                                 </select>
+                                @else
+                                <select id="roleSelect" name="roles" class="form-select">
+                                    @foreach($selectiveRoles as $selectiveRole)
+                                    <option value="{{$selectiveRole->name}}" <?php echo $user->roles[0]->name === $selectiveRole->name ? 'selected' : '' ?>>{{$selectiveRole->display_name}}</option>
+                                    {{$selectiveRole->name}}
+                                    @endforeach
+                                </select>
+                                @endif
                             </div>
-                            <div class="mb-3">
+                            <!-- <div class="mb-3"> 
                                 <div class="form-label">Permissions</div>
 
                                 @foreach($permissions as $permission)
@@ -172,11 +181,11 @@
                                     </label>
                                 </div>
                                 @endforeach
-                            </div>
-                        </fieldset>
+                            </div>-->
 
-                        <input type="hidden" name="uid" value="{{$user->uid}}" />
-                        <input type="submit" name="submit" class="btn btn-danger" value="Authorise" />
+                            <input type="hidden" name="uid" value="{{$user->uid}}" />
+                            <input type="submit" name="submit" class="btn btn-danger" value="Authorise" />
+                        </fieldset>
                     </form>
                 </div>
                 <!-- <br />
