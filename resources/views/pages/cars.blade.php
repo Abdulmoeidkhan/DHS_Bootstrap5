@@ -1,7 +1,7 @@
 @auth
 @extends('layouts.layout')
 @section("content")
-@if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "vendor")
+@if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "vendor"|| session()->get('user')->roles[0]->name === "dho")
 <div class="row">
     <div class="d-flex justify-content-center gap-2">
         <!-- <a type="button" href="{{route('pages.addCarCategories')}}" class="btn btn-outline-warning">Add Car Category</a> -->
@@ -19,11 +19,11 @@
     <div class="col-lg-4">
         <div class="row">
             <div class="col-lg-12">
-                <div class="card overflow-hidden">
+                <div class="card overflow-hidden text-center">
                     <div class="card-body p-4">
-                        <h5 class="card-title mb-9 fw-semibold">Activation Code</h5>
+                        <h5 class="card-title mb-9 fw-semibold ">Activation Code</h5>
                         <div class="row align-items-center">
-                            <div class="col-8">
+                            <div class="col-12">
                                 <h4 class="fw-semibold mb-3">
                                     {{config('localvariables.carCode')}}
                                 </h4>

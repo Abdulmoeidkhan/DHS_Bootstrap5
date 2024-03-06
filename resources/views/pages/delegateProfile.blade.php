@@ -215,6 +215,27 @@
                     </form>
                 </div>
                 <br />
+                <h5 class="card-title fw-semibold mb-4">Wish List</h5>
+                <div class="table-responsive">
+                    <form name="programInfo" id="programInfo" method="POST" action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.setInterests'):''}}">
+                        <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
+                            <legend>Programs</legend>
+                            @csrf
+                            @foreach (\App\Models\Program::all() as $key=>$program)
+                            <div class="mb-3">
+                                <input name="program_uid-{{$key}}" type="checkbox" class="form-check-input" id="program-{{$key}}" value="{{$program->program_uid}}" <?php echo in_array($program->program_uid, $delegate->interests) ? 'checked' : '' ?>>
+                                &nbsp;
+                                <label for="program-{{$key}}" class="form-label"><b>{{$program->program_name}}</b> (Day-{{$program->program_day}} &nbsp; {{$program->program_start_time}}-{{$program->program_end_time}} )</label>
+                            </div>
+                            @endforeach
+                            <input type="hidden" name="guest_uid" value="{{$delegate->delegates_uid}}" />
+                            <input type="hidden" name="delegation_uid" value="{{$delegate->delegation}}" />
+                            @if(session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate')
+                            <input type="submit" name="submit" class="btn btn-primary" value="Update Interest" />
+                            @endif
+                        </fieldset>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

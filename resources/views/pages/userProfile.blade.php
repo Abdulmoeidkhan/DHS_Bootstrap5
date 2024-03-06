@@ -151,8 +151,8 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="roleSelect" class="form-label">Roles</label>
-                                @if($user->roles[0]->name == "delegate" || $user->roles[0]->name == "liason" || $user->roles[0]->name == "interpreter" || $user->roles[0]->name == "receiving" || $user->roles[0]->name == "hotels" || $user->roles[0]->name == "airport")
-                                <select id="roleSelect" name="roles" class="form-select" <?php echo $user->uid === auth()->user()->uid ? 'disabled' : ($user->roles[0]->name == "delegate" || $user->roles[0]->name == "liason" || $user->roles[0]->name == "interpreter" || $user->roles[0]->name == "receiving" || $user->roles[0]->name == "hotels" || $user->roles[0]->name == "airport" ? 'disabled' : ''); ?>>
+                                @if($user->roles[0]->name == "delegate" || $user->roles[0]->name == "liason" || $user->roles[0]->name == "interpreter" || $user->roles[0]->name == "receiving" || $user->roles[0]->name == "hotels" || $user->roles[0]->name == "airport" || $user->roles[0]->name == "vendor")
+                                <select id="roleSelect" name="roles" class="form-select" <?php echo $user->uid === auth()->user()->uid ? 'disabled' : ($user->roles[0]->name == "delegate" || $user->roles[0]->name == "liason" || $user->roles[0]->name == "interpreter" || $user->roles[0]->name == "receiving" || $user->roles[0]->name == "hotels" || $user->roles[0]->name == "airport" || $user->roles[0]->name == "vendor" ? 'disabled' : ''); ?>>
                                     @foreach($roles as $role)
                                     <option value="{{$role->name}}" <?php echo $user->roles[0]->name === $role->name ? 'selected' : '' ?>>{{$role->display_name}}</option>
                                     @endforeach
