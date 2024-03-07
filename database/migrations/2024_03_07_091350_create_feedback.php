@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('wish_list', function (Blueprint $table) {
+        Schema::create('feedback', function (Blueprint $table) {
             $table->id();
-            $table->uuid('wishlist_uid')->unique();
+            $table->string('feedback');
             $table->uuid('guest_uid');
-            $table->uuid('wish_uid');
+            $table->uuid('feedback_uid')->unique();
             $table->uuid('delegation_uid');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('wish_list');
+        Schema::dropIfExists('feedback');
     }
 };

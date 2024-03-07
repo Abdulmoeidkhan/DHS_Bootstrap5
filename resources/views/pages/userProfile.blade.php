@@ -40,14 +40,14 @@
                 <form action="{{route('request.imageUpload')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="input-group">
-                        <input type="hidden" value="{{$user->uid}}" name="id" />
+                        <input type="hidden" value="{{$user->uid}}" name="id" required/>
                         <!-- <input type="file" class="form-control" id="uploadFile" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="image" accept="image/png, image/jpeg" required>
                         <button class="btn btn-outline-danger" type="submit">Upload</button> -->
                     </div>
                     <div class="mb-3">
                         <label for="delegation_picture" class="form-label">Picture</label>
-                        <input name="delegation_picture" type="file" class="form-control" id="delegation_picture" accept="image/png, image/jpeg">
-                        <input name="savedpicture" type="hidden" class="form-control" id="savedpicture" value="">
+                        <input name="delegation_picture" type="file" class="form-control" id="delegation_picture" accept="image/png, image/jpeg" required>
+                        <input name="savedpicture" type="hidden" class="form-control" id="savedpicture" value="" required>
                         <div class="box-2">
                             <div class="result"></div>
                         </div>
@@ -57,7 +57,7 @@
                         <div class="box">
                             <div class="options hide">
                                 <label>Width</label>
-                                <input type="number" class="img-w" value="300" min="100" max="1200" />
+                                <input type="number" class="img-w" value="300" min="100" max="1200" required/>
                             </div>
                             <button class="btn save hide">Save</button>
                         </div>
@@ -138,7 +138,7 @@
                                     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                                 </div>
                             </fieldset> -->
-                            <input type="hidden" name="uid" value="{{$user->uid}}" />
+                            <input type="hidden" name="uid" value="{{$user->uid}}" required/>
                             <input type="submit" name="submit" class="btn btn-badar" value="Change" />
                         </fieldset>
                     </form>
@@ -183,7 +183,7 @@
                                 @endforeach
                             </div>-->
 
-                            <input type="hidden" name="uid" value="{{$user->uid}}" />
+                            <input type="hidden" name="uid" value="{{$user->uid}}" required/>
                             <input type="submit" name="submit" class="btn btn-danger" value="Authorise" />
                         </fieldset>
                     </form>

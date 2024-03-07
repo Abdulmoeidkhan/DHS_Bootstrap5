@@ -21,6 +21,7 @@ use App\Http\Controllers\CarsController;
 use App\Http\Controllers\DelegateFlightController;
 use App\Http\Controllers\DelegatesPageController;
 use App\Http\Controllers\DoucmentController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\FlightsController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\InterestController;
@@ -34,6 +35,7 @@ use App\Http\Controllers\PrintInvitationController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\ReceivingController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\WishController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -350,6 +352,18 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/getInterests/{id?}', [InterestController::class, 'getInterests'])->name('request.getInterests');
         Route::post('/setInterests/{id?}', [InterestController::class, 'setInterests'])->name('request.setInterests');
         // Program Page And API End
+
+        // Wish API Start
+        Route::get('/getWish/{id?}', [WishController::class, 'getWish'])->name('request.getWish');
+        Route::post('/setWish', [WishController::class, 'setWish'])->name('request.setWish');
+        Route::post('/deleteWish', [WishController::class, 'deleteWish'])->name('request.deleteWish');
+        // Wish API End
+
+        // Feedback API Start
+        Route::get('/getFeedback/{id?}', [FeedbackController::class, 'getFeedback'])->name('request.getFeedback');
+        Route::post('/setFeedback', [FeedbackController::class, 'setFeedback'])->name('request.setFeedback');
+        Route::post('/deleteFeedback', [FeedbackController::class, 'deleteFeedback'])->name('request.deleteFeedback');
+        // Feedback API End
 
         // Members Start
         Route::get('/members/{id}', [MemberController::class, 'render'])->name('pages.members');

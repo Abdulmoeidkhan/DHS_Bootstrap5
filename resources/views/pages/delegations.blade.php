@@ -637,6 +637,7 @@
                                 <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th>
                                 <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th>
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
+                                <th data-filter-control="input" data-field="email_address" data-sortable="true" data-formatter="operateText">Email</th>
                                 <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                                 <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
@@ -695,6 +696,7 @@
                                 <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th>
                                 <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th>
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
+                                <th data-filter-control="input" data-field="email_address" data-sortable="true" data-formatter="operateText">Email</th>
                                 <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                                 <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
@@ -748,6 +750,7 @@
                                 <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th>
                                 <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th>
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
+                                <th data-filter-control="input" data-field="email_address" data-sortable="true" data-formatter="operateText">Email</th>
                                 <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                                 <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
@@ -801,6 +804,7 @@
                                 <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th>
                                 <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th>
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
+                                <th data-filter-control="input" data-field="email_address" data-sortable="true" data-formatter="operateText">Email</th>
                                 <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                                 <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
@@ -854,6 +858,7 @@
                                 <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th>
                                 <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th>
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
+                                <th data-filter-control="input" data-field="email_address" data-sortable="true" data-formatter="operateText">Email</th>
                                 <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                                 <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>

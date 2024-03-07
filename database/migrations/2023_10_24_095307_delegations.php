@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('country');
             $table->uuid('user_uid')->nullable()->unique();
             $table->string('invited_by');
+            $table->string('email_address')->unique();
             $table->string('delegation_response')->default("Awaited");
             $table->string('address')->nullable();
             $table->string('exhibition');

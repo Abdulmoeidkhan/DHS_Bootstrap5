@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Delegate;
-use App\Models\Delegation;
-use Illuminate\Http\Request;
-use App\Models\ImageBlob;
-use App\Models\InterestedProgram;
 use App\Models\User;
+use App\Models\WishList;
+use App\Models\Feedback;
+use App\Models\Delegate;
+use App\Models\ImageBlob;
+use App\Models\Delegation;
+use App\Models\InterestedProgram;
 use Laratrust\Models\Role;
+use Illuminate\Http\Request;
 use Laratrust\Models\Permission;
+use App\Http\Controllers\Controller;
 
 class UserFullProfileController extends Controller
 {
@@ -42,13 +44,15 @@ class UserFullProfileController extends Controller
         $delegateImage = ImageBlob::where('uid', $delegate->delegates_uid)->first();
         $repImage = ImageBlob::where('uid', $rep->delegates_uid)->first();
         $delegateInterests = InterestedProgram::where('guest_uid', $delegate->delegates_uid)->get();
+        $delegateWishes = WishList::where('guest_uid', $delegate->delegates_uid)->get();
+        $delegateFeedback = Feedback::where('guest_uid', $delegate->delegates_uid)->get();
         $interests = [];
         foreach ($delegateInterests as $key => $delegateInterest) {
             array_push($interests, $delegateInterest->program_uid);
         }
         $delegate->interests = $interests;
         // return $repImage->img_blob;
-        return view('pages.delegateProfile', ['delegate' => $delegate, 'delegateImage' => $delegateImage, 'repImage' => $repImage, 'rep' => $rep, 'delegationData' => $delegationData]);
+        return view('pages.delegateProfile', ['delegate' => $delegate, 'delegateImage' => $delegateImage, 'repImage' => $repImage, 'rep' => $rep, 'delegationData' => $delegationData, 'delegateWishes' => $delegateWishes, 'delegateFeedback' => $delegateFeedback]);
     }
     public function renderSpeceficDelegateProfile(Request $req, $id)
     {
@@ -56,12 +60,14 @@ class UserFullProfileController extends Controller
         $delegateImage = ImageBlob::where('uid', $delegate->delegates_uid)->first();
         $repImage = ImageBlob::where('uid', $delegate->rep_uid)->first();
         $delegateInterests = InterestedProgram::where('guest_uid', $delegate->delegates_uid)->get(['program_uid']);
+        $delegateWishes = WishList::where('guest_uid', $delegate->delegates_uid)->get();
+        $delegateFeedback = Feedback::where('guest_uid', $delegate->delegates_uid)->get();
         $interests = [];
         foreach ($delegateInterests as $key => $delegateInterest) {
             array_push($interests, $delegateInterest->program_uid);
         }
         $delegate->interests = $interests;
         // return $delegate->interests;
-        return view('pages.delegateProfile', ['delegate' => $delegate, 'delegateImage' => $delegateImage, 'repImage' => $repImage]);
+        return view('pages.delegateProfile', ['delegate' => $delegate, 'delegateImage' => $delegateImage, 'repImage' => $repImage, 'delegateWishes' => $delegateWishes, 'delegateFeedback' => $delegateFeedback]);
     }
 }

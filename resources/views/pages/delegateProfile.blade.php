@@ -44,11 +44,11 @@
                             <input type="file" class="form-control" id="uploadFile" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="image" accept="image/png, image/jpeg" required>
                             <button class="btn btn-outline-danger" type="submit">Upload</button>
                         </div> -->
-                        <input type="hidden" value="{{$delegate->delegates_uid}}" name="id" />
+                        <input type="hidden" value="{{$delegate->delegates_uid}}" name="id" required />
                         <div class="mb-3">
                             <label for="delegation_picture" class="form-label">Picture</label>
-                            <input name="delegation_picture" type="file" class="form-control" id="delegation_picture" accept="image/png, image/jpeg">
-                            <input name="savedpicture" type="hidden" class="form-control" id="savedpicture" value="">
+                            <input name="delegation_picture" type="file" class="form-control" id="delegation_picture" accept="image/png, image/jpeg" required>
+                            <input name="savedpicture" type="hidden" class="form-control" id="savedpicture" value="" required>
                             <div class="box-2">
                                 <div class="result"></div>
                             </div>
@@ -58,7 +58,7 @@
                             <div class="box">
                                 <div class="options hide">
                                     <label>Width</label>
-                                    <input type="number" class="img-w" value="300" min="100" max="1200" />
+                                    <input type="number" class="img-w" value="300" min="100" max="1200" required />
                                 </div>
                                 <button class="btn save hide">Save</button>
                             </div>
@@ -79,11 +79,11 @@
                         <!-- <div class="input-group">
                             <input type="file" class="form-control" id="uploadFile" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="image" accept="image/png, image/jpeg" required>
                         </div> -->
-                        <input type="hidden" value="{{$rep->delegates_uid}}" name="id" />
+                        <input type="hidden" value="{{$rep->delegates_uid}}" name="id" required />
                         <div class="mb-3">
                             <label for="rep_picture" class="form-label">Picture</label>
-                            <input name="rep_picture" type="file" class="form-control" id="rep_picture" accept="image/png, image/jpeg">
-                            <input name="savedpicture" type="hidden" class="form-control" id="savedpicture-2" value="">
+                            <input name="rep_picture" type="file" class="form-control" id="rep_picture" accept="image/png, image/jpeg" required>
+                            <input name="savedpicture" type="hidden" class="form-control" id="savedpicture-2" value="" required>
                             <div class="box-2">
                                 <div class="result-representatives"></div>
                             </div>
@@ -93,7 +93,7 @@
                             <div class="box">
                                 <div class="options hide-representatives">
                                     <label>Width</label>
-                                    <input type="number" class="img-w-representatives" value="300" min="100" max="1200" />
+                                    <input type="number" class="img-w-representatives" value="300" min="100" max="1200" required />
                                 </div>
                                 <button class="btn save-representatives hide-representatives">Save</button>
                             </div>
@@ -215,26 +215,92 @@
                     </form>
                 </div>
                 <br />
-                <h5 class="card-title fw-semibold mb-4">Wish List</h5>
                 <div class="table-responsive">
-                    <form name="programInfo" id="programInfo" method="POST" action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.setInterests'):''}}">
-                        <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
-                            <legend>Programs</legend>
-                            @csrf
-                            @foreach (\App\Models\Program::all() as $key=>$program)
-                            <div class="mb-3">
-                                <input name="program_uid-{{$key}}" type="checkbox" class="form-check-input" id="program-{{$key}}" value="{{$program->program_uid}}" <?php echo in_array($program->program_uid, $delegate->interests) ? 'checked' : '' ?>>
-                                &nbsp;
-                                <label for="program-{{$key}}" class="form-label"><b>{{$program->program_name}}</b> (Day-{{$program->program_day}} &nbsp; {{$program->program_start_time}}-{{$program->program_end_time}} )</label>
+                    <h5 class="card-title fw-semibold mb-4">Feedback</h5>
+                    @if(count($delegateFeedback)>0)
+                    <ul class="list-group">
+                        @foreach($delegateFeedback as $key=> $feedback)
+                        <li class="list-group-item list-group-item-success">
+                            <div class="row">
+                                <div class="col">
+                                    <span style="vertical-align:-webkit-baseline-middle">
+                                        {{$feedback->feedback}}
+                                    </span>
+                                </div>
+                                <form name="feedbackDelete" class="col" id="feedbackDelete" method="POST" action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.deleteFeedback'):''}}">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{$feedback->feedback_uid}}" />
+                                    <button type="submit" class="btn btn-outline-badar float-end border-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M18 6l-12 12" />
+                                            <path d="M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                </form>
                             </div>
-                            @endforeach
+                        </li>
+                        @endforeach
+                    </ul>
+                    @else
+                    <form name="feedback" id="feedback" method="POST" action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.setFeedback'):''}}">
+                        <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
+                            <legend>Feedback</legend>
+                            @csrf
+                            <div class="mb-3">
+                                <input type="text" class="form-control" name="feedback" id="feedback" placeholder="feedback" value="" />
+                            </div>
                             <input type="hidden" name="guest_uid" value="{{$delegate->delegates_uid}}" />
                             <input type="hidden" name="delegation_uid" value="{{$delegate->delegation}}" />
                             @if(session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate')
-                            <input type="submit" name="submit" class="btn btn-primary" value="Update Interest" />
+                            <input type="submit" name="submit" class="btn btn-primary" value="Add Feedback" />
                             @endif
                         </fieldset>
                     </form>
+                    @endif
+                </div>
+                <br />
+                <div class="table-responsive">
+                    <h5 class="card-title fw-semibold mb-4">Wish List</h5>
+                    <form name="wishInfo" id="wishInfo" method="POST" action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.setWish'):''}}">
+                        <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
+                            <legend>Wishes</legend>
+                            @csrf
+                            <div class="mb-3">
+                                <input type="text" class="form-control" name="wish" id="wish" placeholder="Wish" value="" />
+                            </div>
+                            <input type="hidden" name="guest_uid" value="{{$delegate->delegates_uid}}" />
+                            <input type="hidden" name="delegation_uid" value="{{$delegate->delegation}}" />
+                            @if(session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate')
+                            <input type="submit" name="submit" class="btn btn-primary" value="Add Wish" />
+                            @endif
+                        </fieldset>
+                    </form>
+                    <br />
+                    <ul class="list-group">
+                        @foreach($delegateWishes as $key=> $wish)
+                        <li class="list-group-item list-group-item-success">
+                            <div class="row">
+                                <div class="col">
+                                    <span style="vertical-align:-webkit-baseline-middle">
+                                        {{$wish->wish}}
+                                    </span>
+                                </div>
+                                <form name="wishDelete" class="col" id="wishDelete" method="POST" action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.deleteWish'):''}}">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{$wish->wish_uid}}" />
+                                    <button type="submit" class="btn btn-outline-badar float-end border-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M18 6l-12 12" />
+                                            <path d="M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                </form>
+                            </div>
+                        </li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>

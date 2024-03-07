@@ -146,6 +146,10 @@
                                 <input name="self_designation" type="text" class="form-control" id="self_designation" value="{{isset($delegationHead)?($delegationHead->designation):''}}" placeholder="Designation" required>
                             </div>
                             <div class="mb-3">
+                                <label for="email_address" class="form-label">Email Address</label>
+                                <input name="email_address" type="text" class="form-control" id="email_address" value="{{isset($delegations)?($delegations->email_address ? $delegations->email_address:''):''}}" placeholder="Email Address" required>
+                            </div>
+                            <div class="mb-3">
                                 <label for="delegation_picture" class="form-label">Picture</label>
                                 <input name="delegation_picture" type="file" class="form-control" id="delegation_picture" accept="image/png, image/jpeg">
                                 <input name="savedpicture" type="hidden" class="form-control" id="savedpicture" value="">
