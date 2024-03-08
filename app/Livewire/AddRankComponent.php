@@ -10,16 +10,16 @@ use Livewire\Attributes\On;
 class AddRankComponent extends Component
 {
     public $rank = '';
-    public $savedrank=0;
+    public $savedrank = 0;
     public function save()
     {
         $rank = new Rank();
         $rank->ranks_uid = (string) Str::uuid();
         $rank->ranks_name = $this->rank;
-        $this->savedrank = $rank->save();
+        $this->savedrank = $rank->ranks_name ? $rank->save() : false;
         // $this->dispatch('ranksaved')->self();
-        $this->dispatch('ranksaved')->to(AddVipsComponent::class);
-        $this->reset();
+        $this->savedrank ? $this->dispatch('ranksaved')->to(AddVipsComponent::class) : '';
+        $this->savedrank ? $this->reset() : '';
     }
     // #[On('ranksaved')]
     public function render()

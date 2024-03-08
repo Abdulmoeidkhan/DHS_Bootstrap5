@@ -34,11 +34,11 @@
                             </div>
                             <div class="mb-3">
                                 <label for="receiving_contact" class="form-label">Contact Number</label>
-                                <input name="receiving_contact" type="number" class="form-control" id="receiving_contact" placeholder="Receiving Contact Number" />
+                                <input name="receiving_contact" type="tel" minlength='0' maxlength='11' class="form-control" id="receiving_contact" placeholder="Receiving Contact Number" />
                             </div>
                             <div class="mb-3">
                                 <label for="receiving_identity" class="form-label">Receiving CNIC</label>
-                                <input name="receiving_identity" type="number" class="form-control" id="receiving_identity" placeholder="Receiving Identity" />
+                                <input name="receiving_identity" type="text" class="form-control" id="receiving_identity" placeholder="Receiving Identity" onchange="isNumeric('identity')" title="13 DIGIT CNIC CODE" data-inputmask="'mask': '99999-9999999-9'" required maxlength="15" />
                             </div>
                             <input type="submit" name="submit" class="btn btn-primary" value="Add Receiving" />
                         </fieldset>

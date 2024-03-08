@@ -34,11 +34,11 @@
                             </div>
                             <div class="mb-3">
                                 <label for="interpreter_contact" class="form-label">Contact Number</label>
-                                <input name="interpreter_contact" type="number" class="form-control" id="interpreter_contact" placeholder="Interpreter Contact Number" required/>
+                                <input name="interpreter_contact" type="tel" minlength='0' maxlength='11' class="form-control" id="interpreter_contact" placeholder="Interpreter Contact Number" required/>
                             </div>
                             <div class="mb-3">
-                                <label for="interpreter_identity" class="form-label">Interpreter CNIC</label>
-                                <input name="interpreter_identity" type="number" class="form-control" id="interpreter_identity" placeholder="Interpreter Identity" required/>
+                                <label for="identity" class="form-label">Interpreter CNIC</label>
+                                <input name="interpreter_identity" type="text" class="form-control" id="identity" placeholder="Interpreter Identity" onchange="isNumeric('identity')" title="13 DIGIT CNIC CODE" data-inputmask="'mask': '99999-9999999-9'" required maxlength="15" required/>
                             </div>
                             <input type="submit" name="submit" class="btn btn-primary" value="Add Interpreter" required/>
                         </fieldset>

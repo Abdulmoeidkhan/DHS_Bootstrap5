@@ -16,12 +16,12 @@
                                 <input name="driver_name" type="text" class="form-control" id="driver_name" value="{{!empty($driver)?$driver->driver_name:''}}" placeholder="Driver Name" required>
                             </div>
                             <div class="mb-3">
-                                <label for="driver_cnic" class="form-label">Driver CNIC</label>
-                                <input name="driver_cnic" type="number" class="form-control" id="driver_cnic" value="{{!empty($driver)?$driver->driver_cnic:''}}" placeholder="Driver CNIC" required>
+                                <label for="identity" class="form-label">Driver CNIC</label>
+                                <input name="driver_cnic" type="text" class="form-control" id="identity" value="{{!empty($driver)?$driver->driver_cnic:''}}" placeholder="Driver CNIC" onchange="isNumeric('identity')" title="13 DIGIT CNIC CODE" data-inputmask="'mask': '99999-9999999-9'" required maxlength="15" required>
                             </div>
                             <div class="mb-3">
                                 <label for="driver_contact" class="form-label">Driver Contact</label>
-                                <input name="driver_contact" type="text" class="form-control" id="driver_contact" value="{{!empty($driver)?$driver->driver_contact:''}}" placeholder="Contact Person" required>
+                                <input name="driver_contact"  type="tel" minlength='0' maxlength='11' class="form-control" id="driver_contact" value="{{!empty($driver)?$driver->driver_contact:''}}" placeholder="Contact Person" required>
                             </div>
                             <div class="mb-3">
                                 <label for="driver_remarks" class="form-label">Driver Remarks</label>

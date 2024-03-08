@@ -21,7 +21,7 @@ class AddVipsComponent extends Component
         $vip->vips_rank = $this->rank;
         $vip->vips_name = $this->name;
         $vip->vips_designation = $this->designation;
-        $this->savedvip = $vip->save();
+        $this->savedvip = $vip->vips_name ? $vip->save() : false;
         // Vips::create(
         //     $this->only(['name', 'designation','rank','uid'])
         // );
@@ -29,8 +29,8 @@ class AddVipsComponent extends Component
         // return $this->redirect('/posts')
         //     ->with('status', 'Post successfully created.');
         // $this->dispatch('datasaved')->self();
-        $this->dispatch('vipchanged')->to(InvitedByComponent::class);
-        $this->reset();
+        $this->savedvip ? $this->dispatch('vipchanged')->to(InvitedByComponent::class) : '';
+        $this->savedvip ? $this->reset() : '';
     }
     #[On('ranksaved')]
     public function render()

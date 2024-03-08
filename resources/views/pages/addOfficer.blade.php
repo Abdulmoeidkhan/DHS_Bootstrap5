@@ -65,11 +65,11 @@
                             </div>
                             <div class="mb-3">
                                 <label for="officer_contact" class="form-label">Contact Number</label>
-                                <input name="officer_contact" type="number" class="form-control" id="officer_contact" placeholder="Officer Contact Number" value="{{isset($officer) ? $officer->officer_contact : ''}}" required />
+                                <input name="officer_contact" type="tel" minlength='0' maxlength='11' class="form-control" id="officer_contact" placeholder="Officer Contact Number" value="{{isset($officer) ? $officer->officer_contact : ''}}" minlength='0' maxlength='11' required />
                             </div>
                             <div class="mb-3">
                                 <label for="officer_identity" class="form-label">Officer CNIC</label>
-                                <input name="officer_identity" type="number" class="form-control" id="officer_identity" placeholder="Officer Identity" value="{{isset($officer) ? $officer->officer_identity : ''}}" required />
+                                <input name="officer_identity" type="text" class="form-control" id="officer_identity" placeholder="Officer Identity" value="{{isset($officer) ? $officer->officer_identity : ''}}" onchange="isNumeric('identity')" title="13 DIGIT CNIC CODE" data-inputmask="'mask': '99999-9999999-9'" required maxlength="15" required />
                             </div>
                             <div class="mb-3">
                                 <label for="officer_address" class="form-label">Officer Address</label>

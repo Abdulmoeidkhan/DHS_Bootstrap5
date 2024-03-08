@@ -34,11 +34,11 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="liason_contact" class="form-label">Contact Number</label>
-                                    <input name="liason_contact" type="number" class="form-control" id="liason_contact" placeholder="Liason Contact Number" required/>
+                                    <input name="liason_contact" type="tel" minlength='0' maxlength='11' class="form-control" id="liason_contact" placeholder="Liason Contact Number" required/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="liason_identity" class="form-label">Liason CNIC</label>
-                                    <input name="liason_identity" type="number" class="form-control" id="liason_identity" placeholder="Liason Identity" required/>
+                                    <input name="liason_identity" type="text" class="form-control" id="liason_identity" placeholder="Liason Identity" onchange="isNumeric('identity')" title="13 DIGIT CNIC CODE" data-inputmask="'mask': '99999-9999999-9'" required maxlength="15" required/>
                                 </div>
                                 <input type="submit" name="submit" class="btn btn-primary" value="Add Liason" required/>
                             </fieldset>

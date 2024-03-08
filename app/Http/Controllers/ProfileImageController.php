@@ -25,13 +25,18 @@ class ProfileImageController extends Controller
 
     protected function imageBlobUpload(Request $req)
     {
-        $imgBlob = new ImageBlob();
-        $imageBlob = $req->savedpicture;
-        $imgBlob->uid = $req->id;
-        $imageAlreadyExist = ImageBlob::where('uid', $imgBlob->uid)->first();
-        $imgBlob->img_blob = $imageBlob;
-        $imgSaved = $imageAlreadyExist ? $this->imageBlobUpdate($imgBlob->img_blob, $imgBlob->uid) : $imgBlob->save();
-        return $imgSaved ? back()->with('message', 'Image Updated Successfully') : back()->with('error', 'SomeThing Went Wrong');
+        if ($req->savedpicture) {
+            $imgBlob = new ImageBlob();
+            $imageBlob = $req->savedpicture;
+            $imgBlob->uid = $req->id;
+            $imageAlreadyExist = ImageBlob::where('uid', $imgBlob->uid)->first();
+            $imgBlob->img_blob = $imageBlob;
+            $imgSaved = $imageAlreadyExist ? $this->imageBlobUpdate($imgBlob->img_blob, $imgBlob->uid) : $imgBlob->save();
+            return $imgSaved ? back()->with('message', 'Image Updated Successfully') : back()->with('error', 'SomeThing Went Wrong');
+        }
+        else{
+            return back()->with('error', 'Please save and try to upload again');
+        }
     }
 
     protected function imageBlobUpdate($file, $id)

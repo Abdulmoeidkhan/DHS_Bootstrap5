@@ -67,7 +67,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="officer_contact" class="form-label">Contact</label>
-                                <input name="officer_contact" type="text" class="form-control" id="officer_contact" placeholder="Liason Contact Number" value="{{$officer->officer_contact}}" required>
+                                <input name="officer_contact" type="tel" minlength='0' maxlength='11'class="form-control" id="officer_contact" placeholder="Liason Contact Number" value="{{$officer->officer_contact}}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="officer_identity" class="form-label">Passport</label>

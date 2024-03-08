@@ -134,7 +134,7 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="arrival_flight" class="form-label">Arrival Flight</label>
-                                            <input name="arrival_flight" type="text" class="form-control" id="arrival_flight" value="{{$flight?->arrival_flight}}" placeholder="Arrival Flight" required>
+                                            <input name="arrival_flight" type="text" class="form-control" id="arrival_flight" value="{{$flight?->arrival_flight}}" placeholder="Arrival Flight">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -146,7 +146,7 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="arrival_time" class="form-label">Arrival Time</label>
-                                            <input name="arrival_time" type="time" step="1" inputmode="numeric" class="form-control" id="arrival_time" value="{{$flight?->arrival_time}}" placeholder="Arrival Time" required>
+                                            <input name="arrival_time" type="time" step="1" inputmode="numeric" class="form-control" id="arrival_time" value="{{$flight?->arrival_time}}" placeholder="Arrival Time">
                                         </div>
                                     </div>
                                 </div>
@@ -154,19 +154,19 @@
                                     <div class="col">
                                         <div class="mb-3">
                                             <label for="departure_flight" class="form-label">Departure Flight</label>
-                                            <input name="departure_flight" type="text" class="form-control" id="departure_flight" value="{{$flight?->departure_flight}}" placeholder="Departure Flight" required>
+                                            <input name="departure_flight" type="text" class="form-control" id="departure_flight" value="{{$flight?->departure_flight}}" placeholder="Departure Flight">
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="mb-3">
                                             <label for="departure_date" class="form-label">Departure Date</label>
-                                            <input name="departure_date" type="date" class="form-control" id="departure_date" value="{{$flight?->departure_date}}" placeholder="Departure Date" required>
+                                            <input name="departure_date" type="date" class="form-control" id="departure_date" value="{{$flight?->departure_date}}" placeholder="Departure Date">
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="mb-3">
                                             <label for="departure_time" class="form-label">Departure Time</label>
-                                            <input name="departure_time" type="time" step="1" inputmode="numeric" class="form-control" id="departure_time" value="{{$flight?->departure_time}}" placeholder="Departure Time" required>
+                                            <input name="departure_time" type="time" step="1" inputmode="numeric" class="form-control" id="departure_time" value="{{$flight?->departure_time}}" placeholder="Departure Time">
                                         </div>
                                     </div>
                                 </div>
@@ -174,7 +174,7 @@
                                     <div class="col align-self-center">
                                         <div class="mb-3">
                                             <label for="passport" class="form-label">Passport</label>
-                                            <input name="passport" type="text" class="form-control" value="{{$flight?->passport}}" id="passport" placeholder="Passport" required>
+                                            <input name="passport" type="text" class="form-control" value="{{$flight?->passport}}" id="passport" placeholder="Passport">
                                         </div>
                                     </div>
                                     <!-- <div class="col align-self-center">

@@ -2,7 +2,7 @@
     <div class="modal-body">
     <div class="mb-3">
             <label for="message-text" class="col-form-label">Rank:</label>
-            <select wire:model="rank" class="form-select">
+            <select wire:model="rank" class="form-select" required>
                 <option value="" selected disabled hidden> Select Rank </option>
                 @foreach (\App\Models\Rank::all() as $renderRank)
                 <option value="{{$renderRank->ranks_uid}}">{{$renderRank->ranks_name}}</option>
@@ -11,11 +11,11 @@
         </div>
         <div class="mb-3">
             <label for="vipName" class="col-form-label">VIP's Name :</label>
-            <input type="text" class="form-control" wire:model="name">
+            <input type="text" class="form-control" wire:model="name" required>
         </div>
         <div class="mb-3">
             <label for="message-text" class="col-form-label">Designation:</label>
-            <input type="text" class="form-control" wire:model="designation">
+            <input type="text" class="form-control" wire:model="designation" required>
         </div>
 
     </div>

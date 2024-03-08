@@ -103,6 +103,7 @@ class AddDelegationPageController extends Controller
         $delegation->country = $req->country;
         $delegation->invited_by = $req->invited_by;
         $delegation->address = $req->address;
+        $delegation->email_address = $req->email_address;
         $delegation->delegation_response = $req->delegation_response;
         $delegation->exhibition = $req->exhibition;
         $delegation->delegationCode = $this->badge(8, "DL");

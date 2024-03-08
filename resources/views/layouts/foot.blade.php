@@ -18,9 +18,37 @@
 <script src="{{asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('assets/js/sidebarmenu.js')}}"></script>
 <script src="{{asset('assets/js/app.min.js')}}"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js" type="text/javascript"></script>
 <?php $routesIncludedTable = array('/'); ?>
 @if(in_array(Request::path(), $routesIncludedTable))
 <script src="{{asset('assets/libs/apexcharts/dist/apexcharts.min.js')}}"></script>
 <script src="{{asset('assets/js/dashboard.js')}}"></script>
 @endif
 <script src="{{asset('assets/libs/simplebar/dist/simplebar.js')}}"></script>
+<script>
+    // CNIC NUMBER Validator
+    ($("#identity").length > 0) && $("#identity").inputmask();
+
+    function isNumeric(comp) {
+        let evt = document.getElementById(comp);
+        let evtValue = evt.value;
+
+        evtValue = evtValue.replaceAll("-", "");
+        evtValue = evtValue.replaceAll("_", "");
+        evtValue = parseInt(evtValue)
+        var regex = /^\d{13}$/;
+        if (!regex.test(evtValue)) {
+            evt.returnValue = false;
+            evt.setCustomValidity("CNIC Must be 13 Digit Long");
+            evt.reportValidity();
+            if (evt.preventDefault) {
+                evt.preventDefault()
+            };
+            return false
+        } else {
+            evt.setCustomValidity("");
+            evt.value = evtValue
+            return true
+        }
+    }
+</script>
