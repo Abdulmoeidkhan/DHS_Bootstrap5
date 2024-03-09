@@ -73,12 +73,12 @@ class ProfileImageController extends Controller
     //     if (Image::where('uid', $req->id)->first()) {
     //         Image::where('uid', $req->id)->update(['base64_image' => $base64]);
     //         return $this->hisOwnProfile($req->id) ? back()->with('message', "Picture Has been updated") : back()->with($req->id, "message", "Picture Has been updated");
-    //         // redirect()->route('pages.userProfile', $req->id);
+    //         // redirect()->route('pages.profileUser', $req->id);
     //     } else {
     //         $image->save();
     //         return $this->hisOwnProfile($req->id) ? back()->with('message', "Picture Has been updated") : back()->with($req->id, "message", "Picture Has been updated");
-    //         // return $this->hisOwnProfile($req->id) ? redirect()->route('pages.myProfile') : redirect()->route('pages.userProfile', $req->id);
-    //         // return $this->hisOwnProfile($req->id) ? redirect()->route('pages.myProfile') : redirect()->route('pages.userProfile', $req->id);
+    //         // return $this->hisOwnProfile($req->id) ? redirect()->route('pages.myProfile') : redirect()->route('pages.profileUser', $req->id);
+    //         // return $this->hisOwnProfile($req->id) ? redirect()->route('pages.myProfile') : redirect()->route('pages.profileUser', $req->id);
     //     }
 
     //     // return $filename;

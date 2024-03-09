@@ -295,12 +295,12 @@ Route::group(['middleware' => 'auth'], function () {
         // Route::post('/attachReceiving', [BadgeController::class, 'attachReceiving'])->name('request.attachReceiving');
         // Badge Page And API End
 
+        Route::get('/userPanel', [UserPanelController::class, 'render'])->name("pages.userPanel");
         Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');
-        Route::get('/userPanel', [UserPanelController::class, 'renderView'])->name("pages.userPanel");
-        Route::get('/userProfile/{id}', [UserFullProfileController::class, 'render'])->name('pages.userProfile');
+        Route::get('/profileUser/{id}', [UserFullProfileController::class, 'render'])->name('pages.profileUser');
         Route::post('/addEventRequest', [AddEventController::class, 'addEvent'])->name('request.addEventRequest');
-        Route::get('/delegationsPage', [DelegationsPageController::class, 'render'])->name('pages.delegationsPage');
         Route::get('/delegatesPage', [DelegatesPageController::class, 'render'])->name('pages.delegatesPage');
+        Route::get('/delegationsPage', [DelegationsPageController::class, 'render'])->name('pages.delegationsPage');
         Route::get('/getDelegation/{status?}', [DelegationsPageController::class, 'delegationData'])->name('request.getDelegation');
         Route::get('/getDelegates/{status?}', [DelegatesPageController::class, 'delegatesData'])->name('request.getDelegates');
         Route::get('/getDelegatesStats', [DelegatesPageController::class, 'getDelegatesStats'])->name('request.getDelegatesStats');

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserPanelController extends Controller
 {
-    public function renderView(Request $req)
+    public function render(Request $req)
     {
         $users = User::with('roles')->where('id', '!=', Auth::user()->id)->get();
         // return $users;

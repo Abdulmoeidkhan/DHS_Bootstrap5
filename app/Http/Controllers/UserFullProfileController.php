@@ -24,7 +24,7 @@ class UserFullProfileController extends Controller
         $user = User::with('roles', 'permissions')->where('uid', $id)->first();
         $image = ImageBlob::where('uid', $id)->first();
         $user->images = $image;
-        return view('pages.userProfile', ['user' => $user, 'roles' => $roles, 'permissions' => $permissions, 'selectiveRoles' => $selectiveRoles]);
+        return view('pages.profileUser', ['user' => $user, 'roles' => $roles, 'permissions' => $permissions, 'selectiveRoles' => $selectiveRoles]);
     }
     public function renderMyProfile(Request $req)
     {
@@ -33,7 +33,7 @@ class UserFullProfileController extends Controller
         $permissions = Permission::all();
         $user = session()->get('user');
         // return $user;
-        return view('pages.userProfile', ['user' => $user,  'roles' => $roles, 'permissions' => $permissions, 'selectiveRoles' => $selectiveRoles]);
+        return view('pages.profileUser', ['user' => $user,  'roles' => $roles, 'permissions' => $permissions, 'selectiveRoles' => $selectiveRoles]);
     }
     public function renderDelegateProfile()
     {
