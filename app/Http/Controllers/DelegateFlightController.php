@@ -43,6 +43,7 @@ class DelegateFlightController extends Controller
 
         return $dataFlight;
     }
+    
     public function setFlight(Request $req)
     {
         if ($req->flightsegment_uid) {
@@ -78,6 +79,7 @@ class DelegateFlightController extends Controller
             }
         }
     }
+
     public function render(Request $req)
     {
         return view('pages.airport');
