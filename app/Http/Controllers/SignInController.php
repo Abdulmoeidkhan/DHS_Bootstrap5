@@ -54,13 +54,13 @@ class SignInController extends Controller
                     // return User::with('roles')->where('email', $req->email)->first();
                 } else {
                     // return ['status' => 0, "msg" => 'The provided credentials do not match our records.'];
-                    return back()->with('error', "Password credentials do not match our records.");
+                    return redirect()->route('signIn')->with('error', "Password credentials do not match our records.");
                 }
             } else {
                 return redirect()->route('accountActivation')->with('error', "User is not activated");
             }
         } else {
-            return back()->with('error', "User does not exist");
+            return redirect()->route('signIn')->with('error', "User does not exist");
         }
     }
 }

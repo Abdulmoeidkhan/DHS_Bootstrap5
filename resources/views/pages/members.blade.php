@@ -150,7 +150,8 @@
                             <th data-field="image.img_blob" data-sortable="true" data-formatter="operatePicture" data-force-hide="true">Image</th>
                             @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="delegate")
                             <th data-field="delegates_uid" data-sortable="true" data-field="status" data-formatter="statusChangerFormatter">Active/Deactive</th>
-                            <th data-field="delegates_uid" data-sortable="true" data-formatter="operateDelegate" data-force-hide="true">Update Flight Info</th>
+                            <th data-field="delegates_uid" data-sortable="true" data-formatter="operateDelegateFlight" data-force-hide="true">Update Flight Info</th>
+                            <th data-field="delegates_uid" data-sortable="true" data-formatter="operateDelegateMember" data-force-hide="true">Update Member Info</th>
                             @endif
                             <!-- <th data-field="organistaion" data-sortable="true">Organistaion</th> -->
                             <!-- <th data-field="last_Name" data-sortable="true">Delegate Last Name</th>
@@ -187,20 +188,12 @@
                 '<path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z"></path>',
                 '</svg>',
                 '</a>',
-                '</div>',
-                '<div class="right">',
-                '<a class="like" href="javascript:void(0)" title="Like">',
-                '<i class="fa fa-heart"></i>',
-                '</a>  ',
-                '<a class="remove" href="javascript:void(0)" title="Remove">',
-                '<i class="fa fa-trash"></i>',
-                '</a>',
                 '</div>'
             ].join('')
         }
     }
 
-    function operateDelegate(value, row, index) {
+    function operateDelegateMember(value, row, index) {
         if (value) {
             return [
                 '<div class="left">',
@@ -212,13 +205,17 @@
                 '<path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z"></path>',
                 '</svg>',
                 '</a>',
-                '</div>',
-                '<div class="right">',
-                '<a class="like" href="javascript:void(0)" title="Like">',
-                '<i class="fa fa-heart"></i>',
-                '</a>',
-                '<a class="remove" href="javascript:void(0)" title="Remove">',
-                '<i class="fa fa-trash"></i>',
+                '</div>'
+            ].join('')
+        }
+    }
+
+    function operateDelegateFlight(value, row, index) {
+        if (value) {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-outline-success" href="addFlight/' + value + '">',
+                '<span style="font-size: 22px;font-weight: bolder;"><i class="ti ti-plane-departure" ></i></span>',
                 '</a>',
                 '</div>'
             ].join('')

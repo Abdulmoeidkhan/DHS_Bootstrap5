@@ -277,15 +277,9 @@ Route::group(['middleware' => 'auth'], function () {
         // Program Page And API Start
         Route::get('/programs', [ProgramController::class, 'renderPrograms'])->name('pages.programs');
         Route::get('/programsData', [ProgramController::class, 'programsData'])->name('request.programsData');
-        Route::get('/addProgramPages', [ProgramController::class, 'addProgramPages'])->name('pages.addProgram');
-        Route::post('/addProgram', [ProgramController::class, 'addProgram'])->name('request.addProgram');
-        Route::get('/deleteProgram/{id}', [ProgramController::class, 'deleteProgram'])->name('request.deleteProgram');
+        Route::get('/addProgramPages', [ProgramController::class, 'addProgramPages'])->name('pages.addProgramPages');
         // Route::post('/attachLiason', [LiasonsController::class, 'attachLiason'])->name('request.attachLiason');
         // Program Page And API End
-
-        // VIPS Page And API Start
-        Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');
-        // VIPS Page And API End
 
         // Badge Page And API Start
         Route::get('/badges', [BadgeController::class, 'renderBadges'])->name('pages.badges');
@@ -376,6 +370,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/members/addMember/{id}', [MemberController::class, 'addMemberPage'])->name('pages.addMember');
         Route::post('/addMemberRequest/{id}', [MemberController::class, 'addMemberRequest'])->name('request.addMemberRequest');
         // Member Pages And API End
+
+        // Flight Pages And API Start
+        Route::get('/members/addFlight/{id}', [FlightsController::class, 'addFlightPage'])->name('pages.addFlight');
+        // Flight Pages And API End
 
         Route::get('/members/delegateStatusChanger/{id}', [DelegationsPageController::class, 'delegateStatusChanger'])->name('request.updateDelegateStatus');
 

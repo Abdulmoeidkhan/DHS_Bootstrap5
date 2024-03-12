@@ -40,25 +40,21 @@ class ProgramController extends Controller
 
         try {
             $savedProgram = $program->save();
-            if ($savedProgram) {
-                return back()->with('message', "Program Added Successfully");
-            }
+            return $savedProgram ? redirect()->route('pages.programs')->with('message', 'Program Added Successfully') : back()->with('error', 'Something Went Wrong');
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return redirect()->route('pages.programs')->with('error', $exception->errorInfo[2]);
         }
     }
 
-    public function deleteProgram(Request $req, $id)
+    public function deleteProgram(Request $req)
     {
 
         try {
-            $deleteProgram = Program::where('program_uid', $id)->delete();
-            if ($deleteProgram) {
-                $deletedInterests = InterestedProgram::where('program_uid', $id)->delete();
-                return back()->with('message', "Program Deleted Successfully");
-            }
+            $deleteProgram = Program::where('program_uid', $req->programId)->delete();
+            $deletedInterests = InterestedProgram::where('program_uid', $req->programId)->delete();
+            return  redirect()->route('pages.programs')->with('message', 'Program Deleted Successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return redirect()->route('pages.programs')->with('error', $exception->errorInfo[2]);
         }
     }
 }

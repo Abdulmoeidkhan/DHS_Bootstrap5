@@ -223,6 +223,14 @@
                         <span>
                             <i class="ti ti-calendar-event"></i>
                         </span>
+                        <span class="hide-menu">Wishlists</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.events')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-calendar-event"></i>
+                        </span>
                         <span class="hide-menu">Events</span>
                     </a>
                 </li>

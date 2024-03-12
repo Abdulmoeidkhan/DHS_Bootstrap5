@@ -5,7 +5,7 @@
 @if(session()->get('user')->roles[0]->name === "admin")
 <div class="row">
     <div class="d-flex justify-content-center">
-        <a type="button" href="{{route('pages.addProgram')}}" class="btn btn-outline-success">Add Program</a>
+        <a type="button" href="{{route('pages.addProgramPages')}}" class="btn btn-outline-success">Add Program</a>
     </div>
 </div>
 <br />
@@ -35,13 +35,9 @@
 <script>
     function operatePlans(value, row, index) {
         if (value) {
-            return [
-                '<div class="left">',
-                '<a class="btn btn-badar" href="deleteProgram/' + value + '">',
-                '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>',
-                '</a>',
-                '</div>',
-            ].join('')
+            // return [
+            return `<div class="left"><form name="deleteProgram" action="{{route('request.deleteProgram')}}" method="POST"><input type="hidden" name="programId" value="${value}"/><button class="btn btn-badar" type="submit"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button></form></div>`;
+            // ].join(``)
         }
     }
 </script>

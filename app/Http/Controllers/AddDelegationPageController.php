@@ -144,7 +144,7 @@ class AddDelegationPageController extends Controller
             if ($delegateSaved) {
                 $delegationSaved = $delegation->save();
                 if ($delegationSaved) {
-                    return $req->submitAndRetain ? back()->with('message', 'Delegation has been added Successfully') : redirect()->route('pages.delegationsPage')->with('message', 'Profile has been activated');
+                    return $req->submitAndRetain ? back()->with('message', 'Delegation has been updated Successfully') : redirect()->route('pages.delegationsPage')->with('message', 'Delegation has been updated Successfully');
                 }
             }
         } catch (\Illuminate\Database\QueryException $exception) {

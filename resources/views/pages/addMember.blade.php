@@ -49,10 +49,6 @@
         max-width: 100%;
     }
 </style>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
-<!-- Flatpickr JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <div class="row">
     <div class="col-lg-12 d-flex align-items-stretch">
         <div class="card w-100">
@@ -119,110 +115,7 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-12 d-flex align-items-stretch">
-        <div class="card w-100">
-            <div class="card-body p-4">
-                <h5 class="card-title fw-semibold mb-4">Flight Information</h5>
-                <div class="table-responsive">
-                    <form name="flightBasicInfo" id="flightBasicInfo" method="POST" action="{{route('request.addDelegationFlight',$id)}}" enctype="multipart/form-data">
-                        <fieldset>
-                            <legend>Add FlightInfo Form</legend>
-                            @csrf
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="arrival_flight" class="form-label">Arrival Flight</label>
-                                            <input name="arrival_flight" type="text" class="form-control" id="arrival_flight" value="{{$flight?->arrival_flight}}" placeholder="Arrival Flight">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="arrival_date" class="form-label">Arrival Date</label>
-                                            <input name="arrival_date" type="date" class="form-control" id="arrival_date" value="{{$flight?->arrival_date}}" placeholder="Arrival Date" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="arrival_time" class="form-label">Arrival Time</label>
-                                            <input name="arrival_time" type="time" step="1" inputmode="numeric" class="form-control" id="arrival_time" value="{{$flight?->arrival_time}}" placeholder="Arrival Time">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="mb-3">
-                                            <label for="departure_flight" class="form-label">Departure Flight</label>
-                                            <input name="departure_flight" type="text" class="form-control" id="departure_flight" value="{{$flight?->departure_flight}}" placeholder="Departure Flight">
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="mb-3">
-                                            <label for="departure_date" class="form-label">Departure Date</label>
-                                            <input name="departure_date" type="date" class="form-control" id="departure_date" value="{{$flight?->departure_date}}" placeholder="Departure Date">
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="mb-3">
-                                            <label for="departure_time" class="form-label">Departure Time</label>
-                                            <input name="departure_time" type="time" step="1" inputmode="numeric" class="form-control" id="departure_time" value="{{$flight?->departure_time}}" placeholder="Departure Time">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col align-self-center">
-                                        <div class="mb-3">
-                                            <label for="passport" class="form-label">Passport</label>
-                                            <input name="passport" type="text" class="form-control" value="{{$flight?->passport}}" id="passport" placeholder="Passport">
-                                        </div>
-                                    </div>
-                                    <!-- <div class="col align-self-center">
-                                        <div class="mb-3">
-                                            <label class="form-label">Arrived : </label>
-                                            <input class="form-check-input" type="radio" name="arrived" id="arrived" value="1" <?php echo $flight?->arrived ? 'checked' : '' ?>>
-                                            <label class="form-check-label" for="arrived">
-                                                Yes
-                                            </label>
-                                            &nbsp;
-                                            <input class="form-check-input" type="radio" name="arrived" id="notArrived" value="0" <?php echo !$flight?->arrived ? 'checked' : '' ?>>
-                                            <label class="form-check-label" for="notArrived">
-                                                No
-                                            </label>
-                                            &nbsp;
-                                            &nbsp;
-                                            &nbsp;
-                                            &nbsp;
-                                            <label class="form-label">Departed : </label>
-                                            <input class="form-check-input" type="radio" name="departed" id="departed" value="1" <?php echo $flight?->departed ? 'checked' : '' ?>>
-                                            <label class="form-check-label" for="departed">
-                                                Yes
-                                            </label>
-                                            &nbsp;
-                                            <input class="form-check-input" type="radio" name="departed" id="notDeparted" value="0" <?php echo !$flight?->departed ? 'checked' : '' ?>>
-                                            <label class="form-check-label" for="notDeparted">
-                                                No
-                                            </label>
-                                        </div>
-                                    </div> -->
-                                </div>
-                            </div>
-                            <!-- <div class="mb-3">
-                                <label for="organistaion" class="form-label">Organisation</label>
-                                <input name="organistaion" type="text" class="form-control" id="organistaion" placeholder="Organisation" required>
-                            </div> -->
-                            <br />
-                            <input name="delegate_uid" type="hidden" id="delegate_uid" value="{{$id}}" required>
-                            <input name="delegation_uid" type="hidden" id="delegation_uid" value="{{$member->delegation}}" required>
-                            <input name="flightsegment_uid" type="hidden" id="flightsegment_uid" value="{{$flight?->flightsegment_uid}}">
-                            <input type="submit" name="submit" class="btn btn-primary" value="Update Flight" />
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <main class="page">
     <div class="box-2">
         <div class="result"></div>
@@ -290,20 +183,6 @@
         dwn.setAttribute('href', imgSrc);
     });
 
-    document.addEventListener('DOMContentLoaded', function() {
-        flatpickr("#arrival_time", {
-            enableTime: true,
-            noCalendar: true,
-            dateFormat: "H:i",
-            time_24hr: true
-        });
-        flatpickr("#departure_time", {
-            enableTime: true,
-            noCalendar: true,
-            dateFormat: "H:i",
-            time_24hr: true
-        });
-    });
 </script>
 @endsection
 @endauth

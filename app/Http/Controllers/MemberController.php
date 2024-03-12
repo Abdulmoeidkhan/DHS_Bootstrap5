@@ -96,6 +96,7 @@ class MemberController extends Controller
         }
         return $delegates;
     }
+    
     public function specificMembersData(Request $req, $id)
     {
         $delegationUid = Delegation::where('delegates', $id)->first('uid');

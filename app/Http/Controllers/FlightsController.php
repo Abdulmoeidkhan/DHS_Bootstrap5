@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Delegate;
+use App\Models\DelegateFlight;
 use App\Models\Flightsegment;
 use App\Models\Itinerary;
 use App\Models\Member;
@@ -128,5 +129,12 @@ class FlightsController extends Controller
         // return Member::where('member_uid', $id)->first();
         $isMember = Member::where('member_uid', $id)->first() ? true : false;
         return $isMember ? redirect()->route('pages.memberFullProfile', $id) : redirect()->route('pages.renderSpeceficDelegateProfile', $id);
+    }
+
+    public function addFlightPage(Request $req, $id)
+    {
+        $flight = DelegateFlight::where('delegate_uid', $id)->first();
+        $member = Delegate::where('delegates_uid', $id)->first();
+        return view('pages.addFlight', ['flight' => $flight, 'member' => $member, 'id' => $id]);
     }
 }
