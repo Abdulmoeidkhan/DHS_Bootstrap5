@@ -46,7 +46,7 @@ class SignInController extends Controller
                             $user->officerUid = Officer::where('officer_user', Auth::user()->uid)->first('officer_uid');
                             break;
                         default:
-                            return back()->with('error', 'Something Went Wrong');
+                            return redirect()->back()->with('error', 'Something Went Wrong');
                     }
                     $user->images = ImageBlob::where('uid', Auth::user()->uid)->first();
                     session()->put('user', $user);

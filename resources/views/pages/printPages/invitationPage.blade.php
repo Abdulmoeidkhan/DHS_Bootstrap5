@@ -9,6 +9,11 @@
         .app-header {
             display: none;
         }
+
+        .container-fluid {
+            font-size: 12px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
     }
 </style>
 <div class="container-fluid">
@@ -22,8 +27,7 @@
     <div class="row container-first-child">
         <div class="col-md-12 parent-print-program d-print-inline">
             <div>
-                <h3 class="text-capitalize">Dear {{$delegate->first_Name}}&nbsp;{{$delegate->last_Name}} - {{$delegation->country}}</h3>
-                <br />
+                <h3 class="text-capitalize">Dear {{$delegate->rankName->ranks_name}}&nbsp;{{$delegate->first_Name}}&nbsp;{{$delegate->last_Name}} - {{$delegation->country}}</h3>
                 <br />
                 <p>{{config('localvariables.para1')}}</p>
                 <p>{{config('localvariables.para2')}}</p>
@@ -46,7 +50,6 @@
                 <p>
                     {{config('localvariables.para4')}}
                 </p>
-                <br />
                 <ul class="list-group ">
                     <li class="list-group-item">{{config('localvariables.li1')}}</li>
                     <li class="list-group-item">{{config('localvariables.li2')}}</li>
@@ -56,7 +59,6 @@
             </div>
         </div>
     </div>
-    <br />
     <br />
     <br />
     <div class="row">
@@ -71,9 +73,9 @@
                     <li class="list-group-item">{{config('localvariables.li8')}}</li>
                 </ul>
                 <br />
-                <p class="blockquote">
+                <!-- <p class="blockquote">
                     <?php echo config('localvariables.eventName'); ?>
-                </p>
+                </p> -->
                 <!-- <p>
                     Location : <?php echo config('localvariables.eventLocation'); ?>
                 </p>
@@ -86,16 +88,14 @@
     <div class="row container-first-child">
         <div class="col-md-12 parent-print-program">
             <div>
-                <br />
-                <h2>How to Print your e-Badge?</h2>
+                <h2>To Print your e-Badge?</h2>
 
-                <p>Go to the Badge Tab in Navigation Bar (Side Bar)</p>
+                <p>Navigate to the Badge Tab in the Navigation Bar (Side Bar).</p>
                 <p>
-                    Click on the Blue Button in a row to print required Badge
+                    Click on the Blue Button in the corresponding row to print the required Badge.
                 </p>
             </div>
         </div>
-
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -105,8 +105,8 @@
                 <br />
                 <p class="blockquote">
                 <ol>
-                    <li class="list-group-item">If you have more than one delegate, you can enter that information with “Add New” and enter your required information and save.</li>
-                    <li class="list-group-item">For your participation confirmation on IDEAS 2022, you will need your e- Badge paper print along with further required documents at your “Arrival” in Pakistan. Please bring your e-Badge print copy and show our Airport Welcome Desk or assigned receiving officer.</li>
+                    <li class="list-group-item">1. If you have multiple delegates, you can add their information by selecting "Add New" and entering the required details.</li>
+                    <li class="list-group-item">2. Upon your arrival in Pakistan, please present a printed copy of your e-Badge along with any other necessary documents at the Airport Welcome Desk or to the assigned receiving officer.</li>
                 </ol>
                 </p>
             </div>
@@ -121,11 +121,15 @@
                 <p class="blockquote">
                 <ol>
                     <li class="list-group-item">
-                        DEFENCE EXPORT PROMOTION ORGANIZATION E-10 SECTOR DEFENCE COMPLEX ISLAMABAD
+                        DEFENCE EXPORT PROMOTION ORGANIZATION
                     </li>
                     <li class="list-group-item">
-                        Phone : 92-51-9262017, 92-51-9262031, 92-51-9262042, 92-51-9262018
-                        Email : info@depo.gov.pk, www.depo.gov.pk
+                        Sector E-10, Defence Complex Islamabad (DCI), Islamabad - Pakistan
+                        Tel: 92-51-9262017, 92-51-9262031, 92-51-9262042
+                        Fax: +92 51 9262018
+                        Email: info@depo.org.pk
+                        URL: www.depo.gov.pk
+
                     </li>
                 </ol>
                 </p>

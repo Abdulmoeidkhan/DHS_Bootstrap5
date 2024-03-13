@@ -219,9 +219,9 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('pages.events')}}" aria-expanded="false">
+                    <a class="sidebar-link" href="{{route('pages.wishPage')}}" aria-expanded="false">
                         <span>
-                            <i class="ti ti-calendar-event"></i>
+                            <i class="ti ti-gift"></i>
                         </span>
                         <span class="hide-menu">Wishlists</span>
                     </a>

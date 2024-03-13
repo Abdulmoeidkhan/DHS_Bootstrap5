@@ -15,6 +15,7 @@ class PrintInvitationController extends Controller
     {
         $delegate = Delegate::where('delegation', $id)->orWhere('delegates_uid', $id)->first();
         $delegation = Delegation::where('uid', $delegate->delegation)->first();
+        $delegate->rankName = Rank::where('ranks_uid', $delegate->rank)->first();
         return view('pages.printPages.invitationPage', ['delegate' => $delegate, 'delegation' => $delegation]);
     }
 

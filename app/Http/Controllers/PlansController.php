@@ -38,12 +38,12 @@ class PlansController extends Controller
     public function deleteHotelPlan($id)
     {
         $hotelPlan = HotelPlan::where('hotel_plan_uid', $id)->delete();
-        return $hotelPlan ? back()->with('message', "Hotel Plan Deleted Successfully") : back()->with('error', "Something Went Wrong");
+        return $hotelPlan ? redirect()->back()->with('message', "Hotel Plan Deleted Successfully") : redirect()->back()->with('error', "Something Went Wrong");
     }
     public function deleteCarPlan($id)
     {
         $carPlan = CarPlan::where('car_plan_uid', $id)->delete();
-        return $carPlan ? back()->with('message', "Car Plan Deleted Successfully") : back()->with('error', "Something Went Wrong");
+        return $carPlan ? redirect()->back()->with('message', "Car Plan Deleted Successfully") : redirect()->back()->with('error', "Something Went Wrong");
     }
 
     // public function addPlan(Request $req)
@@ -58,10 +58,10 @@ class PlansController extends Controller
     //     try {
     //         $savedcarcategory = $carcategory->save();
     //         if ($savedcarcategory) {
-    //             return back()->with('message', "Car Category Added Successfully");
+    //             return redirect()->back()->with('message', "Car Category Added Successfully");
     //         }
     //     } catch (\Illuminate\Database\QueryException $exception) {
-    //         return  back()->with('error', $exception->errorInfo[2]);
+    //         return  redirect()->back()->with('error', $exception->errorInfo[2]);
     //     }
     // }
 
@@ -81,10 +81,10 @@ class PlansController extends Controller
     //                 $oldDriver = Driver::where('driver_uid', $oldCar->driver_uid)->update(['driver_status' => 1]);
     //             }
     //             $newDriver = Driver::where('driver_uid', $req->driver_uid)->update(['driver_status' => 0]);
-    //             return $newDriver ? back()->with('message', "Car Updated Successfully") : back()->with('error', "Something Went Wrong");
+    //             return $newDriver ? redirect()->back()->with('message', "Car Updated Successfully") : redirect()->back()->with('error', "Something Went Wrong");
     //         }
     //     } catch (\Illuminate\Database\QueryException $exception) {
-    //         return  back()->with('error', $exception->errorInfo[2]);
+    //         return  redirect()->back()->with('error', $exception->errorInfo[2]);
     //     }
     // }
 

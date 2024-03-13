@@ -17,7 +17,7 @@ class FeedbackController extends Controller
 
     public function setFeedback(Request $req)
     {
-        $feedback = new Feedback();
+        $feedback = new Feedredirect()->back();
         $feedback->feedback_uid = (string) Str::uuid();
         foreach ($req->all() as $key => $value) {
             if ($key != 'submit' && $key != '_token' && strlen($value) > 0) {
@@ -27,10 +27,10 @@ class FeedbackController extends Controller
         try {
             $savedFeedback = $feedback->save();
             if ($savedFeedback) {
-                return back()->with('message', "Feedback Added Successfully");
+                return redirect()->back()->with('message', "Feedback Added Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
     public function deleteFeedback(Request $req)
@@ -38,10 +38,10 @@ class FeedbackController extends Controller
         try {
             $deleteFeedback = Feedback::where('guest_uid', $req->id)->orWhere('feedback_uid', $req->id)->orWhere('delegation_uid', $req->id)->delete();
             if ($deleteFeedback) {
-                return back()->with('error', "Feedback Deleted Successfully");
+                return redirect()->back()->with('error', "Feedback Deleted Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
 }

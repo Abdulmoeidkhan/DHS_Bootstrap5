@@ -42,10 +42,10 @@ class DoucmentController extends Controller
 
         if (Document::where('uid', $req->id)->first()) {
             Document::where('uid', $req->id)->update(['pdf_blob' => $pdfBlob]);
-            return $this->hisOwnProfile($req->id) ? back()->with('message', "Document Has been updated") : back()->with($req->id, "message", "Document Has been updated");
+            return $this->hisOwnProfile($req->id) ? redirect()->back()->with('message', "Document Has been updated") : redirect()->back()->with($req->id, "message", "Document Has been updated");
         } else {
             $pdf->save();
-            return $this->hisOwnProfile($req->id) ? back()->with('message', "Document Has been updated") : back()->with($req->id, "message", "Document Has been updated");
+            return $this->hisOwnProfile($req->id) ? redirect()->back()->with('message', "Document Has been updated") : redirect()->back()->with($req->id, "message", "Document Has been updated");
         }
     }
     public function getPdf(Request $req, $id)

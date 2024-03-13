@@ -85,13 +85,13 @@ class InterpreterController extends Controller
         try {
             $interpreterSaved = $interpreter->save();
             if ($interpreterSaved) {
-                return back()->with('message', 'Interpreter has been added Successfully');
+                return redirect()->back()->with('message', 'Interpreter has been added Successfully');
             }
         } catch (QueryException $exception) {
             if ($exception->errorInfo[2]) {
-                return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
             } else {
-                return  back()->with('error', $exception->errorInfo[2]);
+                return  redirect()->back()->with('error', $exception->errorInfo[2]);
             }
         }
     }
@@ -107,10 +107,10 @@ class InterpreterController extends Controller
         try {
             $updatedInterpreter = Interpreter::where('interpreter_uid', $id)->update($arrayToBeUpdate);
             if ($updatedInterpreter) {
-                return back()->with('message', 'Interpreter Updated Successfully');
+                return redirect()->back()->with('message', 'Interpreter Updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
 
@@ -121,13 +121,13 @@ class InterpreterController extends Controller
         //     $updateInterpreter = Interpreter::where('interpreter_uid', $req->interpreterSelect)->update(['interpreter_delegation' => $req->delegationUid, 'interpreter_assign' => 1]);
         //     if ($updateInterpreter) {
         //         $updateDelegation = Delegation::where('uid', $req->delegationUid)->update(['interpreters' => $req->interpreterSelect]);
-        //         return back()->with('message', 'Interpreter has been attach Successfully');
+        //         return redirect()->back()->with('message', 'Interpreter has been attach Successfully');
         //     }
         // } catch (QueryException $exception) {
         //     if ($exception->errorInfo[2]) {
-        //         return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+        //         return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
         //     } else {
-        //         return  back()->with('error', $exception->errorInfo[2]);
+        //         return  redirect()->back()->with('error', $exception->errorInfo[2]);
         //     }
         // }
     }

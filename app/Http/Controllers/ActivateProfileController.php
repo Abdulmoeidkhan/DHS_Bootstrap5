@@ -44,9 +44,9 @@ class ActivateProfileController extends Controller
                 return $rolesAndPermissionGiven;
             } catch (\Illuminate\Database\QueryException $exception) {
                 if ($exception->errorInfo[2]) {
-                    return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
                 } else {
-                    return  back()->with('error', $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', $exception->errorInfo[2]);
                 }
             }
         } else {
@@ -68,9 +68,9 @@ class ActivateProfileController extends Controller
             return $rolesAndPermissionGiven;
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
-                return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
             } else {
-                return  back()->with('error', $exception->errorInfo[2]);
+                return  redirect()->back()->with('error', $exception->errorInfo[2]);
             }
         }
     }
@@ -89,9 +89,9 @@ class ActivateProfileController extends Controller
             return $rolesAndPermissionGiven;
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
-                return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
             } else {
-                return  back()->with('error', $exception->errorInfo[2]);
+                return  redirect()->back()->with('error', $exception->errorInfo[2]);
             }
         }
     }
@@ -117,9 +117,9 @@ class ActivateProfileController extends Controller
                 return true;
             } catch (\Illuminate\Database\QueryException $exception) {
                 if ($exception->errorInfo[2]) {
-                    return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
                 } else {
-                    return  back()->with('error', $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', $exception->errorInfo[2]);
                 }
             }
         } else {
@@ -138,9 +138,9 @@ class ActivateProfileController extends Controller
                 return $rolesAndPermissionGiven;
             } catch (\Illuminate\Database\QueryException $exception) {
                 if ($exception->errorInfo[2]) {
-                    return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
                 } else {
-                    return  back()->with('error', $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', $exception->errorInfo[2]);
                 }
             }
         } else {
@@ -180,9 +180,9 @@ class ActivateProfileController extends Controller
                 return $rolesAndPermissionGiven;
             } catch (\Illuminate\Database\QueryException $exception) {
                 if ($exception->errorInfo[2]) {
-                    return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
                 } else {
-                    return  back()->with('error', $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', $exception->errorInfo[2]);
                 }
             }
         } else {
@@ -200,9 +200,9 @@ class ActivateProfileController extends Controller
                 return $rolesAndPermissionGiven;
             } catch (\Illuminate\Database\QueryException $exception) {
                 if ($exception->errorInfo[2]) {
-                    return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
                 } else {
-                    return  back()->with('error', $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', $exception->errorInfo[2]);
                 }
             }
         } else {
@@ -220,9 +220,9 @@ class ActivateProfileController extends Controller
                 return $rolesAndPermissionGiven;
             } catch (\Illuminate\Database\QueryException $exception) {
                 if ($exception->errorInfo[2]) {
-                    return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
                 } else {
-                    return  back()->with('error', $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', $exception->errorInfo[2]);
                 }
             }
         } else {
@@ -251,9 +251,9 @@ class ActivateProfileController extends Controller
                 return true;
             } catch (\Illuminate\Database\QueryException $exception) {
                 if ($exception->errorInfo[2]) {
-                    return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
                 } else {
-                    return  back()->with('error', $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', $exception->errorInfo[2]);
                 }
             }
         } else {
@@ -282,9 +282,9 @@ class ActivateProfileController extends Controller
                 return true;
             } catch (\Illuminate\Database\QueryException $exception) {
                 if ($exception->errorInfo[2]) {
-                    return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
                 } else {
-                    return  back()->with('error', $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', $exception->errorInfo[2]);
                 }
             }
         } else {
@@ -313,9 +313,9 @@ class ActivateProfileController extends Controller
                 return true;
             } catch (\Illuminate\Database\QueryException $exception) {
                 if ($exception->errorInfo[2]) {
-                    return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
                 } else {
-                    return  back()->with('error', $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', $exception->errorInfo[2]);
                 }
             }
         } else {
@@ -331,34 +331,34 @@ class ActivateProfileController extends Controller
                 $delegateActivated = $this->activateDelegate($req);
                 // return $delegateActivated;
                 // $delegateRolesPermission = $this->delegationRolesAndTeams($req->uid);
-                return $delegateActivated ? back()->with('message', 'Delegation Updated Successfully') : back()->with('error', 'Delegation already assigned');
+                return $delegateActivated ? redirect()->back()->with('message', 'Delegation Updated Successfully') : redirect()->back()->with('error', 'Delegation already assigned');
                 break;
             case "HL":
                 $operatorActivated = $this->activateHotelOperator($req);
-                return $operatorActivated ? back()->with('message', 'Profile Updated Successfully') : back()->with('error', 'Officer already assigned');
+                return $operatorActivated ? redirect()->back()->with('message', 'Profile Updated Successfully') : redirect()->back()->with('error', 'Officer already assigned');
                 break;
             case "LO":
                 $officerActivated = $this->activateOfficer($req);
-                return $officerActivated ? back()->with('message', 'Officer Updated Successfully') : back()->with('error', 'Officer already assigned');
+                return $officerActivated ? redirect()->back()->with('message', 'Officer Updated Successfully') : redirect()->back()->with('error', 'Officer already assigned');
                 break;
             case "RO":
                 $officerActivated = $this->activateOfficer($req);
-                return $officerActivated ? back()->with('message', 'Officer Updated Successfully') : back()->with('error', 'Officer already assigned');
+                return $officerActivated ? redirect()->back()->with('message', 'Officer Updated Successfully') : redirect()->back()->with('error', 'Officer already assigned');
                 break;
             case "IO":
                 $officerActivated = $this->activateOfficer($req);
-                return $officerActivated ? back()->with('message', 'Officer Updated Successfully') : back()->with('error', 'Officer already assigned');
+                return $officerActivated ? redirect()->back()->with('message', 'Officer Updated Successfully') : redirect()->back()->with('error', 'Officer already assigned');
                 break;
             case "AP":
                 $airportOperator = $this->activateAirportOperator($req);
-                return $airportOperator ? back()->with('message', 'Airport Operator Updated Successfully') : back()->with('error', 'Operator already assigned');
+                return $airportOperator ? redirect()->back()->with('message', 'Airport Operator Updated Successfully') : redirect()->back()->with('error', 'Operator already assigned');
                 break;
             case "CA":
                 $carOperator = $this->activateCarOperator($req);
-                return $carOperator ? back()->with('message', 'Car Operator Updated Successfully') : back()->with('error', 'Operator already assigned');
+                return $carOperator ? redirect()->back()->with('message', 'Car Operator Updated Successfully') : redirect()->back()->with('error', 'Operator already assigned');
                 break;
             default:
-                return back()->with('error', 'Something Went Wrong');
+                return redirect()->back()->with('error', 'Something Went Wrong');
         }
     }
 

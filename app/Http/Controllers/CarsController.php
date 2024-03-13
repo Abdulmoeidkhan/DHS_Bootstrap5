@@ -52,10 +52,10 @@ class CarsController extends Controller
         try {
             $savedcarcategory = $carcategory->save();
             if ($savedcarcategory) {
-                return back()->with('message', "Car Category Added Successfully");
+                return redirect()->back()->with('message', "Car Category Added Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
 
@@ -75,10 +75,10 @@ class CarsController extends Controller
                     $oldDriver = Driver::where('driver_uid', $oldCar->driver_uid)->update(['driver_status' => 1]);
                 }
                 $newDriver = Driver::where('driver_uid', $req->driver_uid)->update(['driver_status' => 0]);
-                return $newDriver ? back()->with('message', "Car Updated Successfully") : back()->with('error', "Something Went Wrong");
+                return $newDriver ? redirect()->back()->with('message', "Car Updated Successfully") : redirect()->back()->with('error', "Something Went Wrong");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
 
@@ -118,10 +118,10 @@ class CarsController extends Controller
             $savedcar = $car->save();
             $updateDriver = Driver::where('driver_uid', $car->driver_uid)->update(['driver_status' => 0]);
             if ($savedcar && $updateDriver) {
-                return back()->with('message', "Car Added Successfully");
+                return redirect()->back()->with('message', "Car Added Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
 
@@ -141,10 +141,10 @@ class CarsController extends Controller
                     $oldDriver = Driver::where('driver_uid', $oldCar->driver_uid)->update(['driver_status' => 1]);
                 }
                 $newDriver = Driver::where('driver_uid', $req->driver_uid)->update(['driver_status' => 0]);
-                return $newDriver ? back()->with('message', "Car Updated Successfully") : back()->with('error', "Something Went Wrong");
+                return $newDriver ? redirect()->back()->with('message', "Car Updated Successfully") : redirect()->back()->with('error', "Something Went Wrong");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
 
@@ -179,10 +179,10 @@ class CarsController extends Controller
         try {
             $saveddriver = $driver->save();
             if ($saveddriver) {
-                return back()->with('message', "Drivers Added Successfully");
+                return redirect()->back()->with('message', "Drivers Added Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
 
@@ -197,10 +197,10 @@ class CarsController extends Controller
             }
             $updateDriver = Driver::where('driver_uid', $id)->update($arrayToBeUpdate);
             if ($updateDriver) {
-                return back()->with('message', "Driver Updated Successfully");
+                return redirect()->back()->with('message', "Driver Updated Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
     // Drivers End
@@ -289,12 +289,12 @@ class CarsController extends Controller
             $updateCar = Car::where('car_uid', $req->car_uid)->update(['car_status' => 0]);
             $guestUidUpdate = $journey_assign_to ? Member::where('member_uid', $req->journey_assign_to)->update(['car_accomodated' => $journey->journey_uid]) : Delegate::where('delegates_uid', $req->journey_assign_to)->update(['car_accomodated' => $journey->journey_uid]);
             if ($savedJourney && $guestUidUpdate && $updateCar) {
-                return back()->with('message', "Journey Assigned Successfully");
+                return redirect()->back()->with('message', "Journey Assigned Successfully");
             } else {
-                return back()->with('error', "SomeThing Went Wrong");
+                return redirect()->back()->with('error', "SomeThing Went Wrong");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
 
@@ -320,10 +320,10 @@ class CarsController extends Controller
                 }
                 $carUidUpdate = Car::where('car_uid', $req->car_uid)->update(['car_status' => 0]);
                 $guestUidUpdate = $journey_assign_to ? Member::where('member_uid', $req->journey_assign_to)->update(['car_accomodated' => $id]) : Delegate::where('delegates_uid', $req->journey_assign_to)->update(['car_accomodated' => $id]);
-                return $guestUidUpdate && $carUidUpdate ? back()->with('message', "Journey Updated Successfully") : back()->with('error', "Something Went Wrong");
+                return $guestUidUpdate && $carUidUpdate ? redirect()->back()->with('message', "Journey Updated Successfully") : redirect()->back()->with('error', "Something Went Wrong");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
 
@@ -334,7 +334,7 @@ class CarsController extends Controller
     public function attachCar(Request $req)
     {
         $updatedCarSelect = $req->carASelect ? Car::where('car_uid', $req->carASelect)->update(['car_delegation' => $req->delegationUid_car]) : Car::where('car_uid', $req->carBSelect)->update(['car_delegation' => $req->delegationUid_car]);
-        return $updatedCarSelect ? back()->with('message', "Car Attach Successfully") : back()->with('error', "Something Went Wrong");
+        return $updatedCarSelect ? redirect()->back()->with('message', "Car Attach Successfully") : redirect()->back()->with('error', "Something Went Wrong");
     }
 
     public function detachCarData($id)
@@ -352,7 +352,7 @@ class CarsController extends Controller
         foreach ($cars as $key => $car) {
             Car::where([['car_delegation', $delegationUid], ['car_uid', $car]])->update(['car_delegation' => null]);
         }
-        return back()->with('message', 'Car has been deattach Successfully');
+        return redirect()->back()->with('message', 'Car has been deattach Successfully');
     }
 
     // Attach Car

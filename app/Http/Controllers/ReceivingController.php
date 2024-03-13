@@ -84,13 +84,13 @@ class ReceivingController extends Controller
         try {
             $receivingSaved = $receiving->save();
             if ($receivingSaved) {
-                return back()->with('message', 'Receiving has been added Successfully');
+                return redirect()->back()->with('message', 'Receiving has been added Successfully');
             }
         } catch (QueryException $exception) {
             if ($exception->errorInfo[2]) {
-                return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
             } else {
-                return  back()->with('error', $exception->errorInfo[2]);
+                return  redirect()->back()->with('error', $exception->errorInfo[2]);
             }
         }
     }
@@ -106,10 +106,10 @@ class ReceivingController extends Controller
         try {
             $updatedReceiving = Receiving::where('receiving_uid', $id)->update($arrayToBeUpdate);
             if ($updatedReceiving) {
-                return back()->with('message', 'Receiving Updated Successfully');
+                return redirect()->back()->with('message', 'Receiving Updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
 
@@ -119,13 +119,13 @@ class ReceivingController extends Controller
         try {
             $updateReceiving = Receiving::where('receiving_uid', $req->receivingOfficerSelect)->update(['receiving_delegation' => $req->delegationUid_receiving, 'receiving_assign' => 1]);
             if ($updateReceiving) {
-                return back()->with('message', 'Receiving has been attach Successfully');
+                return redirect()->back()->with('message', 'Receiving has been attach Successfully');
             }
         } catch (QueryException $exception) {
             if ($exception->errorInfo[2]) {
-                return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
             } else {
-                return  back()->with('error', $exception->errorInfo[2]);
+                return  redirect()->back()->with('error', $exception->errorInfo[2]);
             }
         }
     }

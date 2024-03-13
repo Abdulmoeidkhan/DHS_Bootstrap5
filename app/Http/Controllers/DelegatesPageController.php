@@ -25,7 +25,7 @@ class DelegatesPageController extends Controller
                     ->leftJoin('image_blobs', 'delegates.delegates_uid', '=', 'image_blobs.uid')
                     ->leftJoin('delegations', 'delegates.delegation', '=', 'delegations.uid')
                     ->leftJoin('vips', 'vips.vips_uid', '=', 'delegations.invited_by')
-                    ->where([['delegates.first_Name', '!=', null], ['delegates.status', '1'], ['self', '1']])
+                    ->where([['delegates.first_Name', '!=', null], ['delegates.status', '1'], ['delegates.self', '1']])
                     ->select('delegates.*', 'delegate_flights.*', 'image_blobs.uid', 'image_blobs.img_blob', 'delegations.country', 'delegations.delegation_response', 'delegations.delegationCode', 'delegations.delegation_status', 'delegations.invited_by', 'vips.*')
                     ->orderBy('delegations.country', 'asc')
                     ->get();
@@ -35,7 +35,7 @@ class DelegatesPageController extends Controller
                     ->leftJoin('image_blobs', 'delegates.delegates_uid', '=', 'image_blobs.uid')
                     ->leftJoin('delegations', 'delegates.delegation', '=', 'delegations.uid')
                     ->leftJoin('vips', 'vips.vips_uid', '=', 'delegations.invited_by')
-                    ->where([['delegates.first_Name', '!=', null], ['delegates.status', '1'], ['self', '1'],['delegations.delegation_response','Accepted']])
+                    ->where([['delegates.first_Name', '!=', null], ['delegates.status', '1'], ['delegates.self', '1'],['delegations.delegation_response','Accepted']])
                     ->select('delegates.*', 'delegate_flights.*', 'image_blobs.uid', 'image_blobs.img_blob', 'delegations.country', 'delegations.delegation_response', 'delegations.delegationCode', 'delegations.delegation_status', 'delegations.invited_by', 'vips.*')
                     ->orderBy('delegations.country', 'asc')
                     ->get();
@@ -78,6 +78,6 @@ class DelegatesPageController extends Controller
     public function invitationUpdate(Request $req)
     {
         $updatedDelegate = Delegate::where('delegates_uid', $req->delegationUid)->update(['invitation_number' => $req->invitaionNumber]);
-        return $updatedDelegate ? back()->with('message', 'Invitation Number Updated Successfully') : back()->with('error', 'Something Went Wrong');
+        return $updatedDelegate ? redirect()->back()->with('message', 'Invitation Number Updated Successfully') : redirect()->back()->with('error', 'Something Went Wrong');
     }
 }

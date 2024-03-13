@@ -50,15 +50,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/signIn', function () {
-    return view('pages.signIn');
+    if (auth()?->user()?->uid) {
+        return redirect()->route('pages.dashboard');
+    } else {
+        return view('pages.signIn');
+    }
 })->name("signIn");
 
 Route::get('/signUp', function () {
-    return view('pages.signUp');
+    if (auth()?->user()?->uid) {
+        return redirect()->route('pages.dashboard');
+    } else {
+        return view('pages.signUp');
+    }
 })->name("signUp");
 
 Route::get('/accountActivation', function () {
-    return view('pages.activation');
+    if (auth()?->user()?->uid) {
+        return redirect()->route('pages.dashboard');
+    } else {
+        return view('pages.activation');
+    }
 })->name("accountActivation");
 
 Route::get('/404', function () {
@@ -348,6 +360,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Program Page And API End
 
         // Wish API Start
+        Route::get('/wishPage', [WishController::class, 'wishPageRender'])->name('pages.wishPage');
         Route::get('/getWish/{id?}', [WishController::class, 'getWish'])->name('request.getWish');
         Route::post('/setWish', [WishController::class, 'setWish'])->name('request.setWish');
         Route::post('/deleteWish', [WishController::class, 'deleteWish'])->name('request.deleteWish');

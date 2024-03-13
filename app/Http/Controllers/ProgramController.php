@@ -40,7 +40,7 @@ class ProgramController extends Controller
 
         try {
             $savedProgram = $program->save();
-            return $savedProgram ? redirect()->route('pages.programs')->with('message', 'Program Added Successfully') : back()->with('error', 'Something Went Wrong');
+            return $savedProgram ? redirect()->route('pages.programs')->with('message', 'Program Added Successfully') : redirect()->back()->with('error', 'Something Went Wrong');
         } catch (\Illuminate\Database\QueryException $exception) {
             return redirect()->route('pages.programs')->with('error', $exception->errorInfo[2]);
         }

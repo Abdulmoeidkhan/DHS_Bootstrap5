@@ -32,10 +32,10 @@ class ProfileImageController extends Controller
             $imageAlreadyExist = ImageBlob::where('uid', $imgBlob->uid)->first();
             $imgBlob->img_blob = $imageBlob;
             $imgSaved = $imageAlreadyExist ? $this->imageBlobUpdate($imgBlob->img_blob, $imgBlob->uid) : $imgBlob->save();
-            return $imgSaved ? back()->with('message', 'Image Updated Successfully') : back()->with('error', 'SomeThing Went Wrong');
+            return $imgSaved ? redirect()->back()->with('message', 'Image Updated Successfully') : redirect()->back()->with('error', 'SomeThing Went Wrong');
         }
         else{
-            return back()->with('error', 'Please save and try to upload again');
+            return redirect()->back()->with('error', 'Please save and try to upload again');
         }
     }
 
@@ -43,7 +43,7 @@ class ProfileImageController extends Controller
     {
         $imageBlob = $file;
         $updateImageBlob = ImageBlob::where('uid', $id)->first() ? ImageBlob::where('uid', $id)->update(['img_blob' => $imageBlob]) : $this->imageBlobUpload($file, $id);
-        return $updateImageBlob ? back()->with('message', 'Image Updated Successfully') : back()->with('error', 'SomeThing Went Wrong');;
+        return $updateImageBlob ? redirect()->back()->with('message', 'Image Updated Successfully') : redirect()->back()->with('error', 'SomeThing Went Wrong');;
     }
 
     // protected function imageBlobUpdate($file, $id)
@@ -72,11 +72,11 @@ class ProfileImageController extends Controller
 
     //     if (Image::where('uid', $req->id)->first()) {
     //         Image::where('uid', $req->id)->update(['base64_image' => $base64]);
-    //         return $this->hisOwnProfile($req->id) ? back()->with('message', "Picture Has been updated") : back()->with($req->id, "message", "Picture Has been updated");
+    //         return $this->hisOwnProfile($req->id) ? redirect()->back()->with('message', "Picture Has been updated") : redirect()->back()->with($req->id, "message", "Picture Has been updated");
     //         // redirect()->route('pages.profileUser', $req->id);
     //     } else {
     //         $image->save();
-    //         return $this->hisOwnProfile($req->id) ? back()->with('message', "Picture Has been updated") : back()->with($req->id, "message", "Picture Has been updated");
+    //         return $this->hisOwnProfile($req->id) ? redirect()->back()->with('message', "Picture Has been updated") : redirect()->back()->with($req->id, "message", "Picture Has been updated");
     //         // return $this->hisOwnProfile($req->id) ? redirect()->route('pages.myProfile') : redirect()->route('pages.profileUser', $req->id);
     //         // return $this->hisOwnProfile($req->id) ? redirect()->route('pages.myProfile') : redirect()->route('pages.profileUser', $req->id);
     //     }

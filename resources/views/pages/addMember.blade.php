@@ -103,7 +103,7 @@
                             <div class="mb-3">
                                 <label for="pdf" class="form-label">Document</label>
                                 <input name="pdf" type="file" class="form-control" id="pdf" accept="application/pdf">
-                                <object data="{{ route('request.getPdf' , $member->delegates_uid ) }}" type="application/pdf" width="100%" height="1000px">
+                                <object data="{{route('request.getPdf', $member->delegates_uid)}}" type="application/pdf" width="100%" height="1000px">
                                     <p>Your browser does not support PDF embedding. You can <a href="{{ route('request.getPdf' , $member->delegates_uid ) }}">download the PDF</a> instead.</p>
                                 </object>
                             </div>

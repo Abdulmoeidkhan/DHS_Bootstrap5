@@ -24,7 +24,7 @@ class InterestController extends Controller
                     $savedProgram = $interestProgram->save();
                     array_push($savedPrograms, $savedProgram);
                 } catch (\Illuminate\Database\QueryException $exception) {
-                    return  back()->with('error', $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', $exception->errorInfo[2]);
                 }
             }
         }
@@ -38,9 +38,9 @@ class InterestController extends Controller
     public function setInterests(Request $req, $id = null)
     {
         if ($this->updatePrograms($req)) {
-            return back()->with('message', "Plan Updated Successfully");
+            return redirect()->back()->with('message', "Plan Updated Successfully");
         } else {
-            return back()->with('error', "SomeThing Went Wrong");
+            return redirect()->back()->with('error', "SomeThing Went Wrong");
         }
     }
 }

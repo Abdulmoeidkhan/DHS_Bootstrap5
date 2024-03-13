@@ -80,10 +80,10 @@ class HotelController extends Controller
         try {
             $savedhotel = $hotel->save();
             if ($savedhotel) {
-                return $req->submitMore ? back()->with('message', "Hotels Added Successfully") : redirect()->route('pages.category');
+                return $req->submitMore ? redirect()->back()->with('message', "Hotels Added Successfully") : redirect()->route('pages.category');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
 
@@ -98,10 +98,10 @@ class HotelController extends Controller
             }
             $updateHotel = Hotel::where('hotel_uid', $id)->update($arrayToBeUpdate);
             if ($updateHotel) {
-                return $req->submitMore ? back()->with('message', "Hotels Updated Successfully") : redirect()->route('pages.category');
+                return $req->submitMore ? redirect()->back()->with('message', "Hotels Updated Successfully") : redirect()->route('pages.category');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
     // Hotels End
@@ -140,10 +140,10 @@ class HotelController extends Controller
         try {
             $savedRoomType = $roomtype->save();
             if ($savedRoomType) {
-                return back()->with('message', "Room Type Added Successfully");
+                return redirect()->back()->with('message', "Room Type Added Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
 
@@ -158,10 +158,10 @@ class HotelController extends Controller
             }
             $updateRoomType = Roomtype::where('room_type_uid', $id)->update($arrayToBeUpdate);
             if ($updateRoomType) {
-                return back()->with('message', "Room Type Updated Successfully");
+                return redirect()->back()->with('message', "Room Type Updated Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
 
@@ -344,12 +344,12 @@ class HotelController extends Controller
             $savedRoom = $delegateRoom->save();
             $delegateAccomodated = Delegate::where('delegates_uid', $req->assign_to)->update(['accomodated' => $delegateRoom->room_uid]);
             if ($savedRoom && $delegateAccomodated) {
-                return back()->with('message', "Room Assigned Successfully");
+                return redirect()->back()->with('message', "Room Assigned Successfully");
             } else {
-                return back()->with('error', "SomeThing Went Wrong");
+                return redirect()->back()->with('error', "SomeThing Went Wrong");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
         // return $req->all();
     }
@@ -373,12 +373,12 @@ class HotelController extends Controller
             $savedRoom = $room->save();
             $guestUidUpdate = $assign_to ? Member::where('member_uid', $req->assign_to)->update(['accomodated' => $room->room_uid]) : Delegate::where('delegates_uid', $req->assign_to)->update(['accomodated' => $room->room_uid]);
             if ($savedRoom && $guestUidUpdate) {
-                return back()->with('message', "Room Assigned Successfully");
+                return redirect()->back()->with('message', "Room Assigned Successfully");
             } else {
-                return back()->with('error', "SomeThing Went Wrong");
+                return redirect()->back()->with('error', "SomeThing Went Wrong");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
     public function updateRoom(Request $req, $id)
@@ -403,10 +403,10 @@ class HotelController extends Controller
             //     $guestUidUpdate = $assign_to ? Member::where('member_uid', $req->assign_to)->update(['accomodated' => $id]) : Delegate::where('delegates_uid', $req->assign_to)->update(['accomodated' => $id]);
             // }
             if ($updateRoom) {
-                return back()->with('message', "Room Updated Successfully");
+                return redirect()->back()->with('message', "Room Updated Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
 
@@ -424,10 +424,10 @@ class HotelController extends Controller
             try {
                 $updatedRoom = Room::where('room_uid', $req->room_uid)->update($updateRoom);
                 if ($updatedRoom) {
-                    return back()->with('message', "Room Updated Successfully");
+                    return redirect()->back()->with('message', "Room Updated Successfully");
                 }
             } catch (\Illuminate\Database\QueryException $exception) {
-                return  back()->with('error', $exception->errorInfo[2]);
+                return  redirect()->back()->with('error', $exception->errorInfo[2]);
             }
         } else {
             $addRoom = new Room();
@@ -443,10 +443,10 @@ class HotelController extends Controller
                 $roomAdded = $addRoom->save();
                 if ($roomAdded) {
                     Delegate::where('delegates_uid', $req->assign_to)->update(['accomodated' => $addRoom->room_uid]);
-                    return back()->with('message', "Room Added Successfully");
+                    return redirect()->back()->with('message', "Room Added Successfully");
                 }
             } catch (\Illuminate\Database\QueryException $exception) {
-                return  back()->with('error', $exception->errorInfo[2]);
+                return  redirect()->back()->with('error', $exception->errorInfo[2]);
             }
         }
     }
@@ -458,10 +458,10 @@ class HotelController extends Controller
             $roomDeleted = Room::where('room_uid', $req->room_uid)->delete();
             if ($roomDeleted) {
                 Delegate::where('delegates_uid', $roomToBeDelete->assign_to)->update(['accomodated' => null]);
-                return back()->with('error', "Room Deleted Successfully");
+                return redirect()->back()->with('error', "Room Deleted Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
 

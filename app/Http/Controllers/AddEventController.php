@@ -32,10 +32,10 @@ class AddEventController extends Controller
         try {
             $savedEvent = $event->save();
             if ($savedEvent) {
-                return redirect()->back()->with('message', "Event Successfully Added");
+                return redirect()->redirect()->back()->with('message', "Event Successfully Added");
                 // $file = $req->file('eventBanner');
                 // Storage::putFileAs('public/uploads', $file->getClientOriginalName(), $file);
-                // return redirect()->back()->with('message', "Event Successfully Added");
+                // return redirect()->redirect()->back()->with('message', "Event Successfully Added");
                 // $base64Image = base64_encode(file_get_contents($file->getRealPath()));
                 // $base64 = 'data:image/' . $type . ';base64,' . $base64Image;
                 // $image = new Image();
@@ -43,16 +43,16 @@ class AddEventController extends Controller
                 // $image->uid = $event->uid;
                 // try {
                 //     $image->save();
-                //     return redirect()->back()->with('message', "Event Successfully Added");
+                //     return redirect()->redirect()->back()->with('message', "Event Successfully Added");
                 // } catch (\Illuminate\Database\QueryException $exception) {
-                //     return  back()->with('error', $exception->errorInfo[2]);
+                //     return  redirect()->back()->with('error', $exception->errorInfo[2]);
                 // }
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
-                return  back()->with('error', 'Event already Exist error : ' . $exception->errorInfo[2]);
+                return  redirect()->back()->with('error', 'Event already Exist error : ' . $exception->errorInfo[2]);
             } else {
-                return  back()->with('error', $exception->errorInfo[2]);
+                return  redirect()->back()->with('error', $exception->errorInfo[2]);
             }
         }
     }

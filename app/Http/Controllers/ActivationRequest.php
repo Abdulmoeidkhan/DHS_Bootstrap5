@@ -29,16 +29,16 @@ class ActivationRequest extends Controller
                     session()->put('user', $user);
                     // return redirect()->route('pages.dashboard')->with('message', "You have successfully Signed In")->with('flash_message', "If you need to install this App please click below");
                     // Auth::logout();
-                    return $activated ? redirect()->route('pages.profileActivation')->with('message', 'Profile has been activated') : back()->with('error', 'Something Went Wrong');
+                    return $activated ? redirect()->route('pages.profileActivation')->with('message', 'Profile has been activated') : redirect()->back()->with('error', 'Something Went Wrong');
                 } else {
                     Auth::logout();
-                    return back()->with('error', 'Activation Code is not correct');
+                    return redirect()->back()->with('error', 'Activation Code is not correct');
                 }
             } else {
-                return back()->with('error', 'Email/Password is not correct');
+                return redirect()->back()->with('error', 'Email/Password is not correct');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
 }

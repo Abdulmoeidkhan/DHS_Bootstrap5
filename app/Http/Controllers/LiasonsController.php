@@ -105,13 +105,13 @@ class LiasonsController extends Controller
         try {
             $liasonSaved = $liason->save();
             if ($liasonSaved) {
-                return back()->with('message', 'Liason has been added Successfully');
+                return redirect()->back()->with('message', 'Liason has been added Successfully');
             }
         } catch (QueryException $exception) {
             if ($exception->errorInfo[2]) {
-                return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
             } else {
-                return  back()->with('error', $exception->errorInfo[2]);
+                return  redirect()->back()->with('error', $exception->errorInfo[2]);
             }
         }
     }
@@ -127,10 +127,10 @@ class LiasonsController extends Controller
         try {
             $updatedOfficer = Officer::where('officer_uid', $id)->update($arrayToBeUpdate);
             if ($updatedOfficer) {
-                return back()->with('message', 'Liason Updated Successfully');
+                return redirect()->back()->with('message', 'Liason Updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
 
@@ -140,13 +140,13 @@ class LiasonsController extends Controller
             $updateLiason = Liason::where('liason_uid', $req->liasonSelect)->update(['liason_delegation' => $req->delegationUid_liason, 'liason_assign' => 1]);
             if ($updateLiason) {
                 // $updateDelegation = Delegation::where('uid', $req->delegationUid)->update(['liasons' => $req->liasonSelect]);
-                return back()->with('message', 'Liason has been attach Successfully');
+                return redirect()->back()->with('message', 'Liason has been attach Successfully');
             }
         } catch (QueryException $exception) {
             if ($exception->errorInfo[2]) {
-                return  back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
             } else {
-                return  back()->with('error', $exception->errorInfo[2]);
+                return  redirect()->back()->with('error', $exception->errorInfo[2]);
             }
         }
     }

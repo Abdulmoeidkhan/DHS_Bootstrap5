@@ -390,7 +390,7 @@ class DelegationsPageController extends Controller
                 //     $delegationUid = $officers ? $officers->interpreter_delegation : 0;
                 //     break;
             default:
-                return back()->with('error', 'Something Went Wrong');
+                return redirect()->back()->with('error', 'Something Went Wrong');
         }
 
         $delegation = $delegationUid ? Delegation::where('uid', $delegationUid)->first() : null;
@@ -405,13 +405,13 @@ class DelegationsPageController extends Controller
     {
         $status = Delegation::where('uid', $id)->first('delegation_status');
         $updatedStatus = $status->delegation_status ? Delegation::where('uid', $id)->update(['delegation_status' => 0]) : Delegation::where('uid', $id)->update(['delegation_status' => 1]);
-        return $updatedStatus ? back()->with('message', 'Delegation Status Updated Successfully') : back()->with('error', 'Something Went Wrong');
+        return $updatedStatus ? redirect()->back()->with('message', 'Delegation Status Updated Successfully') : redirect()->back()->with('error', 'Something Went Wrong');
     }
 
     public function delegateStatusChanger($id)
     {
         $status = Delegate::where('delegates_uid', $id)->first('status');
         $updatedStatus = $status->status ? Delegate::where('delegates_uid', $id)->update(['status' => 0]) : Delegate::where('delegates_uid', $id)->update(['status' => 1]);
-        return $updatedStatus ? back()->with('message', 'Delegate Status Updated Successfully') : back()->with('error', 'Something Went Wrong');
+        return $updatedStatus ? redirect()->back()->with('message', 'Delegate Status Updated Successfully') : redirect()->back()->with('error', 'Something Went Wrong');
     }
 }

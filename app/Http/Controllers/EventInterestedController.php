@@ -23,13 +23,13 @@ class EventInterestedController extends Controller
                 $user = User::with('roles', 'permissions')->where('id', Auth::user()->id)->first();
                 $user->images = Image::where('uid', Auth::user()->uid)->first();
                 session()->put('user', $user);
-                return back()->with('message', "Event Interest Update Successfully");
+                return redirect()->back()->with('message', "Event Interest Update Successfully");
             } catch (\Illuminate\Database\QueryException $exception) {
                 if ($exception->errorInfo[2]) {
                     // return  $exception->errorInfo[2];
-                    return  back()->with('error', 'Email Address already Exist error : ' . $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', 'Email Address already Exist error : ' . $exception->errorInfo[2]);
                 } else {
-                    return  back()->with('error', $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', $exception->errorInfo[2]);
                 }
             }
             // return $udpateInterest;
@@ -42,14 +42,14 @@ class EventInterestedController extends Controller
                 $user = User::with('roles', 'permissions')->where('id', Auth::user()->id)->first();
                 $user->images = Image::where('uid', Auth::user()->uid)->first();
                 session()->put('user', $user);
-                return back()->with('message', "Event Interest Update Successfully");
+                return redirect()->back()->with('message', "Event Interest Update Successfully");
             } catch (\Illuminate\Database\QueryException $exception) {
                 if ($exception->errorInfo[2]) {
                     // return  $exception->errorInfo[2];
-                    return  back()->with('error', 'Email Address already Exist error : ' . $exception->errorInfo[2]);
+                    return  redirect()->back()->with('error', 'Email Address already Exist error : ' . $exception->errorInfo[2]);
                 } else {
                     return  redirect()->route('404');
-                    // return  back()->with('error', $exception->errorInfo[2]);
+                    // return  redirect()->back()->with('error', $exception->errorInfo[2]);
                 }
             }
         }

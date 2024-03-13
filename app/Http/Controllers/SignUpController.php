@@ -56,15 +56,15 @@ class SignUpController extends Controller
             $this->basicRolesAndTeams($user);
             if ($savedUser) {
                 $emailSent = (new MailOtpController)->html_email($uid);
-                return $emailSent ? redirect()->route("accountActivation") : back()->with('error', 'Email Address already Exist error : ');
+                return $emailSent ? redirect()->route("accountActivation") : redirect()->back()->with('error', 'Email Address already Exist error : ');
                 // return redirect()->route('request.emailModule',$uid);
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
                 // return  $exception->errorInfo[2];
-                return  back()->with('error', 'Email Address already Exist error : ' . $exception->errorInfo[2]);
+                return  redirect()->back()->with('error', 'Email Address already Exist error : ' . $exception->errorInfo[2]);
             } else {
-                return  back()->with('error', $exception->errorInfo[2]);
+                return  redirect()->back()->with('error', $exception->errorInfo[2]);
             }
         }
     }

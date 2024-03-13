@@ -61,10 +61,10 @@ class FlightsController extends Controller
                     array_push($segments, $segment);
                 }
                 Flightsegment::insert($segments);
-                return back()->with('message', "Itinerary Updates Successfully");
+                return redirect()->back()->with('message', "Itinerary Updates Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
 
@@ -83,9 +83,9 @@ class FlightsController extends Controller
                 $segments['arrival_time'] = $req['segment-' . $i + 1 . '-arrTime'];
                 Flightsegment::where("flightsegment_uid", $req["segment-" . $i + 1 . "-uid"])->update($segments);
             }
-            return back()->with('message', "Itinerary Updates Successfully");
+            return redirect()->back()->with('message', "Itinerary Updates Successfully");
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
 
         return $req->all();
@@ -117,10 +117,10 @@ class FlightsController extends Controller
         try {
             $savedTicket = $ticket->save();
             if ($savedTicket) {
-                return back()->with('message', "Itinerary Updates Successfully");
+                return redirect()->back()->with('message', "Itinerary Updates Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
     }
 

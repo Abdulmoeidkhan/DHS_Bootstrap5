@@ -36,6 +36,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('signUpRequest', [SignUpController::class, 'signUp'])->name('request.signUp');
-Route::post('signInRequest', [SignInController::class, 'signIn'])->name('request.signIn');
-Route::post('activationRequest', [ActivationRequest::class, 'activation'])->name('request.activation');
+
