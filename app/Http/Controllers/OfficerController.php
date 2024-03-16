@@ -94,13 +94,13 @@ class OfficerController extends Controller
             $imgSaved = $req->savedpicture ? $this->imageBlobUpload($req->savedpicture, $officer->officer_uid) : '';
             // $pdfSaved = $req->file('pdf') ? $this->documentUpload($req->file('pdf'), $officer->officer_uid) : '';
             if ($officerSaved) {
-                return $req->submitMore ? redirect()->back()->with('message', 'Officer has been added Successfully') : redirect()->route('pages.addOfficer');
+                return $req->submitMore ? redirect()->route('pages.addOfficer')->with('message', 'Officer has been added Successfully') : redirect()->route('pages.addOfficer');
             }
         } catch (QueryException $exception) {
             if ($exception->errorInfo[2]) {
-                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+                return  redirect()->route('pages.addOfficer')->with('error', 'Error : ' . $exception->errorInfo[2]);
             } else {
-                return  redirect()->back()->with('error', $exception->errorInfo[2]);
+                return  redirect()->route('pages.addOfficer')->with('error', $exception->errorInfo[2]);
             }
         }
     }
@@ -108,7 +108,7 @@ class OfficerController extends Controller
     {
         $arrayToBeUpdate = [];
         foreach ($req->all() as $key => $value) {
-            if ($key != 'submit' && $key != '_token' && $key != 'submitMore'  &&$key != 'savedpicture'  && $key != 'picture' && $key != 'officer_picture' && $key != 'pdf' && strlen($value) > 0) {
+            if ($key != 'submit' && $key != '_token' && $key != 'submitMore'  && $key != 'savedpicture'  && $key != 'picture' && $key != 'officer_picture' && $key != 'pdf' && strlen($value) > 0) {
                 $arrayToBeUpdate[$key] = $value;
             }
         }
@@ -118,13 +118,13 @@ class OfficerController extends Controller
             // $pdfUpdate = $req->pdf ? $this->documentUpdate($req->file('pdf'), $id) : 0;
             $imgUpdate = $req->savedpicture ? $this->imageBlobUpdate($req->savedpicture, $id) : 0;
             if ($officerUpdate) {
-                return $req->submitMore ? redirect()->back()->with('message', 'Officer has been updated Successfully') : redirect()->route('pages.addOfficer');
+                return $req->submitMore ? redirect()->route('pages.addOfficer')->with('message', 'Officer has been updated Successfully') : redirect()->route('pages.addOfficer');
             }
         } catch (QueryException $exception) {
             if ($exception->errorInfo[2]) {
-                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+                return  redirect()->route('pages.addOfficer')->with('error', 'Error : ' . $exception->errorInfo[2]);
             } else {
-                return  redirect()->back()->with('error', $exception->errorInfo[2]);
+                return  redirect()->route('pages.addOfficer')->with('error', $exception->errorInfo[2]);
             }
         }
     }
@@ -156,7 +156,7 @@ class OfficerController extends Controller
                 Officer::where('officer_uid', $interpreter)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
             }
         }
-        return redirect()->back()->with('message', 'Officer has been Attach Successfully');
+        return redirect()->route('pages.delegationsPage')->with('message', 'Officer has been Attach Successfully');
         // return [$liason,$receiving,$interpreter,$delegationUid];
     }
     public function detachOfficerData($id)
@@ -171,7 +171,7 @@ class OfficerController extends Controller
         foreach ($officers as $key => $officer) {
             Officer::where('officer_uid', $officer)->update(['officer_delegation' => null, 'officer_assign' => 0]);
         }
-        return redirect()->back()->with('message', 'Officer has been deattach Successfully');
+        return redirect()->route('pages.delegationsPage')->with('message', 'Officer has been deattach Successfully');
         // return [$liason,$receiving,$interpreter,$delegationUid];
         // return $req->all();
     }

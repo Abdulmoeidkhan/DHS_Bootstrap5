@@ -141,10 +141,10 @@ class CarsController extends Controller
                     $oldDriver = Driver::where('driver_uid', $oldCar->driver_uid)->update(['driver_status' => 1]);
                 }
                 $newDriver = Driver::where('driver_uid', $req->driver_uid)->update(['driver_status' => 0]);
-                return $newDriver ? redirect()->back()->with('message', "Car Updated Successfully") : redirect()->back()->with('error', "Something Went Wrong");
+                return $newDriver ? redirect()->route('pages.cars')->with('message', "Car Updated Successfully") : redirect()->route('pages.cars')->with('error', "Something Went Wrong");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  redirect()->back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->route('pages.cars')->with('error', $exception->errorInfo[2]);
         }
     }
 
@@ -179,10 +179,10 @@ class CarsController extends Controller
         try {
             $saveddriver = $driver->save();
             if ($saveddriver) {
-                return redirect()->back()->with('message', "Drivers Added Successfully");
+                return redirect()->route('pages.cars')->with('message', "Drivers Added Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  redirect()->back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->route('pages.cars')->with('error', $exception->errorInfo[2]);
         }
     }
 
@@ -197,10 +197,10 @@ class CarsController extends Controller
             }
             $updateDriver = Driver::where('driver_uid', $id)->update($arrayToBeUpdate);
             if ($updateDriver) {
-                return redirect()->back()->with('message', "Driver Updated Successfully");
+                return redirect()->route('pages.cars')->with('message', "Driver Updated Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  redirect()->back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->route('pages.cars')->with('error', $exception->errorInfo[2]);
         }
     }
     // Drivers End

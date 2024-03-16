@@ -310,6 +310,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/getDelegation/{status?}', [DelegationsPageController::class, 'delegationData'])->name('request.getDelegation');
         Route::get('/getDelegates/{status?}', [DelegatesPageController::class, 'delegatesData'])->name('request.getDelegates');
         Route::get('/getDelegatesStats', [DelegatesPageController::class, 'getDelegatesStats'])->name('request.getDelegatesStats');
+        Route::get('/getIntlDelegatesStats', [DelegatesPageController::class, 'getIntlDelegatesStats'])->name('request.getIntlDelegatesStats');
+        Route::get('/getDelegationStats', [DelegatesPageController::class, 'getDelegationStats'])->name('request.getDelegationStats');
         Route::get('/addDelegationPage/{id?}', [AddDelegationPageController::class, 'render'])->name('pages.addDelegationPage');
         Route::get('/getSpecificMembers', [MemberController::class, 'specificMembersData'])->name('pages.getSpecificMembers');
         Route::get('/statusChanger/{id}', [DelegationsPageController::class, 'updateStatus'])->name('request.updateStatus');
@@ -361,6 +363,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Wish API Start
         Route::get('/wishPage', [WishController::class, 'wishPageRender'])->name('pages.wishPage');
+        Route::get('/wishesWithDelegation', [WishController::class, 'getWishWithDelegation'])->name('request.wishesWithDelegation');
         Route::get('/getWish/{id?}', [WishController::class, 'getWish'])->name('request.getWish');
         Route::post('/setWish', [WishController::class, 'setWish'])->name('request.setWish');
         Route::post('/deleteWish', [WishController::class, 'deleteWish'])->name('request.deleteWish');

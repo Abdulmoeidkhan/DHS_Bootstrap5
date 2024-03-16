@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Delegate;
-use App\Models\DelegateRooms;
 use App\Models\Delegation;
 use App\Models\Hotel;
 use App\Models\HotelOperator;
@@ -14,7 +13,6 @@ use App\Models\Officer;
 use App\Models\Rank;
 use App\Models\Room;
 use App\Models\Roomtype;
-use App\Models\User;
 use App\Models\Vips;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -80,10 +78,10 @@ class HotelController extends Controller
         try {
             $savedhotel = $hotel->save();
             if ($savedhotel) {
-                return $req->submitMore ? redirect()->back()->with('message', "Hotels Added Successfully") : redirect()->route('pages.category');
+                return $req->submitMore ? redirect()->route('pages.category')->with('message', "Hotels Added Successfully") : redirect()->route('pages.category');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  redirect()->back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->route('pages.category')->with('error', $exception->errorInfo[2]);
         }
     }
 
@@ -98,10 +96,10 @@ class HotelController extends Controller
             }
             $updateHotel = Hotel::where('hotel_uid', $id)->update($arrayToBeUpdate);
             if ($updateHotel) {
-                return $req->submitMore ? redirect()->back()->with('message', "Hotels Updated Successfully") : redirect()->route('pages.category');
+                return $req->submitMore ? redirect()->route('pages.category')->with('message', "Hotels Updated Successfully") : redirect()->route('pages.category');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  redirect()->back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->route('pages.category')->with('error', $exception->errorInfo[2]);
         }
     }
     // Hotels End
@@ -140,10 +138,10 @@ class HotelController extends Controller
         try {
             $savedRoomType = $roomtype->save();
             if ($savedRoomType) {
-                return redirect()->back()->with('message', "Room Type Added Successfully");
+                return redirect()->route('pages.category')->with('message', "Room Type Added Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  redirect()->back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->route('pages.category')->with('error', $exception->errorInfo[2]);
         }
     }
 
@@ -158,10 +156,10 @@ class HotelController extends Controller
             }
             $updateRoomType = Roomtype::where('room_type_uid', $id)->update($arrayToBeUpdate);
             if ($updateRoomType) {
-                return redirect()->back()->with('message', "Room Type Updated Successfully");
+                return redirect()->route('pages.category')->with('message', "Room Type Updated Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  redirect()->back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->route('pages.category')->with('error', $exception->errorInfo[2]);
         }
     }
 
@@ -344,9 +342,9 @@ class HotelController extends Controller
             $savedRoom = $delegateRoom->save();
             $delegateAccomodated = Delegate::where('delegates_uid', $req->assign_to)->update(['accomodated' => $delegateRoom->room_uid]);
             if ($savedRoom && $delegateAccomodated) {
-                return redirect()->back()->with('message', "Room Assigned Successfully");
+                return redirect()->route('pages.category')->with('message', "Room Assigned Successfully");
             } else {
-                return redirect()->back()->with('error', "SomeThing Went Wrong");
+                return redirect()->route('pages.category')->with('error', "SomeThing Went Wrong");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             return  redirect()->back()->with('error', $exception->errorInfo[2]);

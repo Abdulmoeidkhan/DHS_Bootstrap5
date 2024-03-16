@@ -35,7 +35,7 @@ class DelegatesPageController extends Controller
                     ->leftJoin('image_blobs', 'delegates.delegates_uid', '=', 'image_blobs.uid')
                     ->leftJoin('delegations', 'delegates.delegation', '=', 'delegations.uid')
                     ->leftJoin('vips', 'vips.vips_uid', '=', 'delegations.invited_by')
-                    ->where([['delegates.first_Name', '!=', null], ['delegates.status', '1'], ['delegates.self', '1'],['delegations.delegation_response','Accepted']])
+                    ->where([['delegates.first_Name', '!=', null], ['delegates.status', '1'], ['delegates.self', '1'], ['delegations.delegation_response', 'Accepted']])
                     ->select('delegates.*', 'delegate_flights.*', 'image_blobs.uid', 'image_blobs.img_blob', 'delegations.country', 'delegations.delegation_response', 'delegations.delegationCode', 'delegations.delegation_status', 'delegations.invited_by', 'vips.*')
                     ->orderBy('delegations.country', 'asc')
                     ->get();
@@ -73,6 +73,26 @@ class DelegatesPageController extends Controller
         $awaited = Delegation::where('delegation_response', 'Awaited')->count();
         $regretted = Delegation::where('delegation_response', 'Regretted')->count();
         return ['names' => ['Accepted', 'Awaited', 'Regretted'], 'values' => [$accepted, $awaited, $regretted]];
+    }
+
+
+    public function getIntlDelegatesStats()
+    {
+        $accepted = Delegation::where([['delegation_response', 'Accepted'], ['country', '!=', 'Pakistan']])->count();
+        $awaited = Delegation::where([['delegation_response', 'Awaited'], ['country', '!=', 'Pakistan']])->count();
+        $regretted = Delegation::where([['delegation_response', 'Regretted'], ['country', '!=', 'Pakistan']])->count();
+        return ['names' => ['Accepted', 'Awaited', 'Regretted'], 'values' => [$accepted, $awaited, $regretted]];
+    }
+
+    public function getDelegationStats()
+    {
+        $countries = Delegation::distinct('country')->get('country');
+        foreach ($countries as $key => $country) {
+            $countries[$key]->accepted = Delegation::where([['delegation_response', 'Accepted'], ['country', $country->country]])->count();
+            $countries[$key]->invitation = Delegation::where('country', $country->country)->count();
+        }
+        // $countries->response = 'success';
+        return $countries;
     }
 
     public function invitationUpdate(Request $req)

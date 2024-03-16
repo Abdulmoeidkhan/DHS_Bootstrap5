@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\WishList;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class WishController extends Controller
@@ -13,6 +14,25 @@ class WishController extends Controller
     {
         $wishes = $id ? WishList::where('guest_uid', $id)->orWhere('wish_uid', $id)->orWhere('delegation_uid', $id)->get() : WishList::all();
         return $wishes;
+    }
+
+    public function getWishWithDelegation($id = null)
+    {
+        $wishesWithDelegation = $id ?
+            DB::table('wish_lists')
+            ->leftJoin('delegations', 'delegations.uid', '=', 'wish_lists.delegation_uid')
+            ->leftJoin('vips', 'delegations.invited_by', '=', 'vips.vips_uid')
+            ->where([['delegations.delegation_status', '1'], ['wish_uid', $id]])
+            ->orWhere([['delegations.delegation_status', '1'], ['delegation_uid', $id]])
+            ->select('delegations.*', 'wish_lists.*','vips.*')
+            ->get()
+            : DB::table('wish_lists')
+            ->leftJoin('delegations', 'delegations.uid', '=', 'wish_lists.delegation_uid')
+            ->leftJoin('vips', 'delegations.invited_by', '=', 'vips.vips_uid')
+            ->where([['delegations.delegation_status', '1']])
+            ->select('delegations.*', 'wish_lists.*','vips.*')
+            ->get();
+        return $wishesWithDelegation;
     }
 
     public function setWish(Request $req)
@@ -45,7 +65,8 @@ class WishController extends Controller
         }
     }
 
-    public function wishPageRender(){
+    public function wishPageRender()
+    {
         return view('pages.wishlist');
     }
 }
