@@ -47,10 +47,10 @@ class WishController extends Controller
         try {
             $savedWish = $wish->save();
             if ($savedWish) {
-                return redirect()->back()->with('message', "Wish Added Successfully");
+                return redirect()->route('pages.delegateProfile')->with('message', "Wish Added Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  redirect()->back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->route('pages.delegateProfile')->with('error', $exception->errorInfo[2]);
         }
     }
     public function deleteWish(Request $req)
@@ -58,10 +58,10 @@ class WishController extends Controller
         try {
             $deleteWish = WishList::where('guest_uid', $req->id)->orWhere('wish_uid', $req->id)->orWhere('delegation_uid', $req->id)->delete();
             if ($deleteWish) {
-                return redirect()->back()->with('error', "Wish Deleted Successfully");
+                return redirect()->route('pages.delegateProfile')->with('error', "Wish Deleted Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  redirect()->back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->route('pages.delegateProfile')->with('error', $exception->errorInfo[2]);
         }
     }
 
