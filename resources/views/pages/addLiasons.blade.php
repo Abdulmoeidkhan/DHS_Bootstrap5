@@ -33,8 +33,8 @@
                                     <input name="liason_last_name" type="text" class="form-control" id="liason_last_name" placeholder="Liason Last Name" required/>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="liason_contact" class="form-label">Contact Number</label>
-                                    <input name="liason_contact" type="tel" minlength='0' maxlength='11' class="form-control" id="liason_contact" placeholder="Liason Contact Number" required/>
+                                    <label for="contact" class="form-label">Contact Number</label>
+                                    <input name="liason_contact" type="text" minlength='0' maxlength='11' class="form-control" id="contact" placeholder="Liason Contact Number" required/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="liason_identity" class="form-label">Liason CNIC</label>

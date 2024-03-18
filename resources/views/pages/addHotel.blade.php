@@ -24,8 +24,8 @@
                                 <input name="contact_person" type="text" class="form-control" id="contact_person" value="{{!empty($hotel)?$hotel->contact_person:''}}" placeholder="Contact Person">
                             </div>
                             <div class="mb-3">
-                                <label for="contact_number" class="form-label">Contact Number</label>
-                                <input name="contact_number" type="tel" minlength='0' maxlength='11' class="form-control" id="contact_number" value="{{!empty($hotel)?$hotel->contact_number:''}}" placeholder="Contact Number">
+                                <label for="contact" class="form-label">Contact Number</label>
+                                <input name="contact_number" type="text" minlength='0' maxlength='11' class="form-control" id="contact" value="{{!empty($hotel)?$hotel->contact_number:''}}" placeholder="Contact Number">
                             </div>
                             <div class="mb-3">
                                 <label for="hotel_remarks" class="form-label">Hotel Remarks</label>

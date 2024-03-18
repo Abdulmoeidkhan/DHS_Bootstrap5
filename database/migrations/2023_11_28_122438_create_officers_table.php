@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('officer_last_name');
             $table->string('officer_address');
             $table->string('officer_remarks');
-            $table->bigInteger('officer_contact');
-            $table->bigInteger('officer_identity')->unique();
+            $table->string('officer_contact');
+            $table->string('officer_identity')->unique();
             $table->uuid('officer_delegation')->unique()->nullable();
             $table->uuid('officer_user')->unique()->nullable();
             $table->uuid('officer_type');

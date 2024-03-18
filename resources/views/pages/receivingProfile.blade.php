@@ -69,8 +69,8 @@
                     <input name="receiving_designation" type="text" class="form-control" id="receiving_designation" placeholder="Designation" value="{{$receiving->receiving_designation}}" required>
                 </div>
                 <div class="mb-3">
-                    <label for="receiving_contact" class="form-label">Contact</label>
-                    <input name="receiving_contact" type="tel" minlength='0' maxlength='11' class="form-control" id="receiving_contact" placeholder="Receiving Officer Contact Number" value="{{$receiving->receiving_contact}}" required>
+                    <label for="contact" class="form-label">Contact</label>
+                    <input name="receiving_contact" type="text" minlength='0' maxlength='11' class="form-control" id="contact" placeholder="Receiving Officer Contact Number" value="{{$receiving->receiving_contact}}" required>
                 </div>
                 <div class="mb-3">
                     <label for="receiving_identity" class="form-label">Passport</label>

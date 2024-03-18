@@ -33,8 +33,8 @@
                                 <input name="interpreter_last_name" type="text" class="form-control" id="interpreter_last_name" placeholder="Interpreter Last Name" required/>
                             </div>
                             <div class="mb-3">
-                                <label for="interpreter_contact" class="form-label">Contact Number</label>
-                                <input name="interpreter_contact" type="tel" minlength='0' maxlength='11' class="form-control" id="interpreter_contact" placeholder="Interpreter Contact Number" required/>
+                                <label for="contact" class="form-label">Contact Number</label>
+                                <input name="interpreter_contact" type="text" minlength='0' maxlength='11' class="form-control" id="contact" placeholder="Interpreter Contact Number" required/>
                             </div>
                             <div class="mb-3">
                                 <label for="identity" class="form-label">Interpreter CNIC</label>

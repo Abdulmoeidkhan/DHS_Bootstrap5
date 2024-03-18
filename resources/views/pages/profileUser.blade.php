@@ -86,8 +86,8 @@
                                 <input name="inputUserName" type="text" class="form-control" id="inputUserName" placeholder="User Name" aria-describedby="userHelp" value="{{$user->name}}" minlength="3" maxlength="20" required>
                             </div>
                             <div class="mb-3">
-                                <label for="inputContactNumber" class="form-label">Your Contact Number</label>
-                                <input type="tel" minlength='0' maxlength='11' name="inputContactNumber" class="form-control" id="inputContactNumber" placeholder="Contact Number" aria-describedby="userHelp" value="{{$user->contact_number}}" minlength="3" maxlength="20" required>
+                                <label for="contact" class="form-label">Your Contact Number</label>
+                                <input type="text" minlength='0' maxlength='11' name="inputContactNumber" class="form-control" id="contact" placeholder="Contact Number" aria-describedby="userHelp" value="{{$user->contact_number}}" minlength="3" maxlength="20" required>
                             </div>
                             <input type="hidden" name="uid" value="{{$user->uid}}" />
                             <input type="submit" name="submit" class="btn btn-primary" value="Update" />

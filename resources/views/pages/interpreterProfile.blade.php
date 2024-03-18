@@ -68,8 +68,8 @@
                                 <input name="interpreter_designation" type="text" class="form-control" id="interpreter_designation" placeholder="Designation" value="{{$interpreter->interpreter_designation}}" required>   
                             </div>
                             <div class="mb-3">
-                                <label for="interpreter_contact" class="form-label">Contact</label>
-                                <input name="interpreter_contact" type="tel" minlength='0' maxlength='11' class="form-control" id="interpreter_contact" placeholder="Interpreter Contact Number" value="{{$interpreter->interpreter_contact}}" required>    
+                                <label for="contact" class="form-label">Contact</label>
+                                <input name="interpreter_contact" type="text" minlength='0' maxlength='11' class="form-control" id="contact" placeholder="Interpreter Contact Number" value="{{$interpreter->interpreter_contact}}" required>    
                             </div>
                             <div class="mb-3">
                                 <label for="interpreter_identity" class="form-label">Passport/Identity</label>

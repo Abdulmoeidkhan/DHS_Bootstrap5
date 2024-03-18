@@ -51,4 +51,29 @@
             return true
         }
     }
+
+    ($("#contact").length > 0) && $("#contact").inputmask("+99-9999999999");
+
+    function isContact(comp) {
+        let evt = document.getElementById(comp);
+        let evtValue = evt.value;
+
+        evtValue = evtValue.replaceAll("-", "");
+        evtValue = evtValue.replaceAll("_", "");
+        evtValue = parseInt(evtValue)
+        var regex = /^\d{12}$/;
+        if (!regex.test(evtValue)) {
+            evt.returnValue = false;
+            evt.setCustomValidity("Phone Must be 14 Digit Long");
+            evt.reportValidity();
+            if (evt.preventDefault) {
+                evt.preventDefault()
+            };
+            return false
+        } else {
+            evt.setCustomValidity("");
+            evt.value = evtValue
+            return true
+        }
+    }
 </script>

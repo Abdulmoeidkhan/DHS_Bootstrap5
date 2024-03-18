@@ -66,8 +66,8 @@
                                 <input name="officer_designation" type="text" class="form-control" id="officer_designation" placeholder="Designation" value="{{$officer->officer_designation}}" required>
                             </div>
                             <div class="mb-3">
-                                <label for="officer_contact" class="form-label">Contact</label>
-                                <input name="officer_contact" type="tel" minlength='0' maxlength='11'class="form-control" id="officer_contact" placeholder="Liason Contact Number" value="{{$officer->officer_contact}}" required>
+                                <label for="contact" class="form-label">Contact</label>
+                                <input name="officer_contact" type="text" minlength='0' maxlength='11'class="form-control" id="contact" placeholder="Liason Contact Number" value="{{$officer->officer_contact}}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="officer_identity" class="form-label">Passport</label>

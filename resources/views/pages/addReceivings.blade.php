@@ -33,8 +33,8 @@
                                 <input name="receiving_last_name" type="text" class="form-control" id="receiving_last_name" placeholder="Receiving Last Name" />
                             </div>
                             <div class="mb-3">
-                                <label for="receiving_contact" class="form-label">Contact Number</label>
-                                <input name="receiving_contact" type="tel" minlength='0' maxlength='11' class="form-control" id="receiving_contact" placeholder="Receiving Contact Number" />
+                                <label for="contact" class="form-label">Contact Number</label>
+                                <input name="receiving_contact" type="text" minlength='0' maxlength='11' class="form-control" id="contact" placeholder="Receiving Contact Number" />
                             </div>
                             <div class="mb-3">
                                 <label for="receiving_identity" class="form-label">Receiving CNIC</label>
