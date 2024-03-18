@@ -83,7 +83,6 @@
         return value ? value : 0
     }
 </script>
-<script async src="https://unpkg.com/axios/dist/axios.min.js"></script>
 @include("layouts.tableFoot")
 <script>
     var $table = $('#table')

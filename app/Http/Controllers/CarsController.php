@@ -334,7 +334,7 @@ class CarsController extends Controller
     public function attachCar(Request $req)
     {
         $updatedCarSelect = $req->carASelect ? Car::where('car_uid', $req->carASelect)->update(['car_delegation' => $req->delegationUid_car]) : Car::where('car_uid', $req->carBSelect)->update(['car_delegation' => $req->delegationUid_car]);
-        return $updatedCarSelect ? redirect()->route('pages.addCar')->with('message', "Car Attach Successfully") : redirect()->back()->with('error', "Something Went Wrong");
+        return $updatedCarSelect ? redirect()->route('pages.delegationsPage')->with('message', "Car Attach Successfully") : redirect()->back()->with('error', "Something Went Wrong");
     }
 
     public function detachCarData($id)
@@ -352,7 +352,7 @@ class CarsController extends Controller
         foreach ($cars as $key => $car) {
             Car::where([['car_delegation', $delegationUid], ['car_uid', $car]])->update(['car_delegation' => null]);
         }
-        return redirect()->route('pages.addCar')->with('message', 'Car has been deattach Successfully');
+        return redirect()->route('pages.delegationsPage')->with('message', 'Car has been deattach Successfully');
     }
 
     // Attach Car

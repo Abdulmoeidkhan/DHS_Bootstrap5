@@ -128,10 +128,10 @@ class MemberController extends Controller
             $imgSaved = $req->savedpicture ? $this->imageBlobUpload($req->savedpicture, $delegate->delegates_uid) : '';
             $req->file('pdf') ? $this->documentUpload($req->file('pdf'), $delegate->delegates_uid) : '';
             if ($savedMember) {
-                return redirect()->back()->with('message', 'Member Updated Successfully');
+                return redirect()->route('pages.members',$req->delegation)->with('message', 'Member Updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  redirect()->back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->route('pages.members',$req->delegation)->with('error', $exception->errorInfo[2]);
         }
     }
     public function updateMemberRequest(Request $req, $id)

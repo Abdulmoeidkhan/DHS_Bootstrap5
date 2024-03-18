@@ -11,6 +11,7 @@
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                             <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
                             <th data-filter-control="input" data-field="wish" data-formatter="operateText">Wishes</th>
+                            <th data-filter-control="input" data-field="last_Name" data-formatter="operateName">Name</th>
                             <th data-filter-control="input" data-field="delegationCode" data-sortable="true" data-formatter="operateText">Delegation Code</th>
                             <th data-filter-control="input" data-field="vips_designation" data-sortable="true" data-formatter="operateText">Invited By</th>
                         </tr>
@@ -29,6 +30,9 @@
         return index + 1;
     }
 
+    function operateName(value, row, index) {
+        return `${row.first_Name} ${row.last_Name}`
+    }
 </script>
 @include("layouts.tableFoot")
 <script>

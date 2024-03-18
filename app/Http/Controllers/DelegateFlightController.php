@@ -43,7 +43,7 @@ class DelegateFlightController extends Controller
 
         return $dataFlight;
     }
-    
+
     public function setFlight(Request $req)
     {
         if ($req->flightsegment_uid) {
@@ -59,7 +59,7 @@ class DelegateFlightController extends Controller
                     return redirect()->back()->with('message', "Flight Segment Successfully");
                 }
             } catch (\Illuminate\Database\QueryException $exception) {
-                return  redirect()->back()->with('error', $exception->errorInfo[2]);
+                return  redirect()->route('pages.addFlight', $req->delegate_uid)->with('error', $exception->errorInfo[2]);
             }
         } else {
             $delegateFlight = new DelegateFlight();
@@ -72,10 +72,10 @@ class DelegateFlightController extends Controller
             try {
                 $savedDelegateFlight = $delegateFlight->save();
                 if ($savedDelegateFlight) {
-                    return redirect()->back()->with('message', "Flight Segment Successfully");
+                    return redirect()->route('pages.addFlight', $req->delegate_uid)->with('message', "Flight Segment Successfully");
                 }
             } catch (\Illuminate\Database\QueryException $exception) {
-                return  redirect()->back()->with('error', $exception->errorInfo[2]);
+                return  redirect()->route('pages.addFlight', $req->delegate_uid)->with('error', $exception->errorInfo[2]);
             }
         }
     }
@@ -88,11 +88,11 @@ class DelegateFlightController extends Controller
     public function departureStatusChanger($id, $status)
     {
         $update = DelegateFlight::where('delegate_uid', $id)->update(['departed' => $status]);
-        return $update ? redirect()->back()->with('message', 'Flight Status has been updated Successfully') : redirect()->back()->with('error', 'Something went wrong');
+        return $update ? redirect()->route('pages.airport')->with('message', 'Flight Status has been updated Successfully') : redirect()->back()->with('error', 'Something went wrong');
     }
     public function arrivalStatusChanger($id, $status)
     {
         $update = DelegateFlight::where('delegate_uid', $id)->update(['arrived' => $status]);
-        return $update ? redirect()->back()->with('message', 'Flight Status has been updated Successfully') : redirect()->back()->with('error', 'Something went wrong');
+        return $update ? redirect()->route('pages.airport')->with('message', 'Flight Status has been updated Successfully') : redirect()->back()->with('error', 'Something went wrong');
     }
 }

@@ -370,5 +370,4 @@
 <img src="{{asset('images/welcome.jpg')}}" width="100%" height="1600px" />
 @endif
 @endsection
-<script async src="https://unpkg.com/axios/dist/axios.min.js"></script>
 @endauth

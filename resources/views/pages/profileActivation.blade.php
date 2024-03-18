@@ -22,7 +22,6 @@
                             </fieldset>
                         </form>
                     </div>
-                    <script async src="https://unpkg.com/axios/dist/axios.min.js"></script>
                     <script async src="{{asset('assets/js/formValidations.js')}}"></script>
                 </div>
             </div>

@@ -21,16 +21,18 @@ class WishController extends Controller
         $wishesWithDelegation = $id ?
             DB::table('wish_lists')
             ->leftJoin('delegations', 'delegations.uid', '=', 'wish_lists.delegation_uid')
+            ->leftJoin('delegates', 'delegates.delegation', '=', 'wish_lists.delegation_uid')
             ->leftJoin('vips', 'delegations.invited_by', '=', 'vips.vips_uid')
             ->where([['delegations.delegation_status', '1'], ['wish_uid', $id]])
             ->orWhere([['delegations.delegation_status', '1'], ['delegation_uid', $id]])
-            ->select('delegations.*', 'wish_lists.*','vips.*')
+            ->select('delegations.*', 'wish_lists.*', 'vips.*', 'delegates.first_Name', 'delegates.last_Name')
             ->get()
             : DB::table('wish_lists')
             ->leftJoin('delegations', 'delegations.uid', '=', 'wish_lists.delegation_uid')
+            ->leftJoin('delegates', 'delegates.delegation', '=', 'wish_lists.delegation_uid')
             ->leftJoin('vips', 'delegations.invited_by', '=', 'vips.vips_uid')
             ->where([['delegations.delegation_status', '1']])
-            ->select('delegations.*', 'wish_lists.*','vips.*')
+            ->select('delegations.*', 'wish_lists.*', 'vips.*', 'delegates.first_Name', 'delegates.last_Name')
             ->get();
         return $wishesWithDelegation;
     }
