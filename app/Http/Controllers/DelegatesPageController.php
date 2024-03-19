@@ -76,23 +76,24 @@ class DelegatesPageController extends Controller
     }
 
 
-    public function getIntlDelegatesStats()
-    {
-        $accepted = Delegation::where([['delegation_response', 'Accepted'], ['country', '!=', 'Pakistan']])->count();
-        $awaited = Delegation::where([['delegation_response', 'Awaited'], ['country', '!=', 'Pakistan']])->count();
-        $regretted = Delegation::where([['delegation_response', 'Regretted'], ['country', '!=', 'Pakistan']])->count();
-        return ['names' => ['Accepted', 'Awaited', 'Regretted'], 'values' => [$accepted, $awaited, $regretted]];
-    }
-
     public function getDelegationStats()
     {
         $countries = Delegation::distinct('country')->get('country');
         foreach ($countries as $key => $country) {
             $countries[$key]->accepted = Delegation::where([['delegation_response', 'Accepted'], ['country', $country->country]])->count();
+            $countries[$key]->regretted = Delegation::where([['delegation_response', 'Regretted'], ['country', $country->country]])->count();
+            $countries[$key]->awaited = Delegation::where([['delegation_response', 'Awaited'], ['country', $country->country]])->count();
             $countries[$key]->invitation = Delegation::where('country', $country->country)->count();
         }
         // $countries->response = 'success';
         return $countries;
+    }
+
+    public function getDelegateSummary()
+    {
+        $active = Delegate::where('status', 1)->count();
+        $inActive = Delegate::where('status', 0)->count();
+        return ['names' => ['Active', 'InActive'], 'values' => [$active, $inActive]];
     }
 
     public function invitationUpdate(Request $req)

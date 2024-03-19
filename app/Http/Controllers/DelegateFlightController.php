@@ -90,9 +90,19 @@ class DelegateFlightController extends Controller
         $update = DelegateFlight::where('delegate_uid', $id)->update(['departed' => $status]);
         return $update ? redirect()->route('pages.airport')->with('message', 'Flight Status has been updated Successfully') : redirect()->back()->with('error', 'Something went wrong');
     }
+
     public function arrivalStatusChanger($id, $status)
     {
         $update = DelegateFlight::where('delegate_uid', $id)->update(['arrived' => $status]);
         return $update ? redirect()->route('pages.airport')->with('message', 'Flight Status has been updated Successfully') : redirect()->back()->with('error', 'Something went wrong');
+    }
+
+
+    public function getFlightsSummary(Request $req)
+    {
+        $arrived = DelegateFlight::where([['arrived', '=', 1], ['departed', '=', 0]])->count();
+        $departed = DelegateFlight::where([['arrived', '=', 1], ['departed', '=', 1]])->count();
+        $notArrived = DelegateFlight::where([['arrived', '=', 0], ['departed', '=', 0]])->count();
+        return ['names' => ['Arrived', 'Departed', 'Not Arrived'], 'values' => [$arrived, $departed, $notArrived]];
     }
 }

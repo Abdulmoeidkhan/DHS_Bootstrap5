@@ -154,6 +154,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/addDelegationFlight/{id}', [DelegateFlightController::class, 'setFlight'])->name('request.addDelegationFlight');
         Route::get('/departureStatusChanger/{id}/{status}', [DelegateFlightController::class, 'departureStatusChanger'])->name('request.departureStatusChanger');
         Route::get('/arrivalStatusChanger/{id}/{status}', [DelegateFlightController::class, 'arrivalStatusChanger'])->name('request.arrivalStatusChanger');
+        Route::get('/getFlightsSummary', [DelegateFlightController::class, 'getFlightsSummary'])->name('data.getFlightsSummary');
         // Members End
 
 
@@ -259,6 +260,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/attachOfficer', [OfficerController::class, 'attachOfficer'])->name('request.attachOfficer');
         Route::post('/detachOfficer', [OfficerController::class, 'detachOfficer'])->name('request.detachOfficer');
         Route::get('/detachOfficerData/{id}', [OfficerController::class, 'detachOfficerData'])->name('data.detachOfficer');
+        Route::get('/getOfficerSummary', [OfficerController::class, 'getOfficerSummary'])->name('data.getOfficerSummary');
         // Officer Page And API End
 
 
@@ -309,9 +311,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/delegationsPage', [DelegationsPageController::class, 'render'])->name('pages.delegationsPage');
         Route::get('/getDelegation/{status?}', [DelegationsPageController::class, 'delegationData'])->name('request.getDelegation');
         Route::get('/getDelegates/{status?}', [DelegatesPageController::class, 'delegatesData'])->name('request.getDelegates');
-        Route::get('/getDelegatesStats', [DelegatesPageController::class, 'getDelegatesStats'])->name('request.getDelegatesStats');
-        Route::get('/getIntlDelegatesStats', [DelegatesPageController::class, 'getIntlDelegatesStats'])->name('request.getIntlDelegatesStats');
-        Route::get('/getDelegationStats', [DelegatesPageController::class, 'getDelegationStats'])->name('request.getDelegationStats');
+        Route::get('/getDelegatesStats', [DelegatesPageController::class, 'getDelegatesStats'])->name('data.getDelegatesStats');
+        Route::get('/getDelegationStats', [DelegatesPageController::class, 'getDelegationStats'])->name('data.getDelegationStats');
+        Route::get('/getDelegateSummary', [DelegatesPageController::class, 'getDelegateSummary'])->name('data.getDelegateSummary');
         Route::get('/addDelegationPage/{id?}', [AddDelegationPageController::class, 'render'])->name('pages.addDelegationPage');
         Route::get('/getSpecificMembers', [MemberController::class, 'specificMembersData'])->name('pages.getSpecificMembers');
         Route::get('/statusChanger/{id}', [DelegationsPageController::class, 'updateStatus'])->name('request.updateStatus');
@@ -370,6 +372,8 @@ Route::group(['middleware' => 'auth'], function () {
         // Wish API End
 
         // Feedback API Start
+        Route::get('/feedbackPage', [FeedbackController::class, 'feedbackPageRender'])->name('pages.feedbackPage');
+        Route::get('/feedbackWithDelegation', [FeedbackController::class, 'getFeedbackWithDelegation'])->name('request.feedbackWithDelegation');
         Route::get('/getFeedback/{id?}', [FeedbackController::class, 'getFeedback'])->name('request.getFeedback');
         Route::post('/setFeedback', [FeedbackController::class, 'setFeedback'])->name('request.setFeedback');
         Route::post('/deleteFeedback', [FeedbackController::class, 'deleteFeedback'])->name('request.deleteFeedback');

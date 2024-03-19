@@ -227,6 +227,14 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.feedbackPage')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-message-2"></i>
+                        </span>
+                        <span class="hide-menu">Feedback</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.events')}}" aria-expanded="false">
                         <span>
                             <i class="ti ti-calendar-event"></i>

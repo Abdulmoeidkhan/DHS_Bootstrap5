@@ -28,6 +28,7 @@ Route::group(['auth' => 'sanctum'], function () {
     // VIPS API Start
     Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');
     // VIPS API End
+    
 
 });
 

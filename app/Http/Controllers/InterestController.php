@@ -38,9 +38,9 @@ class InterestController extends Controller
     public function setInterests(Request $req, $id = null)
     {
         if ($this->updatePrograms($req)) {
-            return redirect()->back()->with('message', "Plan Updated Successfully");
+            return redirect()->route('pages.delegateProfile')->with('message', "Plan Updated Successfully");
         } else {
-            return redirect()->back()->with('error', "SomeThing Went Wrong");
+            return redirect()->route('pages.delegateProfile')->with('error', "SomeThing Went Wrong");
         }
     }
 }

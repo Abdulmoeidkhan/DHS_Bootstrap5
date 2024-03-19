@@ -2,7 +2,7 @@ $(function () {
 
 
   // =====================================
-  // Profit
+  // Delegation
   // =====================================
   axios.get('/getDelegationStats')
     .then(function (response) {
@@ -12,6 +12,8 @@ $(function () {
         series: [
           { name: "Invitaion:", data: dataArray(delegationData, 'invitation') },
           { name: "Accepted:", data: dataArray(delegationData, 'accepted') },
+          { name: "Awaited:", data: dataArray(delegationData, 'awaited') },
+          { name: "Regretted:", data: dataArray(delegationData, 'regretted') },
         ],
 
         chart: {
@@ -25,7 +27,7 @@ $(function () {
         },
 
 
-        colors: ["#5D87FF", "#49BEFF"],
+        colors: ["#5D87FF", "#49BEFF", '#ffae1f', '#e32027'],
 
 
         plotOptions: {
@@ -111,9 +113,8 @@ $(function () {
 
 
   // =====================================
-  // Breakup
+  // Delegates
   // =====================================
-  // let data;
   axios.get('/getDelegatesStats')
     .then(function (response) {
       let data = response.data;
@@ -141,7 +142,7 @@ $(function () {
         },
 
         dataLabels: {
-          enabled: false,
+          enabled: true,
         },
 
         legend: {
@@ -172,9 +173,13 @@ $(function () {
       console.log(error);
     })
 
-    axios.get('/getIntlDelegatesStats')
+  // =====================================
+  // Flights
+  // =====================================
+  axios.get('/getFlightsSummary')
     .then(function (response) {
       let data = response.data;
+      console.log(data)
       var intlDelegation = {
         color: "#adb5bd",
         series: data.values,
@@ -199,7 +204,7 @@ $(function () {
         },
 
         dataLabels: {
-          enabled: false,
+          enabled: true,
         },
 
         legend: {
@@ -279,7 +284,107 @@ $(function () {
     },
   };
   new ApexCharts(document.querySelector("#earning"), earning).render();
+
+  // =====================================
+  // Officer Chart
+  // =====================================
+
+  axios.get('/getOfficerSummary')
+    .then(function (response) {
+      let data = response.data;
+      console.log(data)
+      var options = {
+        series: [{
+          name: 'Assigned',
+          data: data.values[0]
+        }, {
+          name: 'Available',
+          data: data.values[1]
+        }],
+        chart: {
+          type: 'bar',
+          height: 200,
+          stacked: true,
+          stackType: '100%'
+        },
+        colors: ["#5D87FF", "#ffae1f", "#E32027"],
+        plotOptions: {
+          bar: {
+            horizontal: true,
+          },
+        },
+        stroke: {
+          width: 1,
+          colors: ['#fff']
+        },
+        title: {
+          text: 'Officer Chart'
+        },
+        xaxis: {
+          categories: ['Liason', 'Interpreter', 'Receiving'],
+        },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return val
+            }
+          }
+        },
+        fill: {
+          opacity: 1
+
+        },
+        legend: {
+          position: 'top',
+          horizontalAlign: 'left',
+          offsetX: 40
+        }
+      };
+
+      var officerchart = new ApexCharts(document.querySelector("#officerchart"), options);
+      officerchart.render();
+
+    })
+  // =====================================
+  // Delegate Chart
+  // =====================================
+
+  axios.get('/getDelegateSummary')
+    .then(function (response) {
+      let data = response.data;
+
+      var options = {
+        series: data.values,
+        chart: {
+          width: 380,
+          type: 'pie',
+        },
+        labels: ['Active', 'InActive'],
+        colors: ["#5D87FF", "#ffae1f",],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+      };
+
+      var delegatechart = new ApexCharts(document.querySelector("#delegatechart"), options);
+      delegatechart.render();
+
+
+    })
+
+
 })
+
+
+
 
 let deferredPrompt;
 

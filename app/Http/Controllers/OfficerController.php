@@ -198,4 +198,11 @@ class OfficerController extends Controller
             return view('pages.addOfficer');
         }
     }
+
+    public function getOfficerSummary(Request $req)
+    {
+        $assigned = [Officer::where('officer_type', "Liason")->whereNotNull('officer_delegation')->count(), Officer::where('officer_type', "Interpreter")->whereNotNull('officer_delegation')->count(), Officer::where('officer_type', "Receiving")->whereNotNull('officer_delegation')->count()];
+        $available = [Officer::where('officer_type', "Liason")->whereNull('officer_delegation')->count(), Officer::where('officer_type', "Interpreter")->whereNull('officer_delegation')->count(), Officer::where('officer_type', "Receiving")->whereNull('officer_delegation')->count()];
+        return ['names' => ['Assigned', 'Available'], 'values' => [$assigned, $available]];
+    }
 }
