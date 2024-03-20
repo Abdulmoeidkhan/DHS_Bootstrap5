@@ -31,7 +31,7 @@
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Badges</h5>
             <div class="table-responsive">
-                <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates',1)}}">
+                <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates',1)}}">
                     <thead>
                         <tr>
                             <th data-formatter="operateSerial" data-filter-control="input">S.No.</th>
@@ -41,11 +41,11 @@
                             <th data-field="first_Name" data-filter-control="input" data-sortable="true">First Name</th>
                             <th data-field="last_Name" data-filter-control="input" data-sortable="true">Last Name</th>
                             <th data-field="vips_designation" data-filter-control="input" data-sortable="true">Invited By</th>
-                            <th data-field="self" data-filter-control="input" data-formatter="operateSelf" data-sortable="true">Self/Rep</th>
+                            <th data-field="delegation_type" data-filter-control="input" data-formatter="operateText" data-sortable="true">Self/Rep</th>
                             <th data-field="delegation_status" data-filter-control="input" data-sortable="true" data-formatter="statusFormatter">Delegation Active</th>
                             <th data-field="isHead" data-filter-control="input" data-sortable="true">Delegation Head</th>
                             <th data-field="invitation_number" data-filter-control="input" data-sortable="true">Invitation Number</th>
-                            <th data-field="img_blob" data-width="150"  data-sortable="true" data-formatter="operatePicture" data-force-hide="true">Image</th>
+                            <th data-field="img_blob" data-width="150" data-sortable="true" data-formatter="operatePicture" data-force-hide="true">Image</th>
                             <th data-field="delegates_uid" data-width="200" data-sortable="true" data-formatter="operatePlans">Actions</th>
                         </tr>
                     </thead>
@@ -77,6 +77,10 @@
 
     function operateSerial(value, row, index) {
         return index + 1;
+    }
+
+    function operateText(value, row, index) {
+        return value ? value : "-"
     }
 
     function operateSelf(value, row, index) {

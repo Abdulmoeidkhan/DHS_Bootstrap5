@@ -32,7 +32,7 @@ class AddEventController extends Controller
         try {
             $savedEvent = $event->save();
             if ($savedEvent) {
-                return redirect()->redirect()->back()->with('message', "Event Successfully Added");
+                return redirect()->route('pages.addEvent')->with('message', "Event Successfully Added");
                 // $file = $req->file('eventBanner');
                 // Storage::putFileAs('public/uploads', $file->getClientOriginalName(), $file);
                 // return redirect()->redirect()->back()->with('message', "Event Successfully Added");
@@ -50,9 +50,9 @@ class AddEventController extends Controller
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
-                return  redirect()->back()->with('error', 'Event already Exist error : ' . $exception->errorInfo[2]);
+                return  redirect()->route('pages.addEvent')->with('error', 'Event already Exist error : ' . $exception->errorInfo[2]);
             } else {
-                return  redirect()->back()->with('error', $exception->errorInfo[2]);
+                return  redirect()->route('pages.addEvent')->with('error', $exception->errorInfo[2]);
             }
         }
     }

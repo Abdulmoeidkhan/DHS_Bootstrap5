@@ -33,7 +33,7 @@ $(function () {
         plotOptions: {
           bar: {
             horizontal: false,
-            columnWidth: "15%",
+            columnWidth: "25%",
             borderRadius: [5],
             borderRadiusApplication: 'end',
             borderRadiusWhenStacked: 'all'
