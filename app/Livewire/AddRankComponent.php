@@ -5,7 +5,6 @@ namespace App\Livewire;
 use App\Models\Rank;
 use Livewire\Component;
 use Illuminate\Support\Str;
-use Livewire\Attributes\On;
 
 class AddRankComponent extends Component
 {
