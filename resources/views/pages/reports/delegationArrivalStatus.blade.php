@@ -59,7 +59,7 @@
                             <th data-width="50" data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                             <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
                             @foreach($flights as $key=>$flight)
-                            <th data-filter-control="input" data-field="{{$key}}" data-sortable="true" data-fixed-columns="true" data-formatter="operateRank">{{$flight->arrival_date}}</th>
+                            <th data-filter-control="input" data-field="arrivals.{{$key}}" data-sortable="true" data-fixed-columns="true" data-formatter="operateRank">{{$flight->arrival_date}}</th>
                             @endforeach
                             <th data-filter-control="input" data-field="totalCount" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">TotalCount</th>
                         </tr>
@@ -75,7 +75,7 @@
     }
 
     function operateText(value, row, index) {
-        return value ? value : "-"
+        return value;
     }
 
     function operateNumber(value, row, index) {

@@ -53,13 +53,13 @@
     <div class="card w-100">
         <div class="card-body p-4">
             <div class="table-responsive">
-            <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.delegationArrivalStatusVIPData')}}">
+                <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.delegationArrivalStatusVIPData')}}">
                     <thead>
                         <tr>
                             <th data-width="50" data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
-                            <th data-filter-control="input" data-field="invitedBy" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Invited By</th>
+                            <th data-filter-control="input" data-field="name.vips_designation" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Invited By</th>
                             @foreach($flights as $key=>$flight)
-                            <th data-filter-control="input" data-field="{{$key}}" data-sortable="true" data-fixed-columns="true" data-formatter="operateRank">{{$flight->arrival_date}}</th>
+                            <th data-filter-control="input" data-field="arrivals.{{$key}}" data-sortable="true" data-fixed-columns="true" data-formatter="operateRank">{{$flight->arrival_date}}</th>
                             @endforeach
                             <th data-filter-control="input" data-field="totalCount" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">TotalCount</th>
                         </tr>
@@ -75,7 +75,7 @@
     }
 
     function operateText(value, row, index) {
-        return value ? value : "-"
+        return value;
     }
 
     function operateNumber(value, row, index) {

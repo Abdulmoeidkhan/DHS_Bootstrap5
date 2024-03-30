@@ -379,27 +379,11 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
-                                <span class="hide-menu">Delegation Arrival Status - Country</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="../main/blog-detail.html" class="sidebar-link">
-                                <div class="round-16 d-flex align-items-center justify-content-center">
-                                    <i class="ti ti-grain"></i>
-                                </div>
-                                <span class="hide-menu">Delegation Arrival Status - VIP</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="../main/blog-detail.html" class="sidebar-link">
-                                <div class="round-16 d-flex align-items-center justify-content-center">
-                                    <i class="ti ti-grain"></i>
-                                </div>
                                 <span class="hide-menu">Delegates Arrival Status - Country</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="../main/blog-detail.html" class="sidebar-link">
+                            <a href="{{route('pages.delegationArrivalStatusVIPReport')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
@@ -419,7 +403,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
-                                <span class="hide-menu">Delegation Arrival Status - Country</span>
+                                <span class="hide-menu">Delegates Departure Status - Country</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -427,23 +411,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
-                                <span class="hide-menu">Delegation Arrival Status - VIP</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="../main/blog-detail.html" class="sidebar-link">
-                                <div class="round-16 d-flex align-items-center justify-content-center">
-                                    <i class="ti ti-grain"></i>
-                                </div>
-                                <span class="hide-menu">Delegates Arrival Status - Country</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="../main/blog-detail.html" class="sidebar-link">
-                                <div class="round-16 d-flex align-items-center justify-content-center">
-                                    <i class="ti ti-grain"></i>
-                                </div>
-                                <span class="hide-menu">Delegates Arrival Status - VIP</span>
+                                <span class="hide-menu">Delegates Departure Status - VIP</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
