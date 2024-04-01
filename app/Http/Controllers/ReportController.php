@@ -155,12 +155,12 @@ class ReportController extends Controller
         $flights = DelegateFlight::distinct('arrival_date')->get('arrival_date');
         return view('pages.reports.delegationArrivalStatus', ['flights' => $flights]);
     }
+
     public function delegationArrivalStatusData()
     {
         $countries = Delegation::distinct('country')->get('country');
         $flights = DelegateFlight::distinct('arrival_date')->get('arrival_date');
         foreach ($countries as $keyCountry => $country) {
-            // $countries[$keyCountry]->totalCount = Delegation::where([['country', $country->country], ['delegation_status', 1]])->count();
             $arrivals = [];
             foreach ($flights as $keyFlights => $flight) {
                 $arrivals[$keyFlights] = DB::table('delegate_flights')
@@ -168,41 +168,16 @@ class ReportController extends Controller
                     ->where([['delegations.country', $country->country], ['delegate_flights.arrival_date', $flight->arrival_date], ['delegations.delegation_response', 'Accepted']])
                     ->select('delegations.country', 'delegations.uid')
                     ->count();
-                // ->leftJoin('delegations', 'delegations.country', $country->country)
             }
-            $countries[$keyCountry]->totalCount =array_sum($arrivals);
+            $countries[$keyCountry]->totalCount = array_sum($arrivals);
             $countries[$keyCountry]->arrivals = $arrivals;
-            // $countries[$keyCountry]->delegationIds = Delegation::where([['country', $country->country], ['delegation_status', 1]])->get('uid');
-            // ->leftJoin('delegate_flights', 'delegate_flights.delegation_uid', '=', 'delegations')
-
-            // foreach ($flights as $flightKey => $flight) {
-            //     $countries[$keyCountry]->delegationFlights = DelegateFlight::distinct('arrival_date')->get('arrival_date');
-
-            // }
-
-            // $delegations = Delegation::where('country', $country->country)->get('uid');
-
-            // $countries[$keyCountry]->$delegations = $delegations;
-            // foreach ($countries[$keyCountry]->delegationIds as $keyDelegation => $delegationId) {
-            //     $countries[$keyDelegation]->delegationIds[$keyDelegation]->flights = DelegateFlight::where('delegation_uid', $delegationId->uid)->distinct('arrival_date')->count();
-            // }
         }
 
-        // foreach ($countries[$keyCountry]->delegationFlights as $keydelegationFlights => $keydelegationFlight) {
-        // }
-
         return $countries;
-        // $flights = DelegateFlight::distinct('delegation_uid')->get('delegation_uid');
-        // $delegations=[];
-        // foreach ($flights as $key => $flight) {
-        //     array_push($delegations,Delegation::where('uid',$flight->delegation_uid)->first());
-        //     $delegations[0]->flight=DelegateFlight::where('delegation_uid',$flight->delegation_uid)->get();
-        // }
-        // $countries = array_map(function ($flight) {
-        //     return Delegation::where('uid', $flight->delegation_uid)->get();
-        // }, $flights);
-        // return $delegations;
     }
+    // Delegation Arrival Status End
+
+    // Delegation Arrival Status VIP Start
 
     public function delegationArrivalStatusVIPReport()
     {
@@ -222,43 +197,94 @@ class ReportController extends Controller
                     ->where([['delegations.invited_by', $invitee->invited_by], ['delegate_flights.arrival_date', $flight->arrival_date], ['delegations.delegation_response', 'Accepted']])
                     ->select('delegations.invited_by', 'delegations.uid')
                     ->count();
-                // ->leftJoin('delegations', 'delegations.country', $country->country)
             }
-            $invitees[$keyInvitees]->totalCount =array_sum($arrivals);
+            $invitees[$keyInvitees]->totalCount = array_sum($arrivals);
             $invitees[$keyInvitees]->arrivals = $arrivals;
-            // $countries[$keyCountry]->delegationIds = Delegation::where([['country', $country->country], ['delegation_status', 1]])->get('uid');
-            // ->leftJoin('delegate_flights', 'delegate_flights.delegation_uid', '=', 'delegations')
-
-            // foreach ($flights as $flightKey => $flight) {
-            //     $countries[$keyCountry]->delegationFlights = DelegateFlight::distinct('arrival_date')->get('arrival_date');
-
-            // }
-
-            // $delegations = Delegation::where('country', $country->country)->get('uid');
-
-            // $countries[$keyCountry]->$delegations = $delegations;
-            // foreach ($countries[$keyCountry]->delegationIds as $keyDelegation => $delegationId) {
-            //     $countries[$keyDelegation]->delegationIds[$keyDelegation]->flights = DelegateFlight::where('delegation_uid', $delegationId->uid)->distinct('arrival_date')->count();
-            // }
         }
 
-        // foreach ($countries[$keyCountry]->delegationFlights as $keydelegationFlights => $keydelegationFlight) {
-        // }
 
         return $invitees;
-        // $flights = DelegateFlight::distinct('delegation_uid')->get('delegation_uid');
-        // $delegations=[];
-        // foreach ($flights as $key => $flight) {
-        //     array_push($delegations,Delegation::where('uid',$flight->delegation_uid)->first());
-        //     $delegations[0]->flight=DelegateFlight::where('delegation_uid',$flight->delegation_uid)->get();
-        // }
-        // $countries = array_map(function ($flight) {
-        //     return Delegation::where('uid', $flight->delegation_uid)->get();
-        // }, $flights);
-        // return $delegations;
     }
 
+    // Delegation Arrival Status VIP End
+
+    // Delegation ArrivalDetail Report Start
+
+    public function delegationArrivalDetailReport()
+    {
+        return view('pages.reports.arrivalDetailReport');
+    }
+
+    // Delegation ArrivalDeatil Report End
+
+    // Delegation Departure Status Start
+
+    public function delegationDepartureStatusReport()
+    {
+        $flights = DelegateFlight::distinct('departure_date')->get('departure_date');
+        return view('pages.reports.delegationDepartureStatus', ['flights' => $flights]);
+    }
+
+    public function delegationDepartureStatusData()
+    {
+        $countries = Delegation::distinct('country')->get('country');
+        $flights = DelegateFlight::distinct('departure_date')->get('departure_date');
+        foreach ($countries as $keyCountry => $country) {
+            $departures = [];
+            foreach ($flights as $keyFlights => $flight) {
+                $departures[$keyFlights] = DB::table('delegate_flights')
+                    ->leftJoin('delegations', 'delegations.uid', '=', 'delegate_flights.delegation_uid')
+                    ->where([['delegations.country', $country->country], ['delegate_flights.departure_date', $flight->departure_date], ['delegations.delegation_response', 'Accepted']])
+                    ->select('delegations.country', 'delegations.uid')
+                    ->count();
+            }
+            $countries[$keyCountry]->totalCount = array_sum($departures);
+            $countries[$keyCountry]->departures = $departures;
+        }
+
+        return $countries;
+    }
     // Delegation Arrival Status End
+
+    // Delegation Arrival Status VIP Start
+
+    public function delegationDepartureStatusVIPReport()
+    {
+        $flights = DelegateFlight::distinct('departure_date')->get('departure_date');
+        return view('pages.reports.delegationDepartureStatusVIP', ['flights' => $flights]);
+    }
+    public function delegationDepartureStatusVIPData()
+    {
+        $invitees = Delegation::distinct('invited_by')->get('invited_by');
+        $flights = DelegateFlight::distinct('departure_date')->get('departure_date');
+        foreach ($invitees as $keyInvitees => $invitee) {
+            $invitees[$keyInvitees]->name = Vips::where([['vips_uid', $invitee->invited_by], ['vips_status', 1]])->first('vips_designation');
+            $departure = [];
+            foreach ($flights as $keyFlights => $flight) {
+                $arrivals[$keyFlights] = DB::table('delegate_flights')
+                    ->leftJoin('delegations', 'delegations.uid', '=', 'delegate_flights.delegation_uid')
+                    ->where([['delegations.invited_by', $invitee->invited_by], ['delegate_flights.departure_date', $flight->departure_date], ['delegations.delegation_response', 'Accepted']])
+                    ->select('delegations.invited_by', 'delegations.uid')
+                    ->count();
+            }
+            $invitees[$keyInvitees]->totalCount = array_sum($departure);
+            $invitees[$keyInvitees]->departure = $departure;
+        }
+
+
+        return $invitees;
+    }
+
+    // Delegation Arrival Status VIP End
+
+
+    // Delegation DepartureDetail Report Start
+    public function delegationDepartureDetailReport()
+    {
+        return view('pages.reports.departureDetailReport');
+    }
+    // Delegation DepartureDetail Report End
+
 
     // Delegation Arrival Status VIP Start
 

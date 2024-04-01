@@ -24,11 +24,11 @@ return new class extends Migration
             $table->string('first_Name')->nullable();
             $table->string('designation')->nullable();
             $table->string('delegateCode')->unique();
-            // $table->string('organistaion')->nullable();
             $table->string('itinerary_uid')->nullable();
             $table->integer('invitation_number')->nullable()->unique();
             $table->uuid('accomodated')->nullable();
             $table->uuid('car_accomodated')->nullable();
+            // $table->string('organistaion')->nullable();
             // $table->foreign('user_uid')->references('uid')->on('users')
             // ->onUpdate('cascade')->onDelete('cascade');
             // $table->foreign('delegation')->references('id')->on('delegations')

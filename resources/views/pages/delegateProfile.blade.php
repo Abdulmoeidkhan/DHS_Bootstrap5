@@ -135,6 +135,13 @@
                                 <label for="self_designation" class="form-label">Designation</label>
                                 <input name="self_designation" type="text" class="form-control" id="self_designation" placeholder="Designation" value="{{$delegate->designation}}" required>
                             </div>
+                            <div class="mb-3">
+                                <label for="golf_player" class="form-label">Golf Player</label>
+                                <select name="golf_player" id="golf_player" class="form-select">
+                                    <option value="0" {{isset($delegationData)?($delegationData->golf_player == 0 ? 'Selected':''):''}}> No </option>
+                                    <option value="1" {{isset($delegationData)?($delegationData->golf_player == 1 ? 'Selected':''):''}}> Yes </option>
+                                </select>
+                            </div>
                             <!-- <div class="mb-3">
                                 <label for="organistaion" class="form-label">Organistaion</label>
                                 <input name="organistaion" type="text" class="form-control" id="organistaion" placeholder="Organistaion" value="{{$delegate->organistaion}}" required>

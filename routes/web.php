@@ -314,6 +314,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/getDelegatesStats', [DelegatesPageController::class, 'getDelegatesStats'])->name('data.getDelegatesStats');
         Route::get('/getDelegationStats', [DelegatesPageController::class, 'getDelegationStats'])->name('data.getDelegationStats');
         Route::get('/getDelegateSummary', [DelegatesPageController::class, 'getDelegateSummary'])->name('data.getDelegateSummary');
+        Route::get('/getDelegateGolfSummary', [DelegatesPageController::class, 'getDelegateGolfSummary'])->name('data.getDelegateGolfSummary');
         Route::get('/addDelegationPage/{id?}', [AddDelegationPageController::class, 'render'])->name('pages.addDelegationPage');
         Route::get('/getSpecificMembers', [MemberController::class, 'specificMembersData'])->name('pages.getSpecificMembers');
         Route::get('/statusChanger/{id}', [DelegationsPageController::class, 'updateStatus'])->name('request.updateStatus');
@@ -330,10 +331,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('reports/countryAndVipReport', [ReportController::class, 'countryAndVipReport'])->name('pages.countryAndVipReport');
         Route::get('reports/selfRepReport', [ReportController::class, 'selfRepReport'])->name('pages.selfRepReport');
         Route::get('reports/selfRepData', [ReportController::class, 'selfRepData'])->name('request.selfRepData');
-        Route::get('reports/delegationArrivalStatusReport', [ReportController::class, 'delegationArrivalStatusReport'])->name('pages.delegationArrivalStatusReport');
-        Route::get('reports/delegationArrivalStatusData', [ReportController::class, 'delegationArrivalStatusData'])->name('request.delegationArrivalStatusData');
-        Route::get('reports/delegationArrivalStatusVIPReport', [ReportController::class, 'delegationArrivalStatusVIPReport'])->name('pages.delegationArrivalStatusVIPReport');
-        Route::get('reports/delegationArrivalStatusVIPData', [ReportController::class, 'delegationArrivalStatusVIPData'])->name('request.delegationArrivalStatusVIPData');
         Route::get('reports/countryAndVipData', [ReportController::class, 'countryAndVipData'])->name('request.countryAndVipData');
         Route::get('reports/vipDelegationData', [ReportController::class, 'vipDelegationData'])->name('request.vipDelegationData');
         Route::get('reports/listOfAllDelegates', [ReportController::class, 'listOfAllDelegates'])->name('pages.listOfAllDelegates');
@@ -341,6 +338,16 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('reports/listOfAllDelegation', [ReportController::class, 'listOfAllDelegation'])->name('pages.listOfAllDelegation');
         Route::get('reports/delegationAttendance', [ReportController::class, 'delegationAttendance'])->name('pages.delegationAttendance');
         Route::get('reports/delegationAttendanceData', [ReportController::class, 'delegationAttendanceData'])->name('request.delegationAttendanceData');
+        Route::get('reports/delegationArrivalStatusReport', [ReportController::class, 'delegationArrivalStatusReport'])->name('pages.delegationArrivalStatusReport');
+        Route::get('reports/delegationArrivalStatusData', [ReportController::class, 'delegationArrivalStatusData'])->name('request.delegationArrivalStatusData');
+        Route::get('reports/delegationArrivalStatusVIPReport', [ReportController::class, 'delegationArrivalStatusVIPReport'])->name('pages.delegationArrivalStatusVIPReport');
+        Route::get('reports/delegationArrivalStatusVIPData', [ReportController::class, 'delegationArrivalStatusVIPData'])->name('request.delegationArrivalStatusVIPData');
+        Route::get('reports/delegationArrivalDetailReport', [ReportController::class, 'delegationArrivalDetailReport'])->name('pages.delegationArrivalDetailReport');
+        Route::get('reports/delegationDepartureDetailReport', [ReportController::class, 'delegationDepartureDetailReport'])->name('pages.delegationDepartureDetailReport');
+        Route::get('reports/delegationDepartureStatusReport', [ReportController::class, 'delegationDepartureStatusReport'])->name('pages.delegationDepartureStatusReport');
+        Route::get('reports/delegationDepartureStatusData', [ReportController::class, 'delegationDepartureStatusData'])->name('request.delegationDepartureStatusData');
+        Route::get('reports/delegationDepartureStatusVIPReport', [ReportController::class, 'delegationDepartureStatusVIPReport'])->name('pages.delegationDepartureStatusVIPReport');
+        Route::get('reports/delegationDepartureStatusVIPData', [ReportController::class, 'delegationDepartureStatusVIPData'])->name('request.delegationDepartureStatusVIPData');
         // Reports End
     });
     Route::group(['middleware' => 'authorisedUserCheck'], function () {

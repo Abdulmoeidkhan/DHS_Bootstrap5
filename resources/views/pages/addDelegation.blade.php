@@ -146,6 +146,13 @@
                                 <input name="self_designation" type="text" class="form-control" id="self_designation" value="{{isset($delegationHead)?($delegationHead->designation):''}}" placeholder="Designation" required>
                             </div>
                             <div class="mb-3">
+                                <label for="golf_player" class="form-label">Golf Player</label>
+                                <select name="golf_player" id="golf_player" class="form-select">
+                                    <option value="0" {{isset($delegations)?($delegations->golf_player == 0 ? 'Selected':''):''}}> No </option>
+                                    <option value="1" {{isset($delegations)?($delegations->golf_player == 1 ? 'Selected':''):''}}> Yes </option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <label for="email_address" class="form-label">Email Address*</label>
                                 <input name="email_address" type="text" class="form-control" id="email_address" value="{{isset($delegations)?($delegations->email_address ? $delegations->email_address:''):''}}" placeholder="Email Address" required>
                             </div>

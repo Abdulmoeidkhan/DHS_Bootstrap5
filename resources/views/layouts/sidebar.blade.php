@@ -391,7 +391,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="../main/blog-detail.html" class="sidebar-link">
+                            <a href="{{route('pages.delegationArrivalDetailReport')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
@@ -399,7 +399,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="../main/blog-detail.html" class="sidebar-link">
+                            <a href="{{route('pages.delegationDepartureStatusReport')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
@@ -407,7 +407,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="../main/blog-detail.html" class="sidebar-link">
+                            <a href="{{route('pages.delegationDepartureStatusVIPReport')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
@@ -415,7 +415,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="../main/blog-detail.html" class="sidebar-link">
+                            <a href="{{route('pages.delegationDepartureDetailReport')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
@@ -453,22 +453,6 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
-                                <span class="hide-menu">Delegates Check-In Status - Country</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="../main/blog-detail.html" class="sidebar-link">
-                                <div class="round-16 d-flex align-items-center justify-content-center">
-                                    <i class="ti ti-grain"></i>
-                                </div>
-                                <span class="hide-menu">Delegates Check-In Status - VIP</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="../main/blog-detail.html" class="sidebar-link">
-                                <div class="round-16 d-flex align-items-center justify-content-center">
-                                    <i class="ti ti-grain"></i>
-                                </div>
                                 <span class="hide-menu">Hotel Check-In Details</span>
                             </a>
                         </li>
@@ -486,22 +470,6 @@
                                     <i class="ti ti-grain"></i>
                                 </div>
                                 <span class="hide-menu">Delegation Check-Out Status - VIP</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="../main/blog-detail.html" class="sidebar-link">
-                                <div class="round-16 d-flex align-items-center justify-content-center">
-                                    <i class="ti ti-grain"></i>
-                                </div>
-                                <span class="hide-menu">Delegates Check-Out Status - Country</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="../main/blog-detail.html" class="sidebar-link">
-                                <div class="round-16 d-flex align-items-center justify-content-center">
-                                    <i class="ti ti-grain"></i>
-                                </div>
-                                <span class="hide-menu">Delegates Check-Out Status - VIP</span>
                             </a>
                         </li>
                         <li class="sidebar-item">

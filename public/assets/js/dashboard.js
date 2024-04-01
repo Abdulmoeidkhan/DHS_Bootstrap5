@@ -123,7 +123,7 @@ $(function () {
         series: data.values,
         labels: data.names,
         chart: {
-          width: 180,
+          width: 270,
           type: "donut",
           fontFamily: "Plus Jakarta Sans', sans-serif",
           foreColor: "#adb0bb",
@@ -185,7 +185,7 @@ $(function () {
         series: data.values,
         labels: data.names,
         chart: {
-          width: 180,
+          width: 270,
           type: "donut",
           fontFamily: "Plus Jakarta Sans', sans-serif",
           foreColor: "#adb0bb",
@@ -380,7 +380,36 @@ $(function () {
 
     })
 
+  axios.get('/getDelegateGolfSummary')
+    .then(function (response) {
+      let data = response.data;
 
+      var options = {
+        series: data.values,
+        chart: {
+          width: 380,
+          type: 'pie',
+        },
+        labels: ['Player', 'NonPlayer'],
+        colors: ["#5D87FF", "#ffae1f",],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+      };
+
+      var delegategolfchart = new ApexCharts(document.querySelector("#delegategolfchart"), options);
+      delegategolfchart.render();
+
+
+    })
 })
 
 

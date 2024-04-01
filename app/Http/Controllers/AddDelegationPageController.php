@@ -172,6 +172,7 @@ class AddDelegationPageController extends Controller
                 } else {
                     $arrayToBeUpdate['delegationuid'] = $req->delegation_uid;
                     $arrayToBeUpdate['delegation_response'] = $req->delegation_response;
+                    $arrayToBeUpdate['golf_player'] = $req->golf_player;
                     if ($key == 'self' && $value == 1) {
                         // $arrayToBeUpdate['delegationhead'] = $req->self_delegate_uid;
                         $arrayToBeUpdateRep['self'] = 0;

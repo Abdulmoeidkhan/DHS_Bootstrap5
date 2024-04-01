@@ -96,6 +96,13 @@ class DelegatesPageController extends Controller
         return ['names' => ['Active', 'InActive'], 'values' => [$active, $inActive]];
     }
 
+    public function getDelegateGolfSummary()
+    {
+        $player = Delegation::where([['golf_player', 1], ['delegation_status', 1]])->count();
+        $nonPlayer = Delegation::where([['golf_player', 0], ['delegation_status', 1]])->count();
+        return ['names' => ['Player', 'NonPlayer'], 'values' => [$player, $nonPlayer]];
+    }
+
     public function invitationUpdate(Request $req)
     {
         $updatedDelegate = Delegate::where('delegates_uid', $req->delegationUid)->update(['invitation_number' => $req->invitaionNumber]);
