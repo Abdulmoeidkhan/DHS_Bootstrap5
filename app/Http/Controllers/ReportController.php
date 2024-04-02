@@ -8,6 +8,7 @@ use App\Models\DelegateFlight;
 use App\Models\Delegation;
 use App\Models\Flightsegment;
 use App\Models\Rank;
+use App\Models\Room;
 use App\Models\Vips;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -253,7 +254,7 @@ class ReportController extends Controller
         $flights = DelegateFlight::distinct('departure_date')->get('departure_date');
         return view('pages.reports.delegationDepartureStatusVIP', ['flights' => $flights]);
     }
-    public function delegationDepartureStatusVIPData()
+    public function delegationCheckInStatusVIPData()
     {
         $invitees = Delegation::distinct('invited_by')->get('invited_by');
         $flights = DelegateFlight::distinct('departure_date')->get('departure_date');
@@ -284,6 +285,70 @@ class ReportController extends Controller
         return view('pages.reports.departureDetailReport');
     }
     // Delegation DepartureDetail Report End
+
+
+    // Delegation Check-In Status Report Start
+
+    public function delegationCheckInStatus()
+    {
+        $rooms = Room::distinct('room_checkin')->get('room_checkin');
+        return view('pages.reports.delegationCheckInStatus', ['rooms' => $rooms]);
+    }
+
+    public function delegationCheckInStatusData()
+    {
+        $countries = Delegation::distinct('country')->get('country');
+        $rooms = Room::distinct('room_checkin')->get('room_checkin');
+        foreach ($countries as $keyCountry => $country) {
+            $room_checkin = [];
+            foreach ($rooms as $keyRooms => $room) {
+                $room_checkin[$keyRooms] = DB::table('rooms')
+                    ->leftJoin('delegates', 'delegates.delegates_uid', '=', 'rooms.assign_to')
+                    ->leftJoin('delegations', 'delegations.uid', '=', 'delegates.delegation')
+                    ->where([['delegations.country', $country->country], ['rooms.room_checkin', $room->room_checkin], ['delegations.delegation_response', 'Accepted']])
+                    ->select('delegations.country', 'delegations.uid')
+                    ->count();
+            }
+            $countries[$keyCountry]->totalCount = array_sum($room_checkin);
+            $countries[$keyCountry]->room_checkin = $room_checkin;
+        }
+
+        return $countries;
+    }
+
+    // Delegation Check-In Status Report End
+
+    // Delegation Check-In Status VIP Report Start
+
+    public function delegationCheckInStatusVIPReport()
+    {
+        $rooms = Room::distinct('room_checkin')->get('room_checkin');
+        return view('pages.reports.delegationCheckInStatusVIP', ['rooms' => $rooms]);
+    }
+    public function checkInDelegationStatusVIPData()
+    {
+        $invitees = Delegation::distinct('invited_by')->get('invited_by');
+        $rooms = Room::distinct('room_checkin')->get('room_checkin');
+        foreach ($invitees as $keyInvitees => $invitee) {
+            $invitees[$keyInvitees]->name = Vips::where([['vips_uid', $invitee->invited_by], ['vips_status', 1]])->first('vips_designation');
+            $room_checkin = [];
+            foreach ($rooms as $keyRooms => $room) {
+                $room_checkin[$keyRooms] = DB::table('rooms')
+                    ->leftJoin('delegates', 'delegates.delegates_uid', '=', 'rooms.assign_to')
+                    ->leftJoin('delegations', 'delegations.uid', '=', 'delegates.delegation')
+                    ->where([['delegations.invited_by', $invitee->invited_by], ['rooms.room_checkin', $room->room_checkin], ['delegations.delegation_response', 'Accepted']])
+                    ->select('delegations.country', 'delegations.uid')
+                    ->count();
+            }
+            $invitees[$keyInvitees]->totalCount = array_sum($room_checkin);
+            $invitees[$keyInvitees]->room_checkin = $room_checkin;
+        }
+
+
+        return $invitees;
+    }
+
+    // Delegation Check-In Status VIP Report End
 
 
     // Delegation Arrival Status VIP Start

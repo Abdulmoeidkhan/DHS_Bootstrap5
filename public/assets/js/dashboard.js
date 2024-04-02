@@ -390,7 +390,7 @@ $(function () {
           width: 380,
           type: 'pie',
         },
-        labels: ['Player', 'NonPlayer'],
+        labels: ['Player', 'Non Player'],
         colors: ["#5D87FF", "#ffae1f",],
         responsive: [{
           breakpoint: 480,

@@ -100,7 +100,7 @@ class DelegatesPageController extends Controller
     {
         $player = Delegation::where([['golf_player', 1], ['delegation_status', 1]])->count();
         $nonPlayer = Delegation::where([['golf_player', 0], ['delegation_status', 1]])->count();
-        return ['names' => ['Player', 'NonPlayer'], 'values' => [$player, $nonPlayer]];
+        return ['names' => ['Player', 'Non Player'], 'values' => [$player, $nonPlayer]];
     }
 
     public function invitationUpdate(Request $req)
