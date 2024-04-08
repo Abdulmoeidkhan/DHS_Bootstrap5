@@ -14,7 +14,6 @@ use App\Http\Controllers\AddEventController;
 use App\Http\Controllers\EventInterestedController;
 use App\Http\Controllers\DelegationsPageController;
 use App\Http\Controllers\AddDelegationPageController;
-use App\Http\Controllers\AddVipsController;
 use App\Http\Controllers\ActivateProfileController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\CarsController;
@@ -77,11 +76,6 @@ Route::get('/404', function () {
     return view('pages.404');
 })->name("404");
 
-
-
-// Route::get('/userList', function () {
-//     return view('pages.userList');
-// })->name("userList");
 Route::group(['middleware' => 'auth'], function () {
     // Commented Routes not in use for now 
     // Route::get('/deleteUser/{id}', [UserProfileController::class, 'deleteId'])->name('request.deleteUser');
@@ -350,8 +344,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('reports/delegationDepartureStatusVIPData', [ReportController::class, 'delegationDepartureStatusVIPData'])->name('request.delegationDepartureStatusVIPData');
         Route::get('reports/delegationCheckInStatus', [ReportController::class, 'delegationCheckInStatus'])->name('pages.delegationCheckInStatus');
         Route::get('reports/delegationCheckInStatusData', [ReportController::class, 'delegationCheckInStatusData'])->name('request.delegationCheckInStatusData');
+        Route::get('reports/checkInDelegationStatusVIPData', [ReportController::class, 'checkInDelegationStatusVIPData'])->name('request.checkInDelegationStatusVIPData');
         Route::get('reports/delegationCheckInStatusVIPReport', [ReportController::class, 'delegationCheckInStatusVIPReport'])->name('pages.delegationCheckInStatusVIPReport');
-        Route::get('reports/delegationCheckInStatusVIPData', [ReportController::class, 'delegationCheckInStatusVIPData'])->name('request.delegationCheckInStatusVIPData');
+        Route::get('reports/delegationCheckOutStatus', [ReportController::class, 'delegationCheckOutStatus'])->name('pages.delegationCheckOutStatus');
+        Route::get('reports/delegationCheckOutStatusData', [ReportController::class, 'delegationCheckOutStatusData'])->name('request.delegationCheckOutStatusData');
+        Route::get('reports/checkOutDelegationStatusVIPData', [ReportController::class, 'checkOutDelegationStatusVIPData'])->name('request.checkOutDelegationStatusVIPData');
+        Route::get('reports/delegationCheckOutStatusVIPReport', [ReportController::class, 'delegationCheckOutStatusVIPReport'])->name('pages.delegationCheckOutStatusVIPReport');
         // Reports End
     });
     Route::group(['middleware' => 'authorisedUserCheck'], function () {
@@ -425,7 +423,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/printDelegationEnvelope/{id}', [PrintInvitationController::class, 'printDelegationEnvelope'])->name("pages.printDelegationEnvelope");
 });
 
-Route::get('/sendhtmlemail/{id}', [MailOtpController::class, 'html_email'])->name("request.emailModule");
 Route::post('signUpRequest', [SignUpController::class, 'signUp'])->name('request.signUp');
 Route::post('signInRequest', [SignInController::class, 'signIn'])->name('request.signIn');
 Route::post('activationRequest', [ActivationRequest::class, 'activation'])->name('request.activation');
+Route::get('/sendhtmlemail/{id}', [MailOtpController::class, 'html_email'])->name("request.emailModule");

@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Delegate;
 use App\Models\DelegateFlight;
 use App\Models\Delegation;
-use App\Models\Flightsegment;
-use App\Models\Rank;
 use App\Models\Room;
 use App\Models\Vips;
 use Illuminate\Http\Request;
@@ -254,6 +252,7 @@ class ReportController extends Controller
         $flights = DelegateFlight::distinct('departure_date')->get('departure_date');
         return view('pages.reports.delegationDepartureStatusVIP', ['flights' => $flights]);
     }
+
     public function delegationCheckInStatusVIPData()
     {
         $invitees = Delegation::distinct('invited_by')->get('invited_by');
@@ -329,9 +328,12 @@ class ReportController extends Controller
     {
         $invitees = Delegation::distinct('invited_by')->get('invited_by');
         $rooms = Room::distinct('room_checkin')->get('room_checkin');
+        
         foreach ($invitees as $keyInvitees => $invitee) {
+            
             $invitees[$keyInvitees]->name = Vips::where([['vips_uid', $invitee->invited_by], ['vips_status', 1]])->first('vips_designation');
             $room_checkin = [];
+
             foreach ($rooms as $keyRooms => $room) {
                 $room_checkin[$keyRooms] = DB::table('rooms')
                     ->leftJoin('delegates', 'delegates.delegates_uid', '=', 'rooms.assign_to')
@@ -340,11 +342,11 @@ class ReportController extends Controller
                     ->select('delegations.country', 'delegations.uid')
                     ->count();
             }
+
             $invitees[$keyInvitees]->totalCount = array_sum($room_checkin);
             $invitees[$keyInvitees]->room_checkin = $room_checkin;
+
         }
-
-
         return $invitees;
     }
 
