@@ -188,7 +188,6 @@
                 </li>
                 @endif
                 @if(session()->get('user')->roles[0]->name =="admin"|| session()->get('user')->roles[0]->name =="hotels")
-
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.hotels')}}" aria-expanded="false">
                         <span>
@@ -197,7 +196,6 @@
                         <span class="hide-menu">Hotel</span>
                     </a>
                 </li>
-
                 @endif
                 @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="dho" || session()->get('user')->roles[0]->name =="vendor")
                 <li class="sidebar-item">
@@ -599,11 +597,13 @@
                     <!-- <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
                     </a> -->
                 </li>
-                <li class="sidebar-item">
-                    <!-- <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
-                    </a> -->
-                </li>
             </ul>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <!-- <div class="unlimited-access hide-menu bg-light-primary position-relative mb-7 mt-5 rounded">
                 <div class="d-flex">
                     <br />

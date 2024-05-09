@@ -78,11 +78,11 @@ class DelegatesPageController extends Controller
 
     public function getDelegationStats()
     {
-        $countries = Delegation::distinct('country')->get('country');
+        $countries = Delegation::distinct('country')->orderBy('country', 'asc')->get('country');
         foreach ($countries as $key => $country) {
-            $countries[$key]->accepted = Delegation::where([['delegation_response', 'Accepted'], ['country', $country->country]])->count();
-            $countries[$key]->regretted = Delegation::where([['delegation_response', 'Regretted'], ['country', $country->country]])->count();
-            $countries[$key]->awaited = Delegation::where([['delegation_response', 'Awaited'], ['country', $country->country]])->count();
+            $countries[$key]->accepted = Delegation::where([['delegation_response', 'Accepted'],['delegation_status',1], ['country', $country->country]])->count();
+            $countries[$key]->regretted = Delegation::where([['delegation_response', 'Regretted'],['delegation_status',1], ['country', $country->country]])->count();
+            $countries[$key]->awaited = Delegation::where([['delegation_response', 'Awaited'],['delegation_status',1], ['country', $country->country]])->count();
             $countries[$key]->invitation = Delegation::where('country', $country->country)->count();
         }
         // $countries->response = 'success';
@@ -91,8 +91,8 @@ class DelegatesPageController extends Controller
 
     public function getDelegateSummary()
     {
-        $active = Delegate::where('status', 1)->count();
-        $inActive = Delegate::where('status', 0)->count();
+        $active = Delegate::where('status', 1)->whereNotNull('rank')->count();
+        $inActive = Delegate::where('status', 0)->whereNotNull('rank')->count();
         return ['names' => ['Active', 'InActive'], 'values' => [$active, $inActive]];
     }
 

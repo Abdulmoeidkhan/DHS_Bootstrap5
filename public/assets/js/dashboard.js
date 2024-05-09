@@ -8,6 +8,7 @@ $(function () {
     .then(function (response) {
       // console.log(response)
       let delegationData = response.data;
+      // console.log(delegationData);
       var chart = {
         series: [
           { name: "Invitaion:", data: dataArray(delegationData, 'invitation') },
@@ -33,7 +34,7 @@ $(function () {
         plotOptions: {
           bar: {
             horizontal: false,
-            columnWidth: "25%",
+            columnWidth: "20%",
             borderRadius: [5],
             borderRadiusApplication: 'end',
             borderRadiusWhenStacked: 'all'
@@ -318,7 +319,7 @@ $(function () {
           colors: ['#fff']
         },
         title: {
-          text: 'Officer Chart'
+          // text: 'Officer Chart'
         },
         xaxis: {
           categories: ['Liason', 'Interpreter', 'Receiving'],

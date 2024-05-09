@@ -153,8 +153,8 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="email_address" class="form-label">Email Address*</label>
-                                <input name="email_address" type="text" class="form-control" id="email_address" value="{{isset($delegations)?($delegations->email_address ? $delegations->email_address:''):''}}" placeholder="Email Address" required>
+                                <label for="email_address" class="form-label">Email Address</label>
+                                <input name="email_address" type="text" class="form-control" id="email_address" value="{{isset($delegations)?($delegations->email_address ? $delegations->email_address:''):''}}" placeholder="Email Address">
                             </div>
                             <div class="mb-3">
                                 <label for="delegation_picture" class="form-label">Picture</label>

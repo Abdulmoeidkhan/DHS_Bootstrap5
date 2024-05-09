@@ -634,8 +634,8 @@
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                                 <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
                                 <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Rank</th>
-                                <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th>
-                                <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th>
+                                <th data-filter-control="input" data-width="450" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateFirstAndLastName">Delegation Name</th>
+                                <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                                 <th data-filter-control="input" data-field="email_address" data-sortable="true" data-formatter="operateText">Email</th>
                                 <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
@@ -694,8 +694,8 @@
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                                 <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
                                 <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Rank</th>
-                                <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th>
-                                <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th>
+                                <th data-filter-control="input" data-width="450" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateFirstAndLastName">Delegation Name</th>
+                                <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                                 <th data-filter-control="input" data-field="email_address" data-sortable="true" data-formatter="operateText">Email</th>
                                 <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
@@ -749,8 +749,8 @@
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                                 <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
                                 <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Rank</th>
-                                <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th>
-                                <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th>
+                                <th data-filter-control="input" data-width="450" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateFirstAndLastName">Delegation Name</th>
+                                <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                                 <th data-filter-control="input" data-field="email_address" data-sortable="true" data-formatter="operateText">Email</th>
                                 <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
@@ -804,8 +804,8 @@
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                                 <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
                                 <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Rank</th>
-                                <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th>
-                                <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th>
+                                <th data-filter-control="input" data-width="450" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateFirstAndLastName">Delegation Name</th>
+                                <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                                 <th data-filter-control="input" data-field="email_address" data-sortable="true" data-formatter="operateText">Email</th>
                                 <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
@@ -859,8 +859,8 @@
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                                 <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
                                 <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Rank</th>
-                                <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th>
-                                <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th>
+                                <th data-filter-control="input" data-width="450" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateFirstAndLastName">Delegation Name</th>
+                                <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                                 <th data-filter-control="input" data-field="email_address" data-sortable="true" data-formatter="operateText">Email</th>
                                 <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
@@ -969,6 +969,10 @@
 <script>
     function operateText(value, row, index) {
         return value ? value : "-"
+    }
+
+    function operateFirstAndLastName(value, row, index) {
+        return `${row.first_Name} ${row.last_Name}` ;
     }
 
     function memberFormatter(value, row, index) {
