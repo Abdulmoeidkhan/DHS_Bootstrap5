@@ -33,7 +33,7 @@
                     <div class="col-8">
                         <h4 class="fw-semibold mb-3">
                             @if(\App\Models\Delegation::count())
-                            Total Invitation : {{\App\Models\Delegation::count()}}
+                            Total Invitation : {{\App\Models\Delegation::where('delegation_status',1)->count()}}
                             @endif
                         </h4>
                         <div class="d-flex align-items-center">
@@ -100,7 +100,7 @@
     <div class="col-lg-12 d-flex align-items-strech">
         <div class="card w-100">
             <div class="card-body">
-            <h5 class="card-title mb-9 fw-semibold">Officer Chart</h5>
+                <h5 class="card-title mb-9 fw-semibold">Officer Chart</h5>
                 <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
                     <div class="mb-3 mb-sm-0">
                         <!-- <h5 class="card-title fw-semibold">Officers</h5> -->

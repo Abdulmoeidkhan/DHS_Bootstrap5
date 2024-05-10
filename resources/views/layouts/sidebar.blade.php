@@ -447,7 +447,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="../main/blog-detail.html" class="sidebar-link">
+                            <a href="{{route('pages.hotelCheckInDetails')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
@@ -471,7 +471,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="../main/blog-detail.html" class="sidebar-link">
+                            <a href="{{route('pages.hotelCheckOutDetails')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
@@ -548,7 +548,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="sidebar-item">
+                <!-- <li class="sidebar-item">
                     <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
                         <span class="d-flex">
                             <i class="ti ti-report"></i>
@@ -565,7 +565,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
                 @endif
                 @if(session()->get('user')->roles[0]->name =="delegate")
                 <li class="sidebar-item">

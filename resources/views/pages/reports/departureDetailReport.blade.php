@@ -59,8 +59,9 @@
                             <th data-filter-control="input" data-field="country.country" data-sortable="true" data-formatter="operateText">Country</th>
                             <th data-filter-control="input" data-field="rank.ranks_name" data-sortable="true" data-formatter="operateText">Rank</th>
                             <th data-filter-control="input" data-field="delegate.designation" data-formatter="operateText">Designation</th>
-                            <th data-filter-control="input" data-field="delegate.first_Name" data-formatter="operateText">First Name</th>
-                            <th data-filter-control="input" data-field="delegate.last_Name" data-formatter="operateText">Last Name</th>
+                            <th data-filter-control="input" data-width="450" data-field="delegate.first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateFirstAndLastName">Delegation Name</th>
+                            <!-- <th data-filter-control="input" data-field="delegate.first_Name" data-formatter="operateText">First Name</th>
+                            <th data-filter-control="input" data-field="delegate.last_Name" data-formatter="operateText">Last Name</th> -->
                             <th data-filter-control="input" data-field="passport" data-formatter="operateText">Passport</th>
                             <th data-filter-control="input" data-field="departure_date" data-sortable="true" data-formatter="operateText">Departure Date</th>
                             <th data-filter-control="input" data-field="departure_time" data-sortable="true" data-formatter="operateText">Departure Time</th>
@@ -76,6 +77,10 @@
 <script>
     function operateSerial(value, row, index) {
         return index + 1;
+    }
+
+    function operateFirstAndLastName(value, row, index) {
+        return `${row.delegate.first_Name} ${row.delegate.last_Name}`;
     }
 
     function operateText(value, row, index) {

@@ -70,6 +70,8 @@
     </div>
 </div>
 <script>
+
+
     function operateSerial(value, row, index) {
         return index + 1;
     }

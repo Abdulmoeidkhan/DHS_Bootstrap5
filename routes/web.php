@@ -350,6 +350,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('reports/delegationCheckOutStatusData', [ReportController::class, 'delegationCheckOutStatusData'])->name('request.delegationCheckOutStatusData');
         Route::get('reports/checkOutDelegationStatusVIPData', [ReportController::class, 'checkOutDelegationStatusVIPData'])->name('request.checkOutDelegationStatusVIPData');
         Route::get('reports/delegationCheckOutStatusVIPReport', [ReportController::class, 'delegationCheckOutStatusVIPReport'])->name('pages.delegationCheckOutStatusVIPReport');
+        Route::get('reports/hotelCheckInDetails', [ReportController::class, 'hotelCheckInDetails'])->name('pages.hotelCheckInDetails');
+        Route::get('reports/hotelCheckOutDetails', [ReportController::class, 'hotelCheckOutDetails'])->name('pages.hotelCheckOutDetails');
         // Reports End
     });
     Route::group(['middleware' => 'authorisedUserCheck'], function () {

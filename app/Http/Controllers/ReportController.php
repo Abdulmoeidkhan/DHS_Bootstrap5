@@ -389,6 +389,16 @@ class ReportController extends Controller
         $rooms = Room::distinct('room_checkout')->get('room_checkout');
         return view('pages.reports.delegationCheckOutStatusVIP', ['rooms' => $rooms]);
     }
+    public function hotelCheckInDetails()
+    {
+        return view('pages.reports.hotelsCheckInDetailReport');
+    }
+
+    public function hotelCheckOutDetails()
+    {
+        return view('pages.reports.hotelsCheckOutDetailReport');
+    }
+
     public function checkOutDelegationStatusVIPData()
     {
         $invitees = Delegation::distinct('invited_by')->get('invited_by');
