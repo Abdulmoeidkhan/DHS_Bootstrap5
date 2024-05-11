@@ -169,8 +169,9 @@
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                                 <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
                                 <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Rank</th>
-                                <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th>
-                                <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th>
+                                <th data-filter-control="input" data-width="450" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateFirstAndLastName">Delegation Name</th>
+                                <!-- <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th> -->
+                                <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
                                 <th data-filter-control="input" data-field="vips_designation" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                 <!-- <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th> -->
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
@@ -201,8 +202,9 @@
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                             <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
                             <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Rank</th>
-                            <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th>
-                            <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th>
+                            <th data-filter-control="input" data-width="450" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateFirstAndLastName">Delegation Name</th>
+                            <!-- <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th> -->
+                            <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
                             <th data-filter-control="input" data-field="vips_designation" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                             <!-- <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th> -->
                             <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
@@ -231,6 +233,10 @@
 <script>
     function operateText(value, row, index) {
         return value ? value : "N/A"
+    }
+
+    function operateFirstAndLastName(value, row, index) {
+        return `${row.first_Name} ${row.last_Name}` ;
     }
 
     function memberFormatter(value, row, index) {

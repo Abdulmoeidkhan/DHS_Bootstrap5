@@ -44,6 +44,7 @@ class OfficerController extends Controller
         }
         return $code;
     }
+
     // protected function documentUpload($file, $id)
     // {
     //     $pdfBlob = file_get_contents($file->getRealPath());
@@ -62,12 +63,14 @@ class OfficerController extends Controller
         $imgSaved = $imgBlob->save();
         return $imgSaved;
     }
+
     // protected function documentUpdate($file, $id)
     // {
     //     $pdfBlob = file_get_contents($file->getRealPath());
     //     $updatePdfBlob = Document::where('uid', $id)->first() ? Document::where('uid', $id)->update(['pdf_blob' => $pdfBlob]) : $this->documentUpload($file, $id);
     //     return $updatePdfBlob;
     // }
+
     protected function imageBlobUpdate($file, $id)
     {
         $imageBlob = $file;
@@ -77,14 +80,17 @@ class OfficerController extends Controller
 
     public function addOfficer(Request $req)
     {
+        // return $req->all();
+        $contact = str_replace('+', '', $req->officer_contact);
+        $contact = str_replace('-', '', $contact);
         $officer = new Officer();
         $officer->officer_uid  = (string) Str::uuid();
         $officer->officer_rank = $req->officer_rank;
         $officer->officer_designation = $req->officer_designation;
         $officer->officer_first_name = $req->officer_first_name;
         $officer->officer_last_name = $req->officer_last_name;
-        $officer->officer_contact = $req->officer_contact;
-        $officer->officer_identity = $req->officer_identity;
+        $officer->officer_contact = $contact;
+        $officer->officer_identity = str_replace("-", "", $req->officer_identity);
         $officer->officer_type  = $req->officer_type;
         $officer->officer_address  = $req->officer_address;
         $officer->officer_remarks  = $req->officer_remarks;
@@ -104,6 +110,7 @@ class OfficerController extends Controller
             }
         }
     }
+
     public function updateOfficer(Request $req, $id)
     {
         $arrayToBeUpdate = [];
@@ -159,11 +166,13 @@ class OfficerController extends Controller
         return redirect()->route('pages.delegationsPage')->with('message', 'Officer has been Attach Successfully');
         // return [$liason,$receiving,$interpreter,$delegationUid];
     }
+
     public function detachOfficerData($id)
     {
         $officers = Officer::where('officer_delegation', $id)->get();
         return $officers;
     }
+
     public function detachOfficer(Request $req)
     {
         $officers = $req->officerSelect;
@@ -176,23 +185,29 @@ class OfficerController extends Controller
         // return $req->all();
     }
 
-    public function officerData($id = null)
+    public function officerData($params = 0, $type = "all", $id = null)
     {
-        $officers = $id ? Officer::where([['officer_status', 1], ['officer_uid', $id]])->get() : Officer::where('officer_status', 1)->get();
-        foreach ($officers as $key => $officer) {
-            $officers[$key]->officer_rank = Rank::where('ranks_uid', $officer->officer_rank)->first();
-            $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
-            // if ($id) {
-            //     $officers[$key]->officer_document = Document::where('uid', $officer->officer_uid)->first();
-            // }
+        if (!$params && $type = "all") {
+            $officers = $id ? Officer::where([['officer_status', 1], ['officer_uid', $id]])->get() : Officer::where('officer_status', 1)->get();
+            foreach ($officers as $key => $officer) {
+                $officers[$key]->officer_rank = Rank::where('ranks_uid', $officer->officer_rank)->first();
+                $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
+            }
+            return $officers;
+        } elseif ($params && $type != "all") {
+            $officers = $id ? Officer::where([['officer_status', 1], ['officer_uid', $id]])->get() : Officer::where([['officer_status', 1], ['officer_type', $type]])->get();
+            foreach ($officers as $key => $officer) {
+                $officers[$key]->officer_rank = Rank::where('ranks_uid', $officer->officer_rank)->first();
+                $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
+            }
+            return $officers;
         }
-        return $officers;
     }
 
     public function addOfficerPage($id = null)
     {
         if ($id) {
-            $officer = $this->officerData($id);
+            $officer = $this->officerData($params = 0, $type = "all",$id);
             return view('pages.addOfficer', ['officer' => $officer[0]]);
         } else {
             return view('pages.addOfficer');

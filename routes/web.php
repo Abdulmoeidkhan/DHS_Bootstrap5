@@ -247,7 +247,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Officer Page And API Start
         Route::get('/officer', [OfficerController::class, 'renderOfficer'])->name('pages.officer');
-        Route::get('/officerData/{id?}', [OfficerController::class, 'officerData'])->name('request.officerData');
+        Route::get('/officerData/{params?}/{type?}/{id?}', [OfficerController::class, 'officerData'])->name('request.officerData');
         Route::get('/addOfficerPage/{id?}', [OfficerController::class, 'addOfficerPage'])->name('pages.addOfficer');
         Route::post('/addOfficer', [OfficerController::class, 'addOfficer'])->name('request.addOfficer');
         Route::post('/updateOfficer/{id}', [OfficerController::class, 'updateOfficer'])->name('request.updateOfficer');
@@ -352,6 +352,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('reports/delegationCheckOutStatusVIPReport', [ReportController::class, 'delegationCheckOutStatusVIPReport'])->name('pages.delegationCheckOutStatusVIPReport');
         Route::get('reports/hotelCheckInDetails', [ReportController::class, 'hotelCheckInDetails'])->name('pages.hotelCheckInDetails');
         Route::get('reports/hotelCheckOutDetails', [ReportController::class, 'hotelCheckOutDetails'])->name('pages.hotelCheckOutDetails');
+        Route::get('reports/officerROReport', [ReportController::class, 'officerROReport'])->name('pages.officerROReport');
+        Route::get('reports/officerLOReport', [ReportController::class, 'officerLOReport'])->name('pages.officerLOReport');
+        Route::get('reports/officerIOReport', [ReportController::class, 'officerIOReport'])->name('pages.officerIOReport');
         // Reports End
     });
     Route::group(['middleware' => 'authorisedUserCheck'], function () {

@@ -489,7 +489,7 @@
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
                         <li class="sidebar-item">
-                            <a href="../main/blog-posts.html" class="sidebar-link">
+                            <a href="{{route('pages.officerLOReport')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
@@ -497,7 +497,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="../main/blog-detail.html" class="sidebar-link">
+                            <a href="{{route('pages.officerROReport')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
@@ -505,7 +505,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="../main/blog-detail.html" class="sidebar-link">
+                            <a href="{{route('pages.officerIOReport')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
@@ -598,12 +598,12 @@
                     </a> -->
                 </li>
             </ul>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             <!-- <div class="unlimited-access hide-menu bg-light-primary position-relative mb-7 mt-5 rounded">
                 <div class="d-flex">
                     <br />
