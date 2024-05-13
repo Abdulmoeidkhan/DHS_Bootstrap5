@@ -493,7 +493,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
-                                <span class="hide-menu">Responsibilities - LOs</span>
+                                <span class="hide-menu">List Of LOs</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -501,7 +501,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
-                                <span class="hide-menu">Responsibilities - ROs</span>
+                                <span class="hide-menu">List Of ROs</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -509,7 +509,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
-                                <span class="hide-menu">Responsibilities - Interpreters</span>
+                                <span class="hide-menu">List Of Interpreters</span>
                             </a>
                         </li>
                     </ul>

@@ -157,7 +157,7 @@
                             <div class="col-4">
                                 <h4 class="fw-semibold mb-3">
                                     @if(\App\Models\Delegate::count())
-                                    Total Delegates : {{\App\Models\Delegate::count()}}
+                                    Total Delegates : {{\App\Models\Delegate::whereNotNull('rank')->count()}}
                                     @endif
                                 </h4>
                                 <div class="d-flex align-items-center">
