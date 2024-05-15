@@ -213,7 +213,7 @@
     }
 
     function operateRoom(value, row, index) {
-        if (value) {
+        if (value && row.hotel_name != null) {
             return [
                 '<div class="left">',
                 '<a class="btn btn-outline-success" href="addRoomPage/' + value + '">',
