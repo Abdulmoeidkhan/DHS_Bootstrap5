@@ -426,7 +426,14 @@
     </div>
 </div> -->
 @else
-<h2>Welcome</h2>
+<h2>
+    Welcome :
+    @if($delegateWelcome=\App\Models\Delegation::where('user_uid',session()->get('user')->uid)->first('delegationhead'))
+    @if($delegateWelcomeName=\App\Models\Delegate::where('delegates_uid',$delegateWelcome->delegationhead)->first())
+    {{$delegateWelcomeName->first_Name}} &nbsp; {{$delegateWelcomeName->last_Name}}
+    @endif
+    @endif
+</h2>
 <img src="{{asset('images/welcome.jpg')}}" width="100%" height="1600px" />
 @endif
 @endsection
