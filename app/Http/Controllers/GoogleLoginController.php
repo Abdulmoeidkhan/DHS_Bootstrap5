@@ -50,7 +50,8 @@ class GoogleLoginController extends Controller
             $finduser = User::where('provider_id', $sociouser->id)->first();
             if ($finduser) {
                 Auth::login($finduser);
-
+                $user = User::with('roles', 'permissions')->where('id', Auth::user()->id)->first();
+                session()->put('user', $user);
                 return redirect()->route('pages.dashboard');
             } else {
                 //  return $user;
@@ -60,6 +61,7 @@ class GoogleLoginController extends Controller
                 $user->name = $sociouser->name;
                 $user->email = $sociouser->email;
                 $user->provider_id = $sociouser->id;
+                $user->activated = 1;
                 $user->avatar = $sociouser->getAvatar();
 
                 $savedUser = $user->save();
