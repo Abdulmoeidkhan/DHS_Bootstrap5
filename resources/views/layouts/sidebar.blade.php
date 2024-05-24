@@ -59,7 +59,7 @@
                         <span>
                             <i class="ti ti-shield-half-filled"></i>
                         </span>
-                        <span class="hide-menu">Officers</span>
+                        <span class="hide-menu">LO's</span>
                     </a>
                 </li>
                 @endif
@@ -105,16 +105,6 @@
                 @endif
                 @if(session()->get('user')->roles[0]->name =="delegate")
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('pages.members',session()->get('user')->delegationUid)}}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-users"></i>
-                        </span>
-                        <span class="hide-menu">Members</span>
-                    </a>
-                </li>
-                @endif
-                @if(session()->get('user')->roles[0]->name =="delegate")
-                <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.delegation')}}" aria-expanded="false">
                         <span>
                             <i class="ti ti-mail"></i>
@@ -125,11 +115,21 @@
                 @endif
                 @if(session()->get('user')->roles[0]->name =="delegate")
                 <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.members',session()->get('user')->delegationUid)}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-users"></i>
+                        </span>
+                        <span class="hide-menu">Members</span>
+                    </a>
+                </li>
+                @endif
+                @if(session()->get('user')->roles[0]->name =="delegate")
+                <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.renderSpecificLiason')}}" aria-expanded="false">
                         <span>
                             <i class="ti ti-shield-half-filled"></i>
                         </span>
-                        <span class="hide-menu">Officers</span>
+                        <span class="hide-menu">LO's</span>
                     </a>
                 </li>
                 @endif
@@ -485,7 +485,7 @@
                         <span class="d-flex">
                             <i class="ti ti-report"></i>
                         </span>
-                        <span class="hide-menu">Officers</span>
+                        <span class="hide-menu">LO's</span>
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
                         <li class="sidebar-item">

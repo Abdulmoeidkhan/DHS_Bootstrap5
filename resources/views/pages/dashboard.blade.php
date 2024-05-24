@@ -25,7 +25,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-xs-6 ">
         <div class="card overflow-hidden">
             <div class="card-body p-4">
                 <h5 class="card-title mb-9 fw-semibold">Delegation</h5>
@@ -60,7 +60,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-xs-6 ">
         <div class="card overflow-hidden">
             <div class="card-body p-4">
                 <h5 class="card-title mb-9 fw-semibold">Flights</h5>
@@ -112,7 +112,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-xs-6 ">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card overflow-hidden">
@@ -147,7 +147,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-xs-6 ">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card overflow-hidden">
@@ -434,7 +434,12 @@
     @endif
     @endif
 </h2>
-<img src="{{asset('images/welcome.jpg')}}" width="100%" height="1600px" />
+<br />
+<a class="btn btn-danger float-start border-0 mx-2 my-2 col-xs-6 " href="{{route('pages.delegation')}}">Delegation</a>
+<a class="btn btn-success float-start border-0 mx-2 my-2 col-xs-6 " href="{{route('pages.members',session()->get('user')->delegationUid)}}">Members</a>
+<a class="btn btn-dark float-start border-0 mx-2 my-2 col-xs-6 " href="{{route('pages.renderSpecificLiason')}}">Officers</a>
+<a class="btn btn-secondary float-start border-0 mx-2 my-2 col-xs-6 " href="{{route('pages.e-listEBadge')}}">E-Badge</a>
+<!-- <img src="{{asset('images/welcome.jpg')}}" width="100%" height="1600px" />-->
 @endif
 @endsection
 @endauth

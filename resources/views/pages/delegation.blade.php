@@ -50,6 +50,8 @@
                                     <div class="d-flex gap-2">
                                         @if($delegation->delegation_response ==="Accepted")
                                         <span class="badge bg-success mx-auto align-items-center rounded-3 fw-semibold">Accepted</span>
+                                        @elseif($delegation->delegation_response ==="Regretted")
+                                        <span class="badge bg-badar mx-auto align-items-center rounded-3 fw-semibold">Regretted</span>
                                         @else
                                         <h6 class="fw-semibold mb-1">{{$delegation->delegation_response}}</h6>
                                         @endif
