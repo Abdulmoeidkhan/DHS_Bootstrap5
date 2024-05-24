@@ -22,6 +22,7 @@ use App\Http\Controllers\DelegatesPageController;
 use App\Http\Controllers\DoucmentController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\FlightsController;
+use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\InterestController;
 use App\Http\Controllers\InterpreterController;
@@ -432,3 +433,7 @@ Route::post('signUpRequest', [SignUpController::class, 'signUp'])->name('request
 Route::post('signInRequest', [SignInController::class, 'signIn'])->name('request.signIn');
 Route::post('activationRequest', [ActivationRequest::class, 'activation'])->name('request.activation');
 Route::get('/sendhtmlemail/{id}', [MailOtpController::class, 'html_email'])->name("request.emailModule");
+
+Route::get('auth/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('request.google');
+
+Route::get('auth/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])->name('request.googleCallBack');

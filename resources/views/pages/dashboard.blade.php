@@ -436,7 +436,9 @@
 </h2>
 <br />
 <a class="btn btn-danger float-start border-0 mx-2 my-2 col-xs-6 " href="{{route('pages.delegation')}}">Delegation</a>
+@if(session()->get('user')->delegationUid)
 <a class="btn btn-success float-start border-0 mx-2 my-2 col-xs-6 " href="{{route('pages.members',session()->get('user')->delegationUid)}}">Members</a>
+@endif
 <a class="btn btn-dark float-start border-0 mx-2 my-2 col-xs-6 " href="{{route('pages.renderSpecificLiason')}}">Officers</a>
 <a class="btn btn-secondary float-start border-0 mx-2 my-2 col-xs-6 " href="{{route('pages.e-listEBadge')}}">E-Badge</a>
 <!-- <img src="{{asset('images/welcome.jpg')}}" width="100%" height="1600px" />-->
