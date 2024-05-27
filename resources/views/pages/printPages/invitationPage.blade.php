@@ -16,7 +16,7 @@
         }
 
         .container-fluid {
-            margin-top: -100px;
+            margin-top: -80px;
         }
 
         .logo-class {
@@ -37,7 +37,7 @@
         <div class="col-md-12 d-flex align-items-center">
             <img src="{{asset('images/icons/ideas_logo_2024.png')}}" width="200px" height="200px" class="logo-class" alt="Partners LOGO" />
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            <div style="font-weight: 500; text-decoration:underline; font-size: 1.3rem;" class="d-flex align-items-center">ONLINE REGISTRATION OF DELEGATION</div>
+            <div style="font-weight: 500; text-decoration:underline; font-size: 12px;" class="d-flex align-items-center">ONLINE REGISTRATION OF DELEGATION</div>
         </div>
     </div>
     <br />
@@ -45,21 +45,21 @@
         <div class="col-md-12 parent-print-program d-print-inline">
             <div>
                 <!-- <h3 class="text-capitalize">Dear {{$delegate->rankName->ranks_name}}&nbsp;{{$delegate->first_Name}}&nbsp;{{$delegate->last_Name}} - {{$delegation->country}}</h3> -->
-                <h4 class="text-capitalize" style="font-weight: 900;">Honorable Delegate,</h4>
+                <h4 class="text-capitalize" style="font-weight: 600; padding-left:2rem">Honorable Delegate,</h4>
                 <!-- <br /> -->
-                <p style="text-indent:2rem">{{config('localvariables.para1')}}</p>
+                <p style="padding-left:2rem">{{config('localvariables.para1')}}</p>
                 <div class="container">
                     <table class="table table-bordered table-hover">
-                        <thead>
+                        <!-- <thead>
                             <tr>
-                                <th scope="col">Activation Code</th>
-                                <th scope="col">QR CODE</th>
-                                <!-- <th scope="col">Secondary Link</th> -->
-                            </tr>
-                        </thead>
+                                <th scope="col"><b style-=>Activation Code</b></th>
+                                <th scope="col"><b>QR CODE</b></th>
+                                <th scope="col">Secondary Link</th> 
+                        </tr>
+                        </thead>-->
                         <tbody>
                             <tr>
-                                <th scope="row">{{$delegation->delegationCode}}</th>
+                                <th scope="row">Activation Code <br /><b>{{$delegation->delegationCode}}</b></th>
                                 <th scope="row"><img src="{{asset('images/primary_QR.png')}}" width="100px" height="100px" /></th>
                                 <!-- <th scope="row"><img src="{{asset('images/secondary_QR.png')}}" width="100px" height="100px" /></th> -->
                             </tr>
@@ -67,26 +67,28 @@
                     </table>
                 </div>
                 <p style="text-align:center">(In case of login/ signup issue please contact on <a href="mailto:support@badarexpo.com">support@badarexpo.com</a> or Whatsapp <b>+92-300-0204623</b>)</p>
-                <p>
+                <p style="padding-left:2rem;">
                     {{config('localvariables.para4')}}
                 </p>
-                <ol>
-                    <li>{{config('localvariables.li1')}}</li>
-                    <li>{{config('localvariables.li2')}}</li>
-                    <li>{{config('localvariables.li3')}}</li>
-                    <li>{{config('localvariables.li4')}}</li>
-                    <li>{{config('localvariables.li5')}}</li>
-                    <li>{{config('localvariables.li6')}}</li>
-                    <li>{{config('localvariables.li7')}}</li>
-                </ol>
+                <div style="padding-left:2rem;">
+                    <ol>
+                        <li>{{config('localvariables.li1')}}</li>
+                        <li>{{config('localvariables.li2')}}</li>
+                        <li>{{config('localvariables.li3')}}</li>
+                        <li>{{config('localvariables.li4')}}</li>
+                        <li>{{config('localvariables.li5')}}</li>
+                        <li>{{config('localvariables.li6')}}</li>
+                        <li>{{config('localvariables.li7')}}</li>
+                    </ol>
+                </div>
             </div>
         </div>
     </div>
     <div class="row container-first-child">
         <div class="col-md-12 parent-print-program d-flex flex-row-reverse">
             <div>
-                <p>Regards</p>
-                <p>Team IT DEPO</p>
+                <p>Regards<br />Team IT DEPO</p>
+                <!-- <p></p> -->
             </div>
         </div>
     </div>
@@ -102,11 +104,11 @@
                     <li class="list-group-item">
                         Sector E-10, Defence Complex Islamabad (DCI), Islamabad - Pakistan
                         <br />
-                        Tel: <b>+92-51-9262017, +92-51-9262031, +92-51-9262042</b>
+                        Tel: <b>+92-51-9262011, +92-51-9262031, +92-51-9262042 </b>
                         <br />
-                        Fax: <b>+92-51-9262018</b>
+                        Fax: <b>+92 51 9262018</b>
                         <br />
-                        Email: <a href="mailto:info@depo.org.pk">info@depo.org.pk</a>
+                        Email: <a href="mailto:mea@depo.gov.pk">mea@depo.gov.pk</a>
                         <br />
                         URL: <a href="www.depo.gov.pk" target="_blank">www.depo.gov.pk</a>
                     </li>
