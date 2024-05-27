@@ -74,11 +74,16 @@
 @media print {
     .btn-outline-primary,
     .btn-outline-secondary,
-    .btn-outline-info {
+    .btn-outline-info,
+    .btn-contain {
         display: none;
+    }
+    .container-fluid {
+        margin-top: -20px !important;
+        padding-top: -20px !important;
     }
 }
 
 @page {
-    size: 297mm 420mm;
+    size: 210mm 297mm;
 }

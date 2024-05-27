@@ -14,6 +14,16 @@
             font-size: 12px;
             font-family: Arial, Helvetica, sans-serif;
         }
+
+        .container-fluid {
+            margin-top: -100px;
+        }
+
+        .logo-class {
+            width: 120px;
+            height: 120px;
+        }
+
     }
 </style>
 <div class="container-fluid">
@@ -21,79 +31,62 @@
         <div class="d-flex justify-content-center">
             <button class="btn btn-outline-primary" onclick="window.print()">Print this Invitation</button>
         </div>
-        <br />
-        <br />
     </div>
+    <br />
+    <div class="row container-first-intro-child">
+        <div class="col-md-12 d-flex align-items-center">
+            <img src="{{asset('images/icons/ideas_logo_2024.png')}}" width="200px" height="200px" class="logo-class" alt="Partners LOGO" />
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <div style="font-weight: 500; text-decoration:underline; font-size: 1.3rem;" class="d-flex align-items-center">ONLINE REGISTRATION OF DELEGATION</div>
+        </div>
+    </div>
+    <br />
     <div class="row container-first-child">
         <div class="col-md-12 parent-print-program d-print-inline">
             <div>
-                <h3 class="text-capitalize">Dear {{$delegate->rankName->ranks_name}}&nbsp;{{$delegate->first_Name}}&nbsp;{{$delegate->last_Name}} - {{$delegation->country}}</h3>
-                <br />
-                <p>{{config('localvariables.para1')}}</p>
-                <p>{{config('localvariables.para2')}}</p>
-                <br />
+                <!-- <h3 class="text-capitalize">Dear {{$delegate->rankName->ranks_name}}&nbsp;{{$delegate->first_Name}}&nbsp;{{$delegate->last_Name}} - {{$delegation->country}}</h3> -->
+                <h4 class="text-capitalize" style="font-weight: 900;">Honorable Delegate,</h4>
+                <!-- <br /> -->
+                <p style="text-indent:2rem">{{config('localvariables.para1')}}</p>
                 <div class="container">
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">Activation Code</th>
+                                <th scope="col">QR CODE</th>
+                                <!-- <th scope="col">Secondary Link</th> -->
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <th scope="row">{{$delegation->delegationCode}}</th>
+                                <th scope="row"><img src="{{asset('images/primary_QR.png')}}" width="100px" height="100px" /></th>
+                                <!-- <th scope="row"><img src="{{asset('images/secondary_QR.png')}}" width="100px" height="100px" /></th> -->
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <br />
+                <p style="text-align:center">(In case of login/ signup issue please contact on <a href="mailto:support@badarexpo.com">support@badarexpo.com</a> or Whatsapp <b>+92-300-0204623</b>)</p>
                 <p>
                     {{config('localvariables.para4')}}
                 </p>
-                <ul class="list-group ">
-                    <li class="list-group-item">{{config('localvariables.li1')}}</li>
-                    <li class="list-group-item">{{config('localvariables.li2')}}</li>
-                    <li class="list-group-item">{{config('localvariables.li3')}}</li>
-                    <li class="list-group-item">{{config('localvariables.li4')}}</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <br />
-    <br />
-    <div class="row">
-        <div class="col-md-12">
-            <div>
-                <h2 class="text-capitalize">{{config('localvariables.heading2')}}</h2>
-                <br />
-                <ul class="list-group ">
-                    <li class="list-group-item">{{config('localvariables.li5')}}</li>
-                    <li class="list-group-item">{{config('localvariables.li6')}}</li>
-                    <li class="list-group-item">{{config('localvariables.li7')}}</li>
-                    <li class="list-group-item">{{config('localvariables.li8')}}</li>
-                </ul>
-                <br />
-                <!-- <p class="blockquote">
-                    <?php echo config('localvariables.eventName'); ?>
-                </p> -->
-                <!-- <p>
-                    Location : <?php echo config('localvariables.eventLocation'); ?>
-                </p>
-                <p>
-                    Date : <?php echo config('localvariables.eventDate'); ?>
-                </p> -->
+                <ol>
+                    <li>{{config('localvariables.li1')}}</li>
+                    <li>{{config('localvariables.li2')}}</li>
+                    <li>{{config('localvariables.li3')}}</li>
+                    <li>{{config('localvariables.li4')}}</li>
+                    <li>{{config('localvariables.li5')}}</li>
+                    <li>{{config('localvariables.li6')}}</li>
+                    <li>{{config('localvariables.li7')}}</li>
+                </ol>
             </div>
         </div>
     </div>
     <div class="row container-first-child">
-        <div class="col-md-12 parent-print-program">
+        <div class="col-md-12 parent-print-program d-flex flex-row-reverse">
             <div>
-                <h2>To Print your e-Badge?</h2>
-
-                <p>Navigate to the Badge Tab in the Navigation Bar (Side Bar).</p>
-                <p>
-                    Click on the Blue Button in the corresponding row to print the required Badge.
-                </p>
+                <p>Regards</p>
+                <p>Team IT DEPO</p>
             </div>
         </div>
     </div>
@@ -101,43 +94,28 @@
         <div class="col-md-12">
             <br />
             <div>
-                <h2>Important Note:</h2>
-                <br />
-                <p class="blockquote">
-                <ol>
-                    <li class="list-group-item">1. If you have multiple delegates, you can add their information by selecting "Add New" and entering the required details.</li>
-                    <li class="list-group-item">2. Upon your arrival in Pakistan, please present a printed copy of your e-Badge along with any other necessary documents at the Airport Welcome Desk or to the assigned receiving officer.</li>
-                </ol>
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <br />
-            <div>
-                <h2>Contact Information:</h2>
-                <br />
-                <p class="blockquote">
+                <h6 style="padding-left:2rem; text-decoration:underline; font-weight:900;">Contact Information:</h6>
                 <ol>
                     <li class="list-group-item">
                         DEFENCE EXPORT PROMOTION ORGANIZATION
                     </li>
                     <li class="list-group-item">
                         Sector E-10, Defence Complex Islamabad (DCI), Islamabad - Pakistan
-                        Tel: 92-51-9262017, 92-51-9262031, 92-51-9262042
-                        Fax: +92 51 9262018
-                        Email: info@depo.org.pk
-                        URL: www.depo.gov.pk
-
+                        <br />
+                        Tel: <b>+92-51-9262017, +92-51-9262031, +92-51-9262042</b>
+                        <br />
+                        Fax: <b>+92-51-9262018</b>
+                        <br />
+                        Email: <a href="mailto:info@depo.org.pk">info@depo.org.pk</a>
+                        <br />
+                        URL: <a href="www.depo.gov.pk" target="_blank">www.depo.gov.pk</a>
                     </li>
                 </ol>
-                </p>
             </div>
         </div>
     </div>
-    <div class="row">
-        <img src="{{asset('images/icons/Partners.png')}}" style="width:100%;" alt="Partners LOGO" />
+    <div class="row d-flex justify-content-center">
+        <img src="{{asset('images/icons/Partners.png')}}" style="width:80%; height:40%;" alt="Partners LOGO" />
     </div>
 </div>
 @endsection
