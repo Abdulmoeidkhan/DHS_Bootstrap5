@@ -11,12 +11,14 @@
         }
 
         .container-fluid {
-            font-size: 12px;
+            font-size: 14px;
             font-family: Arial, Helvetica, sans-serif;
+            text-align: justify;
         }
 
         .container-fluid {
-            margin-top: -80px;
+            margin-top: -70px;
+            padding-left: 0px;
         }
 
         .logo-class {
@@ -24,6 +26,20 @@
             height: 120px;
         }
 
+        .container-mine {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin: 10px 0px;
+        }
+
+    }
+
+    .container-mine {
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+        margin: 20px 0px;
     }
 </style>
 <div class="container-fluid">
@@ -33,41 +49,25 @@
         </div>
     </div>
     <br />
-    <div class="row container-first-intro-child">
+    <div class="row container-first-intro-child" style="padding-left:2rem;">
         <div class="col-md-12 d-flex align-items-center">
             <img src="{{asset('images/icons/ideas_logo_2024.png')}}" width="200px" height="200px" class="logo-class" alt="Partners LOGO" />
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            <div style="font-weight: 500; text-decoration:underline; font-size: 12px;" class="d-flex align-items-center">ONLINE REGISTRATION OF DELEGATION</div>
+            <div style="font-weight: 600; text-decoration:underline; font-size: 18px; text-align:center;" class="d-flex align-items-center">ONLINE REGISTRATION OF DELEGATION</div>
         </div>
     </div>
     <br />
     <div class="row container-first-child">
         <div class="col-md-12 parent-print-program d-print-inline">
             <div>
-                <!-- <h3 class="text-capitalize">Dear {{$delegate->rankName->ranks_name}}&nbsp;{{$delegate->first_Name}}&nbsp;{{$delegate->last_Name}} - {{$delegation->country}}</h3> -->
                 <h4 class="text-capitalize" style="font-weight: 600; padding-left:2rem">Honorable Delegate,</h4>
-                <!-- <br /> -->
-                <p style="padding-left:2rem">{{config('localvariables.para1')}}</p>
-                <div class="container">
-                    <table class="table table-bordered table-hover">
-                        <!-- <thead>
-                            <tr>
-                                <th scope="col"><b style-=>Activation Code</b></th>
-                                <th scope="col"><b>QR CODE</b></th>
-                                <th scope="col">Secondary Link</th> 
-                        </tr>
-                        </thead>-->
-                        <tbody>
-                            <tr>
-                                <th scope="row">Activation Code <br /><b>{{$delegation->delegationCode}}</b></th>
-                                <th scope="row"><img src="{{asset('images/primary_QR.png')}}" width="100px" height="100px" /></th>
-                                <!-- <th scope="row"><img src="{{asset('images/secondary_QR.png')}}" width="100px" height="100px" /></th> -->
-                            </tr>
-                        </tbody>
-                    </table>
+                <p style="padding-left:2rem;text-indent:2rem;">The Defence Export Promotion Organization team welcome you for the International Defence Exhibition and Seminar IDEAS 2024. Please confirm your attendance by creating account / Login ID on our Online Delegation System at <b>www.delegation.ideaspakistan.gov.pk</b>. Your Activation Code is given below:- </p>
+                <div class="container-mine">
+                    <div style="font-weight:bolder; padding-left:8rem;"><br />Activation Code <br /><br /><b>{{$delegation->delegationCode}}</b></div>
+                    <div style="padding-right:8rem"><img src="{{asset('images/primary_QR.png')}}" width="100px" height="100px" /></div>
                 </div>
-                <p style="text-align:center">(In case of login/ signup issue please contact on <a href="mailto:support@badarexpo.com">support@badarexpo.com</a> or Whatsapp <b>+92-300-0204623</b>)</p>
-                <p style="padding-left:2rem;">
+                <p style="text-align:center; font-size:12px;">(In case of login/ signup issue please contact on <a href="mailto:support@badarexpo.com">support@badarexpo.com</a> or Whatsapp <b>+92-300-0204623</b>)</p>
+                <p style="padding-left:2rem; text-indent:2rem;">
                     {{config('localvariables.para4')}}
                 </p>
                 <div style="padding-left:2rem;">
@@ -87,7 +87,7 @@
     <div class="row container-first-child">
         <div class="col-md-12 parent-print-program d-flex flex-row-reverse">
             <div>
-                <p>Regards<br />Team IT DEPO</p>
+                <p style="line-height: 14px; margin-bottom:0px;">Regards<br />Team IT DEPO</p>
                 <!-- <p></p> -->
             </div>
         </div>
@@ -96,17 +96,19 @@
         <div class="col-md-12">
             <br />
             <div>
-                <h6 style="padding-left:2rem; text-decoration:underline; font-weight:900;">Contact Information:</h6>
                 <ol>
+                    <li class="list-group-item" style="text-decoration:underline; font-weight:900;">
+                        Contact Information:
+                    </li>
                     <li class="list-group-item">
                         DEFENCE EXPORT PROMOTION ORGANIZATION
                     </li>
                     <li class="list-group-item">
                         Sector E-10, Defence Complex Islamabad (DCI), Islamabad - Pakistan
                         <br />
-                        Tel: <b>+92-51-9262011, +92-51-9262031, +92-51-9262042 </b>
+                        Tel:+92-51-9262011, +92-51-9262031, +92-51-9262042
                         <br />
-                        Fax: <b>+92 51 9262018</b>
+                        Fax: +92 51 9262018
                         <br />
                         Email: <a href="mailto:mea@depo.gov.pk">mea@depo.gov.pk</a>
                         <br />
@@ -117,7 +119,7 @@
         </div>
     </div>
     <div class="row d-flex justify-content-center">
-        <img src="{{asset('images/icons/Partners.png')}}" style="width:80%; height:40%;" alt="Partners LOGO" />
+        <img src="{{asset('images/icons/Partners-1.png')}}" style="width:80%; height:40%;" alt="Partners LOGO" />
     </div>
 </div>
 @endsection

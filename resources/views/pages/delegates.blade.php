@@ -163,7 +163,7 @@
             <div id="Active" class="tabcontent" style="display: block;">
                 <p>
                 <div class="table-responsive">
-                    <table id="table" data-filter-control-multiple-search="true" data-height="1000" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true" data-height="1000" data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates',1)}}">
+                    <table id="table" data-filter-control-multiple-search="true" data-height="999" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates',1)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -197,7 +197,7 @@
             <div id="Inactive" class="tabcontent">
                 <p>
                 <div class="table-responsive">
-                    <table id="table" data-filter-control-multiple-search="true" data-height="1000" data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true" data-height="1000" data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates',0)}}">
+                    <table id="table1" data-filter-control-multiple-search="true" data-height="999" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table1" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates',0)}}">
                         <thead>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                             <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
@@ -236,7 +236,7 @@
     }
 
     function operateFirstAndLastName(value, row, index) {
-        return `${row.first_Name} ${row.last_Name}` ;
+        return `${row.first_Name} ${row.last_Name}`;
     }
 
     function memberFormatter(value, row, index) {
@@ -502,28 +502,6 @@
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " active";
     }
-</script>
-@include("layouts.tableFoot")
-<script>
-    var $table = $('#table')
-    var selectedRow = {}
-
-    $(function() {
-        $table.on('click-row.bs.table', function(e, row, $element) {
-            selectedRow = row
-            $('.active').removeClass('active')
-            $($element).addClass('active')
-        })
-    })
-
-    function rowStyle(row) {
-        if (row.id === selectedRow.id) {
-            return {
-                classes: 'active'
-            }
-        }
-        return {}
-    }
 
     function operatePicture(value, row, index) {
         if (value) {
@@ -542,6 +520,36 @@
             return "No";
         }
     }
+</script>
+@include("layouts.tableFoot")
+<script>
+    ['#table', '#table1' ].map((val => {
+        var $table = $(val)
+        var selectedRow = {}
+
+        $(function() {
+            $table.on('click-row.bs.table', function(e, row, $element) {
+                selectedRow = row
+                $('.active').removeClass('active')
+                $($element).addClass('active')
+            })
+        })
+
+        function rowStyle(row) {
+            if (row.id === selectedRow.id) {
+                return {
+                    classes: 'active'
+                }
+            }
+            return {}
+        }
+
+        $(val).bootstrapTable({
+            exportOptions: {
+                fileName: 'List Of All Delegation'
+            }
+        });
+    }))
 </script>
 @endsection
 @endauth
