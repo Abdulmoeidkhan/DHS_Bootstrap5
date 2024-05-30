@@ -17,7 +17,7 @@
         }
 
         .container-fluid {
-            margin-top: -70px;
+            margin-top: -40px;
             padding-left: 0px;
         }
 
@@ -53,7 +53,7 @@
         <div class="col-md-12 d-flex align-items-center">
             <img src="{{asset('images/icons/ideas_logo_2024.png')}}" width="200px" height="200px" class="logo-class" alt="Partners LOGO" />
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            <div style="font-weight: 600; text-decoration:underline; font-size: 18px; text-align:center;" class="d-flex align-items-center">ONLINE REGISTRATION OF DELEGATION</div>
+            <div style="font-weight: 600; text-decoration:underline; font-size: 18px; text-align:center; padding-top: 30px;" class="d-flex align-items-center">ONLINE REGISTRATION OF DELEGATION</div>
         </div>
     </div>
     <br />

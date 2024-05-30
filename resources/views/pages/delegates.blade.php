@@ -163,7 +163,7 @@
             <div id="Active" class="tabcontent" style="display: block;">
                 <p>
                 <div class="table-responsive">
-                    <table id="table" data-filter-control-multiple-search="true" data-height="999" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates',1)}}">
+                    <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getDelegates',1)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -177,6 +177,7 @@
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                                 <th data-filter-control="input" data-field="delegation_type" data-sortable="true" data-formatter="operateText">Type</th>
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
+                                <th data-filter-control="input" data-field="delegationCode" data-sortable="true" data-formatter="operateText">Delegation Code</th>
                                 <th data-filter-control="input" data-field="passport" data-sortable="true" data-formatter="operateText">Passport</th>
                                 <th data-filter-control="input" data-field="arrival_date" data-sortable="true" data-formatter="operateText">Arr Date</th>
                                 <th data-filter-control="input" data-field="arrival_time" data-sortable="true" data-formatter="operateText">Arr Time</th>
@@ -197,7 +198,7 @@
             <div id="Inactive" class="tabcontent">
                 <p>
                 <div class="table-responsive">
-                    <table id="table1" data-filter-control-multiple-search="true" data-height="999" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table1" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegates',0)}}">
+                    <table id="table1" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table1" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getDelegates',0)}}">
                         <thead>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                             <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
@@ -210,6 +211,7 @@
                             <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                             <th data-filter-control="input" data-field="delegation_type" data-sortable="true" data-formatter="operateText">Type</th>
                             <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
+                            <th data-filter-control="input" data-field="delegationCode" data-sortable="true" data-formatter="operateText">Delegation Code</th>
                             <th data-filter-control="input" data-field="passport" data-sortable="true" data-formatter="operateText">Passport</th>
                             <th data-filter-control="input" data-field="arrival_date" data-sortable="true" data-formatter="operateText">Arr Date</th>
                             <th data-filter-control="input" data-field="arrival_time" data-sortable="true" data-formatter="operateText">Arr Time</th>
@@ -311,17 +313,7 @@
     }
 
     function operateInvitedBy(value, row, index) {
-        console.log(value)
-        if (value) {
-            return [
-                // '<div class="left">' + value.vips_name + value.vips_designation + '</div>',
-                value,
-            ].join('')
-        } else {
-            return [
-                'N/A',
-            ].join('')
-        }
+        return value ? value : "N/A";
     }
 
     function operateOfficerName(value, row, index) {
@@ -523,7 +515,7 @@
 </script>
 @include("layouts.tableFoot")
 <script>
-    ['#table', '#table1' ].map((val => {
+    ['#table', '#table1'].map((val => {
         var $table = $(val)
         var selectedRow = {}
 

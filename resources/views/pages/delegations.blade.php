@@ -438,7 +438,7 @@
             <div class="tab-content pt-5" id="tab-content">
                 <div class="tab-pane active" id="simple-tabpanel-0" role="tabpanel" aria-labelledby="simple-tab-0">
                     <div class="table-responsive">
-                        <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',1)}}">
+                        <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getDelegation',1)}}">
                             <thead>
                                 <tr>
                                     <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -481,7 +481,7 @@
                 </div>
                 <div class="tab-pane" id="simple-tabpanel-1" role="tabpanel" aria-labelledby="simple-tab-1">
                     <div class="table-responsive">
-                        <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',0)}}">
+                        <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getDelegation',0)}}">
                             <thead>
                                 <tr>
                                     <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -524,7 +524,7 @@
                 </div>
                 <div class="tab-pane" id="simple-tabpanel-2" role="tabpanel" aria-labelledby="simple-tab-2">
                     <div class="table-responsive">
-                        <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation')}}">
+                        <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getDelegation')}}">
                             <thead>
                                 <tr>
                                     <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -567,7 +567,7 @@
                 </div>
                 <div class="tab-pane" id="simple-tabpanel-3" role="tabpanel" aria-labelledby="simple-tab-3">
                     <div class="table-responsive">
-                        <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',2)}}">
+                        <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getDelegation',2)}}">
                             <thead>
                                 <tr>
                                     <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -628,7 +628,7 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',1)}}">
+                    <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getDelegation',1)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -638,7 +638,7 @@
                                 <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                                 <th data-filter-control="input" data-field="email_address" data-sortable="true" data-formatter="operateText">Email</th>
-                                <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
+                                <th data-filter-control="input" data-field="vips.vips_designation" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                                 <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                                 <th data-filter-control="input" data-field="member_count" data-sortable="true" data-formatter="operateText">Number Of Person</th>
@@ -688,7 +688,7 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table1" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table1" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',0)}}">
+                    <table id="table1" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table1" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getDelegation',0)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -698,7 +698,7 @@
                                 <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                                 <th data-filter-control="input" data-field="email_address" data-sortable="true" data-formatter="operateText">Email</th>
-                                <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
+                                <th data-filter-control="input" data-field="vips.vips_designation" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                                 <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                                 <th data-filter-control="input" data-field="member_count" data-sortable="true" data-formatter="operateText">Number Of Person</th>
@@ -743,7 +743,7 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table2" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table2" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',2)}}">
+                    <table id="table2" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table2" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getDelegation',2)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -753,7 +753,7 @@
                                 <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                                 <th data-filter-control="input" data-field="email_address" data-sortable="true" data-formatter="operateText">Email</th>
-                                <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
+                                <th data-filter-control="input" data-field="vips.vips_designation" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                                 <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                                 <th data-filter-control="input" data-field="member_count" data-sortable="true" data-formatter="operateText">Number Of Person</th>
@@ -798,7 +798,7 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table3" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table3" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation',3)}}">
+                    <table id="table3" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table3" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getDelegation',3)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -808,7 +808,7 @@
                                 <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                                 <th data-filter-control="input" data-field="email_address" data-sortable="true" data-formatter="operateText">Email</th>
-                                <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
+                                <th data-filter-control="input" data-field="vips.vips_designation" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                                 <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                                 <th data-filter-control="input" data-field="member_count" data-sortable="true" data-formatter="operateText">Number Of Person</th>
@@ -853,7 +853,7 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table4" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table4" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation')}}">
+                    <table id="table4" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table4" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getDelegation')}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -863,7 +863,7 @@
                                 <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
                                 <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
                                 <th data-filter-control="input" data-field="email_address" data-sortable="true" data-formatter="operateText">Email</th>
-                                <th data-filter-control="input" data-field="vips" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
+                                <th data-filter-control="input" data-field="vips.vips_designation" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
                                 <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
                                 <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th>
                                 <th data-filter-control="input" data-field="member_count" data-sortable="true" data-formatter="operateText">Number Of Person</th>
@@ -917,7 +917,7 @@
             <br /> -->
 <!-- endif -->
 <!-- <div class="table-responsive">
-                <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true" data-height="800"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getDelegation')}}">
+                <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true" data-height="800"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getDelegation')}}">
                     <thead>
                         <tr>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -968,7 +968,7 @@
 </div> -->
 <script>
     function operateText(value, row, index) {
-        return value ? value : "-"
+        return value ? value : "N/A"
     }
 
     function operateFirstAndLastName(value, row, index) {
@@ -1067,15 +1067,7 @@
     }
 
     function operateInvitedBy(value, row, index) {
-        if (value) {
-            return [
-                value.vips_designation,
-            ].join('')
-        } else {
-            return [
-                '-',
-            ].join('')
-        }
+        return value ? value : "N/A";
     }
 
     function operateOfficerName(value, row, index) {

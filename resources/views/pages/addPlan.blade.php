@@ -42,7 +42,7 @@
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Car Plans</h5>
             <div class="table-responsive">
-                <table id="table1" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true" data-height="999" data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getCarPlan',$id)}}">
+                <table id="table1" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getCarPlan',$id)}}">
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
@@ -61,7 +61,7 @@
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Hotel Plans</h5>
             <div class="table-responsive">
-                <table id="table2" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true" data-height="999" data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100, all]" data-url="{{route('request.getHotelPlan',$id)}}">
+                <table id="table2" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getHotelPlan',$id)}}">
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
