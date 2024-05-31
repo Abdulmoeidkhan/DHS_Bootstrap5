@@ -61,12 +61,12 @@
         <div class="col-md-12 parent-print-program d-print-inline">
             <div>
                 <h4 class="text-capitalize" style="font-weight: 600; padding-left:2rem">Honorable Delegate,</h4>
-                <p style="padding-left:2rem;text-indent:2rem;">The Defence Export Promotion Organization team welcome you for the International Defence Exhibition and Seminar IDEAS 2024. Please confirm your attendance by creating account / Login ID on our Online Delegation System at <b>www.delegation.ideaspakistan.gov.pk</b>. Your Activation Code is given below:- </p>
+                <p style="padding-left:2rem;text-indent:2rem;">The Defence Export Promotion Organization team welcome you for the International Defence Exhibition and Seminar IDEAS 2024. Please confirm your attendance by creating account / Login ID on our Online Delegation System at <b><a href="https://delegation.ideaspakistan.gov.pk" target="_blank">www.delegation.ideaspakistan.gov.pk</a></b>. Your Activation Code is given below:- </p>
                 <div class="container-mine">
                     <div style="font-weight:bolder; padding-left:8rem;"><br />Activation Code <br /><br /><b>{{$delegation->delegationCode}}</b></div>
                     <div style="padding-right:8rem"><img src="{{asset('images/primary_QR.png')}}" width="100px" height="100px" /></div>
                 </div>
-                <p style="text-align:center; font-size:12px;">(In case of login/ signup issue please contact on <a href="mailto:support@badarexpo.com">support@badarexpo.com</a> or Whatsapp <b>+92-300-0204623</b>)</p>
+                <p style="text-align:center; font-size:12px;">(In case of login/ signup issue please contact on <a href="mailto:support@badarexpo.com">support@badarexpo.com</a> or Whatsapp <b><a href="tel:+923000204623">+92-300-0204623</a></b>)</p>
                 <p style="padding-left:2rem; text-indent:2rem;">
                     {{config('localvariables.para4')}}
                 </p>
