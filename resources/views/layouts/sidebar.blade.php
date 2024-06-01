@@ -62,6 +62,8 @@
                         <span class="hide-menu">Delegates</span>
                     </a>
                 </li>
+                @endif
+                @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="dho" || session()->get('user')->roles[0]->name =="navy" || session()->get('user')->roles[0]->name =="airforce"|| session()->get('user')->roles[0]->name =="army")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.officer')}}" aria-expanded="false">
                         <span>

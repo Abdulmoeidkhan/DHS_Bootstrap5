@@ -7,7 +7,7 @@
     <div class="card w-100">
         <div class="card-body p-4">
             <!-- <h5 class="card-title fw-semibold mb-4">Officer</h5> -->
-            @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "dho")
+            @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "dho"|| session()->get('user')->roles[0]->name === 'vendor'|| session()->get('user')->roles[0]->name === 'army'|| session()->get('user')->roles[0]->name === 'navy'|| session()->get('user')->roles[0]->name === 'airforce')
             <div class="row">
                 <div class="d-flex">
                     <a type="button" href="{{route('pages.addOfficer')}}" class="btn btn-primary">Add Officer</a>
@@ -16,7 +16,7 @@
             <br />
             @endif
             <div class="table-responsive">
-                <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-flat="true" table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.officerData')}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]">
+                <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-flat="true" table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true" data-toggle="table" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.officerData',['params'=>0,'type'=>'all','force'=>session()->get('user')->roles[0]->name=='navy'||session()->get('user')->roles[0]->name=='airforce'||session()->get('user')->roles[0]->name=='army'?session()->get('user')->roles[0]->name:'all','id'=>null])}}">
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
@@ -74,7 +74,6 @@
             ].join('')
         }
     }
-    
 </script>
 @include("layouts.tableFoot")
 @endsection

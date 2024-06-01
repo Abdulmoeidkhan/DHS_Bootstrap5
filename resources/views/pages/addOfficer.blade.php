@@ -77,7 +77,21 @@
                             </div>
                             <div class="mb-3">
                                 <label for="officer_remarks" class="form-label">Force Type</label>
-                                <input name="officer_remarks" type="text" class="form-control" id="officer_remarks" placeholder="Force Type" value="{{isset($officer) ? $officer->officer_remarks : ''}}" required />
+                                <select name="officer_remarks" id="officer_remarks" class="form-select" required {{isset($officer->officer_remarks)?'disabled':''}}>
+                                    <option value="" selected disabled hidden> Select Type </option>
+                                    @if(session()->get('user')->roles[0]->name === 'army')
+                                    <option value="army" {{isset($officer->officer_remarks) ? ($officer->officer_remarks == 'army' ? 'selected' : '') : ''}}> Army Officer </option>
+                                    @elseif(session()->get('user')->roles[0]->name === 'navy')
+                                    <option value="navy" {{isset($officer->officer_remarks) ? ($officer->officer_remarks == 'navy' ? 'selected' : '') : ''}}> Navy Officer </option>
+                                    @elseif(session()->get('user')->roles[0]->name === 'airforce')
+                                    <option value="airforce" {{isset($officer->officer_remarks) ? ($officer->officer_remarks == 'airforce' ? 'selected' : '') : ''}}> Air Force Officer </option>
+                                    @else
+                                    <option value="army" {{isset($officer->officer_remarks) ? ($officer->officer_remarks == 'army' ? 'selected' : '') : ''}}> Army Officer </option>
+                                    <option value="navy" {{isset($officer->officer_remarks) ? ($officer->officer_remarks == 'navy' ? 'selected' : '') : ''}}> Navy Officer </option>
+                                    <option value="airforce" {{isset($officer->officer_remarks) ? ($officer->officer_remarks == 'airforce' ? 'selected' : '') : ''}}> Air Force Officer </option>
+                                    @endif
+                                </select>
+                                <!-- <input name="officer_remarks" type="text" class="form-control" id="officer_remarks" placeholder="Force Type" value="{{isset($officer) ? $officer->officer_remarks : ''}}" required /> -->
                             </div>
                             <div class="mb-3">
                                 <label for="officer_picture" class="form-label">Picture</label>

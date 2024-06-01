@@ -16,7 +16,7 @@ class UserTypeCheck
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $isAdmin = session()->get('user')->roles[0]->name === 'admin' || session()->get('user')->roles[0]->name === 'dho' || session()->get('user')->roles[0]->name === 'vendor' ?true:false;
+        $isAdmin = session()->get('user')->roles[0]->name === 'admin' || session()->get('user')->roles[0]->name === 'dho' || session()->get('user')->roles[0]->name === 'vendor'|| session()->get('user')->roles[0]->name === 'army'|| session()->get('user')->roles[0]->name === 'navy'|| session()->get('user')->roles[0]->name === 'airforce' ?true:false;
 
         if (!$isAdmin) {
             return abort(403);

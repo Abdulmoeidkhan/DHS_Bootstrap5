@@ -146,10 +146,10 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Members Start
         Route::get('/getDelegationFlight/{status?}', [DelegateFlightController::class, 'getFlight'])->name('request.getDelegationFlight');
-        Route::post('/addDelegationFlight/{id}', [DelegateFlightController::class, 'setFlight'])->name('request.addDelegationFlight');
         Route::get('/departureStatusChanger/{id}/{status}', [DelegateFlightController::class, 'departureStatusChanger'])->name('request.departureStatusChanger');
         Route::get('/arrivalStatusChanger/{id}/{status}', [DelegateFlightController::class, 'arrivalStatusChanger'])->name('request.arrivalStatusChanger');
         Route::get('/getFlightsSummary', [DelegateFlightController::class, 'getFlightsSummary'])->name('data.getFlightsSummary');
+        Route::post('/addDelegationFlight/{id}', [DelegateFlightController::class, 'setFlight'])->name('request.addDelegationFlight');
         // Members End
 
 
@@ -160,11 +160,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/addticketspage', [FlightsController::class, 'addTicketRender'])->name('pages.addticketspage');
         Route::get('/viewItinerary/{id}', [FlightsController::class, 'viewItinerary'])->name('page.viewItinerary');
         Route::get('/viewPassenger/{id}', [FlightsController::class, 'viewPassenger'])->name('page.viewPassenger');
+        Route::get('/getItinerary', [FlightsController::class, 'getItinerary'])->name('request.getItinerary');
+        Route::get('/getTickets', [FlightsController::class, 'getTickets'])->name('request.getTickets');
         Route::post('/addTicket', [FlightsController::class, 'addTicket'])->name('request.addTicket');
         Route::post('/addItinerary', [FlightsController::class, 'addItinerary'])->name('request.addItinerary');
         Route::post('/updateItinerary', [FlightsController::class, 'updateItinerary'])->name('request.updateItinerary');
-        Route::get('/getItinerary', [FlightsController::class, 'getItinerary'])->name('request.getItinerary');
-        Route::get('/getTickets', [FlightsController::class, 'getTickets'])->name('request.getTickets');
         // Flights Pages And API End
     });
 
@@ -224,9 +224,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/cars', [CarsController::class, 'render'])->name('pages.cars');
         Route::get('/getCars', [CarsController::class, 'getCars'])->name('request.getCars');
         Route::get('/addCarPage/{id?}', [CarsController::class, 'addCarRender'])->name('pages.addCar');
+        Route::get('/detachCarData/{id}', [CarsController::class, 'detachCarData'])->name('data.detachCarData');
         Route::post('/addCar', [CarsController::class, 'addCar'])->name('request.addCar');
         Route::post('/updateCar/{id}', [CarsController::class, 'updateCar'])->name('request.updateCar');
-        Route::get('/detachCarData/{id}', [CarsController::class, 'detachCarData'])->name('data.detachCarData');
         // Car Pages And API End
 
         // Journey Pages And API Start
@@ -248,38 +248,38 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Officer Page And API Start
         Route::get('/officer', [OfficerController::class, 'renderOfficer'])->name('pages.officer');
-        Route::get('/officerData/{params?}/{type?}/{id?}', [OfficerController::class, 'officerData'])->name('request.officerData');
+        Route::get('/officerData/{params?}/{type?}/{force?}/{id?}', [OfficerController::class, 'officerData'])->name('request.officerData');
         Route::get('/addOfficerPage/{id?}', [OfficerController::class, 'addOfficerPage'])->name('pages.addOfficer');
+        Route::get('/detachOfficerData/{id}', [OfficerController::class, 'detachOfficerData'])->name('data.detachOfficer');
+        Route::get('/getOfficerSummary', [OfficerController::class, 'getOfficerSummary'])->name('data.getOfficerSummary');
         Route::post('/addOfficer', [OfficerController::class, 'addOfficer'])->name('request.addOfficer');
         Route::post('/updateOfficer/{id}', [OfficerController::class, 'updateOfficer'])->name('request.updateOfficer');
         Route::post('/attachOfficer', [OfficerController::class, 'attachOfficer'])->name('request.attachOfficer');
         Route::post('/detachOfficer', [OfficerController::class, 'detachOfficer'])->name('request.detachOfficer');
-        Route::get('/detachOfficerData/{id}', [OfficerController::class, 'detachOfficerData'])->name('data.detachOfficer');
-        Route::get('/getOfficerSummary', [OfficerController::class, 'getOfficerSummary'])->name('data.getOfficerSummary');
         // Officer Page And API End
 
 
         // Liason Page And API Start
         Route::get('/liasons', [LiasonsController::class, 'renderLiasons'])->name('pages.liasons');
         Route::get('/liasonsData', [LiasonsController::class, 'liasonsData'])->name('request.liasonsData');
-        Route::post('/addLiason', [LiasonsController::class, 'addLiason'])->name('request.addLiason');
         Route::get('/addLiasonPage', [LiasonsController::class, 'addLiasonPage'])->name('pages.addLiason');
+        Route::post('/addLiason', [LiasonsController::class, 'addLiason'])->name('request.addLiason');
         Route::post('/attachLiason', [LiasonsController::class, 'attachLiason'])->name('request.attachLiason');
         // Liason Page And API End
 
         // interpreters Page And API Start
         Route::get('/interpreters', [InterpreterController::class, 'renderInterpreters'])->name('pages.interpreters');
         Route::get('/interpretersData', [InterpreterController::class, 'interpretersData'])->name('request.interpretersData');
-        Route::post('/addInterpreter', [InterpreterController::class, 'addInterpreter'])->name('request.addInterpreter');
         Route::get('/addInterpreterPage', [InterpreterController::class, 'addInterpreterPage'])->name('pages.addInterpreter');
+        Route::post('/addInterpreter', [InterpreterController::class, 'addInterpreter'])->name('request.addInterpreter');
         Route::post('/attachInterpreter', [InterpreterController::class, 'attachInterpreter'])->name('request.attachInterpreter');
         // interpreters Page And API End
 
         // receivings Page And API Start
         Route::get('/receivings', [ReceivingController::class, 'renderReceivings'])->name('pages.receivings');
         Route::get('/receivingsData', [ReceivingController::class, 'receivingsData'])->name('request.receivingsData');
-        Route::post('/addReceiving', [ReceivingController::class, 'addReceiving'])->name('request.addReceiving');
         Route::get('/addReceivingPages', [ReceivingController::class, 'addReceivingPage'])->name('pages.addReceivings');
+        Route::post('/addReceiving', [ReceivingController::class, 'addReceiving'])->name('request.addReceiving');
         Route::post('/attachReceiving', [ReceivingController::class, 'attachReceiving'])->name('request.attachReceiving');
         // receivings Page And API End
 
@@ -429,9 +429,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/printDelegationEnvelope/{id}', [PrintInvitationController::class, 'printDelegationEnvelope'])->name("pages.printDelegationEnvelope");
 });
 
-Route::post('signUpRequest', [SignUpController::class, 'signUp'])->name('request.signUp');
-Route::post('signInRequest', [SignInController::class, 'signIn'])->name('request.signIn');
-Route::post('activationRequest', [ActivationRequest::class, 'activation'])->name('request.activation');
+Route::post('/signUpRequest', [SignUpController::class, 'signUp'])->name('request.signUp');
+Route::post('/signInRequest', [SignInController::class, 'signIn'])->name('request.signIn');
+Route::post('/activationRequest', [ActivationRequest::class, 'activation'])->name('request.activation');
 Route::get('/sendhtmlemail/{id}', [MailOtpController::class, 'html_email'])->name("request.emailModule");
 
 Route::get('auth/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('request.google');

@@ -19,7 +19,7 @@ class UserFullProfileController extends Controller
     public function render(Request $req, $id)
     {
         $roles = Role::all();
-        $selectiveRoles = Role::where('name', 'user')->orWhere('name', 'admin')->orWhere('name', 'dho')->orWhere('name', 'vendor')->get();
+        $selectiveRoles = Role::where('name', 'user')->orWhere('name', 'admin')->orWhere('name', 'dho')->orWhere('name', 'vendor')->orWhere('name', 'army')->orWhere('name', 'navy')->orWhere('name', 'airforce')->get();
         $permissions = Permission::all();
         $user = User::with('roles', 'permissions')->where('uid', $id)->first();
         $image = ImageBlob::where('uid', $id)->first();
@@ -29,7 +29,7 @@ class UserFullProfileController extends Controller
     public function renderMyProfile(Request $req)
     {
         $roles = Role::all();
-        $selectiveRoles = Role::where('name', 'user')->orWhere('name', 'admin')->orWhere('name', 'dho')->orWhere('name', 'vendor')->get();
+        $selectiveRoles = Role::where('name', 'user')->orWhere('name', 'admin')->orWhere('name', 'dho')->orWhere('name', 'vendor')->orWhere('name', 'army')->orWhere('name', 'navy')->orWhere('name', 'airforce')->get();
         $permissions = Permission::all();
         $user = session()->get('user');
         // return $user;

@@ -185,17 +185,25 @@ class OfficerController extends Controller
         // return $req->all();
     }
 
-    public function officerData($params = 0, $type = "all", $id = null)
+    public function officerData($params = 0, $type = "all", $force = "all", $id = null)
     {
-        if (!$params && $type = "all") {
+        // return [$params, $type, $force, $id];
+        if ($params == 0 && $type == "all" && $force == "all") {
             $officers = $id ? Officer::where([['officer_status', 1], ['officer_uid', $id]])->get() : Officer::where('officer_status', 1)->get();
             foreach ($officers as $key => $officer) {
                 $officers[$key]->officer_rank = Rank::where('ranks_uid', $officer->officer_rank)->first();
                 $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
             }
             return $officers;
-        } elseif ($params && $type != "all") {
+        } elseif ($params != 0 && $type != "all" && $force == "all") {
             $officers = $id ? Officer::where([['officer_status', 1], ['officer_uid', $id]])->get() : Officer::where([['officer_status', 1], ['officer_type', $type]])->get();
+            foreach ($officers as $key => $officer) {
+                $officers[$key]->officer_rank = Rank::where('ranks_uid', $officer->officer_rank)->first();
+                $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
+            }
+            return $officers;
+        } elseif ($params == 0 && $type == "all" && $force != 'all') {
+            $officers = $id ? Officer::where([['officer_status', 1], ['officer_uid', $id]])->get() : Officer::where([['officer_status', 1], ['officer_remarks', $force]])->get();
             foreach ($officers as $key => $officer) {
                 $officers[$key]->officer_rank = Rank::where('ranks_uid', $officer->officer_rank)->first();
                 $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
@@ -207,7 +215,7 @@ class OfficerController extends Controller
     public function addOfficerPage($id = null)
     {
         if ($id) {
-            $officer = $this->officerData($params = 0, $type = "all",$id);
+            $officer = $this->officerData($params = 0, $type = "all", $id, $force = "all");
             return view('pages.addOfficer', ['officer' => $officer[0]]);
         } else {
             return view('pages.addOfficer');
