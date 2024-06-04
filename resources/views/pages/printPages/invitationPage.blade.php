@@ -121,5 +121,7 @@
     <div class="row d-flex justify-content-center">
         <img src="{{asset('images/icons/Partners-1.png')}}" style="width:80%; height:40%;" alt="Partners LOGO" />
     </div>
+    <br/>
+    <div class="row d-flex justify-content-end">{{$delegation->country}}/{{$delegate->invitedByDesignation->vips_designation}} &nbsp;</div>
 </div>
 @endsection

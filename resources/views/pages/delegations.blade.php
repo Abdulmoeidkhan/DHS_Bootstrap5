@@ -633,6 +633,8 @@
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                                 <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
+                                <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
+                                <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th>
                                 <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Rank</th>
                                 <th data-filter-control="input" data-width="450" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateFirstAndLastName">Delegation Name</th>
                                 <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
@@ -650,7 +652,6 @@
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior" data-formatter="operateText">Superior</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
-                                <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th>
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
@@ -659,7 +660,7 @@
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
                                 @if(session()->get('user')->roles[0]->name === "admin")
-                                <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
+                                <!-- <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th> -->
                                 <th data-field="uid" data-formatter="operateDelegation">Edit</th>
                                 <th data-field="uid" data-formatter="operateMember">Member</th>
                                 @endif
@@ -693,6 +694,8 @@
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                                 <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
+                                <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
+                                <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th>
                                 <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Rank</th>
                                 <th data-filter-control="input" data-width="450" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateFirstAndLastName">Delegation Name</th>
                                 <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
@@ -710,7 +713,7 @@
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior" data-formatter="operateText">Superior</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
-                                <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th>
+                                <!-- <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
@@ -718,7 +721,7 @@
                                 <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
-                                <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
+                                <!-- <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th> -->
                                 <th data-field="uid" data-formatter="operateDelegation">Edit</th>
                                 <th data-field="uid" data-formatter="operateMember">Member</th>
                                 <th data-field="uid" data-formatter="operateCar">Add Car</th>
@@ -748,6 +751,8 @@
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                                 <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
+                                <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
+                                <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th>
                                 <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Rank</th>
                                 <th data-filter-control="input" data-width="450" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateFirstAndLastName">Delegation Name</th>
                                 <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
@@ -765,7 +770,7 @@
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior" data-formatter="operateText">Superior</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
-                                <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th>
+                                <!-- <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
@@ -773,7 +778,7 @@
                                 <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
-                                <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
+                                <!-- <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th> -->
                                 <th data-field="uid" data-formatter="operateDelegation">Edit</th>
                                 <th data-field="uid" data-formatter="operateMember">Member</th>
                                 <th data-field="uid" data-formatter="operateCar">Add Car</th>
@@ -803,6 +808,8 @@
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                                 <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
+                                <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
+                                <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th>
                                 <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Rank</th>
                                 <th data-filter-control="input" data-width="450" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateFirstAndLastName">Delegation Name</th>
                                 <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
@@ -820,7 +827,7 @@
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior" data-formatter="operateText">Superior</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
-                                <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th>
+                                <!-- <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
@@ -828,7 +835,7 @@
                                 <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
-                                <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
+                                <!-- <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th> -->
                                 <th data-field="uid" data-formatter="operateDelegation">Edit</th>
                                 <th data-field="uid" data-formatter="operateMember">Member</th>
                                 <th data-field="uid" data-formatter="operateCar">Add Car</th>
@@ -858,6 +865,8 @@
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                                 <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
+                                <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
+                                <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th>
                                 <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Rank</th>
                                 <th data-filter-control="input" data-width="450" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateFirstAndLastName">Delegation Name</th>
                                 <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
@@ -875,7 +884,7 @@
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior" data-formatter="operateText">Superior</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
-                                <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th>
+                                <!-- <th data-filter-control="input" data-field="delegationCode" data-formatter="operateText">Delegation Code</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="members" data-formatter="memberFormatter">Members Rank - First/Last Name</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
@@ -883,7 +892,7 @@
                                 <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
-                                <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
+                                <!-- <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th> -->
                                 <th data-field="uid" data-formatter="operateDelegation">Edit</th>
                                 <th data-field="uid" data-formatter="operateMember">Member</th>
                                 <th data-field="uid" data-formatter="operateCar">Add Car</th>
@@ -1005,7 +1014,7 @@
         if (value) {
             return [
                 '<div class="left">',
-                '<a class="btn btn-success" href="invitation/' + value + '">',
+                '<a class="btn btn-success" target="_blank" href="invitation/' + value + '">',
                 '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
                 '</a>',
                 '</div>',
