@@ -2,15 +2,16 @@
 
 namespace App\Livewire;
 
-use App\Http\Controllers\MailOtpController;
-use App\Models\Permission;
 use App\Models\Role;
 use App\Models\Team;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
+use App\Models\Permission;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Validate; 
+use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\MailOtpController;
 
 class AddUserComponent extends Component
 {
@@ -38,9 +39,14 @@ class AddUserComponent extends Component
     }
 
     public $savedUser = 0;
+
+    #[Validate('required')]
     public $email = '';
+    #[Validate('required')]
     public $username = '';
+    #[Validate('required')]
     public $password = '';
+    #[Validate('required')]
     public $confirmPassword = '';
 
     public function save()
@@ -48,6 +54,7 @@ class AddUserComponent extends Component
         $uid = (string) Str::uuid();
         $user = new User();
         $user->uid = $uid;
+        
         $user->name = $this->username;
         $user->email = $this->email;
         $user->password = Hash::make($this->password);
