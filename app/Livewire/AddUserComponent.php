@@ -9,9 +9,7 @@ use Livewire\Component;
 use App\Models\Permission;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
-use Livewire\Attributes\Validate; 
 use Illuminate\Support\Facades\Hash;
-use App\Http\Controllers\MailOtpController;
 
 class AddUserComponent extends Component
 {
@@ -40,13 +38,9 @@ class AddUserComponent extends Component
 
     public $savedUser = 0;
 
-    #[Validate('required')]
     public $email = '';
-    #[Validate('required')]
     public $username = '';
-    #[Validate('required')]
     public $password = '';
-    #[Validate('required')]
     public $confirmPassword = '';
 
     public function save()

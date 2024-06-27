@@ -215,7 +215,7 @@ class OfficerController extends Controller
     public function addOfficerPage($id = null)
     {
         if ($id) {
-            $officer = $this->officerData($params = 0, $type = "all", $id, $force = "all");
+            $officer = $this->officerData($params = 0, $type = "all", $force = "all", $id);
             return view('pages.addOfficer', ['officer' => $officer[0]]);
         } else {
             return view('pages.addOfficer');
