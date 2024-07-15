@@ -10,6 +10,7 @@ use App\Models\User;
 
 class MailOtpController extends Controller
 {
+
     public function html_email($id)
     {
         try {

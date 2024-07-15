@@ -30,8 +30,8 @@ class DelegationsPageController extends Controller
                 ->leftJoin('vips', 'delegations.invited_by', '=', 'vips.vips_uid')
                 ->where([['delegations.delegation_response', 'Accepted'], ['delegations.delegation_status', '1']])
                 ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.rank', 'delegates.self', 'delegates.delegates_uid', 'delegates.designation', 'vips.vips_uid')
+                ->orderBy('vips.id', 'asc')
                 ->orderBy('delegations.country', 'asc')
-                ->orderBy('vips.vips_rank', 'asc')
                 ->get();
 
             foreach ($delegations as $key => $delegation) {
@@ -90,7 +90,7 @@ class DelegationsPageController extends Controller
             //     ->where('delegations.delegation_status', '1')
             //     ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.rank', 'delegates.self', 'delegates.delegates_uid', 'delegates.designation', 'vips.vips_uid')
             //     ->orderBy('delegations.country', 'asc')
-            //     ->orderBy('vips.vips_rank', 'asc')
+            //     ->orderBy('vips.id', 'asc')
             //     ->get();
             // foreach ($delegations as $key => $delegation) {
             //     $delegations[$key]->hotelPlan = HotelPlan::where([['delegation_uid', $delegation->uid]])->first(['hotel_uid', 'hotel_roomtype_standard', 'hotel_roomtype_suite', 'hotel_roomtype_superior', 'hotel_roomtype_doubleOccupancy', 'hotel_plan_uid']);
@@ -123,7 +123,7 @@ class DelegationsPageController extends Controller
                 ->where([['delegations.delegation_status', '1']])
                 ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.rank', 'delegates.self', 'delegates.delegates_uid', 'delegates.designation', 'vips.vips_uid')
                 ->orderBy('delegations.country', 'asc')
-                ->orderBy('vips.vips_rank', 'asc')
+                ->orderBy('vips.id', 'asc')
                 ->get();
             foreach ($delegations as $key => $delegation) {
                 $delegations[$key]->hotelPlan = HotelPlan::where([['delegation_uid', $delegation->uid]])->first(['hotel_uid', 'hotel_roomtype_standard', 'hotel_roomtype_suite', 'hotel_roomtype_superior', 'hotel_roomtype_doubleOccupancy', 'hotel_plan_uid']);
@@ -177,7 +177,7 @@ class DelegationsPageController extends Controller
                 ->where([['delegations.delegation_response', 'Awaited'], ['delegations.delegation_status', '1']])
                 ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.rank', 'delegates.self', 'delegates.delegates_uid', 'delegates.designation', 'vips.vips_uid')
                 ->orderBy('delegations.country', 'asc')
-                ->orderBy('vips.vips_rank', 'asc')
+                ->orderBy('vips.id', 'asc')
                 ->get();
             foreach ($delegations as $key => $delegation) {
                 $delegations[$key]->hotelPlan = HotelPlan::where([['delegation_uid', $delegation->uid]])->first(['hotel_uid', 'hotel_roomtype_standard', 'hotel_roomtype_suite', 'hotel_roomtype_superior', 'hotel_roomtype_doubleOccupancy', 'hotel_plan_uid']);
@@ -238,7 +238,7 @@ class DelegationsPageController extends Controller
                 ->where([['delegations.delegation_response', 'Regretted'], ['delegations.delegation_status', '1']])
                 ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.rank', 'delegates.self', 'delegates.delegates_uid', 'delegates.designation', 'vips.vips_uid')
                 ->orderBy('delegations.country', 'asc')
-                ->orderBy('vips.vips_rank', 'asc')
+                ->orderBy('vips.id', 'asc')
                 ->get();
             foreach ($delegations as $key => $delegation) {
                 $delegations[$key]->hotelPlan = HotelPlan::where([['delegation_uid', $delegation->uid]])->first(['hotel_uid', 'hotel_roomtype_standard', 'hotel_roomtype_suite', 'hotel_roomtype_superior', 'hotel_roomtype_doubleOccupancy', 'hotel_plan_uid']);
@@ -294,7 +294,7 @@ class DelegationsPageController extends Controller
                 ->where('delegations.delegation_status', '0')
                 ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.rank', 'delegates.self', 'delegates.delegates_uid', 'delegates.designation', 'vips.vips_uid')
                 ->orderBy('delegations.country', 'asc')
-                ->orderBy('vips.vips_rank', 'asc')
+                ->orderBy('vips.id', 'asc')
                 ->get();
             foreach ($delegations as $key => $delegation) {
                 $delegations[$key]->hotelPlan = HotelPlan::where([['delegation_uid', $delegation->uid]])->first(['hotel_uid', 'hotel_roomtype_standard', 'hotel_roomtype_suite', 'hotel_roomtype_superior', 'hotel_roomtype_doubleOccupancy', 'hotel_plan_uid']);

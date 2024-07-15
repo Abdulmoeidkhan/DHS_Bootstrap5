@@ -32,8 +32,6 @@
                 <label for="hotel_roomtype_doubleOccupancy" class="col-form-label">Double Occupancy Quantity:</label>
                 <input type="number" class="form-control" wire:model="dOccupancyQuantity" required>
             </div>
-
-
             <input type="hidden" wire:model="delegationUid">
         </fieldset>
     </div>

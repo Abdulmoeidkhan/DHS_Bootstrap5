@@ -10,6 +10,20 @@ use Illuminate\Support\Facades\Auth;
 
 class ActivationRequest extends Controller
 {
+    protected function badge($characters, $prefix)
+    {
+        $possible = '0123456789';
+        $code = $prefix;
+        $i = 0;
+        while ($i < $characters) {
+            $code .= substr($possible, mt_rand(0, strlen($possible) - 1), 1);
+            if ($i < $characters - 1) {
+                $code .= "";
+            }
+            $i++;
+        }
+        return $code;
+    }
 
     public function activation(Request $req)
     {
@@ -40,5 +54,9 @@ class ActivationRequest extends Controller
         } catch (\Illuminate\Database\QueryException $exception) {
             return  redirect()->back()->with('error', $exception->errorInfo[2]);
         }
+    }
+
+    public function resendOtp(Request $req)
+    {
     }
 }
