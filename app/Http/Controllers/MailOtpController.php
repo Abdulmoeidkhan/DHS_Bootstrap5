@@ -23,7 +23,7 @@ class MailOtpController extends Controller
                 Mail::send('pages.mails.otp', $data, function ($message) use ($myEmail) {
                     $message->to($myEmail, "DHS")->subject('Your Activation Code');
                     $message->bcc("abdul.moeid@badarexpo.com", "DHS")->subject('Your Activation Code');
-                    $message->from("noreply@ideaspakistan.gov.pk", "DHS OTP");
+                    $message->from("noreply.badarvms@gmail.com", "DHS OTP");
                 });
                 return true;
             }

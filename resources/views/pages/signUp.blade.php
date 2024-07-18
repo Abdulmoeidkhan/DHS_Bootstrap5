@@ -85,11 +85,11 @@
                                     <p class="fs-4 mb-0 fw-bold">Already have an Account?</p>
                                     <a class="text-badar fw-bold ms-2" href="{{route('signIn')}}">Sign In</a>
                                 </div>
-                                <div class="d-flex align-items-center justify-content-center">
+                                {{-- <div class="d-flex align-items-center justify-content-center">
                                     <p class="fs-4 mb-0 fw-bold">Activate Account?</p>
                                     <a class="text-badar fw-bold ms-2"
                                         href="{{route('accountActivation')}}">Activate</a>
-                                </div>
+                                </div> --}}
                             </form>
                             <br />
                             <img style="width:445px;width:-webkit-fill-available;"

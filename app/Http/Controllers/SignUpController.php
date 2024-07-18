@@ -48,14 +48,16 @@ class SignUpController extends Controller
         $user->email = $req->email;
         $user->password = Hash::make($req->password);
         $user->activation_code = $this->badge(8, "");
+        $user->activated = 1;
         $savedUser = 0;
         try {
             $savedUser = $user->save();
             $this->basicRolesAndTeams($user);
             if ($savedUser) {
-                $emailSent = (new MailOtpController)->html_email($uid);
-                return $emailSent ? redirect()->route("accountActivation") : redirect()->back()->with('error', 'Email Address already Exist error : ');
+                // $emailSent = (new MailOtpController)->html_email($uid);
+                // return $emailSent ? redirect()->route("signIn") : redirect()->back()->with('error', 'Email Address already Exist error : ');
                 // return redirect()->route('request.emailModule',$uid);
+                return redirect()->route("signIn");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {

@@ -50,7 +50,11 @@ class SignInController extends Controller
                     }
                     $user->images = ImageBlob::where('uid', Auth::user()->uid)->first();
                     session()->put('user', $user);
-                    return redirect()->route('pages.dashboard')->with('message', "You have successfully Signed In")->with('flash_message', "If you need to install this App please click below");
+                    if (session()->get('user')->roles[0]->name == "user") {
+                        return redirect()->route('pages.profileActivation')->with('message', "You have successfully Signed In")->with('flash_message', "If you need to install this App please click below");
+                    } else {
+                        return redirect()->route('pages.dashboard')->with('message', "You have successfully Signed In")->with('flash_message', "If you need to install this App please click below");
+                    }
                     // return User::with('roles')->where('email', $req->email)->first();
                 } else {
                     // return ['status' => 0, "msg" => 'The provided credentials do not match our records.'];
