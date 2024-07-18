@@ -197,10 +197,10 @@ class AddDelegationPageController extends Controller
         unset($arrayToBeUpdateSelf['delegate_uid']);
         unset($arrayToBeUpdate['delegationuid']);
         try {
-            $delegationUpdate = Delegation::where('uid', $delegationUid)->update($arrayToBeUpdate);
-            $representativeUpdate = Delegate::where('delegates_uid', $delegationRepUid)->update($arrayToBeUpdateRep);
+            // $delegationUpdate = Delegation::where('uid', $delegationUid)->update($arrayToBeUpdate);
+            // $representativeUpdate = Delegate::where('delegates_uid', $delegationRepUid)->update($arrayToBeUpdateRep);
             $delegateUpdate = Delegate::where('delegates_uid', $delegationSelfUid)->update($arrayToBeUpdateSelf);
-            return $delegateUpdate ? redirect()->back()->with('message', 'Delegation has been updated Successfully') : redirect()->back()->with('message', 'Something Went Wrong');
+            return $delegateUpdate ? redirect()->route('pages.dashboard')->with('message', 'Delegation has been updated Successfully') : redirect()->back()->with('message', 'Something Went Wrong');
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
                 return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
@@ -243,8 +243,8 @@ class AddDelegationPageController extends Controller
         unset($arrayToBeUpdateRep['delegation_uid']);
         unset($arrayToBeUpdateSelf['delegation_uid']);
         try {
-            $delegationUpdate = Delegation::where('uid', $arrayToBeUpdate['uid'])->update($arrayToBeUpdate);
-            $representativeUpdate = Delegate::where('delegates_uid', $delegationRepUid)->update($arrayToBeUpdateRep);
+            // $delegationUpdate = Delegation::where('uid', $arrayToBeUpdate['uid'])->update($arrayToBeUpdate);
+            // $representativeUpdate = Delegate::where('delegates_uid', $delegationRepUid)->update($arrayToBeUpdateRep);
             $delegateUpdate = Delegate::where('delegates_uid', $delegationSelfUid)->update($arrayToBeUpdateSelf);
             $req->rep_Pdf ? $this->documentUpdate($req->file('rep_Pdf'), $delegationRepUid) : 0;
             $req->rep_saved_picture ? $this->imageBlobUpdate($req->rep_saved_picture, $delegationRepUid) : 0;
