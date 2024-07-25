@@ -81,7 +81,8 @@ class GoogleLoginController extends Controller
                 }
             }
         } catch (Exception $e) {
-            dd($e->getMessage());
+            // dd($e->getMessage()??"You can not access this page directly");
+            return abort(404);
         }
     }
 }

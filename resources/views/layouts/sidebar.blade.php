@@ -387,7 +387,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
-                                <span class="hide-menu">Delegates Arrival Status - Country</span>
+                                <span class="hide-menu">Arrival Status - Country</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -395,7 +395,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
-                                <span class="hide-menu">Delegates Arrival Status - VIP</span>
+                                <span class="hide-menu">Arrival Status - VIP</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -403,7 +403,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
-                                <span class="hide-menu">Delegates Arrival Details</span>
+                                <span class="hide-menu">Arrival Details</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -411,7 +411,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
-                                <span class="hide-menu">Delegates Departure Status - Country</span>
+                                <span class="hide-menu">Departure Status - Country</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -419,7 +419,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
-                                <span class="hide-menu">Delegates Departure Status - VIP</span>
+                                <span class="hide-menu">Departure Status - VIP</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -427,7 +427,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
-                                <span class="hide-menu">Delegates Departure Details</span>
+                                <span class="hide-menu">Departure Details</span>
                             </a>
                         </li>
                     </ul>
