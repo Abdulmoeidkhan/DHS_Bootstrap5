@@ -137,14 +137,90 @@ class ReportController extends Controller
 
         $invitees = Vips::distinct('vips_uid')->orderBy('id', 'ASC')->get('vips_uid');
         foreach ($invitees as $inviteeskey => $invitee) {
+            $accepted = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Accepted']])->get();
             $invitees[$inviteeskey]->name = Vips::where('vips_uid', $invitee->vips_uid)->first('vips_designation');
             $invitees[$inviteeskey]->count = Delegation::where('invited_by', $invitee->vips_uid)->count();
-            $accepted = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Accepted']])->first();
             $invitees[$inviteeskey]->awaited = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Awaited']])->count();
             $invitees[$inviteeskey]->regretted = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Regretted']])->count();
-            $invitees[$inviteeskey]->self = $accepted ? Delegate::where([['delegation', $accepted->uid], ['delegation_type', 'Self'], ['self', 1]])->count() : 0;
-            $invitees[$inviteeskey]->rep = $accepted ? Delegate::where([['delegation', $accepted->uid], ['delegation_type', 'Rep'], ['self', 1]])->count() : 0;
+            $invitees[$inviteeskey]->self = [];
+            $invitees[$inviteeskey]->rep = [];
+            $invitees[$inviteeskey]->totalCountOfDelegates = [];
+            foreach ($accepted as $key => $accept) {
+                // array_push($invitees[$inviteeskey]->self,Delegate::where([['delegation', $accept->uid], ['delegation_type', 'Self'], ['self', 1]])->count(),"yellow");
+                // array_push($invitees[$inviteeskey]->rep,Delegate::where([['delegation', $accept->uid], ['delegation_type', 'Rep'], ['self', 1]])->count(),"yellow");
+                $invitees[$inviteeskey]->self = [...$invitees[$inviteeskey]->self, $accept ? Delegate::where([['delegation', $accept->uid], ['delegation_type', 'Self'], ['self', 1]])->count() : 0];
+                $invitees[$inviteeskey]->rep = [...$invitees[$inviteeskey]->rep, $accept ? Delegate::where([['delegation', $accept->uid], ['delegation_type', 'Rep'], ['self', 1]])->count() : 0];
+                $invitees[$inviteeskey]->totalCountOfDelegates = [...$invitees[$inviteeskey]->totalCountOfDelegates, $accept ? Delegate::where([['delegation', $accept->uid], ['self', 1]])->count() : 0];
+            }
+            $invitees[$inviteeskey]->selfSum = array_sum($invitees[$inviteeskey]->self);
+            $invitees[$inviteeskey]->repSum = array_sum($invitees[$inviteeskey]->rep);
+            $invitees[$inviteeskey]->totalCountOfDelegatesSum = array_sum($invitees[$inviteeskey]->totalCountOfDelegates);
         }
+
+        if ($invitees->count() > 0) {
+            $invitees[$invitees->count()] = [
+                'name.vips_designation' => 'Total',
+                'count' => $invitees->sum('count'),
+                'awaited' => $invitees->sum('awaited'),
+                'regretted' => $invitees->sum('regretted'),
+                'selfSum' => $invitees->sum('selfSum'),
+                'repSum' => $invitees->sum('repSum'),
+                'totalCountOfDelegatesSum' => $invitees->sum('totalCountOfDelegatesSum'),
+            ];
+        }
+        return $invitees;
+    }
+
+    public function selfRepDetailReport()
+    {
+        return view('pages.reports.selfRepDetailReport');
+    }
+
+    public function selfRepDetailData()
+    {
+        $invitees = Vips::distinct('vips_uid')->orderBy('id', 'ASC')->get('vips_uid');
+        foreach ($invitees as $inviteeskey => $invitee) {
+            $accepted = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Accepted']])->get();
+            $invitees[$inviteeskey]->name = Vips::where('vips_uid', $invitee->vips_uid)->first('vips_designation');
+            $invitees[$inviteeskey]->count = Delegation::where('invited_by', $invitee->vips_uid)->count();
+            $invitees[$inviteeskey]->awaited = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Awaited']])->count();
+            $invitees[$inviteeskey]->regretted = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Regretted']])->count();
+            $invitees[$inviteeskey]->regrettedCountries = [Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Regretted']])->get('country')];
+            $invitees[$inviteeskey]->self = [];
+            $invitees[$inviteeskey]->selfCountries = [];
+            $invitees[$inviteeskey]->rep = [];
+            $invitees[$inviteeskey]->repCountries = [];
+            $invitees[$inviteeskey]->totalCountOfDelegates = [];
+            foreach ($accepted as $key => $accept) {
+                $invitees[$inviteeskey]->self = [...$invitees[$inviteeskey]->self, $accept ? Delegate::where([['delegation', $accept->uid], ['delegation_type', 'Self'], ['self', 1]])->count() : 0];
+                $invitees[$inviteeskey]->rep = [...$invitees[$inviteeskey]->rep, $accept ? Delegate::where([['delegation', $accept->uid], ['delegation_type', 'Rep'], ['self', 1]])->count() : 0];
+                $invitees[$inviteeskey]->totalCountOfDelegates = [...$invitees[$inviteeskey]->totalCountOfDelegates, $accept ? Delegate::where([['delegation', $accept->uid], ['self', 1]])->count() : 0];
+                $invitees[$inviteeskey]->selfCountries = [...array_unique($invitees[$inviteeskey]->selfCountries), DB::table('delegations')
+                    ->leftJoin('delegates', 'delegations.uid', '=', 'delegates.delegation')
+                    ->where([['delegates.delegation_type', 'Self'], ['delegates.self', 1], ['delegations.uid', $accept->uid]])
+                    ->get('country')];
+                $invitees[$inviteeskey]->repCountries = [...array_unique($invitees[$inviteeskey]->repCountries), DB::table('delegations')
+                    ->leftJoin('delegates', 'delegations.uid', '=', 'delegates.delegation')
+                    ->where([['delegates.delegation_type', 'Rep'], ['delegates.self', 1], ['delegations.uid', $accept->uid]])
+                    ->get('country')];
+            }
+            $invitees[$inviteeskey]->selfSum = array_sum($invitees[$inviteeskey]->self);
+            $invitees[$inviteeskey]->repSum = array_sum($invitees[$inviteeskey]->rep);
+            $invitees[$inviteeskey]->totalCountOfDelegatesSum = array_sum($invitees[$inviteeskey]->totalCountOfDelegates);
+        }
+
+        // if ($invitees->count() > 0) {
+        //     $invitees[$invitees->count()] = [
+        //         'name.vips_designation' => 'Total',
+        //         'count' => $invitees->sum('count'),
+        //         'awaited' => $invitees->sum('awaited'),
+        //         'regretted' => $invitees->sum('regretted'),
+        //         'selfSum' => $invitees->sum('selfSum'),
+        //         'repSum' => $invitees->sum('repSum'),
+        //         'totalCountOfDelegatesSum' => $invitees->sum('totalCountOfDelegatesSum'),
+        //     ];
+        // }
+
         return $invitees;
     }
 

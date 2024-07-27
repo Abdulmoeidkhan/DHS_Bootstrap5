@@ -243,8 +243,8 @@ class AddDelegationPageController extends Controller
         unset($arrayToBeUpdateRep['delegation_uid']);
         unset($arrayToBeUpdateSelf['delegation_uid']);
         try {
-            // $delegationUpdate = Delegation::where('uid', $arrayToBeUpdate['uid'])->update($arrayToBeUpdate);
-            // $representativeUpdate = Delegate::where('delegates_uid', $delegationRepUid)->update($arrayToBeUpdateRep);
+            $delegationUpdate = Delegation::where('uid', $arrayToBeUpdate['uid'])->update($arrayToBeUpdate);
+            $representativeUpdate = Delegate::where('delegates_uid', $delegationRepUid)->update($arrayToBeUpdateRep);
             $delegateUpdate = Delegate::where('delegates_uid', $delegationSelfUid)->update($arrayToBeUpdateSelf);
             $req->rep_Pdf ? $this->documentUpdate($req->file('rep_Pdf'), $delegationRepUid) : 0;
             $req->rep_saved_picture ? $this->imageBlobUpdate($req->rep_saved_picture, $delegationRepUid) : 0;
@@ -259,8 +259,11 @@ class AddDelegationPageController extends Controller
                     }
                     $removeOfficer = Officer::where('officer_delegation', $arrayToBeUpdate['uid'])->update(['officer_delegation' => null, 'officer_assign' => 0]);
                     $removeCar = Car::where('car_delegation', $arrayToBeUpdate['uid'])->update(['car_delegation' => null]);
+                    // return $arrayToBeUpdate;
+                    return $req->submitAndRetain ? redirect()->back()->with('message', 'Delegation has been updated Successfully') : redirect()->route('pages.delegationsPage')->with('message', 'Delegation has been updated Successfully');
+                } else {
+                    return $req->submitAndRetain ? redirect()->back()->with('message', 'Delegation has been updated Successfully') : redirect()->route('pages.delegationsPage')->with('message', 'Delegation has been updated Successfully');
                 }
-                return $req->submitAndRetain ? redirect()->back()->with('message', 'Delegation has been updated Successfully') : redirect()->route('pages.delegationsPage')->with('message', 'Delegation has been updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {

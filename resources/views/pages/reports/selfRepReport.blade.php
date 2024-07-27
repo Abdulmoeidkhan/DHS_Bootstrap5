@@ -59,10 +59,11 @@
                             <th data-width="50" data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                             <th data-filter-control="input" data-field="name.vips_designation" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Invited By</th>
                             <th data-filter-control="input" data-field="count" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Invitation</th>
-                            <th data-filter-control="input" data-field="self" data-sortable="true" data-fixed-columns="true" data-formatter="operateNumber">Accepted Self</th>
-                            <th data-filter-control="input" data-field="rep" data-sortable="true" data-fixed-columns="true" data-formatter="operateNumber">Accepted Rep</th>
+                            <th data-filter-control="input" data-field="selfSum" data-sortable="true" data-fixed-columns="true" data-formatter="operateNumber">Accepted Self</th>
+                            <th data-filter-control="input" data-field="repSum" data-sortable="true" data-fixed-columns="true" data-formatter="operateNumber">Accepted Rep</th>
                             <th data-filter-control="input" data-field="regretted" data-sortable="true" data-fixed-columns="true" data-formatter="operateNumber">Regretted</th>
-                            <th data-filter-control="input" data-field="awaited" data-sortable="true" data-fixed-columns="true" data-formatter="operateNumber">Awaited</th>
+                            {{-- <th data-filter-control="input" data-field="awaited" data-sortable="true" data-fixed-columns="true" data-formatter="operateNumber">Awaited</th> --}}
+                            <th data-filter-control="input" data-field="totalCountOfDelegatesSum" data-sortable="true" data-fixed-columns="true" data-formatter="operateNumber">Number Of Delegates</th>
                         </tr>
                     </thead>
                 </table>

@@ -338,6 +338,14 @@
                                 <span class="hide-menu">Self/Rep</span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a href="{{route('pages.selfRepDetailReport')}}" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grain"></i>
+                                </div>
+                                <span class="hide-menu">Self/Rep Detail</span>
+                            </a>
+                        </li>
                         <!-- <li class="sidebar-item">
                             <a href="../main/blog-detail.html" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
