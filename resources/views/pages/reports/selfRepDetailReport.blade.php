@@ -105,7 +105,7 @@
     }
 
     function operateCountries(value, row, index){
-        return value.map(mainArray=> mainArray.length > 0 ? mainArray.map((subArray)=>subArray.country+'<br/>'):'').join('')
+        return value.map(mainArray=> mainArray.length > 0 ? mainArray.map((subArray)=>subArray.country+'<br/>').join(''):'').join('')
 
     }
 </script>

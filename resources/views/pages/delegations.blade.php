@@ -76,7 +76,7 @@
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <h4 class="fw-semibold mb-3">
-                                    {{App\Models\Delegation::count()}}
+                                    {{App\Models\Delegation::where('delegation_status',1)->count()}}
                                 </h4>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <h4 class="fw-semibold mb-3">
-                                    {{App\Models\Delegation::where('delegation_response','Awaited')->count()}}
+                                    {{App\Models\Delegation::where('delegation_response','Awaited')->where('delegation_status',1)->count()}}
                                 </h4>
                             </div>
                         </div>
@@ -112,7 +112,7 @@
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <h4 class="fw-semibold mb-3">
-                                    {{App\Models\Delegation::where('delegation_response','Accepted')->count()}}
+                                    {{App\Models\Delegation::where('delegation_response','Accepted')->where('delegation_status',1)->count()}}
                                 </h4>
                             </div>
                         </div>
@@ -130,7 +130,7 @@
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <h4 class="fw-semibold mb-3">
-                                    {{App\Models\Delegation::where('delegation_response','Regretted')->count()}}
+                                    {{App\Models\Delegation::where('delegation_response','Regretted')->where('delegation_status',1)->count()}}
                                 </h4>
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <h4 class="fw-semibold mb-3">
-                                    {{App\Models\Delegation::where('delegation_response','Accepted')->count()+App\Models\Delegation::where('delegation_response','Regretted')->count()}}
+                                    {{App\Models\Delegation::where('delegation_response','Accepted')->where('delegation_status',1)->count()+App\Models\Delegation::where('delegation_response','Regretted')->where('delegation_status',1)->count()}}
                                 </h4>
                             </div>
                         </div>
