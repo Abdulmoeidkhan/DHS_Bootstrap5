@@ -665,14 +665,13 @@
                 <button class="tablinks" onclick="openCity(event, 'Deactive')">Deactive</button>
                 @endif
             </div>
-            <div id="All" class="tabcontent" style="display: block;" >
+            <div id="All" class="tabcontent" style="{{session()->get('user')->roles[0]->name != 'dho'?'display: block;':''}}" >
                 @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
                     <div class="d-flex" style="position: absolute;top: 95px;">
                         <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-primary">Add Delegations</a>
                     </div>
                 </div>
-                @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
                     <table id="table4" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table4" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-row-style="rowStyle" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getDelegation')}}">
@@ -720,8 +719,9 @@
                         </thead>
                     </table>
                 </div>
+                @endif
             </div>
-            <div id="Accepted" class="tabcontent" >
+            <div id="Accepted" class="tabcontent" style="{{session()->get('user')->roles[0]->name == 'dho'?'display: block;':''}}">
                 @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
                     <div class="d-flex" style="position: absolute;top: 95px;">
