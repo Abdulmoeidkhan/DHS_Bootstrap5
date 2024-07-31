@@ -116,7 +116,15 @@ class OfficerController extends Controller
         $arrayToBeUpdate = [];
         foreach ($req->all() as $key => $value) {
             if ($key != 'submit' && $key != '_token' && $key != 'submitMore'  && $key != 'savedpicture'  && $key != 'picture' && $key != 'officer_picture' && $key != 'pdf' && strlen($value) > 0) {
-                $arrayToBeUpdate[$key] = $value;
+                if ($key == 'officer_contact') {
+                    $contact = str_replace('+', '', $value);
+                    $contact = str_replace('-', '', $contact);
+                    $arrayToBeUpdate[$key] = $contact;
+                } elseif ($key == 'officer_identity') {
+                    $arrayToBeUpdate[$key] = str_replace("-", "", $value);
+                } else {
+                    $arrayToBeUpdate[$key] = $value;
+                }
             }
         }
         try {
@@ -125,13 +133,13 @@ class OfficerController extends Controller
             // $pdfUpdate = $req->pdf ? $this->documentUpdate($req->file('pdf'), $id) : 0;
             $imgUpdate = $req->savedpicture ? $this->imageBlobUpdate($req->savedpicture, $id) : 0;
             if ($officerUpdate) {
-                return $req->submitMore ? redirect()->route('pages.addOfficer')->with('message', 'Officer has been updated Successfully') : redirect()->route('pages.addOfficer');
+                return $req->submitMore ? redirect()->route('pages.addOfficer',$id)->with('message', 'Officer has been updated Successfully') : redirect()->route('pages.addOfficer',$id);
             }
         } catch (QueryException $exception) {
             if ($exception->errorInfo[2]) {
-                return  redirect()->route('pages.addOfficer')->with('error', 'Error : ' . $exception->errorInfo[2]);
+                return  redirect()->route('pages.addOfficer',$id)->with('error', 'Error : ' . $exception->errorInfo[2]);
             } else {
-                return  redirect()->route('pages.addOfficer')->with('error', $exception->errorInfo[2]);
+                return  redirect()->route('pages.addOfficer',$id)->with('error', $exception->errorInfo[2]);
             }
         }
     }
