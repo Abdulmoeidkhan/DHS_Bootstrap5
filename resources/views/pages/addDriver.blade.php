@@ -21,7 +21,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="contact" class="form-label">Driver Contact</label>
-                                <input name="driver_contact"  type="text" minlength='0' maxlength='11' class="form-control" id="contact" value="{{!empty($driver)?$driver->driver_contact:''}}" placeholder="Contact Person" required>
+                                <input name="driver_contact"  type="text" minlength='0' maxlength='16' class="form-control" id="contact" value="{{!empty($driver)?$driver->driver_contact:''}}" placeholder="Contact Person" required>
                             </div>
                             <div class="mb-3">
                                 <label for="driver_remarks" class="form-label">Driver Remarks</label>

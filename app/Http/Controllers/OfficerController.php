@@ -100,7 +100,7 @@ class OfficerController extends Controller
             $imgSaved = $req->savedpicture ? $this->imageBlobUpload($req->savedpicture, $officer->officer_uid) : '';
             // $pdfSaved = $req->file('pdf') ? $this->documentUpload($req->file('pdf'), $officer->officer_uid) : '';
             if ($officerSaved) {
-                return $req->submitMore ? redirect()->route('pages.addOfficer')->with('message', 'Officer has been added Successfully') : redirect()->route('pages.addOfficer');
+                return $req->submitMore ? redirect()->route('pages.addOfficer')->with('message', 'Officer has been added Successfully') : redirect()->route('pages.addOfficer')->with('message', 'Officer has been added Successfully');
             }
         } catch (QueryException $exception) {
             if ($exception->errorInfo[2]) {

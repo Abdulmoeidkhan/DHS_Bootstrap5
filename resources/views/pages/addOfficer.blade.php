@@ -24,12 +24,34 @@
     }
 </style>
 <div class="row">
+    <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#DelegateModal">Add
+            Rank's</button>
+    </div>
+</div>
+<div class="row">
     <div class="col-lg-12 d-flex align-items-stretch">
         <div class="card w-100">
             <div class="card-body p-4">
                 <h5 class="card-ti tle fw-semibold mb-4">New Officer</h5>
+                <div class="modal fade" id="DelegateModal" tabindex="-1" aria-labelledby="DelegateModal"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Delegates Form</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <livewire:add-rank-component />
+                            <!-- <livewire:add-delegate-component /> -->
+                        </div>
+                    </div>
+                </div>
                 <div class="table-responsive">
-                    <form name="officerBasicInfo" id="officerBasicInfo" method="POST" action="{{isset($officer->officer_uid)? route('request.updateOfficer',$officer->officer_uid):route('request.addOfficer')}}" enctype="multipart/form-data">
+                    <form name="officerBasicInfo" id="officerBasicInfo" method="POST"
+                        action="{{isset($officer->officer_uid)? route('request.updateOfficer',$officer->officer_uid):route('request.addOfficer')}}"
+                        enctype="multipart/form-data">
                         <fieldset>
                             <legend>Add Officer Form</legend>
                             @csrf
@@ -38,70 +60,107 @@
                                 <select name="officer_rank" id="officer_rank" class="form-select">
                                     <option value="" selected disabled hidden> Select Rank </option>
                                     @foreach (\App\Models\Rank::all() as $renderRank)
-                                    <option value="{{$renderRank->ranks_uid}}" {{isset($officer->officer_rank) ? ($officer->officer_rank->ranks_uid == $renderRank->ranks_uid ? 'selected' : '') : ''}}>{{$renderRank->ranks_name}}</option>
+                                    <option value="{{$renderRank->ranks_uid}}" {{isset($officer->officer_rank) ?
+                                        ($officer->officer_rank->ranks_uid == $renderRank->ranks_uid ? 'selected' : '')
+                                        : ''}}>{{$renderRank->ranks_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="officer_first_name" class="form-label">First Name</label>
-                                <input name="officer_first_name" type="text" class="form-control" id="officer_first_name" placeholder="Officer First Name" value="{{isset($officer) ? $officer->officer_first_name : ''}}" required />
+                                <input name="officer_first_name" type="text" class="form-control"
+                                    id="officer_first_name" placeholder="Officer First Name"
+                                    value="{{isset($officer) ? $officer->officer_first_name : ''}}" required />
                             </div>
                             <div class="mb-3">
                                 <label for="officer_last_name" class="form-label">Last Name</label>
-                                <input name="officer_last_name" type="text" class="form-control" id="officer_last_name" placeholder="Officer Last Name" value="{{isset($officer) ? $officer->officer_last_name : ''}}" required />
+                                <input name="officer_last_name" type="text" class="form-control" id="officer_last_name"
+                                    placeholder="Officer Last Name"
+                                    value="{{isset($officer) ? $officer->officer_last_name : ''}}" required />
                             </div>
                             <div class="mb-3">
                                 <label for="officer_type" class="form-label">Type</label>
-                                <select name="officer_type" id="officer_type" class="form-select" {{isset($officer->officer_type)?'disabled':''}}>
+                                <select name="officer_type" id="officer_type" class="form-select"
+                                    {{isset($officer->officer_type)?'disabled':''}}>
                                     <option value="" selected disabled hidden> Select Type </option>
-                                    <option value="Liason" {{isset($officer->officer_type) ? ($officer->officer_type == 'Liason' ? 'selected' : '') : ''}}> Liason Officer </option>
-                                    <option value="Interpreter" {{isset($officer->officer_type) ? ($officer->officer_type == 'Interpreter' ? 'selected' : '') : ''}}> Interpreter Officer </option>
-                                    <option value="Receiving" {{isset($officer->officer_type) ? ($officer->officer_type == 'Receiving' ? 'selected' : '') : ''}}> Receiving Officer </option>
+                                    <option value="Liason" {{isset($officer->officer_type) ? ($officer->officer_type ==
+                                        'Liason' ? 'selected' : '') : ''}}> Liason Officer </option>
+                                    <option value="Interpreter" {{isset($officer->officer_type) ?
+                                        ($officer->officer_type == 'Interpreter' ? 'selected' : '') : ''}}> Interpreter
+                                        Officer </option>
+                                    <option value="Receiving" {{isset($officer->officer_type) ? ($officer->officer_type
+                                        == 'Receiving' ? 'selected' : '') : ''}}> Receiving Officer </option>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="officer_designation" class="form-label">Designation</label>
-                                <input name="officer_designation" type="text" class="form-control" id="officer_designation" placeholder="Officer Officer Designation" value="{{isset($officer) ? $officer->officer_designation : ''}}" required />
+                                <input name="officer_designation" type="text" class="form-control"
+                                    id="officer_designation" placeholder="Officer Officer Designation"
+                                    value="{{isset($officer) ? $officer->officer_designation : ''}}" required />
                             </div>
                             <div class="mb-3">
                                 <label for="contact" class="form-label">Contact Number</label>
-                                <input name="officer_contact" type="text" minlength='0' maxlength='14' class="form-control" id="contact" placeholder="Officer Contact Number" value="{{isset($officer) ? $officer->officer_contact : ''}}" minlength='0' maxlength='14' onchange="isContact('contact')" title="14 DIGIT PHONE NUMBET" data-inputmask="'mask': '+99-9999999999'" required />
+                                <input name="officer_contact" type="tel" minlength='0' maxlength='14'
+                                    class="form-control" id="contact" placeholder="Officer Contact Number"
+                                    value="{{isset($officer) ? $officer->officer_contact : ''}}" minlength='0'
+                                    maxlength='14' onchange="isContact('contact')" title="14 DIGIT PHONE NUMBET"
+                                    data-inputmask="'mask': '+99-9999999999'" required />
                             </div>
                             <div class="mb-3">
                                 <label for="identity" class="form-label">Officer CNIC</label>
-                                <input name="officer_identity" type="text" class="form-control" id="identity" placeholder="Officer Identity" value="{{isset($officer) ? $officer->officer_identity : ''}}" onchange="isNumeric('identity')" title="13 DIGIT CNIC CODE" data-inputmask="'mask': '99999-9999999-9'" required maxlength="15" required />
+                                <input name="officer_identity" type="tel" class="form-control" id="identity"
+                                    placeholder="Officer Identity"
+                                    value="{{isset($officer) ? $officer->officer_identity : ''}}"
+                                    onchange="isNumeric('identity')" title="13 DIGIT CNIC CODE"
+                                    data-inputmask="'mask': '99999-9999999-9'" required maxlength="15" required />
                             </div>
                             <div class="mb-3">
                                 <label for="officer_address" class="form-label">Officer Address</label>
-                                <input name="officer_address" type="text" class="form-control" id="officer_address" placeholder="Officer Address" value="{{isset($officer) ? $officer->officer_address : ''}}" required />
+                                <input name="officer_address" type="text" class="form-control" id="officer_address"
+                                    placeholder="Officer Address"
+                                    value="{{isset($officer) ? $officer->officer_address : ''}}" required />
                             </div>
                             <div class="mb-3">
                                 <label for="officer_remarks" class="form-label">Force Type</label>
-                                <select name="officer_remarks" id="officer_remarks" class="form-select" required {{isset($officer->officer_remarks)?'disabled':''}}>
+                                <select name="officer_remarks" id="officer_remarks" class="form-select" required
+                                    {{isset($officer->officer_remarks)?'disabled':''}}>
                                     <option value="" selected disabled hidden> Select Type </option>
                                     @if(session()->get('user')->roles[0]->name === 'army')
-                                    <option value="army" {{isset($officer->officer_remarks) ? ($officer->officer_remarks == 'army' ? 'selected' : '') : ''}}> Army Officer </option>
+                                    <option value="army" {{isset($officer->officer_remarks) ? ($officer->officer_remarks
+                                        == 'army' ? 'selected' : '') : ''}}> Army Officer </option>
                                     @elseif(session()->get('user')->roles[0]->name === 'navy')
-                                    <option value="navy" {{isset($officer->officer_remarks) ? ($officer->officer_remarks == 'navy' ? 'selected' : '') : ''}}> Navy Officer </option>
+                                    <option value="navy" {{isset($officer->officer_remarks) ? ($officer->officer_remarks
+                                        == 'navy' ? 'selected' : '') : ''}}> Navy Officer </option>
                                     @elseif(session()->get('user')->roles[0]->name === 'airforce')
-                                    <option value="airforce" {{isset($officer->officer_remarks) ? ($officer->officer_remarks == 'airforce' ? 'selected' : '') : ''}}> Air Force Officer </option>
+                                    <option value="airforce" {{isset($officer->officer_remarks) ?
+                                        ($officer->officer_remarks == 'airforce' ? 'selected' : '') : ''}}> Air Force
+                                        Officer </option>
                                     @else
-                                    <option value="army" {{isset($officer->officer_remarks) ? ($officer->officer_remarks == 'army' ? 'selected' : '') : ''}}> Army Officer </option>
-                                    <option value="navy" {{isset($officer->officer_remarks) ? ($officer->officer_remarks == 'navy' ? 'selected' : '') : ''}}> Navy Officer </option>
-                                    <option value="airforce" {{isset($officer->officer_remarks) ? ($officer->officer_remarks == 'airforce' ? 'selected' : '') : ''}}> Air Force Officer </option>
+                                    <option value="army" {{isset($officer->officer_remarks) ? ($officer->officer_remarks
+                                        == 'army' ? 'selected' : '') : ''}}> Army Officer </option>
+                                    <option value="navy" {{isset($officer->officer_remarks) ? ($officer->officer_remarks
+                                        == 'navy' ? 'selected' : '') : ''}}> Navy Officer </option>
+                                    <option value="airforce" {{isset($officer->officer_remarks) ?
+                                        ($officer->officer_remarks == 'airforce' ? 'selected' : '') : ''}}> Air Force
+                                        Officer </option>
                                     @endif
                                 </select>
                                 <!-- <input name="officer_remarks" type="text" class="form-control" id="officer_remarks" placeholder="Force Type" value="{{isset($officer) ? $officer->officer_remarks : ''}}" required /> -->
                             </div>
                             <div class="mb-3">
                                 <label for="officer_picture" class="form-label">Picture</label>
-                                <input name="officer_picture" type="file" class="form-control" id="officer_picture" accept="image/png, image/jpeg">
-                                <input name="savedpicture" type="hidden" class="form-control" id="savedpicture" value="">
+                                <input name="officer_picture" type="file" class="form-control" id="officer_picture"
+                                    accept="image/png, image/jpeg">
+                                <input name="savedpicture" type="hidden" class="form-control" id="savedpicture"
+                                    value="">
                                 <div class="box-2">
                                     <div class="result"></div>
                                 </div>
-                                <div class="box-2 img-result {{isset($officer->officer_picture) ? ($officer?->officer_picture?->img_blob ? '' : 'hide') : ''}}">
-                                    <img class="cropped" src="{{isset($officer->officer_picture)? $officer?->officer_picture?->img_blob:''}}" alt="" />
+                                <div
+                                    class="box-2 img-result {{isset($officer->officer_picture) ? ($officer?->officer_picture?->img_blob ? '' : 'hide') : ''}}">
+                                    <img class="cropped"
+                                        src="{{isset($officer->officer_picture)? $officer?->officer_picture?->img_blob:''}}"
+                                        alt="" />
                                 </div>
                                 <div class="box">
                                     <div class="options hide">
@@ -120,8 +179,12 @@
                                 </object>
                                 @endif
                             </div> -->
-                            <input type="submit" name="submit" class="btn {{isset($officer->officer_uid)?'btn-success':'btn-primary'}}" value="{{isset($officer->officer_uid)?'Update Officer':'Add Officer'}}" />
-                            <input type="submit" name="submitMore" class="btn {{isset($officer->officer_uid)?'btn-primary':'btn-success'}}" value="{{isset($officer->officer_uid)?'Update Officer & More':'Add Officer & More'}}" />
+                            <input type="submit" name="submit"
+                                class="btn {{isset($officer->officer_uid)?'btn-success':'btn-primary'}}"
+                                value="{{isset($officer->officer_uid)?'Update Officer':'Add Officer'}}" />
+                            <input type="submit" name="submitMore"
+                                class="btn {{isset($officer->officer_uid)?'btn-primary':'btn-success'}}"
+                                value="{{isset($officer->officer_uid)?'Update Officer & More':'Add Officer & More'}}" />
                         </fieldset>
                     </form>
                 </div>
