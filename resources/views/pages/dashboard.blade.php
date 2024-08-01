@@ -1,7 +1,7 @@
 @auth
 @extends('layouts.layout')
 @section("content")
-@if(session()->get('user')->roles[0]->name =="admin")
+@if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="dho")
 <div class="row">
     <div class="col-lg-12 d-flex align-items-strech">
         <div class="card w-100">
