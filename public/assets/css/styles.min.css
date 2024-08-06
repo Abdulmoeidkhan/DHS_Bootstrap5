@@ -16832,7 +16832,7 @@ fieldset:disabled .btn {
     }
     #main-wrapper[data-layout="vertical"][data-header-position="fixed"]
         .app-header {
-        width: calc(100% - 350px);
+        width: calc(100% - 250px);
     }
     #main-wrapper[data-layout="vertical"][data-sidebartype="full"]
         .body-wrapper {

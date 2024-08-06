@@ -31,7 +31,6 @@
                     </thead>
                     <tbody>
                         @foreach($users as $index => $user)
-                        {{$user}}
                         <tr>
                             <td class="border-bottom-0">
                                 <h6 class="fw-semibold mb-0">{{$index+1}}</h6>

@@ -180,7 +180,7 @@ $(function () {
   axios.get('/getFlightsSummary')
     .then(function (response) {
       let data = response.data;
-      console.log(data)
+      // console.log(data)
       var intlDelegation = {
         color: "#adb5bd",
         series: data.values,
@@ -241,50 +241,50 @@ $(function () {
   // =====================================
   // Earning
   // =====================================
-  var earning = {
-    chart: {
-      id: "sparkline3",
-      type: "area",
-      height: 60,
-      sparkline: {
-        enabled: true,
-      },
-      group: "sparklines",
-      fontFamily: "Plus Jakarta Sans', sans-serif",
-      foreColor: "#adb0bb",
-    },
-    series: [
-      {
-        name: "Earnings",
-        color: "#49BEFF",
-        data: [25, 66, 20, 40, 12, 58, 20],
-      },
-    ],
-    stroke: {
-      curve: "smooth",
-      width: 2,
-    },
-    fill: {
-      colors: ["#f3feff"],
-      type: "solid",
-      opacity: 0.05,
-    },
+  // var earning = {
+  //   chart: {
+  //     id: "sparkline3",
+  //     type: "area",
+  //     height: 60,
+  //     sparkline: {
+  //       enabled: true,
+  //     },
+  //     group: "sparklines",
+  //     fontFamily: "Plus Jakarta Sans', sans-serif",
+  //     foreColor: "#adb0bb",
+  //   },
+  //   series: [
+  //     {
+  //       name: "Earnings",
+  //       color: "#49BEFF",
+  //       data: [25, 66, 20, 40, 12, 58, 20],
+  //     },
+  //   ],
+  //   stroke: {
+  //     curve: "smooth",
+  //     width: 2,
+  //   },
+  //   fill: {
+  //     colors: ["#f3feff"],
+  //     type: "solid",
+  //     opacity: 0.05,
+  //   },
 
-    markers: {
-      size: 0,
-    },
-    tooltip: {
-      theme: "dark",
-      fixed: {
-        enabled: true,
-        position: "right",
-      },
-      x: {
-        show: false,
-      },
-    },
-  };
-  new ApexCharts(document.querySelector("#earning"), earning).render();
+  //   markers: {
+  //     size: 0,
+  //   },
+  //   tooltip: {
+  //     theme: "dark",
+  //     fixed: {
+  //       enabled: true,
+  //       position: "right",
+  //     },
+  //     x: {
+  //       show: false,
+  //     },
+  //   },
+  // };
+  // new ApexCharts(document.querySelector("#earning"), earning).render();
 
   // =====================================
   // Officer Chart
@@ -293,7 +293,7 @@ $(function () {
   axios.get('/getOfficerSummary')
     .then(function (response) {
       let data = response.data;
-      console.log(data)
+      // console.log(data)
       var options = {
         series: [{
           name: 'Assigned',
@@ -426,19 +426,21 @@ window.addEventListener('beforeinstallprompt', (event) => {
 
 function showInstallButton() {
   const installButton = document.getElementById('installButton'); // Replace with your button ID
-  installButton.style.display = 'block';
-  installButton.addEventListener('click', () => {
-    installButton.style.display = 'none';
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        console.log('User accepted the install prompt');
-      } else {
-        console.log('User dismissed the install prompt');
-      }
-      deferredPrompt = null;
+  if (installButton) {
+    installButton.style.display = 'block';
+    installButton.addEventListener('click', () => {
+      installButton.style.display = 'none';
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the install prompt');
+        } else {
+          console.log('User dismissed the install prompt');
+        }
+        deferredPrompt = null;
+      });
     });
-  });
+  };
 }
 
 // Custom Function for returning array with values of count
