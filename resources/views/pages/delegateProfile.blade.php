@@ -109,8 +109,8 @@
             <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">Delegate Information</h5>
                 <div class="table-responsive">
-                    <form name="delegationInfo" id="delegationInfo" method="POST" action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.updateDelegation'):''}}">
-                        <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
+                    <form name="delegationInfo" id="delegationInfo" method="POST" action="{{session()->get('user')->roles[0]->name == 'admin' ? route('request.updateDelegation'):''}}">
+                        <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' ? '' : 'disabled' ?>>
                             <legend>Delegate Information</legend>
                             @csrf
                             <div class="mb-3">
