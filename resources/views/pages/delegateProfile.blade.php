@@ -34,11 +34,15 @@
                 <div class="mb-4">
                     <h5 class="card-title fw-semibold">Delegate Picture</h5>
                 </div>
-                <img src="{{$delegateImage?$delegateImage->img_blob:asset('assets/images/profile/user-1.jpg')}}" width="200px" height="200px" class="rounded mx-auto d-block" alt="Delegate Profile Picture">
+                <img src="{{$delegateImage?$delegateImage->img_blob:asset('assets/images/profile/user-1.jpg')}}"
+                    width="200px" height="200px" class="rounded mx-auto d-block" alt="Delegate Profile Picture">
                 <br />
-                <form action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ?route('request.imageUpload'):''}}" method="post" enctype="multipart/form-data">
+                <form
+                    action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ?route('request.imageUpload'):''}}"
+                    method="post" enctype="multipart/form-data">
                     @csrf
-                    <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
+                    <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' ||
+                        session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
                         <!-- <div class="input-group">
                             <input type="hidden" value="{{$delegate->delegates_uid}}" name="id" />
                             <input type="file" class="form-control" id="uploadFile" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="image" accept="image/png, image/jpeg" required>
@@ -47,13 +51,18 @@
                         <input type="hidden" value="{{$delegate->delegates_uid}}" name="id" required />
                         <div class="mb-3">
                             <label for="delegation_picture" class="form-label">Picture</label>
-                            <input name="delegation_picture" type="file" class="form-control" id="delegation_picture" accept="image/png, image/jpeg" required>
-                            <input name="savedpicture" type="hidden" class="form-control" id="savedpicture" value="" required>
+                            <input name="delegation_picture" type="file" class="form-control" id="delegation_picture"
+                                accept="image/png, image/jpeg" required>
+                            <input name="savedpicture" type="hidden" class="form-control" id="savedpicture" value=""
+                                required>
                             <div class="box-2">
                                 <div class="result"></div>
                             </div>
-                            <div class="box-2 img-result {{isset($delegationHead->delegation_picture) ? ($delegationHead?->delegation_picture?->img_blob ? '' : 'hide') : ''}}">
-                                <img class="cropped" src="{{isset($delegationHead->delegation_picture)? $delegationHead?->delegation_picture?->img_blob:''}}" alt="" />
+                            <div
+                                class="box-2 img-result {{isset($delegationHead->delegation_picture) ? ($delegationHead?->delegation_picture?->img_blob ? '' : 'hide') : ''}}">
+                                <img class="cropped"
+                                    src="{{isset($delegationHead->delegation_picture)? $delegationHead?->delegation_picture?->img_blob:''}}"
+                                    alt="" />
                             </div>
                             <div class="box">
                                 <div class="options hide">
@@ -71,29 +80,39 @@
                 <div class="mb-4">
                     <h5 class="card-title fw-semibold">Rep Picture</h5>
                 </div>
-                <img src="{{$repImage?$repImage->img_blob:asset('assets/images/profile/user-1.jpg')}}" width="200px" height="200px" class="rounded mx-auto d-block" alt="User Profile Picture">
+                <img src="{{$repImage?$repImage->img_blob:asset('assets/images/profile/user-1.jpg')}}" width="200px"
+                    height="200px" class="rounded mx-auto d-block" alt="User Profile Picture">
                 <br />
-                <form action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ?route('request.imageUpload'):''}}" method="post" enctype="multipart/form-data">
+                <form
+                    action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ?route('request.imageUpload'):''}}"
+                    method="post" enctype="multipart/form-data">
                     @csrf
-                    <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
+                    <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' ||
+                        session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
                         <!-- <div class="input-group">
                             <input type="file" class="form-control" id="uploadFile" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="image" accept="image/png, image/jpeg" required>
                         </div> -->
                         <input type="hidden" value="{{$rep->delegates_uid}}" name="id" required />
                         <div class="mb-3">
                             <label for="rep_picture" class="form-label">Picture</label>
-                            <input name="rep_picture" type="file" class="form-control" id="rep_picture" accept="image/png, image/jpeg" required>
-                            <input name="savedpicture" type="hidden" class="form-control" id="savedpicture-2" value="" required>
+                            <input name="rep_picture" type="file" class="form-control" id="rep_picture"
+                                accept="image/png, image/jpeg" required>
+                            <input name="savedpicture" type="hidden" class="form-control" id="savedpicture-2" value=""
+                                required>
                             <div class="box-2">
                                 <div class="result-representatives"></div>
                             </div>
-                            <div class="box-2 img-result-representatives {{isset($delegationHead->delegation_picture) ? ($delegationHead?->delegation_picture?->img_blob ? '' : 'hide') : ''}}">
-                                <img class="cropped-representatives" src="{{isset($delegationHead->delegation_picture)? $delegationHead?->delegation_picture?->img_blob:''}}" alt="" />
+                            <div
+                                class="box-2 img-result-representatives {{isset($delegationHead->delegation_picture) ? ($delegationHead?->delegation_picture?->img_blob ? '' : 'hide') : ''}}">
+                                <img class="cropped-representatives"
+                                    src="{{isset($delegationHead->delegation_picture)? $delegationHead?->delegation_picture?->img_blob:''}}"
+                                    alt="" />
                             </div>
                             <div class="box">
                                 <div class="options hide-representatives">
                                     <label>Width</label>
-                                    <input type="number" class="img-w-representatives" value="300" min="100" max="1200" required />
+                                    <input type="number" class="img-w-representatives" value="300" min="100" max="1200"
+                                        required />
                                 </div>
                                 <button class="btn save-representatives hide-representatives">Save</button>
                             </div>
@@ -109,37 +128,46 @@
             <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">Delegate Information</h5>
                 <div class="table-responsive">
-                    <form name="delegationInfo" id="delegationInfo" method="POST" action="{{session()->get('user')->roles[0]->name == 'admin' ? route('request.updateDelegation'):''}}">
-                        <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' ? '' : 'disabled' ?>>
+                    <form name="delegationInfo" id="delegationInfo" method="POST"
+                        action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.updateDelegation'):''}}">
+                        <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' ||
+                            session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
                             <legend>Delegate Information</legend>
                             @csrf
                             <div class="mb-3">
                                 <label for="self_rank" class="form-label">Rank</label>
-                                <select name="self_rank" id="self_rank" class="form-select">
+                                <select name={{session()->get('user')->roles[0]->name == 'delegate'?'':'self_rank'}}
+                                    id="self_rank" class="form-select" {{session()->get('user')->roles[0]->name == 'delegate'?'disabled':''}}>
                                     <option value="" selected disabled hidden> Select Rank </option>
                                     @foreach (\App\Models\Rank::all() as $renderRank)
-                                    <option value="{{$renderRank->ranks_uid}}" <?php echo $delegate->rank == $renderRank->ranks_uid ? 'selected' : '' ?>>{{$renderRank->ranks_name}}</option>
+                                    <option value="{{$renderRank->ranks_uid}}" <?php echo $delegate->rank ==
+                                        $renderRank->ranks_uid ? 'selected' : '' ?>>{{$renderRank->ranks_name}}</option>
                                     @endforeach
                                 </select>
                                 <!-- <input name="rank" type="text" class="form-control" id="rank" placeholder="Rank" value="{{$delegate->rank}}"> -->
                             </div>
                             <div class="mb-3">
                                 <label for="self_first_Name" class="form-label">First Name</label>
-                                <input name="self_first_Name" type="text" class="form-control" id="self_first_Name" placeholder="First Name" value="{{$delegate->first_Name}}" required>
+                                <input name="{{session()->get('user')->roles[0]->name == 'delegate'?'':'self_first_Name'}}" type="text" class="form-control" id="self_first_Name"
+                                    placeholder="First Name" value="{{$delegate->first_Name}}" {{session()->get('user')->roles[0]->name == 'delegate'?'disabled':''}} required>
                             </div>
                             <div class="mb-3">
                                 <label for="self_last_Name" class="form-label">Last Name</label>
-                                <input name="self_last_Name" type="text" class="form-control" id="self_last_Name" placeholder="Last Name" value="{{$delegate->last_Name}}" required>
+                                <input name="{{session()->get('user')->roles[0]->name == 'delegate'?'':'self_last_Name'}}" type="text" class="form-control" id="self_last_Name"
+                                    placeholder="Last Name" value="{{$delegate->last_Name}}" {{session()->get('user')->roles[0]->name == 'delegate'?'disabled':''}} required>
                             </div>
                             <div class="mb-3">
                                 <label for="self_designation" class="form-label">Designation</label>
-                                <input name="self_designation" type="text" class="form-control" id="self_designation" placeholder="Designation" value="{{$delegate->designation}}" required>
+                                <input name="{{session()->get('user')->roles[0]->name == 'delegate'?'':'self_designation'}}" type="text" class="form-control" id="self_designation"
+                                    placeholder="Designation" value="{{$delegate->designation}}" {{session()->get('user')->roles[0]->name == 'delegate'?'disabled':''}}  required>
                             </div>
                             <div class="mb-3">
                                 <label for="golf_player" class="form-label">Golf Player</label>
                                 <select name="golf_player" id="golf_player" class="form-select">
-                                    <option value="0" {{isset($delegationData)?($delegationData->golf_player == 0 ? 'Selected':''):''}}> No </option>
-                                    <option value="1" {{isset($delegationData)?($delegationData->golf_player == 1 ? 'Selected':''):''}}> Yes </option>
+                                    <option value="0" {{isset($delegationData)?($delegationData->golf_player == 0 ?
+                                        'Selected':''):''}}> No </option>
+                                    <option value="1" {{isset($delegationData)?($delegationData->golf_player == 1 ?
+                                        'Selected':''):''}}> Yes </option>
                                 </select>
                             </div>
                             <!-- <div class="mb-3">
@@ -148,19 +176,24 @@
                             </div> -->
                             <div class="mb-3">
                                 <label for="delegation_response" class="form-label">Delegation Response</label>
-                                <select class="form-select" aria-label="Delegation Response" id="delegation_response" name="delegation_response" required>
-                                    <option value="Accepted" {{isset($delegationData)?($delegationData->delegation_response == 'Accepted' ? 'Selected':''):''}}> Accepted </option>
-                                    <option value="Regretted" {{isset($delegationData)?($delegationData->delegation_response == 'Regretted' ? 'Selected':''):''}}> Regretted </option>
+                                <select class="form-select" aria-label="Delegation Response" id="delegation_response"
+                                    name="delegation_response" required>
+                                    <option value="Accepted" {{isset($delegationData)?($delegationData->
+                                        delegation_response == 'Accepted' ? 'Selected':''):''}}> Accepted </option>
+                                    <option value="Regretted" {{isset($delegationData)?($delegationData->
+                                        delegation_response == 'Regretted' ? 'Selected':''):''}}> Regretted </option>
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <input class="form-check-input" type="radio" name="self" id="self" value="1" <?php echo $delegate->self ? 'checked' : '' ?>>
+                                <input class="form-check-input" type="radio" name="self" id="self" value="1" <?php echo
+                                    $delegate->self ? 'checked' : '' ?>>
                                 <label class="form-check-label" for="self">
                                     Self
                                 </label>
                             </div>
                             <div class="mb-3">
-                                <input class="form-check-input" type="radio" name="self" id="rep" value="0" <?php echo !$delegate->self ? 'checked' : '' ?>>
+                                <input class="form-check-input" type="radio" name="self" id="rep" value="0" <?php echo
+                                    !$delegate->self ? 'checked' : '' ?>>
                                 <label class="form-check-label" for="rep">
                                     Rep
                                 </label>
@@ -170,21 +203,26 @@
                                 <select name="rep_rank" id="rep_rank" class="form-select">
                                     <option value="" selected disabled hidden> Select Rank </option>
                                     @foreach (\App\Models\Rank::all() as $renderRank)
-                                    <option value="{{$renderRank->ranks_uid}}" {{isset($rep)?($rep->rank == $renderRank->ranks_uid ? 'Selected':''):''}}>{{$renderRank->ranks_name}}</option>
+                                    <option value="{{$renderRank->ranks_uid}}" {{isset($rep)?($rep->rank ==
+                                        $renderRank->ranks_uid ? 'Selected':''):''}}>{{$renderRank->ranks_name}}
+                                    </option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="rep_first_Name" class="form-label">Rep First Name</label>
-                                <input name="rep_first_Name" type="text" class="form-control" id="rep_first_Name" placeholder="Rep First Name" value="{{$rep->first_Name}}">
+                                <input name="rep_first_Name" type="text" class="form-control" id="rep_first_Name"
+                                    placeholder="Rep First Name" value="{{$rep->first_Name}}">
                             </div>
                             <div class="mb-3">
                                 <label for="rep_last_Name" class="form-label">Rep Last Name</label>
-                                <input name="rep_last_Name" type="text" class="form-control" id="rep_last_Name" placeholder="Rep Last Name" value="{{$rep->last_Name}}">
+                                <input name="rep_last_Name" type="text" class="form-control" id="rep_last_Name"
+                                    placeholder="Rep Last Name" value="{{$rep->last_Name}}">
                             </div>
                             <div class="mb-3">
                                 <label for="rep_designation" class="form-label">Designation</label>
-                                <input name="rep_designation" type="text" class="form-control" id="rep_designation" value="{{isset($rep)?$rep->designation :''}}" placeholder="Rep Designation">
+                                <input name="rep_designation" type="text" class="form-control" id="rep_designation"
+                                    value="{{isset($rep)?$rep->designation :''}}" placeholder="Rep Designation">
                             </div>
                             <input type="hidden" name="delegation_uid" value="{{$delegate->delegation}}" />
                             <input type="hidden" name="self_delegate_uid" value="{{$delegate->delegates_uid}}" />
@@ -202,20 +240,27 @@
             <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">Programs</h5>
                 <div class="table-responsive">
-                    <form name="programInfo" id="programInfo" method="POST" action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.setInterests'):''}}">
-                        <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
+                    <form name="programInfo" id="programInfo" method="POST"
+                        action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.setInterests'):''}}">
+                        <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' ||
+                            session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
                             <legend>Programs</legend>
                             @csrf
                             @foreach (\App\Models\Program::all() as $key=>$program)
                             <div class="mb-3">
-                                <input name="program_uid-{{$key}}" type="checkbox" class="form-check-input" id="program-{{$key}}" value="{{$program->program_uid}}" <?php echo in_array($program->program_uid, $delegate->interests) ? 'checked' : '' ?>>
+                                <input name="program_uid-{{$key}}" type="checkbox" class="form-check-input"
+                                    id="program-{{$key}}" value="{{$program->program_uid}}" <?php echo
+                                    in_array($program->program_uid, $delegate->interests) ? 'checked' : '' ?>>
                                 &nbsp;
-                                <label for="program-{{$key}}" class="form-label"><b>{{$program->program_name}}</b> (Day-{{$program->program_day}} &nbsp; {{$program->program_start_time}}-{{$program->program_end_time}} )</label>
+                                <label for="program-{{$key}}" class="form-label"><b>{{$program->program_name}}</b>
+                                    (Day-{{$program->program_day}} &nbsp;
+                                    {{$program->program_start_time}}-{{$program->program_end_time}} )</label>
                             </div>
                             @endforeach
                             <input type="hidden" name="guest_uid" value="{{$delegate->delegates_uid}}" />
                             <input type="hidden" name="delegation_uid" value="{{$delegate->delegation}}" />
-                            @if(session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate')
+                            @if(session()->get('user')->roles[0]->name == 'admin' ||
+                            session()->get('user')->roles[0]->name == 'delegate')
                             <input type="submit" name="submit" class="btn btn-primary" value="Update Interest" />
                             @endif
                         </fieldset>
@@ -234,11 +279,15 @@
                                         {{$feedback->feedback}}
                                     </span>
                                 </div>
-                                <form name="feedbackDelete" class="col" id="feedbackDelete" method="POST" action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.deleteFeedback'):''}}">
+                                <form name="feedbackDelete" class="col" id="feedbackDelete" method="POST"
+                                    action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.deleteFeedback'):''}}">
                                     @csrf
                                     <input type="hidden" name="id" value="{{$feedback->feedback_uid}}" />
                                     <button type="submit" class="btn btn-outline-badar float-end border-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x"
+                                            width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5"
+                                            stroke="currentColor" fill="none" stroke-linecap="round"
+                                            stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                             <path d="M18 6l-12 12" />
                                             <path d="M6 6l12 12" />
@@ -250,16 +299,20 @@
                         @endforeach
                     </ul>
                     @else
-                    <form name="feedback" id="feedback" method="POST" action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.setFeedback'):''}}">
-                        <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
+                    <form name="feedback" id="feedback" method="POST"
+                        action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.setFeedback'):''}}">
+                        <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' ||
+                            session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
                             <legend>Feedback</legend>
                             @csrf
                             <div class="mb-3">
-                                <input type="text" class="form-control" name="feedback" id="feedback" placeholder="feedback" value="" />
+                                <input type="text" class="form-control" name="feedback" id="feedback"
+                                    placeholder="feedback" value="" />
                             </div>
                             <input type="hidden" name="guest_uid" value="{{$delegate->delegates_uid}}" />
                             <input type="hidden" name="delegation_uid" value="{{$delegate->delegation}}" />
-                            @if(session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate')
+                            @if(session()->get('user')->roles[0]->name == 'admin' ||
+                            session()->get('user')->roles[0]->name == 'delegate')
                             <input type="submit" name="submit" class="btn btn-primary" value="Add Feedback" />
                             @endif
                         </fieldset>
@@ -269,16 +322,20 @@
                 <br />
                 <div class="table-responsive">
                     <h5 class="card-title fw-semibold mb-4">Wish List</h5>
-                    <form name="wishInfo" id="wishInfo" method="POST" action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.setWish'):''}}">
-                        <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
+                    <form name="wishInfo" id="wishInfo" method="POST"
+                        action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.setWish'):''}}">
+                        <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' ||
+                            session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
                             <legend>Wishes</legend>
                             @csrf
                             <div class="mb-3">
-                                <input type="text" class="form-control" name="wish" id="wish" placeholder="Wish" value="" />
+                                <input type="text" class="form-control" name="wish" id="wish" placeholder="Wish"
+                                    value="" />
                             </div>
                             <input type="hidden" name="guest_uid" value="{{$delegate->delegates_uid}}" />
                             <input type="hidden" name="delegation_uid" value="{{$delegate->delegation}}" />
-                            @if(session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate')
+                            @if(session()->get('user')->roles[0]->name == 'admin' ||
+                            session()->get('user')->roles[0]->name == 'delegate')
                             <input type="submit" name="submit" class="btn btn-primary" value="Add Wish" />
                             @endif
                         </fieldset>
@@ -293,11 +350,15 @@
                                         {{$wish->wish}}
                                     </span>
                                 </div>
-                                <form name="wishDelete" class="col" id="wishDelete" method="POST" action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.deleteWish'):''}}">
+                                <form name="wishDelete" class="col" id="wishDelete" method="POST"
+                                    action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.deleteWish'):''}}">
                                     @csrf
                                     <input type="hidden" name="id" value="{{$wish->wish_uid}}" />
                                     <button type="submit" class="btn btn-outline-badar float-end border-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x"
+                                            width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5"
+                                            stroke="currentColor" fill="none" stroke-linecap="round"
+                                            stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                             <path d="M18 6l-12 12" />
                                             <path d="M6 6l12 12" />

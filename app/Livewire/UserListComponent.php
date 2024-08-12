@@ -11,11 +11,16 @@ use Livewire\Attributes\On;
 class UserListComponent extends Component
 {
     public $users;
-    // public $code;
+    public $code;
 
     public function mount()
     {
         $this->users = User::with('roles')->where('id', '!=', Auth::user()->id)->get();
+        foreach ($this->users as $index => $user) {
+            if ($user->roles[0]->name == 'delegate') {
+                $this->users[$index]->code=Delegation::where('user_uid',$user->uid)->first('delegationCode');
+            }
+        }
         // foreach ($this->users as $index => $user) {
         //     switch ($this->users[$index]->roles[0]->display_name) {
         //         case "Delegate":

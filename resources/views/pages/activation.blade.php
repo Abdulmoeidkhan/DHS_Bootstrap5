@@ -6,6 +6,11 @@
         background: -webkit-linear-gradient(to right, #EAECC6, #2BC0E4);
         background: linear-gradient(to right, #EAECC6, #2BC0E4);
     }
+    /* .gradient-class {
+    background: #336600;
+    background: -webkit-linear-gradient(to left, #336600, #70ff88);
+    background: linear-gradient(to left, #336600, #70ff88);
+  } */
 </style>
 <div class="page-wrapper gradient-class" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6"
     data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
