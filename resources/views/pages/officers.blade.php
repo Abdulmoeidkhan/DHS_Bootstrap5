@@ -35,6 +35,7 @@
                             <th data-filter-control="input" data-field="officerCode" data-sortable="true" data-formatter="operateText">Code</th>
                             <th data-filter-control="input" data-field="officer_address" data-sortable="true" data-formatter="operateText">Address</th>
                             <th data-filter-control="input" data-field="officer_remarks" data-sortable="true" data-formatter="operateText">Forces Type</th>
+                            <th data-filter-control="input" data-field="officer_picture" data-sortable="true" data-formatter="operateBoolean">Picture Updated</th>
                             <th data-filter-control="input" data-field="officer_picture.img_blob" data-formatter="operatePicture">Picture</th>
                             <th data-filter-control="input" data-field="officer_uid" data-formatter="operateProfile">Actions</th>
                         </tr>
@@ -87,6 +88,12 @@
     function operateText(value, row, index) {
         return value ? value : "N/A"
     }
+
+    function operateBoolean(value, row, index) {
+        // console.log(value)
+        return value?.img_blob ? 'Yes' : 'No';
+    }
+
 </script>
 @include("layouts.tableFoot")
 @endsection
