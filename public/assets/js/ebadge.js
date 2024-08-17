@@ -3,6 +3,7 @@ $("#barCode").barcode(
     "code128",
     {
         showHRI: false,
+        barHeight: 40,
         barWidth: 3,
     }
 );

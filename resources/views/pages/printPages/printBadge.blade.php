@@ -21,7 +21,7 @@
 </head>
 
 <body class="antialiased">
-    <div class="container">
+    <div class="container-fluid">
         <br />
         <div class="row">
             <div class="btn-parent d-flex justify-content-center">
@@ -30,31 +30,34 @@
         </div>
         <br />
         <br />
-        <div class="row">
-            <div class="d-flex justify-content-evenly align-items-center">
-                <div class="card-border ">
+        <div class="row my-5">
+            <div class="d-flex align-items-center my-3">
+                <div class="card-border">
                     <div class="logo-child">
                         <div>
-                            <h5 class="text-center">
+                            <h4 class="text-left mx-3">
                                 {{$delegate->rank->ranks_name}} {{$delegate->first_Name}}
                                 </br>
                                 {{$delegate->last_Name}}
-                            </h5>
+                            </h4>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <div id="barCode" custom-id="43251"></div>
+                    {{-- {{$delegate}} --}}
+                    <div class="d-flex my-1">
+                        <div id="barCode" custom-id="{{$delegate->delegateCode}}"></div>
                     </div>
                     {{-- <h2 style="text-transform:uppercase; font-weight:700;" class="text-center">
                         {{$delegation->country}}
                     </h2> --}}
-                    {{$delegate}}
-                    <h6 style="text-transform: uppercase;" class="text-center">/{{$delegation->country}}/{{$delegation->delegationCode}} </h6>
+                    <h6 style="text-transform: uppercase;" class="text-center mx-3">
+                        {{isset($delegate->flight->passport)?$delegate->flight->passport:''}}/{{$delegation->country}}/{{$delegate->delegateCode}}
+                    </h6>
                 </div>
-                <div class="card-border">
-                    <div class="logo-child">
+                {{$delegate->passport}}
+                <div class="card-border mx-4">
+                    <div class="logo-child mx-5">
                         @if($delegate->image)
-                        <img src="{{$delegate->image?$delegate->image->img_blob:''}}" style="height: 80px; width: 80px;"
+                        <img src="{{$delegate->image?$delegate->image->img_blob:''}}" style="height: 120px; width: 100px;"
                             class="img-fluid" alt="" />
                         @endif
                     </div>

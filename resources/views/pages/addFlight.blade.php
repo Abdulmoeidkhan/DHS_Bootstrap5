@@ -26,7 +26,7 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="arrival_date" class="form-label">Arrival Date</label>
-                                            <input name="arrival_date" type="date" class="form-control" id="arrival_date" value="{{$flight?->arrival_date}}" placeholder="Arrival Date" required>
+                                            <input name="arrival_date" type="date" class="form-control" id="arrival_date" value="{{$flight?->arrival_date}}" placeholder="Arrival Date">
                                         </div>
                                     </div>
                                     <div class="col-md-4">

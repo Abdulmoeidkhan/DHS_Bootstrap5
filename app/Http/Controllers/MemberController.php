@@ -32,6 +32,7 @@ class MemberController extends Controller
         $image->uid = $id;
         $image->save();
     }
+
     protected function documentUpload($file, $id)
     {
         $pdfBlob = file_get_contents($file->getRealPath());
@@ -57,11 +58,27 @@ class MemberController extends Controller
         $updatePdfBlob = Document::where('uid', $id)->first() ? Document::where('uid', $id)->update(['pdf_blob' => $pdfBlob]) : $this->documentUpload($file, $id);
         return $updatePdfBlob;
     }
+
     protected function imageBlobUpdate($file, $id)
     {
         $imageBlob = $file;
         $updateImageBlob = ImageBlob::where('uid', $id)->first() ? ImageBlob::where('uid', $id)->update(['img_blob' => $imageBlob]) : $this->imageBlobUpload($file, $id);
         return $updateImageBlob;
+    }
+
+    protected function badge($characters, $prefix)
+    {
+        $possible = '0123456789';
+        $code = $prefix;
+        $i = 0;
+        while ($i < $characters) {
+            $code .= substr($possible, mt_rand(0, strlen($possible) - 1), 1);
+            if ($i < $characters - 1) {
+                $code .= "";
+            }
+            $i++;
+        }
+        return $code;
     }
 
     public function render($id)
@@ -96,7 +113,7 @@ class MemberController extends Controller
         }
         return $delegates;
     }
-    
+
     public function specificMembersData(Request $req, $id)
     {
         $delegationUid = Delegation::where('delegates', $id)->first('uid');
@@ -120,6 +137,7 @@ class MemberController extends Controller
         $delegate->last_Name = $req->lastName;
         $delegate->designation = $req->designation;
         $delegate->delegation_type = $req->delegation_type;
+        $delegate->delegateCode = $this->badge(8, "DLG");
         // $delegate->organistaion = $req->organistaion;
         // $delegate->passport = $req->passport;
         // return $req->all();
@@ -128,10 +146,10 @@ class MemberController extends Controller
             $imgSaved = $req->savedpicture ? $this->imageBlobUpload($req->savedpicture, $delegate->delegates_uid) : '';
             $req->file('pdf') ? $this->documentUpload($req->file('pdf'), $delegate->delegates_uid) : '';
             if ($savedMember) {
-                return redirect()->route('pages.members',$req->delegation)->with('message', 'Member Updated Successfully');
+                return redirect()->route('pages.members', $req->delegation)->with('message', 'Member Updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  redirect()->route('pages.members',$req->delegation)->with('error', $exception->errorInfo[2]);
+            return  redirect()->route('pages.members', $req->delegation)->with('error', $exception->errorInfo[2]);
         }
     }
     public function updateMemberRequest(Request $req, $id)

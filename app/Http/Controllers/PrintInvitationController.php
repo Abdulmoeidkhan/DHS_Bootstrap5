@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Delegate;
+use App\Models\DelegateFlight;
 use App\Models\Delegation;
 use App\Models\ImageBlob;
 use App\Models\Rank;
@@ -28,6 +29,8 @@ class PrintInvitationController extends Controller
         $delegation = Delegation::where('uid', $delegate->delegation)->first();
         $delegate->rank = Rank::where('ranks_uid', $delegate->rank)->first('ranks_name');
         $delegate->image = ImageBlob::where('uid', $delegate->delegates_uid)->first();
+        $delegate->flight = DelegateFlight::where('delegation_uid', $id)->orWhere('delegate_uid', $id)->first();
+        // return $delegate;
         return view('pages.printPages.printBadge', ['delegate' => $delegate, 'delegation' => $delegation]);
     }
 
