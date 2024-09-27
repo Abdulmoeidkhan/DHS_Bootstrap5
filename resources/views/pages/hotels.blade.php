@@ -189,6 +189,7 @@
     }
 
     function operateRoomType(value, row, index) {
+
         if (value) {
             return [
                 '<div class="left">',

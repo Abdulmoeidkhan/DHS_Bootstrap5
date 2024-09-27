@@ -32,6 +32,7 @@ class DelegationsPageController extends Controller
                 ->select('delegations.*', 'delegates.first_Name', 'delegates.last_Name', 'delegates.rank', 'delegates.self', 'delegates.delegates_uid', 'delegates.designation', 'vips.vips_uid')
                 ->orderBy('vips.id', 'asc')
                 ->orderBy('delegations.country', 'asc')
+                ->take(1000)
                 ->get();
 
             foreach ($delegations as $key => $delegation) {

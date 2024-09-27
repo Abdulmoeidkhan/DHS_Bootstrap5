@@ -43,6 +43,13 @@ class ReportController extends Controller
             $countries[$countrieskey]->regretted = Delegation::where([['country', $country->country], ['delegation_response', 'Regretted']])->count();
             $countries[$countrieskey]->accepted = Delegation::where([['country', $country->country], ['delegation_response', 'Accepted']])->count();
             $countries[$countrieskey]->awaited = Delegation::where([['country', $country->country], ['delegation_response', 'Awaited']])->count();
+            $countries[$countrieskey]->uids = Delegation::where([['country', $country->country], ['delegation_response', 'Accepted']])->get('uid');
+            $tempMemberCount = [];
+            foreach ($countries[$countrieskey]->uids as $key => $uid) {
+                array_push($tempMemberCount, Delegate::where([['delegation', $uid->uid], ['self', 1], ['status', 1]])->count());
+            }
+            $countries[$countrieskey]->memberCount = $tempMemberCount;
+            $countries[$countrieskey]->memberCountTotal = array_sum($tempMemberCount);
         }
         return $countries;
     }
