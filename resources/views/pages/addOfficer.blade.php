@@ -103,8 +103,8 @@
                                 <label for="contact" class="form-label">Contact Number</label>
                                 <input name="officer_contact" type="tel" minlength='0' maxlength='14'
                                     class="form-control" id="contact" placeholder="Officer Contact Number"
-                                    value="{{isset($officer) ? $officer->officer_contact : ''}}" minlength='0'
-                                    maxlength='14' onchange="isContact('contact')" title="14 DIGIT PHONE NUMBET"
+                                    value="{{isset($officer) ? $officer->officer_contact : ''}}"
+                                    onchange="isContact('contact')" title="14 DIGIT PHONE NUMBET"
                                     data-inputmask="'mask': '+99-9999999999'" required />
                             </div>
                             <div class="mb-3">

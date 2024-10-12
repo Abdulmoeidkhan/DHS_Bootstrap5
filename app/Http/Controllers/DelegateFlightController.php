@@ -56,7 +56,7 @@ class DelegateFlightController extends Controller
             try {
                 $delegateFlightUpdate = DelegateFlight::where('delegate_uid', $req->delegate_uid)->update($delegateFlight);
                 if ($delegateFlightUpdate) {
-                    return redirect()->back()->with('message', "Flight Segment Successfully");
+                    return redirect()->route('pages.addFlight', $req->delegate_uid)->with('message', "Flight Segment Successfully");
                 }
             } catch (\Illuminate\Database\QueryException $exception) {
                 return  redirect()->route('pages.addFlight', $req->delegate_uid)->with('error', $exception->errorInfo[2]);

@@ -34,7 +34,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="contact" class="form-label">Contact Number</label>
-                                <input name="interpreter_contact" type="text" minlength='0' maxlength='11' class="form-control" id="contact" placeholder="Interpreter Contact Number" required/>
+                                <input name="interpreter_contact" type="text" minlength='0' maxlength='14' class="form-control" id="contact" placeholder="Interpreter Contact Number" required/>
                             </div>
                             <div class="mb-3">
                                 <label for="identity" class="form-label">Interpreter CNIC</label>

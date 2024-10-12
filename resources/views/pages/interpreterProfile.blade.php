@@ -69,7 +69,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="contact" class="form-label">Contact</label>
-                                <input name="interpreter_contact" type="text" minlength='0' maxlength='11' class="form-control" id="contact" placeholder="Interpreter Contact Number" value="{{$interpreter->interpreter_contact}}" required>    
+                                <input name="interpreter_contact" type="text" minlength='0' maxlength='14' class="form-control" id="contact" placeholder="Interpreter Contact Number" value="{{$interpreter->interpreter_contact}}" required>    
                             </div>
                             <div class="mb-3">
                                 <label for="interpreter_identity" class="form-label">Passport/Identity</label>

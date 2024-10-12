@@ -72,6 +72,12 @@ class HotelController extends Controller
         $hotel->hotel_code = $this->badge(8, "HL");
         foreach ($req->all() as $key => $value) {
             if ($key != 'submit' && $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
+                // if ($key == 'contact_number') {
+                //     $contact = str_replace('+', '', $value);
+                //     $contact = str_replace('-', '', $contact);
+                //     $hotel[$key] = $contact;
+                // } else {
+                // }
                 $hotel[$key] = $value;
             }
         }
@@ -352,9 +358,7 @@ class HotelController extends Controller
         // return $req->all();
     }
 
-    public function assignedRoomUpdate(Request $req)
-    {
-    }
+    public function assignedRoomUpdate(Request $req) {}
 
     public function addRoom(Request $req)
     {

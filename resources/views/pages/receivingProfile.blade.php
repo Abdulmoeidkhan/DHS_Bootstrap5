@@ -70,7 +70,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="contact" class="form-label">Contact</label>
-                    <input name="receiving_contact" type="text" minlength='0' maxlength='11' class="form-control" id="contact" placeholder="Receiving Officer Contact Number" value="{{$receiving->receiving_contact}}" required>
+                    <input name="receiving_contact" type="text" minlength='0' maxlength='14' class="form-control" id="contact" placeholder="Receiving Officer Contact Number" value="{{$receiving->receiving_contact}}" required>
                 </div>
                 <div class="mb-3">
                     <label for="receiving_identity" class="form-label">Passport</label>
