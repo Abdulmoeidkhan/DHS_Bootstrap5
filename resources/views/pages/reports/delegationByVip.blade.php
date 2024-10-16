@@ -53,15 +53,28 @@
     <div class="card w-100">
         <div class="card-body p-4">
             <div class="table-responsive">
-                <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.vipDelegationData')}}">
+                <table id="table" data-filter-control-multiple-search="true"
+                    data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
+                    data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true"
+                    data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true"
+                    data-show-pagination-switch="true" data-show-columns-toggle-all="true"
+                    data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.vipDelegationData')}}">
                     <thead>
                         <tr>
-                            <th data-width="50" data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
-                            <th data-filter-control="input" data-field="name.vips_designation" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Invited By</th>
-                            <th data-filter-control="input" data-field="count" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Invited</th>
-                            <th data-filter-control="input" data-field="accepted" data-sortable="true" data-fixed-columns="true" data-formatter="operateNumber">Accepted</th>
-                            <th data-filter-control="input" data-field="regretted" data-sortable="true" data-fixed-columns="true" data-formatter="operateNumber">Regretted</th>
-                            <th data-filter-control="input" data-field="awaited" data-sortable="true" data-fixed-columns="true" data-formatter="operateNumber">Awaited</th>
+                            <th data-width="50" data-filter-control="input" data-field="SNO"
+                                data-formatter="operateSerial">S.No.</th>
+                            <th data-filter-control="input" data-field="name.vips_designation" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operateText">Invited By</th>
+                            <th data-filter-control="input" data-field="count" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operateText">Invited</th>
+                            <th data-filter-control="input" data-field="accepted" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operateNumber">Accepted</th>
+                            <th data-filter-control="input" data-field="regretted" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operateNumber">Regretted</th>
+                            <th data-filter-control="input" data-field="awaited" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operateNumber">Awaited</th>
+                            <th data-filter-control="input" data-field="vips_uid" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operatePerc">Ratio</th>
                         </tr>
                     </thead>
                 </table>
@@ -80,6 +93,11 @@
 
     function operateNumber(value, row, index) {
         return value ? value : 0
+    }
+    function operatePerc(value,row,index) {
+        
+        return Math.ceil(((row.accepted + row.regretted)/row.count)*100);
+        
     }
 </script>
 @include("layouts.tableFoot")

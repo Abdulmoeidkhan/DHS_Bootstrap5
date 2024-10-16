@@ -39,7 +39,7 @@
                     data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter=","
                     data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true"
                     data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true"
-                    data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getDelegates',1)}}">
+                    data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegates',1)}}">
                     <thead>
                         <tr>
                             <th data-formatter="operateSerial" data-filter-control="input">S.No.</th>

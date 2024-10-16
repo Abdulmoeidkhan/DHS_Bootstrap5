@@ -51,6 +51,18 @@ class ReportController extends Controller
             $countries[$countrieskey]->memberCount = $tempMemberCount;
             $countries[$countrieskey]->memberCountTotal = array_sum($tempMemberCount);
         }
+
+        if ($countries->count() > 0) {
+            $countries[$countries->count()] = [
+                'country' => 'Total',
+                'count' => $countries->sum('count'),
+                'regretted' => $countries->sum('regretted'),
+                'accepted' => $countries->sum('accepted'),
+                'awaited' => $countries->sum('awaited'),
+                'memberCountTotal' => $countries->sum('memberCountTotal'),
+            ];
+        }
+
         return $countries;
     }
 
@@ -84,6 +96,15 @@ class ReportController extends Controller
             $invitees[$inviteeskey]->awaited = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Awaited']])->count();
         }
 
+        if ($invitees->count() > 0) {
+            $invitees[$invitees->count()] = [
+                'name.vips_designation' => 'Total',
+                'count' => $invitees->sum('count'),
+                'regretted' => $invitees->sum('regretted'),
+                'accepted' => $invitees->sum('accepted'),
+                'awaited' => $invitees->sum('awaited'),
+            ];
+        }
         return $invitees;
     }
 
@@ -115,6 +136,18 @@ class ReportController extends Controller
             $countries[$countrieskey]->totalCount = $delegationsCount;
             $countries[$countrieskey]->vips = $vips;
         }
+
+        // if ($countries->count() > 0) {
+        //     $countries[$countries->count()] = [
+        //         'name.vips_designation' => 'Total',
+        //         'count' => $countries->sum('count'),
+        //         'awaited' => $countries->sum('awaited'),
+        //         'regretted' => $countries->sum('regretted'),
+        //         'selfSum' => $countries->sum('selfSum'),
+        //         'repSum' => $countries->sum('repSum'),
+        //         'totalCountOfDelegatesSum' => $countries->sum('totalCountOfDelegatesSum'),
+        //     ];
+        // }
         return $countries;
     }
 

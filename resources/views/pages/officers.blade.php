@@ -20,7 +20,7 @@
                        data-flat="true" data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true" data-toggle="table" 
                        data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" 
                        data-filter-control="true"
-                       data-page-list="[10, 25, 50, 100]" 
+                       data-page-list="[10, 25, 50, 100,200]" 
                        data-url="{{route('request.officerData',['params'=>0,'type'=>'all','force'=>session()->get('user')->roles[0]->name=='navy'||session()->get('user')->roles[0]->name=='airforce'||session()->get('user')->roles[0]->name=='army'?session()->get('user')->roles[0]->name:'all','id'=>null])}}">
                     <thead>
                         <tr>

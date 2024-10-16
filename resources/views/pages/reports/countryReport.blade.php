@@ -58,7 +58,7 @@
                     data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true"
                     data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true"
                     data-show-pagination-switch="true" data-show-columns-toggle-all="true"
-                    data-page-list="[10, 25, 50, 100]" data-url="{{route('request.countryData')}}">
+                    data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.countryData')}}">
                     <thead>
                         <tr>
                             <th data-width="50" data-filter-control="input" data-field="SNO"

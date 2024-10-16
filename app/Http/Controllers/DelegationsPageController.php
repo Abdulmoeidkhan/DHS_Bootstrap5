@@ -41,7 +41,7 @@ class DelegationsPageController extends Controller
                 $delegations[$key]->car = CarPlan::where([['delegation_uid', $delegation->uid]])->first(['car_category_a', 'car_category_b', 'car_plan_uid']);
                 // $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
                 $delegations[$key]->member_count = Delegate::where([['delegation', $delegation->uid], ['self', 1], ['status', 1]])->count();
-                $delegations[$key]->members = Delegate::where([['delegation', $delegation->uid], ['delegation_type', 'Member'], ['status', 1]])->get();
+                $delegations[$key]->members = Delegate::where([['delegation', $delegation->uid], ['delegation_type', 'Member'], ['status', 1]])->orWhere([['delegation', $delegation->uid], ['delegation_type', 'Rep'], ['status', 1]])->get();
                 $delegations[$key]->rankName = Rank::where('ranks_uid', $delegation->rank)->first('ranks_name');
                 $delegations[$key]->vips = Vips::where('vips_uid', $delegation->vips_uid)->first();
                 $delegations[$key]->vips->rank = Rank::where('ranks_uid', $delegations[$key]->vips->vips_rank)->first('ranks_name');
