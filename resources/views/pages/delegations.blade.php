@@ -85,7 +85,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-2">
+    <div class="col-lg-1">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card overflow-hidden mb-1">
@@ -157,9 +157,9 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-2">
+    <div class="col-lg-3">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-6">
                 <div class="card overflow-hidden mb-1">
                     <div class="card-body p-4">
                         <h5 class="card-title mb-9 fw-semibold">Deactivated</h5>
@@ -167,6 +167,20 @@
                             <div class="col-8">
                                 <h4 class="fw-semibold mb-3">
                                     {{App\Models\Delegation::where('delegation_status',0)->count()}}
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card overflow-hidden mb-1">
+                    <div class="card-body p-4">
+                        <h5 class="card-title mb-9 fw-semibold">Members</h5>
+                        <div class="row align-items-center">
+                            <div class="col-8">
+                                <h4 class="fw-semibold mb-3">
+                                    {{App\Http\Controllers\DelegationsPageController::memberCountAccepted()}}
                                 </h4>
                             </div>
                         </div>
@@ -286,6 +300,22 @@
                         <label for="liasonSelect" class="col-form-label">Car B :</label>
                         <select class="form-select" aria-label="Car B To Be Associate" id="carBSelect" name="carBSelect">
                             <option value="" selected disabled hidden> Select Car B To Be Associate </option>
+                            @foreach(\App\Models\Car::where([['car_status',1],['car_delegation',null],['car_category','a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->get() as $key=>$car)
+                            <option value="{{$car->car_uid}}">
+                                {{$car->car_makes.' '.$car->car_model.' '}}
+                                (
+                                @foreach(\App\Models\CarCategory::where('car_category_uid',$car->car_category)->get('car_category') as $carkey=>$carcat)
+                                {{$carcat->car_category}}
+                                @endforeach
+                                )
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="liasonSelect" class="col-form-label">Car C :</label>
+                        <select class="form-select" aria-label="Car C To Be Associate" id="carCSelect" name="carCSelect">
+                            <option value="" selected disabled hidden> Select Car C To Be Associate </option>
                             @foreach(\App\Models\Car::where([['car_status',1],['car_delegation',null],['car_category','a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->get() as $key=>$car)
                             <option value="{{$car->car_uid}}">
                                 {{$car->car_makes.' '.$car->car_model.' '}}
@@ -693,6 +723,7 @@
                                 <th data-filter-control="input" data-field="golf_player" data-sortable="true" data-formatter="statusFormatter">Golf Player</th>
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
+                                <th data-filter-control="input" data-field="car.car_category_c" data-sortable="true" data-formatter="operateText">Car C</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText">Standard</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
@@ -753,6 +784,7 @@
                                 <th data-filter-control="input" data-field="golf_player" data-sortable="true" data-formatter="statusFormatter">Golf Player</th>
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
+                                <th data-filter-control="input" data-field="car.car_category_c" data-sortable="true" data-formatter="operateText">Car C</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText">Standard</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
@@ -813,6 +845,7 @@
                                 <th data-filter-control="input" data-field="golf_player" data-sortable="true" data-formatter="statusFormatter">Golf Player</th>
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
+                                <th data-filter-control="input" data-field="car.car_category_c" data-sortable="true" data-formatter="operateText">Car C</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText">Standard</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
@@ -869,6 +902,7 @@
                                 <th data-filter-control="input" data-field="golf_player" data-sortable="true" data-formatter="statusFormatter">Golf Player</th>
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
+                                <th data-filter-control="input" data-field="car.car_category_c" data-sortable="true" data-formatter="operateText">Car C</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText">Standard</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
@@ -925,6 +959,7 @@
                                 <th data-filter-control="input" data-field="golf_player" data-sortable="true" data-formatter="statusFormatter">Golf Player</th>
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
+                                <th data-filter-control="input" data-field="car.car_category_c" data-sortable="true" data-formatter="operateText">Car C</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText">Standard</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>

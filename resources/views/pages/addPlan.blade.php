@@ -48,6 +48,7 @@
                             <th data-field="id">Id</th>
                             <th data-field="car_category_a" data-sortable="true">Category A</th>
                             <th data-field="car_category_b" data-sortable="true">Category B</th>
+                            <th data-field="car_category_c" data-sortable="true">Category C</th>
                             <th data-field="car_plan_uid" data-formatter="deleteCarPlan" data-sortable="true">Actions</th>
                         </tr>
                     </thead>

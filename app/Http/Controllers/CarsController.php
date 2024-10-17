@@ -89,6 +89,9 @@ class CarsController extends Controller
     public function getCars()
     {
         $car = Car::get();
+        foreach ($car as $key => $node) {
+            $car[$key]->category = CarCategory::where('car_category_uid', $node->car_category)->first('car_category');
+        }
         return $car;
     }
 

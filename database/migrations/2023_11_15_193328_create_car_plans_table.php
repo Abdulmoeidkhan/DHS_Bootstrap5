@@ -17,6 +17,7 @@ return new class extends Migration
             $table->uuid('car_plan_uid');
             $table->integer('car_category_a');
             $table->integer('car_category_b');
+            $table->integer('car_category_c');
             // $table->uuid('car_category_uid');
             // $table->integer('car_a_quantity');
             // $table->integer('car_b_quantity');

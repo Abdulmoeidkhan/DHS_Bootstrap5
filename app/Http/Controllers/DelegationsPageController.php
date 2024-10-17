@@ -17,11 +17,31 @@ use App\Models\Program;
 use App\Models\Rank;
 use App\Models\Receiving;
 use App\Models\Vips;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class DelegationsPageController extends Controller
 {
+
+    public static function memberCountAccepted()
+    {
+        $memberCount = 0;
+        $delegations = DB::table('delegations')
+            ->leftJoin('delegates', 'delegates.delegates_uid', '=', 'delegations.delegationhead')
+            ->where([['delegations.delegation_response', 'Accepted'], ['delegations.delegation_status', '1']])
+            ->select('delegations.*', 'delegates.self', 'delegates.delegates_uid')
+            ->orderBy('delegations.country', 'asc')
+            ->take(1000)
+            ->get();
+
+        foreach ($delegations as $key => $delegation) {
+            $delegations[$key]->member_count = Delegate::where([['delegation', $delegation->uid], ['self', 1], ['status', 1]])->count();
+        }
+
+        if ($delegations->count() > 0) {
+            $memberCount = $delegations->sum('member_count');
+        }
+        return $memberCount;
+    }
     public function delegationData($status = null)
     {
         if ($status == 1) {
@@ -38,7 +58,7 @@ class DelegationsPageController extends Controller
             foreach ($delegations as $key => $delegation) {
                 $delegations[$key]->hotelPlan = HotelPlan::where([['delegation_uid', $delegation->uid]])->first(['hotel_uid', 'hotel_roomtype_standard', 'hotel_roomtype_suite', 'hotel_roomtype_superior', 'hotel_roomtype_doubleOccupancy', 'hotel_plan_uid']);
                 $delegations[$key]->officers = DB::table('officers')->leftJoin('ranks', 'officers.officer_rank', '=', 'ranks.ranks_uid')->where('officer_delegation', $delegation->uid)->select('officers.*', 'ranks.ranks_name')->get();
-                $delegations[$key]->car = CarPlan::where([['delegation_uid', $delegation->uid]])->first(['car_category_a', 'car_category_b', 'car_plan_uid']);
+                $delegations[$key]->car = CarPlan::where([['delegation_uid', $delegation->uid]])->first(['car_category_a', 'car_category_b', 'car_category_c', 'car_plan_uid']);
                 // $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
                 $delegations[$key]->member_count = Delegate::where([['delegation', $delegation->uid], ['self', 1], ['status', 1]])->count();
                 $delegations[$key]->members = Delegate::where([['delegation', $delegation->uid], ['delegation_type', 'Member'], ['status', 1]])->orWhere([['delegation', $delegation->uid], ['delegation_type', 'Rep'], ['status', 1]])->get();
@@ -71,6 +91,7 @@ class DelegationsPageController extends Controller
                     [
                         'car_category_a' => $delegations->sum('car.car_category_a'),
                         'car_category_b' => $delegations->sum('car.car_category_b'),
+                        'car_category_c' => $delegations->sum('car.car_category_c'),
                     ],
                     'member_count' => $delegations->sum('member_count'),
                     'hotelPlan' =>
@@ -129,10 +150,10 @@ class DelegationsPageController extends Controller
             foreach ($delegations as $key => $delegation) {
                 $delegations[$key]->hotelPlan = HotelPlan::where([['delegation_uid', $delegation->uid]])->first(['hotel_uid', 'hotel_roomtype_standard', 'hotel_roomtype_suite', 'hotel_roomtype_superior', 'hotel_roomtype_doubleOccupancy', 'hotel_plan_uid']);
                 $delegations[$key]->officers = DB::table('officers')->leftJoin('ranks', 'officers.officer_rank', '=', 'ranks.ranks_uid')->where('officer_delegation', $delegation->uid)->select('officers.*', 'ranks.ranks_name')->get();
-                $delegations[$key]->car = CarPlan::where([['delegation_uid', $delegation->uid]])->first(['car_category_a', 'car_category_b', 'car_plan_uid']);
+                $delegations[$key]->car = CarPlan::where([['delegation_uid', $delegation->uid]])->first(['car_category_a', 'car_category_b', 'car_category_c', 'car_plan_uid']);
                 // $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
                 $delegations[$key]->member_count = Delegate::where([['delegation', $delegation->uid], ['self', 1], ['status', 1]])->count();
-                $delegations[$key]->members = Delegate::where([['delegation', $delegation->uid], ['delegation_type', 'Member'], ['status', 1]])->get();
+                $delegations[$key]->members = Delegate::where([['delegation', $delegation->uid], ['delegation_type', 'Member'], ['status', 1]])->orWhere([['delegation', $delegation->uid], ['delegation_type', 'Rep'], ['status', 1]])->get();
                 $delegations[$key]->rankName = Rank::where('ranks_uid', $delegation->rank)->first('ranks_name');
                 $delegations[$key]->vips = Vips::where('vips_uid', $delegation->vips_uid)->first();
                 $delegations[$key]->vips->rank = Rank::where('ranks_uid', $delegations[$key]->vips->vips_rank)->first('ranks_name');
@@ -156,6 +177,7 @@ class DelegationsPageController extends Controller
                     [
                         'car_category_a' => $delegations->sum('car.car_category_a'),
                         'car_category_b' => $delegations->sum('car.car_category_b'),
+                        'car_category_c' => $delegations->sum('car.car_category_c'),
                     ],
                     'member_count' => $delegations->sum('member_count'),
                     'hotelPlan' =>
@@ -187,10 +209,10 @@ class DelegationsPageController extends Controller
                 // $delegations[$key]->dOccupancy = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4i']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
                 // $delegations[$key]->suite = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4g']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
                 $delegations[$key]->officers = DB::table('officers')->leftJoin('ranks', 'officers.officer_rank', '=', 'ranks.ranks_uid')->where('officer_delegation', $delegation->uid)->select('officers.*', 'ranks.ranks_name')->get();
-                $delegations[$key]->car = CarPlan::where([['delegation_uid', $delegation->uid]])->first(['car_category_a', 'car_category_b', 'car_plan_uid']);
+                $delegations[$key]->car = CarPlan::where([['delegation_uid', $delegation->uid]])->first(['car_category_a', 'car_category_b', 'car_category_c', 'car_plan_uid']);
                 // $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
                 $delegations[$key]->member_count = Delegate::where([['delegation', $delegation->uid], ['self', 1], ['status', 1]])->count();
-                $delegations[$key]->members = Delegate::where([['delegation', $delegation->uid], ['delegation_type', 'Member'], ['status', 1]])->get();
+                $delegations[$key]->members = Delegate::where([['delegation', $delegation->uid], ['delegation_type', 'Member'], ['status', 1]])->orWhere([['delegation', $delegation->uid], ['delegation_type', 'Rep'], ['status', 1]])->get();
                 $delegations[$key]->rankName = Rank::where('ranks_uid', $delegation->rank)->first('ranks_name');
                 $delegations[$key]->vips = Vips::where('vips_uid', $delegation->vips_uid)->first();
                 $delegations[$key]->vips->rank = Rank::where('ranks_uid', $delegations[$key]->vips->vips_rank)->first('ranks_name');
@@ -219,6 +241,7 @@ class DelegationsPageController extends Controller
                     [
                         'car_category_a' => $delegations->sum('car.car_category_a'),
                         'car_category_b' => $delegations->sum('car.car_category_b'),
+                        'car_category_c' => $delegations->sum('car.car_category_c'),
                     ],
                     'member_count' => $delegations->sum('member_count'),
                     'hotelPlan' =>
@@ -248,7 +271,7 @@ class DelegationsPageController extends Controller
                 // $delegations[$key]->dOccupancy = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4i']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
                 // $delegations[$key]->suite = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4g']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
                 $delegations[$key]->officers = DB::table('officers')->leftJoin('ranks', 'officers.officer_rank', '=', 'ranks.ranks_uid')->where('officer_delegation', $delegation->uid)->select('officers.*', 'ranks.ranks_name')->get();
-                $delegations[$key]->car = CarPlan::where([['delegation_uid', $delegation->uid]])->first(['car_category_a', 'car_category_b', 'car_plan_uid']);
+                $delegations[$key]->car = CarPlan::where([['delegation_uid', $delegation->uid]])->first(['car_category_a', 'car_category_b', 'car_category_c', 'car_plan_uid']);
                 // $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
                 $delegations[$key]->member_count = Delegate::where([['delegation', $delegation->uid], ['self', 1], ['status', 1]])->count();
                 $delegations[$key]->members = Delegate::where([['delegation', $delegation->uid], ['delegation_type', '!=', 'Self'], ['status', 1]])->get();
@@ -275,6 +298,7 @@ class DelegationsPageController extends Controller
                     [
                         'car_category_a' => $delegations->sum('car.car_category_a'),
                         'car_category_b' => $delegations->sum('car.car_category_b'),
+                        'car_category_c' => $delegations->sum('car.car_category_c'),
                     ],
                     'member_count' => $delegations->sum('member_count'),
                     'hotelPlan' =>
@@ -304,7 +328,7 @@ class DelegationsPageController extends Controller
                 // $delegations[$key]->dOccupancy = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4i']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
                 // $delegations[$key]->suite = HotelPlan::where([['delegation_uid', $delegation->uid], ['hotel_roomtpye_uid', '7548a2ec-7eaf-4e85-a957-3749d6d69e4g']])->first(['hotel_uid', 'hotel_quantity', 'hotel_plan_uid']);
                 $delegations[$key]->officers = DB::table('officers')->leftJoin('ranks', 'officers.officer_rank', '=', 'ranks.ranks_uid')->where('officer_delegation', $delegation->uid)->select('officers.*', 'ranks.ranks_name')->get();
-                $delegations[$key]->car = CarPlan::where([['delegation_uid', $delegation->uid]])->first(['car_category_a', 'car_category_b', 'car_plan_uid']);
+                $delegations[$key]->car = CarPlan::where([['delegation_uid', $delegation->uid]])->first(['car_category_a', 'car_category_b', 'car_category_c', 'car_plan_uid']);
                 // $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
                 $delegations[$key]->member_count = Delegate::where([['delegation', $delegation->uid], ['self', 1], ['status', 1]])->count();
                 $delegations[$key]->members = Delegate::where([['delegation', $delegation->uid], ['delegation_type', '!=', 'Self'], ['status', 1]])->get();
@@ -336,6 +360,7 @@ class DelegationsPageController extends Controller
                     [
                         'car_category_a' => $delegations->sum('car.car_category_a'),
                         'car_category_b' => $delegations->sum('car.car_category_b'),
+                        'car_category_c' => $delegations->sum('car.car_category_c'),
                     ],
                     'member_count' => $delegations->sum('member_count'),
                     'hotelPlan' =>

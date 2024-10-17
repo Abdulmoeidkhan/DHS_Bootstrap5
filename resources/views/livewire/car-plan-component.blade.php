@@ -11,6 +11,10 @@
                 <label for="car_b_quantity" class="col-form-label">Car B Quantity:</label>
                 <input type="number" class="form-control" wire:model="carBQuantity">
             </div>
+            <div class="mb-3">
+                <label for="car_c_quantity" class="col-form-label">Car C Quantity:</label>
+                <input type="number" class="form-control" wire:model="carCQuantity">
+            </div>
             <input type="hidden" wire:model="delegationUid">
         </fieldset>
     </div>

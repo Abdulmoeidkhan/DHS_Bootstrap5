@@ -12,6 +12,7 @@ class CarPlanComponent extends Component
     public $delegationUid;
     public $carAQuantity = 0;
     public $carBQuantity = 0;
+    public $carCQuantity = 0;
     // public $carCategory = '';
     public $carPlanuid = 0;
     public $savedcarplan = 0;
@@ -23,6 +24,7 @@ class CarPlanComponent extends Component
         $carPlan->car_plan_uid = (string) Str::uuid();
         $carPlan->car_category_a = $this->carAQuantity;
         $carPlan->car_category_b = $this->carBQuantity;
+        $carPlan->car_category_c = $this->carCQuantity;
         $carPlan->delegation_uid = $this->delegationUid;
         $this->savedcarplan = $carPlan->save();
         // $this->reset();
@@ -32,7 +34,7 @@ class CarPlanComponent extends Component
 
     public function update()
     {
-        $carsPlan = CarPlan::where('car_plan_uid', $this->carPlanuid)->update(['car_category_a' => $this->carAQuantity, 'car_category_b' => $this->carBQuantity]);
+        $carsPlan = CarPlan::where('car_plan_uid', $this->carPlanuid)->update(['car_category_a' => $this->carAQuantity, 'car_category_b' => $this->carBQuantity,'car_category_c' => $this->carCQuantity]);
         if ($carsPlan) {
             // $this->reset();
             $this->js("alert('Plan Updated!')"); 
@@ -49,6 +51,7 @@ class CarPlanComponent extends Component
             $this->isForSaved=0;
             $this->carAQuantity = $carsPlan->car_category_a;
             $this->carBQuantity = $carsPlan->car_category_b;
+            $this->carCQuantity = $carsPlan->car_category_c;
             $this->carPlanuid = $carsPlan->car_plan_uid;
         }
         return view('livewire.car-plan-component');

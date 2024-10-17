@@ -70,6 +70,7 @@
                             <th data-field="car_makes" data-sortable="true">Car Makes</th>
                             <th data-field="car_model" data-sortable="true">Car Model</th>
                             <th data-field="car_remarks">Car Remarks</th>
+                            <th data-field="category.car_category">Car Category</th>
                             <th data-field="car_delegation" data-formatter="operateCarRemarks">Car Status</th>
                             <th data-field="car_uid" data-formatter="operateCar">Actions</th>
                         </tr>
