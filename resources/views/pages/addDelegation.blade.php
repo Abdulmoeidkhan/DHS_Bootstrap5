@@ -189,10 +189,12 @@
                                     id="jointInvitation" title="Joint Invitations" name="inviters[]" multiple>
                                     @foreach (\App\Models\Vips::all() as $key => $vip)
                                     <option value="{{$vip->vips_uid}}"
+                                        @if(isset($delegations) &&$delegations->inviters)
                                         @foreach($delegations->inviters as $inviter)
                                         {{$inviter == $vip->vips_uid?'selected':''}}
                                         @endforeach
-                                        >{{'('.$vip->vips_designation.') '.$vip->vips_name}}</option>
+                                        @endif
+                                        >{{'('.$vip->vips_designation.')' }}</option>
                                     @endforeach
                                 </select>
                             </div>

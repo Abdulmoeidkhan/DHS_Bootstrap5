@@ -1079,7 +1079,7 @@
     }
 
     function invitersFormatter(value, row, index) {
-        return value ? value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val?.vips_designation + ' ' + val?.vips_name+ '</div><br/>').join('') : '-';
+        return value ? value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val?.vips_designation + '</div><br/>').join('') : '-';
     }
 
     function statusChangerFormatter(value, row, index) {
