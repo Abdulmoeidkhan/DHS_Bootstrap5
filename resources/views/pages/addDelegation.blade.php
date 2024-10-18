@@ -186,9 +186,13 @@
                             <div class="mb-3">
                                 <label for="jointInvitation" class="form-label">Joint Invitation:</label>
                                 <select id="multi-select-jointInvitation" placeholder="Select upto 10 tags"
-                                    id="jointInvitation" title="Joint Invitations" name="inviters[]" multiple required>
+                                    id="jointInvitation" title="Joint Invitations" name="inviters[]" multiple>
                                     @foreach (\App\Models\Vips::all() as $key => $vip)
-                                    <option value="{{$vip->vips_uid}}">{{'('.$vip->vips_designation.') '.$vip->vips_name}}</option>
+                                    <option value="{{$vip->vips_uid}}"
+                                        @foreach($delegations->inviters as $inviter)
+                                        {{$inviter == $vip->vips_uid?'selected':''}}
+                                        @endforeach
+                                        >{{'('.$vip->vips_designation.') '.$vip->vips_name}}</option>
                                     @endforeach
                                 </select>
                             </div>

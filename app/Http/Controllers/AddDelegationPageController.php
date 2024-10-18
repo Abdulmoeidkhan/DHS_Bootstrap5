@@ -72,6 +72,7 @@ class AddDelegationPageController extends Controller
             $delegationHead = Delegate::where([['delegation_type', 'Self'], ['delegation', $id]])->first();
             $representatives = Delegate::where([['delegation_type', 'Rep'], ['delegation', $id]])->first();
             $delegations = Delegation::where([['uid', $delegationHead->delegation]])->first();
+            $delegations->inviters = json_decode($delegations->inviters, true);
             $delegationHead->delegation_picture = ImageBlob::where('uid', $delegationHead->delegates_uid)->first();
             $delegationHead->delegation_document =  Document::where('uid', $delegationHead->delegates_uid)->count();
             if ($representatives) {
@@ -109,7 +110,7 @@ class AddDelegationPageController extends Controller
         $delegation->delegation_response = $req->delegation_response;
         $delegation->exhibition = $req->exhibition;
         $delegation->delegationCode = $this->badge(8, "DL");
-        $delegation->inviters=json_encode($req->inviters);
+        $delegation->inviters = json_encode($req->inviters);
 
         $representative = new Delegate();
         $representative->delegates_uid = (string) Str::uuid();
@@ -222,7 +223,10 @@ class AddDelegationPageController extends Controller
         $arrayToBeUpdateRep = [];
         $arrayToBeUpdateSelf = [];
         foreach ($req->all() as $key => $value) {
-            if ($key != 'submit' && $key != '_token' && $key != 'savedpicture' && $key != 'submitAndRetain'  && $key != 'delegation_picture' && $key != 'pdf' && $key != 'rep_Pdf' && $key != 'rep_saved_picture' && $key != 'rep_picture' && strlen($value) > 0) {
+            if ($key == 'inviters' || !isset($req->inviters)) {
+                $arrayToBeUpdate['inviters'] = json_encode($req->inviters) ?? json_decode('[]');
+            }
+            if ($key != 'inviters' && $key != 'submit' && $key != '_token' && $key != 'savedpicture' && $key != 'submitAndRetain'  && $key != 'delegation_picture' && $key != 'pdf' && $key != 'rep_Pdf' && $key != 'rep_saved_picture' && $key != 'rep_picture' && strlen($value) > 0) {
                 if (substr($key, 0, 4) == 'rep_') {
                     $arrayToBeUpdateRep[substr($key, 4)] = $value;
                 } elseif (substr($key, 0, 5) == 'self_') {
