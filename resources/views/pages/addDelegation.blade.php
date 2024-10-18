@@ -1,6 +1,7 @@
 @auth
 @extends('layouts.layout')
 @section("content")
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
 @if(session()->get('user')->roles[0]->name === "admin")
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css'>
@@ -29,12 +30,14 @@
 </style>
 <div class="row">
     <div class="d-flex justify-content-center">
-        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#VIPModal">Add VIP'S</button>
+        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#VIPModal">Add
+            VIP'S</button>
         &nbsp;
         &nbsp;
         &nbsp;
         &nbsp;
-        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#DelegateModal">Add Rank's</button>
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#DelegateModal">Add
+            Rank's</button>
         <!-- <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#DelegateModal">Add Delegates</button> -->
         <div class="modal fade" id="VIPModal" tabindex="-1" aria-labelledby="VIPModal" aria-hidden="true">
             <div class="modal-dialog">
@@ -69,30 +72,40 @@
             <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">New Delegation</h5>
                 <div class="table-responsive">
-                    <form name="delegationBasicInfo" id="delegationBasicInfo" method="POST" action="{{isset($delegations)?route('request.updateDelegationRequest'):route('request.addDelegationRequest')}}" enctype="multipart/form-data">
+                    <form name="delegationBasicInfo" id="delegationBasicInfo" method="POST"
+                        action="{{isset($delegations)?route('request.updateDelegationRequest'):route('request.addDelegationRequest')}}"
+                        enctype="multipart/form-data">
                         <fieldset>
                             <legend>Add Invitaion Details</legend>
                             @csrf
                             <div class="mb-3">
                                 <label for="countryInput" class="form-label">Select Country*</label>
-                                <select class="form-select" aria-label="Country Name" id="countryInput" name="country" required>
+                                <select class="form-select" aria-label="Country Name" id="countryInput" name="country"
+                                    required>
                                     <option value="" selected disabled hidden> Select Country </option>
                                     @foreach(\App\Models\Country::all() as $country)
-                                    <option value="{{$country->name}}" {{isset($delegations)?($delegations->country == $country->name ? 'Selected':''):''}}> {{$country->value}} </option>
+                                    <option value="{{$country->name}}" {{isset($delegations)?($delegations->country ==
+                                        $country->name ? 'Selected':''):''}}> {{$country->value}} </option>
                                     @endforeach
                                 </select>
                             </div>
-                            <livewire:invited-by-component selectedVip="{{isset($delegations)?$delegations->invited_by:''}}" />
+                            <livewire:invited-by-component
+                                selectedVip="{{isset($delegations)?$delegations->invited_by:''}}" />
                             <div class="mb-3">
                                 <label for="address" class="form-label">Address</label>
-                                <textarea name="address" class="form-control" id="address" placeholder="Address">{{isset($delegations)?$delegations->address:''}}</textarea>
+                                <textarea name="address" class="form-control" id="address"
+                                    placeholder="Address">{{isset($delegations)?$delegations->address:''}}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="delegation_response" class="form-label">Delegation Response</label>
-                                <select class="form-select" aria-label="Delegation Response" id="delegation_response" name="delegation_response" required>
-                                    <option value="Awaited" {{isset($delegations)?($delegations->delegation_response == 'Awaited' ? 'Selected':''):''}}> Awaited </option>
-                                    <option value="Accepted" {{isset($delegations)?($delegations->delegation_response == 'Accepted' ? 'Selected':''):''}}> Accepted </option>
-                                    <option value="Regretted" {{isset($delegations)?($delegations->delegation_response == 'Regretted' ? 'Selected':''):''}}> Regretted </option>
+                                <select class="form-select" aria-label="Delegation Response" id="delegation_response"
+                                    name="delegation_response" required>
+                                    <option value="Awaited" {{isset($delegations)?($delegations->delegation_response ==
+                                        'Awaited' ? 'Selected':''):''}}> Awaited </option>
+                                    <option value="Accepted" {{isset($delegations)?($delegations->delegation_response ==
+                                        'Accepted' ? 'Selected':''):''}}> Accepted </option>
+                                    <option value="Regretted" {{isset($delegations)?($delegations->delegation_response
+                                        == 'Regretted' ? 'Selected':''):''}}> Regretted </option>
                                 </select>
                             </div>
                             <!-- <div class="mb-3">
@@ -117,10 +130,12 @@
                             </div> -->
                             <div class="mb-3">
                                 <label for="exhibition" class="form-label">Event Name*</label>
-                                <select class="form-select" aria-label="Event Name" id="exhibition" name="exhibition" required>
+                                <select class="form-select" aria-label="Event Name" id="exhibition" name="exhibition"
+                                    required>
                                     <option value="" selected disabled hidden> Select Event </option>
                                     @foreach(\App\Models\Event::all() as $event)
-                                    <option value="{{$event->name}}" {{isset($delegations)?($delegations->exhibition == $event->name ? 'Selected':''):''}}> {{$event->name}} </option>
+                                    <option value="{{$event->name}}" {{isset($delegations)?($delegations->exhibition ==
+                                        $event->name ? 'Selected':''):''}}> {{$event->name}} </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -129,42 +144,68 @@
                                 <select name="self_rank" id="self_rank" class="form-select" required>
                                     <option value="" selected disabled hidden> Select Rank </option>
                                     @foreach (\App\Models\Rank::all() as $renderRank)
-                                    <option value="{{$renderRank->ranks_uid}}" {{isset($delegationHead)?($delegationHead->rank == $renderRank->ranks_uid ? 'Selected':''):''}}>{{$renderRank->ranks_name}}</option>
+                                    <option value="{{$renderRank->ranks_uid}}"
+                                        {{isset($delegationHead)?($delegationHead->rank == $renderRank->ranks_uid ?
+                                        'Selected':''):''}}>{{$renderRank->ranks_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="self_first_Name" class="form-label">First Name*</label>
-                                <input name="self_first_Name" type="text" class="form-control" id="self_first_Name" value="{{isset($delegationHead)?($delegationHead->first_Name):''}}" placeholder="First Name" required>
+                                <input name="self_first_Name" type="text" class="form-control" id="self_first_Name"
+                                    value="{{isset($delegationHead)?($delegationHead->first_Name):''}}"
+                                    placeholder="First Name" required>
                             </div>
                             <div class="mb-3">
                                 <label for="self_last_Name" class="form-label">Last Name*</label>
-                                <input name="self_last_Name" type="text" class="form-control" id="self_last_Name" value="{{isset($delegationHead)?($delegationHead->last_Name):''}}" placeholder="Last Name" required>
+                                <input name="self_last_Name" type="text" class="form-control" id="self_last_Name"
+                                    value="{{isset($delegationHead)?($delegationHead->last_Name):''}}"
+                                    placeholder="Last Name" required>
                             </div>
                             <div class="mb-3">
                                 <label for="self_designation" class="form-label">Designation*</label>
-                                <input name="self_designation" type="text" class="form-control" id="self_designation" value="{{isset($delegationHead)?($delegationHead->designation):''}}" placeholder="Designation" required>
+                                <input name="self_designation" type="text" class="form-control" id="self_designation"
+                                    value="{{isset($delegationHead)?($delegationHead->designation):''}}"
+                                    placeholder="Designation" required>
                             </div>
                             <div class="mb-3">
                                 <label for="golf_player" class="form-label">Golf Player</label>
                                 <select name="golf_player" id="golf_player" class="form-select">
-                                    <option value="0" {{isset($delegations)?($delegations->golf_player == 0 ? 'Selected':''):''}}> No </option>
-                                    <option value="1" {{isset($delegations)?($delegations->golf_player == 1 ? 'Selected':''):''}}> Yes </option>
+                                    <option value="0" {{isset($delegations)?($delegations->golf_player == 0 ?
+                                        'Selected':''):''}}> No </option>
+                                    <option value="1" {{isset($delegations)?($delegations->golf_player == 1 ?
+                                        'Selected':''):''}}> Yes </option>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="email_address" class="form-label">Email Address</label>
-                                <input name="email_address" type="text" class="form-control" id="email_address" value="{{isset($delegations)?($delegations->email_address ? $delegations->email_address:''):''}}" placeholder="Email Address">
+                                <input name="email_address" type="text" class="form-control" id="email_address"
+                                    value="{{isset($delegations)?($delegations->email_address ? $delegations->email_address:''):''}}"
+                                    placeholder="Email Address">
+                            </div>
+                            <div class="mb-3">
+                                <label for="jointInvitation" class="form-label">Joint Invitation:</label>
+                                <select id="multi-select-jointInvitation" placeholder="Select upto 10 tags"
+                                    id="jointInvitation" title="Joint Invitations" name="inviters[]" multiple required>
+                                    @foreach (\App\Models\Vips::all() as $key => $vip)
+                                    <option value="{{$vip->vips_uid}}">{{'('.$vip->vips_designation.') '.$vip->vips_name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="delegation_picture" class="form-label">Picture</label>
-                                <input name="delegation_picture" type="file" class="form-control" id="delegation_picture" accept="image/png, image/jpeg">
-                                <input name="savedpicture" type="hidden" class="form-control" id="savedpicture" value="">
+                                <input name="delegation_picture" type="file" class="form-control"
+                                    id="delegation_picture" accept="image/png, image/jpeg">
+                                <input name="savedpicture" type="hidden" class="form-control" id="savedpicture"
+                                    value="">
                                 <div class="box-2">
                                     <div class="result"></div>
                                 </div>
-                                <div class="box-2 img-result {{isset($delegationHead->delegation_picture) ? ($delegationHead?->delegation_picture?->img_blob ? '' : 'hide') : ''}}">
-                                    <img class="cropped" src="{{isset($delegationHead->delegation_picture)? $delegationHead?->delegation_picture?->img_blob:''}}" alt="" />
+                                <div
+                                    class="box-2 img-result {{isset($delegationHead->delegation_picture) ? ($delegationHead?->delegation_picture?->img_blob ? '' : 'hide') : ''}}">
+                                    <img class="cropped"
+                                        src="{{isset($delegationHead->delegation_picture)? $delegationHead?->delegation_picture?->img_blob:''}}"
+                                        alt="" />
                                 </div>
                                 <div class="box">
                                     <div class="options hide">
@@ -175,25 +216,33 @@
                                 </div>
                             </div>
                             @if(isset($delegationHead))
-                            <input name="self_delegation_uid" type="hidden" class="form-control" id="self_delegation_uid" value="{{isset($delegationHead)?$delegationHead->delegates_uid :''}}">
+                            <input name="self_delegation_uid" type="hidden" class="form-control"
+                                id="self_delegation_uid"
+                                value="{{isset($delegationHead)?$delegationHead->delegates_uid :''}}">
                             @endif
                             <div class="mb-3">
                                 <label for="pdf" class="form-label">Document</label>
                                 <input name="pdf" type="file" class="form-control" id="pdf" accept="application/pdf">
                                 @if(isset($delegationHead)?$delegationHead->delegation_document:0)
-                                <object data="{{ route('request.getPdf' , $delegationHead->delegates_uid ) }}" type="application/pdf" width="100%" height="1000px">
-                                    <p>Your browser does not support PDF embedding. You can <a href="{{ route('request.getPdf' , $delegationHead->delegates_uid ) }}">download the PDF</a> instead.</p>
+                                <object data="{{ route('request.getPdf' , $delegationHead->delegates_uid ) }}"
+                                    type="application/pdf" width="100%" height="1000px">
+                                    <p>Your browser does not support PDF embedding. You can <a
+                                            href="{{ route('request.getPdf' , $delegationHead->delegates_uid ) }}">download
+                                            the PDF</a>
+                                        instead.</p>
                                 </object>
                                 @endif
                             </div>
                             <div class="mb-3">
-                                <input class="form-check-input" type="radio" name="self" id="self" value="1" {{isset($delegationHead)?($delegationHead->self?'checked':''):'checked'}} />
+                                <input class="form-check-input" type="radio" name="self" id="self" value="1"
+                                    {{isset($delegationHead)?($delegationHead->self?'checked':''):'checked'}} />
                                 <label class="form-check-label" for="self">
                                     Self
                                 </label>
                             </div>
                             <div class="mb-3">
-                                <input class="form-check-input" type="radio" name="self" id="rep" value="0" {{isset($delegationHead)?($delegationHead->self?'':'checked'):''}}>
+                                <input class="form-check-input" type="radio" name="self" id="rep" value="0"
+                                    {{isset($delegationHead)?($delegationHead->self?'':'checked'):''}}>
                                 <label class="form-check-label" for="rep">
                                     Rep
                                 </label>
@@ -203,57 +252,83 @@
                                 <select name="rep_rank" id="rep_rank" class="form-select">
                                     <option value="" selected disabled hidden> Select Rank </option>
                                     @foreach (\App\Models\Rank::all() as $renderRank)
-                                    <option value="{{$renderRank->ranks_uid}}" {{isset($representatives)?($representatives->rank == $renderRank->ranks_uid ? 'Selected':''):''}}>{{$renderRank->ranks_name}}</option>
+                                    <option value="{{$renderRank->ranks_uid}}"
+                                        {{isset($representatives)?($representatives->rank ==
+                                        $renderRank->ranks_uid ? 'Selected':''):''}}>{{$renderRank->ranks_name}}
+                                    </option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="rep_first_Name" class="form-label">Rep First Name</label>
-                                <input name="rep_first_Name" type="text" class="form-control" id="rep_first_Name" value="{{isset($representatives)?$representatives->first_Name :''}}" placeholder="Rep First Name">
+                                <input name="rep_first_Name" type="text" class="form-control" id="rep_first_Name"
+                                    value="{{isset($representatives)?$representatives->first_Name :''}}"
+                                    placeholder="Rep First Name">
                             </div>
                             <div class="mb-3">
                                 <label for="rep_last_Name" class="form-label">Rep Last Name</label>
-                                <input name="rep_last_Name" type="text" class="form-control" id="rep_last_Name" value="{{isset($representatives)?$representatives->last_Name :''}}" placeholder="Rep Last Name">
+                                <input name="rep_last_Name" type="text" class="form-control" id="rep_last_Name"
+                                    value="{{isset($representatives)?$representatives->last_Name :''}}"
+                                    placeholder="Rep Last Name">
                             </div>
                             <div class="mb-3">
                                 <label for="rep_designation" class="form-label">Designation</label>
-                                <input name="rep_designation" type="text" class="form-control" id="rep_designation" value="{{isset($representatives)?$representatives->designation :''}}" placeholder="Rep Designation">
+                                <input name="rep_designation" type="text" class="form-control" id="rep_designation"
+                                    value="{{isset($representatives)?$representatives->designation :''}}"
+                                    placeholder="Rep Designation">
                             </div>
                             <div class="mb-3">
                                 <label for="rep_picture" class="form-label">Picture</label>
-                                <input name="rep_picture" type="file" class="form-control" id="rep_picture" accept="image/png, image/jpeg">
-                                <input name="rep_saved_picture" type="hidden" class="form-control" id="rep_saved_picture" value="">
+                                <input name="rep_picture" type="file" class="form-control" id="rep_picture"
+                                    accept="image/png, image/jpeg">
+                                <input name="rep_saved_picture" type="hidden" class="form-control"
+                                    id="rep_saved_picture" value="">
                                 <div class="box-2-representatives">
                                     <div class="result-representatives"></div>
                                 </div>
-                                <div class="box-2-representatives img-result-representatives {{isset($representatives->delegation_picture) ? ($representatives?->delegation_picture?->img_blob ? '' : 'hide') : ''}}">
-                                    <img class="cropped-representatives" src="{{isset($representatives->delegation_picture)? $representatives?->delegation_picture?->img_blob:''}}" alt="" />
+                                <div
+                                    class="box-2-representatives img-result-representatives {{isset($representatives->delegation_picture) ? ($representatives?->delegation_picture?->img_blob ? '' : 'hide') : ''}}">
+                                    <img class="cropped-representatives"
+                                        src="{{isset($representatives->delegation_picture)? $representatives?->delegation_picture?->img_blob:''}}"
+                                        alt="" />
                                 </div>
                                 <div class="box-representatives">
                                     <div class="options-representatives hide-representatives">
                                         <label>Width</label>
-                                        <input type="number" class="img-w-representatives" value="300" min="100" max="1200" />
+                                        <input type="number" class="img-w-representatives" value="300" min="100"
+                                            max="1200" />
                                     </div>
                                     <button class="btn save-representatives hide-representatives">Save</button>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="rep_Pdf" class="form-label">Document</label>
-                                <input name="rep_Pdf" type="file" class="form-control" id="rep_Pdf" accept="application/pdf">
+                                <input name="rep_Pdf" type="file" class="form-control" id="rep_Pdf"
+                                    accept="application/pdf">
                                 @if(isset($representatives)?$representatives->delegation_document:0)
-                                <object data="{{route('request.getPdf' , $representatives->delegates_uid)}}" type="application/pdf" width="100%" height="1000px">
-                                    <p>Your browser does not support PDF embedding. You can <a href="{{route('request.getPdf',$representatives->delegates_uid)}}">download the PDF</a> instead.</p>
+                                <object data="{{route('request.getPdf' , $representatives->delegates_uid)}}"
+                                    type="application/pdf" width="100%" height="1000px">
+                                    <p>Your browser does not support PDF embedding. You can <a
+                                            href="{{route('request.getPdf',$representatives->delegates_uid)}}">download
+                                            the PDF</a>
+                                        instead.</p>
                                 </object>
                                 @endif
                             </div>
                             <!-- @if(isset($representatives)) -->
-                            <input name="rep_delegation_uid" type="hidden" class="form-control" id="rep_delegation_uid" value="{{isset($representatives)?$representatives->delegates_uid :''}}">
+                            <input name="rep_delegation_uid" type="hidden" class="form-control" id="rep_delegation_uid"
+                                value="{{isset($representatives)?$representatives->delegates_uid :''}}">
                             <!-- @endif -->
                             @if(isset($delegations))
-                            <input name="uid" type="hidden" class="form-control" id="uid" value="{{isset($delegations)?$delegations->uid :''}}">
+                            <input name="uid" type="hidden" class="form-control" id="uid"
+                                value="{{isset($delegations)?$delegations->uid :''}}">
                             @endif
-                            <input type="submit" name="submit" class="btn {{isset($delegations)?'btn-success':'btn-primary'}}" value="{{isset($delegations)?'Update Delegation':'Add Delegation'}}" />
-                            <input type="submit" name="submitAndRetain" class="btn {{isset($delegations)?'btn-success':'btn-primary'}}" value="{{isset($delegations)?'Update Delegation & Retain':'Add Delegation & Retain'}}" />
+                            <input type="submit" name="submit"
+                                class="btn {{isset($delegations)?'btn-success':'btn-primary'}}"
+                                value="{{isset($delegations)?'Update Delegation':'Add Delegation'}}" />
+                            <input type="submit" name="submitAndRetain"
+                                class="btn {{isset($delegations)?'btn-success':'btn-primary'}}"
+                                value="{{isset($delegations)?'Update Delegation & Retain':'Add Delegation & Retain'}}" />
                         </fieldset>
                     </form>
                 </div>
@@ -264,6 +339,7 @@
     </div>
 </div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.min.js'></script>
+<script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js" type="text/javascript"></script>
 <script>
     // vars
     let result = document.querySelector('.result'),
@@ -373,6 +449,8 @@
         dwn_representatives.download = 'imagename.png';
         dwn_representatives.setAttribute('href', imgSrc);
     });
+
+
 </script>
 @endsection
 @endauth

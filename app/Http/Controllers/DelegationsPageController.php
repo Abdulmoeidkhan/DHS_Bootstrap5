@@ -67,6 +67,16 @@ class DelegationsPageController extends Controller
                 $delegations[$key]->vips->rank = Rank::where('ranks_uid', $delegations[$key]->vips->vips_rank)->first('ranks_name');
                 $delegations[$key]->cars = Car::where('car_delegation', $delegation->uid)->get();
                 $delegations[$key]->interests = InterestedProgram::where('delegation_uid', $delegation->uid)->get();
+                $invitersArray = $delegation->inviters != null ? json_decode($delegation->inviters) : [];
+                if ($invitersArray != null) {
+                    $delegations[$key]->inviters = $invitersArray;
+                    foreach ($invitersArray as $inviterskey => $inviter) {
+                        $delegations[$key]->invitersDetail[$inviterskey] = Vips::where('vips_uid', $inviter)->first(['vips_name', 'vips_designation', 'vips_rank']);
+                    }
+                } else {
+                    $delegations[$key]->inviters = [];
+                    $delegations[$key]->invitersDetail=[];
+                }
 
                 foreach ($delegations[$key]->interests as $keyInterests => $interest) {
                     $delegations[$key]->interests[$keyInterests]->program = Program::where('program_uid', $interest->program_uid)->first();
@@ -159,6 +169,16 @@ class DelegationsPageController extends Controller
                 $delegations[$key]->vips->rank = Rank::where('ranks_uid', $delegations[$key]->vips->vips_rank)->first('ranks_name');
                 $delegations[$key]->cars = Car::where('car_delegation', $delegation->uid)->get();
                 $delegations[$key]->interests = InterestedProgram::where('delegation_uid', $delegation->uid)->get();
+                $invitersArray = $delegation->inviters != null ? json_decode($delegation->inviters) : [];
+                if ($invitersArray != null) {
+                    $delegations[$key]->inviters = $invitersArray;
+                    foreach ($invitersArray as $inviterskey => $inviter) {
+                        $delegations[$key]->invitersDetail[$inviterskey] = Vips::where('vips_uid', $inviter)->first(['vips_name', 'vips_designation', 'vips_rank']);
+                    }
+                } else {
+                    $delegations[$key]->inviters = [];
+                    $delegations[$key]->invitersDetail=[];
+                }
 
                 foreach ($delegations[$key]->interests as $keyInterests => $interest) {
                     $delegations[$key]->interests[$keyInterests]->program = Program::where('program_uid', $interest->program_uid)->first();
@@ -218,6 +238,16 @@ class DelegationsPageController extends Controller
                 $delegations[$key]->vips->rank = Rank::where('ranks_uid', $delegations[$key]->vips->vips_rank)->first('ranks_name');
                 $delegations[$key]->cars = Car::where('car_delegation', $delegation->uid)->get();
                 $delegations[$key]->interests = InterestedProgram::where('delegation_uid', $delegation->uid)->get();
+                $invitersArray = $delegation->inviters != null ? json_decode($delegation->inviters) : [];
+                if ($invitersArray != null) {
+                    $delegations[$key]->inviters = $invitersArray;
+                    foreach ($invitersArray as $inviterskey => $inviter) {
+                        $delegations[$key]->invitersDetail[$inviterskey] = Vips::where('vips_uid', $inviter)->first(['vips_name', 'vips_designation', 'vips_rank']);
+                    }
+                } else {
+                    $delegations[$key]->inviters = [];
+                    $delegations[$key]->invitersDetail=[];
+                }
 
                 foreach ($delegations[$key]->interests as $keyInterests => $interest) {
                     $delegations[$key]->interests[$keyInterests]->program = Program::where('program_uid', $interest->program_uid)->first();
@@ -279,6 +309,18 @@ class DelegationsPageController extends Controller
                 $delegations[$key]->vips = Vips::where('vips_uid', $delegation->vips_uid)->first();
                 $delegations[$key]->vips->rank = Rank::where('ranks_uid', $delegations[$key]->vips->vips_rank)->first('ranks_name');
                 $delegations[$key]->cars = Car::where('car_delegation', $delegation->uid)->get();
+
+                $invitersArray = $delegation->inviters != null ? json_decode($delegation->inviters) : [];
+                if ($invitersArray != null) {
+                    $delegations[$key]->inviters = $invitersArray;
+                    foreach ($invitersArray as $inviterskey => $inviter) {
+                        $delegations[$key]->invitersDetail[$inviterskey] = Vips::where('vips_uid', $inviter)->first(['vips_name', 'vips_designation', 'vips_rank']);
+                    }
+                } else {
+                    $delegations[$key]->inviters = [];
+                    $delegations[$key]->invitersDetail=[];
+                }
+
                 foreach ($delegations[$key]->members as $memberkey => $members) {
                     $delegations[$key]->members[$memberkey]->rank = Rank::where('ranks_uid', $members->rank)->first('ranks_name');
                 }
@@ -337,6 +379,16 @@ class DelegationsPageController extends Controller
                 $delegations[$key]->vips->rank = Rank::where('ranks_uid', $delegations[$key]->vips->vips_rank)->first('ranks_name');
                 $delegations[$key]->cars = Car::where('car_delegation', $delegation->uid)->get();
                 $delegations[$key]->interests = InterestedProgram::where('delegation_uid', $delegation->uid)->get();
+                $invitersArray = $delegation->inviters != null ? json_decode($delegation->inviters) : [];
+                if ($invitersArray != null) {
+                    $delegations[$key]->inviters = $invitersArray;
+                    foreach ($invitersArray as $inviterskey => $inviter) {
+                        $delegations[$key]->invitersDetail[$inviterskey] = Vips::where('vips_uid', $inviter)->first(['vips_name', 'vips_designation', 'vips_rank']);
+                    }
+                } else {
+                    $delegations[$key]->inviters = [];
+                    $delegations[$key]->invitersDetail=[];
+                }
 
                 foreach ($delegations[$key]->interests as $keyInterests => $interest) {
                     $delegations[$key]->interests[$keyInterests]->program = Program::where('program_uid', $interest->program_uid)->first();

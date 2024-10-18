@@ -89,6 +89,8 @@ class AddDelegationPageController extends Controller
     public function addDelegation(Request $req)
     {
 
+        // return $req->all();
+
         $delegates = new Delegate();
         $delegates->delegates_uid = (string) Str::uuid();
         $delegates->rank = $req->self_rank;
@@ -107,6 +109,7 @@ class AddDelegationPageController extends Controller
         $delegation->delegation_response = $req->delegation_response;
         $delegation->exhibition = $req->exhibition;
         $delegation->delegationCode = $this->badge(8, "DL");
+        $delegation->inviters=json_encode($req->inviters);
 
         $representative = new Delegate();
         $representative->delegates_uid = (string) Str::uuid();
