@@ -4,10 +4,26 @@
 
 
 <div class="row">
+    @php
+    $components=[
+    ['firstCol'=>2,'secondCol'=>12,'heading'=>'All Invitation','dataFunc'=>'allDelegation'],
+    ['firstCol'=>2,'secondCol'=>12,'heading'=>'Confirm Delegates','dataFunc'=>'memberCountAccepted'],
+    ['firstCol'=>2,'secondCol'=>12,'heading'=>'Army','dataFunc'=>'officersArmy','childComp'=>[['heading'=>'LO'],['heading'=>'IO'],['heading'=>'RO']]],
+    ['firstCol'=>2,'secondCol'=>12,'heading'=>'Navy','dataFunc'=>'officersNavy','childComp'=>[['heading'=>'LO'],['heading'=>'IO'],['heading'=>'RO']]],
+    ['firstCol'=>2,'secondCol'=>12,'heading'=>'AirForce','dataFunc'=>'officersAirForce','childComp'=>[['heading'=>'LO'],['heading'=>'IO'],['heading'=>'RO']]],
+    ];
+    @endphp
+    @foreach ($components as $key=>$comp)
+    <livewire:summary-card-component :$comp :$key />
+    @endforeach
+</div>
+<div class="row">
     <div class="card w-100">
         <div class="card-body p-4">
             <!-- <h5 class="card-title fw-semibold mb-4">Officer</h5> -->
-            @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "dho"|| session()->get('user')->roles[0]->name === 'vendor'|| session()->get('user')->roles[0]->name === 'army'|| session()->get('user')->roles[0]->name === 'navy'|| session()->get('user')->roles[0]->name === 'airforce')
+            @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "dho"||
+            session()->get('user')->roles[0]->name === 'vendor'|| session()->get('user')->roles[0]->name === 'army'||
+            session()->get('user')->roles[0]->name === 'navy'|| session()->get('user')->roles[0]->name === 'airforce')
             <div class="row">
                 <div class="d-flex">
                     <a type="button" href="{{route('pages.addOfficer')}}" class="btn btn-primary">Add Officer</a>
@@ -16,28 +32,42 @@
             <br />
             @endif
             <div class="table-responsive">
-                <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" 
-                       data-flat="true" data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true" data-toggle="table" 
-                       data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" 
-                       data-filter-control="true"
-                       data-page-list="[10, 25, 50, 100,200]" 
-                       data-url="{{route('request.officerData',['params'=>0,'type'=>'all','force'=>session()->get('user')->roles[0]->name=='navy'||session()->get('user')->roles[0]->name=='airforce'||session()->get('user')->roles[0]->name=='army'?session()->get('user')->roles[0]->name:'all','id'=>null])}}">
+                <table id="table" data-filter-control-multiple-search="true"
+                    data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-flat="true"
+                    data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true"
+                    data-toggle="table" data-pagination="true" data-show-toggle="true" data-show-export="true"
+                    data-show-columns="true" data-show-columns-toggle-all="true" data-filter-control="true"
+                    data-page-list="[10, 25, 50, 100,200]"
+                    data-url="{{route('request.officerData',['params'=>0,'type'=>'all','force'=>session()->get('user')->roles[0]->name=='navy'||session()->get('user')->roles[0]->name=='airforce'||session()->get('user')->roles[0]->name=='army'?session()->get('user')->roles[0]->name:'all','id'=>null])}}">
                     <thead>
                         <tr>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No</th>
-                            <th data-filter-control="input" data-field="officer_rank.ranks_name" data-sortable="true" data-formatter="operateText">Rank</th>
-                            <th data-filter-control="input" data-field="officer_first_name" data-sortable="true" data-formatter="operateText">First Name</th>
-                            <th data-filter-control="input" data-field="officer_last_name" data-sortable="true" data-formatter="operateText">Last Name</th>
-                            <th data-filter-control="input" data-field="officer_designation" data-sortable="true" data-formatter="operateText">Designation</th>
-                            <th data-filter-control="input" data-field="officer_contact" data-sortable="true" data-formatter="operateText">Contact</th>
-                            <th data-filter-control="input" data-field="officer_identity" data-sortable="true" data-formatter="operateText">Identity</th>
-                            <th data-filter-control="input" data-field="officer_type" data-sortable="true" data-formatter="operateText">Type</th>
-                            <th data-filter-control="input" data-field="officerCode" data-sortable="true" data-formatter="operateText">Code</th>
-                            <th data-filter-control="input" data-field="officer_address" data-sortable="true" data-formatter="operateText">Address</th>
-                            <th data-filter-control="input" data-field="officer_remarks" data-sortable="true" data-formatter="operateText">Forces Type</th>
-                            <th data-filter-control="input" data-field="officer_picture" data-sortable="true" data-formatter="operateBoolean">Picture Updated</th>
-                            <th data-filter-control="input" data-field="officer_picture.img_blob" data-formatter="operatePicture">Picture</th>
-                            <th data-filter-control="input" data-field="officer_uid" data-formatter="operateProfile">Actions</th>
+                            <th data-filter-control="input" data-field="officer_rank.ranks_name" data-sortable="true"
+                                data-formatter="operateText">Rank</th>
+                            <th data-filter-control="input" data-field="officer_first_name" data-sortable="true"
+                                data-formatter="operateText">First Name</th>
+                            <th data-filter-control="input" data-field="officer_last_name" data-sortable="true"
+                                data-formatter="operateText">Last Name</th>
+                            <th data-filter-control="input" data-field="officer_designation" data-sortable="true"
+                                data-formatter="operateText">Designation</th>
+                            <th data-filter-control="input" data-field="officer_contact" data-sortable="true"
+                                data-formatter="operateText">Contact</th>
+                            <th data-filter-control="input" data-field="officer_identity" data-sortable="true"
+                                data-formatter="operateText">Identity</th>
+                            <th data-filter-control="input" data-field="officer_type" data-sortable="true"
+                                data-formatter="operateText">Type</th>
+                            <th data-filter-control="input" data-field="officerCode" data-sortable="true"
+                                data-formatter="operateText">Code</th>
+                            <th data-filter-control="input" data-field="officer_address" data-sortable="true"
+                                data-formatter="operateText">Address</th>
+                            <th data-filter-control="input" data-field="officer_remarks" data-sortable="true"
+                                data-formatter="operateText">Forces Type</th>
+                            <th data-filter-control="input" data-field="officer_picture" data-sortable="true"
+                                data-formatter="operateBoolean">Picture Updated</th>
+                            <th data-filter-control="input" data-field="officer_picture.img_blob"
+                                data-formatter="operatePicture">Picture</th>
+                            <th data-filter-control="input" data-field="officer_uid" data-formatter="operateProfile">
+                                Actions</th>
                         </tr>
                     </thead>
                 </table>

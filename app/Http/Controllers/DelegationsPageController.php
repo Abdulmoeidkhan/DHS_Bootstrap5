@@ -42,6 +42,7 @@ class DelegationsPageController extends Controller
         }
         return $memberCount;
     }
+    
     public function delegationData($status = null)
     {
         if ($status == 1) {

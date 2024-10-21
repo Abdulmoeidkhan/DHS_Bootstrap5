@@ -35,6 +35,7 @@ use App\Http\Controllers\PrintInvitationController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\ReceivingController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\WishController;
 use Illuminate\Support\Facades\Route;
 
@@ -86,6 +87,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/events', [EventController::class, 'render'])->name('pages.events');
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout.request');
     Route::get('/', [DashboardController::class, 'renderView'])->name("pages.dashboard");
+    Route::get('/Summary', [SummaryController::class, 'renderSummary'])->name("pages.summary");
     Route::get('/userProfile/myProfile', [UserFullProfileController::class, 'renderMyProfile'])->name('pages.myProfile');
     Route::get('/userProfile/profileActivation', [ActivateProfileController::class, 'renderProfileActivation'])->name('pages.profileActivation');
     Route::get('/interested/{id}', [EventInterestedController::class, 'updateInterest'])->name('request.interested');

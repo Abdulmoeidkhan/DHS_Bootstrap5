@@ -236,7 +236,12 @@
                         <select class="form-select" multiple aria-label="Officer To Be Associate" id="liasonSelect" name="liasonSelect[]" required>
                             <option value="" selected disabled hidden> Select Officer To Be Associate </option>
                             @foreach(\App\Models\Officer::where([['officer_assign',0],['officer_type','Liason']])->get() as $key=>$officer)
-                            <option class="text-capitalize" value="{{$officer->officer_uid}}"> {{$officer->officer_first_name.' '.$officer->officer_last_name.' - '.$officer->officer_type}} </option>
+                            <option class="text-capitalize" value="{{$officer->officer_uid}}">
+                            @foreach (\App\Models\Rank::where('ranks_uid',$officer->officer_rank)->get() as $rank)
+                            {{$rank->ranks_name}}
+                            @endforeach    
+                             {{$officer->officer_first_name.' '.$officer->officer_last_name.' - '.$officer->officer_type}}
+                            </option>
                             @endforeach
                         </select>
                     </div>
@@ -245,7 +250,12 @@
                         <select class="form-select" multiple aria-label="Officer To Be Associate" id="recievingSelect" name="recievingSelect[]" required>
                             <option value="" selected disabled hidden> Select Officer To Be Associate </option>
                             @foreach(\App\Models\Officer::where([['officer_assign',0],['officer_type','Receiving']])->get() as $key=>$officer)
-                            <option class="text-capitalize" value="{{$officer->officer_uid}}"> {{$officer->officer_first_name.' '.$officer->officer_last_name.' - '.$officer->officer_type}} </option>
+                            <option class="text-capitalize" value="{{$officer->officer_uid}}">
+                            @foreach (\App\Models\Rank::where('ranks_uid',$officer->officer_rank)->get() as $rank)
+                            {{$rank->ranks_name}}
+                            @endforeach    
+                             {{$officer->officer_first_name.' '.$officer->officer_last_name.' - '.$officer->officer_type}}
+                            </option>
                             @endforeach
                         </select>
                     </div>
@@ -254,7 +264,12 @@
                         <select class="form-select" multiple aria-label="Officer To Be Associate" id="interpreterSelect" name="interpreterSelect[]" required>
                             <option value="" selected disabled hidden> Select Officer To Be Associate </option>
                             @foreach(\App\Models\Officer::where([['officer_assign',0],['officer_type','Interpreter']])->get() as $key=>$officer)
-                            <option class="text-capitalize" value="{{$officer->officer_uid}}"> {{$officer->officer_first_name.' '.$officer->officer_last_name.' - '.$officer->officer_type}} </option>
+                            <option class="text-capitalize" value="{{$officer->officer_uid}}">
+                            @foreach (\App\Models\Rank::where('ranks_uid',$officer->officer_rank)->get() as $rank)
+                                {{$rank->ranks_name}}
+                            @endforeach    
+                             {{$officer->officer_first_name.' '.$officer->officer_last_name.' - '.$officer->officer_type}}
+                            </option>
                             @endforeach
                         </select>
                     </div>

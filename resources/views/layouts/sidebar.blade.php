@@ -27,6 +27,16 @@
                         <span class="hide-menu">Dashboard</span>
                     </a>
                 </li>
+                @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="dho")
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('pages.summary')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-chart-bar"></i>
+                        </span>
+                        <span class="hide-menu">Summary</span>
+                    </a>
+                </li>
+                @endif
                 @if(session()->get('user')->roles[0]->name =="admin")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.userPanel')}}" aria-expanded="false">
@@ -63,7 +73,9 @@
                     </a>
                 </li>
                 @endif
-                @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="dho" || session()->get('user')->roles[0]->name =="navy" || session()->get('user')->roles[0]->name =="airforce"|| session()->get('user')->roles[0]->name =="army")
+                @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="dho"
+                || session()->get('user')->roles[0]->name =="navy" || session()->get('user')->roles[0]->name
+                =="airforce"|| session()->get('user')->roles[0]->name =="army")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.officer')}}" aria-expanded="false">
                         <span>
@@ -125,7 +137,8 @@
                 @endif
                 @if(session()->get('user')->roles[0]->name =="delegate")
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('pages.members',session()->get('user')->delegationUid)}}" aria-expanded="false">
+                    <a class="sidebar-link" href="{{route('pages.members',session()->get('user')->delegationUid)}}"
+                        aria-expanded="false">
                         <span>
                             <i class="ti ti-users"></i>
                         </span>
@@ -143,7 +156,8 @@
                     </a>
                 </li>
                 @endif
-                @if(session()->get('user')->roles[0]->name =="liason" || session()->get('user')->roles[0]->name =="receiving"|| session()->get('user')->roles[0]->name =="interpreter")
+                @if(session()->get('user')->roles[0]->name =="liason" || session()->get('user')->roles[0]->name
+                =="receiving"|| session()->get('user')->roles[0]->name =="interpreter")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.delegationAssigned')}}" aria-expanded="false">
                         <span>
@@ -161,7 +175,8 @@
                     </a>
                 </li>
                 @endif
-                @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="airport")
+                @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name
+                =="airport")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.airport')}}" aria-expanded="false">
                         <span>
@@ -197,7 +212,8 @@
                     </a>
                 </li>
                 @endif
-                @if(session()->get('user')->roles[0]->name =="admin"|| session()->get('user')->roles[0]->name =="hotels")
+                @if(session()->get('user')->roles[0]->name =="admin"|| session()->get('user')->roles[0]->name
+                =="hotels")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.hotels')}}" aria-expanded="false">
                         <span>
@@ -207,7 +223,8 @@
                     </a>
                 </li>
                 @endif
-                @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="dho" || session()->get('user')->roles[0]->name =="vendor")
+                @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="dho"
+                || session()->get('user')->roles[0]->name =="vendor")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.cars')}}" aria-expanded="false">
                         <span>

@@ -49,9 +49,80 @@
     }
 </style>
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-2">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card overflow-hidden text-center">
+                    <div class="card-body p-4">
+                        <h5 class="card-title mb-9 fw-semibold">All Delegation</h5>
+                        <div class="row align-items-center">
+                            <div class="col-12">
+                                <h4 class="fw-semibold mb-3">
+                                    {{App\Models\Delegation::where('delegation_status',1)->count()}}
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-2">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card overflow-hidden text-center">
+                    <div class="card-body p-4">
+                        <h5 class="card-title mb-9 fw-semibold">Confirm Members</h5>
+                        <div class="row align-items-center">
+                            <div class="col-12">
+                                <h4 class="fw-semibold mb-3">
+                                    {{App\Http\Controllers\DelegationsPageController::memberCountAccepted()}}
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card overflow-hidden text-center">
+                    <div class="card-body p-4">
+                        <h5 class="card-title mb-9 fw-semibold">Updated Flight</h5>
+                        <div class="row align-items-center">
+                            <div class="col-12">
+                                <h4 class="fw-semibold mb-3">
+                                    {{App\Models\DelegateFlight::whereNotNull('arrival_date')->count()}}
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card overflow-hidden text-center">
+                    <div class="card-body p-4">
+                        <h5 class="card-title mb-9 fw-semibold">Balance Flight</h5>
+                        <div class="row align-items-center">
+                            <div class="col-12">
+                                <h4 class="fw-semibold mb-3">
+                                    {{App\Http\Controllers\DelegationsPageController::memberCountAccepted() -
+                                    App\Models\DelegateFlight::whereNotNull('arrival_date')->count()}}
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card overflow-hidden text-center">
@@ -84,26 +155,48 @@
             <div id="Unused" class="tabcontent">
                 <p>
                 <div class="table-responsive">
-                    <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegationFlight',0)}}">
+                    <table id="table" data-filter-control-multiple-search="true"
+                        data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
+                        data-filter-control="true" data-toggle="table" data-flat="true" data-show-toggle="true"
+                        data-show-export="true" data-show-columns="true" data-show-refresh="true"
+                        data-show-pagination-switch="true" data-show-columns-toggle-all="true"
+                        data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegationFlight',0)}}">
                         <thead>
                             <tr>
-                                <th data-filter-control="input" data-field="Serial Number" data-formatter="operateSerial">S.No</th>
-                                <th data-filter-control="input" data-field="country.country" data-sortable="true" data-formatter="operateText">Country</th>
-                                <th data-filter-control="input" data-field="rank.ranks_name" data-sortable="true" data-formatter="operateText">Rank</th>
-                                <th data-filter-control="input" data-field="delegate.designation" data-formatter="operateText">Designation</th>
-                                <th data-filter-control="input" data-field="delegate.first_Name" data-formatter="operateText">First Name</th>
-                                <th data-filter-control="input" data-field="delegate.last_Name" data-formatter="operateText">Last Name</th>
-                                <th data-filter-control="input" data-field="passport" data-formatter="operateText">Passport</th>
-                                <th data-filter-control="input" data-field="arrival_date" data-sortable="true" data-formatter="operateText">Arrival Date</th>
-                                <th data-filter-control="input" data-field="arrival_time" data-sortable="true" data-formatter="operateText">Arrival Time</th>
-                                <th data-filter-control="input" data-field="arrival_flight" data-sortable="true" data-formatter="operateText">Arrival Flight</th>
-                                <th data-filter-control="input" data-field="arrived" data-sortable="true" data-formatter="operateStatus">Arrival Status</th>
-                                <th data-filter-control="input" data-field="arrived" data-sortable="true" data-formatter="operateArrivalStatusChanger">Arrival Status Changer</th>
-                                <th data-filter-control="input" data-field="departure_date" data-sortable="true" data-formatter="operateText">Departure Date</th>
-                                <th data-filter-control="input" data-field="departure_time" data-sortable="true" data-formatter="operateText">Departure Time</th>
-                                <th data-filter-control="input" data-field="departure_flight" data-sortable="true" data-formatter="operateText">Departure Flight</th>
-                                <th data-filter-control="input" data-field="departed" data-formatter="operateStatus">Departure Status</th>
-                                <th data-filter-control="input" data-field="departed" data-formatter="operateDepartureStatusChanger">Departure Status Changer</th>
+                                <th data-filter-control="input" data-field="Serial Number"
+                                    data-formatter="operateSerial">S.No</th>
+                                <th data-filter-control="input" data-field="country.country" data-sortable="true"
+                                    data-formatter="operateText">Country</th>
+                                <th data-filter-control="input" data-field="rank.ranks_name" data-sortable="true"
+                                    data-formatter="operateText">Rank</th>
+                                <th data-filter-control="input" data-field="delegate.designation"
+                                    data-formatter="operateText">Designation</th>
+                                <th data-filter-control="input" data-field="delegate.first_Name"
+                                    data-formatter="operateText">First Name</th>
+                                <th data-filter-control="input" data-field="delegate.last_Name"
+                                    data-formatter="operateText">Last Name</th>
+                                <th data-filter-control="input" data-field="passport" data-formatter="operateText">
+                                    Passport</th>
+                                <th data-filter-control="input" data-field="arrival_date" data-sortable="true"
+                                    data-formatter="operateText">Arrival Date</th>
+                                <th data-filter-control="input" data-field="arrival_time" data-sortable="true"
+                                    data-formatter="operateText">Arrival Time</th>
+                                <th data-filter-control="input" data-field="arrival_flight" data-sortable="true"
+                                    data-formatter="operateText">Arrival Flight</th>
+                                <th data-filter-control="input" data-field="arrived" data-sortable="true"
+                                    data-formatter="operateStatus">Arrival Status</th>
+                                <th data-filter-control="input" data-field="arrived" data-sortable="true"
+                                    data-formatter="operateArrivalStatusChanger">Arrival Status Changer</th>
+                                <th data-filter-control="input" data-field="departure_date" data-sortable="true"
+                                    data-formatter="operateText">Departure Date</th>
+                                <th data-filter-control="input" data-field="departure_time" data-sortable="true"
+                                    data-formatter="operateText">Departure Time</th>
+                                <th data-filter-control="input" data-field="departure_flight" data-sortable="true"
+                                    data-formatter="operateText">Departure Flight</th>
+                                <th data-filter-control="input" data-field="departed" data-formatter="operateStatus">
+                                    Departure Status</th>
+                                <th data-filter-control="input" data-field="departed"
+                                    data-formatter="operateDepartureStatusChanger">Departure Status Changer</th>
                             </tr>
                         </thead>
                     </table>
@@ -113,26 +206,48 @@
             <div id="PartialUsed" class="tabcontent">
                 <p>
                 <div class="table-responsive">
-                    <table id="table1" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table1" data-flat="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegationFlight',1)}}">
+                    <table id="table1" data-filter-control-multiple-search="true"
+                        data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
+                        data-filter-control="true" data-toggle="table1" data-flat="true" data-show-toggle="true"
+                        data-show-export="true" data-show-columns="true" data-show-refresh="true"
+                        data-show-pagination-switch="true" data-show-columns-toggle-all="true"
+                        data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegationFlight',1)}}">
                         <thead>
                             <tr>
-                                <th data-filter-control="input" data-field="Serial Number" data-formatter="operateSerial">S.No</th>
-                                <th data-filter-control="input" data-field="country.country" data-sortable="true" data-formatter="operateText">Country</th>
-                                <th data-filter-control="input" data-field="rank.ranks_name" data-sortable="true" data-formatter="operateText">Rank</th>
-                                <th data-filter-control="input" data-field="delegate.designation" data-formatter="operateText">Designation</th>
-                                <th data-filter-control="input" data-field="delegate.first_Name" data-formatter="operateText">First Name</th>
-                                <th data-filter-control="input" data-field="delegate.last_Name" data-formatter="operateText">Last Name</th>
-                                <th data-filter-control="input" data-field="passport" data-formatter="operateText">Passport</th>
-                                <th data-filter-control="input" data-field="arrival_date" data-sortable="true" data-formatter="operateText">Arrival Date</th>
-                                <th data-filter-control="input" data-field="arrival_time" data-sortable="true" data-formatter="operateText">Arrival Time</th>
-                                <th data-filter-control="input" data-field="arrival_flight" data-sortable="true" data-formatter="operateText">Arrival Flight</th>
-                                <th data-filter-control="input" data-field="arrived" data-sortable="true" data-formatter="operateStatus">Arrival Status</th>
-                                <th data-filter-control="input" data-field="arrived" data-sortable="true" data-formatter="operateArrivalStatusChanger">Arrival Status Changer</th>
-                                <th data-filter-control="input" data-field="departure_date" data-sortable="true" data-formatter="operateText">Departure Date</th>
-                                <th data-filter-control="input" data-field="departure_time" data-sortable="true" data-formatter="operateText">Departure Time</th>
-                                <th data-filter-control="input" data-field="departure_flight" data-sortable="true" data-formatter="operateText">Departure Flight</th>
-                                <th data-filter-control="input" data-field="departed" data-formatter="operateStatus">Departure Status</th>
-                                <th data-filter-control="input" data-field="departed" data-formatter="operateDepartureStatusChanger">Departure Status Changer</th>
+                                <th data-filter-control="input" data-field="Serial Number"
+                                    data-formatter="operateSerial">S.No</th>
+                                <th data-filter-control="input" data-field="country.country" data-sortable="true"
+                                    data-formatter="operateText">Country</th>
+                                <th data-filter-control="input" data-field="rank.ranks_name" data-sortable="true"
+                                    data-formatter="operateText">Rank</th>
+                                <th data-filter-control="input" data-field="delegate.designation"
+                                    data-formatter="operateText">Designation</th>
+                                <th data-filter-control="input" data-field="delegate.first_Name"
+                                    data-formatter="operateText">First Name</th>
+                                <th data-filter-control="input" data-field="delegate.last_Name"
+                                    data-formatter="operateText">Last Name</th>
+                                <th data-filter-control="input" data-field="passport" data-formatter="operateText">
+                                    Passport</th>
+                                <th data-filter-control="input" data-field="arrival_date" data-sortable="true"
+                                    data-formatter="operateText">Arrival Date</th>
+                                <th data-filter-control="input" data-field="arrival_time" data-sortable="true"
+                                    data-formatter="operateText">Arrival Time</th>
+                                <th data-filter-control="input" data-field="arrival_flight" data-sortable="true"
+                                    data-formatter="operateText">Arrival Flight</th>
+                                <th data-filter-control="input" data-field="arrived" data-sortable="true"
+                                    data-formatter="operateStatus">Arrival Status</th>
+                                <th data-filter-control="input" data-field="arrived" data-sortable="true"
+                                    data-formatter="operateArrivalStatusChanger">Arrival Status Changer</th>
+                                <th data-filter-control="input" data-field="departure_date" data-sortable="true"
+                                    data-formatter="operateText">Departure Date</th>
+                                <th data-filter-control="input" data-field="departure_time" data-sortable="true"
+                                    data-formatter="operateText">Departure Time</th>
+                                <th data-filter-control="input" data-field="departure_flight" data-sortable="true"
+                                    data-formatter="operateText">Departure Flight</th>
+                                <th data-filter-control="input" data-field="departed" data-formatter="operateStatus">
+                                    Departure Status</th>
+                                <th data-filter-control="input" data-field="departed"
+                                    data-formatter="operateDepartureStatusChanger">Departure Status Changer</th>
                             </tr>
                         </thead>
                     </table>
@@ -142,26 +257,48 @@
             <div id="Used" class="tabcontent">
                 <p>
                 <div class="table-responsive">
-                    <table id="table2" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table2" data-flat="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegationFlight',2)}}">
+                    <table id="table2" data-filter-control-multiple-search="true"
+                        data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
+                        data-filter-control="true" data-toggle="table2" data-flat="true" data-show-toggle="true"
+                        data-show-export="true" data-show-columns="true" data-show-refresh="true"
+                        data-show-pagination-switch="true" data-show-columns-toggle-all="true"
+                        data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegationFlight',2)}}">
                         <thead>
                             <tr>
-                                <th data-filter-control="input" data-field="Serial Number" data-formatter="operateSerial">S.No</th>
-                                <th data-filter-control="input" data-field="country.country" data-sortable="true" data-formatter="operateText">Country</th>
-                                <th data-filter-control="input" data-field="rank.ranks_name" data-sortable="true" data-formatter="operateText">Rank</th>
-                                <th data-filter-control="input" data-field="delegate.designation" data-formatter="operateText">Designation</th>
-                                <th data-filter-control="input" data-field="delegate.first_Name" data-formatter="operateText">First Name</th>
-                                <th data-filter-control="input" data-field="delegate.last_Name" data-formatter="operateText">Last Name</th>
-                                <th data-filter-control="input" data-field="passport" data-formatter="operateText">Passport</th>
-                                <th data-filter-control="input" data-field="arrival_date" data-sortable="true" data-formatter="operateText">Arrival Date</th>
-                                <th data-filter-control="input" data-field="arrival_time" data-sortable="true" data-formatter="operateText">Arrival Time</th>
-                                <th data-filter-control="input" data-field="arrival_flight" data-sortable="true" data-formatter="operateText">Arrival Flight</th>
-                                <th data-filter-control="input" data-field="arrived" data-sortable="true" data-formatter="operateStatus">Arrival Status</th>
-                                <th data-filter-control="input" data-field="arrived" data-sortable="true" data-formatter="operateArrivalStatusChanger">Arrival Status Changer</th>
-                                <th data-filter-control="input" data-field="departure_date" data-sortable="true" data-formatter="operateText">Departure Date</th>
-                                <th data-filter-control="input" data-field="departure_time" data-sortable="true" data-formatter="operateText">Departure Time</th>
-                                <th data-filter-control="input" data-field="departure_flight" data-sortable="true" data-formatter="operateText">Departure Flight</th>
-                                <th data-filter-control="input" data-field="departed" data-formatter="operateStatus">Departure Status</th>
-                                <th data-filter-control="input" data-field="departed" data-formatter="operateDepartureStatusChanger">Departure Status Changer</th>
+                                <th data-filter-control="input" data-field="Serial Number"
+                                    data-formatter="operateSerial">S.No</th>
+                                <th data-filter-control="input" data-field="country.country" data-sortable="true"
+                                    data-formatter="operateText">Country</th>
+                                <th data-filter-control="input" data-field="rank.ranks_name" data-sortable="true"
+                                    data-formatter="operateText">Rank</th>
+                                <th data-filter-control="input" data-field="delegate.designation"
+                                    data-formatter="operateText">Designation</th>
+                                <th data-filter-control="input" data-field="delegate.first_Name"
+                                    data-formatter="operateText">First Name</th>
+                                <th data-filter-control="input" data-field="delegate.last_Name"
+                                    data-formatter="operateText">Last Name</th>
+                                <th data-filter-control="input" data-field="passport" data-formatter="operateText">
+                                    Passport</th>
+                                <th data-filter-control="input" data-field="arrival_date" data-sortable="true"
+                                    data-formatter="operateText">Arrival Date</th>
+                                <th data-filter-control="input" data-field="arrival_time" data-sortable="true"
+                                    data-formatter="operateText">Arrival Time</th>
+                                <th data-filter-control="input" data-field="arrival_flight" data-sortable="true"
+                                    data-formatter="operateText">Arrival Flight</th>
+                                <th data-filter-control="input" data-field="arrived" data-sortable="true"
+                                    data-formatter="operateStatus">Arrival Status</th>
+                                <th data-filter-control="input" data-field="arrived" data-sortable="true"
+                                    data-formatter="operateArrivalStatusChanger">Arrival Status Changer</th>
+                                <th data-filter-control="input" data-field="departure_date" data-sortable="true"
+                                    data-formatter="operateText">Departure Date</th>
+                                <th data-filter-control="input" data-field="departure_time" data-sortable="true"
+                                    data-formatter="operateText">Departure Time</th>
+                                <th data-filter-control="input" data-field="departure_flight" data-sortable="true"
+                                    data-formatter="operateText">Departure Flight</th>
+                                <th data-filter-control="input" data-field="departed" data-formatter="operateStatus">
+                                    Departure Status</th>
+                                <th data-filter-control="input" data-field="departed"
+                                    data-formatter="operateDepartureStatusChanger">Departure Status Changer</th>
                             </tr>
                         </thead>
                     </table>
@@ -171,26 +308,48 @@
             <div id="All" class="tabcontent" style="display: block;">
                 <p>
                 <div class="table-responsive">
-                    <table id="table3" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table3" data-flat="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegationFlight',3)}}">
+                    <table id="table3" data-filter-control-multiple-search="true"
+                        data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
+                        data-filter-control="true" data-toggle="table3" data-flat="true" data-show-toggle="true"
+                        data-show-export="true" data-show-columns="true" data-show-refresh="true"
+                        data-show-pagination-switch="true" data-show-columns-toggle-all="true"
+                        data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegationFlight',3)}}">
                         <thead>
                             <tr>
-                                <th data-filter-control="input" data-field="Serial Number" data-formatter="operateSerial">S.No</th>
-                                <th data-filter-control="input" data-field="country.country" data-sortable="true" data-formatter="operateText">Country</th>
-                                <th data-filter-control="input" data-field="rank.ranks_name" data-sortable="true" data-formatter="operateText">Rank</th>
-                                <th data-filter-control="input" data-field="delegate.designation" data-formatter="operateText">Designation</th>
-                                <th data-filter-control="input" data-field="delegate.first_Name" data-formatter="operateText">First Name</th>
-                                <th data-filter-control="input" data-field="delegate.last_Name" data-formatter="operateText">Last Name</th>
-                                <th data-filter-control="input" data-field="passport" data-formatter="operateText">Passport</th>
-                                <th data-filter-control="input" data-field="arrival_date" data-sortable="true" data-formatter="operateText">Arrival Date</th>
-                                <th data-filter-control="input" data-field="arrival_time" data-sortable="true" data-formatter="operateText">Arrival Time</th>
-                                <th data-filter-control="input" data-field="arrival_flight" data-sortable="true" data-formatter="operateText">Arrival Flight</th>
-                                <th data-filter-control="input" data-field="arrived" data-sortable="true" data-formatter="operateStatus">Arrival Status</th>
-                                <th data-filter-control="input" data-field="arrived" data-sortable="true" data-formatter="operateArrivalStatusChanger">Arrival Status Changer</th>
-                                <th data-filter-control="input" data-field="departure_date" data-sortable="true" data-formatter="operateText">Departure Date</th>
-                                <th data-filter-control="input" data-field="departure_time" data-sortable="true" data-formatter="operateText">Departure Time</th>
-                                <th data-filter-control="input" data-field="departure_flight" data-sortable="true" data-formatter="operateText">Departure Flight</th>
-                                <th data-filter-control="input" data-field="departed" data-formatter="operateStatus">Departure Status</th>
-                                <th data-filter-control="input" data-field="departed" data-formatter="operateDepartureStatusChanger">Departure Status Changer</th>
+                                <th data-filter-control="input" data-field="Serial Number"
+                                    data-formatter="operateSerial">S.No</th>
+                                <th data-filter-control="input" data-field="country.country" data-sortable="true"
+                                    data-formatter="operateText">Country</th>
+                                <th data-filter-control="input" data-field="rank.ranks_name" data-sortable="true"
+                                    data-formatter="operateText">Rank</th>
+                                <th data-filter-control="input" data-field="delegate.designation"
+                                    data-formatter="operateText">Designation</th>
+                                <th data-filter-control="input" data-field="delegate.first_Name"
+                                    data-formatter="operateText">First Name</th>
+                                <th data-filter-control="input" data-field="delegate.last_Name"
+                                    data-formatter="operateText">Last Name</th>
+                                <th data-filter-control="input" data-field="passport" data-formatter="operateText">
+                                    Passport</th>
+                                <th data-filter-control="input" data-field="arrival_date" data-sortable="true"
+                                    data-formatter="operateText">Arrival Date</th>
+                                <th data-filter-control="input" data-field="arrival_time" data-sortable="true"
+                                    data-formatter="operateText">Arrival Time</th>
+                                <th data-filter-control="input" data-field="arrival_flight" data-sortable="true"
+                                    data-formatter="operateText">Arrival Flight</th>
+                                <th data-filter-control="input" data-field="arrived" data-sortable="true"
+                                    data-formatter="operateStatus">Arrival Status</th>
+                                <th data-filter-control="input" data-field="arrived" data-sortable="true"
+                                    data-formatter="operateArrivalStatusChanger">Arrival Status Changer</th>
+                                <th data-filter-control="input" data-field="departure_date" data-sortable="true"
+                                    data-formatter="operateText">Departure Date</th>
+                                <th data-filter-control="input" data-field="departure_time" data-sortable="true"
+                                    data-formatter="operateText">Departure Time</th>
+                                <th data-filter-control="input" data-field="departure_flight" data-sortable="true"
+                                    data-formatter="operateText">Departure Flight</th>
+                                <th data-filter-control="input" data-field="departed" data-formatter="operateStatus">
+                                    Departure Status</th>
+                                <th data-filter-control="input" data-field="departed"
+                                    data-formatter="operateDepartureStatusChanger">Departure Status Changer</th>
                             </tr>
                         </thead>
                     </table>
