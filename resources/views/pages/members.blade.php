@@ -126,7 +126,7 @@
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Delegates</h5>
             <div class="table-responsive">
-                <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.getMembers',$id)}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]">
+                <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.getMembers',$id)}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true">
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
@@ -150,8 +150,8 @@
                             <th data-field="image.img_blob" data-sortable="true" data-formatter="operatePicture" data-force-hide="true">Image</th>
                             @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="delegate")
                             <th data-field="delegates_uid" data-sortable="true" data-field="status" data-formatter="statusChangerFormatter">Active/Deactive</th>
-                            <th data-field="delegates_uid" data-sortable="true" data-formatter="operateDelegateFlight" data-force-hide="true">Update Flight Info</th>
-                            <th data-field="delegates_uid" data-sortable="true" data-formatter="operateDelegateMember" data-force-hide="true">Update Member Info</th>
+                            <th data-field="delegates_uid" data-sortable="true" data-formatter="operateDelegateFlight" data-force-hide="true" data-print-ignore="true">Update Flight Info</th>
+                            <th data-field="delegates_uid" data-sortable="true" data-formatter="operateDelegateMember" data-force-hide="true" data-print-ignore="true">Update Member Info</th>
                             @endif
                             <!-- <th data-field="organistaion" data-sortable="true">Organistaion</th> -->
                             <!-- <th data-field="last_Name" data-sortable="true">Delegate Last Name</th>
@@ -311,6 +311,82 @@
         dwn.download = 'imagename.png';
         dwn.setAttribute('href', imgSrc);
     });
+
+    
+</script>
+<script>
+    ['#table' ].map((val => {
+        var $table = $(val)
+        var selectedRow = {}
+
+        $(function() {
+            $table.on('click-row.bs.table', function(e, row, $element) {
+                selectedRow = row
+                $('.active').removeClass('active')
+                $($element).addClass('active')
+            })
+        })
+
+        function rowStyle(row) {
+            if (row.id === selectedRow.id) {
+                return {
+                    classes: 'active'
+                }
+            }
+            return {}
+        }
+
+        $(val).bootstrapTable({
+            exportTypes: ['json', 'csv', 'txt', 'sql', 'excel'],
+            exportOptions: {
+                fileName: 'List Of All Delegation',
+            }
+        });
+        $(val).bootstrapTable({
+      printPageBuilder: function (val) {
+        return `
+<html>
+  <head>
+  <style type="text/css" media="print">
+  @page {
+    size: auto;
+    margin: 25px 0 25px 0;
+  }
+  </style>
+  <style type="text/css" media="all">
+  table {
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  table, th, td {
+    border: 1px solid grey;
+  }
+  th, td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  p {
+    font-weight: bold;
+    margin-left:20px;
+  }
+  table {
+    width:94%;
+    margin-left:3%;
+    margin-right:3%;
+  }
+  div.bs-table-print {
+    text-align:center;
+  }
+  </style>
+  </head>
+  <title>Print Table</title>
+  <body>
+  <div class="bs-table-print">${val}</div>
+  </body>
+</html>`
+      }
+    })
+    }))
 </script>
 @include("layouts.tableFoot")
 @endsection

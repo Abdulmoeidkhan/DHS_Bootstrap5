@@ -159,8 +159,8 @@
                         data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
                         data-filter-control="true" data-toggle="table" data-flat="true" data-show-toggle="true"
                         data-show-export="true" data-show-columns="true" data-show-refresh="true"
-                        data-show-pagination-switch="true" data-show-columns-toggle-all="true"
-                        data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegationFlight',0)}}">
+                        data-show-pagination-switch="true" data-show-columns-toggle-all="true" 
+                        data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegationFlight',0)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="Serial Number"
@@ -211,7 +211,7 @@
                         data-filter-control="true" data-toggle="table1" data-flat="true" data-show-toggle="true"
                         data-show-export="true" data-show-columns="true" data-show-refresh="true"
                         data-show-pagination-switch="true" data-show-columns-toggle-all="true"
-                        data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegationFlight',1)}}">
+                        data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegationFlight',1)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="Serial Number"
@@ -262,7 +262,7 @@
                         data-filter-control="true" data-toggle="table2" data-flat="true" data-show-toggle="true"
                         data-show-export="true" data-show-columns="true" data-show-refresh="true"
                         data-show-pagination-switch="true" data-show-columns-toggle-all="true"
-                        data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegationFlight',2)}}">
+                        data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegationFlight',2)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="Serial Number"
@@ -313,7 +313,7 @@
                         data-filter-control="true" data-toggle="table3" data-flat="true" data-show-toggle="true"
                         data-show-export="true" data-show-columns="true" data-show-refresh="true"
                         data-show-pagination-switch="true" data-show-columns-toggle-all="true"
-                        data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegationFlight',3)}}">
+                        data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegationFlight',3)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="Serial Number"
@@ -360,7 +360,7 @@
         <!-- <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Itineraries</h5>
             <div class="table-responsive">
-                <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegationFlight',0)}}">
+                <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegationFlight',0)}}">
                     <thead>
                         <tr>
                             <th data-filter-control="input" data-field="Serial Number" data-formatter="operateSerial">S.No</th>

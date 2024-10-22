@@ -37,7 +37,7 @@
                     data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true"
                     data-toggle="table" data-pagination="true" data-show-toggle="true" data-show-export="true"
                     data-show-columns="true" data-show-columns-toggle-all="true" data-filter-control="true"
-                    data-page-list="[10, 25, 50, 100,200]"
+                    data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true"
                     data-url="{{route('request.officerData',['params'=>0,'type'=>'all','force'=>session()->get('user')->roles[0]->name=='navy'||session()->get('user')->roles[0]->name=='airforce'||session()->get('user')->roles[0]->name=='army'?session()->get('user')->roles[0]->name:'all','id'=>null])}}">
                     <thead>
                         <tr>
@@ -66,7 +66,7 @@
                                 data-formatter="operateBoolean">Picture Updated</th>
                             <th data-filter-control="input" data-field="officer_picture.img_blob"
                                 data-formatter="operatePicture">Picture</th>
-                            <th data-filter-control="input" data-field="officer_uid" data-formatter="operateProfile">
+                            <th data-filter-control="input" data-field="officer_uid" data-formatter="operateProfile" data-print-ignore="true">
                                 Actions</th>
                         </tr>
                     </thead>
@@ -124,6 +124,81 @@
         return value?.img_blob ? 'Yes' : 'No';
     }
 
+
+</script>
+<script>
+    ['#table', '#table1', '#table2', '#table3', '#table4', ].map((val => {
+        var $table = $(val)
+        var selectedRow = {}
+
+        $(function() {
+            $table.on('click-row.bs.table', function(e, row, $element) {
+                selectedRow = row
+                $('.active').removeClass('active')
+                $($element).addClass('active')
+            })
+        })
+
+        function rowStyle(row) {
+            if (row.id === selectedRow.id) {
+                return {
+                    classes: 'active'
+                }
+            }
+            return {}
+        }
+
+        $(val).bootstrapTable({
+            exportTypes: ['json', 'csv', 'txt', 'sql', 'excel'],
+            exportOptions: {
+                fileName: 'List Of All Delegation',
+            }
+        });
+        $(val).bootstrapTable({
+      printPageBuilder: function (val) {
+        return `
+<html>
+  <head>
+  <style type="text/css" media="print">
+  @page {
+    size: auto;
+    margin: 25px 0 25px 0;
+  }
+  </style>
+  <style type="text/css" media="all">
+  table {
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  table, th, td {
+    border: 1px solid grey;
+  }
+  th, td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  p {
+    font-weight: bold;
+    margin-left:20px;
+  }
+  table {
+    width:94%;
+    margin-left:3%;
+    margin-right:3%;
+  }
+  div.bs-table-print {
+    text-align:center;
+  }
+  </style>
+  </head>
+  <title>Print Table</title>
+  <body>
+  <div class="bs-table-print">${val}</div>
+  </body>
+</html>`
+      }
+    })
+    }))
 </script>
 @include("layouts.tableFoot")
 @endsection
