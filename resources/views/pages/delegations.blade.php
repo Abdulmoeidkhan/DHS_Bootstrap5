@@ -530,7 +530,7 @@
             <div class="tab-content pt-5" id="tab-content">
                 <div class="tab-pane active" id="simple-tabpanel-0" role="tabpanel" aria-labelledby="simple-tab-0">
                     <div class="table-responsive">
-                        <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegation',1)}}">
+                        <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',1)}}">
                             <thead>
                                 <tr>
                                     <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -556,17 +556,17 @@
                                     <th data-filter-control="input" data-field="invitersDetail" data-formatter="invitersFormatter">Joint Inviters</th>
                                     <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                     <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
-                                    <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
-                                    <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
-                                    <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
-                                    <th data-field="uid" data-formatter="operateDelegation">Edit</th>
-                                    <th data-field="uid" data-formatter="operateMember">Member</th>
-                                    <th data-field="uid" data-formatter="operateCar">Add Car</th>
-                                    <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
-                                    <th data-field="officer_uid" data-formatter="operateOfficer">Assign Officer</th>
-                                    <th data-field="uid" data-formatter="detachOfficer">Unassign Officer</th>
-                                    <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
-                                    <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
+                                    <th data-filter-control="input" data-field="created_at" data-sortable="true" data-print-ignore="true">Created At</th>
+                                    <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-print-ignore="true">Last Updated</th>
+                                    <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
+                                    <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
+                                    <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
+                                    <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
+                                    <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th>
+                                    <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
+                                    <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
+                                    <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
+                                    <th data-field="uid" data-formatter="statusChangerFormatter" data-print-ignore="true">Status Changer</th>
                                 </tr>
                             </thead>
                         </table>
@@ -574,7 +574,7 @@
                 </div>
                 <div class="tab-pane" id="simple-tabpanel-1" role="tabpanel" aria-labelledby="simple-tab-1">
                     <div class="table-responsive">
-                        <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegation',0)}}">
+                        <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',0)}}">
                             <thead>
                                 <tr>
                                     <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -600,17 +600,17 @@
                                     <th data-filter-control="input" data-field="invitersDetail" data-formatter="invitersFormatter">Joint Inviters</th>
                                     <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                     <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
-                                    <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
-                                    <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
-                                    <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
-                                    <th data-field="uid" data-formatter="operateDelegation">Edit</th>
-                                    <th data-field="uid" data-formatter="operateMember">Member</th>
-                                    <th data-field="uid" data-formatter="operateCar">Add Car</th>
-                                    <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
-                                    <th data-field="officer_uid" data-formatter="operateOfficer">Assign Officer</th>
-                                    <th data-field="uid" data-formatter="detachOfficer">Unassign Officer</th>
-                                    <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
-                                    <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
+                                    <th data-filter-control="input" data-field="created_at" data-sortable="true" data-print-ignore="true">Created At</th>
+                                    <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-print-ignore="true">Last Updated</th>
+                                    <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
+                                    <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
+                                    <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
+                                    <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
+                                    <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th>
+                                    <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
+                                    <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
+                                    <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
+                                    <th data-field="uid" data-formatter="statusChangerFormatter" data-print-ignore="true">Status Changer</th>
                                 </tr>
                             </thead>
                         </table>
@@ -618,7 +618,7 @@
                 </div>
                 <div class="tab-pane" id="simple-tabpanel-2" role="tabpanel" aria-labelledby="simple-tab-2">
                     <div class="table-responsive">
-                        <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegation')}}">
+                        <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation')}}">
                             <thead>
                                 <tr>
                                     <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -644,17 +644,17 @@
                                     <th data-filter-control="input" data-field="invitersDetail" data-formatter="invitersFormatter">Joint Inviters</th>
                                     <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                     <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
-                                    <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
-                                    <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
-                                    <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
-                                    <th data-field="uid" data-formatter="operateDelegation">Edit</th>
-                                    <th data-field="uid" data-formatter="operateMember">Member</th>
-                                    <th data-field="uid" data-formatter="operateCar">Add Car</th>
-                                    <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
-                                    <th data-field="officer_uid" data-formatter="operateOfficer">Assign Officer</th>
-                                    <th data-field="uid" data-formatter="detachOfficer">Unassign Officer</th>
-                                    <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
-                                    <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
+                                    <th data-filter-control="input" data-field="created_at" data-sortable="true" data-print-ignore="true">Created At</th>
+                                    <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-print-ignore="true">Last Updated</th>
+                                    <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
+                                    <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
+                                    <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
+                                    <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
+                                    <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th>
+                                    <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
+                                    <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
+                                    <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
+                                    <th data-field="uid" data-formatter="statusChangerFormatter" data-print-ignore="true">Status Changer</th>
                                 </tr>
                             </thead>
                         </table>
@@ -662,7 +662,7 @@
                 </div>
                 <div class="tab-pane" id="simple-tabpanel-3" role="tabpanel" aria-labelledby="simple-tab-3">
                     <div class="table-responsive">
-                        <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegation',2)}}">
+                        <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',2)}}">
                             <thead>
                                 <tr>
                                     <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -688,17 +688,17 @@
                                     <th data-filter-control="input" data-field="invitersDetail" data-formatter="invitersFormatter">Joint Inviters</th>
                                     <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                     <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
-                                    <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
-                                    <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
-                                    <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
-                                    <th data-field="uid" data-formatter="operateDelegation">Edit</th>
-                                    <th data-field="uid" data-formatter="operateMember">Member</th>
-                                    <th data-field="uid" data-formatter="operateCar">Add Car</th>
-                                    <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
-                                    <th data-field="officer_uid" data-formatter="operateOfficer">Assign Officer</th>
-                                    <th data-field="uid" data-formatter="detachOfficer">Unassign Officer</th>
-                                    <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
-                                    <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
+                                    <th data-filter-control="input" data-field="created_at" data-sortable="true" data-print-ignore="true">Created At</th>
+                                    <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-print-ignore="true">Last Updated</th>
+                                    <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
+                                    <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
+                                    <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
+                                    <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
+                                    <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th>
+                                    <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
+                                    <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
+                                    <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
+                                    <th data-field="uid" data-formatter="statusChangerFormatter" data-print-ignore="true">Status Changer</th>
                                 </tr>
                             </thead>
                         </table>
@@ -723,7 +723,7 @@
                 </div>
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table4" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table4" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-row-style="rowStyle" data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegation')}}">
+                    <table id="table4" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table4" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-row-style="rowStyle" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation')}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -754,18 +754,18 @@
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
                                 <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
-                                <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
-                                <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
-                                <!-- <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th> -->
-                                <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
-                                <th data-field="uid" data-formatter="operateDelegation">Edit</th>
-                                <th data-field="uid" data-formatter="operateMember">Member</th>
-                                <th data-field="uid" data-formatter="operateCar">Add Car</th>
-                                <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
-                                <th data-field="officer_uid" data-formatter="operateOfficer">Assign Officer</th>
-                                <th data-field="uid" data-formatter="detachOfficer">Unassign Officer</th>
-                                <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
-                                <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
+                                <th data-filter-control="input" data-field="created_at" data-sortable="true" data-print-ignore="true">Created At</th>
+                                <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-print-ignore="true">Last Updated</th>
+                                <!-- <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th> -->
+                                <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
+                                <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
+                                <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
+                                <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
+                                <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th>
+                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
+                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
+                                <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
+                                <th data-field="uid" data-formatter="statusChangerFormatter" data-print-ignore="true">Status Changer</th>
                             </tr>
                         </thead>
                     </table>
@@ -785,7 +785,7 @@
                     <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
                      data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true"
                       data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" 
-                      data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegation',1)}}">
+                      data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',1)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -815,21 +815,21 @@
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
                                 <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
-                                <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
-                                <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
+                                <th data-filter-control="input" data-field="created_at" data-sortable="true" data-print-ignore="true">Created At</th>
+                                <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-print-ignore="true">Last Updated</th>
                                 @if(session()->get('user')->roles[0]->name === "admin")
-                                <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
-                                <!-- <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th> -->
-                                <th data-field="uid" data-formatter="operateDelegation">Edit</th>
-                                <th data-field="uid" data-formatter="operateMember">Member</th>
+                                <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
+                                <!-- <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th> -->
+                                <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
+                                <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
                                 @endif
-                                <th data-field="uid" data-formatter="operateCar">Add Car</th>
-                                <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
-                                <th data-field="officer_uid" data-formatter="operateOfficer">Assign Officer</th>
-                                <th data-field="uid" data-formatter="detachOfficer">Unassign Officer</th>
+                                <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
+                                <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th>
+                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
+                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                                 @if(session()->get('user')->roles[0]->name === "admin")
-                                <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
-                                <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
+                                <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
+                                <th data-field="uid" data-formatter="statusChangerFormatter" data-print-ignore="true">Status Changer</th>
                                 @endif
                             </tr>
                         </thead>
@@ -847,7 +847,7 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table1" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table1" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegation',0)}}">
+                    <table id="table1" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table1" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',0)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -878,18 +878,18 @@
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
                                 <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
-                                <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
-                                <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
-                                <!-- <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th> -->
-                                <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
-                                <th data-field="uid" data-formatter="operateDelegation">Edit</th>
-                                <th data-field="uid" data-formatter="operateMember">Member</th>
-                                <th data-field="uid" data-formatter="operateCar">Add Car</th>
-                                <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
-                                <th data-field="officer_uid" data-formatter="operateOfficer">Assign Officer</th>
-                                <th data-field="uid" data-formatter="detachOfficer">Unassign Officer</th>
-                                <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
-                                <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
+                                <th data-filter-control="input" data-field="created_at" data-sortable="true" data-print-ignore="true">Created At</th>
+                                <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-print-ignore="true">Last Updated</th>
+                                <!-- <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th> -->
+                                <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
+                                <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
+                                <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
+                                <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
+                                <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th>
+                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
+                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
+                                <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
+                                <th data-field="uid" data-formatter="statusChangerFormatter" data-print-ignore="true">Status Changer</th>
                             </tr>
                         </thead>
                     </table>
@@ -905,7 +905,7 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table2" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table2" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegation',2)}}">
+                    <table id="table2" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table2" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',2)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -936,18 +936,18 @@
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
                                 <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
-                                <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
-                                <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
-                                <!-- <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th> -->
-                                <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
-                                <th data-field="uid" data-formatter="operateDelegation">Edit</th>
-                                <th data-field="uid" data-formatter="operateMember">Member</th>
-                                <th data-field="uid" data-formatter="operateCar">Add Car</th>
-                                <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
-                                <th data-field="officer_uid" data-formatter="operateOfficer">Assign Officer</th>
-                                <th data-field="uid" data-formatter="detachOfficer">Unassign Officer</th>
-                                <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
-                                <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
+                                <th data-filter-control="input" data-field="created_at" data-sortable="true" data-print-ignore="true">Created At</th>
+                                <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-print-ignore="true">Last Updated</th>
+                                <!-- <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th> -->
+                                <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
+                                <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
+                                <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
+                                <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
+                                <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th>
+                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
+                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
+                                <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
+                                <th data-field="uid" data-formatter="statusChangerFormatter" data-print-ignore="true">Status Changer</th>
                             </tr>
                         </thead>
                     </table>
@@ -963,7 +963,7 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table3" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table3" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegation',3)}}">
+                    <table id="table3" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table3" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',3)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -994,18 +994,18 @@
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
                                 <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
-                                <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
-                                <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
-                                <!-- <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th> -->
-                                <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
-                                <th data-field="uid" data-formatter="operateDelegation">Edit</th>
-                                <th data-field="uid" data-formatter="operateMember">Member</th>
-                                <th data-field="uid" data-formatter="operateCar">Add Car</th>
-                                <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
-                                <th data-field="officer_uid" data-formatter="operateOfficer">Assign Officer</th>
-                                <th data-field="uid" data-formatter="detachOfficer">Unassign Officer</th>
-                                <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
-                                <th data-field="uid" data-formatter="statusChangerFormatter">Status Changer</th>
+                                <th data-filter-control="input" data-field="created_at" data-sortable="true" data-print-ignore="true">Created At</th>
+                                <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-print-ignore="true">Last Updated</th>
+                                <!-- <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th> -->
+                                <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
+                                <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
+                                <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
+                                <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
+                                <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th>
+                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
+                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
+                                <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
+                                <th data-field="uid" data-formatter="statusChangerFormatter" data-print-ignore="true">Status Changer</th>
                             </tr>
                         </thead>
                     </table>
@@ -1030,7 +1030,7 @@
             <br /> -->
 <!-- endif -->
 <!-- <div class="table-responsive">
-                <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true" data-height="800"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegation')}}">
+                <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true" data-height="800"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation')}}">
                     <thead>
                         <tr>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -1055,17 +1055,17 @@
                             <th data-filter-control="input" data-field="superior.hotel_quantity">Superior</th>
                             <th data-filter-control="input" data-field="dOccupancy.hotel_quantity">Double Occupancy</th>
                             <th data-filter-control="input" data-field="delegationCode">Delegation Code</th>
-                            <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
-                            <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
+                            <th data-filter-control="input" data-field="created_at" data-sortable="true" data-print-ignore="true">Created At</th>
+                            <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-print-ignore="true">Last Updated</th>
                             <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Active/Suspended</th>
-                            <th data-field="delegationhead" data-formatter="operateInvitaion">Invitation</th>
-                            <th data-field="uid" data-formatter="operateDelegation">Edit</th>
-                            <th data-field="uid" data-formatter="operateMember">Member</th>
-                            <th data-field="uid" data-formatter="operatePlan">Car/Accomodation</th>
-                            <th data-field="uid" data-formatter="operateCar">Add Car</th>
-                            <th data-field="uid" data-formatter="operateDetachCar">Remove Car</th>
-                            <th data-field="officer_uid" data-formatter="operateOfficer">Assign Officer</th>
-                            <th data-field="uid" data-formatter="detachOfficer">Unassign Officer</th>
+                            <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
+                            <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
+                            <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
+                            <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
+                            <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
+                            <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th>
+                            <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
+                            <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                             <th data-field="uid" data-formatter="statusChangerFormatter">Active/Suspended</th> -->
 <!-- <th data-filter-control="input" data-field="exhibition" data-sortable="true">Exhibition</th> -->
 <!-- <th data-filter-control="input" data-field="delegates_uid" data-formatter="operateFormatter">Profile</th> -->
@@ -1623,10 +1623,55 @@
         }
 
         $(val).bootstrapTable({
+            exportTypes: ['json', 'csv', 'txt', 'sql', 'excel'],
             exportOptions: {
-                fileName: 'List Of All Delegation'
+                fileName: 'List Of All Delegation',
             }
         });
+        $(val).bootstrapTable({
+      printPageBuilder: function (val) {
+        return `
+<html>
+  <head>
+  <style type="text/css" media="print">
+  @page {
+    size: auto;
+    margin: 25px 0 25px 0;
+  }
+  </style>
+  <style type="text/css" media="all">
+  table {
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  table, th, td {
+    border: 1px solid grey;
+  }
+  th, td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  p {
+    font-weight: bold;
+    margin-left:20px;
+  }
+  table {
+    width:94%;
+    margin-left:3%;
+    margin-right:3%;
+  }
+  div.bs-table-print {
+    text-align:center;
+  }
+  </style>
+  </head>
+  <title>Print Table</title>
+  <body>
+  <div class="bs-table-print">${val}</div>
+  </body>
+</html>`
+      }
+    })
     }))
 </script>
 @endsection

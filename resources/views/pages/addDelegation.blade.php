@@ -81,7 +81,7 @@
                             <div class="mb-3">
                                 <label for="countryInput" class="form-label">Select Country*</label>
                                 <select class="form-select" aria-label="Country Name" id="countryInput" name="country"
-                                    required>
+                                    required {{isset($delegations->country) ? 'disabled':''}}>
                                     <option value="" selected disabled hidden> Select Country </option>
                                     @foreach(\App\Models\Country::all() as $country)
                                     <option value="{{$country->name}}" {{isset($delegations)?($delegations->country ==
@@ -141,7 +141,8 @@
                             </div>
                             <div class="mb-3">
                                 <label for="rank" class="form-label">Rank*</label>
-                                <select name="self_rank" id="self_rank" class="form-select" required>
+                                <select name="self_rank" id="self_rank" class="form-select" required
+                                    {{isset($delegationHead->rank) ? 'disabled':''}}>
                                     <option value="" selected disabled hidden> Select Rank </option>
                                     @foreach (\App\Models\Rank::all() as $renderRank)
                                     <option value="{{$renderRank->ranks_uid}}"
@@ -154,19 +155,22 @@
                                 <label for="self_first_Name" class="form-label">First Name*</label>
                                 <input name="self_first_Name" type="text" class="form-control" id="self_first_Name"
                                     value="{{isset($delegationHead)?($delegationHead->first_Name):''}}"
-                                    placeholder="First Name" required>
+                                    placeholder="First Name" required {{isset($delegationHead->first_Name) ?
+                                'disabled':''}}>
                             </div>
                             <div class="mb-3">
                                 <label for="self_last_Name" class="form-label">Last Name*</label>
                                 <input name="self_last_Name" type="text" class="form-control" id="self_last_Name"
                                     value="{{isset($delegationHead)?($delegationHead->last_Name):''}}"
-                                    placeholder="Last Name" required>
+                                    placeholder="Last Name" required {{isset($delegationHead->last_Name) ?
+                                'disabled':''}}>
                             </div>
                             <div class="mb-3">
                                 <label for="self_designation" class="form-label">Designation*</label>
                                 <input name="self_designation" type="text" class="form-control" id="self_designation"
                                     value="{{isset($delegationHead)?($delegationHead->designation):''}}"
-                                    placeholder="Designation" required>
+                                    placeholder="Designation" required {{isset($delegationHead->designation) ?
+                                'disabled':''}}>
                             </div>
                             <div class="mb-3">
                                 <label for="golf_player" class="form-label">Golf Player</label>
@@ -181,15 +185,15 @@
                                 <label for="email_address" class="form-label">Email Address</label>
                                 <input name="email_address" type="text" class="form-control" id="email_address"
                                     value="{{isset($delegations)?($delegations->email_address ? $delegations->email_address:''):''}}"
-                                    placeholder="Email Address">
+                                    placeholder="Email Address" {{isset($delegations->email_address) ?
+                                'disabled':''}}>
                             </div>
                             <div class="mb-3">
                                 <label for="jointInvitation" class="form-label">Joint Invitation:</label>
                                 <select id="multi-select-jointInvitation" placeholder="Select upto 10 tags"
                                     id="jointInvitation" title="Joint Invitations" name="inviters[]" multiple>
                                     @foreach (\App\Models\Vips::all() as $key => $vip)
-                                    <option value="{{$vip->vips_uid}}"
-                                        @if(isset($delegations) &&$delegations->inviters)
+                                    <option value="{{$vip->vips_uid}}" @if(isset($delegations) &&$delegations->inviters)
                                         @foreach($delegations->inviters as $inviter)
                                         {{$inviter == $vip->vips_uid?'selected':''}}
                                         @endforeach

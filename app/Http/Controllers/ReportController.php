@@ -39,11 +39,11 @@ class ReportController extends Controller
     {
         $countries = Delegation::distinct('country')->get('country');
         foreach ($countries as $countrieskey => $country) {
-            $countries[$countrieskey]->count = Delegation::where('country', $country->country)->count();
-            $countries[$countrieskey]->regretted = Delegation::where([['country', $country->country], ['delegation_response', 'Regretted']])->count();
-            $countries[$countrieskey]->accepted = Delegation::where([['country', $country->country], ['delegation_response', 'Accepted']])->count();
-            $countries[$countrieskey]->awaited = Delegation::where([['country', $country->country], ['delegation_response', 'Awaited']])->count();
-            $countries[$countrieskey]->uids = Delegation::where([['country', $country->country], ['delegation_response', 'Accepted']])->get('uid');
+            $countries[$countrieskey]->count = Delegation::where([['country', $country->country], ['delegation_status', 1]])->count();
+            $countries[$countrieskey]->regretted = Delegation::where([['country', $country->country], ['delegation_response', 'Regretted'], ['delegation_status', 1]])->count();
+            $countries[$countrieskey]->accepted = Delegation::where([['country', $country->country], ['delegation_response', 'Accepted'], ['delegation_status', 1]])->count();
+            $countries[$countrieskey]->awaited = Delegation::where([['country', $country->country], ['delegation_response', 'Awaited'], ['delegation_status', 1]])->count();
+            $countries[$countrieskey]->uids = Delegation::where([['country', $country->country], ['delegation_response', 'Accepted'], ['delegation_status', 1]])->get('uid');
             $tempMemberCount = [];
             foreach ($countries[$countrieskey]->uids as $key => $uid) {
                 array_push($tempMemberCount, Delegate::where([['delegation', $uid->uid], ['self', 1], ['status', 1]])->count());
@@ -90,10 +90,10 @@ class ReportController extends Controller
         $invitees = Vips::distinct('vips_uid')->orderBy('id', 'ASC')->get('vips_uid');
         foreach ($invitees as $inviteeskey => $invitee) {
             $invitees[$inviteeskey]->name = Vips::where('vips_uid', $invitee->vips_uid)->first('vips_designation');
-            $invitees[$inviteeskey]->count = Delegation::where('invited_by', $invitee->vips_uid)->count();
-            $invitees[$inviteeskey]->regretted = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Regretted']])->count();
-            $invitees[$inviteeskey]->accepted = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Accepted']])->count();
-            $invitees[$inviteeskey]->awaited = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Awaited']])->count();
+            $invitees[$inviteeskey]->count = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_status', 1]])->count();
+            $invitees[$inviteeskey]->regretted = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Regretted'], ['delegation_status', 1]])->count();
+            $invitees[$inviteeskey]->accepted = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Accepted'], ['delegation_status', 1]])->count();
+            $invitees[$inviteeskey]->awaited = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Awaited'], ['delegation_status', 1]])->count();
         }
 
         if ($invitees->count() > 0) {
@@ -127,27 +127,27 @@ class ReportController extends Controller
 
         $countries = Delegation::distinct('country')->get('country');
         foreach ($countries as $countrieskey => $country) {
-            $delegations = Delegation::where('country', $country->country)->distinct('invited_by')->get('invited_by');
-            $delegationsCount = Delegation::where('country', $country->country)->count('invited_by');
+            $delegations = Delegation::where([['country', $country->country], ['delegation_status', 1]])->distinct('invited_by')->get('invited_by');
+            $delegationsCount = Delegation::where([['country', $country->country], ['delegation_status', 1]])->count('invited_by');
             $vips = Vips::get(['vips_designation', 'vips_uid']);
             foreach ($vips as $key => $vip) {
-                $vips[$key]->count = Delegation::where([['invited_by', $vip->vips_uid], ['country', $country->country]])->count();
+                $vips[$key]->count = Delegation::where([['invited_by', $vip->vips_uid], ['country', $country->country], ['delegation_status', 1]])->count();
             }
             $countries[$countrieskey]->totalCount = $delegationsCount;
             $countries[$countrieskey]->vips = $vips;
         }
 
-        // if ($countries->count() > 0) {
-        //     $countries[$countries->count()] = [
-        //         'name.vips_designation' => 'Total',
-        //         'count' => $countries->sum('count'),
-        //         'awaited' => $countries->sum('awaited'),
-        //         'regretted' => $countries->sum('regretted'),
-        //         'selfSum' => $countries->sum('selfSum'),
-        //         'repSum' => $countries->sum('repSum'),
-        //         'totalCountOfDelegatesSum' => $countries->sum('totalCountOfDelegatesSum'),
-        //     ];
-        // }
+        if ($countries->count() > 0) {
+            $countries[$countries->count()] = [
+                'country' => 'Total',
+                'totalCount' => $countries->sum('totalCount'),
+            ];
+            // $countries[$countries->count()]['vips'] = [
+            // foreach ($vips as $key => $vip) {
+            //         'count' => Delegation::where([['invited_by', $vip->vips_uid], ['delegation_status', 1]])->count()
+            //     }
+            // ];
+        }
         return $countries;
     }
 
@@ -177,11 +177,11 @@ class ReportController extends Controller
 
         $invitees = Vips::distinct('vips_uid')->orderBy('id', 'ASC')->get('vips_uid');
         foreach ($invitees as $inviteeskey => $invitee) {
-            $accepted = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Accepted']])->get();
+            $accepted = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Accepted'], ['delegation_status', 1]])->get();
             $invitees[$inviteeskey]->name = Vips::where('vips_uid', $invitee->vips_uid)->first('vips_designation');
-            $invitees[$inviteeskey]->count = Delegation::where('invited_by', $invitee->vips_uid)->count();
-            $invitees[$inviteeskey]->awaited = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Awaited']])->count();
-            $invitees[$inviteeskey]->regretted = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Regretted']])->count();
+            $invitees[$inviteeskey]->count = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_status', 1]])->count();
+            $invitees[$inviteeskey]->awaited = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Awaited'], ['delegation_status', 1]])->count();
+            $invitees[$inviteeskey]->regretted = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Regretted'], ['delegation_status', 1]])->count();
             $invitees[$inviteeskey]->self = [];
             $invitees[$inviteeskey]->rep = [];
             $invitees[$inviteeskey]->totalCountOfDelegates = [];
@@ -220,12 +220,12 @@ class ReportController extends Controller
     {
         $invitees = Vips::distinct('vips_uid')->orderBy('id', 'ASC')->get('vips_uid');
         foreach ($invitees as $inviteeskey => $invitee) {
-            $accepted = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Accepted']])->get();
+            $accepted = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Accepted'], ['delegation_status', 1]])->get();
             $invitees[$inviteeskey]->name = Vips::where('vips_uid', $invitee->vips_uid)->first('vips_designation');
-            $invitees[$inviteeskey]->count = Delegation::where('invited_by', $invitee->vips_uid)->count();
-            $invitees[$inviteeskey]->awaited = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Awaited']])->count();
-            $invitees[$inviteeskey]->regretted = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Regretted']])->count();
-            $invitees[$inviteeskey]->regrettedCountries = [Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Regretted']])->get('country')];
+            $invitees[$inviteeskey]->count = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_status', 1]])->count();
+            $invitees[$inviteeskey]->awaited = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Awaited'], ['delegation_status', 1]])->count();
+            $invitees[$inviteeskey]->regretted = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Regretted'], ['delegation_status', 1]])->count();
+            $invitees[$inviteeskey]->regrettedCountries = Delegation::where([['invited_by', $invitee->vips_uid], ['delegation_response', 'Regretted'], ['delegation_status', 1]])->get('country');
             $invitees[$inviteeskey]->self = [];
             $invitees[$inviteeskey]->selfCountries = [];
             $invitees[$inviteeskey]->rep = [];
