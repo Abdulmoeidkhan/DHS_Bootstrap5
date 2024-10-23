@@ -429,7 +429,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::get('/invitation/{id}', [PrintInvitationController::class, 'printInvitation'])->name("pages.invitationPage");
-    Route::get('/printDelegationBadge/{id}', [PrintInvitationController::class, 'printDelegationBadge'])->name("pages.printDelegationBadge");
+    Route::get('/printDelegationBadge/{id}/{type}', [PrintInvitationController::class, 'printDelegationBadge'])->name("pages.printDelegationBadge");
     Route::get('/printDelegationEnvelope/{id}', [PrintInvitationController::class, 'printDelegationEnvelope'])->name("pages.printDelegationEnvelope");
 });
 

@@ -59,6 +59,7 @@
                     data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter=","
                     data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true"
                     data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true"
+                    data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true"
                     data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.selfRepDetailData')}}">
                     <thead>
                         <tr>
@@ -137,6 +138,50 @@
                 fileName: 'List Of All Delegation'
             }
         });
+        $(val).bootstrapTable({
+      printPageBuilder: function (val) {
+        return `
+<html>
+  <head>
+  <style type="text/css" media="print">
+  @page {
+    size: auto;
+    margin: 25px 0 25px 0;
+  }
+  </style>
+  <style type="text/css" media="all">
+  table {
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  table, th, td {
+    border: 1px solid grey;
+  }
+  th, td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  p {
+    font-weight: bold;
+    margin-left:20px;
+  }
+  table {
+    width:94%;
+    margin-left:3%;
+    margin-right:3%;
+  }
+  div.bs-table-print {
+    text-align:center;
+  }
+  </style>
+  </head>
+  <title>Print Table</title>
+  <body>
+  <div class="bs-table-print">${val}</div>
+  </body>
+</html>`
+      }
+    })
     }))
 </script>
 

@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('delegateCode')->unique();
             $table->string('itinerary_uid')->nullable();
             $table->integer('invitation_number')->nullable()->unique();
+            $table->integer('isPrinted')->default(0);
             $table->uuid('accomodated')->nullable();
             $table->uuid('car_accomodated')->nullable();
             // $table->string('organistaion')->nullable();

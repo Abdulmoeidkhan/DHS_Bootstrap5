@@ -36,28 +36,23 @@
                     <div class="logo-child">
                         <div>
                             <h4 class="text-left mx-3">
-                                {{$delegate->rank->ranks_name}} {{$delegate->first_Name}}
+                                {{$printDoc->first}} {{$printDoc->second}}
                                 </br>
-                                {{$delegate->last_Name}}
+                                {{$printDoc->third}}
                             </h4>
                         </div>
                     </div>
-                    {{-- {{$delegate}} --}}
                     <div class="d-flex my-1">
-                        <div id="barCode" custom-id="{{$delegate->delegateCode}}"></div>
+                        <div id="barCode" custom-id="{{$printDoc->sixth}}"></div>
                     </div>
-                    {{-- <h2 style="text-transform:uppercase; font-weight:700;" class="text-center">
-                        {{$delegation->country}}
-                    </h2> --}}
                     <h6 style="text-transform: uppercase;" class="text-center mx-3">
-                        {{isset($delegate->flight->passport)?$delegate->flight->passport:''}}/{{$delegation->country}}/{{$delegate->delegateCode}}
+                        {{$printDoc->forth}}/{{$printDoc->fifth}}/{{$printDoc->sixth}}
                     </h6>
                 </div>
-                {{$delegate->passport}}
                 <div class="card-border mx-4">
                     <div class="logo-child mx-5">
-                        @if($delegate->image)
-                        <img src="{{$delegate->image?$delegate->image->img_blob:''}}" style="height: 120px; width: 100px;"
+                        @if($printDoc->image)
+                        <img src="{{$printDoc->image->img_blob}}" style="height: 120px; width: 100px;"
                             class="img-fluid" alt="" />
                         @endif
                     </div>
@@ -65,34 +60,6 @@
             </div>
         </div>
     </div>
-    <!-- <div class="container">
-        <div class="row float-left container-first-child">
-            <div class="col-md-12 parent-print-program text-center d-print-inline badge-box-2">
-                <div class="card-border">
-                    <div class="logo-child">
-                        <div>
-                                <img src="" class="logo-img responsive" alt="Pimec" />&nbsp;&nbsp;
-                            </div> 
-                        <div>
-                            <h5>
-                                {{$delegate->rank->ranks_name}} {{$delegate->first_Name}} {{$delegate->last_Name}}
-                            </h5>
-                        </div>
-                    </div>
-                    <div id="barCode" custom-id="43251"></div>
-                    <h2 style="text-transform:uppercase; font-weight:700;">
-                        {{$delegation->country}}
-                    </h2>
-                    <h6 style="text-transform: uppercase;">{{$delegation->delegationCode}} </h6>
-                </div>
-                <div class="card-border">
-                    <div class="logo-child">
-                        <img src="$delegate->image->img_blob" style="height: 80px; width: 80px;" class="img-fluid" alt="" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>

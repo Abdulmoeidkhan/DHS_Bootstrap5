@@ -159,7 +159,7 @@
                         data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
                         data-filter-control="true" data-toggle="table" data-flat="true" data-show-toggle="true"
                         data-show-export="true" data-show-columns="true" data-show-refresh="true"
-                        data-show-pagination-switch="true" data-show-columns-toggle-all="true" 
+                        data-show-pagination-switch="true" data-show-columns-toggle-all="true"
                         data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegationFlight',0)}}">
                         <thead>
                             <tr>
@@ -494,7 +494,7 @@
 </script>
 @include("layouts.tableFoot")
 <script>
-    ['#table', '#table1', '#table2', '#table3' ].map((val => {
+    ['#table', '#table1', '#table2', '#table3'].map((val => {
         var $table = $(val)
         var selectedRow = {}
 
@@ -520,6 +520,50 @@
                 fileName: 'List Of All Delegation'
             }
         });
+        $(val).bootstrapTable({
+            printPageBuilder: function(val) {
+                return `
+<html>
+  <head>
+  <style type="text/css" media="print">
+  @page {
+    size: auto;
+    margin: 25px 0 25px 0;
+  }
+  </style>
+  <style type="text/css" media="all">
+  table {
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  table, th, td {
+    border: 1px solid grey;
+  }
+  th, td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  p {
+    font-weight: bold;
+    margin-left:20px;
+  }
+  table {
+    width:94%;
+    margin-left:3%;
+    margin-right:3%;
+  }
+  div.bs-table-print {
+    text-align:center;
+  }
+  </style>
+  </head>
+  <title>Print Table</title>
+  <body>
+  <div class="bs-table-print">${val}</div>
+  </body>
+</html>`
+            }
+        })
     }))
 </script>
 @endsection

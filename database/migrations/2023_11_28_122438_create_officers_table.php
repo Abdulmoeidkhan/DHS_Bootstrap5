@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('officerCode')->unique();
             $table->integer('officer_assign')->default(0);
             $table->integer('officer_status')->default(1);
+            $table->integer('isPrinted')->default(0);
             $table->timestamps();
         });
     }

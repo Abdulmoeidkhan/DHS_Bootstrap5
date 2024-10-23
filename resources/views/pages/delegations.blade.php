@@ -237,10 +237,10 @@
                             <option value="" selected disabled hidden> Select Officer To Be Associate </option>
                             @foreach(\App\Models\Officer::where([['officer_assign',0],['officer_type','Liason']])->get() as $key=>$officer)
                             <option class="text-capitalize" value="{{$officer->officer_uid}}">
-                            @foreach (\App\Models\Rank::where('ranks_uid',$officer->officer_rank)->get() as $rank)
-                            {{$rank->ranks_name}}
-                            @endforeach    
-                             {{$officer->officer_first_name.' '.$officer->officer_last_name.' - '.$officer->officer_type}}
+                                @foreach (\App\Models\Rank::where('ranks_uid',$officer->officer_rank)->get() as $rank)
+                                {{$rank->ranks_name}}
+                                @endforeach
+                                {{$officer->officer_first_name.' '.$officer->officer_last_name.' - '.$officer->officer_type}}
                             </option>
                             @endforeach
                         </select>
@@ -251,10 +251,10 @@
                             <option value="" selected disabled hidden> Select Officer To Be Associate </option>
                             @foreach(\App\Models\Officer::where([['officer_assign',0],['officer_type','Receiving']])->get() as $key=>$officer)
                             <option class="text-capitalize" value="{{$officer->officer_uid}}">
-                            @foreach (\App\Models\Rank::where('ranks_uid',$officer->officer_rank)->get() as $rank)
-                            {{$rank->ranks_name}}
-                            @endforeach    
-                             {{$officer->officer_first_name.' '.$officer->officer_last_name.' - '.$officer->officer_type}}
+                                @foreach (\App\Models\Rank::where('ranks_uid',$officer->officer_rank)->get() as $rank)
+                                {{$rank->ranks_name}}
+                                @endforeach
+                                {{$officer->officer_first_name.' '.$officer->officer_last_name.' - '.$officer->officer_type}}
                             </option>
                             @endforeach
                         </select>
@@ -265,10 +265,10 @@
                             <option value="" selected disabled hidden> Select Officer To Be Associate </option>
                             @foreach(\App\Models\Officer::where([['officer_assign',0],['officer_type','Interpreter']])->get() as $key=>$officer)
                             <option class="text-capitalize" value="{{$officer->officer_uid}}">
-                            @foreach (\App\Models\Rank::where('ranks_uid',$officer->officer_rank)->get() as $rank)
+                                @foreach (\App\Models\Rank::where('ranks_uid',$officer->officer_rank)->get() as $rank)
                                 {{$rank->ranks_name}}
-                            @endforeach    
-                             {{$officer->officer_first_name.' '.$officer->officer_last_name.' - '.$officer->officer_type}}
+                                @endforeach
+                                {{$officer->officer_first_name.' '.$officer->officer_last_name.' - '.$officer->officer_type}}
                             </option>
                             @endforeach
                         </select>
@@ -714,7 +714,7 @@
                 <button class="tablinks" onclick="openCity(event, 'Deactive')">Deactive</button>
                 @endif
             </div>
-            <div id="All" class="tabcontent" style="{{session()->get('user')->roles[0]->name != 'dho'?'display: block;':''}}" >
+            <div id="All" class="tabcontent" {{session()->get('user')->roles[0]->name != 'dho'?'style=display: block;':''}}>
                 @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
                     <div class="d-flex" style="position: absolute;top: 95px;">
@@ -723,7 +723,7 @@
                 </div>
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table4" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table4" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-row-style="rowStyle" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation')}}">
+                    <table id="table4" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table4" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-row-style="rowStyle" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation')}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -772,7 +772,7 @@
                 </div>
                 @endif
             </div>
-            <div id="Accepted" class="tabcontent" style="{{session()->get('user')->roles[0]->name == 'dho'?'display: block;':''}}">
+            <div id="Accepted" class="tabcontent" {{session()->get('user')->roles[0]->name == 'dho'?'style=display: block;':''}}>
                 @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
                     <div class="d-flex" style="position: absolute;top: 95px;">
@@ -782,10 +782,10 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
-                     data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true"
-                      data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" 
-                      data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',1)}}">
+                    <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
+                        data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true"
+                        data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true"
+                        data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',1)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -847,7 +847,7 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table1" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table1" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',0)}}">
+                    <table id="table1" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table1" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',0)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -905,7 +905,7 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table2" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table2" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',2)}}">
+                    <table id="table2" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table2" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',2)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -963,7 +963,7 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table3" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table3" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',3)}}">
+                    <table id="table3" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table3" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',3)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -1587,17 +1587,22 @@
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " active";
     }
+
     function rowStyle(row) {
-            if(row.delegation_response == 'Regretted'){
-                return {classes: 'rejected'}
+        if (row.delegation_response == 'Regretted') {
+            return {
+                classes: 'rejected'
             }
-            else if(row.delegation_response == 'Accepted'){
-                return {classes: 'accepted'}
+        } else if (row.delegation_response == 'Accepted') {
+            return {
+                classes: 'accepted'
             }
-            else{
-                return {classes: '  '}
+        } else {
+            return {
+                classes: '  '
             }
         }
+    }
 </script>
 @include("layouts.tableFoot")
 <script>
@@ -1629,8 +1634,8 @@
             }
         });
         $(val).bootstrapTable({
-      printPageBuilder: function (val) {
-        return `
+            printPageBuilder: function(val) {
+                return `
 <html>
   <head>
   <style type="text/css" media="print">
@@ -1670,8 +1675,8 @@
   <div class="bs-table-print">${val}</div>
   </body>
 </html>`
-      }
-    })
+            }
+        })
     }))
 </script>
 @endsection
