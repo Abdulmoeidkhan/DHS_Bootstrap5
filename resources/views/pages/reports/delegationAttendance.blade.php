@@ -6,6 +6,7 @@
         color: green;
         font-weight: bold;
     }
+
     body {
         font-family: Arial;
     }
@@ -52,7 +53,8 @@
     <div class="card w-100">
         <div class="card-body p-4">
             <div class="table-responsive">
-                <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.delegationAttendanceData')}}">
+                <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true"
+                    data-reorderable-columns="true" data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.delegationAttendanceData')}}">
                     <thead>
                         <tr>
                             <th data-width="50" data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -81,7 +83,7 @@
 </script>
 @include("layouts.tableFoot")
 <script>
-    ['#table' ].map((val => {
+    ['#table'].map((val => {
         var $table = $(val)
         var selectedRow = {}
 
@@ -108,8 +110,8 @@
             }
         });
         $(val).bootstrapTable({
-      printPageBuilder: function (val) {
-        return `
+            printPageBuilder: function(val) {
+                return `
 <html>
   <head>
   <style type="text/css" media="print">
@@ -149,8 +151,8 @@
   <div class="bs-table-print">${val}</div>
   </body>
 </html>`
-      }
-    })
+            }
+        })
     }))
 </script>
 </script>

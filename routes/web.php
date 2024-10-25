@@ -258,6 +258,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/updateOfficer/{id}', [OfficerController::class, 'updateOfficer'])->name('request.updateOfficer');
         Route::post('/attachOfficer', [OfficerController::class, 'attachOfficer'])->name('request.attachOfficer');
         Route::post('/detachOfficer', [OfficerController::class, 'detachOfficer'])->name('request.detachOfficer');
+        Route::get('/officerStatusChanger/{id}', [OfficerController::class, 'officerStatusChanger'])->name('request.officerStatusChanger');
         // Officer Page And API End
 
 

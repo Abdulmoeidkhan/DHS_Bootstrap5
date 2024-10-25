@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Document;
 use App\Models\ImageBlob;
 use App\Models\Officer;
 use App\Models\Rank;
@@ -133,13 +132,13 @@ class OfficerController extends Controller
             // $pdfUpdate = $req->pdf ? $this->documentUpdate($req->file('pdf'), $id) : 0;
             $imgUpdate = $req->savedpicture ? $this->imageBlobUpdate($req->savedpicture, $id) : 0;
             if ($officerUpdate) {
-                return $req->submitMore ? redirect()->route('pages.addOfficer',$id)->with('message', 'Officer has been updated Successfully') : redirect()->route('pages.addOfficer',$id);
+                return $req->submitMore ? redirect()->route('pages.addOfficer', $id)->with('message', 'Officer has been updated Successfully') : redirect()->route('pages.addOfficer', $id);
             }
         } catch (QueryException $exception) {
             if ($exception->errorInfo[2]) {
-                return  redirect()->route('pages.addOfficer',$id)->with('error', 'Error : ' . $exception->errorInfo[2]);
+                return  redirect()->route('pages.addOfficer', $id)->with('error', 'Error : ' . $exception->errorInfo[2]);
             } else {
-                return  redirect()->route('pages.addOfficer',$id)->with('error', $exception->errorInfo[2]);
+                return  redirect()->route('pages.addOfficer', $id)->with('error', $exception->errorInfo[2]);
             }
         }
     }
@@ -235,5 +234,23 @@ class OfficerController extends Controller
         $assigned = [Officer::where('officer_type', "Liason")->whereNotNull('officer_delegation')->count(), Officer::where('officer_type', "Interpreter")->whereNotNull('officer_delegation')->count(), Officer::where('officer_type', "Receiving")->whereNotNull('officer_delegation')->count()];
         $available = [Officer::where('officer_type', "Liason")->whereNull('officer_delegation')->count(), Officer::where('officer_type', "Interpreter")->whereNull('officer_delegation')->count(), Officer::where('officer_type', "Receiving")->whereNull('officer_delegation')->count()];
         return ['names' => ['Assigned', 'Available'], 'values' => [$assigned, $available]];
+    }
+
+    public function officerStatusChanger($id)
+    {
+        try {
+            $officer = Officer::where('officer_uid', $id)->first(['clearance']);
+            $status = $officer->clearance == 1 ? 0 : 1;
+            $statusUpdated = Officer::where('officer_uid', $id)->update(['clearance' => $status]);
+            if ($statusUpdated) {
+                return redirect()->route('pages.officer')->with('message', 'Officer has been updated Successfully');
+            }
+        } catch (QueryException $exception) {
+            if ($exception->errorInfo[2]) {
+                return  redirect()->route('pages.officer')->with('error', 'Error : ' . $exception->errorInfo[2]);
+            } else {
+                return  redirect()->route('pages.officer')->with('error', $exception->errorInfo[2]);
+            }
+        }
     }
 }

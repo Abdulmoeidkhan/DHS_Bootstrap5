@@ -59,6 +59,7 @@
                     data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true"
                     data-show-pagination-switch="true" data-show-columns-toggle-all="true"
                     data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true"
+                    data-reorderable-columns="true"
                     data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.countryData')}}">
                     <thead>
                         <tr>
@@ -68,12 +69,12 @@
                                 data-fixed-columns="true" data-formatter="operateText">Country</th>
                             <th data-filter-control="input" data-field="count" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Invitation</th>
+                            <th data-filter-control="input" data-field="accepted" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operateNumber">Accepted</th>
                             <th data-filter-control="input" data-field="regretted" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateNumber">Regretted</th>
                             <th data-filter-control="input" data-field="awaited" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateNumber">Awaited</th>
-                            <th data-filter-control="input" data-field="accepted" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateNumber">Accepted</th>
                             <th data-filter-control="input" data-field="memberCountTotal" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateNumber">Total Accepted Delegates</th>
                         </tr>
@@ -98,7 +99,7 @@
 </script>
 @include("layouts.tableFoot")
 <script>
-    ['#table' ].map((val => {
+    ['#table'].map((val => {
         var $table = $(val)
         var selectedRow = {}
 
@@ -125,8 +126,8 @@
             }
         });
         $(val).bootstrapTable({
-      printPageBuilder: function (val) {
-        return `
+            printPageBuilder: function(val) {
+                return `
 <html>
   <head>
   <style type="text/css" media="print">
@@ -166,8 +167,8 @@
   <div class="bs-table-print">${val}</div>
   </body>
 </html>`
-      }
-    })
+            }
+        })
     }))
 </script>
 

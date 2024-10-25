@@ -204,9 +204,9 @@
                         <label for="officerSelect" class="col-form-label">Officers :</label>
                         <select class="form-select" multiple aria-label="Officer To Be Detach" id="officerSelect" name="officerSelect[]" required>
                             <option value="" selected disabled hidden> Select Officer To Be Detach </option>
-                            <select class="form-select" multiple aria-label="Officer To Be Associate" id="recievingSelect" name="recievingSelect[]" required>
-                                <option value="" selected disabled hidden> Select Officer To Be Associate </option>
-                            </select>
+                        </select>
+                        <select class="form-select" multiple aria-label="Officer To Be Associate" id="recievingSelect" name="recievingSelect[]" required>
+                            <option value="" selected disabled hidden> Select Officer To Be Associate </option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -530,7 +530,8 @@
             <div class="tab-content pt-5" id="tab-content">
                 <div class="tab-pane active" id="simple-tabpanel-0" role="tabpanel" aria-labelledby="simple-tab-0">
                     <div class="table-responsive">
-                        <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',1)}}">
+                        <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" 
+ data-reorderable-columns="true"data-url="{{route('request.getDelegation',1)}}">
                             <thead>
                                 <tr>
                                     <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -574,7 +575,8 @@
                 </div>
                 <div class="tab-pane" id="simple-tabpanel-1" role="tabpanel" aria-labelledby="simple-tab-1">
                     <div class="table-responsive">
-                        <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',0)}}">
+                        <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" 
+ data-reorderable-columns="true"data-url="{{route('request.getDelegation',0)}}">
                             <thead>
                                 <tr>
                                     <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -618,7 +620,8 @@
                 </div>
                 <div class="tab-pane" id="simple-tabpanel-2" role="tabpanel" aria-labelledby="simple-tab-2">
                     <div class="table-responsive">
-                        <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation')}}">
+                        <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" 
+ data-reorderable-columns="true"data-url="{{route('request.getDelegation')}}">
                             <thead>
                                 <tr>
                                     <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -662,7 +665,8 @@
                 </div>
                 <div class="tab-pane" id="simple-tabpanel-3" role="tabpanel" aria-labelledby="simple-tab-3">
                     <div class="table-responsive">
-                        <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',2)}}">
+                        <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" 
+ data-reorderable-columns="true"data-url="{{route('request.getDelegation',2)}}">
                             <thead>
                                 <tr>
                                     <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -714,7 +718,7 @@
                 <button class="tablinks" onclick="openCity(event, 'Deactive')">Deactive</button>
                 @endif
             </div>
-            <div id="All" class="tabcontent" {{session()->get('user')->roles[0]->name != 'dho'?'style=display: block;':''}}>
+            <div id="All" class="tabcontent" style="display: block;">
                 @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
                     <div class="d-flex" style="position: absolute;top: 95px;">
@@ -723,7 +727,13 @@
                 </div>
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table4" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table4" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-row-style="rowStyle" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation')}}">
+                    <table
+                        id="table4" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter=","
+                        data-virtual-scroll="true" data-filter-control="true" data-toggle="table4" data-flat="true" data-pagination="true"
+                        data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true"
+                        data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-row-style="rowStyle"
+                        data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true"
+                        data-reorderable-columns="true" data-url="{{route('request.getDelegation')}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -785,7 +795,8 @@
                     <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
                         data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true"
                         data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true"
-                        data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',1)}}">
+                        data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true"
+                        data-reorderable-columns="true" data-url="{{route('request.getDelegation',1)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -847,7 +858,8 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table1" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table1" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',0)}}">
+                    <table id="table1" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table1" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true"
+                        data-reorderable-columns="true" data-url="{{route('request.getDelegation',0)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -905,7 +917,8 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table2" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table2" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',2)}}">
+                    <table id="table2" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table2" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true"
+                        data-reorderable-columns="true" data-url="{{route('request.getDelegation',2)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -963,7 +976,8 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table3" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table3" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation',3)}}">
+                    <table id="table3" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table3" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true"
+                        data-reorderable-columns="true" data-url="{{route('request.getDelegation',3)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -1030,7 +1044,8 @@
             <br /> -->
 <!-- endif -->
 <!-- <div class="table-responsive">
-                <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true" data-height="800"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDelegation')}}">
+                <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true" data-height="800"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" 
+ data-reorderable-columns="true"data-url="{{route('request.getDelegation')}}">
                     <thead>
                         <tr>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -1606,7 +1621,7 @@
 </script>
 @include("layouts.tableFoot")
 <script>
-    ['#table', '#table1', '#table2', '#table3', '#table4', ].map((val => {
+    ['#table', '#table1', '#table2', '#table3', '#table4'].map((val => {
         var $table = $(val)
         var selectedRow = {}
 

@@ -81,7 +81,7 @@
                             <div class="mb-3">
                                 <label for="countryInput" class="form-label">Select Country*</label>
                                 <select class="form-select" aria-label="Country Name" id="countryInput" name="country"
-                                    required {{isset($delegations->country) ? 'disabled':''}}>
+                                    required {{isset($delegations->country) && session()->get('user')->roles[0]->name !== "admin" ? 'disabled':''}}>
                                     <option value="" selected disabled hidden> Select Country </option>
                                     @foreach(\App\Models\Country::all() as $country)
                                     <option value="{{$country->name}}" {{isset($delegations)?($delegations->country ==
@@ -142,7 +142,7 @@
                             <div class="mb-3">
                                 <label for="rank" class="form-label">Rank*</label>
                                 <select name="self_rank" id="self_rank" class="form-select" required
-                                    {{isset($delegationHead->rank) ? 'disabled':''}}>
+                                    {{isset($delegationHead->rank) && session()->get('user')->roles[0]->name !== "admin"? 'disabled':''}}>
                                     <option value="" selected disabled hidden> Select Rank </option>
                                     @foreach (\App\Models\Rank::all() as $renderRank)
                                     <option value="{{$renderRank->ranks_uid}}"
@@ -155,21 +155,21 @@
                                 <label for="self_first_Name" class="form-label">First Name*</label>
                                 <input name="self_first_Name" type="text" class="form-control" id="self_first_Name"
                                     value="{{isset($delegationHead)?($delegationHead->first_Name):''}}"
-                                    placeholder="First Name" required {{isset($delegationHead->first_Name) ?
+                                    placeholder="First Name" required {{isset($delegationHead->first_Name) && session()->get('user')->roles[0]->name !== "admin" ?
                                 'disabled':''}}>
                             </div>
                             <div class="mb-3">
                                 <label for="self_last_Name" class="form-label">Last Name*</label>
                                 <input name="self_last_Name" type="text" class="form-control" id="self_last_Name"
                                     value="{{isset($delegationHead)?($delegationHead->last_Name):''}}"
-                                    placeholder="Last Name" required {{isset($delegationHead->last_Name) ?
+                                    placeholder="Last Name" required {{isset($delegationHead->last_Name) && session()->get('user')->roles[0]->name !== "admin"?
                                 'disabled':''}}>
                             </div>
                             <div class="mb-3">
                                 <label for="self_designation" class="form-label">Designation*</label>
                                 <input name="self_designation" type="text" class="form-control" id="self_designation"
                                     value="{{isset($delegationHead)?($delegationHead->designation):''}}"
-                                    placeholder="Designation" required {{isset($delegationHead->designation) ?
+                                    placeholder="Designation" required {{isset($delegationHead->designation) && session()->get('user')->roles[0]->name !== "admin"?
                                 'disabled':''}}>
                             </div>
                             <div class="mb-3">
@@ -185,7 +185,7 @@
                                 <label for="email_address" class="form-label">Email Address</label>
                                 <input name="email_address" type="text" class="form-control" id="email_address"
                                     value="{{isset($delegations)?($delegations->email_address ? $delegations->email_address:''):''}}"
-                                    placeholder="Email Address" {{isset($delegations->email_address) ?
+                                    placeholder="Email Address" {{isset($delegations->email_address) && session()->get('user')->roles[0]->name !== "admin"?
                                 'disabled':''}}>
                             </div>
                             <div class="mb-3">

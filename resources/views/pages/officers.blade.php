@@ -64,6 +64,10 @@
                                 data-formatter="operateText">Forces Type</th>
                             <th data-filter-control="input" data-field="officer_picture" data-sortable="true"
                                 data-formatter="operateBoolean">Picture Updated</th>
+                            <th data-filter-control="input" data-field="isPrinted" data-sortable="true"
+                                data-formatter="operateYesNo">Printed</th>
+                            <th data-filter-control="input" data-field="clearance" data-sortable="true"
+                                data-formatter="operateYesNo">Clearance</th>
                             <th data-filter-control="input" data-field="officer_picture.img_blob"
                                 data-formatter="operatePicture">Picture</th>
                             <th data-filter-control="input" data-field="officer_uid" data-formatter="operateProfile" data-print-ignore="true">
@@ -89,17 +93,24 @@
                 '</svg>',
                 '</a>',
                 '<a class="btn btn-outline-primary" target="_blank" href="printDelegationBadge/' + value + '/officer">',
-                '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-id-badge-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 12h3v4h-3z" /><path d="M10 6h-6a1 1 0 0 0 -1 1v12a1 1 0 0 0 1 1h16a1 1 0 0 0 1 -1v-12a1 1 0 0 0 -1 -1h-6" /><path d="M10 3m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v3a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /><path d="M14 16h2" /><path d="M14 12h4" /></svg>',
+                '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-id-badge-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
+                '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
+                '<path d="M7 12h3v4h-3z" />',
+                '<path d="M10 6h-6a1 1 0 0 0 -1 1v12a1 1 0 0 0 1 1h16a1 1 0 0 0 1 -1v-12a1 1 0 0 0 -1 -1h-6" />',
+                '<path d="M10 3m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v3a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />',
+                '<path d="M14 16h2" /><path d="M14 12h4" />',
+                '</svg>',
+                '</a>',
+                '<a class="btn btn-outline-warning" href="officerStatusChanger/' + value + '">',
+                '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-switch-3">',
+                '<path stroke="none" d="M0 0h24v24H0z" fill="none"/>',
+                '<path d="M3 17h2.397a5 5 0 0 0 4.096 -2.133l.177 -.253m3.66 -5.227l.177 -.254a5 5 0 0 1 4.096 -2.133h3.397" />',
+                '<path d="M18 4l3 3l-3 3" />',
+                '<path d="M3 7h2.397a5 5 0 0 1 4.096 2.133l4.014 5.734a5 5 0 0 0 4.096 2.133h3.397" />',
+                '<path d="M18 20l3 -3l-3 -3" />',
+                '</svg>',
                 '</a>',
                 '</div>',
-                '<div class="right">',
-                '<a class="like" href="javascript:void(0)" title="Like">',
-                '<i class="fa fa-heart"></i>',
-                '</a>  ',
-                '<a class="remove" href="javascript:void(0)" title="Remove">',
-                '<i class="fa fa-trash"></i>',
-                '</a>',
-                '</div>'
             ].join('')
         }
     }
@@ -126,14 +137,17 @@
         // console.log(value)
         return value?.img_blob ? 'Yes' : 'No';
     }
+
+    function operateYesNo(value, row, index) {
+        return value == 1 ? 'Yes' : 'No';
+    }
 </script>
 <script>
-    ['#table', '#table1', '#table2', '#table3', '#table4', ].map((val => {
-        var $table = $(val)
+    ['#table'].map((val => {
         var selectedRow = {}
 
         $(function() {
-            $table.on('click-row.bs.table', function(e, row, $element) {
+            $(val).on('click-row.bs.table', function(e, row, $element) {
                 selectedRow = row
                 $('.active').removeClass('active')
                 $($element).addClass('active')

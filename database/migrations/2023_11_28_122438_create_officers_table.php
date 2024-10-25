@@ -29,6 +29,7 @@ return new class extends Migration
             $table->integer('officer_assign')->default(0);
             $table->integer('officer_status')->default(1);
             $table->integer('isPrinted')->default(0);
+            $table->integer('clearance')->default(1);
             $table->timestamps();
         });
     }

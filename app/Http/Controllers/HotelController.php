@@ -348,9 +348,9 @@ class HotelController extends Controller
             $savedRoom = $delegateRoom->save();
             $delegateAccomodated = Delegate::where('delegates_uid', $req->assign_to)->update(['accomodated' => $delegateRoom->room_uid]);
             if ($savedRoom && $delegateAccomodated) {
-                return redirect()->route('pages.category')->with('message', "Room Assigned Successfully");
+                return redirect()->route('pages.hotels')->with('message', "Room Assigned Successfully");
             } else {
-                return redirect()->route('pages.category')->with('error', "SomeThing Went Wrong");
+                return redirect()->route('pages.hotels')->with('error', "SomeThing Went Wrong");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             return  redirect()->back()->with('error', $exception->errorInfo[2]);
@@ -392,6 +392,11 @@ class HotelController extends Controller
                     $arrayToBeUpdate[$key] = $value;
                 }
             }
+            if(!isset($req->room_checkout)){
+                $arrayToBeUpdate['room_checkout']=null;
+                $arrayToBeUpdate['checked_out_time']=null;
+            }
+            // return [$req,$arrayToBeUpdate];
             // $oldRoom = Room::where('room_uid', $id)->first();
             $updateRoom = Room::where('room_uid', $req->room_uid)->update($arrayToBeUpdate);
             // return $arrayToBeUpdate;
