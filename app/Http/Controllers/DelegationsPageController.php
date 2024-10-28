@@ -455,7 +455,7 @@ class DelegationsPageController extends Controller
     {
         $delegationUid = null;
         switch (session()->get('user')->roles[0]->name) {
-            case "liason" || "receiving" || "interpreter":
+            case "liaison" || "receiving" || "interpreter":
                 $officers = Officer::where('officer_user', session()->get('user')->uid)->first('officer_delegation');
                 $delegationUid = $officers ? $officers->officer_delegation : null;
                 // return $officers;

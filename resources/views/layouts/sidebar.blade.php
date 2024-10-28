@@ -156,7 +156,7 @@
                     </a>
                 </li>
                 @endif
-                @if(session()->get('user')->roles[0]->name =="liason" || session()->get('user')->roles[0]->name
+                @if(session()->get('user')->roles[0]->name =="liaison" || session()->get('user')->roles[0]->name
                 =="receiving"|| session()->get('user')->roles[0]->name =="interpreter")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.delegationAssigned')}}" aria-expanded="false">
@@ -558,23 +558,23 @@
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
                         <li class="sidebar-item">
-                            <a href="../main/blog-posts.html" class="sidebar-link">
+                            <a href="#" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
                                 <span class="hide-menu">List of VIPs</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <!-- <li class="sidebar-item">
                             <a href="../main/blog-detail.html" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>
                                 <span class="hide-menu">List of Officer</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="sidebar-item">
-                            <a href="../main/blog-detail.html" class="sidebar-link">
+                            <a href="#" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-grain"></i>
                                 </div>

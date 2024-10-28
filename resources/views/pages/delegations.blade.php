@@ -235,7 +235,7 @@
                         <label for="liasonSelect" class="col-form-label">Liason Officer :</label>
                         <select class="form-select" multiple aria-label="Officer To Be Associate" id="liasonSelect" name="liasonSelect[]" required>
                             <option value="" selected disabled hidden> Select Officer To Be Associate </option>
-                            @foreach(\App\Models\Officer::where([['officer_assign',0],['officer_type','Liason']])->get() as $key=>$officer)
+                            @foreach(\App\Models\Officer::where([['officer_assign',0],['officer_type','Liaison']])->get() as $key=>$officer)
                             <option class="text-capitalize" value="{{$officer->officer_uid}}">
                                 @foreach (\App\Models\Rank::where('ranks_uid',$officer->officer_rank)->get() as $rank)
                                 {{$rank->ranks_name}}

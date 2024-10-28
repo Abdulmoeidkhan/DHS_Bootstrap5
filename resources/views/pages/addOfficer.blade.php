@@ -84,8 +84,8 @@
                                 <select name="officer_type" id="officer_type" class="form-select"
                                     {{isset($officer->officer_type)?'disabled':''}}>
                                     <option value="" selected disabled hidden> Select Type </option>
-                                    <option value="Liason" {{isset($officer->officer_type) ? ($officer->officer_type ==
-                                        'Liason' ? 'selected' : '') : ''}}> Liason Officer </option>
+                                    <option value="Liaison" {{isset($officer->officer_type) ? ($officer->officer_type ==
+                                        'Liaison' ? 'selected' : '') : ''}}> Liaison Officer </option>
                                     <option value="Interpreter" {{isset($officer->officer_type) ?
                                         ($officer->officer_type == 'Interpreter' ? 'selected' : '') : ''}}> Interpreter
                                         Officer </option>

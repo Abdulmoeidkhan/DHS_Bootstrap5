@@ -43,7 +43,7 @@
                                 <p class="mb-0 fs-3">Delegate Profile</p>
                             </a>
                             @endif
-                            @if(session()->get('user')->roles[0]->name =="liason")
+                            @if(session()->get('user')->roles[0]->name =="liaison")
                             <a href="{{route('pages.liasonSpecificProfile',session()->get('user')->uid)}}" class="d-flex align-items-center gap-2 dropdown-item">
                                 <i class="ti ti-user-check fs-6"></i>
                                 <p class="mb-0 fs-3">Liason Profile</p>

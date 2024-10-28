@@ -26,7 +26,7 @@ class UserListComponent extends Component
         //         case "Delegate":
         //             $this->users[$index]->code = Delegation::where('user_uid', $user->uid)->first('delegationCode');
         //             break;
-        //             // case "Liason":
+        //             // case "Liaison":
         //             //     $this->code = Delegation::where('user_uid', $this->users->uid)->first('delegationCode');
         //             //     break;
         //             // case "LO":

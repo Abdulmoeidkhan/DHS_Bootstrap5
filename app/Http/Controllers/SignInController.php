@@ -42,7 +42,7 @@ class SignInController extends Controller
                             $delegation = Delegation::where('user_uid', Auth::user()->uid)->first('uid');
                             $delegation ? $user->delegationUid = $delegation->uid : null;
                             break;
-                        case "liason" || "interpreter" || "receiving":
+                        case "liaison" || "interpreter" || "receiving":
                             $user->officerUid = Officer::where('officer_user', Auth::user()->uid)->first('officer_uid');
                             break;
                         default:

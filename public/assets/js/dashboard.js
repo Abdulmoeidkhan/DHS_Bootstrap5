@@ -322,7 +322,7 @@ $(function () {
           // text: 'Officer Chart'
         },
         xaxis: {
-          categories: ['Liason', 'Interpreter', 'Receiving'],
+          categories: ['Liaison', 'Interpreter', 'Receiving'],
         },
         tooltip: {
           y: {

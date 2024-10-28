@@ -40,13 +40,13 @@ class SummaryController extends Controller
     public function officersArmy()
     {
         $totalArmyOfficers['totalcount'] = Officer::where([['officer_remarks', 'army'], ['officer_status', '1']])->count();
-        $totalArmyOfficers[0] = Officer::where([['officer_remarks', 'army'], ['officer_type', 'Liason'], ['officer_status', '1']])->count();
+        $totalArmyOfficers[0] = Officer::where([['officer_remarks', 'army'], ['officer_type', 'Liaison'], ['officer_status', '1']])->count();
         $totalArmyOfficers[1] = Officer::where([['officer_remarks', 'army'], ['officer_type', 'Interpreter'], ['officer_status', '1']])->count();
         $totalArmyOfficers[2] = Officer::where([['officer_remarks', 'army'], ['officer_type', 'Receiving'], ['officer_status', '1']])->count();
-        $totalArmyOfficers['assign'][0] = Officer::where([['officer_remarks', 'army'], ['officer_type', 'Liason'], ['officer_status', '1'],['officer_assign','1']])->count();
+        $totalArmyOfficers['assign'][0] = Officer::where([['officer_remarks', 'army'], ['officer_type', 'Liaison'], ['officer_status', '1'],['officer_assign','1']])->count();
         $totalArmyOfficers['assign'][1] = Officer::where([['officer_remarks', 'army'], ['officer_type', 'Interpreter'], ['officer_status', '1'],['officer_assign','1']])->count();
         $totalArmyOfficers['assign'][2] = Officer::where([['officer_remarks', 'army'], ['officer_type', 'Receiving'], ['officer_status', '1'],['officer_assign','1']])->count();
-        $totalArmyOfficers['unassign'][0] = Officer::where([['officer_remarks', 'army'], ['officer_type', 'Liason'], ['officer_status', '1'],['officer_assign','0']])->count();
+        $totalArmyOfficers['unassign'][0] = Officer::where([['officer_remarks', 'army'], ['officer_type', 'Liaison'], ['officer_status', '1'],['officer_assign','0']])->count();
         $totalArmyOfficers['unassign'][1] = Officer::where([['officer_remarks', 'army'], ['officer_type', 'Interpreter'], ['officer_status', '1'],['officer_assign','0']])->count();
         $totalArmyOfficers['unassign'][2] = Officer::where([['officer_remarks', 'army'], ['officer_type', 'Receiving'], ['officer_status', '1'],['officer_assign','0']])->count();
         return $totalArmyOfficers;
@@ -55,13 +55,13 @@ class SummaryController extends Controller
     public function officersNavy()
     {
         $totalArmyOfficers['totalcount'] = Officer::where([['officer_remarks', 'navy'], ['officer_status', '1']])->count();
-        $totalArmyOfficers[0] = Officer::where([['officer_remarks', 'navy'], ['officer_type', 'Liason'], ['officer_status', '1']])->count();
+        $totalArmyOfficers[0] = Officer::where([['officer_remarks', 'navy'], ['officer_type', 'Liaison'], ['officer_status', '1']])->count();
         $totalArmyOfficers[1] = Officer::where([['officer_remarks', 'navy'], ['officer_type', 'Interpreter'], ['officer_status', '1']])->count();
         $totalArmyOfficers[2] = Officer::where([['officer_remarks', 'navy'], ['officer_type', 'Receiving'], ['officer_status', '1']])->count();
-        $totalArmyOfficers['assign'][0] = Officer::where([['officer_remarks', 'navy'], ['officer_type', 'Liason'], ['officer_status', '1'],['officer_assign','1']])->count();
+        $totalArmyOfficers['assign'][0] = Officer::where([['officer_remarks', 'navy'], ['officer_type', 'Liaison'], ['officer_status', '1'],['officer_assign','1']])->count();
         $totalArmyOfficers['assign'][1] = Officer::where([['officer_remarks', 'navy'], ['officer_type', 'Interpreter'], ['officer_status', '1'],['officer_assign','1']])->count();
         $totalArmyOfficers['assign'][2] = Officer::where([['officer_remarks', 'navy'], ['officer_type', 'Receiving'], ['officer_status', '1'],['officer_assign','1']])->count();
-        $totalArmyOfficers['unassign'][0] = Officer::where([['officer_remarks', 'navy'], ['officer_type', 'Liason'], ['officer_status', '1'],['officer_assign','0']])->count();
+        $totalArmyOfficers['unassign'][0] = Officer::where([['officer_remarks', 'navy'], ['officer_type', 'Liaison'], ['officer_status', '1'],['officer_assign','0']])->count();
         $totalArmyOfficers['unassign'][1] = Officer::where([['officer_remarks', 'navy'], ['officer_type', 'Interpreter'], ['officer_status', '1'],['officer_assign','0']])->count();
         $totalArmyOfficers['unassign'][2] = Officer::where([['officer_remarks', 'navy'], ['officer_type', 'Receiving'], ['officer_status', '1'],['officer_assign','0']])->count();
         return $totalArmyOfficers;
@@ -70,13 +70,13 @@ class SummaryController extends Controller
     public function officersAirForce()
     {
         $totalArmyOfficers['totalcount'] = Officer::where([['officer_remarks', 'airforce'], ['officer_status', '1']])->count();
-        $totalArmyOfficers[0] = Officer::where([['officer_remarks', 'airforce'], ['officer_type', 'Liason'], ['officer_status', '1']])->count();
+        $totalArmyOfficers[0] = Officer::where([['officer_remarks', 'airforce'], ['officer_type', 'Liaison'], ['officer_status', '1']])->count();
         $totalArmyOfficers[1] = Officer::where([['officer_remarks', 'airforce'], ['officer_type', 'Interpreter'], ['officer_status', '1']])->count();
         $totalArmyOfficers[2] = Officer::where([['officer_remarks', 'airforce'], ['officer_type', 'Receiving'], ['officer_status', '1']])->count();
-        $totalArmyOfficers['assign'][0] = Officer::where([['officer_remarks', 'airforce'], ['officer_type', 'Liason'], ['officer_status', '1'],['officer_assign','1']])->count();
+        $totalArmyOfficers['assign'][0] = Officer::where([['officer_remarks', 'airforce'], ['officer_type', 'Liaison'], ['officer_status', '1'],['officer_assign','1']])->count();
         $totalArmyOfficers['assign'][1] = Officer::where([['officer_remarks', 'airforce'], ['officer_type', 'Interpreter'], ['officer_status', '1'],['officer_assign','1']])->count();
         $totalArmyOfficers['assign'][2] = Officer::where([['officer_remarks', 'airforce'], ['officer_type', 'Receiving'], ['officer_status', '1'],['officer_assign','1']])->count();
-        $totalArmyOfficers['unassign'][0] = Officer::where([['officer_remarks', 'airforce'], ['officer_type', 'Liason'], ['officer_status', '1'],['officer_assign','0']])->count();
+        $totalArmyOfficers['unassign'][0] = Officer::where([['officer_remarks', 'airforce'], ['officer_type', 'Liaison'], ['officer_status', '1'],['officer_assign','0']])->count();
         $totalArmyOfficers['unassign'][1] = Officer::where([['officer_remarks', 'airforce'], ['officer_type', 'Interpreter'], ['officer_status', '1'],['officer_assign','0']])->count();
         $totalArmyOfficers['unassign'][2] = Officer::where([['officer_remarks', 'airforce'], ['officer_type', 'Receiving'], ['officer_status', '1'],['officer_assign','0']])->count();
         return $totalArmyOfficers;

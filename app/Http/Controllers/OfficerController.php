@@ -16,7 +16,7 @@ class OfficerController extends Controller
     {
         $code = '';
         switch ($type) {
-            case 'Liason':
+            case 'Liaison':
                 $code = 'LO';
                 break;
 
@@ -231,8 +231,8 @@ class OfficerController extends Controller
 
     public function getOfficerSummary(Request $req)
     {
-        $assigned = [Officer::where('officer_type', "Liason")->whereNotNull('officer_delegation')->count(), Officer::where('officer_type', "Interpreter")->whereNotNull('officer_delegation')->count(), Officer::where('officer_type', "Receiving")->whereNotNull('officer_delegation')->count()];
-        $available = [Officer::where('officer_type', "Liason")->whereNull('officer_delegation')->count(), Officer::where('officer_type', "Interpreter")->whereNull('officer_delegation')->count(), Officer::where('officer_type', "Receiving")->whereNull('officer_delegation')->count()];
+        $assigned = [Officer::where('officer_type', "Liaison")->whereNotNull('officer_delegation')->count(), Officer::where('officer_type', "Interpreter")->whereNotNull('officer_delegation')->count(), Officer::where('officer_type', "Receiving")->whereNotNull('officer_delegation')->count()];
+        $available = [Officer::where('officer_type', "Liaison")->whereNull('officer_delegation')->count(), Officer::where('officer_type', "Interpreter")->whereNull('officer_delegation')->count(), Officer::where('officer_type', "Receiving")->whereNull('officer_delegation')->count()];
         return ['names' => ['Assigned', 'Available'], 'values' => [$assigned, $available]];
     }
 
