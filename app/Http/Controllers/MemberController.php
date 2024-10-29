@@ -19,6 +19,8 @@ use App\Models\ImageBlob;
 use App\Models\Rank;
 use App\Models\Room;
 use App\Models\Roomtype;
+use Illuminate\Support\Facades\Storage;
+
 
 class MemberController extends Controller
 {
@@ -42,14 +44,43 @@ class MemberController extends Controller
         $pdf->save();
     }
 
-    protected function imageBlobUpload($file, $id)
+    // protected function imageBlobUpload($file, $id)
+    // {
+    //     $imageBlob = $file;
+    //     $imgBlob = new ImageBlob();
+    //     $imgBlob->img_blob = $imageBlob;
+    //     $imgBlob->uid = $id;
+    //     $imgSaved = $imgBlob->save();
+    //     return $imgSaved;
+    // }
+    
+    // protected function imageBlobUpdate($file, $id)
+    // {
+    //     $imageBlob = $file;
+    //     $updateImageBlob = ImageBlob::where('uid', $id)->first() ? ImageBlob::where('uid', $id)->update(['img_blob' => $imageBlob]) : $this->imageBlobUpload($file, $id);
+    //     return $updateImageBlob;
+    // }
+
+    protected function imageDeleteBlobUpdate($file, $uid)
     {
         $imageBlob = $file;
-        $imgBlob = new ImageBlob();
-        $imgBlob->img_blob = $imageBlob;
-        $imgBlob->uid = $id;
-        $imgSaved = $imgBlob->save();
+        $oldImageDelete = Storage::disk('cloudinary')->delete('Images/' . $uid);
+        $imgSaved = Storage::disk('cloudinary')->put('Images/profile/' . $uid . '.png', $imageBlob);
         return $imgSaved;
+    }
+
+    protected function imageBlobUpload($file, $uid)
+    {
+        $imageBlob = $file;
+        $imgSaved = Storage::disk('cloudinary')->put('Images/' . $uid, $imageBlob);
+        return $imgSaved;
+    }
+
+    protected function imageBlobUpdate($file, $uid)
+    {
+        $imageBlob = $file;
+        $updateImageBlob = Storage::disk('cloudinary')->exists($uid . '.png') ? $this->imageDeleteBlobUpdate($imageBlob, $uid) : $this->imageBlobUpload($file, $uid);
+        return $updateImageBlob;
     }
 
     protected function documentUpdate($file, $id)
@@ -59,12 +90,6 @@ class MemberController extends Controller
         return $updatePdfBlob;
     }
 
-    protected function imageBlobUpdate($file, $id)
-    {
-        $imageBlob = $file;
-        $updateImageBlob = ImageBlob::where('uid', $id)->first() ? ImageBlob::where('uid', $id)->update(['img_blob' => $imageBlob]) : $this->imageBlobUpload($file, $id);
-        return $updateImageBlob;
-    }
 
     protected function badge($characters, $prefix)
     {

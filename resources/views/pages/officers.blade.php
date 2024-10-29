@@ -120,12 +120,8 @@
     }
 
     function operatePicture(value, row, index) {
-        if (value) {
-            return [
-                '<div class="left">',
-                '<img src="' + value + '" width="80px" height="80px"/>',
-                '</div>'
-            ].join('')
+        if (row.officer_uid) {
+            return  row.officer_uid ? `<img  onerror="this.style.display='none'" style="object-fit: cover;" width="100" height="120" src="https://res.cloudinary.com/dhkm5xmpn/image/upload/Images/${row.officer_uid}.png"  />` : ['<div class="left">', 'Not Available', '</div>'].join('');
         }
     }
 

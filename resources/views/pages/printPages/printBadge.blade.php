@@ -35,11 +35,11 @@
                 <div class="card-border">
                     <div class="logo-child">
                         <div>
-                            <h4 class="text-left mx-3">
+                            <h5 class="text-left mx-3">
                                 {{$printDoc->first}} {{$printDoc->second}}
                                 </br>
                                 {{$printDoc->third}}
-                            </h4>
+                            </h5>
                         </div>
                     </div>
                     <div class="d-flex my-1">
