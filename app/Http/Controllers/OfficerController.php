@@ -79,37 +79,37 @@ class OfficerController extends Controller
     //     return $updatePdfBlob;
     // }
 
-    // protected function imageDeleteBlobUpdate($file, $uid)
-    // {
-    //     $imageBlob = $file;
-    //     $oldImageDelete = Storage::disk('cloudinary')->delete('Images/' . $uid);
-    //     $imgSaved = Storage::disk('cloudinary')->put('Images/profile/' . $uid . '.png', $imageBlob);
-    //     return $imgSaved;
-    // }
+    protected function imageDeleteBlobUpdate($file, $uid)
+    {
+        $imageBlob = $file;
+        $oldImageDelete = Storage::disk('cloudinary')->delete('Images/' . $uid);
+        $imgSaved = Storage::disk('cloudinary')->put('Images/profile/' . $uid . '.png', $imageBlob);
+        return $imgSaved;
+    }
 
     protected function imageBlobUpload($file, $uid)
     {
-        // $imageBlob = $file;
-        // $imgSaved = Storage::disk('cloudinary')->put('Images/' . $uid, $imageBlob);
-        // return $imgSaved;
-
         $imageBlob = $file;
-        $imgBlob = new ImageBlob();
-        $imgBlob->img_blob = $imageBlob;
-        $imgBlob->uid = $uid;
-        $imgSaved = $imgBlob->save();
+        $imgSaved = Storage::disk('cloudinary')->put('Images/' . $uid, $imageBlob);
         return $imgSaved;
+
+        // $imageBlob = $file;
+        // $imgBlob = new ImageBlob();
+        // $imgBlob->img_blob = $imageBlob;
+        // $imgBlob->uid = $uid;
+        // $imgSaved = $imgBlob->save();
+        // return $imgSaved;
     }
 
     protected function imageBlobUpdate($file, $uid)
     {
 
-        $imageBlob = $file;
-        $updateImageBlob = ImageBlob::where('uid', $uid)->first() ? ImageBlob::where('uid', $uid)->update(['img_blob' => $imageBlob]) : $this->imageBlobUpload($file, $uid);
-        return $updateImageBlob;
         // $imageBlob = $file;
-        // $updateImageBlob = Storage::disk('cloudinary')->exists($uid . '.png') ? $this->imageDeleteBlobUpdate($imageBlob, $uid) : $this->imageBlobUpload($file, $uid);
+        // $updateImageBlob = ImageBlob::where('uid', $uid)->first() ? ImageBlob::where('uid', $uid)->update(['img_blob' => $imageBlob]) : $this->imageBlobUpload($file, $uid);
         // return $updateImageBlob;
+        $imageBlob = $file;
+        $updateImageBlob = Storage::disk('cloudinary')->exists($uid . '.png') ? $this->imageDeleteBlobUpdate($imageBlob, $uid) : $this->imageBlobUpload($file, $uid);
+        return $updateImageBlob;
     }
 
     public function addOfficer(Request $req)
@@ -234,21 +234,24 @@ class OfficerController extends Controller
             $officers = $id ? Officer::where([['officer_status', 1], ['officer_uid', $id]])->get() : Officer::where('officer_status', 1)->get();
             foreach ($officers as $key => $officer) {
                 $officers[$key]->officer_rank = Rank::where('ranks_uid', $officer->officer_rank)->first();
-                $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
+                // $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
+                $officers[$key]->officer_picture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v'.time().'/Images/' . $officer->officer_uid . '.png';
             }
             return $officers;
         } elseif ($params != 0 && $type != "all" && $force == "all") {
             $officers = $id ? Officer::where([['officer_status', 1], ['officer_uid', $id]])->get() : Officer::where([['officer_status', 1], ['officer_type', $type]])->get();
             foreach ($officers as $key => $officer) {
                 $officers[$key]->officer_rank = Rank::where('ranks_uid', $officer->officer_rank)->first();
-                $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
+                // $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
+                $officers[$key]->officer_picture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v'.time().'/Images/' . $officer->officer_uid . '.png';
             }
             return $officers;
         } elseif ($params == 0 && $type == "all" && $force != 'all') {
             $officers = $id ? Officer::where([['officer_status', 1], ['officer_uid', $id]])->get() : Officer::where([['officer_status', 1], ['officer_remarks', $force]])->get();
             foreach ($officers as $key => $officer) {
                 $officers[$key]->officer_rank = Rank::where('ranks_uid', $officer->officer_rank)->first();
-                $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
+                // $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
+                $officers[$key]->officer_picture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v'.time().'/Images/' . $officer->officer_uid . '.png';
             }
             return $officers;
         }
