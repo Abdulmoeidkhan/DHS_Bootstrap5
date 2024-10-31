@@ -82,7 +82,8 @@
                             <div class="mb-3">
                                 <label for="officer_type" class="form-label">Type</label>
                                 <select name="officer_type" id="officer_type" class="form-select"
-                                    {{isset($officer->officer_type)?'disabled':''}}>
+                                    <!-- isset(officer->officer_type)?'disabled':'' -->
+                                    >
                                     <option value="" selected disabled hidden> Select Type </option>
                                     <option value="Liaison" {{isset($officer->officer_type) ? ($officer->officer_type ==
                                         'Liaison' ? 'selected' : '') : ''}}> Liaison Officer </option>
