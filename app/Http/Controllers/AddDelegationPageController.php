@@ -49,40 +49,40 @@ class AddDelegationPageController extends Controller
         return $updatePdfBlob;
     }
 
-    protected function imageDeleteBlobUpdate($file, $uid)
-    {
-        $imageBlob = $file;
-        $oldImageDelete = Storage::disk('cloudinary')->delete('Images/' . $uid);
-        $imgSaved = Storage::disk('cloudinary')->put('Images/profile/' . $uid . '.png', $imageBlob);
-        return $imgSaved;
-    }
+    // protected function imageDeleteBlobUpdate($file, $uid)
+    // {
+    //     $imageBlob = $file;
+    //     $oldImageDelete = Storage::disk('cloudinary')->delete('Images/' . $uid);
+    //     $imgSaved = Storage::disk('cloudinary')->put('Images/profile/' . $uid . '.png', $imageBlob);
+    //     return $imgSaved;
+    // }
 
     protected function imageBlobUpload($file, $uid)
     {
-        // $imageBlob = $file;
-        // $imgBlob = new ImageBlob();
-        // $imgBlob->img_blob = $imageBlob;
-        // $imgBlob->uid = $id;
-        // $imgSaved = $imgBlob->save();
-        // return $imgSaved;
         $imageBlob = $file;
+        $imgBlob = new ImageBlob();
+        $imgBlob->img_blob = $imageBlob;
+        $imgBlob->uid = $uid;
+        $imgSaved = $imgBlob->save();
+        return $imgSaved;
+        // $imageBlob = $file;
         // $imgBlob = new $this->dbClassCall;
         // $imgBlob->img_blob = $imageBlob;
         // $imgBlob->uid = $uid;
         // $imgSaved = $imgBlob->save();
-        $imgSaved = Storage::disk('cloudinary')->put('Images/' . $uid, $imageBlob);
-        return $imgSaved;
+        // $imgSaved = Storage::disk('cloudinary')->put('Images/' . $uid, $imageBlob);
+        // return $imgSaved;
     }
 
     protected function imageBlobUpdate($file, $uid)
     {
-        // $imageBlob = $file;
-        // $updateImageBlob = ImageBlob::where('uid', $id)->first() ? ImageBlob::where('uid', $id)->update(['img_blob' => $imageBlob]) : $this->imageBlobUpload($file, $id);
-        // return $updateImageBlob;
-
         $imageBlob = $file;
-        $updateImageBlob = Storage::disk('cloudinary')->exists($uid . '.png') ? $this->imageDeleteBlobUpdate($imageBlob, $uid) : $this->imageBlobUpload($file, $uid);
+        $updateImageBlob = ImageBlob::where('uid', $uid)->first() ? ImageBlob::where('uid', $uid)->update(['img_blob' => $imageBlob]) : $this->imageBlobUpload($file, $uid);
         return $updateImageBlob;
+
+        // $imageBlob = $file;
+        // $updateImageBlob = Storage::disk('cloudinary')->exists($uid . '.png') ? $this->imageDeleteBlobUpdate($imageBlob, $uid) : $this->imageBlobUpload($file, $uid);
+        // return $updateImageBlob;
     }
 
     public function render($id = null)

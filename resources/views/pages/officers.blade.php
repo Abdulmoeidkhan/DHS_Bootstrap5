@@ -37,7 +37,8 @@
                     data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true"
                     data-toggle="table" data-pagination="true" data-show-toggle="true" data-show-export="true"
                     data-show-columns="true" data-show-columns-toggle-all="true" data-filter-control="true"
-                    data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true"
+                    data-page-list="[10, 25, 50, 100,200]" data-show-print="true"
+                    data-print-as-filtered-and-sorted-on-ui="true"
                     data-url="{{route('request.officerData',['params'=>0,'type'=>'all','force'=>session()->get('user')->roles[0]->name=='navy'||session()->get('user')->roles[0]->name=='airforce'||session()->get('user')->roles[0]->name=='army'?session()->get('user')->roles[0]->name:'all','id'=>null])}}">
                     <thead>
                         <tr>
@@ -70,7 +71,8 @@
                                 data-formatter="operateYesNo">Clearance</th>
                             <th data-filter-control="input" data-field="officer_picture.img_blob"
                                 data-formatter="operatePicture">Picture</th>
-                            <th data-filter-control="input" data-field="officer_uid" data-formatter="operateProfile" data-print-ignore="true">
+                            <th data-filter-control="input" data-field="officer_uid" data-formatter="operateProfile"
+                                data-print-ignore="true">
                                 Actions</th>
                         </tr>
                     </thead>
@@ -120,8 +122,15 @@
     }
 
     function operatePicture(value, row, index) {
-        if (row.officer_uid) {
-            return  row.officer_uid ? `<img  onerror="this.style.display='none'" style="object-fit: cover;" width="100" height="120" src="https://res.cloudinary.com/dhkm5xmpn/image/upload/Images/${row.officer_uid}.png"  />` : ['<div class="left">', 'Not Available', '</div>'].join('');
+        // if (row.officer_uid) {
+        //     return  row.officer_uid ? `<img  onerror="this.style.display='none'" style="object-fit: cover;" width="100" height="120" src="https://res.cloudinary.com/dhkm5xmpn/image/upload/Images/${row.officer_uid}.png"  />` : ['<div class="left">', 'Not Available', '</div>'].join('');
+        // }
+        if (value) {
+            return [
+                '<div class="left">',
+                '<img src="' + value + '" width="80px" height="80px"/>',
+                '</div>'
+            ].join('')
         }
     }
 
