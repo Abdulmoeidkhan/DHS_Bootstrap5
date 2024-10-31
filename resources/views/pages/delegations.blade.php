@@ -718,8 +718,8 @@
                 <button class="tablinks" onclick="openCity(event, 'Deactive')">Deactive</button>
                 @endif
             </div>
+            @if(session()->get('user')->roles[0]->name === "admin")
             <div id="All" class="tabcontent" style="display: block;">
-                @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
                     <div class="d-flex" style="position: absolute;top: 95px;">
                         <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-primary">Add Delegations</a>
@@ -780,9 +780,9 @@
                         </thead>
                     </table>
                 </div>
-                @endif
             </div>
-            <div id="Accepted" class="tabcontent" {{session()->get('user')->roles[0]->name == 'dho'?'style=display: block;':''}}>
+            @endif
+            <div id="Accepted" class="tabcontent" style="display:{{session()->get('user')->roles[0]->name == 'dho'?'block;':'none'}}">
                 @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
                     <div class="d-flex" style="position: absolute;top: 95px;">
