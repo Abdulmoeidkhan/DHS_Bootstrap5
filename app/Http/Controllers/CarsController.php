@@ -170,7 +170,7 @@ class CarsController extends Controller
         }
     }
 
-    public function addDriverInfo(Request $req)
+    public function addDriver(Request $req)
     {
         $driver = new Driver();
         $driver->driver_uid = (string) Str::uuid();

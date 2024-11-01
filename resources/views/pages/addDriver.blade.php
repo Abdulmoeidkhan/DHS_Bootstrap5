@@ -7,7 +7,7 @@
             <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">{{!empty($driver)?"Update Driver":"New Driver"}}</h5>
                 <div class="table-responsive">
-                    <form name="addDriverInfo" id="addDriverInfo" method="POST" action="{{!empty($driver)?route('request.updateDriver',$driver->driver_uid):route('request.addDriverInfo')}}">
+                    <form name="addDriverInfo" id="addDriverInfo" method="POST" action="{{!empty($driver)?route('request.updateDriver',$driver->driver_uid):route('request.addDriver')}}">
                         <fieldset>
                             <legend>{{!empty($driver)?"Update Driver":"Add Driver"}}</legend>
                             @csrf

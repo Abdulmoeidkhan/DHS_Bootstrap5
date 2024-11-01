@@ -63,13 +63,13 @@
                                 data-formatter="operateText">Address</th>
                             <th data-filter-control="input" data-field="officer_remarks" data-sortable="true"
                                 data-formatter="operateText">Forces Type</th>
-                            {{-- <th data-filter-control="input" data-field="officer_picture" data-sortable="true"
-                                data-formatter="operateBoolean">Picture Updated</th> --}}
+                            <th data-filter-control="input" data-field="officer_picturePresent" data-sortable="true"
+                                data-formatter="operateBoolean">Picture Updated</th>
                             <th data-filter-control="input" data-field="isPrinted" data-sortable="true"
                                 data-formatter="operateYesNo">Printed</th>
                             <th data-filter-control="input" data-field="clearance" data-sortable="true"
                                 data-formatter="operateYesNo">Clearance</th>
-                            <th data-filter-control="input" data-field="officer_picture"
+                            <th data-filter-control="input" data-sortable="true" data-sortable="true"
                                 data-formatter="operatePicture">Picture</th>
                             <th data-filter-control="input" data-field="officer_uid" data-formatter="operateProfile"
                                 data-print-ignore="true">
@@ -122,20 +122,38 @@
     }
 
     function operatePicture(value, row, index) {
-        // if (row.officer_picture) {
-            return  value ? `<img onerror="this.style.display='none'" style="object-fit:cover;" width="100px" height="120px" src="${value}"  />` : ['<div class="left">', 'Not Available', '</div>'].join('');
-            // return  row.officer_uid ? `<img onerror="this.style.display='none'" style="object-fit: cover;" width="100" height="120" src="https://res.cloudinary.com/dhkm5xmpn/image/upload/Images/${row.officer_uid}.png"  />` : ['<div class="left">', 'Not Available', '</div>'].join('');
-        // }
+        if (row.officer_picture) {
+            // return  value ? `<img onerror="this.style.display='none'" style="object-fit:cover;" width="100px" height="120px" src="${value}"  />` : ['<div class="left">', 'Not Available', '</div>'].join('');
+            return row.officer_picture ? `<img onerror="this.style.display='none';" style="object-fit: cover;" width="100" height="120" src="${row.officer_picture}" />` : ['<div class="left">', 'Not Available', '</div>'].join('');
+        }
     }
 
     function operateText(value, row, index) {
         return value ? value : "N/A"
     }
 
-    // function operateBoolean(value, row, index) {
-    //     // console.log(value)
-    //     return value ? 'Yes' : 'No';
-    // }
+    function operateBoolean(value, row, index) {
+        // async function checkImageExists(url) {
+        //     try {
+        //         const response = await fetch(url, {
+        //             method: 'HEAD'
+        //         });
+        //         return response.ok;
+        //     } catch (error) {
+        //         return false;
+        //     }
+        // }
+        // checkImageExists(value).then(exists => {
+        //     if (exists) {
+        //         return 'Yes'
+        //     } else {
+        //         return 'No'
+        //     }
+        // });
+
+        // return checkImageExists(value).then(exists => exists ? console.log(exists) : console.log(exists));
+        return value?'Yes':'No';
+    }
 
     function operateYesNo(value, row, index) {
         return value == 1 ? 'Yes' : 'No';

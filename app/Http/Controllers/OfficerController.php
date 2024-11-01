@@ -235,7 +235,8 @@ class OfficerController extends Controller
             foreach ($officers as $key => $officer) {
                 $officers[$key]->officer_rank = Rank::where('ranks_uid', $officer->officer_rank)->first();
                 // $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
-                $officers[$key]->officer_picture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v'.time().'/Images/' . $officer->officer_uid . '.png';
+                $officers[$key]->officer_picture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $officer->officer_uid . '.png';
+                // $officers[$key]->officer_picturePresent = @getimagesize('https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $officer->officer_uid . '.png');
             }
             return $officers;
         } elseif ($params != 0 && $type != "all" && $force == "all") {
@@ -243,7 +244,8 @@ class OfficerController extends Controller
             foreach ($officers as $key => $officer) {
                 $officers[$key]->officer_rank = Rank::where('ranks_uid', $officer->officer_rank)->first();
                 // $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
-                $officers[$key]->officer_picture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v'.time().'/Images/' . $officer->officer_uid . '.png';
+                $officers[$key]->officer_picture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $officer->officer_uid . '.png';
+                // $officers[$key]->officer_picturePresent = @getimagesize('https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $officer->officer_uid . '.png');
             }
             return $officers;
         } elseif ($params == 0 && $type == "all" && $force != 'all') {
@@ -251,7 +253,8 @@ class OfficerController extends Controller
             foreach ($officers as $key => $officer) {
                 $officers[$key]->officer_rank = Rank::where('ranks_uid', $officer->officer_rank)->first();
                 // $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
-                $officers[$key]->officer_picture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v'.time().'/Images/' . $officer->officer_uid . '.png';
+                $officers[$key]->officer_picture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $officer->officer_uid . '.png';
+                // $officers[$key]->officer_picturePresent = @getimagesize('https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $officer->officer_uid . '.png');
             }
             return $officers;
         }
