@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ForeignImageValidator;
 use App\Models\ImageBlob;
 use App\Models\Officer;
 use App\Models\Rank;
@@ -91,6 +92,7 @@ class OfficerController extends Controller
     {
         $imageBlob = $file;
         $imgSaved = Storage::disk('cloudinary')->put('Images/' . $uid, $imageBlob);
+        $imgSaved ?? ForeignImageValidator::create(['image_exist' => $uid]);
         return $imgSaved;
 
         // $imageBlob = $file;
@@ -235,6 +237,7 @@ class OfficerController extends Controller
             foreach ($officers as $key => $officer) {
                 $officers[$key]->officer_rank = Rank::where('ranks_uid', $officer->officer_rank)->first();
                 // $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
+                $officers[$key]->officer_picturePresent = ForeignImageValidator::where('image_uid', $officer->officer_uid)->first('image_exist');
                 $officers[$key]->officer_picture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $officer->officer_uid . '.png';
                 // $officers[$key]->officer_picturePresent = @getimagesize('https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $officer->officer_uid . '.png');
             }
@@ -244,6 +247,7 @@ class OfficerController extends Controller
             foreach ($officers as $key => $officer) {
                 $officers[$key]->officer_rank = Rank::where('ranks_uid', $officer->officer_rank)->first();
                 // $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
+                $officers[$key]->officer_picturePresent = ForeignImageValidator::where('image_uid', $officer->officer_uid)->first('image_exist');
                 $officers[$key]->officer_picture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $officer->officer_uid . '.png';
                 // $officers[$key]->officer_picturePresent = @getimagesize('https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $officer->officer_uid . '.png');
             }
@@ -253,6 +257,7 @@ class OfficerController extends Controller
             foreach ($officers as $key => $officer) {
                 $officers[$key]->officer_rank = Rank::where('ranks_uid', $officer->officer_rank)->first();
                 // $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
+                $officers[$key]->officer_picturePresent = ForeignImageValidator::where('image_uid', $officer->officer_uid)->first('image_exist');
                 $officers[$key]->officer_picture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $officer->officer_uid . '.png';
                 // $officers[$key]->officer_picturePresent = @getimagesize('https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $officer->officer_uid . '.png');
             }

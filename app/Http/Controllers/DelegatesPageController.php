@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Delegate;
 use App\Models\Delegation;
+use App\Models\ForeignImageValidator;
 use App\Models\Rank;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,21 +23,21 @@ class DelegatesPageController extends Controller
             if (session()->get('user')->roles[0]->name == "admin") {
                 $delegates = DB::table('delegates')
                     ->leftJoin('delegate_flights', 'delegate_flights.delegate_uid', '=', 'delegates.delegates_uid')
-                    ->leftJoin('image_blobs', 'delegates.delegates_uid', '=', 'image_blobs.uid')
+                    // ->leftJoin('image_blobs', 'delegates.delegates_uid', '=', 'image_blobs.uid')
                     ->leftJoin('delegations', 'delegates.delegation', '=', 'delegations.uid')
                     ->leftJoin('vips', 'vips.vips_uid', '=', 'delegations.invited_by')
                     ->where([['delegates.first_Name', '!=', null], ['delegates.status', '1'], ['delegates.self', '1']])
-                    ->select('delegates.*', 'delegate_flights.*', 'image_blobs.uid', 'image_blobs.img_blob', 'delegations.country', 'delegations.delegation_response', 'delegations.delegationCode', 'delegations.delegation_status', 'delegations.invited_by', 'vips.*')
+                    ->select('delegates.*', 'delegate_flights.*', 'delegations.country', 'delegations.delegation_response', 'delegations.delegationCode', 'delegations.delegation_status', 'delegations.invited_by', 'vips.*')
                     ->orderBy('delegations.country', 'asc')
                     ->get();
             } elseif (session()->get('user')->roles[0]->name == "dho") {
                 $delegates = DB::table('delegates')
                     ->leftJoin('delegate_flights', 'delegate_flights.delegate_uid', '=', 'delegates.delegates_uid')
-                    ->leftJoin('image_blobs', 'delegates.delegates_uid', '=', 'image_blobs.uid')
+                    // ->leftJoin('image_blobs', 'delegates.delegates_uid', '=', 'image_blobs.uid')
                     ->leftJoin('delegations', 'delegates.delegation', '=', 'delegations.uid')
                     ->leftJoin('vips', 'vips.vips_uid', '=', 'delegations.invited_by')
                     ->where([['delegates.first_Name', '!=', null], ['delegates.status', '1'], ['delegates.self', '1'], ['delegations.delegation_response', 'Accepted']])
-                    ->select('delegates.*', 'delegate_flights.*', 'image_blobs.uid', 'image_blobs.img_blob', 'delegations.country', 'delegations.delegation_response', 'delegations.delegationCode', 'delegations.delegation_status', 'delegations.invited_by', 'vips.*')
+                    ->select('delegates.*', 'delegate_flights.*', 'delegations.country', 'delegations.delegation_response', 'delegations.delegationCode', 'delegations.delegation_status', 'delegations.invited_by', 'vips.*')
                     ->orderBy('delegations.country', 'asc')
                     ->get();
             }
@@ -45,13 +46,15 @@ class DelegatesPageController extends Controller
             foreach ($delegates as $key => $delegate) {
                 $delegates[$key]->rankName = Rank::where('ranks_uid', $delegate->rank)->first('ranks_name');
                 $delegates[$key]->invited_by_name = Rank::where('ranks_uid', $delegate->invited_by)->first('ranks_name');
+                $delegates[$key]->image = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $delegate->delegates_uid . '.png';
+                $delegates[$key]->imagePresent = ForeignImageValidator::where('image_uid', $delegate->delegates_uid)->first('image_exist');
                 $delegates[$key]->isHead = $delegate->delegation_type !== "Member" ? "Yes" : "No";
             }
             return $delegates;
         } else if ($status == 0) {
             $delegates = DB::table('delegates')
                 ->leftJoin('delegate_flights', 'delegate_flights.delegate_uid', '=', 'delegates.delegates_uid')
-                ->leftJoin('image_blobs', 'delegates.delegates_uid', '=', 'image_blobs.uid')
+                // ->leftJoin('image_blobs', 'delegates.delegates_uid', '=', 'image_blobs.uid')
                 ->leftJoin('delegations', 'delegates.delegation', '=', 'delegations.uid')
                 ->leftJoin('vips', 'delegations.invited_by', '=', 'vips.vips_uid')
                 ->where([['delegates.first_Name', '!=', null], ['delegates.status', '0'], ['self', '1']])
@@ -62,6 +65,8 @@ class DelegatesPageController extends Controller
             foreach ($delegates as $key => $delegate) {
                 $delegates[$key]->rankName = Rank::where('ranks_uid', $delegate[$key]->rank)->first('ranks_name');
                 $delegates[$key]->invited_by->name = Rank::where('ranks_uid', $delegate[$key]->invited_by->name)->first('ranks_name');
+                $delegates[$key]->image = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $delegate->delegates_uid . '.png';
+                $delegates[$key]->imagePresent = ForeignImageValidator::where('image_uid', $delegate->delegates_uid)->first('image_exist');
             }
             return $delegates;
         }
@@ -80,9 +85,9 @@ class DelegatesPageController extends Controller
     {
         $countries = Delegation::distinct('country')->orderBy('country', 'asc')->get('country');
         foreach ($countries as $key => $country) {
-            $countries[$key]->accepted = Delegation::where([['delegation_response', 'Accepted'],['delegation_status',1], ['country', $country->country]])->count();
-            $countries[$key]->regretted = Delegation::where([['delegation_response', 'Regretted'],['delegation_status',1], ['country', $country->country]])->count();
-            $countries[$key]->awaited = Delegation::where([['delegation_response', 'Awaited'],['delegation_status',1], ['country', $country->country]])->count();
+            $countries[$key]->accepted = Delegation::where([['delegation_response', 'Accepted'], ['delegation_status', 1], ['country', $country->country]])->count();
+            $countries[$key]->regretted = Delegation::where([['delegation_response', 'Regretted'], ['delegation_status', 1], ['country', $country->country]])->count();
+            $countries[$key]->awaited = Delegation::where([['delegation_response', 'Awaited'], ['delegation_status', 1], ['country', $country->country]])->count();
             $countries[$key]->invitation = Delegation::where('country', $country->country)->count();
         }
         // $countries->response = 'success';

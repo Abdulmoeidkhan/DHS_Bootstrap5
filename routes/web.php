@@ -83,6 +83,9 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::get('/deleteUser/{id}', [UserProfileController::class, 'deleteId'])->name('request.deleteUser');
     // Route::get('/restoreUser/{id}', [UserProfileController::class, 'restoreId'])->name('restoreUser.request');
 
+    // Image Status Request
+    Route::get('/updatePictureStatus/{uid}', [ProfileImageController::class, 'updateImageStatus'])->name('request.updateImageStatus');
+
     // Pages Routes
     Route::get('/events', [EventController::class, 'render'])->name('pages.events');
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout.request');

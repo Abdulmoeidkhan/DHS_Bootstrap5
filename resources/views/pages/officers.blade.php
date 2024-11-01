@@ -133,31 +133,24 @@
     }
 
     function operateBoolean(value, row, index) {
-        // async function checkImageExists(url) {
-        //     try {
-        //         const response = await fetch(url, {
-        //             method: 'HEAD'
-        //         });
-        //         return response.ok;
-        //     } catch (error) {
-        //         return false;
-        //     }
-        // }
-        // checkImageExists(value).then(exists => {
-        //     if (exists) {
-        //         return 'Yes'
-        //     } else {
-        //         return 'No'
-        //     }
-        // });
-
-        // return checkImageExists(value).then(exists => exists ? console.log(exists) : console.log(exists));
-        return value?'Yes':'No';
+        // console.log(value);
+        return value?'Yes':`<button class="btn btn-outline-success" onClick="updatePictureStatus(this,'${row.officer_uid}')">Update</button>`;
+    }
+    
+    async function updatePictureStatus(comp,uid){
+        const resp = await axios.get(`updatePictureStatus/${uid}`);
+        if(resp.data.success){
+            const parentComp = comp.parentNode;
+            comp.remove();
+            parentComp.innerText="Yes"
+        }
+            
     }
 
     function operateYesNo(value, row, index) {
         return value == 1 ? 'Yes' : 'No';
     }
+
 </script>
 <script>
     ['#table'].map((val => {

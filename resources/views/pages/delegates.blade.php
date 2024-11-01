@@ -163,31 +163,57 @@
             <div id="Active" class="tabcontent" style="display: block;">
                 <p>
                 <div class="table-responsive">
-                    <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegates',1)}}" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true">
+                    <table id="table" data-filter-control-multiple-search="true"
+                        data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
+                        data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true"
+                        data-show-toggle="true" data-show-export="true" data-show-columns="true"
+                        data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true"
+                        data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegates',1)}}"
+                        data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true">
                         <thead>
                             <tr>
-                                <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
-                                <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
-                                <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Rank</th>
-                                <th data-filter-control="input" data-width="450" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateFirstAndLastName">Delegation Name</th>
+                                <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.
+                                </th>
+                                <th data-filter-control="input" data-field="country" data-sortable="true"
+                                    data-fixed-columns="true" data-formatter="operateText">Country</th>
+                                <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true"
+                                    data-fixed-columns="true" data-formatter="operateText">Rank</th>
+                                <th data-filter-control="input" data-width="450" data-field="first_Name"
+                                    data-sortable="true" data-fixed-columns="true"
+                                    data-formatter="operateFirstAndLastName">Delegation Name</th>
                                 <!-- <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th> -->
                                 <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
-                                <th data-filter-control="input" data-field="vips_designation" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
+                                <th data-filter-control="input" data-field="vips_designation" data-sortable="true"
+                                    data-formatter="operateInvitedBy">Invited By</th>
                                 <!-- <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th> -->
-                                <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
-                                <th data-filter-control="input" data-field="delegation_type" data-sortable="true" data-formatter="operateText">Type</th>
-                                <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
-                                <th data-filter-control="input" data-field="delegationCode" data-sortable="true" data-formatter="operateText">Delegation Code</th>
-                                <th data-filter-control="input" data-field="passport" data-sortable="true" data-formatter="operateText">Passport</th>
-                                <th data-filter-control="input" data-field="arrival_date" data-sortable="true" data-formatter="operateText">Arr Date</th>
-                                <th data-filter-control="input" data-field="arrival_time" data-sortable="true" data-formatter="operateText">Arr Time</th>
-                                <th data-filter-control="input" data-field="arrival_flight" data-sortable="true" data-formatter="operateText">Arr Flight</th>
-                                <th data-filter-control="input" data-field="departure_date" data-sortable="true" data-formatter="operateText">Dep Date</th>
-                                <th data-filter-control="input" data-field="departure_time" data-sortable="true" data-formatter="operateText">Dep Time</th>
-                                <th data-filter-control="input" data-field="departure_flight" data-sortable="true" data-formatter="operateText">Dep Flight</th>
-                                <th data-filter-control="input" data-field="invitation_number" data-sortable="true" data-formatter="operateText">Invitation Number</th>
-                                <th data-filter-control="input" data-field="img_blob" data-sortable="true" data-formatter="operatePictureData">Image Uploaded</th>
-                                <th data-filter-control="input" data-field="img_blob" data-sortable="true" data-formatter="operatePicture">Image Upload</th>
+                                <th data-filter-control="input" data-field="delegation_response" data-sortable="true"
+                                    data-formatter="operateText">Response</th>
+                                <th data-filter-control="input" data-field="delegation_type" data-sortable="true"
+                                    data-formatter="operateText">Type</th>
+                                <th data-filter-control="input" data-field="designation" data-sortable="true"
+                                    data-formatter="operateText">Designation</th>
+                                <th data-filter-control="input" data-field="delegationCode" data-sortable="true"
+                                    data-formatter="operateText">Delegation Code</th>
+                                <th data-filter-control="input" data-field="passport" data-sortable="true"
+                                    data-formatter="operateText">Passport</th>
+                                <th data-filter-control="input" data-field="arrival_date" data-sortable="true"
+                                    data-formatter="operateText">Arr Date</th>
+                                <th data-filter-control="input" data-field="arrival_time" data-sortable="true"
+                                    data-formatter="operateText">Arr Time</th>
+                                <th data-filter-control="input" data-field="arrival_flight" data-sortable="true"
+                                    data-formatter="operateText">Arr Flight</th>
+                                <th data-filter-control="input" data-field="departure_date" data-sortable="true"
+                                    data-formatter="operateText">Dep Date</th>
+                                <th data-filter-control="input" data-field="departure_time" data-sortable="true"
+                                    data-formatter="operateText">Dep Time</th>
+                                <th data-filter-control="input" data-field="departure_flight" data-sortable="true"
+                                    data-formatter="operateText">Dep Flight</th>
+                                <th data-filter-control="input" data-field="invitation_number" data-sortable="true"
+                                    data-formatter="operateText">Invitation Number</th>
+                                <th data-filter-control="input" data-field="imagePresent" data-sortable="true"
+                                    data-formatter="operateBoolean">Image Uploaded</th>
+                                <th data-filter-control="input" data-field="img_blob" data-sortable="true"
+                                    data-formatter="operatePicture">Image Upload</th>
                             </tr>
                         </thead>
                     </table>
@@ -198,30 +224,55 @@
             <div id="Inactive" class="tabcontent">
                 <p>
                 <div class="table-responsive">
-                    <table id="table1" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table1" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegates',0)}}" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true">
+                    <table id="table1" data-filter-control-multiple-search="true"
+                        data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
+                        data-filter-control="true" data-toggle="table1" data-flat="true" data-pagination="true"
+                        data-show-toggle="true" data-show-export="true" data-show-columns="true"
+                        data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true"
+                        data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegates',0)}}"
+                        data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true">
                         <thead>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
-                            <th data-filter-control="input" data-field="country" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Country</th>
-                            <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Rank</th>
-                            <th data-filter-control="input" data-width="450" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateFirstAndLastName">Delegation Name</th>
+                            <th data-filter-control="input" data-field="country" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operateText">Country</th>
+                            <th data-filter-control="input" data-field="rankName.ranks_name" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operateText">Rank</th>
+                            <th data-filter-control="input" data-width="450" data-field="first_Name"
+                                data-sortable="true" data-fixed-columns="true" data-formatter="operateFirstAndLastName">
+                                Delegation Name</th>
                             <!-- <th data-filter-control="input" data-field="first_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">First Name</th> -->
                             <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
-                            <th data-filter-control="input" data-field="vips_designation" data-sortable="true" data-formatter="operateInvitedBy">Invited By</th>
+                            <th data-filter-control="input" data-field="vips_designation" data-sortable="true"
+                                data-formatter="operateInvitedBy">Invited By</th>
                             <!-- <th data-filter-control="input" data-field="self" data-formatter="operateSelf">Status</th> -->
-                            <th data-filter-control="input" data-field="delegation_response" data-sortable="true" data-formatter="operateText">Response</th>
-                            <th data-filter-control="input" data-field="delegation_type" data-sortable="true" data-formatter="operateText">Type</th>
-                            <th data-filter-control="input" data-field="designation" data-sortable="true" data-formatter="operateText">Designation</th>
-                            <th data-filter-control="input" data-field="delegationCode" data-sortable="true" data-formatter="operateText">Delegation Code</th>
-                            <th data-filter-control="input" data-field="passport" data-sortable="true" data-formatter="operateText">Passport</th>
-                            <th data-filter-control="input" data-field="arrival_date" data-sortable="true" data-formatter="operateText">Arr Date</th>
-                            <th data-filter-control="input" data-field="arrival_time" data-sortable="true" data-formatter="operateText">Arr Time</th>
-                            <th data-filter-control="input" data-field="arrival_flight" data-sortable="true" data-formatter="operateText">Arr Flight</th>
-                            <th data-filter-control="input" data-field="departure_date" data-sortable="true" data-formatter="operateText">Dep Date</th>
-                            <th data-filter-control="input" data-field="departure_time" data-sortable="true" data-formatter="operateText">Dep Time</th>
-                            <th data-filter-control="input" data-field="departure_flight" data-sortable="true" data-formatter="operateText">Dep Flight</th>
-                            <th data-filter-control="input" data-field="invitation_number" data-sortable="true" data-formatter="operateText">Invitation Number</th>
-                            <th data-filter-control="input" data-field="img_blob" data-sortable="true" data-formatter="operatePictureData">Image Uploaded</th>
-                            <th data-filter-control="input" data-field="img_blob" data-sortable="true" data-formatter="operatePicture">Image Upload</th>
+                            <th data-filter-control="input" data-field="delegation_response" data-sortable="true"
+                                data-formatter="operateText">Response</th>
+                            <th data-filter-control="input" data-field="delegation_type" data-sortable="true"
+                                data-formatter="operateText">Type</th>
+                            <th data-filter-control="input" data-field="designation" data-sortable="true"
+                                data-formatter="operateText">Designation</th>
+                            <th data-filter-control="input" data-field="delegationCode" data-sortable="true"
+                                data-formatter="operateText">Delegation Code</th>
+                            <th data-filter-control="input" data-field="passport" data-sortable="true"
+                                data-formatter="operateText">Passport</th>
+                            <th data-filter-control="input" data-field="arrival_date" data-sortable="true"
+                                data-formatter="operateText">Arr Date</th>
+                            <th data-filter-control="input" data-field="arrival_time" data-sortable="true"
+                                data-formatter="operateText">Arr Time</th>
+                            <th data-filter-control="input" data-field="arrival_flight" data-sortable="true"
+                                data-formatter="operateText">Arr Flight</th>
+                            <th data-filter-control="input" data-field="departure_date" data-sortable="true"
+                                data-formatter="operateText">Dep Date</th>
+                            <th data-filter-control="input" data-field="departure_time" data-sortable="true"
+                                data-formatter="operateText">Dep Time</th>
+                            <th data-filter-control="input" data-field="departure_flight" data-sortable="true"
+                                data-formatter="operateText">Dep Flight</th>
+                            <th data-filter-control="input" data-field="invitation_number" data-sortable="true"
+                                data-formatter="operateText">Invitation Number</th>
+                            <th data-filter-control="input" data-field="imagePresent" data-sortable="true"
+                                data-formatter="operateBoolean">Image Uploaded</th>
+                            <th data-filter-control="input" data-field="img_blob" data-sortable="true"
+                                data-formatter="operatePicture">Image Upload</th>
                         </thead>
                     </table>
                 </div>
@@ -495,23 +546,43 @@
         evt.currentTarget.className += " active";
     }
 
-    function operatePicture(value, row, index) {
-        if (value) {
-            return [
-                '<div class="left">',
-                '<img src="' + value + '" width="80px" height="80px"/>',
-                '</div>'
-            ].join('')
-        }
-    }
+    // function operatePicture(value, row, index) {
+    //     if (value) {
+    //         return [
+    //             '<div class="left">',
+    //             '<img src="' + value + '" width="80px" height="80px"/>',
+    //             '</div>'
+    //         ].join('')
+    //     }
+    // }
 
-    function operatePictureData(value, row, index) {
-        if (value) {
-            return "Yes";
-        } else {
-            return "No";
-        }
+    // function operatePictureData(value, row, index) {
+    //     if (value) {
+    //         return "Yes";
+    //     } else {
+    //         return "No";
+    //     }
+    // }
+
+    function operatePicture(value, row, index) {
+            return value ? `<img onerror="this.style.display='none';" style="object-fit: cover;" width="100" height="120" src="${value}" />` : ['<div class="left">', 'Not Available', '</div>'].join('');
     }
+    
+    function operateBoolean(value, row, index) {
+        // console.log(value);
+        return value?'Yes':`<button class="btn btn-outline-success" onClick="updatePictureStatus(this,'${row.officer_uid}')">Update</button>`;
+    }
+    
+    async function updatePictureStatus(comp,uid){
+        const resp = await axios.get(`updatePictureStatus/${uid}`);
+        if(resp.data.success){
+            const parentComp = comp.parentNode;
+            comp.remove();
+            parentComp.innerText="Yes"
+        }
+            
+    }
+    
 </script>
 @include("layouts.tableFoot")
 <script>

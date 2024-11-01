@@ -44,7 +44,8 @@
             <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">New Member</h5>
                 <div class="table-responsive">
-                    <form name="memberBasicInfo" id="memberBasicInfo" method="POST" action="{{route('request.addMemberRequest',$id)}}" enctype="multipart/form-data">
+                    <form name="memberBasicInfo" id="memberBasicInfo" method="POST"
+                        action="{{route('request.addMemberRequest',$id)}}" enctype="multipart/form-data">
                         <fieldset>
                             <legend>Add Members Form</legend>
                             @csrf
@@ -61,15 +62,18 @@
                             </div>
                             <div class="mb-3">
                                 <label for="firstName" class="form-label">First Name</label>
-                                <input name="firstName" type="text" class="form-control" id="firstName" placeholder="First Name" required>
+                                <input name="firstName" type="text" class="form-control" id="firstName"
+                                    placeholder="First Name" required>
                             </div>
                             <div class="mb-3">
                                 <label for="lastName" class="form-label">Last Name</label>
-                                <input name="lastName" type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+                                <input name="lastName" type="text" class="form-control" id="lastName"
+                                    placeholder="Last Name" required>
                             </div>
                             <div class="mb-3">
                                 <label for="designation" class="form-label">Designation</label>
-                                <input name="designation" type="text" class="form-control" id="designation" placeholder="Designation" required>
+                                <input name="designation" type="text" class="form-control" id="designation"
+                                    placeholder="Designation" required>
                             </div>
                             <!-- <div class="mb-3">
                                 <label for="organistaion" class="form-label">Organisation</label>
@@ -81,8 +85,10 @@
                             </div> -->
                             <div class="mb-3">
                                 <label for="picture" class="form-label">Picture</label>
-                                <input name="picture" type="file" class="form-control" id="picture" accept="image/png, image/jpeg">
-                                <input name="savedpicture" type="hidden" class="form-control" id="savedpicture" value="">
+                                <input name="picture" type="file" class="form-control" id="picture"
+                                    accept="image/png, image/jpeg">
+                                <input name="savedpicture" type="hidden" class="form-control" id="savedpicture"
+                                    value="">
                                 <div class="box-2">
                                     <div class="result"></div>
                                 </div>
@@ -126,7 +132,15 @@
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Delegates</h5>
             <div class="table-responsive">
-                <table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-show-refresh="true" data-show-pagination-switch="true" data-click-to-select="true" data-toggle="table" data-url="{{route('request.getMembers',$id)}}" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true">
+                <table id="table" data-filter-control-multiple-search="true"
+                    data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-flat="true" table
+                    id="table" data-filter-control-multiple-search="true"
+                    data-filter-control-multiple-search-delimiter="," data-show-refresh="true"
+                    data-show-pagination-switch="true" data-click-to-select="true" data-toggle="table"
+                    data-url="{{route('request.getMembers',$id)}}" data-pagination="true" data-show-toggle="true"
+                    data-show-export="true" data-show-columns="true" data-show-columns-toggle-all="true"
+                    data-page-list="[10, 25, 50, 100,200]" data-show-print="true"
+                    data-print-as-filtered-and-sorted-on-ui="true">
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
@@ -136,7 +150,8 @@
                             <th data-field="designation" data-sortable="true">Designation</th>
                             <th data-field="delegation_type" data-sortable="true">Type</th>
                             <th data-field="flight.passport" data-sortable="true">Passport</th>
-                            <th data-field="status" data-sortable="true" data-field="status" data-formatter="statusFormatter">Member Active</th>
+                            <th data-field="status" data-sortable="true" data-field="status"
+                                data-formatter="statusFormatter">Member Active</th>
                             <th data-field="flight.arrival_flight" data-sortable="true">Arrival Flight</th>
                             <th data-field="flight.arrival_date" data-sortable="true">Arrival Date</th>
                             <th data-field="flight.arrival_time" data-sortable="true">Arrival Time</th>
@@ -147,11 +162,18 @@
                             <th data-field="rooms.room_type.room_type" data-sortable="true">Room Type</th>
                             <th data-field="rooms.room_checkin" data-sortable="true">Room Check In</th>
                             <th data-field="rooms.room_checkout" data-sortable="true">Room Check Out</th>
-                            <th data-field="image.img_blob" data-sortable="true" data-formatter="operatePicture" data-force-hide="true">Image</th>
-                            @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="delegate")
-                            <th data-field="delegates_uid" data-sortable="true" data-field="status" data-formatter="statusChangerFormatter">Active/Deactive</th>
-                            <th data-field="delegates_uid" data-sortable="true" data-formatter="operateDelegateFlight" data-force-hide="true" data-print-ignore="true">Update Flight Info</th>
-                            <th data-field="delegates_uid" data-sortable="true" data-formatter="operateDelegateMember" data-force-hide="true" data-print-ignore="true">Update Member Info</th>
+                            <th data-filter-control="input" data-field="imagePresent" data-sortable="true"
+                                data-formatter="operateBoolean">Picture Updated</th>
+                            <th data-field="image" data-sortable="true" data-formatter="operatePicture"
+                                data-force-hide="true">Image</th>
+                            @if(session()->get('user')->roles[0]->name =="admin" ||
+                            session()->get('user')->roles[0]->name =="delegate")
+                            <th data-field="delegates_uid" data-sortable="true" data-field="status"
+                                data-formatter="statusChangerFormatter">Active/Deactive</th>
+                            <th data-field="delegates_uid" data-sortable="true" data-formatter="operateDelegateFlight"
+                                data-force-hide="true" data-print-ignore="true">Update Flight Info</th>
+                            <th data-field="delegates_uid" data-sortable="true" data-formatter="operateDelegateMember"
+                                data-force-hide="true" data-print-ignore="true">Update Member Info</th>
                             @endif
                             <!-- <th data-field="organistaion" data-sortable="true">Organistaion</th> -->
                             <!-- <th data-field="last_Name" data-sortable="true">Delegate Last Name</th>
@@ -223,13 +245,31 @@
     }
 
     function operatePicture(value, row, index) {
-        if (value) {
-            return [
-                '<div class="left">',
-                '<img src="' + value + '" width="80px" height="80px"/>',
-                '</div>'
-            ].join('')
+        // if (value) {
+        //     return [
+        //         '<div class="left">',
+        //         '<img src="' + value + '" width="80px" height="80px"/>',
+        //         '</div>'
+        //     ].join('')
+        // }
+        // if (image) {
+            return value ? `<img onerror="this.style.display='none';" style="object-fit: cover;" width="100" height="120" src="${value}" />` : ['<div class="left">', 'Not Available', '</div>'].join('');
+        // }
+    }
+
+    function operateBoolean(value, row, index) {
+        // console.log(value);
+        return value?'Yes':`<button class="btn btn-outline-success" onClick="updatePictureStatus(this,'${row.officer_uid}')">Update</button>`;
+    }
+    
+    async function updatePictureStatus(comp,uid){
+        const resp = await axios.get(`updatePictureStatus/${uid}`);
+        if(resp.data.success){
+            const parentComp = comp.parentNode;
+            comp.remove();
+            parentComp.innerText="Yes"
         }
+            
     }
 
     function statusFormatter(value, row, index) {
