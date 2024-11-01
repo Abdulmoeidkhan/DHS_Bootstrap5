@@ -123,7 +123,7 @@
 
     function operatePicture(value, row, index) {
         // if (row.officer_picture) {
-            return  value ? `<img onerror="this.style.display='none'" style="object-fit: cover;" width="100" height="120" src="${value}"  />` : ['<div class="left">', 'Not Available', '</div>'].join('');
+            return  value ? `<img onerror="this.style.display='none'" style="object-fit:cover;" width="100px" height="120px" src="${value}"  />` : ['<div class="left">', 'Not Available', '</div>'].join('');
             // return  row.officer_uid ? `<img onerror="this.style.display='none'" style="object-fit: cover;" width="100" height="120" src="https://res.cloudinary.com/dhkm5xmpn/image/upload/Images/${row.officer_uid}.png"  />` : ['<div class="left">', 'Not Available', '</div>'].join('');
         // }
     }

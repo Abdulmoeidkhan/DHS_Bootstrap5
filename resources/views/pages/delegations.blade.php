@@ -782,7 +782,7 @@
                 </div>
             </div>
             @endif
-            <div id="Accepted" class="tabcontent" style="display:{{session()->get('user')->roles[0]->name == 'dho'?'block;':'none'}}">
+            <div id="Accepted" class="tabcontent" style="display:{{session()->get('user')->roles[0]->name == 'dho'?'block;':'none;'}}">
                 @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
                     <div class="d-flex" style="position: absolute;top: 95px;">
