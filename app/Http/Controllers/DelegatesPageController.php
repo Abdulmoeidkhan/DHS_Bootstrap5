@@ -46,7 +46,7 @@ class DelegatesPageController extends Controller
             foreach ($delegates as $key => $delegate) {
                 $delegates[$key]->rankName = Rank::where('ranks_uid', $delegate->rank)->first('ranks_name');
                 $delegates[$key]->invited_by_name = Rank::where('ranks_uid', $delegate->invited_by)->first('ranks_name');
-                $delegates[$key]->image = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $delegate->delegates_uid . '.png';
+                $delegates[$key]->img_blob = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $delegate->delegates_uid . '.png';
                 $delegates[$key]->imagePresent = ForeignImageValidator::where('image_uid', $delegate->delegates_uid)->first('image_exist');
                 $delegates[$key]->isHead = $delegate->delegation_type !== "Member" ? "Yes" : "No";
             }
@@ -65,7 +65,7 @@ class DelegatesPageController extends Controller
             foreach ($delegates as $key => $delegate) {
                 $delegates[$key]->rankName = Rank::where('ranks_uid', $delegate[$key]->rank)->first('ranks_name');
                 $delegates[$key]->invited_by->name = Rank::where('ranks_uid', $delegate[$key]->invited_by->name)->first('ranks_name');
-                $delegates[$key]->image = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $delegate->delegates_uid . '.png';
+                $delegates[$key]->img_blob = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $delegate->delegates_uid . '.png';
                 $delegates[$key]->imagePresent = ForeignImageValidator::where('image_uid', $delegate->delegates_uid)->first('image_exist');
             }
             return $delegates;

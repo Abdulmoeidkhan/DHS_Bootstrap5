@@ -33,7 +33,8 @@ class PrintInvitationController extends Controller
                 $printerFlag = Delegate::where('delegates_uid', $delegate->delegates_uid)->update(['isPrinted' => 1]);
                 $delegation = Delegation::where('uid', $delegate->delegation)->first();
                 $delegate->rank = Rank::where('ranks_uid', $delegate->rank)->first('ranks_name');
-                $delegate->image = ImageBlob::where('uid', $delegate->delegates_uid)->first();
+                // $delegate->image = ImageBlob::where('uid', $delegate->delegates_uid)->first();
+                $delegate->image = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $id . '.png';
                 $delegate->flight = DelegateFlight::where('delegation_uid', $id)->orWhere('delegate_uid', $id)->first();
                 // return $delegation;
                 $printDoc->first = $delegate->rank->ranks_name ?? '';
@@ -48,7 +49,8 @@ class PrintInvitationController extends Controller
                 $officer = Officer::where('officer_uid', $id)->first();
                 $printerFlag = Officer::where('officer_uid', $id)->update(['isPrinted' => 1]);
                 $officer->rank = Rank::where('ranks_uid', $officer->officer_rank)->first('ranks_name');
-                $officer->image = ImageBlob::where('uid', $officer->officer_uid)->first();
+                $officer->image = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $id . '.png';
+                // $officer->image = ImageBlob::where('uid', $officer->officer_uid)->first();
                 // return $delegation;
                 $printDoc->first = $officer->rank->ranks_name ?? '';
                 $printDoc->second = $officer->officer_first_name ?? '';

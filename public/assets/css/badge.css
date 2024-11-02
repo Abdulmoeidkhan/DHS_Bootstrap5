@@ -28,6 +28,7 @@
         -ms-text-overflow: ellipsis;
         text-overflow: ellipsis;
         width: 290px;
+        color:black;
     }
 }
 
@@ -48,4 +49,5 @@ h6 {
     -ms-text-overflow: ellipsis;
     text-overflow: ellipsis;
     width: 290px;
+    color:black;
 }

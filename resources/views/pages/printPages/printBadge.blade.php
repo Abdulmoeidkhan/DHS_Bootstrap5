@@ -45,14 +45,14 @@
                     <div class="d-flex my-1">
                         <div id="barCode" custom-id="{{$printDoc->sixth}}"></div>
                     </div>
-                    <h6 style="text-transform: uppercase;" class="text-center mx-3">
+                    <h6 style="text-transform: uppercase;" class="text-left mx-3">
                         {{$printDoc->forth}}/{{$printDoc->fifth}}/{{$printDoc->sixth}}
                     </h6>
                 </div>
                 <div class="card-border mx-4">
                     <div class="logo-child mx-5">
                         @if($printDoc->image)
-                        <img src="{{$printDoc->image->img_blob}}" style="height: 120px; width: 100px;"
+                        <img src="{{$printDoc->image}}" style="height: 120px; width: 100px;"
                             class="img-fluid" alt="" />
                         @endif
                     </div>
