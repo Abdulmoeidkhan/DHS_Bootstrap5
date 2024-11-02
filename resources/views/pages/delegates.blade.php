@@ -202,12 +202,24 @@
                                     data-formatter="operateText">Arr Time</th>
                                 <th data-filter-control="input" data-field="arrival_flight" data-sortable="true"
                                     data-formatter="operateText">Arr Flight</th>
+                                <th data-filter-control="input" data-field="arrived" data-sortable="true"
+                                    data-formatter="operateYesNo">Arr Status</th>
                                 <th data-filter-control="input" data-field="departure_date" data-sortable="true"
                                     data-formatter="operateText">Dep Date</th>
                                 <th data-filter-control="input" data-field="departure_time" data-sortable="true"
                                     data-formatter="operateText">Dep Time</th>
                                 <th data-filter-control="input" data-field="departure_flight" data-sortable="true"
                                     data-formatter="operateText">Dep Flight</th>
+                                <th data-filter-control="input" data-field="departed" data-sortable="true"
+                                    data-formatter="operateYesNo">Dep Status</th>
+                                <th data-filter-control="input" data-field="hotel_names" data-sortable="true"
+                                    data-formatter="operateText">Hotel Name</th>
+                                <th data-filter-control="input" data-field="room_type" data-sortable="true"
+                                    data-formatter="operateText">Room Type</th>
+                                <th data-filter-control="input" data-field="room_no" data-sortable="true"
+                                    data-formatter="operateText">Room Number</th>
+                                <th data-filter-control="input" data-field="officers" data-sortable="true"
+                                    data-formatter="operateOfficers">Officer</th>
                                 <th data-filter-control="input" data-field="invitation_number" data-sortable="true"
                                     data-formatter="operateText">Invitation Number</th>
                                 <th data-filter-control="input" data-field="imagePresent" data-sortable="true"
@@ -261,12 +273,24 @@
                                 data-formatter="operateText">Arr Time</th>
                             <th data-filter-control="input" data-field="arrival_flight" data-sortable="true"
                                 data-formatter="operateText">Arr Flight</th>
+                            <th data-filter-control="input" data-field="arrived" data-sortable="true"
+                                data-formatter="operateYesNo">Arr Status</th>
                             <th data-filter-control="input" data-field="departure_date" data-sortable="true"
                                 data-formatter="operateText">Dep Date</th>
                             <th data-filter-control="input" data-field="departure_time" data-sortable="true"
                                 data-formatter="operateText">Dep Time</th>
                             <th data-filter-control="input" data-field="departure_flight" data-sortable="true"
                                 data-formatter="operateText">Dep Flight</th>
+                            <th data-filter-control="input" data-field="departed" data-sortable="true"
+                                data-formatter="operateYesNo">Dep Status</th>
+                            <th data-filter-control="input" data-field="hotel_names" data-sortable="true"
+                                data-formatter="operateText">Hotel Name</th>
+                            <th data-filter-control="input" data-field="room_type" data-sortable="true"
+                                data-formatter="operateText">Room Type</th>
+                            <th data-filter-control="input" data-field="room_no" data-sortable="true"
+                                data-formatter="operateText">Room Number</th>
+                            <th data-filter-control="input" data-field="officers" data-sortable="true"
+                                data-formatter="operateOfficers">Officer</th>
                             <th data-filter-control="input" data-field="invitation_number" data-sortable="true"
                                 data-formatter="operateText">Invitation Number</th>
                             <th data-filter-control="input" data-field="imagePresent" data-sortable="true"
@@ -532,6 +556,10 @@
         return index + 1;
     }
 
+    function operateYesNo(value, row, index) {
+        return value == '1' ? 'Yes' : 'No';
+    }
+
     function openTab(evt, cityName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
@@ -565,24 +593,33 @@
     // }
 
     function operatePicture(value, row, index) {
-            return value ? `<img onerror="this.style.display='none';" style="object-fit: cover;" width="100" height="120" src="${value}" />` : ['<div class="left">', 'Not Available', '</div>'].join('');
+        return value ? `<img onerror="this.style.display='none';" style="object-fit: cover;" width="100" height="120" src="${value}" />` : ['<div class="left">', 'Not Available', '</div>'].join('');
     }
-    
+
     function operateBoolean(value, row, index) {
         // console.log(value);
-        return value?'Yes':`<button class="btn btn-outline-success" onClick="updatePictureStatus(this,'${row.officer_uid}')">Update</button>`;
+        return value ? 'Yes' : `<button class="btn btn-outline-success" onClick="updatePictureStatus(this,'${row.officer_uid}')">Update</button>`;
     }
-    
-    async function updatePictureStatus(comp,uid){
+
+    function operateOfficers(value, row, index) {
+        if (value.length > 0) {
+            return value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + val.officer_type + ' - ' + val.rank.ranks_name + ' ' + val.officer_first_name + ' ' + val.officer_last_name + '-' + val.officer_contact + '</div><br/>').join('')
+        } else {
+            return [
+                '-',
+            ].join('')
+        }
+    }
+
+    async function updatePictureStatus(comp, uid) {
         const resp = await axios.get(`updatePictureStatus/${uid}`);
-        if(resp.data.success){
+        if (resp.data.success) {
             const parentComp = comp.parentNode;
             comp.remove();
-            parentComp.innerText="Yes"
+            parentComp.innerText = "Yes"
         }
-            
+
     }
-    
 </script>
 @include("layouts.tableFoot")
 <script>
@@ -613,8 +650,8 @@
             }
         });
         $(val).bootstrapTable({
-      printPageBuilder: function (val) {
-        return `
+            printPageBuilder: function(val) {
+                return `
 <html>
   <head>
   <style type="text/css" media="print">
@@ -654,8 +691,8 @@
   <div class="bs-table-print">${val}</div>
   </body>
 </html>`
-      }
-    })
+            }
+        })
     }))
 </script>
 @endsection
