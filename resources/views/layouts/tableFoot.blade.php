@@ -11,3 +11,4 @@
 <script src="https://cdn.jsdelivr.net/gh/akottr/dragtable@master/jquery.dragtable.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.0/dist/extensions/reorder-columns/bootstrap-table-reorder-columns.min.js"></script>
 
+
