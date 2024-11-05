@@ -210,8 +210,8 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Driver Pages And API Start
         Route::get('/getDrivers', [CarsController::class, 'getDrivers'])->name('request.getDrivers');
+        Route::post('/addInfoDriver', [CarsController::class, 'addInfoDriver'])->name('request.addInfoDriver');
         Route::get('/addDriverPage/{id?}', [CarsController::class, 'addDriverRender'])->name('pages.addDriver');
-        Route::post('/addDriver', [CarsController::class, 'addDriver'])->name('request.addDriver');
         Route::post('/updateDriver/{id}', [CarsController::class, 'updateDriver'])->name('request.updateDriver');
         // Driver Pages And API End
 

@@ -197,7 +197,7 @@
                 <h5 class="modal-title" id="officerDetachModalLabel">Unassign Officer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" action='{{route("request.detachOfficer")}}'>
+            <form onsubmit='submitFunction(event,`{{route("request.detachOfficer")}}`,"detachOfficer");'>
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
@@ -228,7 +228,7 @@
                 <h5 class="modal-title" id="officerModalLabel">Assign Officer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" action='{{route("request.attachOfficer")}}'>
+            <form onsubmit='submitFunction(event,`{{route("request.attachOfficer")}}`,"attachOfficer");'>
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
@@ -292,7 +292,7 @@
                 <h5 class="modal-title" id="">Attach Car Modal</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" action='{{route("request.attachCar")}}'>
+            <form onsubmit='submitFunction(event,`{{route("request.attachCar")}}`,"attachCar");'>
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
@@ -362,12 +362,12 @@
                 <h5 class="modal-title" id="">De-Attach Car Modal</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" action='{{route("request.deattachCar")}}'>
+            <form onsubmit='submitFunction(event,`{{route("request.deattachCar")}}`,"deattachCar");'>
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="deattachCarSelect" class="col-form-label">Car :</label>
-                        <select class="form-select" aria-label="Car To Be De-Attach" id="deattachCarSelect" name="deattachCarSelect[]">
+                        <select class="form-select" aria-label="Car To Be De-Attach" id="deattachCarSelect" name="deattachCarSelect[]" required>
                             <option value="" selected disabled hidden> Select Car To Be Disassociate </option>
                             @foreach(\App\Models\Car::where([['car_status',1],['car_delegation','!=',null]])->get() as $key=>$car)
                             <option value="{{$car->car_uid}}">
@@ -393,15 +393,14 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="statusChangerModal" tabindex="-1" aria-labelledby="statusChangerModal" aria-hidden="true">
+<!-- <div class="modal fade" id="statusChangerModal" tabindex="-1" aria-labelledby="statusChangerModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="">Status Changer Confirmation</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" action='{{route("request.deattachCar")}}'>
-                @csrf
+            <form>
                 <div class="modal-body">
                     <div class="mb-3">
                         <input type="hidden" name="delegationUid_dis_car" value="" id="delegationUid_dis_car" />
@@ -414,7 +413,7 @@
             </form>
         </div>
     </div>
-</div>
+</div> -->
 <!-- <div class="modal fade" id="LiasonModal" tabindex="-1" aria-labelledby="LiasonModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -736,7 +735,7 @@
                 <!-- <br /> -->
                 <div class="table-responsive">
                     <table
-                        id="table4" data-filter-control-multiple-search="true" 
+                        id="table4" data-filter-control-multiple-search="true"
                         data-filter-control-multiple-search-delimiter=","
                         data-virtual-scroll="true" data-filter-control="true" data-toggle="table4" data-flat="true" data-pagination="true"
                         data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true"
@@ -801,7 +800,7 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table" data-filter-control-multiple-search="true" 
+                    <table id="table" data-filter-control-multiple-search="true"
                         data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
                         data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true"
                         data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true"
@@ -868,7 +867,7 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table1" data-filter-control-multiple-search="true" 
+                    <table id="table1" data-filter-control-multiple-search="true"
                         data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
                         data-filter-control="true" data-toggle="table1" data-flat="true" data-pagination="true" data-show-toggle="true"
                         data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true"
@@ -931,7 +930,7 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table2" data-filter-control-multiple-search="true" 
+                    <table id="table2" data-filter-control-multiple-search="true"
                         data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
                         data-filter-control="true" data-toggle="table2" data-flat="true" data-pagination="true" data-show-toggle="true"
                         data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true"
@@ -994,7 +993,7 @@
                 @endif
                 <!-- <br /> -->
                 <div class="table-responsive">
-                    <table id="table3" data-filter-control-multiple-search="true" 
+                    <table id="table3" data-filter-control-multiple-search="true"
                         data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
                         data-filter-control="true" data-toggle="table3" data-flat="true" data-pagination="true"
                         data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true"
@@ -1642,6 +1641,27 @@
                 classes: '  '
             }
         }
+    }
+
+    function submitFunction(e, route, category) {
+        e.preventDefault();
+        const formData = new FormData(e.target); // Create a FormData object to get all the form data
+
+        // Convert FormData to a plain object
+        const formValues = {};
+        formData.forEach((value, key) => {
+            formValues[key] = value;
+        });
+        switch (category) {
+            case 'attachCar':
+                
+                break;
+        
+            default:
+                break;
+        }
+        console.log(formValues, route, category);
+        return false;
     }
 </script>
 @include("layouts.tableFoot")
