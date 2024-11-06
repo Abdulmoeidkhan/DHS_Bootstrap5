@@ -1646,21 +1646,29 @@
     function submitFunction(e, route, category) {
         e.preventDefault();
         const formData = new FormData(e.target); // Create a FormData object to get all the form data
-
         // Convert FormData to a plain object
         const formValues = {};
         formData.forEach((value, key) => {
             formValues[key] = value;
         });
+
+        const lengthOfForm = Object.keys(formValues).length; // Length Of Values getting from from 
+
+        const sendingPostRequest = (values,route)=>{
+            axios.post(route, values).then(response=>console.log(response);).catch(error =>console.log(error););
+        }
+        
         switch (category) {
             case 'attachCar':
-                
+            sendingPostRequest
                 break;
         
             default:
                 break;
         }
-        console.log(formValues, route, category);
+
+
+        console.log(formValues, route, category,Object.keys(formValues).length);
         return false;
     }
 </script>

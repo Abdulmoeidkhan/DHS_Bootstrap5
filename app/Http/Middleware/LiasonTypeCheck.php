@@ -15,7 +15,7 @@ class LiasonTypeCheck
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $userType = array('liason','interpreter','receiving');
+        $userType = array('liaison','interpreter','receiving');
         $userCheck = in_array(session()->get('user')->roles[0]->name, $userType);
         $isLiason = $userCheck ? true : false;
 
