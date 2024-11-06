@@ -39,14 +39,13 @@ class PlansController extends Controller
     {
         $delegationUid = HotelPlan::where('hotel_plan_uid', $id)->first('delegation_uid');
         $hotelPlan = HotelPlan::where('hotel_plan_uid', $id)->delete();
-        return $hotelPlan ? redirect()->route('pages.addPlan')->with('message', "Hotel Plan Deleted Successfully") : redirect()->route('pages.addPlan',$delegationUid)->with('error', "Something Went Wrong");
+        return $hotelPlan ? redirect()->route('pages.addPlan',$delegationUid->delegation_uid)->with('message', "Hotel Plan Deleted Successfully") : redirect()->route('pages.addPlan',$delegationUid->delegation_uid)->with('error', "Something Went Wrong");
     }
     public function deleteCarPlan($id)
     {
-
-        $delegationUid = CarPlan::where('car_plan_uid', $id)->fisrt('delegation_uid');
+        $delegationUid = CarPlan::where('car_plan_uid', $id)->first('delegation_uid');
         $carPlan = CarPlan::where('car_plan_uid', $id)->delete();
-        return $carPlan ? redirect()->route('pages.addPlan',$delegationUid)->with('message', "Car Plan Deleted Successfully") : redirect()->route('pages.addPlan',$delegationUid)->with('error', "Something Went Wrong");
+        return $carPlan ? redirect()->route('pages.addPlan',$delegationUid->delegation_uid)->with('message', "Car Plan Deleted Successfully") : redirect()->route('pages.addPlan',$delegationUid->delegation_uid)->with('error', "Something Went Wrong");
     }
 
     // public function addPlan(Request $req)
