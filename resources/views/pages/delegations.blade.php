@@ -1655,22 +1655,23 @@
         const lengthOfForm = Object.keys(formValues).length; // Length Of Values getting from from 
 
         const sendingPostRequest = (values,route)=>{
-            axios.post(route, values).then(response=>console.log(response);).catch(error =>console.log(error););
+            axios.post(route, values).then(response=>console.log(response)).catch(error =>console.log(error));
         }
-        
+
         switch (category) {
             case 'attachCar':
-            sendingPostRequest
+            lengthOfForm>2?sendingPostRequest(formValues,route):'No Request Made';
                 break;
-        
+            case 'deattachCar':
+            lengthOfForm>2?sendingPostRequest(formValues,route):'No Request Made';
+                break;
             default:
                 break;
         }
-
-
         console.log(formValues, route, category,Object.keys(formValues).length);
         return false;
     }
+
 </script>
 @include("layouts.tableFoot")
 <script>

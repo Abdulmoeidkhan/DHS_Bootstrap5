@@ -349,8 +349,8 @@ class CarsController extends Controller
 
     public function deattachCar(Request $req)
     {
-        // return $req->all();
-        $cars = $req->deattachCarSelect;
+        return $req->input('deattachCarSelect[]');
+        $cars = $req->input('deattachCarSelect[]');
         $delegationUid = $req->delegationUid_dis_car;
         foreach ($cars as $key => $car) {
             Car::where([['car_delegation', $delegationUid], ['car_uid', $car]])->update(['car_delegation' => null]);
