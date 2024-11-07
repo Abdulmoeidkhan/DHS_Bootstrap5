@@ -337,7 +337,8 @@ class CarsController extends Controller
     public function attachCar(Request $req)
     {
         $updatedCarSelect = $req->carASelect ? Car::where('car_uid', $req->carASelect)->update(['car_delegation' => $req->delegationUid_car]) : Car::where('car_uid', $req->carBSelect)->update(['car_delegation' => $req->delegationUid_car]);
-        return $updatedCarSelect ? redirect()->route('pages.delegationsPage')->with('message', "Car Attach Successfully") : redirect()->back()->with('error', "Something Went Wrong");
+        return $updatedCarSelect ? response()->json(['success' => true, 'requestStatus' => 'Car Attach Successfully'], 200) : response()->json(['success' => false, 'requestStatus' => 'Not Update'], 404);
+        // return $updatedCarSelect ? redirect()->route('pages.delegationsPage')->with('message', "Car Attach Successfully") : redirect()->back()->with('error', "Something Went Wrong");
     }
 
     public function detachCarData($id)
@@ -349,13 +350,13 @@ class CarsController extends Controller
 
     public function deattachCar(Request $req)
     {
-        return $req->input('deattachCarSelect[]');
-        $cars = $req->input('deattachCarSelect[]');
+        // return $req->input('deattachCarSelect[]');
+        $car = $req->deattachCarSelect;
         $delegationUid = $req->delegationUid_dis_car;
-        foreach ($cars as $key => $car) {
-            Car::where([['car_delegation', $delegationUid], ['car_uid', $car]])->update(['car_delegation' => null]);
-        }
-        return redirect()->route('pages.delegationsPage')->with('message', 'Car has been deattach Successfully');
+        $carDetach = Car::where([['car_delegation', $delegationUid], ['car_uid', $car]])->update(['car_delegation' => null]);
+        // return $cars;
+        return $carDetach ? response()->json(['success' => true, 'requestStatus' => 'Car has been deattach Successfully'], 200) : response()->json(['success' => false, 'requestStatus' => 'Not Update'], 404);
+        // return redirect()->route('pages.delegationsPage')->with('message', 'Car has been deattach Successfully');
     }
 
     // Attach Car

@@ -65,6 +65,7 @@
         color: white;
     }
 </style>
+<span id="alert-comp"></span>
 
 <div class="row">
     <div class="col-lg-2">
@@ -190,6 +191,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="DetachModal" tabindex="-1" aria-labelledby="DetachModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -367,7 +369,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="deattachCarSelect" class="col-form-label">Car :</label>
-                        <select class="form-select" aria-label="Car To Be De-Attach" id="deattachCarSelect" name="deattachCarSelect[]" required>
+                        <select class="form-select" aria-label="Car To Be De-Attach" id="deattachCarSelect" name="deattachCarSelect" required>
                             <option value="" selected disabled hidden> Select Car To Be Disassociate </option>
                             @foreach(\App\Models\Car::where([['car_status',1],['car_delegation','!=',null]])->get() as $key=>$car)
                             <option value="{{$car->car_uid}}">
@@ -1654,24 +1656,31 @@
 
         const lengthOfForm = Object.keys(formValues).length; // Length Of Values getting from from 
 
-        const sendingPostRequest = (values,route)=>{
-            axios.post(route, values).then(response=>console.log(response)).catch(error =>console.log(error));
+        const sendingPostRequest = (values, route) => {
+            axios.post(route, values).then(response => {
+                console.log(response)
+                document.getElementById('alert-comp').innerHTML = `<div class="alert alert-${response.data.success?'success':'danger'} alert-dismissible fade show" role="alert">
+        <strong>${response.data.requestStatus}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>`
+            }).catch(error => {
+                console.log(error)
+            });
         }
 
         switch (category) {
             case 'attachCar':
-            lengthOfForm>2?sendingPostRequest(formValues,route):'No Request Made';
+                lengthOfForm > 2 ? sendingPostRequest(formValues, route) : 'No Request Made';
                 break;
             case 'deattachCar':
-            lengthOfForm>2?sendingPostRequest(formValues,route):'No Request Made';
+                lengthOfForm > 2 ? sendingPostRequest(formValues, route) : 'No Request Made';
                 break;
             default:
                 break;
         }
-        console.log(formValues, route, category,Object.keys(formValues).length);
+        console.log(formValues, route, category, Object.keys(formValues).length);
         return false;
     }
-
 </script>
 @include("layouts.tableFoot")
 <script>
