@@ -52,7 +52,7 @@
                 <div class="card-border mx-4">
                     <div class="logo-child mx-5">
                         @if($printDoc->image)
-                        <img src="{{$printDoc->image}}" style="height: 120px; width: 100px;"
+                        <img onerror="this.style.display='none';" style="object-fit: cover;" width="100" height="120" src="{{$printDoc->image}}"
                             class="img-fluid" alt="" />
                         @endif
                     </div>
