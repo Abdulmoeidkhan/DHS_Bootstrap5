@@ -127,7 +127,7 @@ class MemberController extends Controller
     {
         $member = Delegate::where('delegates_uid', $id)->first();
         $flight = DelegateFlight::where('delegate_uid', $id)->first();
-        $memberPicture = ImageBlob::where('uid', $id)->first();
+        $memberPicture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $member->delegates_uid . '.png';
         // return $member;
         return view('pages.addMember', ['member' => $member, 'flight' => $flight, 'id' => $id, 'memberPicture' => $memberPicture]);
     }
