@@ -49,8 +49,8 @@
                                 Code</th>
                             <th data-field="rankName.ranks_name" data-filter-control="input" data-sortable="true">Rank
                             </th>
-                            <th data-field="first_Name" data-filter-control="input" data-sortable="true">First Name</th>
-                            <th data-field="last_Name" data-filter-control="input" data-sortable="true">Last Name</th>
+                            <th data-field="first_Name" data-filter-control="input" data-sortable="true" data-formatter="operateFirstAndLastName">Name</th>
+                            <!-- <th data-field="last_Name" data-filter-control="input" data-sortable="true">Last Name</th> -->
                             <th data-field="vips_designation" data-filter-control="input" data-sortable="true">Invited
                                 By</th>
                             <th data-field="delegation_type" data-filter-control="input" data-formatter="operateText"
@@ -68,7 +68,7 @@
                             <th data-field="img_blob" data-filter-control="input" data-sortable="true" data-formatter="operateStatus">Image
                                 Uploaded</th>
                             <th data-field="isPrinted" data-filter-control="input" data-sortable="true" data-formatter="operateStatus">Printed</th>
-                            <th data-width="150" data-formatter="operatePicture" data-force-hide="true">Image</th>
+                            <th data-width="150" data-formatter="operatePicture" data-force-hide="true" data-field="img_blob">Image</th>
                             <th data-field="delegates_uid" data-width="200" data-sortable="true"
                                 data-formatter="operatePlans" data-print-ignore="true">Actions</th>
                         </tr>
@@ -126,21 +126,25 @@
         const modalBodyInputInvitation = invitationNumberModal.querySelector('.modal-body #invitaionNumber')
         modalBodyInputInvitation.value = invitation
     })
-    
+
     function operateStatus(value, row, index) {
         return value ? 'Yes' : 'No'
     }
-    
+
     function operatePicture(value, row, index) {
-        if (row.img_blob) {
-            return [
-                '<div class="left">',
-                '<img src="' + row.img_blob + '" width="80px" height="80px"/>',
-                '</div>'
-            ].join('')
-        }
+        // if (row.img_blob) {
+        //     return [
+        //         '<div class="left">',
+        //         '<img src="' + row.img_blob + '" width="80px" height="80px"/>',
+        //         '</div>'
+        //     ].join('')
+        // }
+        return value ? `<img onerror="this.style.display='none';" style="object-fit: cover;" width="100" height="120" src="${value}" />` : ['<div class="left">', 'Not Available', '</div>'].join('');
     }
 
+    function operateFirstAndLastName(value, row, index) {
+        return `${row.first_Name} &nbsp; ${row.last_Name}`;
+    }
 </script>
 <script>
     ['#table'].map((val => {

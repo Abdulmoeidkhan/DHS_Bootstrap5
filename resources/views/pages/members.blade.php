@@ -49,7 +49,7 @@
                             action="{{route('request.addMemberRequest',$id)}}"
                             @endif
                             enctype="multipart/form-data">
-                            <fieldset disabled>
+                            <fieldset @if(session()->get('user')->roles[0]->name =="delegate") disabled @endif>
                                 <legend>Add Members Form</legend>
                                 @csrf
                                 <div class="mb-3">
@@ -148,8 +148,8 @@
                             <tr>
                                 <th data-field="id">Id</th>
                                 <th data-field="rankName.ranks_name" data-sortable="true">Rank</th>
-                                <th data-field="first_Name" data-sortable="true">First Name</th>
-                                <th data-field="last_Name" data-sortable="true">Last Name</th>
+                                <th data-field="first_Name" data-sortable="true" data-formatter="operateFirstAndLastName">Name</th>
+                                <!-- <th data-field="last_Name" data-sortable="true">Last Name</th> -->
                                 <th data-field="designation" data-sortable="true">Designation</th>
                                 <th data-field="delegation_type" data-sortable="true">Type</th>
                                 <th data-field="flight.passport" data-sortable="true">Passport</th>
@@ -297,6 +297,10 @@
                     '</div>',
                 ].join('')
             }
+        }
+
+        function operateFirstAndLastName(value, row, index) {
+            return `${row.first_Name} &nbsp; ${row.last_Name}`;
         }
     </script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.min.js'></script>
