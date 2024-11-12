@@ -45,8 +45,11 @@
                 <h5 class="card-title fw-semibold mb-4">New Member</h5>
                 <div class="table-responsive">
                     <form name="memberBasicInfo" id="memberBasicInfo" method="POST"
-                        action="{{route('request.addMemberRequest',$id)}}" enctype="multipart/form-data">
-                        <fieldset>
+                        @if(!session()->get('user')->roles[0]->name =="delegate")
+                        action="{{route('request.addMemberRequest',$id)}}"
+                        @endif
+                        enctype="multipart/form-data">
+                        <fieldset disabled>
                             <legend>Add Members Form</legend>
                             @csrf
                             <div class="mb-3">
@@ -253,23 +256,23 @@
         //     ].join('')
         // }
         // if (image) {
-            return value ? `<img onerror="this.style.display='none';" style="object-fit: cover;" width="100" height="120" src="${value}" />` : ['<div class="left">', 'Not Available', '</div>'].join('');
+        return value ? `<img onerror="this.style.display='none';" style="object-fit: cover;" width="100" height="120" src="${value}" />` : ['<div class="left">', 'Not Available', '</div>'].join('');
         // }
     }
 
     function operateBoolean(value, row, index) {
         // console.log(value);
-        return value?'Yes':`<button class="btn btn-outline-success" onClick="updatePictureStatus(this,'${row.officer_uid}')">Update</button>`;
+        return value ? 'Yes' : `<button class="btn btn-outline-success" onClick="updatePictureStatus(this,'${row.officer_uid}')">Update</button>`;
     }
-    
-    async function updatePictureStatus(comp,uid){
+
+    async function updatePictureStatus(comp, uid) {
         const resp = await axios.get(`updatePictureStatus/${uid}`);
-        if(resp.data.success){
+        if (resp.data.success) {
             const parentComp = comp.parentNode;
             comp.remove();
-            parentComp.innerText="Yes"
+            parentComp.innerText = "Yes"
         }
-            
+
     }
 
     function statusFormatter(value, row, index) {
@@ -351,11 +354,9 @@
         dwn.download = 'imagename.png';
         dwn.setAttribute('href', imgSrc);
     });
-
-    
 </script>
 <script>
-    ['#table' ].map((val => {
+    ['#table'].map((val => {
         var $table = $(val)
         var selectedRow = {}
 
@@ -383,8 +384,8 @@
             }
         });
         $(val).bootstrapTable({
-      printPageBuilder: function (val) {
-        return `
+            printPageBuilder: function(val) {
+                return `
 <html>
   <head>
   <style type="text/css" media="print">
@@ -424,8 +425,8 @@
   <div class="bs-table-print">${val}</div>
   </body>
 </html>`
-      }
-    })
+            }
+        })
     }))
 </script>
 @include("layouts.tableFoot")
