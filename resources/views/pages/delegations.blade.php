@@ -731,7 +731,7 @@
             <div id="All" class="tabcontent" style="display: block;">
                 <div class="row">
                     <div class="d-flex" style="position: absolute;top: 95px;">
-                        <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-primary">Add Delegations</a>
+                        <!-- <a type="button" href="route('pages.addDelegationPage')" class="btn btn-primary">Add Delegations</a> -->
                     </div>
                 </div>
                 <!-- <br /> -->
@@ -796,7 +796,7 @@
                 @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
                     <div class="d-flex" style="position: absolute;top: 95px;">
-                        <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-primary">Add Delegations</a>
+                        <!-- <a type="button" href="route('pages.addDelegationPage')" class="btn btn-primary">Add Delegations</a> -->
                     </div>
                 </div>
                 @endif
@@ -863,7 +863,7 @@
                 @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
                     <div class="d-flex" style="position: absolute;top: 95px;">
-                        <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-primary">Add Delegations</a>
+                        <!-- <a type="button" href="route('pages.addDelegationPage')" class="btn btn-primary">Add Delegations</a> -->
                     </div>
                 </div>
                 @endif
@@ -926,7 +926,7 @@
                 @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
                     <div class="d-flex" style="position: absolute;top: 95px;">
-                        <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-primary">Add Delegations</a>
+                        <!-- <a type="button" href="route('pages.addDelegationPage')" class="btn btn-primary">Add Delegations</a> -->
                     </div>
                 </div>
                 @endif
@@ -989,7 +989,7 @@
                 @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
                     <div class="d-flex" style="position: absolute;top: 95px;">
-                        <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-primary">Add Delegations</a>
+                        <!-- <a type="button" href="route('pages.addDelegationPage')" class="btn btn-primary">Add Delegations</a> -->
                     </div>
                 </div>
                 @endif
@@ -1062,7 +1062,7 @@
 <!-- if(session()->get('user')->roles[0]->name === "admin") -->
 <!-- <div class="row">
                 <div class="d-flex">
-                    <a type="button" href="{{route('pages.addDelegationPage')}}" class="btn btn-primary">Add Delegations</a>
+                    <!-- <a type="button" href="route('pages.addDelegationPage')" class="btn btn-primary">Add Delegations</a> -->
                 </div>
             </div>
             <br /> -->
