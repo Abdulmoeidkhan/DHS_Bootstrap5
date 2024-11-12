@@ -9,7 +9,7 @@
                 <h5 class="modal-title" id="">Invitation Number</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" action='{{route("request.invitaionNumberUpdate")}}'>
+            <form onsubmit='submitFunction(event,`{{route("request.invitaionNumberUpdate")}}`);'>
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
@@ -144,6 +144,23 @@
 
     function operateFirstAndLastName(value, row, index) {
         return `${row.first_Name} &nbsp; ${row.last_Name}`;
+    }
+
+    function submitFunction(e, route, category) {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const formValues = {};
+        formData.forEach((value, key) => {
+            formValues[key] = value;
+        });
+
+        const lengthOfForm = Object.keys(formValues).length; // Length Of Values getting from from 
+
+        axios.post(route, formValues).then(response => {
+            console.log(response.data.requestStatus)
+        }).catch(error => {
+            console.log(error)
+        });
     }
 </script>
 <script>

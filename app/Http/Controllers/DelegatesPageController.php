@@ -177,6 +177,6 @@ class DelegatesPageController extends Controller
     public function invitationUpdate(Request $req)
     {
         $updatedDelegate = Delegate::where('delegates_uid', $req->delegationUid)->update(['invitation_number' => $req->invitaionNumber]);
-        return $updatedDelegate ? redirect()->back()->with('message', 'Invitation Number Updated Successfully') : redirect()->back()->with('error', 'Something Went Wrong');
+        return $updatedDelegate ? response()->json(['success' => false, 'requestStatus' => 'Invitation Number Updated Successfully'], 200) : response()->json(['success' => false, 'requestStatus' => 'Invitation Number Not Updated'], 404);
     }
 }
