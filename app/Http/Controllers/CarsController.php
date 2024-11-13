@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 class CarsController extends Controller
 {
@@ -336,7 +337,29 @@ class CarsController extends Controller
 
     public function attachCar(Request $req)
     {
-        $updatedCarSelect = $req->carASelect ? Car::where('car_uid', $req->carASelect)->update(['car_delegation' => $req->delegationUid_car]) : Car::where('car_uid', $req->carBSelect)->update(['car_delegation' => $req->delegationUid_car]);
+        $carASelect = $req->carASelect;
+        $carBSelect = $req->carBSelect;
+        $carCSelect = $req->carCSelect;
+
+        try {
+            if ($carASelect) {
+                Car::where('car_uid', $carASelect)->update(['car_delegation' => $req->delegationUid_car]);
+            }
+            if ($carBSelect) {
+                Car::where('car_uid', $carBSelect)->update(['car_delegation' => $req->delegationUid_car]);
+            }
+            if ($carCSelect) {
+                Car::where('car_uid', $carCSelect)->update(['car_delegation' => $req->delegationUid_car]);
+            }
+            return response()->json(['success' => true, 'requestStatus' => 'Car Attach Successfully'], 200);
+        } catch (QueryException $exception) {
+            if ($exception->errorInfo[2]) {
+                return response()->json(['success' => false, 'requestStatus' => 'Error : ' . $exception->errorInfo[2]], 404);
+            } else {
+                return response()->json(['success' => false, 'requestStatus' => 'Not Update'], 404);
+            }
+        }
+        // $updatedCarSelect = $req->carASelect ? Car::where('car_uid', $req->carASelect)->update(['car_delegation' => $req->delegationUid_car]) : Car::where('car_uid', $req->carBSelect)->update(['car_delegation' => $req->delegationUid_car]);
         return $updatedCarSelect ? response()->json(['success' => true, 'requestStatus' => 'Car Attach Successfully'], 200) : response()->json(['success' => false, 'requestStatus' => 'Not Update'], 404);
         // return $updatedCarSelect ? redirect()->route('pages.delegationsPage')->with('message', "Car Attach Successfully") : redirect()->back()->with('error', "Something Went Wrong");
     }
@@ -344,6 +367,13 @@ class CarsController extends Controller
     public function detachCarData($id)
     {
         $cars = Car::where('car_delegation', $id)->get();
+        return $cars;
+    }
+
+    public function attachCarData($id)
+    {
+        $carCat = CarCategory::where('id', $id)->first('car_category_uid');
+        $cars = $carCat ? Car::where([['car_category', $carCat->car_category_uid], ['car_delegation', null]])->get() : [];
         return $cars;
     }
 

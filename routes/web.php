@@ -230,6 +230,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/getCars', [CarsController::class, 'getCars'])->name('request.getCars');
         Route::get('/addCarPage/{id?}', [CarsController::class, 'addCarRender'])->name('pages.addCar');
         Route::get('/detachCarData/{id}', [CarsController::class, 'detachCarData'])->name('data.detachCarData');
+        Route::get('/attachCarData/{id}', [CarsController::class, 'attachCarData'])->name('data.attachCarData');
         Route::post('/addCar', [CarsController::class, 'addCar'])->name('request.addCar');
         Route::post('/updateCar/{id}', [CarsController::class, 'updateCar'])->name('request.updateCar');
         // Car Pages And API End
@@ -256,6 +257,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/officerData/{params?}/{type?}/{force?}/{id?}', [OfficerController::class, 'officerData'])->name('request.officerData');
         Route::get('/addOfficerPage/{id?}', [OfficerController::class, 'addOfficerPage'])->name('pages.addOfficer');
         Route::get('/detachOfficerData/{id}', [OfficerController::class, 'detachOfficerData'])->name('data.detachOfficer');
+        Route::get('/attachOfficerData/{type}', [OfficerController::class, 'attachOfficerData'])->name('data.attachOfficer');
         Route::get('/getOfficerSummary', [OfficerController::class, 'getOfficerSummary'])->name('data.getOfficerSummary');
         Route::post('/addOfficer', [OfficerController::class, 'addOfficer'])->name('request.addOfficer');
         Route::post('/updateOfficer/{id}', [OfficerController::class, 'updateOfficer'])->name('request.updateOfficer');

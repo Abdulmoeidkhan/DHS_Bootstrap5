@@ -199,16 +199,13 @@
                 <h5 class="modal-title" id="officerDetachModalLabel">Unassign Officer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form onsubmit='submitFunction(event,`{{route("request.detachOfficer")}}`,"detachOfficer");'>
+            <form onsubmit='submitFunction(event,`{{route("request.detachOfficer")}}`,"deattachOfficer");'>
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="officerSelect" class="col-form-label">Officers :</label>
                         <select class="form-select" multiple aria-label="Officer To Be Detach" id="officerSelect" name="officerSelect[]" required>
                             <option value="" selected disabled hidden> Select Officer To Be Detach </option>
-                        </select>
-                        <select class="form-select" multiple aria-label="Officer To Be Associate" id="recievingSelect" name="recievingSelect[]" required>
-                            <option value="" selected disabled hidden> Select Officer To Be Associate </option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -235,7 +232,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="liasonSelect" class="col-form-label">Liason Officer :</label>
-                        <select class="form-select" multiple aria-label="Officer To Be Associate" id="liasonSelect" name="liasonSelect[]" required>
+                        <select class="form-select" multiple aria-label="Officer To Be Associate" id="liasonSelect" name="liasonSelect[]">
                             <option value="" selected disabled hidden> Select Officer To Be Associate </option>
                             @foreach(\App\Models\Officer::where([['officer_assign',0],['officer_type','Liaison']])->get() as $key=>$officer)
                             <option class="text-capitalize" value="{{$officer->officer_uid}}">
@@ -249,7 +246,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="recievingSelect" class="col-form-label">Recieving Officer :</label>
-                        <select class="form-select" multiple aria-label="Officer To Be Associate" id="recievingSelect" name="recievingSelect[]" required>
+                        <select class="form-select" multiple aria-label="Officer To Be Associate" id="recievingSelect" name="recievingSelect[]">
                             <option value="" selected disabled hidden> Select Officer To Be Associate </option>
                             @foreach(\App\Models\Officer::where([['officer_assign',0],['officer_type','Receiving']])->get() as $key=>$officer)
                             <option class="text-capitalize" value="{{$officer->officer_uid}}">
@@ -263,7 +260,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="interpreterSelect" class="col-form-label">Interpreter Officer :</label>
-                        <select class="form-select" multiple aria-label="Officer To Be Associate" id="interpreterSelect" name="interpreterSelect[]" required>
+                        <select class="form-select" multiple aria-label="Officer To Be Associate" id="interpreterSelect" name="interpreterSelect[]">
                             <option value="" selected disabled hidden> Select Officer To Be Associate </option>
                             @foreach(\App\Models\Officer::where([['officer_assign',0],['officer_type','Interpreter']])->get() as $key=>$officer)
                             <option class="text-capitalize" value="{{$officer->officer_uid}}">
@@ -298,7 +295,7 @@
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="carSelect" class="col-form-label">Car A:</label>
+                        <label for="carASelect" class="col-form-label">Car A:</label>
                         <select class="form-select" aria-label="Car A To Be Associate" id="carASelect" name="carASelect">
                             <option value="" selected disabled hidden> Select Car A To Be Associate </option>
                             @foreach(\App\Models\Car::where([['car_status',1],['car_delegation',null],['car_category','61346491-983a-40ed-8477-2d9ed84e6767']])->get() as $key=>$car)
@@ -314,7 +311,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="liasonSelect" class="col-form-label">Car B :</label>
+                        <label for="carBSelect" class="col-form-label">Car B :</label>
                         <select class="form-select" aria-label="Car B To Be Associate" id="carBSelect" name="carBSelect">
                             <option value="" selected disabled hidden> Select Car B To Be Associate </option>
                             @foreach(\App\Models\Car::where([['car_status',1],['car_delegation',null],['car_category','a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->get() as $key=>$car)
@@ -330,7 +327,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="liasonSelect" class="col-form-label">Car C :</label>
+                        <label for="carCSelect" class="col-form-label">Car C :</label>
                         <select class="form-select" aria-label="Car C To Be Associate" id="carCSelect" name="carCSelect">
                             <option value="" selected disabled hidden> Select Car C To Be Associate </option>
                             @foreach(\App\Models\Car::where([['car_status',1],['car_delegation',null],['car_category','a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->get() as $key=>$car)
@@ -765,24 +762,26 @@
                                 <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
                                 @endif
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
-                                <th data-filter-control="input" data-field="car.car_category_a_details" data-sortable="true" data-formatter="operateCarCategory">Car A Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_a_details" data-sortable="true" data-formatter="operateCategory">Car A Plan Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
-                                <th data-filter-control="input" data-field="car.car_category_b_details" data-sortable="true" data-formatter="operateCarCategory">Car B Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_b_details" data-sortable="true" data-formatter="operateCategory">Car B Plan Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_c" data-sortable="true" data-formatter="operateText">Car C</th>
-                                <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCarCategory">Car C Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCategory">Car C Plan Details</th>
                                 <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
                                 <!-- <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText">Standard</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCarCategory">Standard Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCategory">Standard Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite_details" data-sortable="true" data-formatter="operateCarCategory">Suite Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite_details" data-sortable="true" data-formatter="operateCategory">Suite Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior" data-formatter="operateText">Superior</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior_details" data-sortable="true" data-formatter="operateCarCategory">Superior Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior_details" data-sortable="true" data-formatter="operateCategory">Superior Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCarCategory">Double Occupancy Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCategory">Double Occupancy Plan Details</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
+                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
+                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
                                 <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true" data-print-ignore="true">Created At</th>
@@ -793,8 +792,6 @@
                                 <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
                                 <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
                                 @endif
-                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
-                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                                 @if(session()->get('user')->roles[0]->name === "admin")
                                 <th data-field="uid" data-formatter="statusChangerFormatter" data-print-ignore="true">Status Changer</th>
                                 @endif
@@ -841,24 +838,26 @@
                                 <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
                                 @endif
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
-                                <th data-filter-control="input" data-field="car.car_category_a_details" data-sortable="true" data-formatter="operateCarCategory">Car A Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_a_details" data-sortable="true" data-formatter="operateCategory">Car A Plan Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
-                                <th data-filter-control="input" data-field="car.car_category_b_details" data-sortable="true" data-formatter="operateCarCategory">Car B Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_b_details" data-sortable="true" data-formatter="operateCategory">Car B Plan Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_c" data-sortable="true" data-formatter="operateText">Car C</th>
-                                <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCarCategory">Car C Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCategory">Car C Plan Details</th>
                                 <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
                                 <!-- <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText">Standard</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCarCategory">Standard Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCategory">Standard Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite_details" data-sortable="true" data-formatter="operateCarCategory">Suite Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite_details" data-sortable="true" data-formatter="operateCategory">Suite Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior" data-formatter="operateText">Superior</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior_details" data-sortable="true" data-formatter="operateCarCategory">Superior Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior_details" data-sortable="true" data-formatter="operateCategory">Superior Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCarCategory">Double Occupancy Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCategory">Double Occupancy Plan Details</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
+                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
+                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
                                 <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true" data-print-ignore="true">Created At</th>
@@ -869,8 +868,6 @@
                                 <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
                                 <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
                                 @endif
-                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
-                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                                 @if(session()->get('user')->roles[0]->name === "admin")
                                 <th data-field="uid" data-formatter="statusChangerFormatter" data-print-ignore="true">Status Changer</th>
                                 @endif
@@ -917,24 +914,26 @@
                                 <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
                                 @endif
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
-                                <th data-filter-control="input" data-field="car.car_category_a_details" data-sortable="true" data-formatter="operateCarCategory">Car A Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_a_details" data-sortable="true" data-formatter="operateCategory">Car A Plan Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
-                                <th data-filter-control="input" data-field="car.car_category_b_details" data-sortable="true" data-formatter="operateCarCategory">Car B Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_b_details" data-sortable="true" data-formatter="operateCategory">Car B Plan Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_c" data-sortable="true" data-formatter="operateText">Car C</th>
-                                <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCarCategory">Car C Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCategory">Car C Plan Details</th>
                                 <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
                                 <!-- <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText">Standard</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCarCategory">Standard Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCategory">Standard Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite_details" data-sortable="true" data-formatter="operateCarCategory">Suite Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite_details" data-sortable="true" data-formatter="operateCategory">Suite Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior" data-formatter="operateText">Superior</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior_details" data-sortable="true" data-formatter="operateCarCategory">Superior Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior_details" data-sortable="true" data-formatter="operateCategory">Superior Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCarCategory">Double Occupancy Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCategory">Double Occupancy Plan Details</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
+                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
+                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
                                 <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true" data-print-ignore="true">Created At</th>
@@ -945,8 +944,6 @@
                                 <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
                                 <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
                                 @endif
-                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
-                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                                 @if(session()->get('user')->roles[0]->name === "admin")
                                 <th data-field="uid" data-formatter="statusChangerFormatter" data-print-ignore="true">Status Changer</th>
                                 @endif
@@ -992,24 +989,26 @@
                                 <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
                                 @endif
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
-                                <th data-filter-control="input" data-field="car.car_category_a_details" data-sortable="true" data-formatter="operateCarCategory">Car A Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_a_details" data-sortable="true" data-formatter="operateCategory">Car A Plan Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
-                                <th data-filter-control="input" data-field="car.car_category_b_details" data-sortable="true" data-formatter="operateCarCategory">Car B Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_b_details" data-sortable="true" data-formatter="operateCategory">Car B Plan Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_c" data-sortable="true" data-formatter="operateText">Car C</th>
-                                <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCarCategory">Car C Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCategory">Car C Plan Details</th>
                                 <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
                                 <!-- <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText">Standard</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCarCategory">Standard Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCategory">Standard Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite_details" data-sortable="true" data-formatter="operateCarCategory">Suite Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite_details" data-sortable="true" data-formatter="operateCategory">Suite Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior" data-formatter="operateText">Superior</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior_details" data-sortable="true" data-formatter="operateCarCategory">Superior Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior_details" data-sortable="true" data-formatter="operateCategory">Superior Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCarCategory">Double Occupancy Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCategory">Double Occupancy Plan Details</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
+                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
+                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
                                 <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true" data-print-ignore="true">Created At</th>
@@ -1020,8 +1019,6 @@
                                 <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
                                 <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
                                 @endif
-                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
-                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                                 @if(session()->get('user')->roles[0]->name === "admin")
                                 <th data-field="uid" data-formatter="statusChangerFormatter" data-print-ignore="true">Status Changer</th>
                                 @endif
@@ -1068,24 +1065,26 @@
                                 <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
                                 @endif
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
-                                <th data-filter-control="input" data-field="car.car_category_a_details" data-sortable="true" data-formatter="operateCarCategory">Car A Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_a_details" data-sortable="true" data-formatter="operateCategory">Car A Plan Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
-                                <th data-filter-control="input" data-field="car.car_category_b_details" data-sortable="true" data-formatter="operateCarCategory">Car B Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_b_details" data-sortable="true" data-formatter="operateCategory">Car B Plan Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_c" data-sortable="true" data-formatter="operateText">Car C</th>
-                                <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCarCategory">Car C Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCategory">Car C Plan Details</th>
                                 <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
                                 <!-- <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText">Standard</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCarCategory">Standard Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCategory">Standard Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite_details" data-sortable="true" data-formatter="operateCarCategory">Suite Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite_details" data-sortable="true" data-formatter="operateCategory">Suite Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior" data-formatter="operateText">Superior</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior_details" data-sortable="true" data-formatter="operateCarCategory">Superior Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior_details" data-sortable="true" data-formatter="operateCategory">Superior Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCarCategory">Double Occupancy Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCategory">Double Occupancy Plan Details</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
+                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
+                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
                                 <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true" data-print-ignore="true">Created At</th>
@@ -1096,8 +1095,6 @@
                                 <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
                                 <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
                                 @endif
-                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
-                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                                 @if(session()->get('user')->roles[0]->name === "admin")
                                 <th data-field="uid" data-formatter="statusChangerFormatter" data-print-ignore="true">Status Changer</th>
                                 @endif
@@ -1183,8 +1180,8 @@
         return value ? value : "N/A"
     }
 
-    function operateCarCategory(value, row, index) {
-        console.log(value);
+    function operateCategory(value, row, index) {
+        // console.log(value);
         return value ? value.map(
             (val, i) =>
             '<div style="text-align:left;">' + (i + 1) + ') ' +
@@ -1588,6 +1585,25 @@
         const delegation = button.getAttribute('data-bs-delegation')
         const modalBodyInput = officerModal.querySelector('.modal-body #delegationUid_officer')
         modalBodyInput.value = delegation
+        let targetElement = [document.getElementById('liasonSelect'), document.getElementById('recievingSelect'), document.getElementById('interpreterSelect')];
+        $('#OfficerModal').on('shown.bs.modal', function() {
+            ['Liaison', 'Receiving', 'Interpreter'].forEach((officetCatType, officetCatKey) => {
+                targetElement[officetCatKey].innerHTML = '';
+                axios.get('/attachOfficerData/' + officetCatType + '')
+                    .then(function(response) {
+                        // console.log(response)
+                        let data = response.data;
+                        let data2 = [];
+                        data.map((val) => {
+                            data2.push(`<option class="text-capitalize" value="${val.officer_uid}">${val.rank.ranks_name} ${val.officer_first_name} ${val.officer_last_name} - ${val.officer_type} </option>`)
+                        })
+                        targetElement[officetCatKey].innerHTML = data2;
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    })
+            })
+        })
     })
 
     const officerDetachModal = document.getElementById('DetachModal')
@@ -1596,10 +1612,10 @@
         const delegation = button.getAttribute('data-bs-delegation')
         const modalBodyInput = officerDetachModal.querySelector('.modal-body #delegationUid_dis_officer')
         modalBodyInput.value = delegation
+        let targetElement = document.getElementById('officerSelect');
+        let officerDeSelect = document.getElementById('delegationUid_dis_officer').value;
+        targetElement.innerHTML = '';
         $('#DetachModal').on('shown.bs.modal', function() {
-            let targetElement = document.getElementById('officerSelect');
-            let officerDeSelect = document.getElementById('delegationUid_dis_officer').value;
-            targetElement.innerHTML = '';
             axios.get('/detachOfficerData/' + officerDeSelect + '')
                 .then(function(response) {
                     let data = response.data;
@@ -1654,13 +1670,32 @@
         const delegation = button.getAttribute('data-bs-delegation')
         const modalBodyInput = carModal.querySelector('.modal-body #delegationUid_car')
         modalBodyInput.value = delegation
+        $('#AttachCar').on('shown.bs.modal', function() {
+            let targetElement = [document.getElementById('carASelect'), document.getElementById('carBSelect'), document.getElementById('carCSelect')];
+            [1, 2, 3].forEach((carCatId) => {
+                axios.get('/attachCarData/' + carCatId + '')
+                    .then(function(response) {
+                        // console.log(response)
+                        let data = response.data;
+                        let data2 = [`<option value="" selected disabled hidden> Select Car To Be Associate </option>`];
+                        data.map((val) => {
+                            data2.push(`<option class="text-capitalize" value="${val.car_uid}">${val.car_makes} ${val.car_model} </option>`)
+                        })
+                        targetElement[carCatId - 1].innerHTML = '';
+                        targetElement[carCatId - 1].innerHTML = data2;
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    })
+            })
+        })
     })
 
     const carDetachModal = document.getElementById('DeattachCar')
     carDetachModal.addEventListener('show.bs.modal', event => {
         const button = event.relatedTarget
         const delegation = button.getAttribute('data-bs-delegation')
-        console.log(delegation)
+        // console.log(delegation)
         const modalBodyInput = carDetachModal.querySelector('.modal-body #delegationUid_dis_car')
         modalBodyInput.value = delegation
         $('#DeattachCar').on('shown.bs.modal', function() {
@@ -1669,9 +1704,9 @@
             targetElement.innerHTML = '';
             axios.get('/detachCarData/' + carDisassociate + '')
                 .then(function(response) {
-                    console.log(response)
+                    // console.log(response)
                     let data = response.data;
-                    let data2 = [];
+                    let data2 = [`<option value="" selected disabled hidden> Select Car To Be Remove </option>`];
                     data.map((val) => {
                         data2.push(`<option class="text-capitalize" value="${val.car_uid}">${val.car_makes} ${val.car_model} </option>`)
                     })
@@ -1723,16 +1758,79 @@
 
     function submitFunction(e, route, category) {
         e.preventDefault();
-        const formData = new FormData(e.target); // Create a FormData object to get all the form data
-        // Convert FormData to a plain object
+        // const formValues = {};
+        // if (category == 'attachOfficer') {
+
+        //     const formData = new FormData();
+
+        //     ['liasonSelect[]', 'recievingSelect[]', 'interpreterSelect[]'].map((selectName, keySelectName) => {
+
+        //         // Get the multiple-select element
+        //         const selectElement = e.target.querySelector(`select[name="${selectName}"]`);
+
+        //         // Add each selected option to the FormData object
+        //         Array.from(selectElement.selectedOptions).forEach(option => {
+        //             formData.append(selectName, option.value);
+        //         });
+
+        //         // Now formData contains all selected values of "mySelect[]"
+        //         // You can proceed with AJAX or any other handling method here
+
+        //         // Example: Log formData for debugging
+        //         for (let [key, value] of formData.entries()) {
+        //             console.log(key, value);
+        //         }
+
+        //     });
+
+        //     formData.forEach((value, key) => {
+        //         console.log(key,value)
+        //         formValues[key] = value;
+        //     })
+
+        // } else {
+        //     const formData = new FormData(e.target); // Create a FormData object to get all the form data
+        //     // Convert FormData to a plain object
+        //     formData.forEach((value, key) => {
+        //         formValues[key] = value;
+        //     });
+        // }
+
+        const formData = new FormData(e.target);
         const formValues = {};
+
+        // Process each entry in FormData
         formData.forEach((value, key) => {
-            formValues[key] = value;
+            // Check if the key already exists in formValues
+            if (formValues[key]) {
+                // If the key already exists, ensure it is an array and add the new value
+                if (Array.isArray(formValues[key])) {
+                    formValues[key].push(value);
+                } else {
+                    formValues[key] = [formValues[key], value];
+                }
+            } else {
+                // If the key does not exist, simply add it
+                formValues[key] = value;
+            }
         });
+
 
         const lengthOfForm = Object.keys(formValues).length; // Length Of Values getting from from 
 
-        const sendingPostRequest = (values, route) => {
+        console.log(lengthOfForm, route, category, formValues)
+        const sendingPostRequestCar = (values, route) => {
+            axios.post(route, values).then(response => {
+                console.log(response)
+                document.getElementById('alert-comp').innerHTML = `<div class="alert alert-${response.data.success?'success':'danger'} alert-dismissible fade show" role="alert">
+        <strong>${response.data.requestStatus}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>`
+            }).catch(error => {
+                console.log(error)
+            });
+        }
+        const sendingPostRequestOfficer = (values, route) => {
             axios.post(route, values).then(response => {
                 console.log(response)
                 document.getElementById('alert-comp').innerHTML = `<div class="alert alert-${response.data.success?'success':'danger'} alert-dismissible fade show" role="alert">
@@ -1746,21 +1844,27 @@
 
         switch (category) {
             case 'attachCar':
-                lengthOfForm > 2 ? sendingPostRequest(formValues, route) : 'No Request Made';
+                lengthOfForm > 2 ? sendingPostRequestCar(formValues, route) : 'No Request Made';
                 break;
             case 'deattachCar':
-                lengthOfForm > 2 ? sendingPostRequest(formValues, route) : 'No Request Made';
+                lengthOfForm > 2 ? sendingPostRequestCar(formValues, route) : 'No Request Made';
+                break;
+            case 'deattachOfficer':
+                lengthOfForm > 2 ? sendingPostRequestOfficer(formValues, route) : 'No Request Made';
+                break;
+            case 'attachOfficer':
+                lengthOfForm > 2 ? sendingPostRequestOfficer(formValues, route) : 'No Request Made';
                 break;
             default:
                 break;
         }
-        console.log(formValues, route, category, Object.keys(formValues).length);
+        // console.log(formValues, route, category, Object.keys(formValues).length);
         return false;
     }
 </script>
 @include("layouts.tableFoot")
 <script>
-    ['#table', '#table1', '#table2', '#table3', '#table4'].map((val => {
+    ['#table', '#table1', '#table2', '#table3', '#table4'].forEach((val => {
         var $table = $(val)
         var selectedRow = {}
 
