@@ -10,7 +10,7 @@
         &nbsp;
         &nbsp;
         &nbsp;
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#HotelPlanModal">Add/Update  Hotel Plan</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#HotelPlanModal">Add/Update Hotel Plan</button>
         <div class="modal fade" id="CarPlanModal" tabindex="-1" aria-labelledby="CarPlanModal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -42,13 +42,19 @@
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Car Plans</h5>
             <div class="table-responsive">
-                <table id="table1" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getCarPlan',$id)}}">
+                <table id="table1" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"
+                    data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true"
+                    data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true"
+                    data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getCarPlan',$id)}}">
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
                             <th data-field="car_category_a" data-sortable="true">Category A</th>
+                            <th data-field="car_category_a_details" data-formatter="categoryDetailController" data-sortable="true">Category A Details</th>
                             <th data-field="car_category_b" data-sortable="true">Category B</th>
+                            <th data-field="car_category_b_details" data-formatter="categoryDetailController" data-sortable="true">Category B Details</th>
                             <th data-field="car_category_c" data-sortable="true">Category C</th>
+                            <th data-field="car_category_c_details" data-formatter="categoryDetailController" data-sortable="true">Category C Details</th>
                             <th data-field="car_plan_uid" data-formatter="deleteCarPlan" data-sortable="true">Actions</th>
                         </tr>
                     </thead>
@@ -62,15 +68,22 @@
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Hotel Plans</h5>
             <div class="table-responsive">
-                <table id="table2" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"  data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getHotelPlan',$id)}}">
+                <table id="table2" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"
+                    data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true"
+                    data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true"
+                    data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getHotelPlan',$id)}}">
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
                             <th data-field="hotel_names" data-sortable="true">Hotel</th>
                             <th data-field="hotel_roomtype_standard" data-sortable="true">Standard Room</th>
+                            <th data-field="hotel_roomtype_standard_details" data-formatter="categoryDetailController" data-sortable="true">Standard Room Details</th>
                             <th data-field="hotel_roomtype_suite" data-sortable="true">Suite Room</th>
+                            <th data-field="hotel_roomtype_suite_details" data-formatter="categoryDetailController" data-sortable="true">Suite Room Details</th>
                             <th data-field="hotel_roomtype_superior" data-sortable="true">Superior Room</th>
+                            <th data-field="hotel_roomtype_superior_details" data-formatter="categoryDetailController" data-sortable="true">Superior Room Details</th>
                             <th data-field="hotel_roomtype_doubleOccupancy" data-sortable="true">Double Occupancy Room</th>
+                            <th data-field="hotel_roomtype_doubleOccupancy_details" data-formatter="categoryDetailController" data-sortable="true">Double Occupancy Room Details</th>
                             <th data-field="hotel_plan_uid" data-formatter="deleteHotelPlan" data-sortable="true">Actions</th>
                         </tr>
                     </thead>
@@ -98,6 +111,25 @@
             '</a>',
             '</div>',
         ].join('')
+    }
+
+    function categoryDetailController(value, row, index) {
+        if (value) {
+            return value.map(
+                (val, i) =>
+                '<div style="text-align:left;">' + (i + 1) + ') ' +
+                (val.first_Name != null ? val.first_Name : '') +
+                ' - ' + (val.last_Name != null ? val.last_Name : '') +
+                ' - ' + (val.designation != null ? val.designation : '') +
+                ' - ' + (val.delegation_type != null ? val.delegation_type : '') +
+                ' - ' + (val.delegateCode != null ? val.delegateCode : '') +
+                '</div><br/>'
+            ).join('')
+        } else {
+            return [
+                '-',
+            ].join('')
+        }
     }
 </script>
 @include("layouts.tableFoot")
