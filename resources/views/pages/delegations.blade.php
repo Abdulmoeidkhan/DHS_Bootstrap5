@@ -758,16 +758,12 @@
                                 <th data-filter-control="input" data-field="invitersDetail" data-formatter="invitersFormatter">Joint Inviters</th>
                                 <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
                                 <th data-filter-control="input" data-field="golf_player" data-sortable="true" data-formatter="statusFormatter">Golf Player</th>
-                                @if(session()->get('user')->roles[0]->name === "admin")
-                                <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
-                                @endif
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
                                 <th data-filter-control="input" data-field="car.car_category_a_details" data-sortable="true" data-formatter="operateCategory">Car A Plan Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
                                 <th data-filter-control="input" data-field="car.car_category_b_details" data-sortable="true" data-formatter="operateCategory">Car B Plan Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_c" data-sortable="true" data-formatter="operateText">Car C</th>
                                 <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCategory">Car C Plan Details</th>
-                                <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
                                 <!-- <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
@@ -780,19 +776,19 @@
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCategory">Double Occupancy Plan Details</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
-                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
-                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
                                 <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true" data-print-ignore="true">Created At</th>
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-print-ignore="true">Last Updated</th>
                                 @if(session()->get('user')->roles[0]->name === "admin")
-                                <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
+                                <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
+                                <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
                                 <!-- <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th> -->
-                                <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
+                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
+                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                                 <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
-                                @endif
-                                @if(session()->get('user')->roles[0]->name === "admin")
+                                <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
+                                <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
                                 <th data-field="uid" data-formatter="statusChangerFormatter" data-print-ignore="true">Status Changer</th>
                                 @endif
                             </tr>
@@ -834,16 +830,12 @@
                                 <th data-filter-control="input" data-field="invitersDetail" data-formatter="invitersFormatter">Joint Inviters</th>
                                 <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
                                 <th data-filter-control="input" data-field="golf_player" data-sortable="true" data-formatter="statusFormatter">Golf Player</th>
-                                @if(session()->get('user')->roles[0]->name === "admin")
-                                <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
-                                @endif
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
                                 <th data-filter-control="input" data-field="car.car_category_a_details" data-sortable="true" data-formatter="operateCategory">Car A Plan Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
                                 <th data-filter-control="input" data-field="car.car_category_b_details" data-sortable="true" data-formatter="operateCategory">Car B Plan Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_c" data-sortable="true" data-formatter="operateText">Car C</th>
                                 <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCategory">Car C Plan Details</th>
-                                <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
                                 <!-- <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
@@ -856,19 +848,19 @@
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCategory">Double Occupancy Plan Details</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
-                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
-                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
                                 <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true" data-print-ignore="true">Created At</th>
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-print-ignore="true">Last Updated</th>
                                 @if(session()->get('user')->roles[0]->name === "admin")
-                                <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
+                                <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
+                                <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
                                 <!-- <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th> -->
-                                <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
+                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
+                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                                 <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
-                                @endif
-                                @if(session()->get('user')->roles[0]->name === "admin")
+                                <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
+                                <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
                                 <th data-field="uid" data-formatter="statusChangerFormatter" data-print-ignore="true">Status Changer</th>
                                 @endif
                             </tr>
@@ -910,16 +902,12 @@
                                 <th data-filter-control="input" data-field="invitersDetail" data-formatter="invitersFormatter">Joint Inviters</th>
                                 <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
                                 <th data-filter-control="input" data-field="golf_player" data-sortable="true" data-formatter="statusFormatter">Golf Player</th>
-                                @if(session()->get('user')->roles[0]->name === "admin")
-                                <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
-                                @endif
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
                                 <th data-filter-control="input" data-field="car.car_category_a_details" data-sortable="true" data-formatter="operateCategory">Car A Plan Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
                                 <th data-filter-control="input" data-field="car.car_category_b_details" data-sortable="true" data-formatter="operateCategory">Car B Plan Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_c" data-sortable="true" data-formatter="operateText">Car C</th>
                                 <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCategory">Car C Plan Details</th>
-                                <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
                                 <!-- <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
@@ -932,19 +920,19 @@
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCategory">Double Occupancy Plan Details</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
-                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
-                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
                                 <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true" data-print-ignore="true">Created At</th>
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-print-ignore="true">Last Updated</th>
                                 @if(session()->get('user')->roles[0]->name === "admin")
-                                <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
+                                <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
+                                <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
                                 <!-- <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th> -->
-                                <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
+                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
+                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                                 <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
-                                @endif
-                                @if(session()->get('user')->roles[0]->name === "admin")
+                                <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
+                                <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
                                 <th data-field="uid" data-formatter="statusChangerFormatter" data-print-ignore="true">Status Changer</th>
                                 @endif
                             </tr>
@@ -985,16 +973,12 @@
                                 <th data-filter-control="input" data-field="invitersDetail" data-formatter="invitersFormatter">Joint Inviters</th>
                                 <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
                                 <th data-filter-control="input" data-field="golf_player" data-sortable="true" data-formatter="statusFormatter">Golf Player</th>
-                                @if(session()->get('user')->roles[0]->name === "admin")
-                                <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
-                                @endif
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
                                 <th data-filter-control="input" data-field="car.car_category_a_details" data-sortable="true" data-formatter="operateCategory">Car A Plan Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
                                 <th data-filter-control="input" data-field="car.car_category_b_details" data-sortable="true" data-formatter="operateCategory">Car B Plan Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_c" data-sortable="true" data-formatter="operateText">Car C</th>
                                 <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCategory">Car C Plan Details</th>
-                                <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
                                 <!-- <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
@@ -1007,19 +991,19 @@
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCategory">Double Occupancy Plan Details</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
-                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
-                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
                                 <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true" data-print-ignore="true">Created At</th>
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-print-ignore="true">Last Updated</th>
                                 @if(session()->get('user')->roles[0]->name === "admin")
-                                <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
+                                <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
+                                <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
                                 <!-- <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th> -->
-                                <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
+                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
+                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                                 <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
-                                @endif
-                                @if(session()->get('user')->roles[0]->name === "admin")
+                                <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
+                                <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
                                 <th data-field="uid" data-formatter="statusChangerFormatter" data-print-ignore="true">Status Changer</th>
                                 @endif
                             </tr>
@@ -1061,16 +1045,12 @@
                                 <th data-filter-control="input" data-field="invitersDetail" data-formatter="invitersFormatter">Joint Inviters</th>
                                 <!-- <th data-filter-control="input" data-field="last_Name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Last Name</th> -->
                                 <th data-filter-control="input" data-field="golf_player" data-sortable="true" data-formatter="statusFormatter">Golf Player</th>
-                                @if(session()->get('user')->roles[0]->name === "admin")
-                                <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
-                                @endif
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
                                 <th data-filter-control="input" data-field="car.car_category_a_details" data-sortable="true" data-formatter="operateCategory">Car A Plan Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
                                 <th data-filter-control="input" data-field="car.car_category_b_details" data-sortable="true" data-formatter="operateCategory">Car B Plan Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_c" data-sortable="true" data-formatter="operateText">Car C</th>
                                 <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCategory">Car C Plan Details</th>
-                                <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
                                 <!-- <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
@@ -1083,19 +1063,19 @@
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCategory">Double Occupancy Plan Details</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
-                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
-                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
                                 <th data-filter-control="input" data-field="interests" data-formatter="operateInterets">Interested Programs</th>
                                 <th data-filter-control="input" data-field="created_at" data-sortable="true" data-print-ignore="true">Created At</th>
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-print-ignore="true">Last Updated</th>
                                 @if(session()->get('user')->roles[0]->name === "admin")
-                                <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
+                                <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
+                                <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
                                 <!-- <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th> -->
-                                <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
+                                <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
+                                <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
                                 <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
-                                @endif
-                                @if(session()->get('user')->roles[0]->name === "admin")
+                                <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
+                                <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
                                 <th data-field="uid" data-formatter="statusChangerFormatter" data-print-ignore="true">Status Changer</th>
                                 @endif
                             </tr>
