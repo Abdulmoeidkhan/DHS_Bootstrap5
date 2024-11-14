@@ -99,15 +99,17 @@ class DelegationsPageController extends Controller
                     $delegations[$key]->car[$keyCarPlan]->car_category_c_details = Delegate::whereIn('delegates_uid', $car_category_c_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
                 }
                 foreach ($delegations[$key]->hotelPlan as $keyHotelPlan => $hotelplan) {
-                    $hotel_roomtype_standard_details = json_decode($hotelplan->hotel_roomtype_standard_details) ?? [];
-                    $hotel_roomtype_suite_details = json_decode($hotelplan->hotel_roomtype_suite_details) ?? [];
-                    $hotel_roomtype_superior_details = json_decode($hotelplan->hotel_roomtype_superior_details) ?? [];
-                    $hotel_roomtype_doubleOccupancy_details = json_decode($hotelplan->hotel_roomtype_doubleOccupancy_details) ?? [];
-
+                    $hotel_roomtype_suite_details = json_decode($hotelplan->hotel_roomtype_suite_details)??[];
+                    $hotel_roomtype_delux_details = json_decode($hotelplan->hotel_roomtype_delux_details)??[];
+                    $hotel_roomtype_exec_details = json_decode($hotelplan->hotel_roomtype_exec_details)??[];
+                    $hotel_roomtype_standard_details = json_decode($hotelplan->hotel_roomtype_standard_details)??[];
+                    $hotel_roomtype_doubleOccupancy_details = json_decode($hotelplan->hotel_roomtype_doubleOccupancy_details)??[];
                     $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_standard_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_standard_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
                     $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_suite_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_suite_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
-                    $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_superior_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_superior_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
+                    $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_delux_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_delux_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
+                    $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_exec_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_exec_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
                     $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_doubleOccupancy_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_doubleOccupancy_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
+
 
                     // $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_standard_details = json_decode($hotelplan->hotel_roomtype_standard_details) ?? [];
                     // $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_suite_details = json_decode($hotelplan->hotel_roomtype_suite_details) ?? [];
@@ -133,10 +135,11 @@ class DelegationsPageController extends Controller
                     'member_count' => $delegations->sum('member_count'),
                     'hotelPlan' =>
                     [
-                        'hotel_roomtype_doubleOccupancy' => $delegations->sum('hotelPlan.hotel_roomtype_doubleOccupancy'),
-                        'hotel_roomtype_standard' => $delegations->sum('hotelPlan.hotel_roomtype_standard'),
                         'hotel_roomtype_suite' => $delegations->sum('hotelPlan.hotel_roomtype_suite'),
-                        'hotel_roomtype_superior' => $delegations->sum('hotelPlan.hotel_roomtype_superior'),
+                        'hotel_roomtype_delux' => $delegations->sum('hotelPlan.hotel_roomtype_delux'),
+                        'hotel_roomtype_exec' => $delegations->sum('hotelPlan.hotel_roomtype_exec'),
+                        'hotel_roomtype_standard' => $delegations->sum('hotelPlan.hotel_roomtype_standard'),
+                        'hotel_roomtype_doubleOccupancy' => $delegations->sum('hotelPlan.hotel_roomtype_doubleOccupancy'),
                     ],
                     'country' => 'Total'
                 ];
@@ -225,14 +228,15 @@ class DelegationsPageController extends Controller
                     $delegations[$key]->car[$keyCarPlan]->car_category_c_details = Delegate::whereIn('delegates_uid', $car_category_c_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
                 }
                 foreach ($delegations[$key]->hotelPlan as $keyHotelPlan => $hotelplan) {
-                    $hotel_roomtype_standard_details = json_decode($hotelplan->hotel_roomtype_standard_details) ?? [];
-                    $hotel_roomtype_suite_details = json_decode($hotelplan->hotel_roomtype_suite_details) ?? [];
-                    $hotel_roomtype_superior_details = json_decode($hotelplan->hotel_roomtype_superior_details) ?? [];
-                    $hotel_roomtype_doubleOccupancy_details = json_decode($hotelplan->hotel_roomtype_doubleOccupancy_details) ?? [];
-
+                    $hotel_roomtype_suite_details = json_decode($hotelplan->hotel_roomtype_suite_details)??[];
+                    $hotel_roomtype_delux_details = json_decode($hotelplan->hotel_roomtype_delux_details)??[];
+                    $hotel_roomtype_exec_details = json_decode($hotelplan->hotel_roomtype_exec_details)??[];
+                    $hotel_roomtype_standard_details = json_decode($hotelplan->hotel_roomtype_standard_details)??[];
+                    $hotel_roomtype_doubleOccupancy_details = json_decode($hotelplan->hotel_roomtype_doubleOccupancy_details)??[];
                     $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_standard_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_standard_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
                     $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_suite_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_suite_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
-                    $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_superior_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_superior_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
+                    $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_delux_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_delux_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
+                    $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_exec_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_exec_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
                     $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_doubleOccupancy_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_doubleOccupancy_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
 
                     // $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_standard_details = json_decode($hotelplan->hotel_roomtype_standard_details) ?? [];
@@ -255,10 +259,11 @@ class DelegationsPageController extends Controller
                     'member_count' => $delegations->sum('member_count'),
                     'hotelPlan' =>
                     [
-                        'hotel_roomtype_doubleOccupancy' => $delegations->sum('hotelPlan.hotel_roomtype_doubleOccupancy'),
-                        'hotel_roomtype_standard' => $delegations->sum('hotelPlan.hotel_roomtype_standard'),
                         'hotel_roomtype_suite' => $delegations->sum('hotelPlan.hotel_roomtype_suite'),
-                        'hotel_roomtype_superior' => $delegations->sum('hotelPlan.hotel_roomtype_superior'),
+                        'hotel_roomtype_delux' => $delegations->sum('hotelPlan.hotel_roomtype_delux'),
+                        'hotel_roomtype_exec' => $delegations->sum('hotelPlan.hotel_roomtype_exec'),
+                        'hotel_roomtype_standard' => $delegations->sum('hotelPlan.hotel_roomtype_standard'),
+                        'hotel_roomtype_doubleOccupancy' => $delegations->sum('hotelPlan.hotel_roomtype_doubleOccupancy'),
                     ],
                     'country' => 'Total'
                 ];
@@ -321,14 +326,15 @@ class DelegationsPageController extends Controller
                     $delegations[$key]->car[$keyCarPlan]->car_category_c_details = Delegate::whereIn('delegates_uid', $car_category_c_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
                 }
                 foreach ($delegations[$key]->hotelPlan as $keyHotelPlan => $hotelplan) {
-                    $hotel_roomtype_standard_details = json_decode($hotelplan->hotel_roomtype_standard_details) ?? [];
-                    $hotel_roomtype_suite_details = json_decode($hotelplan->hotel_roomtype_suite_details) ?? [];
-                    $hotel_roomtype_superior_details = json_decode($hotelplan->hotel_roomtype_superior_details) ?? [];
-                    $hotel_roomtype_doubleOccupancy_details = json_decode($hotelplan->hotel_roomtype_doubleOccupancy_details) ?? [];
-
+                    $hotel_roomtype_suite_details = json_decode($hotelplan->hotel_roomtype_suite_details)??[];
+                    $hotel_roomtype_delux_details = json_decode($hotelplan->hotel_roomtype_delux_details)??[];
+                    $hotel_roomtype_exec_details = json_decode($hotelplan->hotel_roomtype_exec_details)??[];
+                    $hotel_roomtype_standard_details = json_decode($hotelplan->hotel_roomtype_standard_details)??[];
+                    $hotel_roomtype_doubleOccupancy_details = json_decode($hotelplan->hotel_roomtype_doubleOccupancy_details)??[];
                     $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_standard_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_standard_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
                     $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_suite_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_suite_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
-                    $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_superior_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_superior_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
+                    $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_delux_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_delux_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
+                    $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_exec_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_exec_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
                     $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_doubleOccupancy_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_doubleOccupancy_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
 
                     // $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_standard_details = json_decode($hotelplan->hotel_roomtype_standard_details) ?? [];
@@ -356,10 +362,11 @@ class DelegationsPageController extends Controller
                     'member_count' => $delegations->sum('member_count'),
                     'hotelPlan' =>
                     [
-                        'hotel_roomtype_doubleOccupancy' => $delegations->sum('hotelPlan.hotel_roomtype_doubleOccupancy'),
-                        'hotel_roomtype_standard' => $delegations->sum('hotelPlan.hotel_roomtype_standard'),
                         'hotel_roomtype_suite' => $delegations->sum('hotelPlan.hotel_roomtype_suite'),
-                        'hotel_roomtype_superior' => $delegations->sum('hotelPlan.hotel_roomtype_superior'),
+                        'hotel_roomtype_delux' => $delegations->sum('hotelPlan.hotel_roomtype_delux'),
+                        'hotel_roomtype_exec' => $delegations->sum('hotelPlan.hotel_roomtype_exec'),
+                        'hotel_roomtype_standard' => $delegations->sum('hotelPlan.hotel_roomtype_standard'),
+                        'hotel_roomtype_doubleOccupancy' => $delegations->sum('hotelPlan.hotel_roomtype_doubleOccupancy'),
                     ],
                     'country' => 'Total'
                 ];
@@ -418,14 +425,15 @@ class DelegationsPageController extends Controller
                     $delegations[$key]->car[$keyCarPlan]->car_category_c_details = Delegate::whereIn('delegates_uid', $car_category_c_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
                 }
                 foreach ($delegations[$key]->hotelPlan as $keyHotelPlan => $hotelplan) {
-                    $hotel_roomtype_standard_details = json_decode($hotelplan->hotel_roomtype_standard_details) ?? [];
-                    $hotel_roomtype_suite_details = json_decode($hotelplan->hotel_roomtype_suite_details) ?? [];
-                    $hotel_roomtype_superior_details = json_decode($hotelplan->hotel_roomtype_superior_details) ?? [];
-                    $hotel_roomtype_doubleOccupancy_details = json_decode($hotelplan->hotel_roomtype_doubleOccupancy_details) ?? [];
-
+                    $hotel_roomtype_suite_details = json_decode($hotelplan->hotel_roomtype_suite_details)??[];
+                    $hotel_roomtype_delux_details = json_decode($hotelplan->hotel_roomtype_delux_details)??[];
+                    $hotel_roomtype_exec_details = json_decode($hotelplan->hotel_roomtype_exec_details)??[];
+                    $hotel_roomtype_standard_details = json_decode($hotelplan->hotel_roomtype_standard_details)??[];
+                    $hotel_roomtype_doubleOccupancy_details = json_decode($hotelplan->hotel_roomtype_doubleOccupancy_details)??[];
                     $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_standard_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_standard_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
                     $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_suite_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_suite_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
-                    $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_superior_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_superior_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
+                    $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_delux_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_delux_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
+                    $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_exec_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_exec_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
                     $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_doubleOccupancy_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_doubleOccupancy_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
 
                     // $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_standard_details = json_decode($hotelplan->hotel_roomtype_standard_details) ?? [];
@@ -453,10 +461,11 @@ class DelegationsPageController extends Controller
                     'member_count' => $delegations->sum('member_count'),
                     'hotelPlan' =>
                     [
-                        'hotel_roomtype_doubleOccupancy' => $delegations->sum('hotelPlan.hotel_roomtype_doubleOccupancy'),
-                        'hotel_roomtype_standard' => $delegations->sum('hotelPlan.hotel_roomtype_standard'),
                         'hotel_roomtype_suite' => $delegations->sum('hotelPlan.hotel_roomtype_suite'),
-                        'hotel_roomtype_superior' => $delegations->sum('hotelPlan.hotel_roomtype_superior'),
+                        'hotel_roomtype_delux' => $delegations->sum('hotelPlan.hotel_roomtype_delux'),
+                        'hotel_roomtype_exec' => $delegations->sum('hotelPlan.hotel_roomtype_exec'),
+                        'hotel_roomtype_standard' => $delegations->sum('hotelPlan.hotel_roomtype_standard'),
+                        'hotel_roomtype_doubleOccupancy' => $delegations->sum('hotelPlan.hotel_roomtype_doubleOccupancy'),
                     ],
                     'country' => 'Total'
                 ];
@@ -518,14 +527,15 @@ class DelegationsPageController extends Controller
                     $delegations[$key]->car[$keyCarPlan]->car_category_c_details = Delegate::whereIn('delegates_uid', $car_category_c_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
                 }
                 foreach ($delegations[$key]->hotelPlan as $keyHotelPlan => $hotelplan) {
-                    $hotel_roomtype_standard_details = json_decode($hotelplan->hotel_roomtype_standard_details) ?? [];
-                    $hotel_roomtype_suite_details = json_decode($hotelplan->hotel_roomtype_suite_details) ?? [];
-                    $hotel_roomtype_superior_details = json_decode($hotelplan->hotel_roomtype_superior_details) ?? [];
-                    $hotel_roomtype_doubleOccupancy_details = json_decode($hotelplan->hotel_roomtype_doubleOccupancy_details) ?? [];
-
+                    $hotel_roomtype_suite_details = json_decode($hotelplan->hotel_roomtype_suite_details)??[];
+                    $hotel_roomtype_delux_details = json_decode($hotelplan->hotel_roomtype_delux_details)??[];
+                    $hotel_roomtype_exec_details = json_decode($hotelplan->hotel_roomtype_exec_details)??[];
+                    $hotel_roomtype_standard_details = json_decode($hotelplan->hotel_roomtype_standard_details)??[];
+                    $hotel_roomtype_doubleOccupancy_details = json_decode($hotelplan->hotel_roomtype_doubleOccupancy_details)??[];
                     $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_standard_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_standard_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
                     $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_suite_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_suite_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
-                    $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_superior_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_superior_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
+                    $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_delux_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_delux_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
+                    $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_exec_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_exec_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
                     $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_doubleOccupancy_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_doubleOccupancy_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
 
                     // $delegations[$key]->hotelPlan[$keyHotelPlan]->hotel_roomtype_standard_details = json_decode($hotelplan->hotel_roomtype_standard_details) ?? [];
@@ -553,10 +563,11 @@ class DelegationsPageController extends Controller
                     'member_count' => $delegations->sum('member_count'),
                     'hotelPlan' =>
                     [
-                        'hotel_roomtype_doubleOccupancy' => $delegations->sum('hotelPlan.hotel_roomtype_doubleOccupancy'),
-                        'hotel_roomtype_standard' => $delegations->sum('hotelPlan.hotel_roomtype_standard'),
                         'hotel_roomtype_suite' => $delegations->sum('hotelPlan.hotel_roomtype_suite'),
-                        'hotel_roomtype_superior' => $delegations->sum('hotelPlan.hotel_roomtype_superior'),
+                        'hotel_roomtype_delux' => $delegations->sum('hotelPlan.hotel_roomtype_delux'),
+                        'hotel_roomtype_exec' => $delegations->sum('hotelPlan.hotel_roomtype_exec'),
+                        'hotel_roomtype_standard' => $delegations->sum('hotelPlan.hotel_roomtype_standard'),
+                        'hotel_roomtype_doubleOccupancy' => $delegations->sum('hotelPlan.hotel_roomtype_doubleOccupancy'),
                     ],
                     'country' => 'Total'
                 ];

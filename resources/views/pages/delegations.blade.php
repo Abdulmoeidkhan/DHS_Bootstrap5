@@ -766,14 +766,15 @@
                                 <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCategory">Car C Plan Details</th>
                                 <!-- <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
-                                <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText">Standard</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCategory">Standard Plan Details</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
+                                <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText" data-sortable="true">Hotel Name</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText" data-sortable="true">Suite</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite_details" data-sortable="true" data-formatter="operateCategory">Suite Plan Details</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior" data-formatter="operateText">Superior</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior_details" data-sortable="true" data-formatter="operateCategory">Superior Plan Details</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_delux" data-formatter="operateText" data-sortable="true">Delux</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_delux_details" data-sortable="true" data-formatter="operateCategory">Delux Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_exec" data-formatter="operateText" data-sortable="true">Executive</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_exec_details" data-sortable="true" data-formatter="operateCategory">Executive Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText" data-sortable="true">Standard</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCategory">Standard Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCategory">Double Occupancy Plan Details</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
@@ -782,10 +783,14 @@
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-print-ignore="true">Last Updated</th>
                                 @if(session()->get('user')->roles[0]->name === "admin")
                                 <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
+                                @endif
+                                @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "dho")
                                 <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
                                 <!-- <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th> -->
                                 <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
                                 <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
+                                @endif
+                                @if(session()->get('user')->roles[0]->name === "admin")
                                 <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
                                 <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
                                 <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
@@ -838,14 +843,15 @@
                                 <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCategory">Car C Plan Details</th>
                                 <!-- <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
-                                <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText">Standard</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCategory">Standard Plan Details</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
+                                <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText" data-sortable="true">Hotel Name</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText" data-sortable="true">Suite</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite_details" data-sortable="true" data-formatter="operateCategory">Suite Plan Details</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior" data-formatter="operateText">Superior</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior_details" data-sortable="true" data-formatter="operateCategory">Superior Plan Details</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_delux" data-formatter="operateText" data-sortable="true">Delux</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_delux_details" data-sortable="true" data-formatter="operateCategory">Delux Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_exec" data-formatter="operateText" data-sortable="true">Executive</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_exec_details" data-sortable="true" data-formatter="operateCategory">Executive Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText" data-sortable="true">Standard</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCategory">Standard Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCategory">Double Occupancy Plan Details</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
@@ -854,10 +860,14 @@
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-print-ignore="true">Last Updated</th>
                                 @if(session()->get('user')->roles[0]->name === "admin")
                                 <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
+                                @endif
+                                @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "dho")
                                 <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
                                 <!-- <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th> -->
                                 <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
                                 <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
+                                @endif
+                                @if(session()->get('user')->roles[0]->name === "admin")
                                 <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
                                 <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
                                 <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
@@ -910,14 +920,15 @@
                                 <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCategory">Car C Plan Details</th>
                                 <!-- <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
-                                <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText">Standard</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCategory">Standard Plan Details</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
+                                <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText" data-sortable="true">Hotel Name</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText" data-sortable="true">Suite</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite_details" data-sortable="true" data-formatter="operateCategory">Suite Plan Details</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior" data-formatter="operateText">Superior</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior_details" data-sortable="true" data-formatter="operateCategory">Superior Plan Details</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_delux" data-formatter="operateText" data-sortable="true">Delux</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_delux_details" data-sortable="true" data-formatter="operateCategory">Delux Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_exec" data-formatter="operateText" data-sortable="true">Executive</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_exec_details" data-sortable="true" data-formatter="operateCategory">Executive Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText" data-sortable="true">Standard</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCategory">Standard Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCategory">Double Occupancy Plan Details</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
@@ -926,10 +937,14 @@
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-print-ignore="true">Last Updated</th>
                                 @if(session()->get('user')->roles[0]->name === "admin")
                                 <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
+                                @endif
+                                @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "dho")
                                 <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
                                 <!-- <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th> -->
                                 <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
                                 <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
+                                @endif
+                                @if(session()->get('user')->roles[0]->name === "admin")
                                 <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
                                 <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
                                 <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
@@ -981,14 +996,16 @@
                                 <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCategory">Car C Plan Details</th>
                                 <!-- <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
-                                <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText">Standard</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCategory">Standard Plan Details</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
+                                <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText" data-sortable="true">Hotel Name</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText" data-sortable="true">Suite</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite_details" data-sortable="true" data-formatter="operateCategory">Suite Plan Details</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior" data-formatter="operateText">Superior</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior_details" data-sortable="true" data-formatter="operateCategory">Superior Plan Details</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_delux" data-formatter="operateText" data-sortable="true">Delux</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_delux_details" data-sortable="true" data-formatter="operateCategory">Delux Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_exec" data-formatter="operateText" data-sortable="true">Executive</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_exec_details" data-sortable="true" data-formatter="operateCategory">Executive Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText" data-sortable="true">Standard</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCategory">Standard Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText" data-sortable="true">Double Occupancy</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCategory">Double Occupancy Plan Details</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
@@ -997,10 +1014,14 @@
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-print-ignore="true">Last Updated</th>
                                 @if(session()->get('user')->roles[0]->name === "admin")
                                 <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
+                                @endif
+                                @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "dho")
                                 <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
                                 <!-- <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th> -->
                                 <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
                                 <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
+                                @endif
+                                @if(session()->get('user')->roles[0]->name === "admin")
                                 <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
                                 <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
                                 <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>
@@ -1053,14 +1074,15 @@
                                 <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCategory">Car C Plan Details</th>
                                 <!-- <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
-                                <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText">Hotel Name</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText">Standard</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCategory">Standard Plan Details</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText">Suite</th>
+                                <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText" data-sortable="true">Hotel Name</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite" data-formatter="operateText" data-sortable="true">Suite</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_suite_details" data-sortable="true" data-formatter="operateCategory">Suite Plan Details</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior" data-formatter="operateText">Superior</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_superior_details" data-sortable="true" data-formatter="operateCategory">Superior Plan Details</th>
-                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-formatter="operateText">Double Occupancy</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_delux" data-formatter="operateText" data-sortable="true">Delux</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_delux_details" data-sortable="true" data-formatter="operateCategory">Delux Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_exec" data-formatter="operateText" data-sortable="true">Executive</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_exec_details" data-sortable="true" data-formatter="operateCategory">Executive Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText" data-sortable="true">Standard</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCategory">Standard Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCategory">Double Occupancy Plan Details</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
@@ -1069,10 +1091,14 @@
                                 <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-print-ignore="true">Last Updated</th>
                                 @if(session()->get('user')->roles[0]->name === "admin")
                                 <th data-field="uid" data-formatter="operatePlan" data-print-ignore="true">Car/Accomodation</th>
+                                @endif
+                                @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "dho")
                                 <th data-field="uid" data-formatter="operateCar" data-print-ignore="true">Add Car</th>
                                 <!-- <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th> -->
                                 <th data-field="officer_uid" data-formatter="operateOfficer" data-print-ignore="true">Assign Officer</th>
                                 <th data-field="uid" data-formatter="detachOfficer" data-print-ignore="true">Unassign Officer</th>
+                                @endif
+                                @if(session()->get('user')->roles[0]->name === "admin")
                                 <th data-field="uid" data-formatter="operateMember" data-print-ignore="true">Member</th>
                                 <th data-field="uid" data-formatter="operateDelegation" data-print-ignore="true">Edit</th>
                                 <th data-field="delegationhead" data-formatter="operateInvitaion" data-print-ignore="true">Invitation</th>

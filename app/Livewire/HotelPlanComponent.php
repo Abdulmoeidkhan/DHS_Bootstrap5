@@ -11,12 +11,14 @@ class HotelPlanComponent extends Component
 {
     public $delegationUid;
     public $hotelUid = '';
-    public $standardQuantity = 0;
-    public $hotelStandardDetail = [];
     public $suiteQuantity = 0;
     public $hotelSuiteDetail = [];
-    public $superiorQuantity = 0;
-    public $hotelSuperiorDetail = [];
+    public $deluxQuantity = 0;
+    public $hotelDeluxDetail = [];
+    public $execQuantity = 0;
+    public $hotelExecDetail = [];
+    public $standardQuantity = 0;
+    public $hotelStandardDetail = [];
     public $dOccupancyQuantity = 0;
     public $hotelDoubleDetail = [];
     public $hotelPlanuid = 0;
@@ -31,12 +33,16 @@ class HotelPlanComponent extends Component
         $hotelPlan->hotel_plan_uid = (string) Str::uuid();
         $hotelPlan->hotel_uid = $this->hotelUid;
         $hotelPlan->delegation_uid = $this->delegationUid;
-        $hotelPlan->hotel_roomtype_standard = $this->standardQuantity;
-        $hotelPlan->hotel_roomtype_standard_details = json_encode($this->hotelStandardDetail) ?? [];
         $hotelPlan->hotel_roomtype_suite = $this->suiteQuantity;
         $hotelPlan->hotel_roomtype_suite_details = json_encode($this->hotelSuiteDetail) ?? [];
+        $hotelPlan->hotel_roomtype_delux = $this->deluxQuantity;
+        $hotelPlan->hotel_roomtype_delux_details = json_encode($this->hotelDeluxDetail) ?? [];
         $hotelPlan->hotel_roomtype_superior = $this->superiorQuantity;
         $hotelPlan->hotel_roomtype_superior_details = json_encode($this->hotelSuperiorDetail) ?? [];
+        $hotelPlan->hotel_roomtype_superior = $this->superiorQuantity;
+        $hotelPlan->hotel_roomtype_superior_details = json_encode($this->hotelSuperiorDetail) ?? [];
+        $hotelPlan->hotel_roomtype_standard = $this->standardQuantity;
+        $hotelPlan->hotel_roomtype_standard_details = json_encode($this->hotelStandardDetail) ?? [];
         $hotelPlan->hotel_roomtype_doubleOccupancy = $this->dOccupancyQuantity;
         $hotelPlan->hotel_roomtype_doubleOccupancy_details = json_encode($this->hotelDoubleDetail) ?? [];
         try {
