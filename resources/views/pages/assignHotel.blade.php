@@ -241,16 +241,52 @@
                                         <span class="fw-normal"></span>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">{{$hotelPlan->hotel_roomtype_standard}}</p>
+                                        <p class="mb-0 fw-normal">
+                                            {{$hotelPlan->hotel_roomtype_standard}}
+                                        <ul>
+                                            @foreach($hotelPlan->hotel_roomtype_standard_details as $key=>$delegate)
+                                            @if($delegate->first_Name)
+                                            <li id="{{$delegate->delegates_uid}}">{{$delegate->first_Name.' '.$delegate->last_Name.' - '.$delegate->delegation_type}}</li>
+                                            @endif
+                                            @endforeach
+                                        </ul>
+                                        </p>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">{{$hotelPlan->hotel_roomtype_suite}}</p>
+                                        <p class="mb-0 fw-normal">
+                                            {{$hotelPlan->hotel_roomtype_suite}}
+                                        <ul>
+                                            @foreach($hotelPlan->hotel_roomtype_suite_details as $key=>$delegate)
+                                            @if($delegate->first_Name)
+                                            <li id="{{$delegate->delegates_uid}}">{{$delegate->first_Name.' '.$delegate->last_Name.' - '.$delegate->delegation_type}}</li>
+                                            @endif
+                                            @endforeach
+                                        </ul>
+                                        </p>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">{{$hotelPlan->hotel_roomtype_superior}}</p>
+                                        <p class="mb-0 fw-normal">
+                                            {{$hotelPlan->hotel_roomtype_superior}}
+                                        <ul>
+                                            @foreach($hotelPlan->hotel_roomtype_superior_details as $key=>$delegate)
+                                            @if($delegate->first_Name)
+                                            <li id="{{$delegate->delegates_uid}}">{{$delegate->first_Name.' '.$delegate->last_Name.' - '.$delegate->delegation_type}}</li>
+                                            @endif
+                                            @endforeach
+                                        </ul>
+                                        </p>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">{{$hotelPlan->hotel_roomtype_doubleOccupancy}}</p>
+                                        <p class="mb-0 fw-normal">
+                                            {{$hotelPlan->hotel_roomtype_doubleOccupancy}}
+                                        <ul>
+                                            @foreach($hotelPlan->hotel_roomtype_doubleOccupancy_details as $key=>$delegate)
+                                            @if($delegate->first_Name)
+                                            <li id="{{$delegate->delegates_uid}}">{{$delegate->first_Name.' '.$delegate->last_Name.' - '.$delegate->delegation_type}}</li>
+                                            @endif
+                                            @endforeach
+                                        </ul>
+                                        </p>
                                     </td>
                                 </tr>
                                 @endforeach
