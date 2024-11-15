@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 // use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\CarMake;
 use App\Models\CarPlan;
 use App\Models\Delegate;
 use App\Models\HotelPlan;
@@ -19,9 +20,15 @@ class PlansController extends Controller
         $car_category_a_details = json_decode($carPlan->car_category_a_details);
         $car_category_b_details = json_decode($carPlan->car_category_b_details);
         $car_category_c_details = json_decode($carPlan->car_category_c_details);
+        $car_category_a_car_details = json_decode($carPlan->car_category_a_car_details);
+        $car_category_b_car_details = json_decode($carPlan->car_category_b_car_details);
+        $car_category_c_car_details = json_decode($carPlan->car_category_c_car_details);
         $carPlan->car_category_a_details = Delegate::whereIn('delegates_uid', $car_category_a_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
         $carPlan->car_category_b_details = Delegate::whereIn('delegates_uid', $car_category_b_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
         $carPlan->car_category_c_details = Delegate::whereIn('delegates_uid', $car_category_c_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
+        $carPlan->car_category_a_car_details = CarMake::whereIn('id', $car_category_a_car_details)->get();
+        $carPlan->car_category_b_car_details = CarMake::whereIn('id', $car_category_b_car_details)->get();
+        $carPlan->car_category_c_car_details = CarMake::whereIn('id', $car_category_c_car_details)->get();
         // foreach($carPlan->car_category_a_details as $key=>$carplan_a){
         // }
         // foreach($carPlan->car_category_b_details as $key=>$carplan_b){

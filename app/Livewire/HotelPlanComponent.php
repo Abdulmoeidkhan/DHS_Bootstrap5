@@ -26,6 +26,30 @@ class HotelPlanComponent extends Component
     public $isForSaved = 1;
     public $message;
 
+
+    public function mount($delegationUid)
+    {
+        $this->delegationUid = $delegationUid;
+        $hotelPlan = HotelPlan::where('delegation_uid', $this->delegationUid)->first();
+        // $hotelPlan = !$this->isForSaved ? HotelPlan::where('delegation_uid', $this->delegationUid)->first() : 0;
+        if ($hotelPlan) {
+            $this->isForSaved = 0;
+            $this->suiteQuantity = $hotelPlan->hotel_roomtype_suite;
+            $this->deluxQuantity = $hotelPlan->hotel_roomtype_delux;
+            $this->execQuantity = $hotelPlan->hotel_roomtype_exec;
+            $this->standardQuantity = $hotelPlan->hotel_roomtype_standard;
+            $this->dOccupancyQuantity = $hotelPlan->hotel_roomtype_doubleOccupancy;
+            $this->hotelSuiteDetail = json_decode($hotelPlan->hotel_roomtype_suite_details);
+            $this->hotelDeluxDetail = json_decode($hotelPlan->hotel_roomtype_delux_details);
+            $this->hotelExecDetail = json_decode($hotelPlan->hotel_roomtype_exec_details);
+            $this->hotelStandardDetail = json_decode($hotelPlan->hotel_roomtype_standard_details);
+            $this->hotelDoubleDetail = json_decode($hotelPlan->hotel_roomtype_doubleOccupancy_details);
+            $this->hotelUid = $hotelPlan->hotel_uid;
+            $this->hotelPlanuid = $hotelPlan->hotel_plan_uid;
+        }
+
+    }
+
     public function save()
     {
         $this->message = '';
@@ -37,10 +61,8 @@ class HotelPlanComponent extends Component
         $hotelPlan->hotel_roomtype_suite_details = json_encode($this->hotelSuiteDetail) ?? [];
         $hotelPlan->hotel_roomtype_delux = $this->deluxQuantity;
         $hotelPlan->hotel_roomtype_delux_details = json_encode($this->hotelDeluxDetail) ?? [];
-        $hotelPlan->hotel_roomtype_superior = $this->superiorQuantity;
-        $hotelPlan->hotel_roomtype_superior_details = json_encode($this->hotelSuperiorDetail) ?? [];
-        $hotelPlan->hotel_roomtype_superior = $this->superiorQuantity;
-        $hotelPlan->hotel_roomtype_superior_details = json_encode($this->hotelSuperiorDetail) ?? [];
+        $hotelPlan->hotel_roomtype_exec = $this->execQuantity;
+        $hotelPlan->hotel_roomtype_exec_details = json_encode($this->hotelExecDetail) ?? [];
         $hotelPlan->hotel_roomtype_standard = $this->standardQuantity;
         $hotelPlan->hotel_roomtype_standard_details = json_encode($this->hotelStandardDetail) ?? [];
         $hotelPlan->hotel_roomtype_doubleOccupancy = $this->dOccupancyQuantity;
@@ -51,14 +73,14 @@ class HotelPlanComponent extends Component
                 $this->message = "Plan has been Updated Successfully";
                 $this->dispatch('hotelplansaved')->self();
                 $this->js("alert('" . $this->message . "')");
-                $this->reset();
+                // $this->reset();
                 return response()->json(['success' => true, 'requestStatus' => 'Plan has been Updated Successfully'], 200);
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             $this->message = "Error:" . $exception->errorInfo[2];
             $this->dispatch('hotelplansaved')->self();
             $this->js("alert('" . $this->message . "')");
-            $this->reset();
+            // $this->reset();
             return response()->json(['success' => false, 'requestStatus' => $exception->errorInfo[2]], 404);
         }
     }
@@ -69,13 +91,15 @@ class HotelPlanComponent extends Component
             $hotelsPlan = HotelPlan::where('hotel_plan_uid', $this->hotelPlanuid)->update(
                 [
                     'hotel_uid' => $this->hotelUid,
-                    'hotel_roomtype_standard' => $this->standardQuantity,
                     'hotel_roomtype_suite' => $this->suiteQuantity,
-                    'hotel_roomtype_superior' => $this->superiorQuantity,
+                    'hotel_roomtype_delux' => $this->deluxQuantity,
+                    'hotel_roomtype_exec' => $this->execQuantity,
+                    'hotel_roomtype_standard' => $this->standardQuantity,
                     'hotel_roomtype_doubleOccupancy' => $this->dOccupancyQuantity,
-                    'hotel_roomtype_standard_details' => json_encode($this->hotelStandardDetail) ?? [],
                     'hotel_roomtype_suite_details' => json_encode($this->hotelSuiteDetail) ?? [],
-                    'hotel_roomtype_superior_details' => json_encode($this->hotelSuperiorDetail) ?? [],
+                    'hotel_roomtype_delux_details' => json_encode($this->hotelDeluxDetail) ?? [],
+                    'hotel_roomtype_exec_details' => json_encode($this->hotelExecDetail) ?? [],
+                    'hotel_roomtype_standard_details' => json_encode($this->hotelStandardDetail) ?? [],
                     'hotel_roomtype_doubleOccupancy_details' => json_encode($this->hotelDoubleDetail) ?? [],
                 ]
             );
@@ -83,14 +107,14 @@ class HotelPlanComponent extends Component
                 $this->message = "Plan has been Updated Successfully";
                 $this->dispatch('hotelplansaved')->self();
                 $this->js("alert('" . $this->message . "')");
-                $this->reset();
+                // $this->reset();
                 return response()->json(['success' => true, 'requestStatus' => 'Plan has been Updated Successfully'], 200);
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             $this->message = "Error:" . $exception->errorInfo[2];
             $this->dispatch('carplansaved')->self();
             $this->js("alert('" . $this->message . "')");
-            $this->reset();
+            // $this->reset();
             return response()->json(['success' => false, 'requestStatus' => $exception->errorInfo[2]], 404);
         }
     }
@@ -98,17 +122,7 @@ class HotelPlanComponent extends Component
     #[On('hotelplansaved')]
     public function render()
     {
-        // $hotelPlan = HotelPlan::where('delegation_uid', $this->delegationUid)->first();
-        // // $hotelPlan = !$this->isForSaved ? HotelPlan::where('delegation_uid', $this->delegationUid)->first() : 0;
-        // if ($hotelPlan) {
-        //     $this->isForSaved = 0;
-        //     $this->standardQuantity = $hotelPlan->hotel_roomtype_standard;
-        //     $this->suiteQuantity = $hotelPlan->hotel_roomtype_suite;
-        //     $this->superiorQuantity = $hotelPlan->hotel_roomtype_superior;
-        //     $this->dOccupancyQuantity = $hotelPlan->hotel_roomtype_doubleOccupancy;
-        //     $this->hotelUid = $hotelPlan->hotel_uid;
-        //     $this->hotelPlanuid = $hotelPlan->hotel_plan_uid;
-        // }
+
         return view('livewire.hotel-plan-component');
     }
 }

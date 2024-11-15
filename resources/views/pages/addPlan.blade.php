@@ -51,10 +51,13 @@
                             <th data-field="id">Id</th>
                             <th data-field="car_category_a" data-sortable="true">Category A</th>
                             <th data-field="car_category_a_details" data-formatter="categoryDetailController" data-sortable="true">Category A Details</th>
+                            <th data-field="car_category_a_car_details" data-formatter="categoryCarDetailController" data-sortable="true">Category A Car Details</th>
                             <th data-field="car_category_b" data-sortable="true">Category B</th>
                             <th data-field="car_category_b_details" data-formatter="categoryDetailController" data-sortable="true">Category B Details</th>
+                            <th data-field="car_category_b_car_details" data-formatter="categoryCarDetailController" data-sortable="true">Category B Car Details</th>
                             <th data-field="car_category_c" data-sortable="true">Category C</th>
                             <th data-field="car_category_c_details" data-formatter="categoryDetailController" data-sortable="true">Category C Details</th>
+                            <th data-field="car_category_c_car_details" data-formatter="categoryCarDetailController" data-sortable="true">Category C Car Details</th>
                             <th data-field="car_plan_uid" data-formatter="deleteCarPlan" data-sortable="true">Actions</th>
                         </tr>
                     </thead>
@@ -76,12 +79,14 @@
                         <tr>
                             <th data-field="id">Id</th>
                             <th data-field="hotel_names" data-sortable="true">Hotel</th>
-                            <th data-field="hotel_roomtype_standard" data-sortable="true">Standard Room</th>
-                            <th data-field="hotel_roomtype_standard_details" data-formatter="categoryDetailController" data-sortable="true">Standard Room Details</th>
                             <th data-field="hotel_roomtype_suite" data-sortable="true">Suite Room</th>
                             <th data-field="hotel_roomtype_suite_details" data-formatter="categoryDetailController" data-sortable="true">Suite Room Details</th>
-                            <th data-field="hotel_roomtype_superior" data-sortable="true">Superior Room</th>
-                            <th data-field="hotel_roomtype_superior_details" data-formatter="categoryDetailController" data-sortable="true">Superior Room Details</th>
+                            <th data-field="hotel_roomtype_delux" data-sortable="true">Delux Room</th>
+                            <th data-field="hotel_roomtype_delux_details" data-formatter="categoryDetailController" data-sortable="true">Delux Room Details</th>
+                            <th data-field="hotel_roomtype_exec" data-sortable="true">Executive Room</th>
+                            <th data-field="hotel_roomtype_exec_details" data-formatter="categoryDetailController" data-sortable="true">Executive Room Details</th>
+                            <th data-field="hotel_roomtype_standard" data-sortable="true">Standard Room</th>
+                            <th data-field="hotel_roomtype_standard_details" data-formatter="categoryDetailController" data-sortable="true">Standard Room Details</th>
                             <th data-field="hotel_roomtype_doubleOccupancy" data-sortable="true">Double Occupancy Room</th>
                             <th data-field="hotel_roomtype_doubleOccupancy_details" data-formatter="categoryDetailController" data-sortable="true">Double Occupancy Room Details</th>
                             <th data-field="hotel_plan_uid" data-formatter="deleteHotelPlan" data-sortable="true">Actions</th>
@@ -123,6 +128,21 @@
                 ' - ' + (val.designation != null ? val.designation : '') +
                 ' - ' + (val.delegation_type != null ? val.delegation_type : '') +
                 ' - ' + (val.delegateCode != null ? val.delegateCode : '') +
+                '</div><br/>'
+            ).join('')
+        } else {
+            return [
+                '-',
+            ].join('')
+        }
+    }
+
+    function categoryCarDetailController(value, row, index) {
+        if (value) {
+            return value.map(
+                (val, i) =>
+                '<div style="text-align:left;">' + 
+                (val.car_make_name != null ? val.car_make_name : '') +
                 '</div><br/>'
             ).join('')
         } else {

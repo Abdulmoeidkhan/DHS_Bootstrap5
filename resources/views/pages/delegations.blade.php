@@ -775,6 +775,7 @@
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_exec_details" data-sortable="true" data-formatter="operateCategory">Executive Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText" data-sortable="true">Standard</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCategory">Standard Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-sortable="true" data-formatter="operateText">Double Occupancy Plan</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCategory">Double Occupancy Plan Details</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
@@ -852,6 +853,7 @@
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_exec_details" data-sortable="true" data-formatter="operateCategory">Executive Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText" data-sortable="true">Standard</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCategory">Standard Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-sortable="true" data-formatter="operateText">Double Occupancy Plan</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCategory">Double Occupancy Plan Details</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
@@ -929,6 +931,7 @@
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_exec_details" data-sortable="true" data-formatter="operateCategory">Executive Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText" data-sortable="true">Standard</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCategory">Standard Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-sortable="true" data-formatter="operateText">Double Occupancy Plan</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCategory">Double Occupancy Plan Details</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>
@@ -1083,6 +1086,7 @@
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_exec_details" data-sortable="true" data-formatter="operateCategory">Executive Plan Details</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard" data-formatter="operateText" data-sortable="true">Standard</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_standard_details" data-sortable="true" data-formatter="operateCategory">Standard Plan Details</th>
+                                <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy" data-sortable="true" data-formatter="operateText">Double Occupancy Plan</th>
                                 <th data-filter-control="input" data-field="hotelPlan.hotel_roomtype_doubleOccupancy_details" data-sortable="true" data-formatter="operateCategory">Double Occupancy Plan Details</th>
                                 <th data-filter-control="input" data-field="officers" data-formatter="operateOfficerName" data-sortable="true">Officer Name & Contact Details</th>
                                 <th data-filter-control="input" data-field="delegation_status" data-formatter="statusFormatter" data-sortable="true">Delegation Active</th>

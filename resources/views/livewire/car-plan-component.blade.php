@@ -8,9 +8,20 @@
                 <input type="number" class="form-control" wire:model="carAQuantity">
             </div>
             <div class="mb-3">
+                <label for="carSelectA" class="col-form-label">Car A Select :</label>
+                <select class="form-select" wire:model="carACarDetail" multiple aria-label="Car To Be Associate" id="carSelectA">
+                    @foreach(\App\Models\CarMake::where('car_category_uid','61346491-983a-40ed-8477-2d9ed84e6767')->get() as $key=>$car)
+                    @if($car->car_make_name)
+                    <option class="text-capitalize" value="{{$car->id}}" {{in_array($car->id, $carACarDetail) ? 'selected' : ''}}>
+                        {{$car->car_make_name}}
+                    </option>
+                    @endif
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
                 <label for="delegateSelectA" class="col-form-label">Delegate Select :</label>
                 <select class="form-select" wire:model="carADetail" multiple aria-label="Delegate To Be Associate" id="delegateSelectA">
-                    <option value="" selected disabled hidden> Select Delegate To Be Associate </option>
                     @foreach(\App\Models\Delegate::where('delegation',$this->delegationUid)->get() as $key=>$delegate)
                     @if($delegate->first_Name)
                     <option class="text-capitalize" value="{{$delegate->delegates_uid}}">
@@ -20,14 +31,26 @@
                     @endforeach
                 </select>
             </div>
+
             <div class="mb-3">
                 <label for="car_b_quantity" class="col-form-label">Car B Quantity:</label>
                 <input type="number" class="form-control" wire:model="carBQuantity">
             </div>
             <div class="mb-3">
+                <label for="carSelectB" class="col-form-label">Car B Select :</label>
+                <select class="form-select" wire:model="carBCarDetail" multiple aria-label="Car To Be Associate" id="carSelectB">
+                    @foreach(\App\Models\CarMake::where('car_category_uid','a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee')->get() as $key=>$car)
+                    @if($car->car_make_name)
+                    <option class="text-capitalize" value="{{$car->id}}" {{in_array($car->id, $carBCarDetail) ? 'selected' : ''}}>
+                        {{$car->car_make_name}}
+                    </option>
+                    @endif
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
                 <label for="delegateSelectB" class="col-form-label">Delegate Select :</label>
-                <select class="form-select" wire:model="carBDetail" multiple aria-label="Delegate To Be Associate" id="delegateSelectB" >
-                    <option value="" selected disabled hidden> Select Delegate To Be Associate </option>
+                <select class="form-select" wire:model="carBDetail" multiple aria-label="Delegate To Be Associate" id="delegateSelectB">
                     @foreach(\App\Models\Delegate::where('delegation',$this->delegationUid)->get() as $key=>$delegate)
                     @if($delegate->first_Name)
                     <option class="text-capitalize" value="{{$delegate->delegates_uid}}">
@@ -42,9 +65,20 @@
                 <input type="number" class="form-control" wire:model="carCQuantity">
             </div>
             <div class="mb-3">
+                <label for="carSelectC" class="col-form-label">Car C Select :</label>
+                <select class="form-select" wire:model="carCCarDetail" multiple aria-label="Car To Be Associate" id="carSelectC">
+                    @foreach(\App\Models\CarMake::where('car_category_uid','a2f0a2e4-984b-42e9-a4b9-0e9f9d22c9ee')->get() as $key=>$car)
+                    @if($car->car_make_name)
+                    <option class="text-capitalize" value="{{$car->id}}" {{in_array($car->id, $carCCarDetail) ? 'selected' : ''}}>
+                        {{$car->car_make_name}}
+                    </option>
+                    @endif
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
                 <label for="delegateSelectC" class="col-form-label">Delegate Select :</label>
                 <select class="form-select" wire:model="carCDetail" multiple aria-label="Delegate To Be Associate" id="delegateSelectC">
-                    <option value="" selected disabled hidden> Select Delegate To Be Associate </option>
                     @foreach(\App\Models\Delegate::where('delegation',$this->delegationUid)->get() as $key=>$delegate)
                     @if($delegate->first_Name)
                     <option class="text-capitalize" value="{{$delegate->delegates_uid}}">

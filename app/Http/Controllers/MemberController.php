@@ -208,10 +208,10 @@ class MemberController extends Controller
                 $req->file('pdf') ? $this->documentUpdate($req->file('pdf'), $id) : '';
             }
             if ($updatedMember) {
-                return redirect()->back()->with('message', 'Member Updated Successfully');
+                return redirect()->route('pages.addMember', $id)->with('message', 'Member Updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  redirect()->back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->route('pages.addMember', $id)->with('error', $exception->errorInfo[2]);
         }
     }
 
