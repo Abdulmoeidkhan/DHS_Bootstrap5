@@ -760,10 +760,13 @@
                                 <th data-filter-control="input" data-field="golf_player" data-sortable="true" data-formatter="statusFormatter">Golf Player</th>
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
                                 <th data-filter-control="input" data-field="car.car_category_a_details" data-sortable="true" data-formatter="operateCategory">Car A Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_a_car_details" data-sortable="true" data-formatter="categoryCarDetailController">Car A Car Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
                                 <th data-filter-control="input" data-field="car.car_category_b_details" data-sortable="true" data-formatter="operateCategory">Car B Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_b_car_details" data-sortable="true" data-formatter="categoryCarDetailController">Car B Car Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_c" data-sortable="true" data-formatter="operateText">Car C</th>
                                 <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCategory">Car C Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_c_car_details" data-sortable="true" data-formatter="categoryCarDetailController">Car C Car Details</th>
                                 <!-- <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText" data-sortable="true">Hotel Name</th>
@@ -838,10 +841,13 @@
                                 <th data-filter-control="input" data-field="golf_player" data-sortable="true" data-formatter="statusFormatter">Golf Player</th>
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
                                 <th data-filter-control="input" data-field="car.car_category_a_details" data-sortable="true" data-formatter="operateCategory">Car A Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_a_car_details" data-sortable="true" data-formatter="categoryCarDetailController">Car A Car Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
                                 <th data-filter-control="input" data-field="car.car_category_b_details" data-sortable="true" data-formatter="operateCategory">Car B Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_b_car_details" data-sortable="true" data-formatter="categoryCarDetailController">Car B Car Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_c" data-sortable="true" data-formatter="operateText">Car C</th>
                                 <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCategory">Car C Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_c_car_details" data-sortable="true" data-formatter="categoryCarDetailController">Car C Car Details</th>
                                 <!-- <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText" data-sortable="true">Hotel Name</th>
@@ -916,10 +922,13 @@
                                 <th data-filter-control="input" data-field="golf_player" data-sortable="true" data-formatter="statusFormatter">Golf Player</th>
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
                                 <th data-filter-control="input" data-field="car.car_category_a_details" data-sortable="true" data-formatter="operateCategory">Car A Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_a_car_details" data-sortable="true" data-formatter="categoryCarDetailController">Car A Car Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
                                 <th data-filter-control="input" data-field="car.car_category_b_details" data-sortable="true" data-formatter="operateCategory">Car B Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_b_car_details" data-sortable="true" data-formatter="categoryCarDetailController">Car B Car Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_c" data-sortable="true" data-formatter="operateText">Car C</th>
                                 <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCategory">Car C Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_c_car_details" data-sortable="true" data-formatter="categoryCarDetailController">Car C Car Details</th>
                                 <!-- <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText" data-sortable="true">Hotel Name</th>
@@ -993,10 +1002,13 @@
                                 <th data-filter-control="input" data-field="golf_player" data-sortable="true" data-formatter="statusFormatter">Golf Player</th>
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
                                 <th data-filter-control="input" data-field="car.car_category_a_details" data-sortable="true" data-formatter="operateCategory">Car A Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_a_car_details" data-sortable="true" data-formatter="categoryCarDetailController">Car A Car Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
                                 <th data-filter-control="input" data-field="car.car_category_b_details" data-sortable="true" data-formatter="operateCategory">Car B Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_b_car_details" data-sortable="true" data-formatter="categoryCarDetailController">Car B Car Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_c" data-sortable="true" data-formatter="operateText">Car C</th>
                                 <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCategory">Car C Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_c_car_details" data-sortable="true" data-formatter="categoryCarDetailController">Car C Car Details</th>
                                 <!-- <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText" data-sortable="true">Hotel Name</th>
@@ -1071,10 +1083,13 @@
                                 <th data-filter-control="input" data-field="golf_player" data-sortable="true" data-formatter="statusFormatter">Golf Player</th>
                                 <th data-filter-control="input" data-field="car.car_category_a" data-sortable="true" data-formatter="operateText">Car A</th>
                                 <th data-filter-control="input" data-field="car.car_category_a_details" data-sortable="true" data-formatter="operateCategory">Car A Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_a_car_details" data-sortable="true" data-formatter="categoryCarDetailController">Car A Car Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_b" data-sortable="true" data-formatter="operateText">Car B</th>
                                 <th data-filter-control="input" data-field="car.car_category_b_details" data-sortable="true" data-formatter="operateCategory">Car B Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_b_car_details" data-sortable="true" data-formatter="categoryCarDetailController">Car B Car Details</th>
                                 <th data-filter-control="input" data-field="car.car_category_c" data-sortable="true" data-formatter="operateText">Car C</th>
                                 <th data-filter-control="input" data-field="car.car_category_c_details" data-sortable="true" data-formatter="operateCategory">Car C Plan Details</th>
+                                <th data-filter-control="input" data-field="car.car_category_c_car_details" data-sortable="true" data-formatter="categoryCarDetailController">Car C Car Details</th>
                                 <!-- <th data-field="uid" data-formatter="operateDetachCar" data-print-ignore="true">Remove Car</th> -->
                                 <th data-filter-control="input" data-field="cars" data-formatter="operateCarsName" data-sortable="true">Cars & Details</th>
                                 <th data-filter-control="input" data-field="hotelData.hotel_names" data-formatter="operateText" data-sortable="true">Hotel Name</th>
@@ -1202,6 +1217,21 @@
             ' - ' + (val.delegateCode != null ? val.delegateCode : '') +
             '</div><br/>'
         ).join('') : '-';
+    }
+
+    function categoryCarDetailController(value, row, index) {
+        if (value) {
+            return value.map(
+                (val, i) =>
+                '<div style="text-align:left;">' + 
+                (val.car_make_name != null ? val.car_make_name : '') +
+                '</div><br/>'
+            ).join('')
+        } else {
+            return [
+                '-',
+            ].join('')
+        }
     }
 
     function operateFirstAndLastName(value, row, index) {
