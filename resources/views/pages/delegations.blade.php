@@ -1348,7 +1348,7 @@
     }
 
     function operateCarsName(value, row, index) {
-        return value ? value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + (val.car_category == '61346491-983a-40ed-8477-2d9ed84e6767' ? 'Cat A' : 'Cat B') + '  ' + val.car_makes + ' ' + val.car_model + ' ' + val.car_number + '  ' + ' - ' + val.driver.driver_name + ' - ' + val.driver.driver_contact + '</div><br/>').join('') : '<div>-</div>';
+        return value ? value.map((val, i) => '<div style="text-align:left;">' + (i + 1) + ') ' + (val.car_category == '61346491-983a-40ed-8477-2d9ed84e6767' ? 'Cat A' : 'Cat B') + '  ' + val.car_makes + ' ' + val.car_model + ' ' + val.car_number + '  ' + ' - ' + (val.driver != null ?val.driver?.driver_name:'') + ' - ' + (val.driver != null ?val.driver?.driver_contact:'') + '</div><br/>').join('') : '<div>-</div>';
     }
 
     function operateOfficer(value, row, index) {
