@@ -531,7 +531,7 @@
                         <table id="table" data-filter-control-multiple-search="true"   
    data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"   
    data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" 
- data-reorderable-columns="true"data-url="{{route('request.getDelegation',1)}}">
+ data-url="{{route('request.getDelegation',1)}}">
                             <thead>
                                 <tr>
                                     <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -578,7 +578,7 @@
                         <table id="table" data-filter-control-multiple-search="true"   
    data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"   
    data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" 
- data-reorderable-columns="true"data-url="{{route('request.getDelegation',0)}}">
+ data-url="{{route('request.getDelegation',0)}}">
                             <thead>
                                 <tr>
                                     <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -625,7 +625,7 @@
                         <table id="table" data-filter-control-multiple-search="true"   
    data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"   
    data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" 
- data-reorderable-columns="true"data-url="{{route('request.getDelegation')}}">
+ data-url="{{route('request.getDelegation')}}">
                             <thead>
                                 <tr>
                                     <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -672,7 +672,7 @@
                         <table id="table" data-filter-control-multiple-search="true"   
    data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"   
    data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" 
- data-reorderable-columns="true"data-url="{{route('request.getDelegation',2)}}">
+ data-url="{{route('request.getDelegation',2)}}">
                             <thead>
                                 <tr>
                                     <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -740,7 +740,7 @@
                         data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true"
                         data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-row-style="rowStyle"
                         data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true"
-                        data-reorderable-columns="true" data-url="{{route('request.getDelegation')}}">
+                         data-url="{{route('request.getDelegation')}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -821,7 +821,7 @@
                         data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true"
                         data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true"
                         data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true"
-                        data-reorderable-columns="true" data-url="{{route('request.getDelegation',1)}}">
+                         data-url="{{route('request.getDelegation',1)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -902,7 +902,7 @@
                         data-filter-control="true" data-toggle="table1" data-flat="true" data-pagination="true" data-show-toggle="true"
                         data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true"
                         data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true"
-                        data-print-as-filtered-and-sorted-on-ui="true" data-reorderable-columns="true" data-url="{{route('request.getDelegation',0)}}">
+                        data-print-as-filtered-and-sorted-on-ui="true"  data-url="{{route('request.getDelegation',0)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -982,7 +982,7 @@
                         data-filter-control="true" data-toggle="table2" data-flat="true" data-pagination="true" data-show-toggle="true"
                         data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true"
                         data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true"
-                        data-print-as-filtered-and-sorted-on-ui="true" data-reorderable-columns="true" data-url="{{route('request.getDelegation',2)}}">
+                        data-print-as-filtered-and-sorted-on-ui="true"  data-url="{{route('request.getDelegation',2)}}">
                         <thead>
                             <tr>
                                 <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -1062,7 +1062,7 @@
                         data-filter-control="true" data-toggle="table3" data-flat="true" data-pagination="true"
                         data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true"
                         data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]"
-                        data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" data-reorderable-columns="true"
+                        data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" 
                         data-url="{{route('request.getDelegation',3)}}">
                         <thead>
                             <tr>
@@ -1150,7 +1150,7 @@
                 <table id="table" data-filter-control-multiple-search="true"   
    data-filter-control-multiple-search-delimiter=","      data-virtual-scroll="true" data-height="800"   data-filter-control="true" data-toggle="table" data-flat="true" table id="table" data-filter-control-multiple-search="true"   
    data-filter-control-multiple-search-delimiter="," data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100,200]" data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true" 
- data-reorderable-columns="true"data-url="{{route('request.getDelegation')}}">
+ data-url="{{route('request.getDelegation')}}">
                     <thead>
                         <tr>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
