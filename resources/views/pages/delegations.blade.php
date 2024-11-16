@@ -300,7 +300,7 @@
                             <option value="" selected disabled hidden> Select Car A To Be Associate </option>
                             @foreach(\App\Models\Car::where([['car_status',1],['car_delegation',null],['car_category','61346491-983a-40ed-8477-2d9ed84e6767']])->get() as $key=>$car)
                             <option value="{{$car->car_uid}}">
-                                {{$car->car_makes.' '.$car->car_model.' '}}
+                                {{$car->car_makes.' '.$car->car_model.' '.$car->car_number.' '.$car->car_color}}
                                 (
                                 @foreach(\App\Models\CarCategory::where('car_category_uid',$car->car_category)->get('car_category') as $carkey=>$carcat)
                                 {{$carcat->car_category}}
@@ -370,7 +370,7 @@
                             <option value="" selected disabled hidden> Select Car To Be Disassociate </option>
                             @foreach(\App\Models\Car::where([['car_status',1],['car_delegation','!=',null]])->get() as $key=>$car)
                             <option value="{{$car->car_uid}}">
-                                {{$car->car_makes.' '.$car->car_model.' '}}
+                                {{$car->car_makes.' '.$car->car_model.' '.$car->car_number.' '.$car->car_color}}
                                 (
                                 @foreach(\App\Models\CarCategory::where('car_category_uid',$car->car_category)->get('car_category') as $carkey=>$carcat)
                                 {{$carcat->car_category}}
@@ -1719,7 +1719,7 @@
                         let data = response.data;
                         let data2 = [`<option value="" selected disabled hidden> Select Car To Be Associate </option>`];
                         data.map((val) => {
-                            data2.push(`<option class="text-capitalize" value="${val.car_uid}">${val.car_makes} ${val.car_model} </option>`)
+                            data2.push(`<option class="text-capitalize" value="${val.car_uid}">${val.car_makes} ${val.car_model} ${val.car_number} ${val.car_color}</option>`)
                         })
                         targetElement[carCatId - 1].innerHTML = '';
                         targetElement[carCatId - 1].innerHTML = data2;
@@ -1748,7 +1748,7 @@
                     let data = response.data;
                     let data2 = [`<option value="" selected disabled hidden> Select Car To Be Remove </option>`];
                     data.map((val) => {
-                        data2.push(`<option class="text-capitalize" value="${val.car_uid}">${val.car_makes} ${val.car_model} </option>`)
+                        data2.push(`<option class="text-capitalize" value="${val.car_uid}">${val.car_makes} ${val.car_model} ${val.car_number} ${val.car_color}</option>`)
                     })
                     targetElement.innerHTML = data2;
                 })
