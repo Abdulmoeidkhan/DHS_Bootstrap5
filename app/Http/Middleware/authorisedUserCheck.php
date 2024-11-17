@@ -15,7 +15,7 @@ class authorisedUserCheck
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $authorisedUserRoles = ['admin', 'delegate', 'liaison','interpreter','receiving'];
+        $authorisedUserRoles = ['admin', 'delegate','airport', 'liaison','interpreter','receiving'];
         $isAuthorised = in_array(session()->get('user')->roles[0]->name, $authorisedUserRoles);
         if (!$isAuthorised) {
             return abort(403);

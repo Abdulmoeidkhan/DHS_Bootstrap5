@@ -201,10 +201,10 @@ class CarsController extends Controller
             }
             $updateDriver = Driver::where('driver_uid', $id)->update($arrayToBeUpdate);
             if ($updateDriver) {
-                return redirect()->route('pages.cars')->with('message', "Driver Updated Successfully");
+                return redirect()->route('pages.addDriver',$id)->with('message', "Driver Updated Successfully");
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  redirect()->route('pages.cars')->with('error', $exception->errorInfo[2]);
+            return  redirect()->route('pages.addDriver',$id)->with('error', $exception->errorInfo[2]);
         }
     }
     // Drivers End

@@ -21,7 +21,7 @@ class DelegatesPageController extends Controller
     public function delegatesData($status = null)
     {
         if ($status == 1) {
-            if (session()->get('user')->roles[0]->name == "admin") {
+            if (session()->get('user')->roles[0]->name == "admin" || session()->get('user')->roles[0]->name == "airport") {
                 $delegates = DB::table('delegates')
                     ->leftJoin('delegations', 'delegates.delegation', '=', 'delegations.uid')
                     ->leftJoin('vips', 'vips.vips_uid', '=', 'delegations.invited_by')

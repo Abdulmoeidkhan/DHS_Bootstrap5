@@ -91,6 +91,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout.request');
     Route::get('/', [DashboardController::class, 'renderView'])->name("pages.dashboard");
     Route::get('/Summary', [SummaryController::class, 'renderSummary'])->name("pages.summary");
+
+
     Route::get('/userProfile/myProfile', [UserFullProfileController::class, 'renderMyProfile'])->name('pages.myProfile');
     Route::get('/userProfile/profileActivation', [ActivateProfileController::class, 'renderProfileActivation'])->name('pages.profileActivation');
     Route::get('/interested/{id}', [EventInterestedController::class, 'updateInterest'])->name('request.interested');
@@ -171,6 +173,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/addItinerary', [FlightsController::class, 'addItinerary'])->name('request.addItinerary');
         Route::post('/updateItinerary', [FlightsController::class, 'updateItinerary'])->name('request.updateItinerary');
         // Flights Pages And API End
+
+
+        // Adding Delegates Data Suleman Requerst Start
+        Route::get('/delegatesPage', [DelegatesPageController::class, 'render'])->name('pages.delegatesPage');
+        Route::get('/getDelegates/{status?}', [DelegatesPageController::class, 'delegatesData'])->name('request.getDelegates');
+        // Adding Delegates Data Suleman Requerst End
     });
 
     Route::group(['middleware' => 'userTypeCheck'], function () {
@@ -214,7 +222,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/addDriverPage/{id?}', [CarsController::class, 'addDriverRender'])->name('pages.addDriver');
         Route::post('/updateDriver/{id}', [CarsController::class, 'updateDriver'])->name('request.updateDriver');
         // Driver Pages And API End
-
 
         // CarCategory Pages And API Start
         Route::get('/getCarCategories', [CarsController::class, 'getCarCategory'])->name('request.getCarCategories');
@@ -310,13 +317,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/addEventPage', [AddEventController::class, 'render'])->name('pages.addEvent');
         Route::get('/profileUser/{id}', [UserFullProfileController::class, 'render'])->name('pages.profileUser');
         Route::post('/addEventRequest', [AddEventController::class, 'addEvent'])->name('request.addEventRequest');
-        Route::get('/delegatesPage', [DelegatesPageController::class, 'render'])->name('pages.delegatesPage');
+        Route::get('/getDelegatesStats', [DelegatesPageController::class, 'getDelegatesStats'])->name('data.getDelegatesStats');
+        Route::get('/getDelegateSummary', [DelegatesPageController::class, 'getDelegateSummary'])->name('data.getDelegateSummary');
         Route::get('/delegationsPage', [DelegationsPageController::class, 'render'])->name('pages.delegationsPage');
         Route::get('/getDelegation/{status?}', [DelegationsPageController::class, 'delegationData'])->name('request.getDelegation');
-        Route::get('/getDelegates/{status?}', [DelegatesPageController::class, 'delegatesData'])->name('request.getDelegates');
-        Route::get('/getDelegatesStats', [DelegatesPageController::class, 'getDelegatesStats'])->name('data.getDelegatesStats');
         Route::get('/getDelegationStats', [DelegatesPageController::class, 'getDelegationStats'])->name('data.getDelegationStats');
-        Route::get('/getDelegateSummary', [DelegatesPageController::class, 'getDelegateSummary'])->name('data.getDelegateSummary');
         Route::get('/getDelegateGolfSummary', [DelegatesPageController::class, 'getDelegateGolfSummary'])->name('data.getDelegateGolfSummary');
         Route::get('/addDelegationPage/{id?}', [AddDelegationPageController::class, 'render'])->name('pages.addDelegationPage');
         Route::get('/getSpecificMembers', [MemberController::class, 'specificMembersData'])->name('pages.getSpecificMembers');
