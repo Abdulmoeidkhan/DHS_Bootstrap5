@@ -35,29 +35,35 @@
                     <h5 class="card-title fw-semibold">Profile Picture</h5>
                 </div>
                 <!-- <img src="asset('assets/images/profile/user-1.jpg')" width="200px" height="200px" class="rounded mx-auto d-block" alt="User Profile Picture"> -->
-                <img src="{{$user->images?$user->images->img_blob:($user->avatar?$user->avatar:asset('assets/images/profile/user-1.jpg'))}}" width="200px" height="200px" class="rounded mx-auto d-block" alt="User Profile Picture">
+                <img src="{{$user->images?$user->images->img_blob:($user->avatar?$user->avatar:asset('assets/images/profile/user-1.jpg'))}}"
+                    width="200px" height="200px" class="rounded mx-auto d-block" alt="User Profile Picture">
                 <br />
                 <form action="{{route('request.imageUpload')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="input-group">
-                        <input type="hidden" value="{{$user->uid}}" name="id" required/>
+                        <input type="hidden" value="{{$user->uid}}" name="id" required />
                         <!-- <input type="file" class="form-control" id="uploadFile" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="image" accept="image/png, image/jpeg" required>
                         <button class="btn btn-outline-danger" type="submit">Upload</button> -->
                     </div>
                     <div class="mb-3">
                         <label for="delegation_picture" class="form-label">Picture</label>
-                        <input name="delegation_picture" type="file" class="form-control" id="delegation_picture" accept="image/png, image/jpeg" required>
-                        <input name="savedpicture" type="hidden" class="form-control" id="savedpicture" value="" required>
+                        <input name="delegation_picture" type="file" class="form-control" id="delegation_picture"
+                            accept="image/png, image/jpeg" required>
+                        <input name="savedpicture" type="hidden" class="form-control" id="savedpicture" value=""
+                            required>
                         <div class="box-2">
                             <div class="result"></div>
                         </div>
-                        <div class="box-2 img-result {{isset($delegationHead->delegation_picture) ? ($delegationHead?->delegation_picture?->img_blob ? '' : 'hide') : ''}}">
-                            <img class="cropped" src="{{isset($delegationHead->delegation_picture)? $delegationHead?->delegation_picture?->img_blob:''}}" alt="" />
+                        <div
+                            class="box-2 img-result {{isset($delegationHead->delegation_picture) ? ($delegationHead?->delegation_picture?->img_blob ? '' : 'hide') : ''}}">
+                            <img class="cropped"
+                                src="{{isset($delegationHead->delegation_picture)? $delegationHead?->delegation_picture?->img_blob:''}}"
+                                alt="" />
                         </div>
                         <div class="box">
                             <div class="options hide">
                                 <label>Width</label>
-                                <input type="number" class="img-w" value="300" min="100" max="1200" required/>
+                                <input type="number" class="img-w" value="300" min="100" max="1200" required />
                             </div>
                             <button class="btn save hide">Save</button>
                         </div>
@@ -78,16 +84,24 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="disabledInputEmail1" class="form-label">Registered Email Address</label>
-                                <input name="disabledInputEmail1" type="email" class="form-control" id="disabledInputEmail1" placeholder="Registered Email Address" aria-describedby="emailHelp" value="{{$user->email}}" disabled>
-                                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                                <input name="disabledInputEmail1" type="email" class="form-control"
+                                    id="disabledInputEmail1" placeholder="Registered Email Address"
+                                    aria-describedby="emailHelp" value="{{$user->email}}" disabled>
+                                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="inputUserName" class="form-label">Your User Name</label>
-                                <input name="inputUserName" type="text" class="form-control" id="inputUserName" placeholder="User Name" aria-describedby="userHelp" value="{{$user->name}}" minlength="3" maxlength="20" required>
+                                <input name="inputUserName" type="text" class="form-control" id="inputUserName"
+                                    placeholder="User Name" aria-describedby="userHelp" value="{{$user->name}}"
+                                    minlength="3" maxlength="20" required>
                             </div>
                             <div class="mb-3">
                                 <label for="contact" class="form-label">Your Contact Number</label>
-                                <input type="text" minlength='0' maxlength='14' name="inputContactNumber" class="form-control" id="contact" placeholder="Contact Number" aria-describedby="userHelp" value="{{$user->contact_number}}" minlength="13" maxlength="13" required>
+                                <input type="text" minlength='0' maxlength='14' name="inputContactNumber"
+                                    class="form-control" id="contact" placeholder="Contact Number"
+                                    aria-describedby="userHelp" value="{{$user->contact_number}}" minlength="13"
+                                    maxlength="13" required>
                             </div>
                             <input type="hidden" name="uid" value="{{$user->uid}}" />
                             <input type="submit" name="submit" class="btn btn-primary" value="Update" />
@@ -102,11 +116,20 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="userInputPassword" class="form-label">Password</label>
-                                <input type="password" name="userInputPassword" onkeypress="checkPasswordStrength(this)" class="form-control" id="userInputPassword" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                                <input type="password" name="userInputPassword" onkeypress="checkPasswordStrength(this)"
+                                    class="form-control" id="userInputPassword" placeholder="Password"
+                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                                    required>
                             </div>
                             <div class="mb-3">
                                 <label for="userInputPasswordConfirm" class="form-label">Confirm Password</label>
-                                <input type="password" name="userInputPasswordConfirm" onkeypress="checkPasswordStrength(this)" class="form-control" id="userInputPasswordConfirm" placeholder="Confirm Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                                <input type="password" name="userInputPasswordConfirm"
+                                    onkeypress="checkPasswordStrength(this)" class="form-control"
+                                    id="userInputPasswordConfirm" placeholder="Confirm Password"
+                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                                    required>
                             </div>
                             <!-- <div class="mb-3 form-check">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -138,7 +161,7 @@
                                     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                                 </div>
                             </fieldset> -->
-                            <input type="hidden" name="uid" value="{{$user->uid}}" required/>
+                            <input type="hidden" name="uid" value="{{$user->uid}}" required />
                             <input type="submit" name="submit" class="btn btn-badar" value="Change" />
                         </fieldset>
                     </form>
@@ -151,16 +174,27 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="roleSelect" class="form-label">Roles</label>
-                                @if($user->roles[0]->name == "delegate" || $user->roles[0]->name == "liaison" || $user->roles[0]->name == "interpreter" || $user->roles[0]->name == "receiving" || $user->roles[0]->name == "hotels" || $user->roles[0]->name == "airport" || $user->roles[0]->name == "vendor")
-                                <select id="roleSelect" name="roles" class="form-select" <?php echo $user->uid === auth()->user()->uid ? 'disabled' : ($user->roles[0]->name == "delegate" || $user->roles[0]->name == "liaison" || $user->roles[0]->name == "interpreter" || $user->roles[0]->name == "receiving" || $user->roles[0]->name == "hotels" || $user->roles[0]->name == "airport" || $user->roles[0]->name == "vendor" ? 'disabled' : ''); ?>>
+                                @if($user->roles[0]->name == "delegate" || $user->roles[0]->name == "liaison" ||
+                                $user->roles[0]->name == "interpreter" || $user->roles[0]->name == "receiving" ||
+                                $user->roles[0]->name == "hotels" || $user->roles[0]->name == "airport" ||
+                                $user->roles[0]->name == "vendor")
+                                <select id="roleSelect" name="roles" class="form-select" <?php echo $user->uid ===
+                                    auth()->user()->uid ? 'disabled' : ($user->roles[0]->name == "delegate" ||
+                                    $user->roles[0]->name == "liaison" || $user->roles[0]->name == "interpreter" ||
+                                    $user->roles[0]->name == "receiving" || $user->roles[0]->name == "hotels" ||
+                                    $user->roles[0]->name == "airport" || $user->roles[0]->name == "vendor" ? 'disabled'
+                                    : ''); ?>>
                                     @foreach($roles as $role)
-                                    <option value="{{$role->name}}" <?php echo $user->roles[0]->name === $role->name ? 'selected' : '' ?>>{{$role->display_name}}</option>
+                                    <option value="{{$role->name}}" <?php echo $user->roles[0]->name === $role->name ?
+                                        'selected' : '' ?>>{{$role->display_name}}</option>
                                     @endforeach
                                 </select>
                                 @else
                                 <select id="roleSelect" name="roles" class="form-select">
                                     @foreach($selectiveRoles as $selectiveRole)
-                                    <option value="{{$selectiveRole->name}}" <?php echo $user->roles[0]->name === $selectiveRole->name ? 'selected' : '' ?>>{{$selectiveRole->display_name}}</option>
+                                    <option value="{{$selectiveRole->name}}" <?php echo $user->roles[0]->name ===
+                                        $selectiveRole->name ? 'selected' : '' ?>>{{$selectiveRole->display_name}}
+                                    </option>
                                     {{$selectiveRole->name}}
                                     @endforeach
                                 </select>
@@ -182,8 +216,36 @@
                                 </div>
                                 @endforeach
                             </div>-->
+                            <div class="mb-3">
+                                <label for="teamSelect" class="form-label">Team</label>
+                                @if($user->roles[0]->name == "delegate" || $user->roles[0]->name == "liaison" ||
+                                $user->roles[0]->name == "interpreter" || $user->roles[0]->name == "receiving" ||
+                                $user->roles[0]->name == "hotels" || $user->roles[0]->name == "airport" ||
+                                $user->roles[0]->name == "vendor")
+                                <select id="teamSelect" name="teams" class="form-select" <?php echo $user->uid ===
+                                    auth()->user()->uid ? 'disabled' : ($user->roles[0]->name == "delegate" ||
+                                    $user->roles[0]->name == "liaison" || $user->roles[0]->name == "interpreter" ||
+                                    $user->roles[0]->name == "receiving" || $user->roles[0]->name == "hotels" ||
+                                    $user->roles[0]->name == "airport" || $user->roles[0]->name == "vendor" ? 'disabled'
+                                    : ''); ?>>
+                                    @foreach($teams as $team)
+                                    <option value="{{$team->name}}" <?php echo $user->team->name === $team->name ?
+                                        'selected' : '' ?>>{{$team->display_name}}</option>
+                                    @endforeach
+                                </select>
+                                @else
+                                <select id="teamSelect" name="teams" class="form-select">
+                                    @foreach($teams as $team)
+                                    <option value="{{$team->name}}" <?php echo $user->team->name ===
+                                        $team->name ? 'selected' : '' ?>>{{$team->display_name}}
+                                    </option>
+                                    {{$team->name}}
+                                    @endforeach
+                                </select>
+                                @endif
+                            </div>
 
-                            <input type="hidden" name="uid" value="{{$user->uid}}" required/>
+                            <input type="hidden" name="uid" value="{{$user->uid}}" required />
                             <input type="submit" name="submit" class="btn btn-danger" value="Authorise" />
                         </fieldset>
                     </form>

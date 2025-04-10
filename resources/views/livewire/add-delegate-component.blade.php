@@ -220,8 +220,7 @@
         <div class="mb-3">
             <label for="designation" class="col-form-label">Designation:</label>
             <input type="text" class="form-control" wire:model="designation" id="designation">
-        </div>
-        
+        </div>        
         <div class="mb-3">
             <label for="fName" class="col-form-label">First Name:</label>
             <input type="text" class="form-control" wire:model="firstName" id='firstName'>

@@ -13,6 +13,7 @@ use Laratrust\Models\Role;
 use Illuminate\Http\Request;
 use Laratrust\Models\Permission;
 use App\Http\Controllers\Controller;
+use App\Models\Team;
 
 class UserFullProfileController extends Controller
 {
@@ -21,19 +22,22 @@ class UserFullProfileController extends Controller
         $roles = Role::all();
         $selectiveRoles = Role::where('name', 'user')->orWhere('name', 'admin')->orWhere('name', 'dho')->orWhere('name', 'vendor')->orWhere('name', 'army')->orWhere('name', 'navy')->orWhere('name', 'airforce')->get();
         $permissions = Permission::all();
+        $teams = Team::all();
         $user = User::with('roles', 'permissions')->where('uid', $id)->first();
+        $user->team = Team::where('id', $user->roles[0]->pivot->team_id)->first(['id','name','display_name']);
         $image = ImageBlob::where('uid', $id)->first();
         $user->images = $image;
-        return view('pages.profileUser', ['user' => $user, 'roles' => $roles, 'permissions' => $permissions, 'selectiveRoles' => $selectiveRoles]);
+        return view('pages.profileUser', ['user' => $user, 'roles' => $roles, 'permissions' => $permissions, 'teams' => $teams, 'selectiveRoles' => $selectiveRoles]);
     }
     public function renderMyProfile(Request $req)
     {
         $roles = Role::all();
         $selectiveRoles = Role::where('name', 'user')->orWhere('name', 'admin')->orWhere('name', 'dho')->orWhere('name', 'vendor')->orWhere('name', 'army')->orWhere('name', 'navy')->orWhere('name', 'airforce')->get();
         $permissions = Permission::all();
+        $teams = Team::all();
         $user = session()->get('user');
         // return $user;
-        return view('pages.profileUser', ['user' => $user,  'roles' => $roles, 'permissions' => $permissions, 'selectiveRoles' => $selectiveRoles]);
+        return view('pages.profileUser', ['user' => $user,  'roles' => $roles, 'permissions' => $permissions, 'teams' => $teams, 'selectiveRoles' => $selectiveRoles]);
     }
     public function renderDelegateProfile()
     {

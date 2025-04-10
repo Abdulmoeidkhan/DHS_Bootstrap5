@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Image;
 use App\Models\ImageBlob;
 use App\Models\Officer;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,11 +31,11 @@ class SignInController extends Controller
             'password' => ['required'],
         ]);
         if ($this->isAvailable($req)) {
-
             if ($this->isActivated($req)) {
                 if (Auth::attempt($credentials)) {
                     $req->session()->regenerate();
                     $user = User::with('roles', 'permissions')->where('id', Auth::user()->id)->first();
+                    $user->team = Team::where('id', $user->roles[0]->pivot->team_id)->first(['id','name','display_name']);
                     // $delegation = $user->roles[0]->name === 'delegate' ?  Delegation::where('user_uid', Auth::user()->uid)->first('uid') : '';
                     // $delegation ? $user->delegationUid = $delegation->uid : null;
                     switch ($user->roles[0]->name) {
