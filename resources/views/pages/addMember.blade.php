@@ -89,8 +89,8 @@
                                 <div class="box-2">
                                     <div class="result"></div>
                                 </div>
-                                <div class="box-2 img-result <?php echo $memberPicture?->img_blob ? '' : 'hide' ?>">
-                                    <img class="cropped" src="{{$memberPicture?->img_blob}}" alt="" />
+                                <div class="box-2 img-result <?php echo $memberPicture ? '' : 'hide' ?>">
+                                    <img class="cropped" src="{{$memberPicture}}" alt="" />
                                 </div>
                                 <div class="box">
                                     <div class="options hide">

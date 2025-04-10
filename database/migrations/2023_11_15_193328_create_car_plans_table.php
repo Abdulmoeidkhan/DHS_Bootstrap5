@@ -16,8 +16,11 @@ return new class extends Migration
             $table->uuid('delegation_uid')->unique();;
             $table->uuid('car_plan_uid');
             $table->integer('car_category_a');
+            $table->string('car_category_a_details');
             $table->integer('car_category_b');
+            $table->string('car_category_b_details');
             $table->integer('car_category_c');
+            $table->string('car_category_c_details');
             // $table->uuid('car_category_uid');
             // $table->integer('car_a_quantity');
             // $table->integer('car_b_quantity');

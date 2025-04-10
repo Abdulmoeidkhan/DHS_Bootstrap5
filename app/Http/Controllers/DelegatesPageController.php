@@ -21,7 +21,7 @@ class DelegatesPageController extends Controller
     public function delegatesData($status = null)
     {
         if ($status == 1) {
-            if (session()->get('user')->roles[0]->name == "admin") {
+            if (session()->get('user')->roles[0]->name == "admin" || session()->get('user')->roles[0]->name == "airport") {
                 $delegates = DB::table('delegates')
                     ->leftJoin('delegations', 'delegates.delegation', '=', 'delegations.uid')
                     ->leftJoin('vips', 'vips.vips_uid', '=', 'delegations.invited_by')
@@ -91,6 +91,50 @@ class DelegatesPageController extends Controller
                 }
             }
             return $delegates;
+        } else if ($status == 2) {
+            if (session()->get('user')->roles[0]->name == "admin") {
+                $delegates = DB::table('delegates')
+                    ->leftJoin('delegations', 'delegates.delegation', '=', 'delegations.uid')
+                    ->leftJoin('vips', 'vips.vips_uid', '=', 'delegations.invited_by')
+                    ->leftJoin('delegate_flights', 'delegate_flights.delegate_uid', '=', 'delegates.delegates_uid')
+                    ->leftJoin('hotel_plans', 'hotel_plans.delegation_uid', '=', 'delegations.uid')
+                    ->leftJoin('hotels', 'hotels.hotel_uid', '=', 'hotel_plans.hotel_uid')
+                    ->leftJoin('rooms', 'delegates.delegates_uid', '=', 'rooms.assign_to')
+                    ->leftJoin('roomtypes', 'rooms.room_type', '=', 'roomtypes.room_type_uid')
+                    // ->leftJoin('image_blobs', 'delegates.delegates_uid', '=', 'image_blobs.uid')
+                    ->where([['delegates.first_Name', '!=', null], ['delegates.status', '1'], ['delegates.self', '1'], ['delegations.delegation_response', 'Accepted']])
+                    ->select('delegates.*', 'delegate_flights.*', 'rooms.*', 'hotels.*', 'roomtypes.*', 'delegations.country', 'delegations.delegation_response', 'delegations.delegationCode', 'delegations.delegation_status', 'delegations.invited_by', 'vips.*')
+                    ->orderBy('delegations.country', 'asc')
+                    ->get();
+            } elseif (session()->get('user')->roles[0]->name == "dho") {
+                $delegates = DB::table('delegates')
+                    ->leftJoin('delegations', 'delegates.delegation', '=', 'delegations.uid')
+                    ->leftJoin('vips', 'vips.vips_uid', '=', 'delegations.invited_by')
+                    ->leftJoin('delegate_flights', 'delegate_flights.delegate_uid', '=', 'delegates.delegates_uid')
+                    // ->leftJoin('image_blobs', 'delegates.delegates_uid', '=', 'image_blobs.uid')
+                    ->leftJoin('hotel_plans', 'hotel_plans.delegation_uid', '=', 'delegations.uid')
+                    ->leftJoin('hotels', 'hotels.hotel_uid', '=', 'hotel_plans.hotel_uid')
+                    ->leftJoin('rooms', 'delegates.delegates_uid', '=', 'rooms.assign_to')
+                    ->leftJoin('roomtypes', 'rooms.room_type', '=', 'roomtypes.room_type_uid')
+                    ->where([['delegates.first_Name', '!=', null], ['delegates.status', '1'], ['delegates.self', '1'], ['delegations.delegation_response', 'Accepted']])
+                    ->select('delegates.*', 'delegate_flights.*', 'rooms.*', 'hotels.*', 'roomtypes.*',  'delegations.country', 'delegations.delegation_response', 'delegations.delegationCode', 'delegations.delegation_status', 'delegations.invited_by', 'vips.*')
+                    ->orderBy('delegations.country', 'asc')
+                    ->get();
+            }
+
+
+            foreach ($delegates as $key => $delegate) {
+                $delegates[$key]->rankName = Rank::where('ranks_uid', $delegate->rank)->first('ranks_name');
+                $delegates[$key]->invited_by_name = Rank::where('ranks_uid', $delegate->invited_by)->first('ranks_name');
+                $delegates[$key]->img_blob = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $delegate->delegates_uid . '.png';
+                $delegates[$key]->imagePresent = ForeignImageValidator::where('image_uid', $delegate->delegates_uid)->first('image_exist');
+                $delegates[$key]->isHead = $delegate->delegation_type !== "Member" ? "Yes" : "No";
+                $delegates[$key]->officers = Officer::where('officer_delegation', $delegate->delegation)->get(['officer_first_name', 'officer_last_name', 'officer_contact', 'officer_rank', 'officer_type']);
+                foreach ($delegates[$key]->officers as $officerKey => $officer) {
+                    $delegates[$key]->officers[$officerKey]->rank = Rank::where('ranks_uid', $officer->officer_rank)->first('ranks_name');
+                }
+            }
+            return $delegates;
         }
     }
 
@@ -133,6 +177,6 @@ class DelegatesPageController extends Controller
     public function invitationUpdate(Request $req)
     {
         $updatedDelegate = Delegate::where('delegates_uid', $req->delegationUid)->update(['invitation_number' => $req->invitaionNumber]);
-        return $updatedDelegate ? redirect()->back()->with('message', 'Invitation Number Updated Successfully') : redirect()->back()->with('error', 'Something Went Wrong');
+        return $updatedDelegate ? response()->json(['success' => false, 'requestStatus' => 'Invitation Number Updated Successfully'], 200) : response()->json(['success' => false, 'requestStatus' => 'Invitation Number Not Updated'], 404);
     }
 }

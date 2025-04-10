@@ -11,9 +11,10 @@
                         <tr>
                             <th data-field="id">Id</th>
                             <th data-field="hotel_names" data-sortable="true">Hotel</th>
-                            <th data-field="hotel_roomtype_standard" data-sortable="true">Standard Room</th>
                             <th data-field="hotel_roomtype_suite" data-sortable="true">Suite Room</th>
-                            <th data-field="hotel_roomtype_superior" data-sortable="true">Superior Room</th>
+                            <th data-field="hotel_roomtype_delux" data-sortable="true">Delux Room</th>
+                            <th data-field="hotel_roomtype_executive" data-sortable="true">Executive Room</th>
+                            <th data-field="hotel_roomtype_standard" data-sortable="true">Standard Room</th>
                             <th data-field="hotel_roomtype_doubleOccupancy" data-sortable="true">Double Occupancy Room</th>
                             <th data-field="hotel_plan_uid" data-formatter="deleteHotelPlan" data-sortable="true">Actions</th>
                         </tr>

@@ -9,7 +9,7 @@
                 <h5 class="modal-title" id="">Invitation Number</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" action='{{route("request.invitaionNumberUpdate")}}'>
+            <form onsubmit='submitFunction(event,`{{route("request.invitaionNumberUpdate")}}`);'>
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
@@ -39,7 +39,8 @@
                     data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter=","
                     data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true"
                     data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true"
-                    data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegates',1)}}">
+                    data-show-print="true" data-print-as-filtered-and-sorted-on-ui="true"
+                    data-page-list="[10, 25, 50, 100,200]" data-url="{{route('request.getDelegates',2)}}">
                     <thead>
                         <tr>
                             <th data-formatter="operateSerial" data-filter-control="input">S.No.</th>
@@ -48,8 +49,8 @@
                                 Code</th>
                             <th data-field="rankName.ranks_name" data-filter-control="input" data-sortable="true">Rank
                             </th>
-                            <th data-field="first_Name" data-filter-control="input" data-sortable="true">First Name</th>
-                            <th data-field="last_Name" data-filter-control="input" data-sortable="true">Last Name</th>
+                            <th data-field="first_Name" data-filter-control="input" data-sortable="true" data-formatter="operateFirstAndLastName">Name</th>
+                            <!-- <th data-field="last_Name" data-filter-control="input" data-sortable="true">Last Name</th> -->
                             <th data-field="vips_designation" data-filter-control="input" data-sortable="true">Invited
                                 By</th>
                             <th data-field="delegation_type" data-filter-control="input" data-formatter="operateText"
@@ -67,9 +68,9 @@
                             <th data-field="img_blob" data-filter-control="input" data-sortable="true" data-formatter="operateStatus">Image
                                 Uploaded</th>
                             <th data-field="isPrinted" data-filter-control="input" data-sortable="true" data-formatter="operateStatus">Printed</th>
-                            <th data-width="150" data-formatter="operatePicture" data-force-hide="true">Image</th>
+                            <th data-width="150" data-formatter="operatePicture" data-force-hide="true" data-field="img_blob">Image</th>
                             <th data-field="delegates_uid" data-width="200" data-sortable="true"
-                                data-formatter="operatePlans">Actions</th>
+                                data-formatter="operatePlans" data-print-ignore="true">Actions</th>
                         </tr>
                     </thead>
                 </table>
@@ -125,21 +126,91 @@
         const modalBodyInputInvitation = invitationNumberModal.querySelector('.modal-body #invitaionNumber')
         modalBodyInputInvitation.value = invitation
     })
-    
+
     function operateStatus(value, row, index) {
         return value ? 'Yes' : 'No'
     }
-    
+
     function operatePicture(value, row, index) {
-        if (row.img_blob) {
-            return [
-                '<div class="left">',
-                '<img src="' + row.img_blob + '" width="80px" height="80px"/>',
-                '</div>'
-            ].join('')
-        }
+        // if (row.img_blob) {
+        //     return [
+        //         '<div class="left">',
+        //         '<img src="' + row.img_blob + '" width="80px" height="80px"/>',
+        //         '</div>'
+        //     ].join('')
+        // }
+        return value ? `<img onerror="this.style.display='none';" style="object-fit: cover;" width="100" height="120" src="${value}" />` : ['<div class="left">', 'Not Available', '</div>'].join('');
     }
 
+    function operateFirstAndLastName(value, row, index) {
+        return `${row.first_Name} &nbsp; ${row.last_Name}`;
+    }
+
+    function submitFunction(e, route, category) {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const formValues = {};
+        formData.forEach((value, key) => {
+            formValues[key] = value;
+        });
+
+        const lengthOfForm = Object.keys(formValues).length; // Length Of Values getting from from 
+
+        axios.post(route, formValues).then(response => {
+            console.log(response.data.requestStatus)
+        }).catch(error => {
+            console.log(error)
+        });
+    }
+</script>
+<script>
+    ['#table'].map((val => {
+
+        $(val).bootstrapTable({
+            printPageBuilder: function(val) {
+                return `
+<html>
+  <head>
+  <style type="text/css" media="print">
+  @page {
+    size: auto;
+    margin: 25px 0 25px 0;
+  }
+  </style>
+  <style type="text/css" media="all">
+  table {
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  table, th, td {
+    border: 1px solid grey;
+  }
+  th, td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  p {
+    font-weight: bold;
+    margin-left:20px;
+  }
+  table {
+    width:94%;
+    margin-left:3%;
+    margin-right:3%;
+  }
+  div.bs-table-print {
+    text-align:center;
+  }
+  </style>
+  </head>
+  <title>Print Table</title>
+  <body>
+  <div class="bs-table-print">${val}</div>
+  </body>
+</html>`
+            }
+        })
+    }))
 </script>
 @include("layouts.tableFoot")
 @endsection

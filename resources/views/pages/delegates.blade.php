@@ -222,6 +222,8 @@
                                     data-formatter="operateOfficers">Officer</th>
                                 <th data-filter-control="input" data-field="invitation_number" data-sortable="true"
                                     data-formatter="operateText">Invitation Number</th>
+                                <th data-field="delegates_uid" data-sortable="true" data-formatter="operateDelegateFlight"
+                                    data-force-hide="true" data-print-ignore="true">Update Flight Info</th>
                                 <th data-filter-control="input" data-field="imagePresent" data-sortable="true"
                                     data-formatter="operateBoolean">Image Uploaded</th>
                                 <th data-filter-control="input" data-field="img_blob" data-sortable="true"
@@ -610,6 +612,18 @@
             ].join('')
         }
     }
+
+    function operateDelegateFlight(value, row, index) {
+            if (value) {
+                return [
+                    '<div class="left">',
+                    '<a class="btn btn-outline-success" href="{{url("")}}/members/addFlight/' + value + '">',
+                    '<span style="font-size: 22px;font-weight: bolder;"><i class="ti ti-plane-departure" ></i></span>',
+                    '</a>',
+                    '</div>'
+                ].join('')
+            }
+        }
 
     async function updatePictureStatus(comp, uid) {
         const resp = await axios.get(`updatePictureStatus/${uid}`);

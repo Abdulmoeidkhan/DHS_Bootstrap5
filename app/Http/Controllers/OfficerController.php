@@ -6,6 +6,7 @@ use App\Models\ForeignImageValidator;
 use App\Models\ImageBlob;
 use App\Models\Officer;
 use App\Models\Rank;
+use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
@@ -187,30 +188,92 @@ class OfficerController extends Controller
 
     public function attachOfficer(Request $req)
     {
-        $liasons = $req->liasonSelect;
-        $receivings = $req->recievingSelect;
-        $interpreters = $req->interpreterSelect;
         $delegationUid = $req->delegationUid_officer;
-        if ($liasons) {
 
-            foreach ($liasons as $key => $liason) {
-                Officer::where('officer_uid', $liason)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
+        // Define an associative array for each select field
+        $officerFields = [
+            'liasonSelect' => is_array($req['liasonSelect[]'])?$req['liasonSelect[]']:[$req['liasonSelect[]']],
+            'recievingSelect' => is_array($req['recievingSelect[]'])?$req['recievingSelect[]']:[$req['recievingSelect[]']],
+            'interpreterSelect' => is_array($req['interpreterSelect[]'])?$req['interpreterSelect[]']:[$req['interpreterSelect[]']],
+        ];
+        try {
+            // Loop over each field, check if it has values, and update officers
+            foreach ($officerFields as $field => $officers) {
+                if ($officers) {
+                    foreach ($officers as $officerUid) {
+                        Officer::where('officer_uid', $officerUid)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
+                    }
+                }
             }
+            return response()->json([
+                'success' => true,
+                'requestStatus' => 'Officer has been detached successfully'
+            ], 200);
+        } catch (Exception $exception) {
+            return response()->json([
+                'success' => false,
+                'requestStatus' => 'Error: ' . $exception->getMessage()
+            ], 500);
         }
-        if ($receivings) {
-            foreach ($receivings as $key => $receiving) {
-                Officer::where('officer_uid', $receiving)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
-            }
-        }
-        if ($interpreters) {
-            foreach ($interpreters as $key => $interpreter) {
-                Officer::where('officer_uid', $interpreter)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
-            }
-        }
-        return redirect()->route('pages.delegationsPage')->with('message', 'Officer has been Attach Successfully');
-        // return [$liason,$receiving,$interpreter,$delegationUid];
+        // $liasons = $req->liasonSelect;
+        // $receivings = $req->recievingSelect;
+        // $interpreters = $req->interpreterSelect;
+        // $delegationUid = $req->delegationUid_officer;
+        // // if ($liasons) {
+        // //     foreach ($liasons as $key => $liason) {
+        // //         Officer::where('officer_uid', $liason)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
+        // //     }
+        // // }
+        // // if ($receivings) {
+        // //     foreach ($receivings as $key => $receiving) {
+        // //         Officer::where('officer_uid', $receiving)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
+        // //     }
+        // // }
+        // // if ($interpreters) {
+        // //     foreach ($interpreters as $key => $interpreter) {
+        // //         Officer::where('officer_uid', $interpreter)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
+        // //     }
+        // // }
+        // // return redirect()->route('pages.delegationsPage')->with('message', 'Officer has been Attach Successfully');
+        // // return [$liason,$receiving,$interpreter,$delegationUid];
+
+        // // foreach ($officers as $key => $officer) {
+        // //     Officer::where('officer_uid', $officer)->update(['officer_delegation' => null, 'officer_assign' => 0]);
+        // // }
+        // try {
+        //     if ($liasons) {
+        //         foreach ($liasons as $key => $liason) {
+        //             Officer::where('officer_uid', $liason)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
+        //         }
+        //     }
+        //     if ($receivings) {
+        //         foreach ($receivings as $key => $receiving) {
+        //             Officer::where('officer_uid', $receiving)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
+        //         }
+        //     }
+        //     if ($interpreters) {
+        //         foreach ($interpreters as $key => $interpreter) {
+        //             Officer::where('officer_uid', $interpreter)->update(['officer_delegation' => $delegationUid, 'officer_assign' => 1]);
+        //         }
+        //     }
+        //     return response()->json(['success' => true, 'requestStatus' => 'Officer has been deattach Successfully'], 200);
+        // } catch (QueryException $exception) {
+        //     if ($exception->errorInfo[2]) {
+        //         return response()->json(['success' => false, 'requestStatus' => 'Error : ' . $exception->errorInfo[2]], 404);
+        //     } else {
+        //         return response()->json(['success' => false, 'requestStatus' => 'Not Update'], 404);
+        //     }
+        // }
     }
 
+    public function attachOfficerData($type)
+    {
+        $officers = Officer::where([['officer_delegation', null], ['officer_type', $type], ['officer_assign', 0]])->get();
+        foreach ($officers as $key => $officer) {
+            $officers[$key]->rank = Rank::where('ranks_uid', $officer->officer_rank)->first('ranks_name');
+        }
+        return $officers;
+    }
     public function detachOfficerData($id)
     {
         $officers = Officer::where('officer_delegation', $id)->get();
@@ -219,14 +282,27 @@ class OfficerController extends Controller
 
     public function detachOfficer(Request $req)
     {
-        $officers = $req->officerSelect;
+        $officers = is_array($req['officerSelect[]'])?$req['officerSelect[]']:[$req['officerSelect[]']];
         // $delegationUid = $req->delegationUid_officer;
-        foreach ($officers as $key => $officer) {
-            Officer::where('officer_uid', $officer)->update(['officer_delegation' => null, 'officer_assign' => 0]);
-        }
-        return redirect()->route('pages.delegationsPage')->with('message', 'Officer has been deattach Successfully');
+        // foreach ($officers as $key => $officer) {
+        //     Officer::where('officer_uid', $officer)->update(['officer_delegation' => null, 'officer_assign' => 0]);
+        // }
+        // return redirect()->route('pages.delegationsPage')->with('message', 'Officer has been deattach Successfully');
         // return [$liason,$receiving,$interpreter,$delegationUid];
         // return $req->all();
+        try {
+            foreach ($officers as $key => $officer) {
+                Officer::where('officer_uid', $officer)->update(['officer_delegation' => null, 'officer_assign' => 0]);
+            }
+            return response()->json(['success' => true, 'requestStatus' => 'Officer has been deattach Successfully'], 200);
+        } catch (QueryException $exception) {
+            if ($exception->errorInfo[2]) {
+                return  redirect()->route('pages.officer')->with('error',);
+                return response()->json(['success' => false, 'requestStatus' => 'Error : ' . $exception->errorInfo[2]], 404);
+            } else {
+                return response()->json(['success' => false, 'requestStatus' => 'Not Update'], 404);
+            }
+        }
     }
 
     public function officerData($params = 0, $type = "all", $force = "all", $id = null)

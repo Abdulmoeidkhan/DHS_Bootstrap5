@@ -217,13 +217,16 @@
                                         <h6 class="fw-semibold mb-0">Hotel Name</h6>
                                     </th>
                                     <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Standard</h6>
-                                    </th>
-                                    <th class="border-bottom-0">
                                         <h6 class="fw-semibold mb-0">Suite</h6>
                                     </th>
                                     <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Superior</h6>
+                                        <h6 class="fw-semibold mb-0">Delux</h6>
+                                    </th>
+                                    <th class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-0">Exec</h6>
+                                    </th>
+                                    <th class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-0">Standard</h6>
                                     </th>
                                     <th class="border-bottom-0">
                                         <h6 class="fw-semibold mb-0">Double Occupancy</h6>
@@ -241,16 +244,64 @@
                                         <span class="fw-normal"></span>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">{{$hotelPlan->hotel_roomtype_standard}}</p>
+                                        <p class="mb-0 fw-normal">
+                                            {{$hotelPlan->hotel_roomtype_suite}}
+                                        <ul>
+                                            @foreach($hotelPlan->hotel_roomtype_suite_details as $key=>$delegate)
+                                            @if($delegate->first_Name)
+                                            <li id="{{$delegate->delegates_uid}}">{{$delegate->first_Name.' '.$delegate->last_Name.' - '.$delegate->delegation_type}}</li>
+                                            @endif
+                                            @endforeach
+                                        </ul>
+                                        </p>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">{{$hotelPlan->hotel_roomtype_suite}}</p>
+                                        <p class="mb-0 fw-normal">
+                                            {{$hotelPlan->hotel_roomtype_delux}}
+                                        <ul>
+                                            @foreach($hotelPlan->hotel_roomtype_delux_details as $key=>$delegate)
+                                            @if($delegate->first_Name)
+                                            <li id="{{$delegate->delegates_uid}}">{{$delegate->first_Name.' '.$delegate->last_Name.' - '.$delegate->delegation_type}}</li>
+                                            @endif
+                                            @endforeach
+                                        </ul>
+                                        </p>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">{{$hotelPlan->hotel_roomtype_superior}}</p>
+                                        <p class="mb-0 fw-normal">
+                                            {{$hotelPlan->hotel_roomtype_exec}}
+                                        <ul>
+                                            @foreach($hotelPlan->hotel_roomtype_exec_details as $key=>$delegate)
+                                            @if($delegate->first_Name)
+                                            <li id="{{$delegate->delegates_uid}}">{{$delegate->first_Name.' '.$delegate->last_Name.' - '.$delegate->delegation_type}}</li>
+                                            @endif
+                                            @endforeach
+                                        </ul>
+                                        </p>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">{{$hotelPlan->hotel_roomtype_doubleOccupancy}}</p>
+                                        <p class="mb-0 fw-normal">
+                                            {{$hotelPlan->hotel_roomtype_standard}}
+                                        <ul>
+                                            @foreach($hotelPlan->hotel_roomtype_standard_details as $key=>$delegate)
+                                            @if($delegate->first_Name)
+                                            <li id="{{$delegate->delegates_uid}}">{{$delegate->first_Name.' '.$delegate->last_Name.' - '.$delegate->delegation_type}}</li>
+                                            @endif
+                                            @endforeach
+                                        </ul>
+                                        </p>
+                                    </td>
+                                    <td class="border-bottom-0">
+                                        <p class="mb-0 fw-normal">
+                                            {{$hotelPlan->hotel_roomtype_doubleOccupancy}}
+                                        <ul>
+                                            @foreach($hotelPlan->hotel_roomtype_doubleOccupancy_details as $key=>$delegate)
+                                            @if($delegate->first_Name)
+                                            <li id="{{$delegate->delegates_uid}}">{{$delegate->first_Name.' '.$delegate->last_Name.' - '.$delegate->delegation_type}}</li>
+                                            @endif
+                                            @endforeach
+                                        </ul>
+                                        </p>
                                     </td>
                                 </tr>
                                 @endforeach

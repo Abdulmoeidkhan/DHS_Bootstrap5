@@ -41,8 +41,9 @@
             <div class="col">
             </div>
         </div>
+        <br />
         <div class="row">
-            <div class="d-flex justify-content-evenly align-items-center">
+            <div class="d-flex justify-content-evenly align-items-center envelope-class">
                 <div>
                     <h5 style="text-transform:capitalize; font-weight:700;">{{$delegate->rank->ranks_name}}</h5>
                     <h5 style="text-transform:capitalize; font-weight:700;">

@@ -127,7 +127,7 @@ class MemberController extends Controller
     {
         $member = Delegate::where('delegates_uid', $id)->first();
         $flight = DelegateFlight::where('delegate_uid', $id)->first();
-        $memberPicture = ImageBlob::where('uid', $id)->first();
+        $memberPicture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $member->delegates_uid . '.png';
         // return $member;
         return view('pages.addMember', ['member' => $member, 'flight' => $flight, 'id' => $id, 'memberPicture' => $memberPicture]);
     }
@@ -208,10 +208,10 @@ class MemberController extends Controller
                 $req->file('pdf') ? $this->documentUpdate($req->file('pdf'), $id) : '';
             }
             if ($updatedMember) {
-                return redirect()->back()->with('message', 'Member Updated Successfully');
+                return redirect()->route('pages.addMember', $id)->with('message', 'Member Updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return  redirect()->back()->with('error', $exception->errorInfo[2]);
+            return  redirect()->route('pages.addMember', $id)->with('error', $exception->errorInfo[2]);
         }
     }
 

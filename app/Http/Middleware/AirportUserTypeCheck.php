@@ -15,7 +15,7 @@ class AirportUserTypeCheck
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $userType = array('airport', 'admin','delegate');
+        $userType = array('airport', 'admin','delegate','dho');
         $isAirportUser = in_array(session()->get('user')->roles[0]->name, $userType);
         if (!$isAirportUser) {
             return abort(403);

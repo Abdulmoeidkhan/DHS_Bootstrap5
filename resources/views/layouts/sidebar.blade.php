@@ -64,6 +64,9 @@
                         <span class="hide-menu">Delegations</span>
                     </a>
                 </li>
+                @endif
+                @if(session()->get('user')->roles[0]->name =="admin" ||session()->get('user')->roles[0]->name =="dho" || session()->get('user')->roles[0]->name
+                =="airport")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.delegatesPage')}}" aria-expanded="false">
                         <span>

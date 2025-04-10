@@ -17,20 +17,89 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="hotel_roomtype_standard" class="col-form-label">Standard Quantity:</label>
-                <input type="number" class="form-control" wire:model="standardQuantity" required>
-            </div>
-            <div class="mb-3">
                 <label for="hotel_roomtype_suite" class="col-form-label">Suite Quantity:</label>
                 <input type="number" class="form-control" wire:model="suiteQuantity" required>
             </div>
             <div class="mb-3">
-                <label for="hotel_roomtype_superior" class="col-form-label">Superior Quantity:</label>
-                <input type="number" class="form-control" wire:model="superiorQuantity" required>
+                <label for="delegateSelectSu" class="col-form-label">Delegate Select :</label>
+                <select class="form-select" wire:model="hotelSuiteDetail" multiple aria-label="Delegate To Be Associate" id="delegateSelectSu" >
+                    <option value="" selected disabled hidden> Select Delegate To Be Associate </option>
+                    @foreach(\App\Models\Delegate::where('delegation',$this->delegationUid)->get() as $key=>$delegate)
+                    @if($delegate->first_Name)
+                    <option class="text-capitalize" value="{{$delegate->delegates_uid}}">
+                        {{$delegate->first_Name.' '.$delegate->last_Name.' - '.$delegate->delegation_type}}
+                    </option>
+                    @endif
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="hotel_roomtype_delux" class="col-form-label">Delux Quantity:</label>
+                <input type="number" class="form-control" wire:model="deluxQuantity" required>
+            </div>
+            <div class="mb-3">
+                <label for="delegateSelectDe" class="col-form-label">Delegate Select :</label>
+                <select class="form-select" wire:model="hotelDeluxDetail" multiple aria-label="Delegate To Be Associate" id="delegateSelectDe" >
+                    <option value="" selected disabled hidden> Select Delegate To Be Associate </option>
+                    @foreach(\App\Models\Delegate::where('delegation',$this->delegationUid)->get() as $key=>$delegate)
+                    @if($delegate->first_Name)
+                    <option class="text-capitalize" value="{{$delegate->delegates_uid}}">
+                        {{$delegate->first_Name.' '.$delegate->last_Name.' - '.$delegate->delegation_type}}
+                    </option>
+                    @endif
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="hotel_roomtype_executive" class="col-form-label">Executive Quantity:</label>
+                <input type="number" class="form-control" wire:model="execQuantity" required>
+            </div>
+            <div class="mb-3">
+                <label for="delegateSelectEx" class="col-form-label">Delegate Select :</label>
+                <select class="form-select" wire:model="hotelExecDetail" multiple aria-label="Delegate To Be Associate" id="delegateSelectEx" >
+                    <option value="" selected disabled hidden> Select Delegate To Be Associate </option>
+                    @foreach(\App\Models\Delegate::where('delegation',$this->delegationUid)->get() as $key=>$delegate)
+                    @if($delegate->first_Name)
+                    <option class="text-capitalize" value="{{$delegate->delegates_uid}}">
+                        {{$delegate->first_Name.' '.$delegate->last_Name.' - '.$delegate->delegation_type}}
+                    </option>
+                    @endif
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="hotel_roomtype_standard" class="col-form-label">Standard Quantity:</label>
+                <input type="number" class="form-control" wire:model="standardQuantity" required>
+            </div>
+            <div class="mb-3">
+                <label for="delegateSelectSt" class="col-form-label">Delegate Select :</label>
+                <select class="form-select" wire:model="hotelStandardDetail" multiple aria-label="Delegate To Be Associate" id="delegateSelectSt" >
+                    <option value="" selected disabled hidden> Select Delegate To Be Associate </option>
+                    @foreach(\App\Models\Delegate::where('delegation',$this->delegationUid)->get() as $key=>$delegate)
+                    @if($delegate->first_Name)
+                    <option class="text-capitalize" value="{{$delegate->delegates_uid}}">
+                        {{$delegate->first_Name.' '.$delegate->last_Name.' - '.$delegate->delegation_type}}
+                    </option>
+                    @endif
+                    @endforeach
+                </select>
             </div>
             <div class="mb-3">
                 <label for="hotel_roomtype_doubleOccupancy" class="col-form-label">Double Occupancy Quantity:</label>
                 <input type="number" class="form-control" wire:model="dOccupancyQuantity" required>
+            </div>
+            <div class="mb-3">
+                <label for="delegateSelectDb" class="col-form-label">Delegate Select :</label>
+                <select class="form-select" wire:model="hotelDoubleDetail" multiple aria-label="Delegate To Be Associate" id="delegateSelectDb" >
+                    <option value="" selected disabled hidden> Select Delegate To Be Associate </option>
+                    @foreach(\App\Models\Delegate::where('delegation',$this->delegationUid)->get() as $key=>$delegate)
+                    @if($delegate->first_Name)
+                    <option class="text-capitalize" value="{{$delegate->delegates_uid}}">
+                        {{$delegate->first_Name.' '.$delegate->last_Name.' - '.$delegate->delegation_type}}
+                    </option>
+                    @endif
+                    @endforeach
+                </select>
             </div>
             <input type="hidden" wire:model="delegationUid">
         </fieldset>

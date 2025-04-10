@@ -129,9 +129,9 @@
                 <h5 class="card-title fw-semibold mb-4">Delegate Information</h5>
                 <div class="table-responsive">
                     <form name="delegationInfo" id="delegationInfo" method="POST"
-                        action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.updateDelegation'):''}}">
+                        action="{{session()->get('user')->roles[0]->name == 'admin' || session()->get('user')->roles[0]->name == 'delegate' ? route('request.updateDelegation'):''}}" {{session()->get('user')->roles[0]->name == 'delegate'?'disabled':''}} >
                         <fieldset <?php echo session()->get('user')->roles[0]->name == 'admin' ||
-                            session()->get('user')->roles[0]->name == 'delegate' ? '' : 'disabled' ?>>
+                            session()->get('user')->roles[0]->name == 'delegate' ? 'disabled' : '' ?> >
                             <legend>Delegate Information</legend>
                             @csrf
                             <div class="mb-3">
@@ -177,7 +177,7 @@
                             <div class="mb-3">
                                 <label for="delegation_response" class="form-label">Delegation Response</label>
                                 <select class="form-select" aria-label="Delegation Response" id="delegation_response"
-                                    name="delegation_response" required>
+                                    name="delegation_response" {{session()->get('user')->roles[0]->name == 'delegate'?'disabled':''}}  >
                                     <option value="Accepted" {{isset($delegationData)?($delegationData->
                                         delegation_response == 'Accepted' ? 'Selected':''):''}}> Accepted </option>
                                     <option value="Regretted" {{isset($delegationData)?($delegationData->
@@ -227,7 +227,7 @@
                             <input type="hidden" name="delegation_uid" value="{{$delegate->delegation}}" />
                             <input type="hidden" name="self_delegate_uid" value="{{$delegate->delegates_uid}}" />
                             <input type="hidden" name="rep_delegate_uid" value="{{$rep->delegates_uid}}" />
-                            <input type="submit" name="submit" class="btn btn-primary" value="Update" />
+                            <input type="submit" name="submit" class="btn btn-primary {{session()->get('user')->roles[0]->name == 'delegate'?'disabled':''}} " value="Update" {{session()->get('user')->roles[0]->name == 'delegate'?'disabled':''}}  />
                         </fieldset>
                     </form>
                 </div>
