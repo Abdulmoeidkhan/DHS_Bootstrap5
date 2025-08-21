@@ -6,7 +6,7 @@
         <div class="brand-logo d-flex align-items-center justify-content-between">
             <a href="{{route('pages.dashboard')}}" class="text-nowrap logo-img">
                 <!-- <img src="{{asset('assets/images/logos/dark-logo.svg')}}" width="180" alt="" /> -->
-                <img src="{{asset('images/icons/Badar-Depo.png')}}" width="180" alt="">
+                <img src="{{asset('images/icons/Badar-Logo-Black.png')}}" width="180" alt="">
             </a>
             <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                 <i class="ti ti-x fs-8"></i>
@@ -65,7 +65,8 @@
                     </a>
                 </li>
                 @endif
-                @if(session()->get('user')->roles[0]->name =="admin" ||session()->get('user')->roles[0]->name =="dho" || session()->get('user')->roles[0]->name
+                @if(session()->get('user')->roles[0]->name =="admin" ||session()->get('user')->roles[0]->name =="dho" ||
+                session()->get('user')->roles[0]->name
                 =="airport")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.delegatesPage')}}" aria-expanded="false">
@@ -268,6 +269,77 @@
                             <i class="ti ti-calendar-event"></i>
                         </span>
                         <span class="hide-menu">Events</span>
+                    </a>
+                </li>
+                @endif
+                @if(session()->get('user')->roles[0]->name =="admin" ||session()->get('user')->roles[0]->name
+                =="snseaUser")
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Inland</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-layout-dashboard"></i>
+                        </span>
+                        <span class="hide-menu">Dashboard</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="#" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-building"></i>
+                        </span>
+                        <span class="hide-menu">Organization</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="#" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-building"></i>
+                        </span>
+                        <span class="hide-menu">Organization Member</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-mist"></i>
+                        </span>
+                        <span class="hide-menu">Program</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="#" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-building"></i>
+                        </span>
+                        <span class="hide-menu">Guest Group</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-list-details"></i>
+                        </span>
+                        <span class="hide-menu">Lunch Coupons</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-list-details"></i>
+                        </span>
+                        <span class="hide-menu">Car Sticker</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-mist"></i>
+                        </span>
+                        <span class="hide-menu">Essentials</span>
                     </a>
                 </li>
                 @endif

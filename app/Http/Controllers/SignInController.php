@@ -33,9 +33,9 @@ class SignInController extends Controller
         if ($this->isAvailable($req)) {
             if ($this->isActivated($req)) {
                 if (Auth::attempt($credentials)) {
-                    $req->session()->regenerate();
+                    // Regenerate session ID
                     $user = User::with('roles', 'permissions')->where('id', Auth::user()->id)->first();
-                    $user->team = Team::where('id', $user->roles[0]->pivot->team_id)->first(['id','name','display_name']);
+                    $user->team = Team::where('id', $user->roles[0]->pivot->team_id)->first(['id', 'name', 'display_name']);
                     // $delegation = $user->roles[0]->name === 'delegate' ?  Delegation::where('user_uid', Auth::user()->uid)->first('uid') : '';
                     // $delegation ? $user->delegationUid = $delegation->uid : null;
                     switch ($user->roles[0]->name) {
@@ -50,13 +50,21 @@ class SignInController extends Controller
                             return redirect()->back()->with('error', 'Something Went Wrong');
                     }
                     $user->images = ImageBlob::where('uid', Auth::user()->uid)->first();
-                    session()->put('user', $user);
-                    if (session()->get('user')->roles[0]->name == "user") {
-                        return redirect()->route('pages.profileActivation')->with('message', "You have successfully Signed In")->with('flash_message', "If you need to install this App please click below");
+                    if ($req->hasSession()) {
+                        $req->session()->regenerate();
                     } else {
-                        return redirect()->route('pages.dashboard')->with('message', "You have successfully Signed In")->with('flash_message', "If you need to install this App please click below");
+                        $user->token =  $user->createToken($user->name)->plainTextToken;
                     }
+                    session()->put('user', $user);
+                    // $req->session()->regenerate();
+                    // session()->put('user', $user);
+                    // if (session()->get('user')->roles[0]->name == "user") {
+                    //     return redirect()->route('pages.profileActivation')->with('message', "You have successfully Signed In")->with('flash_message', "If you need to install this App please click below");
+                    // } else {
+                    //     return redirect()->route('pages.dashboard')->with('message', "You have successfully Signed In")->with('flash_message', "If you need to install this App please click below");
+                    // }
                     // return User::with('roles')->where('email', $req->email)->first();
+                    return $user;
                 } else {
                     // return ['status' => 0, "msg" => 'The provided credentials do not match our records.'];
                     return redirect()->route('signIn')->with('error', "Password credentials do not match our records.");

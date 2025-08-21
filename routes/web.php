@@ -37,6 +37,7 @@ use App\Http\Controllers\ReceivingController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\WishController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,7 +51,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/signIn', function () {
+Route::get('/signIn', function (Request $req) {
     if (auth()?->user()?->uid) {
         return redirect()->route('pages.dashboard');
     } else {
@@ -444,8 +445,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/printDelegationEnvelope/{id}', [PrintInvitationController::class, 'printDelegationEnvelope'])->name("pages.printDelegationEnvelope");
 });
 
-Route::post('/signUpRequest', [SignUpController::class, 'signUp'])->name('request.signUp');
-Route::post('/signInRequest', [SignInController::class, 'signIn'])->name('request.signIn');
 Route::post('/activationRequest', [ActivationRequest::class, 'activation'])->name('request.activation');
 Route::get('/sendhtmlemail/{id}', [MailOtpController::class, 'html_email'])->name("request.emailModule");
 

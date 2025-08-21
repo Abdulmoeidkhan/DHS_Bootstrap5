@@ -6,6 +6,7 @@
     background: -webkit-linear-gradient(to right, #EAECC6, #2BC0E4);
     background: linear-gradient(to right, #EAECC6, #2BC0E4);
   }
+
   /* .gradient-class {
     background: #336600;
     background: -webkit-linear-gradient(to left, #336600, #70ff88);
@@ -33,23 +34,24 @@
               </div>
               @endif
               <a href="{{route('pages.dashboard')}}" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                <img src="{{asset('images/icons/ideas_logo_2024.png')}}" width="180" alt="IDEAS">
+                <img src="{{asset('images/icons/pimec-2025.png')}}" width="180" alt="PIMEC">
               </a>
               <p class="text-center">Delegation Handling System</p>
-              <form action="{{route('request.signIn')}}" method="POST">
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email Address</label>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email"
-                    autofocus aria-describedby="emailHelp">
-                </div>
-                <div class="mb-4">
-                  <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" name="password">
-                  <p style="text-align:right;margin-top:2px">
-                    <a class="text-badar fw-bold ms-2" href="#" id="togglePassword">Show</a>
-                  </p>
-                  <script>
-                    const togglePassword = document
+              {{-- <form action="" method="POST"> --}}
+                <form onsubmit='submitFunction(event,`{{route("request.signIn")}}`);'>
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email"
+                      autofocus aria-describedby="emailHelp">
+                  </div>
+                  <div class="mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                    <p style="text-align:right;margin-top:2px">
+                      <a class="text-badar fw-bold ms-2" href="#" id="togglePassword">Show</a>
+                    </p>
+                    <script>
+                      const togglePassword = document
                         .querySelector('#togglePassword');
                     const password = document.querySelector('#password');
                     togglePassword.addEventListener('click', () => {
@@ -61,34 +63,34 @@
                         password.setAttribute('type', type);
                         togglePassword.innerText=togglePassword.innerText !=="Show"? 'Show':'Hide'
                     });
-                  </script>
-                </div>
-                <div class="d-flex align-items-center justify-content-between mb-4">
-                  <div class="form-check">
-                    <input class="form-check-input badar" type="checkbox" value="" id="flexCheckChecked" checked>
-                    <label class="form-check-label text-dark" for="flexCheckChecked">
-                      Remeber this Device
-                    </label>
+                    </script>
                   </div>
-                  <a class="text-badar fw-bold" href="#">Forgot Password ?</a>
-                </div>
-                @csrf
-                <input type="submit" name="Sign In" value="Sign In"
-                  class="btn btn-badar w-100 py-8 fs-4 mb-4 rounded-2" />
-                <a href="{{route('request.google')}}" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In
-                  With Google</a>
-                <div class="d-flex align-items-center justify-content-center">
-                  <p class="fs-4 mb-0 fw-bold">New to DHS?</p>
-                  <a class="text-badar fw-bold ms-2" href="{{route('signUp')}}">Create an account</a>
-                </div>
-                {{-- <div class="d-flex align-items-center justify-content-center">
-                  <p class="fs-4 mb-0 fw-bold">Activate Account?</p>
-                  <a class="text-badar fw-bold ms-2" href="{{route('accountActivation')}}">Activate</a>
-                </div> --}}
-              </form>
-              <br />
-              <img style="width:445px;width:-webkit-fill-available;" src="{{asset('images/icons/Partners.png')}}"
-                alt="Partners LOGO" />
+                  <div class="d-flex align-items-center justify-content-between mb-4">
+                    <div class="form-check">
+                      <input class="form-check-input badar" type="checkbox" value="" id="flexCheckChecked" checked>
+                      <label class="form-check-label text-dark" for="flexCheckChecked">
+                        Remeber this Device
+                      </label>
+                    </div>
+                    <a class="text-badar fw-bold" href="#">Forgot Password ?</a>
+                  </div>
+                  @csrf
+                  <input type="submit" name="Sign In" value="Sign In"
+                    class="btn btn-badar w-100 py-8 fs-4 mb-4 rounded-2" />
+                  <a href="{{route('request.google')}}" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In
+                    With Google</a>
+                  <div class="d-flex align-items-center justify-content-center">
+                    <p class="fs-4 mb-0 fw-bold">New to DHS?</p>
+                    <a class="text-badar fw-bold ms-2" href="{{route('signUp')}}">Create an account</a>
+                  </div>
+                  {{-- <div class="d-flex align-items-center justify-content-center">
+                    <p class="fs-4 mb-0 fw-bold">Activate Account?</p>
+                    <a class="text-badar fw-bold ms-2" href="{{route('accountActivation')}}">Activate</a>
+                  </div> --}}
+                </form>
+                <br />
+                <img style="width:445px;width:-webkit-fill-available;"
+                  src="{{asset('images/icons/pimec-2025-logostrip.png')}}" alt="Partners LOGO" />
             </div>
           </div>
         </div>
@@ -96,4 +98,23 @@
     </div>
   </div>
 </div>
+<script>
+  function submitFunction(e, route) {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const formValues = {};
+
+        formData.forEach((value, key) => {
+            formValues[key] = value;
+        });
+
+        const lengthOfForm = Object.keys(formValues).length; // Length Of Values getting from from 
+        axios.post(route, formValues).then(response => {
+            console.log(response.data)
+            window.location.reload();
+        }).catch(error => {
+            console.log(error)
+        });
+    }
+</script>
 @endsection

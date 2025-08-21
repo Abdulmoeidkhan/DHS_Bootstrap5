@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 
 class ProfileImageController extends Controller
 {
@@ -51,34 +52,58 @@ class ProfileImageController extends Controller
     protected function imageDeleteBlobUpdate($file, $uid)
     {
         $imageBlob = $file;
-        $oldImageDelete = Storage::disk('cloudinary')->delete('Images/' . $uid);
-        $imgSaved = Storage::disk('cloudinary')->put('Images/profile/' . $uid . '.png', $imageBlob);
+        $oldImageDelete = Storage::disk('local')->delete('Images/' . $uid);
+        $imgSaved = Storage::disk('local')->put('Images/profile/' . $uid . '.png', $imageBlob);
         return $imgSaved;
     }
+
+    // protected function imageDeleteBlobUpdate($file, $uid)
+    // {
+    //     $imageBlob = $file;
+    //     $oldImageDelete = Storage::disk('cloudinary')->delete('Images/' . $uid);
+    //     $imgSaved = Storage::disk('cloudinary')->put('Images/profile/' . $uid . '.png', $imageBlob);
+    //     return $imgSaved;
+    // }
+
+    // protected function imageBlobUpload($file, $uid)
+    // {
+    //     $imageBlob = $file;
+    //     $imgSaved = Storage::disk('cloudinary')->put('Images/' . $uid, $imageBlob);
+    //     $imgSaved ?? ForeignImageValidator::create(['image_exist' => $uid]);
+    //     return $imgSaved;
+    //     // $imageBlob = $file;
+    //     // $imgBlob = new ImageBlob();
+    //     // $imgBlob->img_blob = $imageBlob;
+    //     // $imgBlob->uid = $uid;
+    //     // $imgSaved = $imgBlob->save();
+    //     // return $imgSaved;
+    // }
 
     protected function imageBlobUpload($file, $uid)
     {
         $imageBlob = $file;
-        $imgSaved = Storage::disk('cloudinary')->put('Images/' . $uid, $imageBlob);
+        $imgSaved = Storage::disk('local')->put('Images/' . $uid, $imageBlob);
         $imgSaved ?? ForeignImageValidator::create(['image_exist' => $uid]);
         return $imgSaved;
-        // $imageBlob = $file;
-        // $imgBlob = new ImageBlob();
-        // $imgBlob->img_blob = $imageBlob;
-        // $imgBlob->uid = $uid;
-        // $imgSaved = $imgBlob->save();
-        // return $imgSaved;
     }
+
 
     protected function imageBlobUpdate($file, $uid)
     {
         $imageBlob = $file;
-        $updateImageBlob = Storage::disk('cloudinary')->exists($uid . '.png') ? $this->imageDeleteBlobUpdate($imageBlob, $uid) : $this->imageBlobUpload($file, $uid);
+        $updateImageBlob = Storage::disk('local')->exists($uid . '.png') ? $this->imageDeleteBlobUpdate($imageBlob, $uid) : $this->imageBlobUpload($file, $uid);
         return $updateImageBlob;
-        // $imageBlob = $file;
-        // $updateImageBlob = ImageBlob::where('uid', $uid)->first() ? ImageBlob::where('uid', $uid)->update(['img_blob' => $imageBlob]) : $this->imageBlobUpload($file, $uid);
-        // return $updateImageBlob;
     }
+    
+    // protected function imageBlobUpdate($file, $uid)
+    // {
+    //     $imageBlob = $file;
+    //     $updateImageBlob = Storage::disk('cloudinary')->exists($uid . '.png') ? $this->imageDeleteBlobUpdate($imageBlob, $uid) : $this->imageBlobUpload($file, $uid);
+    //     return $updateImageBlob;
+    //     // $imageBlob = $file;
+    //     // $updateImageBlob = ImageBlob::where('uid', $uid)->first() ? ImageBlob::where('uid', $uid)->update(['img_blob' => $imageBlob]) : $this->imageBlobUpload($file, $uid);
+    //     // return $updateImageBlob;
+    // }
 
     // protected function imageBlobUpload(Request $req)
     // {

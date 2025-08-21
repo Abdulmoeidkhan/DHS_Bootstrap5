@@ -53,8 +53,8 @@ class AddDelegationPageController extends Controller
     protected function imageDeleteBlobUpdate($file, $uid)
     {
         $imageBlob = $file;
-        $oldImageDelete = Storage::disk('cloudinary')->delete('Images/' . $uid);
-        $imgSaved = Storage::disk('cloudinary')->put('Images/profile/' . $uid . '.png', $imageBlob);
+        $oldImageDelete = Storage::disk('public')->delete('Images/' . $uid);
+        $imgSaved = Storage::disk('public')->put('Images/profile/' . $uid . '.png', $imageBlob);
         return $imgSaved;
     }
 
@@ -72,7 +72,7 @@ class AddDelegationPageController extends Controller
         // $imgBlob->uid = $uid;
         // $imgSaved = $imgBlob->save();
         $imageBlob = $file;
-        $imgSaved = Storage::disk('cloudinary')->put('Images/' . $uid, $imageBlob);
+        $imgSaved = Storage::disk('public')->put('Images/' . $uid, $imageBlob);
         $imgSaved ?? ForeignImageValidator::create(['image_exist'=>$uid]);
         return $imgSaved;
     }
@@ -84,7 +84,7 @@ class AddDelegationPageController extends Controller
         // return $updateImageBlob;
 
         $imageBlob = $file;
-        $updateImageBlob = Storage::disk('cloudinary')->exists($uid . '.png') ? $this->imageDeleteBlobUpdate($imageBlob, $uid) : $this->imageBlobUpload($file, $uid);
+        $updateImageBlob = Storage::disk('public')->exists($uid . '.png') ? $this->imageDeleteBlobUpdate($imageBlob, $uid) : $this->imageBlobUpload($file, $uid);
         return $updateImageBlob;
     }
 

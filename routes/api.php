@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/signInRequest', [SignInController::class, 'signIn'])->name('request.signIn');
+Route::post('/signUpRequest', [SignUpController::class, 'signUp'])->name('request.signUp');
+
 Route::group(['auth' => 'sanctum'], function () {
     // Program API Start
     Route::post('/addProgram', [ProgramController::class, 'addProgram'])->name('request.addProgram');
@@ -28,7 +31,7 @@ Route::group(['auth' => 'sanctum'], function () {
     // VIPS API Start
     Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');
     // VIPS API End
-    
+
 
 });
 
@@ -36,5 +39,3 @@ Route::group(['auth' => 'sanctum'], function () {
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-
