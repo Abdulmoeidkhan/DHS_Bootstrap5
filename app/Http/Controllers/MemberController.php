@@ -65,8 +65,8 @@ class MemberController extends Controller
     protected function imageDeleteBlobUpdate($file, $uid)
     {
         $imageBlob = $file;
-        $oldImageDelete = Storage::disk('cloudinary')->delete('Images/' . $uid);
-        $imgSaved = Storage::disk('cloudinary')->put('Images/profile/' . $uid . '.png', $imageBlob);
+        $oldImageDelete = Storage::disk('public')->delete('Images/' . $uid);
+        $imgSaved = Storage::disk('public')->put('Images/profile/' . $uid . '.png', $imageBlob);
         return $imgSaved;
     }
 
@@ -79,8 +79,8 @@ class MemberController extends Controller
         // $imgSaved = $imgBlob->save();
         // return $imgSaved;
         $imageBlob = $file;
-        $imgSaved = Storage::disk('cloudinary')->put('Images/' . $uid, $imageBlob);
-        $imgSaved ?? ForeignImageValidator::create(['image_exist'=>$uid]);
+        $imgSaved = $imgSaved = Storage::disk('public')->put('Images/' . $uid . '.png', file_get_contents($file));
+        $imgSaved ?? ForeignImageValidator::create(['image_exist' => $uid]);
         return $imgSaved;
     }
 
@@ -90,7 +90,7 @@ class MemberController extends Controller
         // $updateImageBlob = ImageBlob::where('uid', $uid)->first() ? ImageBlob::where('uid', $uid)->update(['img_blob' => $imageBlob]) : $this->imageBlobUpload($file, $uid);
         // return $updateImageBlob;
         $imageBlob = $file;
-        $updateImageBlob = Storage::disk('cloudinary')->exists($uid . '.png') ? $this->imageDeleteBlobUpdate($imageBlob, $uid) : $this->imageBlobUpload($file, $uid);
+        $updateImageBlob = Storage::disk('public')->exists($uid . '.png') ? $this->imageDeleteBlobUpdate($imageBlob, $uid) : $this->imageBlobUpload($file, $uid);
         return $updateImageBlob;
     }
 
@@ -127,7 +127,8 @@ class MemberController extends Controller
     {
         $member = Delegate::where('delegates_uid', $id)->first();
         $flight = DelegateFlight::where('delegate_uid', $id)->first();
-        $memberPicture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $member->delegates_uid . '.png';
+        // $memberPicture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $member->delegates_uid . '.png';
+        $memberPicture = route('public') . '/Images/' . $member->delegates_uid . '.png';
         // return $member;
         return view('pages.addMember', ['member' => $member, 'flight' => $flight, 'id' => $id, 'memberPicture' => $memberPicture]);
     }
@@ -142,7 +143,8 @@ class MemberController extends Controller
             $delegates[$key]->flight = DelegateFlight::where('delegate_uid', $delegate->delegates_uid)->first();
             $delegates[$key]->rooms = HotelPlan::where('delegation_uid', $id)->first();
             // $delegates[$key]->image = ImageBlob::where('uid', $delegate->delegates_uid)->first();
-            $delegates[$key]->image = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $delegate->delegates_uid . '.png';
+            // $delegates[$key]->image = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $delegate->delegates_uid . '.png';
+            $delegates[$key]->image = asset('storage/Images/' . $delegate->delegates_uid . '.png');
             $delegates[$key]->imagePresent = ForeignImageValidator::where('image_uid', $delegate->delegates_uid)->first('image_exist');
             if ($delegate->rooms) {
                 $delegates[$key]->rooms->hotelName = Hotel::where('hotel_uid', $delegate->rooms->hotel_uid)->first('hotel_names');

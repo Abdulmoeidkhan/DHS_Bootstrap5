@@ -79,6 +79,9 @@ Route::get('/404', function () {
     return view('pages.404');
 })->name("404");
 
+Route::post('/signInRequest', [SignInController::class, 'signIn'])->name('request.signIn');
+Route::post('/signUpRequest', [SignUpController::class, 'signUp'])->name('request.signUp');
+
 Route::group(['middleware' => 'auth'], function () {
     // Commented Routes not in use for now 
     // Route::get('/deleteUser/{id}', [UserProfileController::class, 'deleteId'])->name('request.deleteUser');

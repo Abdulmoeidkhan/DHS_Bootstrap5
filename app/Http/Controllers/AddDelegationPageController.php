@@ -63,7 +63,7 @@ class AddDelegationPageController extends Controller
         // $imageBlob = $file;
         // $imgBlob = new ImageBlob();
         // $imgBlob->img_blob = $imageBlob;
-        // $imgBlob->uid = $uid;
+        // $imgBlob->uid = $uid;$imageBlob
         // $imgSaved = $imgBlob->save();
         // return $imgSaved;
         // $imageBlob = $file;
@@ -71,9 +71,9 @@ class AddDelegationPageController extends Controller
         // $imgBlob->img_blob = $imageBlob;
         // $imgBlob->uid = $uid;
         // $imgSaved = $imgBlob->save();
-        $imageBlob = $file;
-        $imgSaved = Storage::disk('public')->put('Images/' . $uid, $imageBlob);
-        $imgSaved ?? ForeignImageValidator::create(['image_exist'=>$uid]);
+        // $imageBlob = $file;
+        $imgSaved = Storage::disk('public')->put('Images/' . $uid . '.png', file_get_contents($file));
+        $imgSaved ?? ForeignImageValidator::create(['image_exist' => $uid]);
         return $imgSaved;
     }
 
@@ -96,10 +96,12 @@ class AddDelegationPageController extends Controller
             $representatives = Delegate::where([['delegation_type', 'Rep'], ['delegation', $id]])->first();
             $delegations = Delegation::where([['uid', $delegationHead->delegation]])->first();
             $delegations->inviters = json_decode($delegations->inviters, true);
-            $delegationHead->delegation_picture = ImageBlob::where('uid', $delegationHead->delegates_uid)->first();
+            // $delegationHead->delegation_picture = ImageBlob::where('uid', $delegationHead->delegates_uid)->first();
+            $delegationHead->delegation_picture = asset('storage/Images/' . $delegationHead->delegates_uid . '.png');
             $delegationHead->delegation_document =  Document::where('uid', $delegationHead->delegates_uid)->count();
             if ($representatives) {
-                $representatives->delegation_picture =  ImageBlob::where('uid', $representatives->delegates_uid)->first();
+                // $representatives->delegation_picture =  ImageBlob::where('uid', $representatives->delegates_uid)->first();
+                $representatives->delegation_picture =  asset('storage/Images/' . $delegationHead->delegates_uid . '.png');
                 $representatives->delegation_document =  Document::where('uid', $representatives->delegates_uid)->count();
             }
             // return [$representatives];

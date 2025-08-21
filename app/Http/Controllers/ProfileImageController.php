@@ -52,8 +52,8 @@ class ProfileImageController extends Controller
     protected function imageDeleteBlobUpdate($file, $uid)
     {
         $imageBlob = $file;
-        $oldImageDelete = Storage::disk('local')->delete('Images/' . $uid);
-        $imgSaved = Storage::disk('local')->put('Images/profile/' . $uid . '.png', $imageBlob);
+        $oldImageDelete = Storage::disk('public')->delete('Images/' . $uid);
+        $imgSaved = Storage::disk('public')->put('Images/profile/' . $uid . '.png', $imageBlob);
         return $imgSaved;
     }
 
@@ -82,7 +82,7 @@ class ProfileImageController extends Controller
     protected function imageBlobUpload($file, $uid)
     {
         $imageBlob = $file;
-        $imgSaved = Storage::disk('local')->put('Images/' . $uid, $imageBlob);
+        $imgSaved = $imgSaved = Storage::disk('public')->put('Images/' . $uid . '.png', file_get_contents($file));
         $imgSaved ?? ForeignImageValidator::create(['image_exist' => $uid]);
         return $imgSaved;
     }
@@ -91,7 +91,7 @@ class ProfileImageController extends Controller
     protected function imageBlobUpdate($file, $uid)
     {
         $imageBlob = $file;
-        $updateImageBlob = Storage::disk('local')->exists($uid . '.png') ? $this->imageDeleteBlobUpdate($imageBlob, $uid) : $this->imageBlobUpload($file, $uid);
+        $updateImageBlob = Storage::disk('public')->exists($uid . '.png') ? $this->imageDeleteBlobUpdate($imageBlob, $uid) : $this->imageBlobUpload($file, $uid);
         return $updateImageBlob;
     }
     

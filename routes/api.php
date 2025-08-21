@@ -19,8 +19,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/signInRequest', [SignInController::class, 'signIn'])->name('request.signIn');
-Route::post('/signUpRequest', [SignUpController::class, 'signUp'])->name('request.signUp');
 
 Route::group(['auth' => 'sanctum'], function () {
     // Program API Start

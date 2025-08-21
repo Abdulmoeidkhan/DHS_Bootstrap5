@@ -599,8 +599,31 @@
     }
 
     function operateBoolean(value, row, index) {
-        // console.log(value);
-        return value ? 'Yes' : `<button class="btn btn-outline-success" onClick="updatePictureStatus(this,'${row.officer_uid}')">Update</button>`;
+        console.log(row.image);
+        // return value ? 'Yes' : `<button class="btn btn-outline-success" onClick="updatePictureStatus(this,'${row.officer_uid}')">Update</button>`;
+        async function fileExists(url) {
+            try {
+                const response = await fetch(url, {
+                    method: 'HEAD'
+                });
+                return response.ok;
+            } catch (error) {
+                return false;
+            }
+        }
+
+        // Example usage
+        const fileUrl = "{{asset('storage/Images')}}" + row.img_blob;
+
+        fileExists(fileUrl).then(exists => {
+            if (exists) {
+                console.log("✅ File exists!");
+                return 'Updated';
+            } else {
+                console.log("❌ File not found.");
+                return 'Not Updated';
+            }
+        });
     }
 
     function operateOfficers(value, row, index) {
@@ -614,16 +637,16 @@
     }
 
     function operateDelegateFlight(value, row, index) {
-            if (value) {
-                return [
-                    '<div class="left">',
-                    '<a class="btn btn-outline-success" href="{{url("")}}/members/addFlight/' + value + '">',
-                    '<span style="font-size: 22px;font-weight: bolder;"><i class="ti ti-plane-departure" ></i></span>',
-                    '</a>',
-                    '</div>'
-                ].join('')
-            }
+        if (value) {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-outline-success" href="{{url("")}}/members/addFlight/' + value + '">',
+                '<span style="font-size: 22px;font-weight: bolder;"><i class="ti ti-plane-departure" ></i></span>',
+                '</a>',
+                '</div>'
+            ].join('')
         }
+    }
 
     async function updatePictureStatus(comp, uid) {
         const resp = await axios.get(`updatePictureStatus/${uid}`);

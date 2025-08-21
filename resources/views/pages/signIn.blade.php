@@ -37,8 +37,8 @@
                 <img src="{{asset('images/icons/pimec-2025.png')}}" width="180" alt="PIMEC">
               </a>
               <p class="text-center">Delegation Handling System</p>
-              {{-- <form action="" method="POST"> --}}
-                <form onsubmit='submitFunction(event,`{{route("request.signIn")}}`);'>
+               <form action='{{route("request.signIn")}}' method="POST"> 
+                <!-- <form onsubmit='submitFunction(event,`{{route("request.signIn")}}`);'> -->
                   <div class="mb-3">
                     <label for="email" class="form-label">Email Address</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email"
@@ -99,22 +99,22 @@
   </div>
 </div>
 <script>
-  function submitFunction(e, route) {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const formValues = {};
+  // function submitFunction(e, route) {
+  //       e.preventDefault();
+  //       const formData = new FormData(e.target);
+  //       const formValues = {};
 
-        formData.forEach((value, key) => {
-            formValues[key] = value;
-        });
+  //       formData.forEach((value, key) => {
+  //           formValues[key] = value;
+  //       });
 
-        const lengthOfForm = Object.keys(formValues).length; // Length Of Values getting from from 
-        axios.post(route, formValues).then(response => {
-            console.log(response.data)
-            window.location.reload();
-        }).catch(error => {
-            console.log(error)
-        });
-    }
+  //       const lengthOfForm = Object.keys(formValues).length; // Length Of Values getting from from 
+  //       axios.post(route, formValues).then(response => {
+  //           console.log(response.data)
+  //           window.location.reload();
+  //       }).catch(error => {
+  //           console.log(error)
+  //       });
+  //   }
 </script>
 @endsection

@@ -84,15 +84,15 @@ class OfficerController extends Controller
     protected function imageDeleteBlobUpdate($file, $uid)
     {
         $imageBlob = $file;
-        $oldImageDelete = Storage::disk('cloudinary')->delete('Images/' . $uid);
-        $imgSaved = Storage::disk('cloudinary')->put('Images/profile/' . $uid . '.png', $imageBlob);
+        $oldImageDelete = Storage::disk('public')->delete('Images/' . $uid);
+        $imgSaved = Storage::disk('public')->put('Images/profile/' . $uid . '.png', $imageBlob);
         return $imgSaved;
     }
 
     protected function imageBlobUpload($file, $uid)
     {
         $imageBlob = $file;
-        $imgSaved = Storage::disk('cloudinary')->put('Images/' . $uid, $imageBlob);
+        $imgSaved = $imgSaved = Storage::disk('public')->put('Images/' . $uid . '.png', file_get_contents($file));
         $imgSaved ?? ForeignImageValidator::create(['image_exist' => $uid]);
         return $imgSaved;
 
@@ -111,7 +111,7 @@ class OfficerController extends Controller
         // $updateImageBlob = ImageBlob::where('uid', $uid)->first() ? ImageBlob::where('uid', $uid)->update(['img_blob' => $imageBlob]) : $this->imageBlobUpload($file, $uid);
         // return $updateImageBlob;
         $imageBlob = $file;
-        $updateImageBlob = Storage::disk('cloudinary')->exists($uid . '.png') ? $this->imageDeleteBlobUpdate($imageBlob, $uid) : $this->imageBlobUpload($file, $uid);
+        $updateImageBlob = Storage::disk('public')->exists($uid . '.png') ? $this->imageDeleteBlobUpdate($imageBlob, $uid) : $this->imageBlobUpload($file, $uid);
         return $updateImageBlob;
     }
 
@@ -314,7 +314,8 @@ class OfficerController extends Controller
                 $officers[$key]->officer_rank = Rank::where('ranks_uid', $officer->officer_rank)->first();
                 // $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
                 $officers[$key]->officer_picturePresent = ForeignImageValidator::where('image_uid', $officer->officer_uid)->first('image_exist');
-                $officers[$key]->officer_picture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $officer->officer_uid . '.png';
+                // $officers[$key]->officer_picture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $officer->officer_uid . '.png';
+                $officers[$key]->officer_picture = asset('storage/Images/' . $officer->officer_uid . '.png');
                 // $officers[$key]->officer_picturePresent = @getimagesize('https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $officer->officer_uid . '.png');
             }
             return $officers;
@@ -324,7 +325,8 @@ class OfficerController extends Controller
                 $officers[$key]->officer_rank = Rank::where('ranks_uid', $officer->officer_rank)->first();
                 // $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
                 $officers[$key]->officer_picturePresent = ForeignImageValidator::where('image_uid', $officer->officer_uid)->first('image_exist');
-                $officers[$key]->officer_picture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $officer->officer_uid . '.png';
+                // $officers[$key]->officer_picture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $officer->officer_uid . '.png';
+                $officers[$key]->officer_picture = asset('storage/Images/' . $officer->officer_uid . '.png');
                 // $officers[$key]->officer_picturePresent = @getimagesize('https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $officer->officer_uid . '.png');
             }
             return $officers;
@@ -334,7 +336,8 @@ class OfficerController extends Controller
                 $officers[$key]->officer_rank = Rank::where('ranks_uid', $officer->officer_rank)->first();
                 // $officers[$key]->officer_picture = ImageBlob::where('uid', $officer->officer_uid)->first();
                 $officers[$key]->officer_picturePresent = ForeignImageValidator::where('image_uid', $officer->officer_uid)->first('image_exist');
-                $officers[$key]->officer_picture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $officer->officer_uid . '.png';
+                // $officers[$key]->officer_picture = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $officer->officer_uid . '.png';
+                $officers[$key]->officer_picture = asset('storage/Images/' . $officer->officer_uid . '.png');
                 // $officers[$key]->officer_picturePresent = @getimagesize('https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $officer->officer_uid . '.png');
             }
             return $officers;

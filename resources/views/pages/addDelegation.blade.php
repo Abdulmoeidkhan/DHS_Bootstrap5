@@ -212,9 +212,9 @@
                                     <div class="result"></div>
                                 </div>
                                 <div
-                                    class="box-2 img-result {{isset($delegationHead->delegation_picture) ? ($delegationHead?->delegation_picture?->img_blob ? '' : 'hide') : ''}}">
+                                    class="box-2 img-result {{isset($delegationHead->delegation_picture) ? ($delegationHead?->delegation_picture ? '' : 'hide') : ''}}">
                                     <img class="cropped"
-                                        src="{{isset($delegationHead->delegation_picture)? $delegationHead?->delegation_picture?->img_blob:''}}"
+                                        src="{{isset($delegationHead->delegation_picture)? $delegationHead?->delegation_picture:''}}"
                                         alt="" />
                                 </div>
                                 <div class="box">
@@ -297,9 +297,9 @@
                                     <div class="result-representatives"></div>
                                 </div>
                                 <div
-                                    class="box-2-representatives img-result-representatives {{isset($representatives->delegation_picture) ? ($representatives?->delegation_picture?->img_blob ? '' : 'hide') : ''}}">
+                                    class="box-2-representatives img-result-representatives {{isset($representatives->delegation_picture) ? ($representatives?->delegation_picture ? '' : 'hide') : ''}}">
                                     <img class="cropped-representatives"
-                                        src="{{isset($representatives->delegation_picture)? $representatives?->delegation_picture?->img_blob:''}}"
+                                        src="{{isset($representatives->delegation_picture)? $representatives?->delegation_picture:''}}"
                                         alt="" />
                                 </div>
                                 <div class="box-representatives">
