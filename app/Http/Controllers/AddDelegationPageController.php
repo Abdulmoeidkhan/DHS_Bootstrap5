@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\MailController;
 use App\Models\Car;
 use App\Models\Delegate;
 use Illuminate\Http\Request;
@@ -16,7 +16,7 @@ use App\Models\Room;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
-class AddDelegationPageController extends Controller
+class AddDelegationPageController extends MailController
 {
     protected function badge($characters, $prefix)
     {
@@ -172,6 +172,7 @@ class AddDelegationPageController extends Controller
         try {
             if ($delegateSaved) {
                 $delegationSaved = $delegation->save();
+                $this->send_html_email($delegation->delegationhead);
                 if ($delegationSaved) {
                     return $req->submitAndRetain ? redirect()->back()->with('message', 'Delegation has been updated Successfully') : redirect()->route('pages.delegationsPage')->with('message', 'Delegation has been updated Successfully');
                 }

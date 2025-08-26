@@ -27,6 +27,7 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\InterestController;
 use App\Http\Controllers\InterpreterController;
 use App\Http\Controllers\LiasonsController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\MailOtpController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\OfficerController;
@@ -450,6 +451,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::post('/activationRequest', [ActivationRequest::class, 'activation'])->name('request.activation');
 Route::get('/sendhtmlemail/{id}', [MailOtpController::class, 'html_email'])->name("request.emailModule");
+Route::get('/sendemailinvitation/{id}', [MailController::class, 'send_html_email'])->name("request.emailInvitation");
 
 Route::get('auth/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('request.google');
 
