@@ -116,7 +116,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Route::get('/members', [MemberController::class, 'render'])->name('pages.members');
         Route::get('/delegation', [DelegationsPageController::class, 'singleDelegation'])->name('pages.delegation');
         Route::get('/specificLiason', [LiasonsController::class, 'renderSpecificLiason'])->name('pages.renderSpecificLiason');
-        Route::get('/specificLiasonData/{id}', [LiasonsController::class, 'specificLiasonData'])->name('request.specificLiasonData');
+        Route::get('/specificLiasonData/{id?}', [LiasonsController::class, 'specificLiasonData'])->name('request.specificLiasonData');
         Route::get('/specificReceivingData/{id?}', [ReceivingController::class, 'specificReceivingData'])->name('request.specificReceivingData');
         Route::get('/userProfile/delegateProfile', [UserFullProfileController::class, 'renderDelegateProfile'])->name('pages.delegateProfile');
     });

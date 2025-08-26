@@ -272,7 +272,7 @@
                     </a>
                 </li>
                 @endif
-                @if(session()->get('user')->roles[0]->name =="admin" ||session()->get('user')->roles[0]->name
+                <!-- if(session()->get('user')->roles[0]->name =="admin" ||session()->get('user')->roles[0]->name
                 =="snseaUser")
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
@@ -342,7 +342,7 @@
                         <span class="hide-menu">Essentials</span>
                     </a>
                 </li>
-                @endif
+                endif -->
                 @if(session()->get('user')->roles[0]->name =="admin"|| session()->get('user')->roles[0]->name =="dho")
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
