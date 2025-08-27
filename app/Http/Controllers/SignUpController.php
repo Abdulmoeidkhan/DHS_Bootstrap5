@@ -30,7 +30,7 @@ class SignUpController extends Controller
     }
     protected function basicRolesAndTeams($user)
     {
-        $team = Team::where('name', 'user')->first();
+        $team = Team::where('name', 'delegation')->first();
         $role = Role::where('name', 'user')->first();
         $permission = Permission::where('name', 'read')->first();
         $user->addRole($role, $team);

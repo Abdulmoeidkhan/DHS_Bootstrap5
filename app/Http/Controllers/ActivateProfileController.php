@@ -150,7 +150,7 @@ class ActivateProfileController extends Controller
 
     protected function delegationRolesAndTeams($uid, $delegationUid)
     {
-        $team = Team::where('name', 'delegate')->first();
+        $team = Team::where('name', 'delegation')->first();
         $role = Role::where('name', 'delegate')->first();
         $user = User::with('roles', 'permissions')->where('uid', $uid)->first();
         $oldPermissions = $user->permissions;

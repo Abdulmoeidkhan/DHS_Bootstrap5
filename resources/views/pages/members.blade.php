@@ -44,12 +44,12 @@
                 <div class="card-body p-4">
                     <h5 class="card-title fw-semibold mb-4">New Member</h5>
                     <div class="table-responsive">
-                        @if(session()->get('user')->roles[0]->name == "admin" || session()->get('user')->roles[0]->name === "dho" )
+                        {{-- if(session()->get('user')->roles[0]->name == "admin" || session()->get('user')->roles[0]->name === "dho" ) --}}
                         <form name="memberBasicInfo" id="memberBasicInfo" method="POST" enctype="multipart/form-data" action='{{route("request.addMemberRequest",$id)}}'>
-                            @else
-                            <form name="memberBasicInfo" id="memberBasicInfo" method="POST" enctype="multipart/form-data">
-                                @endif
-                                <fieldset @if(session()->get('user')->roles[0]->name =="delegate") disabled @endif>
+                            {{-- else
+                            <form name="memberBasicInfo" id="memberBasicInfo" method="POST" enctype="multipart/form-data" >
+                                endif --}}
+                                <fieldset>
                                     <legend>Add Members Form</legend>
                                     @csrf
                                     <div class="mb-3">

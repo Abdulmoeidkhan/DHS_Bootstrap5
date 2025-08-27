@@ -201,6 +201,7 @@ class DelegationsPageController extends Controller
                 $delegations[$key]->member_count = Delegate::where([['delegation', $delegation->uid], ['self', 1], ['status', 1]])->count();
                 $delegations[$key]->members = Delegate::where([['delegation', $delegation->uid], ['delegation_type', 'Member'], ['status', 1]])->orWhere([['delegation', $delegation->uid], ['delegation_type', 'Rep'], ['status', 1]])->get();
                 $delegations[$key]->rankName = Rank::where('ranks_uid', $delegation->rank)->first('ranks_name');
+                $delegations[$key]->officers = DB::table('officers')->leftJoin('ranks', 'officers.officer_rank', '=', 'ranks.ranks_uid')->where('officer_delegation', $delegation->uid)->select('officers.*', 'ranks.ranks_name')->get();
                 $delegations[$key]->vips = Vips::where('vips_uid', $delegation->vips_uid)->first();
                 $delegations[$key]->vips->rank = Rank::where('ranks_uid', $delegations[$key]->vips->vips_rank)->first('ranks_name');
                 $delegations[$key]->cars = Car::where('car_delegation', $delegation->uid)->get();
