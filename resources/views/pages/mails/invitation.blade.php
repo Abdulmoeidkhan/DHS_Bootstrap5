@@ -80,12 +80,12 @@
                         <div style="font-weight:bolder; padding-left:8rem;"><br />Activation Code
                             <br /><br /><b>{{$delegation->delegationCode}}</b>
                         </div>
-                        <div style="padding-right:8rem"><img src="{{$message->embed(public_path('images/primary_QR.png'))}}" width="100px"
+                        <div style="padding-right:8rem"><img src="{{public_path('images/primary_QR.png')}}" width="100px"
                                 height="100px" /></div>
                     </div>
-                    <p style="text-align:center; font-size:12px;">(In case of login/ signup issue please contact on <a
+                    <!-- <p style="text-align:center; font-size:12px;">(In case of login/ signup issue please contact on <a
                             href="mailto:support@badarexpo.com">support@badarexpo.com</a> or Whatsapp <b><a
-                                href="tel:+923000204623">+92-300-0204623</a></b>)</p>
+                                href="tel:+923000204623">+92-300-0204623</a></b>)</p> -->
                     <p style="padding-left:2rem; text-indent:2rem;">
                         {{config('localvariables.para4')}}
                     </p>
@@ -155,7 +155,8 @@
             </div>
         </div>
         <div class="row d-flex justify-content-center">
-            <img src="{{ $message->embed(public_path('assets/images/logos/pimec-2025-logostrip.png')) }}" style="width:80%; height:40%;" alt="Partners LOGO" />
+            <!-- <img src="{{ public_path('assets/images/logos/pimec-2025-logostrip.png')}}" style="width:80%; height:40%;" alt="Partners LOGO" /> -->
+            <img src="{{ public_path('images/icons/pimec-2025.png-logostrip') }}" width="120" height="120">
         </div>
         <br />
     </div>

@@ -110,9 +110,9 @@
                     <div style="padding-right:8rem"><img src="{{asset('images/primary_QR.png')}}" width="100px"
                             height="100px" /></div>
                 </div>
-                <p style="text-align:center; font-size:12px;">(In case of login/ signup issue please contact on <a
+                <!-- <p style="text-align:center; font-size:12px;">(In case of login/ signup issue please contact on <a
                         href="mailto:support@badarexpo.com">support@badarexpo.com</a> or Whatsapp <b><a
-                            href="tel:+923000204623">+92-300-0204623</a></b>)</p>
+                            href="tel:+923000204623">+92-300-0204623</a></b>)</p> -->
                 <p style="padding-left:2rem; text-indent:2rem;">
                     {{config('localvariables.para4')}}
                 </p>

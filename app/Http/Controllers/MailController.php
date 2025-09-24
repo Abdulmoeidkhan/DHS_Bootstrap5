@@ -10,6 +10,7 @@ use App\Models\Rank;
 use App\Models\Vips;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\QueryException;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class MailController extends Controller
 {
@@ -45,13 +46,40 @@ class MailController extends Controller
             $delegate->invitedByDesignation = Vips::where('vips_uid', $delegation->invited_by)->first('vips_designation');
             $data = array('email' => $delegation->email_address, 'host' => $host, 'delegation' => $delegation, 'delegate' => $delegate);
             $email_address = $request->recipient;
-            Mail::send('pages.mails.invitation', $data, function ($message) use ($email_address) {
-                $message->to($email_address, "DHS")->subject('Invitation Details');
-                $message->bcc("abdul.moeid@badarexpo.com", "DHS")->subject('Invitation Details');
-                // $message->bcc("pimeccoordination2025@gmail.com", "DHS")->subject('Invitation Details');
-                // $message->bcc("suleman.ahmed@badarexpo.com", "DHS")->subject('Invitation Details');
-                $message->from("noreply.badarvms@gmail.com", "Invitation");
+
+            // Load the Blade view with data
+            $pdf = Pdf::loadView('pages.mails.invitation', [
+                'delegate' => $delegate,
+                'delegation' => $delegation,
+            ]);
+
+            // Optional: Save PDF to storage if needed
+            $pdfPath = storage_path("app/public/email_invitation_{$id}.pdf");
+            $pdf->save($pdfPath);
+
+
+            // Mail::send('pages.mails.invitation', $data, function ($message) use ($email_address) {
+            //     $message->to($email_address, "DHS")->subject('Invitation Details');
+            //     $message->bcc("abdul.moeid@badarexpo.com", "DHS")->subject('Invitation Details');
+            //     // $message->bcc("pimeccoordination2025@gmail.com", "DHS")->subject('Invitation Details');
+            //     // $message->bcc("suleman.ahmed@badarexpo.com", "DHS")->subject('Invitation Details');
+            //     $message->from("noreply.badarvms@gmail.com", "Invitation");
+            // });
+
+            // Send Email with PDF attached
+            Mail::send('pages.mails.invitation', $data, function ($message) use ($email_address, $pdfPath) {
+                $message->to($email_address, "DHS")->subject('PIMEC 2025 Invitation')->attach($pdfPath, [
+                    'as' => 'Invitation.pdf',
+                    'mime' => 'application/pdf',
+                ]);;
+                $message->bcc("abdul.moeid@badarexpo.com", "DHS")->subject('PIMEC 2025 Invitation')
+                    ->attach($pdfPath, [
+                        'as' => 'Invitation.pdf',
+                        'mime' => 'application/pdf',
+                    ]);
             });
+
+
             return response()->json(['success' => true, 'message' => 'Email sent successfully.']);
         } catch (QueryException $exception) {
             return response()->json([
