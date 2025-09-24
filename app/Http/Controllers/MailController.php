@@ -22,15 +22,44 @@ class MailController extends Controller
             $delegate->rankName = Rank::where('ranks_uid', $delegate->rank)->first();
             $delegate->invitedByDesignation = Vips::where('vips_uid', $delegation->invited_by)->first('vips_designation');
             $data = array('email' => $delegation->email_address, 'host' => $host, 'delegation' => $delegation, 'delegate' => $delegate);
-            $email_address=$delegation->email_address;
+            $email_address = $delegation->email_address;
             Mail::send('pages.mails.invitation', $data, function ($message) use ($email_address) {
                 $message->to($email_address, "DHS")->subject('Invitation Details');
                 $message->bcc("abdul.moeid@badarexpo.com", "DHS")->subject('Invitation Details');
+                $message->bcc("pimeccoordination2025@gmail.com", "DHS")->subject('Invitation Details');
+                $message->bcc("suleman.ahmed@badarexpo.com", "DHS")->subject('Invitation Details');
                 $message->from("noreply.badarvms@gmail.com", "Invitation");
             });
             return true;
         } catch (QueryException $exception) {
             print_r($exception->errorInfo);
+        }
+    }
+    public function send_html_email_on_given_email($id, Request $request)
+    {
+        try {
+            $host = request()->getHttpHost();
+            $delegate = Delegate::where('delegation', $id)->orWhere('delegates_uid', $id)->first();
+            $delegation = Delegation::where('uid', $delegate->delegation)->first();
+            $delegate->rankName = Rank::where('ranks_uid', $delegate->rank)->first();
+            $delegate->invitedByDesignation = Vips::where('vips_uid', $delegation->invited_by)->first('vips_designation');
+            $data = array('email' => $delegation->email_address, 'host' => $host, 'delegation' => $delegation, 'delegate' => $delegate);
+            $email_address = $request->recipient;
+            Mail::send('pages.mails.invitation', $data, function ($message) use ($email_address) {
+                $message->to($email_address, "DHS")->subject('Invitation Details');
+                $message->bcc("abdul.moeid@badarexpo.com", "DHS")->subject('Invitation Details');
+                // $message->bcc("pimeccoordination2025@gmail.com", "DHS")->subject('Invitation Details');
+                // $message->bcc("suleman.ahmed@badarexpo.com", "DHS")->subject('Invitation Details');
+                $message->from("noreply.badarvms@gmail.com", "Invitation");
+            });
+            return response()->json(['success' => true, 'message' => 'Email sent successfully.']);
+        } catch (QueryException $exception) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to send email.',
+                'error' => $exception->getMessage(),
+                'errorInfo' => $exception->errorInfo
+            ]);
         }
     }
 }

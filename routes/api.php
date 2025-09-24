@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivationRequest;
 use App\Http\Controllers\SignInController;
 use App\Http\Controllers\SignUpController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\AddVipsController;
 use App\Http\Controllers\ProgramController;
 use Illuminate\Http\Request;
@@ -29,8 +30,7 @@ Route::group(['auth' => 'sanctum'], function () {
     // VIPS API Start
     Route::post('/addVips', [AddVipsController::class, 'addVips'])->name('request.addVips');
     // VIPS API End
-
-
+    Route::post('/sendemailinvitation/{id}', [MailController::class, 'send_html_email_on_given_email'])->name("request.emailInvitationSpecificEmail");
 });
 
 

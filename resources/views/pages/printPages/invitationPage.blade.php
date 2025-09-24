@@ -42,12 +42,38 @@
         margin: 20px 0px;
     }
 </style>
-<div class="container-fluid">
-    <div class="row btn-contain container">
-        <div class="d-flex justify-content-center">
-            <button class="btn btn-outline-primary" onclick="window.print()">Print this Invitation</button>
+<div class="modal fade" id="emailAddressModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Send Invitation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formForEmail" onsubmit='submitFunction(event,`{{route("request.emailInvitationSpecificEmail",["id"=>$id])}}`);'>
+                    @csrf
+                    <div class="mb-3">
+                        <label for="recipient" class="col-form-label">Recipient:</label>
+                        <input type="email" class="form-control" id="recipient" name="recipient" required>
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" id="sendEmailBtn" class="btn btn-primary">Send message</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
         </div>
     </div>
+</div>
+<span id="alert-comp"></span>
+<div class="container-fluid">
+    <div class="row btn-contain container">
+        <div class="d-flex justify-content-center gap-2">
+            <button class="btn btn-outline-primary" onclick="window.print()">Print this Invitation</button>
+            <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#emailAddressModal">Send this Invitation</button>
+        </div>
+    </div>
+    <br />
     <br />
     <div class="row container-first-intro-child" style="padding-left:2rem;">
         <div class="col-md-12 d-flex align-items-center">
@@ -68,7 +94,8 @@
                     {{$renderRank->ranks_name}}
                     @endif
                     {{$guest->first_Name}} {{$guest->last_Name}}
-                    @endif,</h4>
+                    @endif,
+                </h4>
                 <p style="padding-left:2rem;text-indent:2rem;">The Pakistan International Maritime Expo & Conference
                     (PIMEC) team welcome
                     you for the International Defence Exhibition and Seminar PIMEC 2025. Please confirm your attendance
@@ -160,6 +187,53 @@
     </div>
     <br />
     {{-- <div class="row d-flex justify-content-end">
-        {{$delegation->country}}/{{$delegate->invitedByDesignation->vips_designation}} &nbsp;</div> --}}
+        {{$delegation->country}}/{{$delegate->invitedByDesignation->vips_designation}} &nbsp;
+</div> --}}
 </div>
+<script>
+    function submitFunction(e, route) {
+        e.preventDefault();
+        
+        const submitBtn = document.getElementById('sendEmailBtn');
+        submitBtn.disabled = true; // Disable button
+
+        const formData = new FormData(e.target);
+        const formValues = {};
+
+        formData.forEach((value, key) => {
+            if (formValues[key]) {
+                if (Array.isArray(formValues[key])) {
+                    formValues[key].push(value);
+                } else {
+                    formValues[key] = [formValues[key], value];
+                }
+            } else {
+                formValues[key] = value;
+            }
+        });
+
+        axios.post(route, formValues).then(response => {
+
+            // Show alert
+            document.getElementById('alert-comp').innerHTML = `
+                <div class="alert alert-${response.data.success ? 'success' : 'danger'} alert-dismissible fade show" role="alert">
+                    <strong>${response.data.message}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>`;
+
+            // Close modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('emailAddressModal'));
+            modal.hide();
+
+            // Reset form
+            e.target.reset();
+
+        }).catch(error => {
+            console.error(error);
+        }).finally(() => {
+            // Re-enable button after request finishes
+            submitBtn.disabled = false;
+        });
+    }
+</script>
 @endsection

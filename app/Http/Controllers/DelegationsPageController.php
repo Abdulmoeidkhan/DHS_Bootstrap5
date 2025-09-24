@@ -63,7 +63,10 @@ class DelegationsPageController extends Controller
                 $delegations[$key]->car = CarPlan::where([['delegation_uid', $delegation->uid]])->get();
                 // $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
                 $delegations[$key]->member_count = Delegate::where([['delegation', $delegation->uid], ['self', 1], ['status', 1]])->count();
-                $delegations[$key]->members = Delegate::where([['delegation', $delegation->uid], ['delegation_type', 'Member'], ['status', 1]])->orWhere([['delegation', $delegation->uid], ['delegation_type', 'Rep'], ['status', 1]])->get();
+                $delegations[$key]->members = Delegate::where('delegation', $delegation->uid)
+                    ->where('status', 1)
+                    ->whereIn('delegation_type', ['Member', 'Rep'])
+                    ->get();
                 $delegations[$key]->rankName = Rank::where('ranks_uid', $delegation->rank)->first('ranks_name');
                 $delegations[$key]->vips = Vips::where('vips_uid', $delegation->vips_uid)->first();
                 $delegations[$key]->vips->rank = Rank::where('ranks_uid', $delegations[$key]->vips->vips_rank)->first('ranks_name');
@@ -83,9 +86,11 @@ class DelegationsPageController extends Controller
                 foreach ($delegations[$key]->interests as $keyInterests => $interest) {
                     $delegations[$key]->interests[$keyInterests]->program = Program::where('program_uid', $interest->program_uid)->first();
                 }
+
                 foreach ($delegations[$key]->members as $memberkey => $members) {
                     $delegations[$key]->members[$memberkey]->rank = Rank::where('ranks_uid', $members->rank)->first('ranks_name');
                 }
+
                 foreach ($delegations[$key]->cars as $keyCar => $car) {
                     $delegations[$key]->cars[$keyCar]->driver = Driver::where('driver_uid', $car->driver_uid)->first();
                 }
@@ -199,7 +204,10 @@ class DelegationsPageController extends Controller
                 $delegations[$key]->car = CarPlan::where([['delegation_uid', $delegation->uid]])->get();
                 // $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
                 $delegations[$key]->member_count = Delegate::where([['delegation', $delegation->uid], ['self', 1], ['status', 1]])->count();
-                $delegations[$key]->members = Delegate::where([['delegation', $delegation->uid], ['delegation_type', 'Member'], ['status', 1]])->orWhere([['delegation', $delegation->uid], ['delegation_type', 'Rep'], ['status', 1]])->get();
+                $delegations[$key]->members = Delegate::where('delegation', $delegation->uid)
+                    ->where('status', 1)
+                    ->whereIn('delegation_type', ['Member', 'Rep'])
+                    ->get();
                 $delegations[$key]->rankName = Rank::where('ranks_uid', $delegation->rank)->first('ranks_name');
                 $delegations[$key]->officers = DB::table('officers')->leftJoin('ranks', 'officers.officer_rank', '=', 'ranks.ranks_uid')->where('officer_delegation', $delegation->uid)->select('officers.*', 'ranks.ranks_name')->get();
                 $delegations[$key]->vips = Vips::where('vips_uid', $delegation->vips_uid)->first();
@@ -304,7 +312,10 @@ class DelegationsPageController extends Controller
                 $delegations[$key]->car = CarPlan::where([['delegation_uid', $delegation->uid]])->get();
                 // $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
                 $delegations[$key]->member_count = Delegate::where([['delegation', $delegation->uid], ['self', 1], ['status', 1]])->count();
-                $delegations[$key]->members = Delegate::where([['delegation', $delegation->uid], ['delegation_type', 'Member'], ['status', 1]])->orWhere([['delegation', $delegation->uid], ['delegation_type', 'Rep'], ['status', 1]])->get();
+                $delegations[$key]->members = Delegate::where('delegation', $delegation->uid)
+                    ->where('status', 1)
+                    ->whereIn('delegation_type', ['Member', 'Rep'])
+                    ->get();
                 $delegations[$key]->rankName = Rank::where('ranks_uid', $delegation->rank)->first('ranks_name');
                 $delegations[$key]->vips = Vips::where('vips_uid', $delegation->vips_uid)->first();
                 $delegations[$key]->vips->rank = Rank::where('ranks_uid', $delegations[$key]->vips->vips_rank)->first('ranks_name');
@@ -411,7 +422,10 @@ class DelegationsPageController extends Controller
                 $delegations[$key]->car = CarPlan::where([['delegation_uid', $delegation->uid]])->get();
                 // $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
                 $delegations[$key]->member_count = Delegate::where([['delegation', $delegation->uid], ['self', 1], ['status', 1]])->count();
-                $delegations[$key]->members = Delegate::where([['delegation', $delegation->uid], ['delegation_type', '!=', 'Self'], ['status', 1]])->get();
+                $delegations[$key]->members = Delegate::where('delegation', $delegation->uid)
+                    ->where('status', 1)
+                    ->whereIn('delegation_type', ['Member', 'Rep'])
+                    ->get();
                 $delegations[$key]->rankName = Rank::where('ranks_uid', $delegation->rank)->first('ranks_name');
                 $delegations[$key]->vips = Vips::where('vips_uid', $delegation->vips_uid)->first();
                 $delegations[$key]->vips->rank = Rank::where('ranks_uid', $delegations[$key]->vips->vips_rank)->first('ranks_name');
@@ -517,7 +531,10 @@ class DelegationsPageController extends Controller
                 $delegations[$key]->car = CarPlan::where([['delegation_uid', $delegation->uid]])->get();
                 // $delegations[$key]->carB = CarPlan::where([['delegation_uid', $delegation->uid], ['car_category_uid', 'a2f0a2e4-984b-42e9-a4b9-0e9f9d11c8ee']])->first(['car_quantity', 'car_plan_uid']);
                 $delegations[$key]->member_count = Delegate::where([['delegation', $delegation->uid], ['self', 1], ['status', 1]])->count();
-                $delegations[$key]->members = Delegate::where([['delegation', $delegation->uid], ['delegation_type', '!=', 'Self'], ['status', 1]])->get();
+                $delegations[$key]->members = Delegate::where('delegation', $delegation->uid)
+                    ->where('status', 1)
+                    ->whereIn('delegation_type', ['Member', 'Rep'])
+                    ->get();
                 $delegations[$key]->rankName = Rank::where('ranks_uid', $delegation->rank)->first('ranks_name');
                 $delegations[$key]->vips = Vips::where('vips_uid', $delegation->vips_uid)->first();
                 $delegations[$key]->vips->rank = Rank::where('ranks_uid', $delegations[$key]->vips->vips_rank)->first('ranks_name');
@@ -639,14 +656,14 @@ class DelegationsPageController extends Controller
                 $delegationUid = $officers ? $officers->officer_delegation : null;
                 // return $officers;
                 break;
-                // case "receiving":
-                //     $officers = Receiving::where('receiving_uid', session()->get('user')->uid)->first('receiving_delegation');
-                //     $delegationUid = $officers ? $officers->receiving_delegation : 0;
-                //     break;
-                // case "interpreter":
-                //     $officers = Interpreter::where('interpreter_uid', session()->get('user')->uid)->first('interpreter_delegation');
-                //     $delegationUid = $officers ? $officers->interpreter_delegation : 0;
-                //     break;
+            // case "receiving":
+            //     $officers = Receiving::where('receiving_uid', session()->get('user')->uid)->first('receiving_delegation');
+            //     $delegationUid = $officers ? $officers->receiving_delegation : 0;
+            //     break;
+            // case "interpreter":
+            //     $officers = Interpreter::where('interpreter_uid', session()->get('user')->uid)->first('interpreter_delegation');
+            //     $delegationUid = $officers ? $officers->interpreter_delegation : 0;
+            //     break;
             default:
                 return redirect()->back()->with('error', 'Something Went Wrong');
         }

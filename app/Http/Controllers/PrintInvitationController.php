@@ -21,7 +21,7 @@ class PrintInvitationController extends Controller
         $delegate->rankName = Rank::where('ranks_uid', $delegate->rank)->first();
         $delegate->invitedByDesignation = Vips::where('vips_uid', $delegation->invited_by)->first('vips_designation');
 
-        return view('pages.printPages.invitationPage', ['delegate' => $delegate, 'delegation' => $delegation]);
+        return view('pages.printPages.invitationPage', ['delegate' => $delegate, 'delegation' => $delegation, 'id' => $id]);
     }
 
     public function printDelegationBadge($id, $type)
