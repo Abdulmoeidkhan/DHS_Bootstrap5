@@ -7,7 +7,7 @@ use App\Models\Member;
 use App\Models\Delegation;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\{DB,Storage};
 use App\Http\Controllers\Controller;
 use App\Models\Delegate;
 use App\Models\DelegateFlight;
@@ -20,7 +20,6 @@ use App\Models\ImageBlob;
 use App\Models\Rank;
 use App\Models\Room;
 use App\Models\Roomtype;
-use Illuminate\Support\Facades\Storage;
 
 
 class MemberController extends Controller

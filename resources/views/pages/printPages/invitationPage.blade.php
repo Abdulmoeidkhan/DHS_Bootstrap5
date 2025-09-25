@@ -42,7 +42,8 @@
         margin: 20px 0px;
     }
 </style>
-<div class="modal fade" id="emailAddressModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="emailAddressModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -50,7 +51,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="formForEmail" onsubmit='submitFunction(event,`{{route("request.emailInvitationSpecificEmail",["id"=>$id])}}`);'>
+                <form id="formForEmail"
+                    onsubmit='submitFunction(event,`{{route("request.emailInvitationSpecificEmail",["id"=>$id])}}`);'>
                     @csrf
                     <div class="mb-3">
                         <label for="recipient" class="col-form-label">Recipient:</label>
@@ -64,13 +66,21 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <span id="alert-comp"></span>
 <div class="container-fluid">
     <div class="row btn-contain container">
         <div class="d-flex justify-content-center gap-2">
             <button class="btn btn-outline-primary" onclick="window.print()">Print this Invitation</button>
-            <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#emailAddressModal">Send this Invitation</button>
+            {{-- <button class="btn btn-outline-secondary" data-bs-toggle="modal"
+                data-bs-target="#emailAddressModal">Send
+                this Invitation</button> --}}
+            @if($delegation->email_address)
+            <form onsubmit='submitFunction(event,`{{route("request.emailInvitationSpecificEmail",["id"=>$id])}}`);'>
+                <button type="submit" id="sendEmailBtn" class="btn btn-outline-secondary">Send
+                    this Invitation</button>
+            </form>
+            @endif
         </div>
     </div>
     <br />
@@ -96,19 +106,24 @@
                     {{$guest->first_Name}} {{$guest->last_Name}}
                     @endif,
                 </h4>
+                <h5 class="text-capitalize" style="font-weight: 600; padding-left:2rem">
+                    Country : {{$delegation->country}}
+                </h5>
+                <h5 class="text-capitalize" style="font-weight: 600; padding-left:2rem">
+                    Invited By : {{$delegate->invitedByDesignation->vips_designation}}
+                </h5>
                 <p style="padding-left:2rem;text-indent:2rem;">The Pakistan International Maritime Expo & Conference
                     (PIMEC) team welcome
                     you for the International Defence Exhibition and Seminar PIMEC 2025. Please confirm your attendance
                     by creating account / Login ID on our Online Delegation System at <b><a
                             href="https://delegation.pimec.gov.pk" target="_blank">www.delegation.pimec.gov.pk</a></b>.
-                    Your Activation Code is given
-                    below:- </p>
+                    Your Portal Activation Code is <b> ( {{$delegation->delegationCode}} )</b>.</p>
                 <div class="container-mine">
-                    <div style="font-weight:bolder; padding-left:8rem;"><br />Activation Code
+                    {{-- <div style="font-weight:bolder; padding-left:8rem;"><br />Activation Code
                         <br /><br /><b>{{$delegation->delegationCode}}</b>
-                    </div>
-                    <div style="padding-right:8rem"><img src="{{asset('images/primary_QR.png')}}" width="100px"
-                            height="100px" /></div>
+                    </div> --}}
+                    {{-- <div style="padding-right:8rem"><img src="{{asset('images/primary_QR.png')}}" width="100px"
+                            height="100px" /></div> --}}
                 </div>
                 <!-- <p style="text-align:center; font-size:12px;">(In case of login/ signup issue please contact on <a
                         href="mailto:support@badarexpo.com">support@badarexpo.com</a> or Whatsapp <b><a
@@ -130,14 +145,14 @@
             </div>
         </div>
     </div>
-    <div class="row container-first-child">
-        <div class="col-md-12 parent-print-program d-flex flex-row-reverse">
+    {{-- <div class="row container-first-child">
+        <div class="col-md-12 parent-print-program d-flex flex-row">
             <div>
                 <p style="line-height: 14px; margin-bottom:0px;">Regards<br />Team PIMEC</p>
                 <!-- <p></p> -->
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="row">
         <div class="col-md-12">
             <br />
@@ -181,14 +196,13 @@
             </div>
         </div>
     </div>
+
     <div class="row d-flex justify-content-center">
         <img src="{{asset('images/icons/pimec-2025-logostrip.png')}}" style="width:80%; height:40%;"
             alt="Partners LOGO" />
     </div>
     <br />
-    {{-- <div class="row d-flex justify-content-end">
-        {{$delegation->country}}/{{$delegate->invitedByDesignation->vips_designation}} &nbsp;
-</div> --}}
+
 </div>
 <script>
     function submitFunction(e, route) {
