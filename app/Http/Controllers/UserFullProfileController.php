@@ -27,6 +27,7 @@ class UserFullProfileController extends Controller
         $user->team = Team::where('id', $user->roles[0]->pivot->team_id)->first(['id','name','display_name']);
         $image = ImageBlob::where('uid', $id)->first();
         $user->images = $image;
+        return ['user' => $user, 'roles' => $roles, 'permissions' => $permissions, 'teams' => $teams, 'selectiveRoles' => $selectiveRoles];
         return view('pages.profileUser', ['user' => $user, 'roles' => $roles, 'permissions' => $permissions, 'teams' => $teams, 'selectiveRoles' => $selectiveRoles]);
     }
     public function renderMyProfile(Request $req)

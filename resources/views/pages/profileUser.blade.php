@@ -333,7 +333,7 @@
         dwn.setAttribute('href', imgSrc);
     });
 </script>
-<script>
+{{-- <script>
     // vars
     let result_representatives = document.querySelector('.result-representatives'),
         img_result_representatives = document.querySelector('.img-result-representatives'),
@@ -387,6 +387,6 @@
         dwn_representatives.download = 'imagename.png';
         dwn_representatives.setAttribute('href', imgSrc);
     });
-</script>
+</script> --}}
 @endsection
 @endauth
