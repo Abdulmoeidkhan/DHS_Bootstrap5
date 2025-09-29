@@ -283,6 +283,9 @@ class AddDelegationPageController extends MailController
             $req->rep_saved_picture ? $this->imageBlobUpdate($req->rep_saved_picture, $delegationRepUid) : 0;
             $req->pdf ? $this->documentUpdate($req->file('pdf'), $delegationSelfUid) : 0;
             $req->savedpicture ? $this->imageBlobUpdate($req->savedpicture, $delegationSelfUid) : 0;
+            if (isset($req->email_address)) {
+                $this->send_html_email_on_given_email($arrayToBeUpdate['uid']);
+            }
             // $delegateStatusUpdate = $req->delegation_response == "Accepted" ? Delegate::where('delegation', $arrayToBeUpdate['uid'])->update(['status' => 1]) : Delegate::where('delegation', $arrayToBeUpdate['uid'])->update(['status' => 0]);
             if ($delegateUpdate) {
                 if ($arrayToBeUpdate['delegation_response'] == 'Regretted') {

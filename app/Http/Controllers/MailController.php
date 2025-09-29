@@ -86,7 +86,7 @@ class MailController extends Controller
     //         ]);
     //     }
     // }
-    public function send_html_email_on_given_email($id, Request $request)
+    public function send_html_email_on_given_email($id)
     {
         try {
             $host = request()->getHttpHost();
