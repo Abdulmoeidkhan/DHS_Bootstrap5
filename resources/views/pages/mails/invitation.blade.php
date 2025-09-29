@@ -48,8 +48,44 @@
         }
     </style>
 </head>
+@php
+if (!isset($guest)) {
+$guest = \App\Models\Delegate::where('delegates_uid', $delegation->delegationhead)->first();
+}
+
+if(!isset($renderRank)){
+$renderRank=\App\Models\Rank::where('ranks_uid',$guest->rank)->first();
+}
+@endphp
 
 <body class="antialiased">
+    <div class="row btn-contain container-fluid">
+        <div class="col-12">
+            <h5>
+                Respected Defence attache,
+            </h5>
+            <p>
+                Please forward this invitation for PIMEC 25 to
+                <span style="font-size:18px; font-weight:bolder">Honorable
+                    @if($guest)
+                    @if($renderRank)
+                    {{$renderRank->ranks_name}}
+                    @endif
+                    {{$guest->first_Name}} {{$guest->last_Name}}
+                    @endif
+                </span>
+                <br />
+                Our helpline number is ,(
+                <a href="tel:+923268050301">+92 326 8050301</a>,
+                <a href="tel:+923268050302">+92 326 8050302</a>,
+                <a href="mailto:pimeccoordination2025@gmail.com">pimeccoordination2025@gmail.com</a>
+                ).
+                <br />
+                Invitation email to delegate is given below:
+            </p>
+        </div>
+    </div>
+    <br />
     <div class="container-fluid">
         <div class="row container-first-intro-child" style="padding-left:2rem;">
             <div class="col-md-12 d-flex align-items-center">
@@ -65,8 +101,8 @@
             <div class="col-md-12 parent-print-program d-print-inline">
                 <div>
                     <h4 class="text-capitalize" style="font-weight: 600; padding-left:2rem">Honorable
-                        @if($guest=\App\Models\Delegate::where('delegates_uid',$delegation->delegationhead)->first())
-                        @if($renderRank=\App\Models\Rank::where('ranks_uid',$guest->rank)->first())
+                        @if($guest)
+                        @if($renderRank)
                         {{$renderRank->ranks_name}}
                         @endif
                         {{$guest->first_Name}} {{$guest->last_Name}}
@@ -89,30 +125,31 @@
                     <div class="container-mine">
                         {{-- <div style="font-weight:bolder; padding-left:8rem;"><br />Activation Code
                             <br /><br /><b>{{$delegation->delegationCode}}</b>
-                        </div> --}}
-                        {{-- <div style="padding-right:8rem"><img src="{{asset('images/primary_QR.png')}}" width="100px"
-                                height="100px" /></div> --}}
-                    </div>
-                    <!-- <p style="text-align:center; font-size:12px;">(In case of login/ signup issue please contact on <a
+                    </div> --}}
+                    {{-- <div style="padding-right:8rem"><img src="{{asset('images/primary_QR.png')}}" width="100px"
+                    height="100px" />
+                </div> --}}
+            </div>
+            <!-- <p style="text-align:center; font-size:12px;">(In case of login/ signup issue please contact on <a
                         href="mailto:support@badarexpo.com">support@badarexpo.com</a> or Whatsapp <b><a
                             href="tel:+923000204623">+92-300-0204623</a></b>)</p> -->
-                    <p style="padding-left:2rem; text-indent:2rem;">
-                        {{config('localvariables.para4')}}
-                    </p>
-                    <div style="padding-left:2rem;">
-                        <ol>
-                            <li>{{config('localvariables.li1')}}</li>
-                            <li>{{config('localvariables.li2')}}</li>
-                            <li>{{config('localvariables.li3')}}</li>
-                            <li>{{config('localvariables.li4')}}</li>
-                            <li>{{config('localvariables.li5')}}</li>
-                            <li>{{config('localvariables.li6')}}</li>
-                            <li>{{config('localvariables.li7')}}</li>
-                        </ol>
-                    </div>
-                </div>
+            <p style="padding-left:2rem; text-indent:2rem;">
+                {{config('localvariables.para4')}}
+            </p>
+            <div style="padding-left:2rem;">
+                <ol>
+                    <li>{{config('localvariables.li1')}}</li>
+                    <li>{{config('localvariables.li2')}}</li>
+                    <li>{{config('localvariables.li3')}}</li>
+                    <li>{{config('localvariables.li4')}}</li>
+                    <li>{{config('localvariables.li5')}}</li>
+                    <li>{{config('localvariables.li6')}}</li>
+                    <li>{{config('localvariables.li7')}}</li>
+                </ol>
             </div>
         </div>
+    </div>
+    </div>
     </div>
     <div class="row">
         <div class="col-md-12">
