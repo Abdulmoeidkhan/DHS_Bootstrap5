@@ -59,33 +59,6 @@ $renderRank=\App\Models\Rank::where('ranks_uid',$guest->rank)->first();
 @endphp
 
 <body class="antialiased">
-    <div class="row btn-contain container-fluid">
-        <div class="col-12">
-            <h5>
-                Respected Defence attache,
-            </h5>
-            <p>
-                Please forward this invitation for PIMEC 25 to
-                <span style="font-size:18px; font-weight:bolder">Honorable
-                    @if($guest)
-                    @if($renderRank)
-                    {{$renderRank->ranks_name}}
-                    @endif
-                    {{$guest->first_Name}} {{$guest->last_Name}}
-                    @endif
-                </span>
-                <br />
-                Our helpline number is ,(
-                <a href="tel:+923268050301">+92 326 8050301</a>,
-                <a href="tel:+923268050302">+92 326 8050302</a>,
-                <a href="mailto:pimeccoordination2025@gmail.com">pimeccoordination2025@gmail.com</a>
-                ).
-                <br />
-                Invitation email to delegate is given below:
-            </p>
-        </div>
-    </div>
-    <br />
     <div class="container-fluid">
         <div class="row container-first-intro-child" style="padding-left:2rem;">
             <div class="col-md-12 d-flex align-items-center">
