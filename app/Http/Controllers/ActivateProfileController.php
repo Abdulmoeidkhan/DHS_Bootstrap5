@@ -100,7 +100,7 @@ class ActivateProfileController extends Controller
     {
         $team = Team::where('name', $rolesAndTeam)->first();
         $role = Role::where('name', $rolesAndTeam)->first();
-        $user = User::with('roles', 'permissions')->where('uid', $uid)->first();
+        $user = User::with(['roles', 'permissions'])->where('uid', $uid)->first();
         $oldPermissions = $user->permissions;
         $rolesRemoved = $user->removeRole($user->roles[0], $user->roles[0]);
         foreach ($oldPermissions as $oldPermission) {
@@ -110,7 +110,7 @@ class ActivateProfileController extends Controller
             try {
                 $rolesAdded = $user->addRole($role, $team);
                 $newdPermissions = $user->givePermissions(['read', 'create'], $team);
-                $updatedUser = User::with('roles', 'permissions')->where('uid', $uid)->first();
+                $updatedUser = User::with(['roles', 'permissions'])->where('uid', $uid)->first();
                 $updatedUser->images = Image::where('uid', $uid)->first();
                 session()->forget('user');
                 session()->put('user', $updatedUser);
@@ -129,13 +129,28 @@ class ActivateProfileController extends Controller
 
     protected function activateDelegate($recievedParams)
     {
-        $delegationUid = Delegation::where([['delegationCode', $recievedParams->activationCode . '']])->first();
+        $delegationUid = Delegation::where('delegationCode', $recievedParams->activationCode . '')->first();
         if ($delegationUid) {
             try {
                 $delegateClaim = Delegation::where('uid', $delegationUid->uid)->update(['user_uid' => Auth::user()->uid]);
                 $updatesDone = $delegateClaim ? Delegation::where('delegationCode', $recievedParams->activationCode . '')->update(['delegation_response' => 'Accepted']) : false;
-                $rolesAndPermissionGiven = $updatesDone ? $this->delegationRolesAndTeams($recievedParams->uid, $delegationUid) : false;
-                return $rolesAndPermissionGiven;
+
+                $user = User::with(['roles', 'permissions'])->where('uid', $recievedParams->uid)->first();
+                $team = Team::where('name', 'delegation')->first();
+                $role = Role::where('name', 'delegate')->first();
+                $user->permissions()->detach();
+                $user->roles()->detach();
+                $user->addRole($role, $team);
+                $user->givePermissions(['read', 'create'], $team);
+                $updatedUser = User::with(['roles', 'permissions'])->where('uid', $recievedParams->uid)->first();
+                $updatedUser->images = Image::where('uid', $recievedParams->uid)->first();
+                $updatedUser->delegationUid = $delegationUid->uid;
+                session()->forget('user');
+                session()->put('user', $updatedUser);
+                return true;
+
+                // $rolesAndPermissionGiven = $updatesDone ? $this->delegationRolesAndTeams($recievedParams->uid, $delegationUid) : false;
+                // return $rolesAndPermissionGiven;
             } catch (\Illuminate\Database\QueryException $exception) {
                 if ($exception->errorInfo[2]) {
                     return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
@@ -150,22 +165,30 @@ class ActivateProfileController extends Controller
 
     protected function delegationRolesAndTeams($uid, $delegationUid)
     {
-        $team = Team::where('name', 'delegation')->first();
-        $role = Role::where('name', 'delegate')->first();
-        $user = User::with('roles', 'permissions')->where('uid', $uid)->first();
-        $oldPermissions = $user->permissions;
-        foreach ($oldPermissions as $oldPermission) {
-            $user->removePermission($oldPermission, $user->roles[0]);
+        try {
+            $team = Team::where('name', 'delegation')->first();
+            $role = Role::where('name', 'delegate')->first();
+            $user = User::with(['roles', 'permissions'])->where('uid', $uid)->first();
+            $user->permissions()->detach();
+            $user->roles()->detach();
+            $user->addRole($role, $team);
+            $user->givePermissions(['read', 'create'], $team);
+            $updatedUser = User::with(['roles', 'permissions'])->where('uid', $uid)->first();
+            $updatedUser->images = Image::where('uid', $uid)->first();
+            $updatedUser->delegationUid = $delegationUid->uid;
+            session()->forget('user');
+            session()->put('user', $updatedUser);
+            return true;
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return false;
+            if ($exception->errorInfo[2]) {
+                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+            } else {
+                return  redirect()->back()->with('error', $exception->errorInfo[2]);
+            }
+
         }
-        $user->removeRole($user->roles[0], $user->roles[0]);
-        $user->addRole($role, $team);
-        $user->givePermissions(['read', 'create'], $team);
-        $updatedUser = User::with('roles', 'permissions')->where('uid', $uid)->first();
-        $updatedUser->images = Image::where('uid', $uid)->first();
-        $updatedUser->delegationUid = $delegationUid->uid;
-        session()->forget('user');
-        session()->put('user', $updatedUser);
-        return true;
+
         // $user->addRole('admin', 'admin');
         // $user->givePermissions(['read', 'create', 'update', 'delete'], 'admin');
     }
@@ -234,7 +257,7 @@ class ActivateProfileController extends Controller
     {
         $team = Team::where('name', 'receiving')->first();
         $role = Role::where('name', 'receiving')->first();
-        $user = User::with('roles', 'permissions')->where('uid', $uid)->first();
+        $user = User::with(['roles', 'permissions'])->where('uid', $uid)->first();
         $oldPermissions = $user->permissions;
         $rolesRemoved = $user->removeRole($user->roles[0], $user->roles[0]);
         foreach ($oldPermissions as $oldPermission) {
@@ -244,7 +267,7 @@ class ActivateProfileController extends Controller
             try {
                 $rolesAdded = $user->addRole($role, $team);
                 $newdPermissions = $user->givePermissions(['read', 'create'], $team);
-                $updatedUser = User::with('roles', 'permissions')->where('uid', $uid)->first();
+                $updatedUser = User::with(['roles', 'permissions'])->where('uid', $uid)->first();
                 $updatedUser->images = Image::where('uid', $uid)->first();
                 session()->forget('user');
                 session()->put('user', $updatedUser);
@@ -265,7 +288,7 @@ class ActivateProfileController extends Controller
     {
         $team = Team::where('name', 'interpreter')->first();
         $role = Role::where('name', 'interpreter')->first();
-        $user = User::with('roles', 'permissions')->where('uid', $uid)->first();
+        $user = User::with(['roles', 'permissions'])->where('uid', $uid)->first();
         $oldPermissions = $user->permissions;
         $rolesRemoved = $user->removeRole($user->roles[0], $user->roles[0]);
         foreach ($oldPermissions as $oldPermission) {
@@ -275,7 +298,7 @@ class ActivateProfileController extends Controller
             try {
                 $rolesAdded = $user->addRole($role, $team);
                 $newdPermissions = $user->givePermissions(['read', 'create'], $team);
-                $updatedUser = User::with('roles', 'permissions')->where('uid', $uid)->first();
+                $updatedUser = User::with(['roles', 'permissions'])->where('uid', $uid)->first();
                 $updatedUser->images = Image::where('uid', $uid)->first();
                 session()->forget('user');
                 session()->put('user', $updatedUser);
@@ -296,7 +319,7 @@ class ActivateProfileController extends Controller
     {
         $team = Team::where('display_name', $type)->first();
         $role = Role::where('display_name', $type)->first();
-        $user = User::with('roles', 'permissions')->where('uid', $uid)->first();
+        $user = User::with(['roles', 'permissions'])->where('uid', $uid)->first();
         $oldPermissions = $user->permissions;
         $rolesRemoved = $user->removeRole($user->roles[0], $user->roles[0]);
         foreach ($oldPermissions as $oldPermission) {
@@ -306,7 +329,7 @@ class ActivateProfileController extends Controller
             try {
                 $rolesAdded = $user->addRole($role, $team);
                 $newdPermissions = $user->givePermissions(['read', 'create'], $team);
-                $updatedUser = User::with('roles', 'permissions')->where('uid', $uid)->first();
+                $updatedUser = User::with(['roles', 'permissions'])->where('uid', $uid)->first();
                 $updatedUser->images = ImageBlob::where('uid', $uid)->first();
                 session()->forget('user');
                 session()->put('user', $updatedUser);
@@ -364,7 +387,7 @@ class ActivateProfileController extends Controller
 
     public function renderProfileActivation()
     {
-        $user = User::with('roles', 'permissions')->where('id', Auth::user()->id)->first();
+        $user = User::with(['roles', 'permissions'])->where('id', Auth::user()->id)->first();
         return view('pages.profileActivation', ['user' => $user]);
     }
 }

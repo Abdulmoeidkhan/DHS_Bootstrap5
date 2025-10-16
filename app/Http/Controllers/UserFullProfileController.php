@@ -24,7 +24,7 @@ class UserFullProfileController extends Controller
         $permissions = Permission::all();
         $teams = Team::all();
         $user = User::with('roles', 'permissions')->where('uid', $id)->first();
-        $user->team = Team::where('id', $user->roles[0]->pivot->team_id)->first(['id','name','display_name']);
+        $user->team = Team::where('id', $user->roles[0]->pivot->team_id)->first(['id', 'name', 'display_name']);
         $image = ImageBlob::where('uid', $id)->first();
         $user->images = $image;
         // return ['user' => $user, 'roles' => $roles, 'permissions' => $permissions, 'teams' => $teams, 'selectiveRoles' => $selectiveRoles];
@@ -37,7 +37,9 @@ class UserFullProfileController extends Controller
         $permissions = Permission::all();
         $teams = Team::all();
         $user = session()->get('user');
+        $user->team = Team::where('id', $user->roles[0]->pivot->team_id)->first(['id', 'name', 'display_name']);
         // return $user;
+        // return ['user' => $user, 'roles' => $roles, 'permissions' => $permissions, 'teams' => $teams, 'selectiveRoles' => $selectiveRoles];
         return view('pages.profileUser', ['user' => $user,  'roles' => $roles, 'permissions' => $permissions, 'teams' => $teams, 'selectiveRoles' => $selectiveRoles]);
     }
     public function renderDelegateProfile()
