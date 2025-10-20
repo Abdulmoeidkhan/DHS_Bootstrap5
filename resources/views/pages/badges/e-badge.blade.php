@@ -43,11 +43,11 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <img src="{{asset('images/icons/ideas_logo_2024.png')}}" width="180px" />
+                <img src="{{asset('images/icons/pimec-2025.png')}}" width="180px" />
             </div>
             <div class="col-6">
-                <h3>12th Internation Defence Exhibition and Seminar (IDEAS)</h3>
-                <p>19-22 November, 2024 at Karachi Expo Centre - Pakistan</p>
+                <h3>Pakistan International Maritime Expo & Conference (PIMEC)</h3>
+                <p>03-06 November, 2025 at Karachi Expo Centre - Pakistan</p>
             </div>
             <div class="col">
                 <h3>e-Badge Paper</h3>
@@ -202,7 +202,7 @@
             </p>
         </div>
         <div class="row">
-            <img src="{{asset('images/icons/Partners.png')}}" style="width:100%;" alt="Partners LOGO" />
+            <img src="{{asset('images/icons/pimec-2025-logostrip.png')}}" style="width:100%;" alt="Partners LOGO" />
         </div>
     </div>
     <script src="{{asset('assets/libs/jquery/dist/jquery.min.js')}}"></script>

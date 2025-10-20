@@ -140,7 +140,7 @@
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <h4 class="fw-semibold mb-3">
-                                    {{App\Models\Delegate::where([['self',1],['status',1]])->count()}}
+                                    {{App\Models\Delegate::where('self',1)->where('status',1)->count()}}
                                 </h4>
                             </div>
                         </div>
