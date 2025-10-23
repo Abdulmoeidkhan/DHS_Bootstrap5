@@ -101,29 +101,27 @@ class ActivateProfileController extends Controller
         $team = Team::where('name', $rolesAndTeam)->first();
         $role = Role::where('name', $rolesAndTeam)->first();
         $user = User::with(['roles', 'permissions'])->where('uid', $uid)->first();
-        $oldPermissions = $user->permissions;
-        $rolesRemoved = $user->removeRole($user->roles[0], $user->roles[0]);
-        foreach ($oldPermissions as $oldPermission) {
-            $user->removePermission($oldPermission, $user->roles[0]);
-        }
-        if ($rolesRemoved) {
-            try {
-                $rolesAdded = $user->addRole($role, $team);
-                $newdPermissions = $user->givePermissions(['read', 'create'], $team);
-                $updatedUser = User::with(['roles', 'permissions'])->where('uid', $uid)->first();
-                $updatedUser->images = Image::where('uid', $uid)->first();
-                session()->forget('user');
-                session()->put('user', $updatedUser);
-                return true;
-            } catch (\Illuminate\Database\QueryException $exception) {
-                if ($exception->errorInfo[2]) {
-                    return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
-                } else {
-                    return  redirect()->back()->with('error', $exception->errorInfo[2]);
-                }
+        // $oldPermissions = $user->permissions;
+        // $rolesRemoved = $user->removeRole($user->roles[0], $user->roles[0]);
+        // foreach ($oldPermissions as $oldPermission) {
+        //     $user->removePermission($oldPermission, $user->roles[0]);
+        // }
+        $user->permissions()->detach();
+        $user->roles()->detach();
+        try {
+            $rolesAdded = $user->addRole($role, $team);
+            $newdPermissions = $user->givePermissions(['read', 'create'], $team);
+            $updatedUser = User::with(['roles', 'permissions'])->where('uid', $uid)->first();
+            $updatedUser->images = Image::where('uid', $uid)->first();
+            session()->forget('user');
+            session()->put('user', $updatedUser);
+            return true;
+        } catch (\Illuminate\Database\QueryException $exception) {
+            if ($exception->errorInfo[2]) {
+                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+            } else {
+                return  redirect()->back()->with('error', $exception->errorInfo[2]);
             }
-        } else {
-            return false;
         }
     }
 
@@ -186,7 +184,6 @@ class ActivateProfileController extends Controller
             } else {
                 return  redirect()->back()->with('error', $exception->errorInfo[2]);
             }
-
         }
 
         // $user->addRole('admin', 'admin');
