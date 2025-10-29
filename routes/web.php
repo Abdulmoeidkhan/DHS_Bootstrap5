@@ -430,6 +430,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Flight Pages And API Start
         Route::get('/members/addFlight/{id}', [FlightsController::class, 'addFlightPage'])->name('pages.addFlight');
+        Route::get('/members/deleteFlight/{id}', [FlightsController::class, 'deleteFlightPage'])->name('pages.deleteFlight');
         // Flight Pages And API End
 
         Route::get('/members/delegateStatusChanger/{id}', [DelegationsPageController::class, 'delegateStatusChanger'])->name('request.updateDelegateStatus');

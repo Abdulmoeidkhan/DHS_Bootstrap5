@@ -137,4 +137,14 @@ class FlightsController extends Controller
         $member = Delegate::where('delegates_uid', $id)->first();
         return view('pages.addFlight', ['flight' => $flight, 'member' => $member, 'id' => $id]);
     }
+
+    public function deleteFlightPage(Request $req, $id)
+    {
+        try {
+            DelegateFlight::where('flightsegment_uid', $id)->delete();
+            return redirect()->back()->with('message', "Flight Deleted Successfully");
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return  redirect()->back()->with('error', $exception->errorInfo[2]);
+        }
+    }
 }
