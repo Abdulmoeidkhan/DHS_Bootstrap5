@@ -94,7 +94,7 @@
                         <div class="row align-items-center">
                             <div class="col-12">
                                 <h4 class="fw-semibold mb-3">
-                                    {{App\Models\DelegateFlight::whereNotNull('departure_flight')->count()}}
+                                    {{App\Models\DelegateFlight::whereNotNull('arrival_date')->count()}}
                                 </h4>
                             </div>
                         </div>
