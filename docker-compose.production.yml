@@ -1,0 +1,97 @@
+name: dhs
+
+services:
+  app:
+    container_name: dhs-app-1
+    image: dhs-app:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      APP_NAME: "${APP_NAME:-DHS}"
+      APP_ENV: "${APP_ENV:-production}"
+      APP_KEY: "${APP_KEY}"
+      APP_DEBUG: "${APP_DEBUG:-false}"
+      APP_URL: "${APP_URL}"
+      LOG_CHANNEL: stack
+      LOG_LEVEL: "${LOG_LEVEL:-error}"
+      DB_CONNECTION: mysql
+      DB_HOST: database
+      DB_PORT: 3306
+      DB_DATABASE: "${DB_DATABASE:-dhs_production}"
+      DB_USERNAME: "${DB_USERNAME:-dhs_user}"
+      DB_PASSWORD: "${DB_PASSWORD}"
+      BROADCAST_DRIVER: log
+      CACHE_DRIVER: file
+      FILESYSTEM_DISK: local
+      QUEUE_CONNECTION: sync
+      SESSION_DRIVER: file
+      SESSION_LIFETIME: 120
+      SESSION_SECURE_COOKIE: "${SESSION_SECURE_COOKIE:-true}"
+    volumes:
+      - dhs-storage:/var/www/storage
+    networks:
+      - dhs_net
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    depends_on:
+      database:
+        condition: service_healthy
+
+  web:
+    container_name: dhs-nginx-1
+    image: dhs-web:latest
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "${DOCKER_WEB_PORT:-127.0.0.1:8009}:80"
+    volumes:
+      - dhs-storage:/var/www/storage:ro
+    networks:
+      - dhs_net
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    depends_on:
+      - app
+
+  database:
+    container_name: dhs-database-1
+    image: mariadb:11.4
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${DB_DATABASE:-dhs_production}"
+      MYSQL_USER: "${DB_USERNAME:-dhs_user}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+    volumes:
+      - dhs-database-data:/var/lib/mysql
+    networks:
+      - dhs_net
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+networks:
+  dhs_net:
+    name: dhs_net
+    driver: bridge
+
+volumes:
+  dhs-storage:
+    name: dhs-storage
+  dhs-database-data:
+    name: dhs-database-data

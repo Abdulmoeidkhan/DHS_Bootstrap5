@@ -1,7 +1,7 @@
 var staticCacheName = "pwa-v" + new Date().getTime();
 var filesToCache = [
     '/offline',
-    '/assets/css/style.min.css',
+    '/assets/css/styles.min.css',
     '/assets/js/app.min.js',
     '/images/icons/Badar-icon-72x72.png',
     '/images/icons/Badar-icon-96x96.png',
