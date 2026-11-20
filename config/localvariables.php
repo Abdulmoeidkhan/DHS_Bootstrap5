@@ -1,19 +1,19 @@
 <?php
 
 return [
-    "eventName" => "PIMEC 2025",
+    "eventName" => "PIMEC 2027",
     "eventLocation" => "Expo Center Karachi",
-    "eventDate" => "03-06 November 2025",
-    "para1" => "The Pakistan International Maritime Expo & Conference (PIMEC) team welcome you for the  PIMEC 2025. Please confirm your attendance by creating account / Login ID on our Online Delegation System at www.delegation.pimec.gov.pk. Your Activation Code is given below:- ",
+    "eventDate" => "03-06 November 2027",
+    "para1" => "The Pakistan International Maritime Expo & Conference (PIMEC) team welcome you for the  PIMEC 2027. Please confirm your attendance by creating account / Login ID on our Online Delegation System at www.delegation.pimec.gov.pk. Your Activation Code is given below:- ",
     // "para2" => "",
     // , along with an “expiry date” and “login ID”.",
     "para3" => "The activation code must be entered before the expiry date for you to gain access to our online system.",
-    "para4" => "The registration on Delegation System offers comprehensive support during participation in PIMEC 2025 for following:- ",
+    "para4" => "The registration on Delegation System offers comprehensive support during participation in PIMEC 2027 for following:- ",
     "li1" => "Visa application by submitting necessary documents as per Govt of Pakistan policy.",
     "li2" => "Arrival / departure protocols.",
     "li3" => "Interpretation / liaison / Scheduling of side meetings.",
     "li4" => "Hospitality services including room booking, cab hiring, guided tours etc.",
-    "li5" => "Confirmation of invitation / registration for planned events of PIMEC 2025.",
+    "li5" => "Confirmation of invitation / registration for planned events of PIMEC 2027.",
     "li6" => "Delegate Registration.",
     "li7" => "Downloading / printing of PIMEC e-badge",
     "heading2" => "Here's How to Get Started:",
@@ -27,7 +27,7 @@ return [
     "li11" => "At once you are created your login account then will not need to create any other account or registration.",
     "li12" => "For more information, access the “Quick Start Guide for Delegation” located on the login page under the “top” menu. To access the “User’s Guide” login to online delegation handling system and click on User’s Guide PDF” in dashboard page.",
     "heading3" => "How to Regret your Invitation?",
-    "li13" => "Go to “PIMEC Delegation Online System” for regretted this your invitation if you not want to participant on Pakistan International Maritime Expo & Conference (PIMEC 2025).",
+    "li13" => "Go to “PIMEC Delegation Online System” for regretted this your invitation if you not want to participant on Pakistan International Maritime Expo & Conference (PIMEC 2027).",
     "li14" => "Click on “Regretted” button in login page.",
     "li15" => "Enter your account activation information and the click submit.",
     "li16" => "(Note: once you regretted your invitation then you cannot activate or access your account again).",
@@ -39,7 +39,7 @@ return [
     "li21" => "E-Badge document is barcode protected with your unique identification to scan your security clearance and official internal process. Please do must ensure that e-Badge you have printed with barcode on e-badge printed paper.",
     "li22" => "Important Note:",
     "li23" => "If you have more than one delegate, you can enter that information with “Add New” and enter your required information and save.",
-    "li24" => "For your participation confirmation on PIMEC 2025, you will need your e- Badge paper print along with further required documents at your “Arrival” in Pakistan. Please bring your e-Badge print copy and show our Airport Welcome Desk or assigned receiving officer.",
+    "li24" => "For your participation confirmation on PIMEC 2027, you will need your e- Badge paper print along with further required documents at your “Arrival” in Pakistan. Please bring your e-Badge print copy and show our Airport Welcome Desk or assigned receiving officer.",
     "airportCode" => "AP73177781",
     "carCode" => "CA84288892"
 

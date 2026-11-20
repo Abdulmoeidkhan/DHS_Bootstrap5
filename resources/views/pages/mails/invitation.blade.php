@@ -62,7 +62,7 @@ $renderRank=\App\Models\Rank::where('ranks_uid',$guest->rank)->first();
     <div class="container-fluid">
         <div class="row container-first-intro-child" style="padding-left:2rem;">
             <div class="col-md-12 d-flex align-items-center">
-                <img src="{{asset('images/icons/pimec-2025.png')}}" width="200px" height="200px" class="logo-class"
+                <img src="{{asset('images/icons/pimec-2027.png')}}" width="200px" height="200px" class="logo-class"
                     alt="Partners LOGO" />
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <div style="font-weight: 600; text-decoration:underline; font-size: 18px; text-align:center; padding-top: 30px;"
@@ -89,7 +89,7 @@ $renderRank=\App\Models\Rank::where('ranks_uid',$guest->rank)->first();
                     </h5>
                     <p style="padding-left:2rem;text-indent:2rem;">The Pakistan International Maritime Expo & Conference
                         (PIMEC) team welcome
-                        you for the International Defence Exhibition and Seminar PIMEC 2025. Please confirm your
+                        you for the International Defence Exhibition and Seminar PIMEC 2027. Please confirm your
                         attendance
                         by creating account / Login ID on our Online Delegation System at <b><a
                                 href="https://delegation.pimec.gov.pk"
@@ -168,9 +168,9 @@ $renderRank=\App\Models\Rank::where('ranks_uid',$guest->rank)->first();
         </div>
     </div>
     <div class="row d-flex justify-content-center">
-        <img src="{{ $message->embed(public_path('assets/images/logos/pimec-2025-logostrip.png')) }}"
+        <img src="{{ $message->embed(public_path('assets/images/logos/pimec-2027-logostrip.png')) }}"
             style="width:80%; height:40%;" alt="Partners LOGO" />
-        {{-- <img src="{{ public_path('images/icons/pimec-2025.png-logostrip') }}" width="120" height="120">
+        {{-- <img src="{{ public_path('images/icons/pimec-2027.png-logostrip') }}" width="120" height="120">
         --}}
     </div>
     <br />

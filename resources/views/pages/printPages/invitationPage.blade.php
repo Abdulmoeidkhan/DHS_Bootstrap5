@@ -99,7 +99,7 @@ $renderRank=\App\Models\Rank::where('ranks_uid',$guest->rank)->first();
                 Respected Defence attache,
             </h5>
             <p>
-                Please forward this invitation for PIMEC 25 to
+                Please forward this invitation for PIMEC 27 to
                 <span style="font-size:18px; font-weight:bolder">Honorable
                     @if($guest)
                     @if($renderRank)
@@ -112,7 +112,7 @@ $renderRank=\App\Models\Rank::where('ranks_uid',$guest->rank)->first();
                 Our helpline number is ,(
                     <a href="tel:+923268050301">+92 326 8050301</a>, 
                     <a href="tel:+923268050302">+92 326 8050302</a>, 
-                    <a href="mailto:pimeccoordination2025@gmail.com">pimeccoordination2025@gmail.com</a>
+                    <a href="mailto:pimeccoordination2027@gmail.com">pimeccoordination2027@gmail.com</a>
                     ).
                 <br />
                 Invitation email to delegate is given below:
@@ -123,7 +123,7 @@ $renderRank=\App\Models\Rank::where('ranks_uid',$guest->rank)->first();
     <br />
     <div class="row container-first-intro-child" style="padding-left:2rem;">
         <div class="col-lg-4 col-md-4 col-sm-12 d-flex align-items-center">
-            <img src="{{asset('images/icons/pimec-2025.png')}}" width="200px" height="200px" class="logo-class"
+            <img src="{{asset('images/icons/pimec-2027.png')}}" width="200px" height="200px" class="logo-class"
                 alt="Partners LOGO" />
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 d-flex align-items-center">
@@ -151,7 +151,7 @@ $renderRank=\App\Models\Rank::where('ranks_uid',$guest->rank)->first();
                 </h5>
                 <p style="padding-left:2rem;text-indent:2rem;">The Pakistan International Maritime Expo & Conference
                     (PIMEC) team welcome
-                    you for the International Defence Exhibition and Seminar PIMEC 2025. Please confirm your attendance
+                    you for the International Defence Exhibition and Seminar PIMEC 2027. Please confirm your attendance
                     by creating account / Login ID on our Online Delegation System at <b><a
                             href="https://delegation.pimec.gov.pk" target="_blank">www.delegation.pimec.gov.pk</a></b>.
                     Your Portal Activation Code is <b> ( {{$delegation->delegationCode}} )</b>.</p>
@@ -236,7 +236,7 @@ $renderRank=\App\Models\Rank::where('ranks_uid',$guest->rank)->first();
 </div>
 
 <div class="row d-flex justify-content-center">
-    <img src="{{asset('images/icons/pimec-2025-logostrip.png')}}" style="width:80%; height:40%;"
+    <img src="{{asset('images/icons/pimec-2027-logostrip.png')}}" style="width:80%; height:40%;"
         alt="Partners LOGO" />
 </div>
 <br />
