@@ -254,8 +254,15 @@ class HotelController extends Controller
 
     public function addRoomRender($id = null)
     {
-        // return 1;
+        if (!$id) {
+            return redirect()->route('pages.hotels')->with('error', 'Please select a delegate first to assign a room.');
+        }
+
         $delegates = Delegate::where([['delegates_uid', $id], ['self', 1]])->get();
+        if ($delegates->isEmpty()) {
+            return redirect()->route('pages.hotels')->with('error', 'Delegate not found.');
+        }
+
         $delegationInfo = Delegation::where('uid', $delegates[0]->delegation)->get();
         $delegationInfo[0]->delegateCount = Delegate::where([['delegation', $delegates[0]->delegation], ['self', 1]])->count();
         $delegationInfo[0]->invitedBy = Vips::where('vips_uid', $delegationInfo[0]->invited_by)->first();
@@ -266,18 +273,20 @@ class HotelController extends Controller
 
 
         $hotelPlans = HotelPlan::where('delegation_uid', $delegates[0]->delegation)->get();
-        $hotelPlans[0]->hotelName = Hotel::where('hotel_uid', $hotelPlans[0]->hotel_uid)->first('hotel_names');
-        foreach ($hotelPlans as $key => $hotelPlan) {
-            $hotel_roomtype_suite_details = json_decode($hotelPlan->hotel_roomtype_suite_details);
-            $hotel_roomtype_delux_details = json_decode($hotelPlan->hotel_roomtype_delux_details);
-            $hotel_roomtype_exec_details = json_decode($hotelPlan->hotel_roomtype_exec_details);
-            $hotel_roomtype_standard_details = json_decode($hotelPlan->hotel_roomtype_standard_details);
-            $hotel_roomtype_doubleOccupancy_details = json_decode($hotelPlan->hotel_roomtype_doubleOccupancy_details);
-            $hotelPlans[$key]->hotel_roomtype_suite_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_suite_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
-            $hotelPlans[$key]->hotel_roomtype_delux_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_delux_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
-            $hotelPlans[$key]->hotel_roomtype_exec_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_exec_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
-            $hotelPlans[$key]->hotel_roomtype_standard_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_standard_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
-            $hotelPlans[$key]->hotel_roomtype_doubleOccupancy_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_doubleOccupancy_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
+        if ($hotelPlans->isNotEmpty()) {
+            $hotelPlans[0]->hotelName = Hotel::where('hotel_uid', $hotelPlans[0]->hotel_uid)->first('hotel_names');
+            foreach ($hotelPlans as $key => $hotelPlan) {
+                $hotel_roomtype_suite_details = json_decode($hotelPlan->hotel_roomtype_suite_details) ?: [];
+                $hotel_roomtype_delux_details = json_decode($hotelPlan->hotel_roomtype_delux_details) ?: [];
+                $hotel_roomtype_exec_details = json_decode($hotelPlan->hotel_roomtype_exec_details) ?: [];
+                $hotel_roomtype_standard_details = json_decode($hotelPlan->hotel_roomtype_standard_details) ?: [];
+                $hotel_roomtype_doubleOccupancy_details = json_decode($hotelPlan->hotel_roomtype_doubleOccupancy_details) ?: [];
+                $hotelPlans[$key]->hotel_roomtype_suite_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_suite_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
+                $hotelPlans[$key]->hotel_roomtype_delux_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_delux_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
+                $hotelPlans[$key]->hotel_roomtype_exec_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_exec_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
+                $hotelPlans[$key]->hotel_roomtype_standard_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_standard_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
+                $hotelPlans[$key]->hotel_roomtype_doubleOccupancy_details = Delegate::whereIn('delegates_uid', $hotel_roomtype_doubleOccupancy_details)->get(['last_Name', 'first_Name', 'designation', 'delegateCode', 'delegation_type']);
+            }
         }
         // return $hotelPlans;
         // return $assignHotel;
