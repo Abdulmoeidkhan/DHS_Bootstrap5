@@ -33,8 +33,9 @@ class MailController extends Controller
                 $message->from("noreply.badarvms@gmail.com", "Invitation");
             });
             return true;
-        } catch (QueryException $exception) {
-            print_r($exception->errorInfo);
+        } catch (\Throwable $exception) {
+            Log::warning("send_html_email failed: " . $exception->getMessage());
+            return false;
         }
     }
 
@@ -105,12 +106,11 @@ class MailController extends Controller
                 $message->from("noreply.badarvms@gmail.com", "Invitation");
             });
             return response()->json(['success' => true, 'message' => 'Email sent successfully.']);
-        } catch (QueryException $exception) {
+        } catch (\Throwable $exception) {
+            Log::warning("send_html_email_on_given_email failed: " . $exception->getMessage());
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to send email.',
-                'error' => $exception->getMessage(),
-                'errorInfo' => $exception->errorInfo
+                'message' => 'Failed to send email: ' . $exception->getMessage()
             ]);
         }
     }

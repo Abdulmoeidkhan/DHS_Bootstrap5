@@ -172,18 +172,18 @@ class AddDelegationPageController extends MailController
         try {
             if ($delegateSaved) {
                 $delegationSaved = $delegation->save();
-                $this->send_html_email($delegation->delegationhead);
+                try {
+                    $this->send_html_email($delegation->delegationhead);
+                } catch (\Throwable $mailException) {
+                    \Illuminate\Support\Facades\Log::warning("Failed to send delegation invitation email: " . $mailException->getMessage());
+                }
                 if ($delegationSaved) {
                     return $req->submitAndRetain ? redirect()->back()->with('message', 'Delegation has been updated Successfully') : redirect()->route('pages.delegationsPage')->with('message', 'Delegation has been updated Successfully');
                 }
             }
-        } catch (\Illuminate\Database\QueryException $exception) {
-            // return $exception->errorInfo[2];
-            if ($exception->errorInfo[2]) {
-                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
-            } else {
-                return  redirect()->back()->with('error', $exception->errorInfo[2]);
-            }
+        } catch (\Throwable $exception) {
+            $errorMsg = method_exists($exception, 'errorInfo') && isset($exception->errorInfo[2]) ? $exception->errorInfo[2] : $exception->getMessage();
+            return redirect()->back()->with('error', 'Error : ' . $errorMsg);
         }
     }
 
@@ -231,12 +231,9 @@ class AddDelegationPageController extends MailController
             // $representativeUpdate = Delegate::where('delegates_uid', $delegationRepUid)->update($arrayToBeUpdateRep);
             $delegateUpdate = Delegate::where('delegates_uid', $delegationSelfUid)->update($arrayToBeUpdateSelf);
             return $delegateUpdate ? redirect()->route('pages.dashboard')->with('message', 'Delegation has been updated Successfully') : redirect()->back()->with('message', 'Something Went Wrong');
-        } catch (\Illuminate\Database\QueryException $exception) {
-            if ($exception->errorInfo[2]) {
-                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
-            } else {
-                return  redirect()->back()->with('error', $exception->errorInfo[2]);
-            }
+        } catch (\Throwable $exception) {
+            $errorMsg = method_exists($exception, 'errorInfo') && isset($exception->errorInfo[2]) ? $exception->errorInfo[2] : $exception->getMessage();
+            return redirect()->back()->with('error', 'Error : ' . $errorMsg);
         }
 
         // return $req->all();
@@ -284,7 +281,11 @@ class AddDelegationPageController extends MailController
             $req->pdf ? $this->documentUpdate($req->file('pdf'), $delegationSelfUid) : 0;
             $req->savedpicture ? $this->imageBlobUpdate($req->savedpicture, $delegationSelfUid) : 0;
             if (isset($req->email_address)) {
-                $this->send_html_email_on_given_email($arrayToBeUpdate['uid']);
+                try {
+                    $this->send_html_email_on_given_email($arrayToBeUpdate['uid']);
+                } catch (\Throwable $mailException) {
+                    \Illuminate\Support\Facades\Log::warning("Failed to send delegation update email: " . $mailException->getMessage());
+                }
             }
             // $delegateStatusUpdate = $req->delegation_response == "Accepted" ? Delegate::where('delegation', $arrayToBeUpdate['uid'])->update(['status' => 1]) : Delegate::where('delegation', $arrayToBeUpdate['uid'])->update(['status' => 0]);
             if ($delegateUpdate) {
@@ -301,12 +302,9 @@ class AddDelegationPageController extends MailController
                     return $req->submitAndRetain ? redirect()->back()->with('message', 'Delegation has been updated Successfully') : redirect()->route('pages.delegationsPage')->with('message', 'Delegation has been updated Successfully');
                 }
             }
-        } catch (\Illuminate\Database\QueryException $exception) {
-            if ($exception->errorInfo[2]) {
-                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
-            } else {
-                return  redirect()->back()->with('error', $exception->errorInfo[2]);
-            }
+        } catch (\Throwable $exception) {
+            $errorMsg = method_exists($exception, 'errorInfo') && isset($exception->errorInfo[2]) ? $exception->errorInfo[2] : $exception->getMessage();
+            return redirect()->back()->with('error', 'Error : ' . $errorMsg);
         }
 
         // return [$arrayToBeUpdate, $arrayToBeUpdateRep, $arrayToBeUpdateSelf];
