@@ -386,7 +386,7 @@ class ReportController extends Controller
         return view('pages.reports.delegationDepartureStatusVIP', ['flights' => $flights]);
     }
 
-    public function delegationCheckInStatusVIPData()
+    public function delegationDepartureStatusVIPData()
     {
         $invitees = Delegation::distinct('invited_by')->get('invited_by');
         $flights = DelegateFlight::distinct('departure_date')->get('departure_date');
@@ -394,7 +394,7 @@ class ReportController extends Controller
             $invitees[$keyInvitees]->name = Vips::where([['vips_uid', $invitee->invited_by], ['vips_status', 1]])->first('vips_designation');
             $departure = [];
             foreach ($flights as $keyFlights => $flight) {
-                $arrivals[$keyFlights] = DB::table('delegate_flights')
+                $departure[$keyFlights] = DB::table('delegate_flights')
                     ->leftJoin('delegations', 'delegations.uid', '=', 'delegate_flights.delegation_uid')
                     ->where([['delegations.invited_by', $invitee->invited_by], ['delegate_flights.departure_date', $flight->departure_date], ['delegations.delegation_response', 'Accepted']])
                     ->select('delegations.invited_by', 'delegations.uid')

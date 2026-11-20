@@ -18,7 +18,7 @@
 <script src="{{asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('assets/js/sidebarmenu.js')}}"></script>
 <script src="{{asset('assets/js/app.min.js')}}"></script>
-<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" type="text/javascript"></script>
 <?php $routesIncludedTable = array('/'); ?>
 @if(in_array(Request::path(), $routesIncludedTable))
 <script src="{{asset('assets/libs/apexcharts/dist/apexcharts.min.js')}}"></script>
