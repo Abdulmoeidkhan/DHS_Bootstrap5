@@ -112,7 +112,7 @@ $renderRank=\App\Models\Rank::where('ranks_uid',$guest->rank)->first();
                 Our helpline number is ,(
                     <a href="tel:+923268050301">+92 326 8050301</a>, 
                     <a href="tel:+923268050302">+92 326 8050302</a>, 
-                    <a href="mailto:pimeccoordination2027@gmail.com">pimeccoordination2027@gmail.com</a>
+                    <a href="mailto:pimeccoordination2025@gmail.com">pimeccoordination2025@gmail.com</a>
                     ).
                 <br />
                 Invitation email to delegate is given below:
