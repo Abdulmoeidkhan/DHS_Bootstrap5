@@ -77,16 +77,17 @@ class DelegatesPageController extends Controller
                 ->leftJoin('roomtypes', 'rooms.room_type', '=', 'roomtypes.room_type_uid')
                 ->leftJoin('officers', 'delegates.delegation', '=', 'officers.officer_delegation')
                 ->where([['delegates.first_Name', '!=', null], ['delegates.status', '0'], ['self', '1']])
-                ->select('delegates.*', 'delegate_flights.*', 'rooms.*', 'hotels.*', 'roomtypes.*', 'image_blobs.uid', 'delegations.country', 'delegations.delegation_response', 'delegations.invited_by', 'vips.*')
+                ->select('delegates.*', 'delegate_flights.*', 'rooms.*', 'hotels.*', 'roomtypes.*', 'delegations.country', 'delegations.delegation_response', 'delegations.invited_by', 'vips.*')
                 ->orderBy('delegations.country', 'asc')
                 ->get();
 
             foreach ($delegates as $key => $delegate) {
-                $delegates[$key]->rankName = Rank::where('ranks_uid', $delegate[$key]->rank)->first('ranks_name');
-                $delegates[$key]->invited_by->name = Rank::where('ranks_uid', $delegate[$key]->invited_by->name)->first('ranks_name');
+                $delegates[$key]->rankName = Rank::where('ranks_uid', $delegate->rank)->first('ranks_name');
+                $delegates[$key]->invited_by_name = Rank::where('ranks_uid', $delegate->invited_by)->first('ranks_name');
                 // $delegates[$key]->img_blob = 'https://res.cloudinary.com/dhkm5xmpn/image/upload/v' . time() . '/Images/' . $delegate->delegates_uid . '.png';
                 $delegates[$key]->img_blob = asset('storage/Images/' . $delegate->delegates_uid . '.png');
                 $delegates[$key]->imagePresent = ForeignImageValidator::where('image_uid', $delegate->delegates_uid)->first('image_exist');
+                $delegates[$key]->isHead = $delegate->delegation_type !== "Member" ? "Yes" : "No";
                 $delegates[$key]->officers = Officer::where('officer_delegation', $delegate->delegation)->get(['officer_first_name', 'officer_last_name', 'officer_contact', 'officer_rank', 'officer_type']);
                 foreach ($delegates[$key]->officers as $officerKey => $officer) {
                     $delegates[$key]->officers[$officerKey]->rank = Rank::where('ranks_uid', $officer->officer_rank)->first('ranks_name');
