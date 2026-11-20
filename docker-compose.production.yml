@@ -65,6 +65,8 @@ services:
     container_name: dhs-database-1
     image: mariadb:11.4
     restart: unless-stopped
+    ports:
+      - "${DB_PORT_FORWARD:-3307}:3306"
     environment:
       MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
       MYSQL_DATABASE: "${DB_DATABASE:-dhs_production}"
