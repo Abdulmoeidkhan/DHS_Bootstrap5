@@ -34,7 +34,7 @@
               </div>
               @endif
               <a href="{{route('pages.dashboard')}}" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                <img src="{{asset('images/icons/pimec-2025.png')}}" width="180" alt="PIMEC">
+                <img src="{{asset('images/icons/pimec-2027.png')}}" width="180" alt="PIMEC">
               </a>
               <p class="text-center">Delegation Handling System</p>
                <form action='{{route("request.signIn")}}' method="POST"> 
@@ -90,7 +90,7 @@
                 </form>
                 <br />
                 <img style="width:445px;width:-webkit-fill-available;"
-                  src="{{asset('images/icons/pimec-2025-logostrip.png')}}" alt="Partners LOGO" />
+                  src="{{asset('images/icons/pimec-2027-logostrip.png')}}" alt="Partners LOGO" />
             </div>
           </div>
         </div>

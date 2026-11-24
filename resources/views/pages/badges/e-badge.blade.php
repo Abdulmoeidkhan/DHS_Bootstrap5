@@ -43,7 +43,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <img src="{{asset('images/icons/pimec-2025.png')}}" width="180px" />
+                <img src="{{asset('images/icons/pimec-2027.png')}}" width="180px" />
             </div>
             <div class="col-6">
                 <h3>Pakistan International Maritime Expo & Conference (PIMEC)</h3>
@@ -202,7 +202,7 @@
             </p>
         </div>
         <div class="row">
-            <img src="{{asset('images/icons/pimec-2025-logostrip.png')}}" style="width:100%;" alt="Partners LOGO" />
+            <img src="{{asset('images/icons/pimec-2027-logostrip.png')}}" style="width:100%;" alt="Partners LOGO" />
         </div>
     </div>
     <script src="{{asset('assets/libs/jquery/dist/jquery.min.js')}}"></script>
